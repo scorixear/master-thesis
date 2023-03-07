@@ -1,0 +1,55 @@
+\documentclass[12pt, ngerman]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{merriweather}
+\usepackage[german=quotes]{csquotes}
+\usepackage{babel}
+\usepackage{array}
+\usepackage{color}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[style=apa,backend=biber,bibencoding=utf8,language=german,natbib,mincitenames=1,maxcitenames=2]{biblatex}
+\usepackage{kmath, kerkis}
+\usepackage{hyperref}
+\usepackage{framed}
+\usepackage{fix-cm}
+\usepackage{biblatex}
+\usepackage{subcaption}
+\usepackage{gensymb}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{pdfpages}
+\usepackage{listings}
+
+\lstset{frame=tb,
+  language=Sql,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{brown},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\lstdefinelanguage{none} {
+  classoffset=1,
+  morekeywords={},
+  classoffset=0,
+  sensitive=true
+}
+
+\makeatletter
+\newcommand\HUGE{\@setfontsize\Huge{50}{60}}
+\makeatother    
+\DeclareLanguageMapping{german}{german-apa}
+\addbibresource{Literatur.bib}
+\date{\today}
+\begin{document}
+  \section*{Literaturverzeichnis}
+  \printbibliography[heading=none]
+\end{document}
