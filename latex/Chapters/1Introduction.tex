@@ -1,28 +1,82 @@
 %************************************************
 \chapter{Einleitung}\label{ch:introduction}
 %************************************************
-\section{Gegenstand}
-Die effiziente und effektive Informationsgewinnung ist in der Medizin ein klarer Grundbaustein einer guten klinischen Praxis. Jegliche medizinische Handlung nutzt und produziert eine große Menge an Informationen, sei es Publikationen als Basis für eine Diagnose oder Dokumentation über den Behandlungsprozess. Diese Informationen strukturiert und klassifiziert abzuspeichern und wiederzugeben ist ein fortlaufender Entwicklungsprozess und Teil aktueller Forschung.
+\section{Gegenstand}\label{sec:gegenstand}
+Eine effektive und effiziente Informationsgewinnung bildet einen fundamentalen Bestandteil einer qualitativ hochwertigen klinischen Praxis in der Medizin. 
+Bei jeder medizinischen Handlung werden große Mengen an Informationen genutzt und generiert, sei es zur Grundlage einer Diagnose oder zur Dokumentation des Behandlungsprozesses. 
+Die strukturierte und klassifizierte Speicherung sowie Wiedergabe dieser Informationen stellt einen fortwährenden Entwicklungsprozess dar und ist Gegenstand aktueller Forschung.\\
 
-Die Digitalisierung der Medizin ist ein enormer Themenbereich mit wachsender Notwendigkeit. Die Medizinische Informatik beschreibt  \enquote{die Wissenschaft der systematischen Erschließung, Verwaltung, Aufbewahrung, Verarbeitung und Bereitstellung von Daten, Informationen und Wissen in der Medizin und im Gesundheitswesen. [...]}\citep{gmds}.
+Die Digitalisierung der Medizin ist ein ausgedehntes Themenfeld mit stetig wachsender Notwendigkeit. 
+Die Medizinische Informatik beschreibt passend dazu \enquote{die Wissenschaft der systematischen Erschließung, Verwaltung, Aufbewahrung, Verarbeitung und Bereitstellung von Daten, Informationen und Wissen in der Medizin und im Gesundheitswesen. [...]}\citep{gmds}. 
+In diesem Kontext wird die Bedeutung der Entwicklung und Implementierung effektiver Informationssysteme und Technologien zur Unterstützung der klinischen Praxis immer größer.\\
 
-In der Lehre wird die Praxis der medizinischen Informatik durch umfassende Literatur wie zum Beispiel in \citet{bb} unterstützt. Zur Strukturierung dieser Literatur existiert die Ontologie SNIK \citep{snikgraphposter}, eine semantisches Netzwerk klassifiert in das SNIK Metamodell. Der öffentliche Zugriff auf dieses Netzwerk 
+In der Lehre wird die Praxis der medizinischen Informatik durch umfassende Literatur wie zum Beispiel in \citet{bb} unterstützt. 
+Zur Strukturierung dieser Literatur existiert die Ontologie SNIK \citep{snikgraphposter}, ein semantisches Netzwerk klassifiert in das SNIK Metamodell und Teil des Instituts für Medizinische Informatik, Statistik und Epidemiologie \citep{imise} an der Universität Leipzig.
+Durch die Verwendung dieses Netzwerkes wird eine systematische Darstellung von Rollen, Entitäten und Funktionen in der Medizinischen Informatik ermöglicht, losgelöst von den Definition der zugrunde liegenden  Literaturquellen.\\
 
+SNIK kann über diverse Zugriffsmöglichkeiten über das Internet durchsucht werden. Der RDF-Browser \citep{rfdbrowser} bietet eine rudimentäre Möglichkeit, auf die SNIK-Ontologie zuzugreifen,
+während der SPARQL-Endpunkt \citep{sparqleditor} einen Query-Editor bereitstellt, der es ermöglicht, graphenbasierte Anfragen an das Resource Description Framework (RDF) von SNIK zu formulieren. 
+Ferner erlaubt eine Graphvisualisierung \citep{graphvisual} eine Darstellung der Informationsendpunkte und ihrer Vernetzung als Graphen. Schließlich stellt QAnswer \citep{qanswer} eine Möglichkeit dar, Fragen in englischer Sprache über das Netzwerk zu stellen und in tabellarischer Form Antworten zu erhalten.
 
-Situation:
-Global:
+\section{Problemstellung} \label{sec:problemstellung}
+Zur Unterstützung der Lehre ist die Nutzung der in \ref{sec:gegenstand} genannten Zugriffsarten subomptimal. 
+Sowohl für Lehrende als auch Studierende bieten diese Arten keine intuitive Benutzung oder Ausgabe der Informationen an.\\
 
-Universität und Institut
+Der RDF-Browser bietet, limitiert durch seine rudimentäre Art, sowohl eine unintuitive Suche als auch Darstellung der Informationen in SNIK.
+Die Visualisierung des Graphen bietet zwar eine annehmliche Darstellung, wird jedoch bei komplexeren Fragen schwierig in ihrer Navigation und unübersichtlich in ihrer Darstellung. 
+Der SPARQL Editor als programatischer Endpunkt enthält sowohl die Hürde der SPAR Query Language als Voraussetzung seiner Nutzung, als auch keine übersichtliche Darstellung der Ergebnisse. 
+Question Answerung mit Hilfe von QAnswer glänzt durch ihren Ansatz der Nutzung von natürlicher Sprache als Fragestellung. Jedoch ist auch hier die Darstellung der Ergebnisse, wenn sie denn korrekt ist, nicht in natürlicher Form.\\
 
-das Blaue Buch
-\section{Problemstellung}
+Jede Zugriffsart hat ihre Existensberechtigung und unterschiedlichste Anwendungsfälle. Doch eine Interaktion mit SNIK und den zugrunde liegenden Literaturquellen von Studierenden und Lehrenden ist stets limitiert in ihrer natürlichen Nutzung oder Darstellung der Daten.\\
 
+Durch diese fehlenden Zugriff ist das SNIK Projekt unüblich als Informationsbasis in der Lehre, obwohl dessen Intention jene Lehre erheblich verbessern würde. 
+Häufige semantische Probleme wie Synonyme und Homonyme für Begriffe als auch eine Zusammenfassung der in den Literaturquellen vorhandenen Informationen sind durch SNIK gegeben, können aber nicht von Studierenden einfach genutzt werden.\\
+
+\begin{itemize}
+  \item Problem P1: Aktuelle Zugriffsarten auf SNIK und dessen Literaturquellen bieten keinen einfachen und intuitiven Einstieg
+  \item Problem P2: Wiedergabe von Informationen aus SNIK und dessen Literaturquellen ist unübersichtlich und erfordert zusätzliches Hintergrundwissen zum Verständnis
+\end{itemize}
 
 \section{Motivation}
 
+Allgemeines Wissen, Informationen und Daten werden in heutiger Zeit über Google und Wikipedia gefunden. 
+Die Suche nach Fragen durch Google und die korrekte Beantwortung jener durch einen kurzen Ausschnitt aus der Definition des Begriffs in Wikipedia bieten dem normalen Nutzer eine einfache und schnelle Möglichkeit, seine/ihre Fragen in natürlicher Sprache zu formulieren und Antworten in natürlicher Sprache zu erhalten.\\
+
+Dies erfordert jedoch enorme Rechenleistungen und große Datensätze um konkretes und korrektes Wissen wiederzugeben. 
+Weitergehend sind Wissen und Informationen über die Medizinische Informatik selten im selben Detailgrad in diesen Ressourcen vorhanden, wie sie in den Literaturquellen von SNIK vorliegen. 
+Zur Unterstützung von Lehrenden und Studierenden soll diese Arbeit eine Möglichkeit bieten, ähnlich dem Prozess der gerade beschriebenen normalen Suche im Internet, Wissen und Informationen aus den Literaturquellen zu extrahieren, welche auch als Basis für die Erstellung des SNIK-Projektes genutzt wurden.\\
+
+Dies ermöglicht jenen Nutzenden die Problematiken bei dem Umgang mit SNIK zu umgehen und bietet eine weitere Methodik um digitale Bildung besser in den Arbeitsfluss einer Universität zu integrieren.
+
 \section{Zielsetzung}\label{sec:zielsetzung}
 
+Den in \ref{sec:problemstellung} gezeigten Problemen $P_i$ werden Ziele $Z_i$ dieser Arbeit zugeordnet.
+
+\begin{itemize}
+  \item Ziel Z1: Zugriff auf Literaturquellen von SNIK mit Hilfe eines ChatBots
+  \item Ziel Z2: Wiedergabe von Wissen aus den Literaturquellen von SNIK in natürlicher Sprache beispielhaft gezeigt an Hand von \citet{bb} als Wissensressource
+\end{itemize}
 
 \section{Aufgabenstellung}
 
+Die in \ref{sec:zielsetzung} genannten Ziele $Z_i$ werden durch die hier aufgeführten Aufgaben $A_i$ gelöst.
+
+\begin{itemize}
+  \item Aufgabe zu Ziel Z1
+  \begin{itemize}
+    \item Aufgabe A1.1: Implementierung einer Webseite, welche natürlich gestellte Fragen entgegen nimmt
+    \item Aufgabe A1.2: Nutzung eines General Pre-trained Transformers (GPT) zur Bewertung, Verständis und Beantwortung der gegeben Fragen
+  \end{itemize}
+  \item Aufgabe zu Ziel Z2
+  \begin{itemize}
+    \item Aufgabe A2.1: Erstellung eines Fragenkatalog aus der Literaturquelle
+    \item Aufgabe A2.2: Fein-Tuning des GPT-Modells auf die Literaturquelle
+    \item Aufgabe A2.3: Analyse und Bewertung der ausgegebenen Daten
+  \end{itemize}
+\end{itemize}
+
 \section{Aufbau der Arbeit}
+Kapitel 1 beschreibt das grundlegende Umfeld dieser Arbeit, formuliert exitierende Probleme und Anforderungen, bietet Ziele zur Lösung dieser Probleme an und gibt Aufgaben, zur Umsetzung dieser Ziele. 
+In Kapitel 2 werden Grundlagen gelegt zum Verständnis der in dieser Arbeit verwendeten Technologie, während in Kapitel 3 der aktuelle Stand der Forschung zusammengefasst wird. 
+Kapitel 4 umfasst Lösungsstrategien der in \ref{sec:problemstellung} formulierten Probleme mit einer anschließenden Beschreibung der Umsetzung dieser Lösungen in Kapitel 5. 
+Die Ergebnisse dieser Arbeit werden in Kapitel 6 präsentiert und in Kapitel 7 zusammengefasst diskutiert. Zusätzlich gibt Kapitel 7 einen Ausblick dieser Arbeit.
