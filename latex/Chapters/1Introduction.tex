@@ -11,30 +11,30 @@ Die Medizinische Informatik beschreibt passend dazu \enquote{die Wissenschaft de
 In diesem Kontext wird die Bedeutung der Entwicklung und Implementierung effektiver Informationssysteme und Technologien zur Unterstützung der klinischen Praxis immer größer.\\
 
 In der Lehre wird die Praxis der medizinischen Informatik durch umfassende Literatur wie zum Beispiel in \citet{bb} unterstützt. 
-Zur Strukturierung dieser Literatur existiert die Ontologie SNIK \citep{snikgraphposter}, ein semantisches Netzwerk klassifiert in das SNIK Metamodell und Teil des Instituts für Medizinische Informatik, Statistik und Epidemiologie \citep{imise} an der Universität Leipzig.
-Durch die Verwendung dieses Netzwerkes wird eine systematische Darstellung von Rollen, Entitäten und Funktionen in der Medizinischen Informatik ermöglicht, losgelöst von den Definition der zugrunde liegenden  Literaturquellen.\\
+Zur Strukturierung dieser Literatur existiert die Ontologie SNIK \citep{snikgraphposter}, ein semantisches Netzwerk klassifiert in das SNIK Metamodell und Projekt des Instituts für Medizinische Informatik, Statistik und Epidemiologie \citep{imise} an der Universität Leipzig.
+Durch die Verwendung dieses Netzwerkes wird eine systematische Darstellung von Rollen, Entitäten und Funktionen des Informationsmanagements in Krankenhäusern ermöglicht, losgelöst von den Definition der zugrunde liegenden Literaturquellen.\\
 
-SNIK kann über diverse Zugriffsmöglichkeiten über das Internet durchsucht werden. Der RDF-Browser \citep{rfdbrowser} bietet eine rudimentäre Möglichkeit, auf die SNIK-Ontologie zuzugreifen,
-während der SPARQL-Endpunkt \citep{sparqleditor} einen Query-Editor bereitstellt, der es ermöglicht, graphenbasierte Anfragen an das Resource Description Framework (RDF) von SNIK zu formulieren. 
-Ferner erlaubt eine Graphvisualisierung \citep{graphvisual} eine Darstellung der Informationsendpunkte und ihrer Vernetzung als Graphen. Schließlich stellt QAnswer \citep{qanswer} eine Möglichkeit dar, Fragen in englischer Sprache über das Netzwerk zu stellen und in tabellarischer Form Antworten zu erhalten.
+Die Bedeutung von maschinellem Lernen, Deep Learning und Sprachmodellen nimmt in der heutigen Zeit immer mehr zu. Diese Technologien werden in vielen Bereichen eingesetzt, von der Automobilindustrie bis hin zu medizinischen Anwendungen, um neue Methoden der Informationsgewinnung und -verarbeitung zu bieten. 
+Eine Studie von \citet{mckinsey} zeigt, dass maschinelles Lernen und künstliche Intelligenz in den nächsten Jahren in der Wirtschaft zunehmend eingesetzt werden und dabei helfen werden, die Effizienz und Produktivität zu steigern.
+Sprachmodelle wie beispielsweise das GPT-3-Modell von OpenAI \citep{gpt3} können dazu beitragen, Texte in verschiedenen Sprachen automatisch zu übersetzen und sogar kreative Schreibarbeiten zu erledigen. 
+Deep Learning, das auf künstlichen neuronalen Netzwerken basiert, ermöglicht eine noch tiefere und komplexere Verarbeitung von Daten. 
+In der Medizin kann Deep Learning zum Beispiel bei der Diagnose von Krankheiten und bei der Analyse von medizinischen Bildern eingesetzt werden \citep{skincancer}.
 
 \section{Problemstellung} \label{sec:problemstellung}
-Zur Unterstützung der Lehre ist die Nutzung der in \ref{sec:gegenstand} genannten Zugriffsarten subomptimal. 
-Sowohl für Lehrende als auch Studierende bieten diese Arten keine intuitive Benutzung oder Ausgabe der Informationen an.\\
+Das Management von Informationssystemen ist eine komplexe Aufgabe, die sich nicht nur auf die Anwendung durch Mitarbeiter in Krankenhäusern beschränkt. Es ist auch wichtig für Studierende, um ein besseres Verständnis der vorhandenen Systeme zu erlangen, sowie für Wissenschaftler, um diese Systeme zu erweitern oder neue Methoden zum Management zu entwerfen.
+Eine konkrete und konsistente Wissensbasis ist sowohl für die Anwendung als auch die Lehre und Forschung von großer Bedeutung. Die Forschung liefert hierfür eine Fülle von Literatur zu verschiedenen Aspekten der Medizinischen Informatik und dem Management von Informationssystemen.\\
 
-Der RDF-Browser bietet, limitiert durch seine rudimentäre Art, sowohl eine unintuitive Suche als auch Darstellung der Informationen in SNIK.
-Die Visualisierung des Graphen bietet zwar eine annehmliche Darstellung, wird jedoch bei komplexeren Fragen schwierig in ihrer Navigation und unübersichtlich in ihrer Darstellung. 
-Der SPARQL Editor als programatischer Endpunkt enthält sowohl die Hürde der SPAR Query Language als Voraussetzung seiner Nutzung, als auch keine übersichtliche Darstellung der Ergebnisse. 
-Question Answerung mit Hilfe von QAnswer glänzt durch ihren Ansatz der Nutzung von natürlicher Sprache als Fragestellung. Jedoch ist auch hier die Darstellung der Ergebnisse, wenn sie denn korrekt ist, nicht in natürlicher Form.\\
+Zwischen verschiedenen Literaturquellen herrscht jedoch oft Inkonsistenz bei der Definition und Benennung von Fachbegriffen. 
+Zum Beispiel wird der Begriff \enquote{Krankenhausinformationssystem (engl. Hospital Information System)} in \citet{kis_winter} als das sozio-technische Subsystem eines Krankenhauses beschrieben,
+das aus allen assoziierten menschlichen und technischen Akteuren, den damit verbundenen informationsverarbeitenden Rollen und allen Prozessen zur Verarbeitung dieser Informationen besteht.
+Im Gegensatz dazu schließt die Definition in \citet{kis_italy} keine menschlichen Akteure ein.\\
 
-Jede Zugriffsart hat ihre Existensberechtigung und unterschiedlichste Anwendungsfälle. Doch eine Interaktion mit SNIK und den zugrunde liegenden Literaturquellen von Studierenden und Lehrenden ist stets limitiert in ihrer natürlichen Nutzung oder Darstellung der Daten.\\
-
-Durch diese fehlenden Zugriff ist das SNIK Projekt unüblich als Informationsbasis in der Lehre, obwohl dessen Intention jene Lehre erheblich verbessern würde. 
-Häufige semantische Probleme wie Synonyme und Homonyme für Begriffe als auch eine Zusammenfassung der in den Literaturquellen vorhandenen Informationen sind durch SNIK gegeben, können aber nicht von Studierenden einfach genutzt werden.\\
+Die Vielzahl an verfügbaren Literaturquellen und die Seitenanzahl der einzelnen Quellen erschweren eine schnelle Informationsbeschaffung, insbesondere für Studierende, die grundlegende Konzepte korrekt verstehen möchten. 
+Darüber hinaus führen semantische Unterschiede bei der Definition von Fachbegriffen zu zusätzlichen Hindernissen.\\
 
 \begin{itemize}
-  \item Problem P1: Aktuelle Zugriffsarten auf SNIK und dessen Literaturquellen bieten keinen einfachen und intuitiven Einstieg
-  \item Problem P2: Wiedergabe von Informationen aus SNIK und dessen Literaturquellen ist unübersichtlich und erfordert zusätzliches Hintergrundwissen zum Verständnis
+  \item Problem P1: Schwierigkeiten bei der Informationsbeschaffung aufgrund der Fülle an Literatur und Seitenanzahl
+  \item Problem P2: Inkonsistenz bei der Definition von Fachbegriffen zwischen verschiedenen Literaturquellen
 \end{itemize}
 
 \section{Motivation}
