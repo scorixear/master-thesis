@@ -29,32 +29,35 @@ Zum Beispiel wird der Begriff \enquote{Krankenhausinformationssystem (engl. Hosp
 das aus allen assoziierten menschlichen und technischen Akteuren, den damit verbundenen informationsverarbeitenden Rollen und allen Prozessen zur Verarbeitung dieser Informationen besteht.
 Im Gegensatz dazu schließt die Definition in \citet{kis_italy} keine menschlichen Akteure ein.\\
 
-Die Vielzahl an verfügbaren Literaturquellen und die Seitenanzahl der einzelnen Quellen erschweren eine schnelle Informationsbeschaffung, insbesondere für Studierende, die grundlegende Konzepte korrekt verstehen möchten. 
-Darüber hinaus führen semantische Unterschiede bei der Definition von Fachbegriffen zu zusätzlichen Hindernissen.\\
+Die Vielzahl an verfügbaren Literaturquellen, deren Umfang, unterschiedliche Perspektiven und semantische Unterschiede bei der Definition von Fachbegriffen
+erschweren eine schnelle Informationsbeschaffung, insbesondere für Studierende, die grundlegende Konzepte korrekt verstehen möchten. \\
 
 \begin{itemize}
-  \item Problem P1: Schwierigkeiten bei der Informationsbeschaffung aufgrund der Fülle an Literatur und Seitenanzahl
+  \item Problem P1: Schwierigkeiten bei der Informationsbeschaffung aufgrund der Fülle an Literatur und deren Umfang
   \item Problem P2: Inkonsistenz bei der Definition von Fachbegriffen zwischen verschiedenen Literaturquellen
 \end{itemize}
 
 \section{Motivation}
 
-Allgemeines Wissen, Informationen und Daten werden in heutiger Zeit über Google und Wikipedia gefunden. 
-Die Suche nach Fragen durch Google und die korrekte Beantwortung jener durch einen kurzen Ausschnitt aus der Definition des Begriffs in Wikipedia bieten dem normalen Nutzer eine einfache und schnelle Möglichkeit, seine/ihre Fragen in natürlicher Sprache zu formulieren und Antworten in natürlicher Sprache zu erhalten.\\
+Eine Strukturierung von Informationen über das Management von Informationssystemen in Krankenhäusern ist bereits Teil des Projektes SNIK \citep{snikposter}, 
+ein semantischen Netz des Instituts für Medizinische Informatik, Statistik und Epidemiologie der Universität Leipzig \citep{imise}. SNIK nutzt als Basis verschiedene Literaturquellen um eine Ontologie basierend auf dem SNIK Metamodell aufzubauen. 
+Der Vorteil ist eine Umgehung von semantischen Unterschieden in den Literaturquellen durch eine Abstrahierung von Grundbegriffen in die Übergruppen Rolle, Entität und Funktion.
+Auf Basis dieses Netzwerkes wurden bereits verschiedene Methoden untersucht, wie Informationen extrahiert werden können.\\
 
-Dies erfordert jedoch enorme Rechenleistungen und große Datensätze um konkretes und korrektes Wissen wiederzugeben. 
-Weitergehend sind Wissen und Informationen über die Medizinische Informatik selten im selben Detailgrad in diesen Ressourcen vorhanden, wie sie in den Literaturquellen von SNIK vorliegen. 
-Zur Unterstützung von Lehrenden und Studierenden soll diese Arbeit eine Möglichkeit bieten, ähnlich dem Prozess der gerade beschriebenen normalen Suche im Internet, Wissen und Informationen aus den Literaturquellen zu extrahieren, welche auch als Basis für die Erstellung des SNIK-Projektes genutzt wurden.\\
+Die BeLL-Arbeit mit dem Titel \enquote{Question Answering auf SNIK} \citep{bell_snik} erweiterte den Zugang zu diesem Netzwerk durch die Nutzung natürlicher englischer Sprache. 
+Im Kontrast dazu untersuchten \citet{chatgpt_qas} die Leistung von Konversations-KI (in diesem Fall ChatGPT) im Vergleich zu herkömmlichen Question-Answering-Systemen, die auf Wissensgraphen basieren (hier als $KGQA_N$ bezeichnet). 
+Die Ergebnisse zeigten, dass ChatGPT erstaunlich stabile und nachvollziehbare Antworten im Vergleich zum genutzten $KGQA_N$ lieferte.
 
-Dies ermöglicht jenen Nutzenden die Problematiken bei dem Umgang mit SNIK zu umgehen und bietet eine weitere Methodik um digitale Bildung besser in den Arbeitsfluss einer Universität zu integrieren.
+Die Ergebnisse der BeLL-Arbeit wurden im Projekt QAnswer \citep{qanswer} umgesetzt, zeigen jedoch bei der Erklärbarkeit und dem Verständis von komplexeren Fragen mangelnde Resultate. 
+Es ist daher notwendig zu untersuchen, ob die Verwendung einer Konversations-KI unter denselben Schwierigkeiten leidet und ob sich dabei neue Herausforderungen ergeben.
 
 \section{Zielsetzung}\label{sec:zielsetzung}
 
 Den in \ref{sec:problemstellung} gezeigten Problemen $P_i$ werden Ziele $Z_i$ dieser Arbeit zugeordnet.
 
 \begin{itemize}
-  \item Ziel Z1: Zugriff auf Literaturquellen von SNIK mit Hilfe eines ChatBots
-  \item Ziel Z2: Wiedergabe von Wissen aus den Literaturquellen von SNIK in natürlicher Sprache beispielhaft gezeigt an Hand von \citet{bb} als Wissensressource
+  \item Ziel Z1: Wiedergabe von Wissen aus \citet{bb} in natürlicher Sprache generiert durch eine Konversation-KI
+  \item Ziel Z2: Verständnis von semantischer Bedeutung von Begriffen erklärt in \citet{bb} durch die Konversations-KI
 \end{itemize}
 
 \section{Aufgabenstellung}

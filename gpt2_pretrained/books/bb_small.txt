@@ -1,0 +1,853 @@
+##Introduction
+
+‘What is a health information system? The literature defines health information systems
+(HIS) in many different ways and presents various views. Some articles focus on the orga-
+nizational aspects of information processing, while others focus on the technology used.
+To begin with, we understand a health information system as the information processing
+and information storing subsystem of a health care organization, which may be a single
+institution, for example, a hospital, or a group of health care institutions like a health care
+network.
+
+This book discusses the significance of information processing in health care, with an
+emphasis on information processing in hospitals, the progress in information and commu-
+nication technology, and the importance of systematic information management. Nearly
+all people working in health care institutions have an enormous demand for information,
+which has to be fulfilled in order to achieve high-quality and efficient patient care. For
+example, physicians and nurses need information concerning the health status of patients
+from different departments of their hospital. They also need current medical knowledge as
+a basis for their clinical decisions. In addition, the management of a hospital needs up-to-
+date information about the hospital’s costs and services. Of course, the quality of informa-
+tion processing is important for the competitiveness of a hospital. Consequently, this
+system of information processing can be regarded as the memory and nervous system of
+the respective health care institution.
+
+The subject of information processing is quite complex. Nearly all groups and all areas
+in a health care institution depend on the quality of information processing. The amount of
+information processing is tremendous. Additionally, the information needs of the different
+groups are often based on the same data. Therefore, integrated information processing is
+necessary. If health information systems are not systematically managed and operated,
+they tend to develop chaotically. This, in turn, leads to negative consequences such as low
+data quality, resulting in low quality of patient care and increasing costs. Systematic infor-
+mation management can help to prevent such HIS failures and contribute to a high-quality
+and efficient patient care.
+
+Well-educated specialists in health informatics/medical informatics, with the knowl-
+edge and skills to systematically manage and operate health information systems are there-
+fore needed to appropriately and responsibly apply information and communication
+technology to the complex information processing environment of health care settings.
+
+This book discusses the typical architectures of health information systems and their
+systematic strategic management. A lot of examples will show how certain methods and
+
+A. Winter et al., Health Information Systems, 1
+DOI: 10.1007/978-1-84996-441-8 1, © Springer-Verlag London Limited 2011
+#2 1 Introduction
+
+tools can be used to describe and assess architectures of health information systems and to
+support the various information management tasks in an integrated fashion.
+
+This textbook addresses you as a health care and health/medical informatics profes-
+sional as well as a student in health/medical informatics and health information manage-
+ment. It should be regarded as an introduction to this complex subject. For a deeper
+understanding, you will need additional knowledge and, foremost, practice in this field.
+
+If you are not familiar with patient care and medical research, you can find an introduc-
+tory chapter to health institutions and their respective information processing tasks. If you
+are not familiar with information systems, you can find an introductory chapter to informa-
+tion system basics.
+
+‘We want to provide you with a terminology about health information systems which is
+as complete and sound as possible. To support this, we compiled a catalog of the most
+important terms as a thesaurus at the end of the book. The terms cataloged are underlined
+in the text, where they are explained. If you find terms which are printed in italics, these
+terms will refer to
+® actions to be undertaken in health care in order to process data and information and to
+
+thereby contribute to the mission of health care (i.e., hospital functions).
+
+e computer-based tools to support professionals in health care to undertake these actions
+
+(i.e., application components).
+
+You will find explanations of the respective terms in Sects. 6.3, 6.4.
+After reading this book, you should be able to answer the following questions:
+eo Why is systematic information processing in health care institutions important?
+® What are appropriate models for health information systems?
+e How do health information systems look like and what architectures are appropriate?
+e How can we assess the quality of health information systems?
+e How can we strategically manage health information systems?
+In the end, we are confident that you will be able to answer the question “How can good
+information systems be designed and maintained?”
+
+If you are a lecturer, we would like to support you by some supplementary materials
+based on the book which can be downloaded from http://www.3lgm?2.de/en/Publications/
+Materials/HealthInformationSystems.jsp.”
+#Health Institutions and Information ProcessingIntroduction
+
+Health information systems strongly influence quality and efficiency of health care, and technical
+progress offers advanced opportunities to support health care. In this chapter, we will discuss the
+interrelation between health information systems on one side and health care on the other side.
+After reading this chapter, you should be able to answer the following questions:
+
+e What is the significance of information systems for health care?
+
+e How does technical progress affect health care?
+
+eo Why is systematic information management important?Significance of Information Processing in Health care
+
+2.2.1
+Information Processing as Quality Factor
+
+Decisions of health care professionals are based on vast amounts of information about the
+patient’s health state. It is essential for the quality of patient care and for the quality of
+hospital management to fulfill these information needs.
+
+‘When a patient is admitted to a hospital, a physician or nurse first needs information
+about the reason for patient admission and the patient history. Later, she or he needs results
+from services such as laboratory and radiology (Fig. 2.1), which are some of the most fre-
+quent diagnostic procedures. In general, clinical patient-related information should be
+available on time, and it should be up-to-date and valid. For example, the recent laboratory
+report should be available on the ward within 2 h after the request. If this is not the case, if
+it comes too late, or is old or even wrong, quality of care and patient safety is at risk. An
+incorrect laboratory report may lead to erroneous and even harmful treatment decisions.
+Additionally, if examinations have to be repeated or lost findings have to be searched for,
+the costs of health care may increase. Information should be documented adequately,
+enabling health care professionals to access the information needed and to make sound
+decisions.
+
+A. Winter et al., Health Information Systems, 3
+DOI: 10.1007/978-1-84996-441-8 2, © Springer-Verlag London Limited 2011
+#4 2 Health Institutions and Information Processing
+
+Fig. 2.1 Radiological conference in a radiodiagnostic department
+
+People working in hospital administration also must be well informed in order to carry
+out their tasks. They should be informed timely and receive current information. If the infor-
+mation flow is too slow, bills are written days or even weeks after the patient’s discharge. If
+information is missing, payable services cannot be billed, and the hospital's income will be
+reduced. For example, under certain circumstances, the amount payable by the health insur-
+ance is reduced, if the invoice from the hospital arrives after a certain deadline.
+
+Hospital management also has an enormous information need. Up-to-date information
+about costs and proceeds are necessary as a basis for controlling the enterprise. Information
+about the quality of patient care is equally important, for example, about the form and sever-
+ity of patients’ illnesses, about nosocomial infections, or about complication rates of thera-
+peutic procedures. Ifthis information is not accurate, not on time, or incomplete, the hospitals
+work cannot be controlled adequately, increasing the risks of management errors.
+
+Thus, information processing is an important quality factor in health care and, in par-
+ticular, in hospitals.
+
+2.2.2
+Information Processing as Cost Factor
+
+In 2007, member states of the Organization for Economic Cooperation and Development
+(OECD) spent between 6 and 15% of their total gross domestic product (GDP) on health care.'
+
+'Organization for Economic Co-operation and Development (OECD). OECD Health Data 2008.
+Statistics and Indicators for 30 countries. http://www.oecd.org
+#2.2 Significance of Information Processing in Health care 5
+
+In 2006, the costs for the approximately 2,100 German hospitals with their 510,000 beds
+amounted to €60 billion; 1.1 million people worked in these organizations in Germany, and 17
+million inpatients were treated.? In the USA, hospital spending was nearly $600 billion. The
+overall US national health expenditure reached $2.2 trillion in 2007, and accounted for 16.2%
+of the Gross Domestic Product.’
+
+A relevant percentage of those costs is spent on information processing. However, the
+total percentage of information processing can only be estimated. Already in the 1960s,
+studies observed that 25% of a hospital’s costs are due to (computer-based and non-
+computer-based) information processing.* However, such an estimate depends on the defi-
+nition of information processing. In general, the investment costs (including purchase,
+adaptation, introduction, and training) must be distinguished from the operating costs
+(including continued maintenance and support as well as staff), and the costs for computer-
+based from the costs for non-computer-based information processing (which still are often
+much higher in hospitals).
+
+Looking at computer-based information processing, the annual budget that health care
+institutions spend on information and communication technology (ICT) (including com-
+puter systems, computer networks, and computer-based application components) was in
+2006 between 2.5% and 3.3% of the total hospital operating expense, depending on the
+number of beds.® In many hospitals, the annual budget is even lower. Most hospital chief
+information officers (CIOs) expect an increasing budget.®
+
+‘When looking at non-computer-based information processing (see Fig. 2.2, for exam-
+ple), the numbers become increasingly vague. However, we can expect that, for example,
+the annual operating costs (including personnel costs) for a non-computer-based archive,
+storing about 300,000-400,000 new patients records each year, may easily amount to more
+than €500,000. A typical, standardized, machine-readable form, including two carbon cop-
+ies (a radiology order, for example) costs approximately €0.50. A typical inpatient record
+at a university hospital consists of about 40 documents.
+
+Based on these figures, it becomes apparent that information processing in health
+care is an important cost factor and considerably significant for a national economy.
+It is clear that, on the one hand, efficient information processing offers vast potential
+for cost reductions. On the other hand, inefficient information processing leads to cost
+increases.
+
+“Federal Statistical Office. Statistical Yearbook 2008 for the Federal Republic of Germany. http://
+www.destatis.de
+
+US Department for Health and Human Services. National Health Expenditure Data 2007. http://
+www.cms.hhs.gov/NationalHealthExpendData
+
+4Jydstrup R, Gross M. Cost of information handling in hospitals. Health Services Research 1966;
+1:235-71.
+
+Healthcare Information and Management Systems Society (HIMSS): 2007 Annual Report of the
+US Hospital IT Market. http://marketplace.himss.org
+
+®Healthcare Information and Management Systems Society (HIMSS). The 19th Annual 2008
+HIMSS Leadership Survey CIO Results Final Report. 2000. http://www.himss.org
+#6 2 Health Institutions and Information Processing
+
+Fig. 2.2 The office of a senior
+physician
+
+2.23
+Information as Productivity Factor
+
+In the nineteenth century, many societies were characterized by rising industry and
+industrial production. By the second half of the twentieth century, the idea of
+communicating and processing data by means of computers and computer networks
+was already emerging. Today we speak of the twenty-first century as the century of
+information technology, or of an “information society.” Informatics and information
+and communication technology (ICT) are playing a key role. Information, bound to a
+medium of matter or energy, but largely independent of place and time, shall be made
+available to people at any time and in any place imaginable. Information shall find its
+way to people, not vice versa.
+
+Today, information belongs to the most important productivity factors of a hospital.
+Productivity is defined as a ratio of output and input. All resources like personnel, medical
+devices, etc. are part of the input. Therefore, from an economic point of view, productivity
+of a hospital might be defined as the ratio of the number of cases and full-time employees.
+If, however, output is considered as quality of patient care, it is much more difficult to
+calculate productivity. Therefore, a lot of reliable clinical data are needed. For high-quality
+patient care and economic management of a hospital, it is essential that the hospital infor-
+mation system can make correct information fully available on time. This is also increas-
+ingly important for the competitiveness of hospitals.
+
+2.24
+Holistic View of the Patient
+
+Information processing in a hospital should offer a comprehensive, holistic view of
+the patient and of the hospital. “Holistic” in this context means to have a complete
+picture of the care of a patient available, independent of the health care institutions
+#2.2 Significance of Information Processing in Health care 7
+
+and hospital departments in which the patient has been or will be treated. This holistic
+view on the patient can reduce undesired consequences of highly specialized medicine
+with various departments and health care professionals involved in patient care.
+Despite highly differentiated diagnostics and therapy, and the multitude of people and
+areas in a hospital, adequate information processing (and a good hospital information
+system) can help to make information about a patient available completely (Fig. 2.3).
+As specialization in medicine and health care increases, so does the fragmentation of
+information, which makes combining information into such a holistic view more and
+more necessary. However, it must be clearly ensured that only authorized personnel
+can access patient data and data about the hospital as an enterprise.
+
+2.2.5
+Hospital Information System as Memory and Nervous System
+
+Figuratively speaking, a hospital information system might be regarded as the memory
+and the nervous system of a hospital. A hospital information system, comprising the
+information processing and storage in a hospital (Figs. 2.4 and 2.5), to a certain extent
+can be compared to the information processing of a human being. The hospital infor-
+mation system also receives, transmits, processes, stores, and presents information.
+The quality of a hospital information system is essential for a hospital, again figura-
+tively, in order to be able to adequately recognize and store facts, to remember them,
+and to act on them.
+#8 2 Health Institutions and Information Processing
+
+Fig.2.4 A paper-based patient record
+archive as one information storing
+part of the hospital’s memory and
+nervous systemProgress in Information and Communication Technology
+
+2.3.1
+Impact on the Quality of Health Care
+
+Progress in information and communication technology (ICT) changes societies and
+affects the costs and quality of information processing in health care. It is thus useful to
+take a look at the world of information and communication technology.
+
+Tremendous improvements in diagnostics have been made available by modem tech-
+nology, for example, in the area of medical signal and image processing. Magnetic reso-
+nance imaging and computer tomography, for example, would not have been possible
+without improvements in information processing and information methodology and with-
+out modern information and communication technology (see Fig. 2.6). Improved diagnos-
+tics then lead to an improvement in therapy. Some therapies, for example, in neurosurgery
+or radiotherapy, are possible mainly due to the progress in ICT. The same is true in the field
+of medical biotechnology: the development of new drug agents, research in molecular
+principles of diseases, and the resulting new patient-specific therapeutic option enable a
+better treatment of patients.
+
+Nowadays, clinical research can to an increasing degree be conducted with success, and
+be internationally competitive, only if carried out on an interdisciplinary, often also
+#2.3 Progress in Information and Communication Technology 9
+
+Fig. 2.5 Snapshot in a server
+room of a hospital showing
+the computer-based nerve
+cords of the hospital's
+memory and nervous
+system
+
+inter-regional or international, and collaborative basis. This collaboration has been and is
+fostered by integrated systems of information technology. The translation of medical
+research outcomes into new therapies needs tight information exchange from “bench” to
+“bed”, that is, from research to patient care. Vice versa information about experiences with
+therapies is collected by computer-based tools within clinical trials and is resent to and
+carefully analyzed at research institutions.
+
+Important progress due to improvements in modern ICT can also be observed in infor-
+mation systems of health care organizations. The role of computer-based information
+systems, together with clinical documentation and knowledge-based decision support sys-
+tems, can hardly be overestimated in respect to the quality of health care, as the volume of
+data available today is much greater than it was a few years ago.
+#10 2 Health Institutions and Information Processing
+
+Fig. 2.6 Physician using a picture archiving and communication system for diagnostics
+
+23.2
+Impact on Economics
+
+For many countries, the vision of an “information society” has become a reality. Nearly
+every modern economic branch is shaped by information processing and information and
+communication technology.
+
+The worldwide information and communication technology market volume is estimated
+at nearly €2.5 trillion in 2009 with a growth rate of about 5% per year.” Germany’s expected
+total annual turnover on information and communication technology was approximately
+€146 billion in 2008. Generally, half of this money is spent on information technology (data
+processing and data communication equipment, software, and related services) and the other
+half on communication technology (telecommunication equipment and related services).
+
+ICT has become a major factor for quality and efficiency of health care worldwide.
+ICT in health care also emerged to a leading industry branch. The percentage of health
+care ICT on the worldwide ICT market is difficult to estimate. The following numbers
+may indicate the significance of ICT in health care: In the U.S. the estimated total expen-
+ditures of ICT equipment and software in health care were about $21 billion in 2007,
+which is 8.1% of the total US ICT expenditures.’ Reports from the European Union (EU)
+
+"European Information Technology Observatory (EITO). ICT Market Overview. http://www.eito.
+com/reposi/FreeDataSheets/ICT-MarketOverview-world
+
+8Bitkom. http://www.bitkom.de
+
+US Census Bureau. Information & Communication Technology Survey. http://www.census.
+
+gov/esdfict
+#2.3 Progress in Information and Communication Technology n
+
+state that the eHealth industry in the EU (defined as comprising clinical information sys-
+tems, telemedicine and homecare, and regional networks) was estimated “to be worth
+close to €21 billion in 2006” and that the global eHealth industry “has the potential to be
+the third largest industry in the health sector with a global turnover of €50-60 billion”!
+Many countries established programs to force information and communication techno-
+logy especially in the eHealth segment with investment volumes between $50 million and
+$11.5 billion."
+
+One might have doubts about the validity of these rather rough numbers. However, they
+all exemplify the following: There is a significant and increasing economic relevance not
+only for information and communication technology in general but also in health care.
+
+23.3
+Changing Health Care
+
+Now once more, what changes in health care do we expect through information and com-
+munication technology?
+
+The developments mentioned will probably continue into the next decade at least at the
+same rate as given today. The development of information and communication technology
+will continue to have a considerable effect on our societies in general and on our health
+care systems in particular.
+
+The use of computer-based tools in health care is dramatically increasing, and new
+technologies such as mobile devices and multifunctional bedside terminals will prolifer-
+ate. Those mobile information processing tools offer both communication and information
+processing features. Wireless networks are standard in many hospitals. Computer-based
+training systems strongly support efficient learning for health care professionals.
+Documentation efforts are continuously rising and lead to more sophisticated computer-
+based documentation tools (see Fig. 2.7). Decision support tools, for example, in the con-
+text of drug prescription, support high-quality care. Communication is increasingly
+supported by electronic means. The globalization of providing health care and the coop-
+eration of health care professionals is increasing, and patients and health care professionals
+seek reliable health information on the Internet. Large health databases are available for
+everyone at his or her work place and global companies offer personal health records
+worldwide for everyone. Providing high-quality and efficient health care will continue to
+be strongly correlated with high-quality information and communication technology and a
+
+"’European Communities. Accelerating the Development of the eHealth Market in Europe. 2007.
+Luxembourg: Office for Official Publications of the European Communities; 2007. http:/ec.
+europa.eu/information_society/activities/health/downloads/index _en.htm, last accessed May 20,
+2009.
+
+1G. F. Anderson, B. K. Frogner, R. A. Johns, U. E. Reinhardt, Healthcare Spending and Use of
+Information Technology in OECD Countries, Health Affairs, May/June 2006 25(3):819-31.
+
+"?President’s Information Technology Advisory Committee (PITAC). Transforming Healthcare
+Through Information Technology — PITAC report to the president. Arlington: Nation
+Coordination Office for Computing; 2001.
+#12 2 Health Institutions and Information Processing
+
+Fig.2.7 A mobile computer on a ward
+to support medical documentation
+and information access
+
+sound methodology for systematically processing information. However, the newest infor-
+mation and communication technologies do not guarantee high-quality information pro-
+cessing. Both information processing technologies and methodologies must adequately
+and responsibly be applied and, as will be pointed out later on, systematically managed.Importance of Systematic Information Management
+
+24.1
+Affected People and Areas
+
+Nearly all people and all areas of a hospital are affected by the quality of the information
+system, as most of them need various types of information (e.g., about the patient) in their
+daily work. The patient can certainly profit most from high-quality information processing
+since it contributes to the quality of patient care and to reducing costs.
+
+The professional groups working in a hospital, especially physicians, nurses, and
+administrative personnel, and others are also directly affected by the quality of the infor-
+mation system. As they spend 25% or even more of their time on information handling,
+they directly profit from good and efficient information processing. However, they will
+also feel the consequences if information processing is poor.
+#2.4 Importance of Systematic Information Management 13
+
+24.2
+Amount of Information Processing
+
+The amount of information processing in hospitals, especially in larger ones, should not be
+underestimated. Let us look at a typical German university medical center. It is an enter-
+prise encompassing staff of approximately 4,500 people, an annual budget of approxi-
+mately €250 million, and, as a maximum care facility, numerous tasks in research,
+education, and patient care. It consists of up to 60 departments and up to 100 wards with
+up to 1,500 beds and about 100 outpatient units. Annually, approximately, 50,000 inpa-
+tients and 250,000 outpatients are treated, and 20,000 operation reports, 250,000 discharge
+letters, 20,000 pathology reports, 100,000 microbiology reports, 200,000 radiology reports,
+and 800,000 clinical chemistry reports are written.
+
+Each year, approximately 300,000-400,000 new patient records, summing up to
+approximately eight million pieces of paper, are created (Fig. 2.8). When stored in a paper-
+based way, an annual record volume of approximately 1,500 m is generated. In Germany,
+for example, they should be archived over a period of 30 years. When stored digitally, the
+annual data volume needed is expected to be around 10-15 terabytes, including digital
+images and digital signals.
+
+The computer-based tools of a university medical center encompass more than hundred
+of the computer-based application components, thousands of workstations and other
+
+Fig. 2.8 A study nurse in an outpatient unit dealing with a multitude of paper-based forms
+#14 2 Health Institutions and Information Processing
+
+terminals, and more than hundred servers (larger computer systems that offer services and
+features to other computer systems), and the respective network.
+
+The numbers in the majority of hospitals are much smaller. In larger ones we will find,
+for example, about ten departments with 600 beds and about 20,000 inpatients every year.
+In industrialized countries 1,500 staff members would work there, and the annual budget
+of the hospital would be about €80 million. Especially in rural areas, we can also find hos-
+pitals with only one department and fewer than 50 beds.Sharing the Same Data
+
+There are different reasons for pursuing holistic and integrated information processing.
+The most important reason is that various groups of health care professionals within and
+outside health care institutions need the same data (Fig. 2.9).
+
+For example, a surgeon in a hospital documents the diagnoses and therapies of an oper-
+ated patient in an operation report. This report serves as basis for the discharge letter. The
+discharge letter is also an important document to communicate with the admitting institu-
+tion, normally a general practitioner. Diagnosis and therapy are also important for statistics
+about patient care and for quality management. Equally, they contain important informa-
+tion for the systematic nursing care of a patient. Diagnostic and therapeutic data are also
+relevant for billing.
+
+In Germany, for example, some basic administrative data must be communicated to the
+respective health insurance company online within 3 days after patient admission and after
+discharge. In a coded form, they are the basis for accounting. Additionally, managing and
+controlling a hospital is possible only if the cost (such as consumption of materials or
+drugs) of the treatment can be compared to the characteristics and severity of the illness,
+characterized by diagnosis and therapy.
+
+Fig. 2.9 Regular clinical
+round by different health
+care professionals on a ward
+
+#2.4 Importance of Systematic Information Management 15Integrated Information Processing to Satisfy Information Needs
+
+Information processing has to integrate the partly overlapping information needs of the
+different groups and areas of a hospital (see Fig. 2.10).
+
+Systematic, integrated information processing in a hospital has advantages not only for
+the patient, but also for the health care professionals, the health insurance companies, and
+the hospital owners. If information processing is not conducted globally across institutions,
+but locally, for example, in professional groups (physicians, nurses, and administrative
+staff) or areas (clinical departments, institutes, and administration), this corresponds to tra-
+ditional separation politics and leads to isolated information processing groups, such as “the
+administration” or “the clinic.” In this case, the quality of the hospital information system
+clearly decreases while the costs for information processing increase due to the necessity
+for multiple data collection and analysis. Finally, this has disadvantages for the patient and,
+when seen from a national economical point of view, for the whole population.
+
+However, integration of information processing should consider not only information
+processing in one health care organization, but also information processing among differ-
+ent institutions (such as integrated health care delivery systems). The achievements of
+modern medicine, particularly in the field of acute diseases, have led to the paradoxical
+result that chronic diseases and multimorbidity increasingly gain in relevance. Among
+other reasons, this is due to more people being able to live to old age. Moreover, in many
+
+Fig. 2.10 During a ward round: Health care professionals jointly using information processing tools
+#16 2 Health Institutions and Information Processing
+
+countries, an increasing willingness to switch doctors and a higher regional mobility exist
+among patients. The degree of highly specialized and distributed patient care creates a
+great demand for integrated information processing among health care professionals and
+among health care institutions such as hospitals, general practices, laboratories, etc. In
+turn, this raises the need for more comprehensive documentation and efficient, compre-
+hensive information systems.
+
+2.4.5
+Raising the Quality of Patient Care and Reducing Costs
+
+Systematic information processing is the key factor for raising quality and reducing
+costs. What does “systematic” mean in this context? “Unsystematic” can, in a positive
+sense, mean creative, spontaneous, or flexible. However, “unsystematic” can also mean
+chaotic, purposeless, and ineffective, and also entail high costs compared to the benefits
+gained.
+
+“Systematic” in this context means purposeful and effective, and with great benefit
+regarding the costs. Bearing this in mind, it is obvious that information processing in a
+health care institution should be managed systematically. Due to the importance of infor-
+mation processing as a quality and cost factor, an institution has to invest systematically
+in its health information system. These investments deal with both staff and tools for
+information processing. They aim at increasing quality of patient care and at reducing
+costs.
+
+Unsystematic information processing normally leads to a low quality of health information
+systems, and the information needs of the staff and departments cannot be adequately satis-
+fied. When health information systems are not systematically managed, they tend to develop
+in a chaotic way. This has severe consequences: decreased data quality, and higher costs,
+especially for tools and information processing staff, not to mention aspects such as data pro-
+tection and data security violation. Even worse, insufficiently managed information systems
+can contribute to breakdowns in established clinical workflows, to a reduced efficiency of
+care, to user boycott, to decreased quality of care and — in the end — even endanger patient
+safety.
+
+To adequately process information and apply information and communication technol-
+ogy, knowledge and skills for these tasks are required.
+
+2.4.6
+Basis of Systematic Information Processing
+
+If the hospital management decides to invest in systematic information processing (and not
+in fighting the effects of chaotic information processing, which normally means much
+higher investments), it decides to manage the hospital information system in a systematic
+way. The management of a hospital information system forms and controls the information
+system, and it ensures its efficient operation.
+#2.5 Examples 17Examples
+
+2.5.1
+Knowledge Access to Improve Patient Care
+
+Imagine the following situation: Ursula B. was pregnant with quintuplets. She had already
+spent more than 5 months in a University Medical Center. She had to spend most of this
+time lying in bed. During the course of her pregnancy, her physical problems increased.
+From the 28th week on, she suffered severe respiratory distress.
+
+Professor L., the pediatrician, who was also involved in her treatment, had the fol-
+lowing question: What are the chances of the infants being born healthy at this gesta-
+tional age?
+
+He went to a computer, which is connected to the computer network of the University
+Medical Center. The physician called up a function “knowledge access” and, as applica-
+tion component, a literature database (MEDLINE), which contains the current state of
+the art of medical knowledge worldwide (Fig. 2.11).
+
+The following information resulted from this knowledge access: Several publications
+stated that only slim chances exist for all infants to survive in good health. If they are born
+during the 28th week of pregnancy, the chance for survival is about 15%. In case of birth
+during the 30th week, their chances would improve to about 75%. Also, according to the
+literature, further delay of the delivery does not improve the prognosis of the quintuplets.
+
+Fig.2.11 Prof. L., Head of
+the Department of
+Pediatrics, working with
+a literature server
+
+3Offered for free by the National Library of Medicine (NLM), Bethesda, USA, http://www.ncbi.
+nlm.nih.gov/entrez/query.fegi
+#18 2 Health Institutions and Information Processing
+
+Fig. 2.12 The Heidelberg quintuplets
+
+The physician discussed the results with the expectant mother. Despite her respiratory
+problems, she had the strength to endure 2 more weeks.
+
+On January 21st of the respective year, the quintuplets were born well and healthy at
+the University Medical Center (Fig. 2.12). A team of 25 physicians, nurses, and mid-
+wives assisted during the delivery. Appropriate knowledge access was of crucial
+importance.
+
+Today, knowledge access at a ward is in many hospitals an integrated part of a hospital
+information system.
+
+You may wonder, in which year and in which medical center the quintuplets were born.
+It was in 1999 at the Heidelberg University Medical Center. Although this real example
+dates back more than 10 years we found it still worth to report on because it shows clearly
+how important it is to have information and knowledge available, and in this respect is
+pioneering for the future trends.
+
+By the way, all quintuples are well and Prof. L., the attending physician, became their
+godfather.
+
+2.5.2
+Nonsystematic Information Processing in Clinical Registers
+
+The following example shows what can happen when information processing is done in a
+nonsystematic (or, better, chaotic?) manner from yet another point of view.'* Let us
+
+“The example is based on a similar one in: Green SB, Byar DP. Using Observational Data from Registries
+to Compare Treatments: The Fallacy of Omnimetrics. Statistics in Medicine 1984;3:361-70.
+#2.5 Examples 19
+
+Table 2.1 Example of Simpson’s paradox — Success rates of Novum and Verum treatments for
+patients with diagnosis A, treated during the years 8 at the Plotzberg Medical Center and Medical
+School (PMC)
+
+analyze a (fictitious) clinical register from the (fictitious) Pltzberg Medical Center and
+Medical School (PMC). PMC will be used in examples and exercises in this book.
+
+Table 2.1 shows statistics with patients having diagnosis A, for example, rheumatism,
+and treated during the years 8, for example, 1991-2001, at PMC. The patients have either
+received standard therapy, Verum, or a new therapy, Novum.
+
+Comparing the success rates of Novum and Verum, one might conclude that the
+new therapy is better than the standard therapy. Applying an appropriate statistical test
+would lead to a low p value and a significant result. The success rate was also analyzed
+by sex. This resulted in Verum leading in female patients as well as in male patients.
+
+Is one of our conclusions erroneous? Or maybe both? What would a systematic design
+and analysis of such a register be? After looking at the data, one can identify a fairly simple
+reason for this so-called Simpson’s paradox. The methodology for processing information
+systematically ought to prevent such errors; however, it is far more complex.The WHO eHealth Resolution™
+
+Nowadays computer-based information processing in health institutions and moreover
+health networks is referred to as eHealth. In its eHealth resolution, the World Health
+
+"World Health Organization. eHealth Resolution. 58th World Health Assembly, Resolution 28.
+May 25, 2005. Geneva: WHO; 2005. 58th World Health Assembly’s home page: http://www.
+emro.who.int/HIS/ehealth/PDF/EB115 R20-en.pdf2 Health Institutions and Information Processing
+
+Organization (WHO) strongly recommends to systematically introduce, improve, and
+manage eHealth worldwide, which should lead to “eHealth for all by 2015.”'¢
+
+“The Fifty-Eighth World Health Assembly 
+1. URGES Member States:
+to consider drawing up a long-term strategic plan for developing and implementing
+eHealth services that includes an appropriate legal framework and infrastructure and
+encourages public and private partnerships;
+
+. to develop the infrastructure for information and communication technologies for
+
+health as deemed appropriate to promote equitable, affordable, and universal
+access to their benefits, and to continue to work with information telecommuni-
+cation agencies and other partners to strive to reduce costs to make eHealth
+successful;
+
+. to build on closer collaboration with the private and not-for-profit sectors in
+
+information and communication technologies, to further public services for
+health;
+
+. to endeavor to reach communities, including vulnerable groups, with eHealth ser-
+
+vices appropriate to their needs;
+
+. to mobilize multisectoral collaboration for determining evidence-based eHealth
+
+standards and norms, to evaluate eHealth activities, and to share the knowledge of
+cost effective models, thus ensuring quality, safety and ethical standards;
+
+. to establish national centers and networks of excellence for eHealth best practice,
+
+policy coordination, and technical support for healthcare delivery, service improve-
+ment, information to citizens, capacity building, and surveillance;
+
+. to consider establishing and implementing national public-health information sys-
+
+tems and to improve, by means of information, the capacity for the surveillance of,
+and rapid response to, disease and public health emergencies.
+
+2. REQUESTS the Director-General:
+to promote international, multisectoral collaboration with a view to improving com-
+patibility of administrative and technical solutions in the area of eHealth;
+
+. to document and analyze developments and trends, inform policy and practice in
+
+countries, and report regularly on use of eHealth worldwide;
+
+. to provide technical support to Member States in relation to eHealth products
+
+and services by disseminating widely experiences and best practices, in parti-
+cular on telemedicine technology; devising assessment methodologies; promo-
+ting research and development; and furthering standards through diffusion of
+guidelines;
+
+. to facilitate the integration of eHealth in health systems and services, including in
+
+the training of health-care professionals and in capacity building, in order to improve
+access to, and quality and safety of, care;
+
+Healy JC. The WHO eHealth Resolution — eHealth for all by 2015? Methods Inf Med 2007;
+46(1):2-4.
+#2.5 Examples 21
+
+5. to continue the expansion to Member States of mechanisms such as the Health Academy
+which promote health awareness and healthy lifestyles through eLearning'’;
+
+6. to provide support to Member States to promote the development, application and
+management of national standards of health information; and to collect and collate
+available information on standards with a view to establishing national standardized
+health information systems in order to facilitate easy and effective exchange of
+information among Member States;
+
+7. to support regional and interregional initiatives in the area of eHealth among groups
+of countries that speak a common language.”
+
+2.54
+Estimated Impact of eHealth to Improve Quality and Efficiency of Patient Care
+
+This example is taken from a study report presented by Gartner on behalf of the Swedish
+Ministry of Health and Social Affairs.'s
+
+This study analyzed the potential benefits of an increased usage of eHealth in six EU
+
+member states:
+
+..There is a significant healthcare improvement potential using eHealth as a catalyst
+
+Examples of quantified potentials include:
+
+Five million yearly outpatient prescription errors could be avoided through the use of
+Electronic Transfer of Prescriptions.
+
+100,000 yearly inpatient adverse drug events could be avoided through Computerized
+Physician Order Entry and Clinical Decision Support. This would in turn free up
+700,000 bed-days yearly, an opportunity for increasing throughput and decreasing wait-
+ing times, corresponding to a value of almost €300 million.
+
+49,000 cases of inpatient Hospital Acquired Infections could be avoided every year
+collectively through the use of Business Intelligence and Data Mining for real time
+detection of in-hospital infections. This could increase availability by over 270,000
+bed-days, resulting in opportunity savings of over €131 million.
+
+11,000 deaths caused by complications related to diabetes could collectively be
+reduced through Electronic Medical Records with Chronic Disease Management
+capabilities.
+
+5.6 million admissions to hospitals for chronically ill patients could be avoided collec-
+tively through the use of Telemedicine and Home Health Monitoring.
+
+Nine million bed-days yearly could be freed up through the use of Computer-Based
+Patient Records, an opportunity for either increasing throughput or decreasing waiting
+times, corresponding to a value of nearly €3.7 billion.
+
+"eLearning is understood in this context to mean use of any electronic technology and media in
+
+support of learning.
+
+Shttp://www.sweden. gov.se/content/1/¢6/12/98/15/5b63bach.pdf
+#2 2 Health Institutions and Information Processing
+
+e Patients can become more involved and accountable for the management of their
+chronic conditions through access to knowledge based best practices via an EMR with
+Chronic Disease Management capabilities and communication with their physicians
+through a Patient Portal.
+
+e Patients can have more control on how and when to engage with their physicians
+through technologies such as Patient Portals and Personal Health Records that enable
+alternative ways of communication and consultation such as e-mail and e-visits.”Exercises
+
+2.6.1
+Amount of Information Processing in Typical Hospitals
+
+Estimate the following figures for a typical university medical center and for a typical rural
+hospital. To solve this exercise, look at the strategic information management plan for
+information processing of a hospital, or proceed with your own local investigations.
+Number of (inpatient) clinical departments and institutes
+
+Number of wards and outpatient units
+
+Number of employees
+
+Annual budget
+
+Number of beds, inpatients, and outpatients per year
+
+Number of new patient records per year
+
+Number of discharge letters per year
+
+Number of computer servers, workstations, and terminals
+
+Number of operation reports, clinical chemistry reports, and radiology reports per year
+
+2.6.2
+Information Processing in Different Areas
+
+Find three examples of information processing for each of the following areas in a hospi-
+tal, taking into account the different health care professional groups working there. Which
+information is processed during which activities, and which tools are used? Take non-
+computer-based and computer-based information processing into consideration in your
+examples.
+
+e Information processing on a ward
+
+e Information processing in an outpatient unit
+
+e Information processing in an operating room
+
+e Information processing in a radiology department
+
+e Information processing in the hospital administration
+#2.7 Summary 23
+
+2.6.3
+Good Information Processing Practice
+
+Have a look at the following typical areas of hospitals. Try to find two examples of “good”
+information processing practices in these areas, and two examples of “poor” information
+processing practices. Which positive or negative consequences for the patients could they
+have?
+
+e Patient administration
+
+® Cardiologic ward
+
+e LaboratorySummary
+
+Information processing is an important quality factor, but an enormous cost factor as well.
+It is also becoming a productivity factor. Information processing should offer a holistic
+view of the patient and of the hospital. A hospital information system can be regarded as
+the memory and nervous system of a hospital.
+
+Information and communication technology has become economically important and
+decisive for the quality of health care. It will continue to change health care.
+
+The integrated processing of information is important, because
+
+e all groups of people and all areas of a hospital depend on its quality,
+
+e the amount of information processing in hospitals is considerable, and
+® health care professionals frequently work with the same data.
+
+The systematic processing of information
+e contributes to high-quality patient care , and
+e reduces costs.
+
+Information processing in hospitals is complex. Therefore,
+
+e the systematic management and operation of hospital information systems, and
+
+e medical informatics specialists responsible for the management, and operation of
+hospital information systems are needed.
