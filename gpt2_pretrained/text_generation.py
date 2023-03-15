@@ -24,9 +24,9 @@ if torch.cuda.is_available():
     device = 'cuda'
 device = torch_directml.device()
 
-MODEL_EPOCH = 4
+MODEL_EPOCH = 5
 models_folder = "models"
-model_path = os.path.join(models_folder, f"gpt2_text_{MODEL_EPOCH}.pt")
+model_path = os.path.join(models_folder, f"gpt2_winter_{MODEL_EPOCH}.pt")
 
 model = GPT2LMHeadModel.from_pretrained('gpt2')
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
@@ -39,7 +39,7 @@ with torch.no_grad():
   while True:
     generation_finished = False
     input_text = input("Q: ")
-    cur_ids = torch.tensor(tokenizer.encode("INPUT:"+input_text)).unsqueeze(0).to(device)
+    cur_ids = torch.tensor(tokenizer.encode(input_text, add_special_tokens=False)).unsqueeze(0).to(device)
     for i in range(100):
       outputs = model(cur_ids, labels = cur_ids)
       loss, logits = outputs[:2]

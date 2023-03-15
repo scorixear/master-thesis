@@ -1,0 +1,139 @@
+#Authors
+Alfred Winter, PhD
+Professor of Medical Informatics
+Institute for Medical Informatics, Statistics
+and Epidemiology
+University of Leipzig, Germany
+Alfred. Winter @imise.uni-leipzig.de
+
+Reinhold Haux, PhD
+Professor of Medical Informatics
+Peter L. Reichertz Institute for Medical
+Informatics
+University of Braunschweig — Institute of
+Technology and Hannover Medical School,
+Germany
+Reinhold. Haux @plri.de
+
+Elske Ammenwerth, PhD
+Professor of Medical Informatics
+Institute for Health Information Systems
+University for Health Sciences, Medical
+Informatics and Technology (UMIT),
+Austria
+Elske. Ammenwerth@umit.at
+
+Birgit Brigl, PhD
+Friedrichsdorf, Germany
+Birgit. Brigl @t-online.de
+
+Nils Hellrung, PhD
+Nils.Hellrung @plri.de
+
+Franziska Jahn, Dipl.-Inf.
+Institute for Medical Informatics, Statistics
+and Epidemiology
+University of Leipzig, Germany
+Franziska.Jahn @imise.uni-leipzig.de
+
+Alfred Winter is Professor for Medical Informatics at the Institute for Medical Informatics,
+Statistics, and Epidemiology of the University of Leipzig, Germany.
+
+He studied informatics at the Technical University in Aachen, Germany, and received
+his Ph.D. and a license for lecturing (German “Habilitation”) for medical informatics from
+the Faculty of Theoretical Medicine at the University of Heidelberg.
+
+His research focuses on methods and modeling tools for the management of health
+information systems. He teaches information management in healthcare in a medical infor-
+matics masters course at Leipzig University and in master programs for health care man-
+agement and for health information management at the private Dresden International
+University in Dresden. He works as a consultant and is responsible for coordinated strate-
+gic information management at Leipzig University Hospital and Leipzig University
+Medical Faculty. He is member of the board of the German professional association of
+medical informaticians (BVMI), member of the board of the joint medical informatics
+division of the German Association of Medical Informatics, Biometry and Epidemiology
+(GMDS) and the German Association of Informatics (GI) and chair of their working group
+“Methods and tools for the management of hospital information systems.”
+
+Reinhold Haux is Professor for Medical Informatics and Director of the Peter L. Reichertz
+Institute for Medical Informatics of the University of Braunschweig — Institute of
+Technology and of Hannover Medical School, Germany.
+
+He studied Medical Informatics at the University of Heidelberg/University of Applied
+Sciences Heilbronn, Germany, where he graduated as M.Sc. (German “Diplom”) in 1978.
+He received a Ph.D. from the Faculty for Theoretical Medicine, University of Ulm, in 1983
+and a Postdoctoral Lecture Qualification (German “Habilitation”) for Medical Informatics
+and Statistics from the Medical Faculty of RWTH Aachen University in 1987.
+
+His current research fields are health information systems and management and health-
+enabling technologies. Since its start in 2001, the international Frank-van Swieten- Lectures
+on Strategic Information Management in Hospitals are part of his teaching activities.
+Reinhold Haux was and is chairperson or member of IT strategy boards of various hospi-
+tals in Germany and Austria, among others of the Heidelberg (1989-2001) and Erlangen#«li About the Authors
+
+University Medical Centers (1999-2001), of TILAK (2002-2004), of Braunschweig
+Medical Center (since 2005), and of Hannover Medical School (since 2007). He is Editor
+of Methods of Information in Medicine and, for the term 2007-2010, President of the
+International Medical Informatics Association (IMIA).
+
+Elske Ammenwerth is professor for health informatics and head of the Institute for Health
+Information Systems at the University for Health Sciences, Medical Informatics and
+Technology (UMIT) in Hall in Tyrol, Austria.
+
+She studied medical informatics at the University of Heidelberg/University of Applied
+Sciences Heilbronn, Germany. Between 1997 and 2001, she worked as a research assistant
+at the Institute for Medical Biometry and Informatics at the University of Heidelberg,
+Germany. In Heidelberg, her work comprised the evaluation of hospital information sys-
+tems, nursing informatics, and requirements analysis for hospital information systems. In
+2000, she received her Ph.D. from the Medical Faculty of the University of Heidelberg for
+her work on requirements modeling.
+
+At UMIT, she works on the electronic health record, electronic medication systems,
+evaluation methods, nursing informatics, and on process modeling and optimization. She
+regularly lectures on hospital information systems and their management, on evaluation of
+information systems, and on project management.
+
+Elske Ammenwerth is Austrian representative within EFMI, the European Federation for
+Medical Informatics, and within IMIA, the International Medical Informatics Association.
+She is also heading the EFMI working group “Assessment of Health Information Systems.”
+
+Birgit Brigl is currently responsible for the service management of the IT full service provider
+of the German Federal Ministry of Finance. Earlier, she worked as a research scientist at the
+Institute of Medical Informatics, Statistics, and Epidemiology of the University of Leipzig,
+Germany. Her research interests cover the management of hospital information systems, with
+a special focus on hospital information systems modeling and IT service management.
+
+She studied medical informatics at the University of Heidelberg/University of Applied
+Sciences, Heilbronn, Germany. Between 1992 and 1998 she worked as a research assistant
+at the Institute for Medical Biometry and Informatics at the University of Heidelberg,
+focusing on the integration of decision support systems in hospital information systems. In
+1997, she received her Ph.D. from the Faculty of Theoretical Medicine at the University of
+Heidelberg for her work on knowledge acquisition.
+
+Nils Hellrung is senior researcher at the Peter L. Reichertz Institute for Medical Informatics
+of the University of Braunschweig — Institute of Technology and of Hannover Medical
+School, Germany.
+#About the Authors «liii
+
+He studied industrial engineering at the Berlin — Institute of Technology, Germany,
+where he graduated as a degreed engineer in 2003 and Medical Informatics at the Health
+and Life Science University Hall/Tyrol, Austria, where he graduated as M.Sc. in 2005. He
+received a Ph.D. from Peter L. Reichertz Institute for Medical Informatics of the University
+of Braunschweig — Institute of Technology and of Hannover Medical School in 2009.
+
+His current research fields are health information systems and management with a focus
+on transinstitutional information management and health care networks. Since its start in
+2008 he is coordinator for the publicly funded project PAGE (Platform for Integration of
+Health Enabling Technologies in Health Care Networks).
+
+Franziska Jahn is research assistant at the Institute for Medical Informatics, Statistics
+and Epidemiology of the University of Leipzig, Germany.
+
+She studied computer science with medical informatics as main subject at the University
+of Leipzig and graduated in 2008. Her research focuses on hospital information system
+architectures and their management. She currently works on her Ph.D. thesis about process
+benchmarking of hospital information systems. She teaches medical informatics students
+and coordinates their education at the University of Leipzig.
+
+She organizes annual Ph.D. students’ symposia of the German Association of Medical
+Informatics, Biometry and Epidemiology (GMDS).
