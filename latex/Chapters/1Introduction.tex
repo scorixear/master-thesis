@@ -34,7 +34,6 @@ erschweren eine schnelle Informationsbeschaffung, insbesondere für Studierende,
 
 \begin{itemize}
   \item Problem P1: Schwierigkeiten bei der Informationsbeschaffung aufgrund der Fülle an Literatur und deren Umfang
-  \item Problem P2: Inkonsistenz bei der Definition von Fachbegriffen zwischen verschiedenen Literaturquellen
 \end{itemize}
 
 \section{Motivation}
@@ -53,11 +52,11 @@ Es ist daher notwendig zu untersuchen, ob die Verwendung einer Konversations-KI 
 
 \section{Zielsetzung}\label{sec:zielsetzung}
 
-Den in \ref{sec:problemstellung} gezeigten Problemen $P_i$ werden Ziele $Z_i$ dieser Arbeit zugeordnet.
+Dem in \ref{sec:problemstellung} gezeigten Problem P1 werden folgende Ziele dieser Arbeit zugeordnet.
 
 \begin{itemize}
-  \item Ziel Z1: Wiedergabe von Wissen aus \citet{bb} in natürlicher Sprache generiert durch eine Konversation-KI
-  \item Ziel Z2: Verständnis von semantischer Bedeutung von Begriffen erklärt in \citet{bb} durch die Konversations-KI
+  \item Ziel Z1: Fragen beantworten aus \citet{bb} in natürlicher Sprache durch eine Konversation-KI
+  \item Ziel Z2: Lösung einer Beispielklausur des Moduls \enquote{Architektur von Informationssystemem im Gesundheitswesen} mit hilfe einer Konversations-KI
 \end{itemize}
 
 \section{Aufgabenstellung}
@@ -67,14 +66,15 @@ Die in \ref{sec:zielsetzung} genannten Ziele $Z_i$ werden durch die hier aufgef�
 \begin{itemize}
   \item Aufgabe zu Ziel Z1
   \begin{itemize}
-    \item Aufgabe A1.1: Implementierung einer Webseite, welche natürlich gestellte Fragen entgegen nimmt
-    \item Aufgabe A1.2: Nutzung eines General Pre-trained Transformers (GPT) zur Bewertung, Verständis und Beantwortung der gegeben Fragen
+    \item Aufgabe A1.1: Vergleich von aktuell verfügbaren Sprachmodellen und ihrer Nutzbarkeit
+    \item Aufgabe A1.3: Datenkuration von \citet{bb}
+    \item Aufgabe A1.2: Nutzung einer Sprachmodells zur Bewertung, Verständis und Beantwortung der gegebenen Frage
   \end{itemize}
   \item Aufgabe zu Ziel Z2
   \begin{itemize}
+    \item Aufgabe A1.3: Evaluierung der Konversations-KI vor und nach dem Training
     \item Aufgabe A2.1: Erstellung eines Fragenkatalog aus der Literaturquelle
-    \item Aufgabe A2.2: Fein-Tuning des GPT-Modells auf die Literaturquelle
-    \item Aufgabe A2.3: Analyse und Bewertung der ausgegebenen Daten
+    \item Aufgabe A2.3: Bewertung der Antwortoptionen von Klausurfragen
   \end{itemize}
 \end{itemize}
 

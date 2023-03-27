@@ -1,1 +1,4 @@
 models/*
+trained_model/*
+aitextgen.tokenizer.json
+*.pt

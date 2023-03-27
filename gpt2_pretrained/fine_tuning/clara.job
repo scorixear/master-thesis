@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --ntasks=1
+#SBATCH --mem=32G
+#SBATCH --job-name=gpt2-finetuning-test
+#SBATCH --gres=gpu:v100:1
+#SBATCH --partition=clara
+#SBATCH --time=01:00:00
+
+WORKDIR=$HOME/gpt2_training
+file="{$WORKDIR}/gpt2_finetuning"
+
+module load Python
+pip install --user -r requirements.txt
+
+python gpt2_finetuning.py

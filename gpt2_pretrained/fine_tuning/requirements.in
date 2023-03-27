@@ -1,0 +1,5 @@
+numpy==1.24.2
+torch==1.13.1
+torch_directml==0.1.13.1.dev230301
+tqdm==4.64.1
+transformers==4.26.1

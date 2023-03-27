@@ -22,23 +22,24 @@ def choose_from_top(probs, n=5):
 
 device = "cpu"
 if torch.cuda.is_available():
+    print("Using CUDA Device")
     device = 'cuda'
-device = torch_directml.device()
+elif torch_directml.is_available():
+    print("Using DIRECTML Device")
+    device = torch_directml.device()
+else:
+    print("Using CPU Device")
 
-MODEL_EPOCH = 5
-models_folder = "models"
-model_path = os.path.join(models_folder, "gpt2_winter_5.pt")
-model_dir = "./models/rey_farhan_winter/"
+print("loading models...")
+models_folder = "."
+model_path = os.path.join(models_folder, "gpt2_bb_konrad.pt")
 
-#configuration = GPT2Config.from_pretrained('gpt2', output_hidden_states=False)
 model = GPT2LMHeadModel.from_pretrained('gpt2')
-tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-#model.resize_token_embeddings(len(tokenizer))
-#model = GPT2LMHeadModel.from_pretrained(model_dir)
-#tokenizer = GPT2Tokenizer.from_pretrained(model_dir)
+tokenizer = GPT2Tokenizer.from_pretrained('gpt2', pad_token='<|pad|>', eos_token='<|endoftext|>')
+model.resize_token_embeddings(len(tokenizer))
 model = model.to(device)
 
-model.load_state_dict(torch.load(model_path))
+model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 
 model.eval()
 with torch.no_grad():
