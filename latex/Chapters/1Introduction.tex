@@ -7,15 +7,16 @@ Bei jeder medizinischen Handlung werden große Mengen an Informationen genutzt u
 Die strukturierte und klassifizierte Speicherung sowie Wiedergabe dieser Informationen stellt einen fortwährenden Entwicklungsprozess dar und ist Gegenstand aktueller Forschung.\\
 
 Die Digitalisierung der Medizin ist ein ausgedehntes Themenfeld mit stetig wachsender Notwendigkeit. 
-Die Medizinische Informatik beschreibt passend dazu \enquote{die Wissenschaft der systematischen Erschließung, Verwaltung, Aufbewahrung, Verarbeitung und Bereitstellung von Daten, Informationen und Wissen in der Medizin und im Gesundheitswesen. [...]}\citep{gmds}. 
+Die Medizinische Informatik beschreibt passend dazu \enquote{die Wissenschaft der systematischen Erschließung, Verwaltung, Aufbewahrung, Verarbeitung und Bereitstellung von Daten, Informationen und Wissen in der Medizin und im Gesundheitswesen. [...]}\citep{gmds}.\todo{geschütztes Leerzeichen (Tilde) vor Zitierungen}\todo{Webseiten als Referenz wenn möglich vermeiden und durch zitierfähige Quellen ersetzen. Wenn es nicht anders geht dann als Fußnote statt als Literaturreferenz. gmds ist kein Author. Außerdem groß geschrieben.}
 In diesem Kontext wird die Bedeutung der Entwicklung und Implementierung effektiver Informationssysteme und Technologien zur Unterstützung der klinischen Praxis immer größer.\\
 
-In der Lehre wird die Praxis der medizinischen Informatik durch umfassende Literatur wie zum Beispiel in \citet{bb} unterstützt. 
-Zur Strukturierung dieser Literatur existiert die Ontologie SNIK \citep{snikgraphposter}, ein semantisches Netzwerk klassifiert in das SNIK Metamodell und Projekt des Instituts für Medizinische Informatik, Statistik und Epidemiologie \citep{imise} an der Universität Leipzig.
+In der Lehre wird die Praxis der medizinischen Informatik durch umfassende Literatur wie zum Beispiel in \citet{bb} unterstützt.
+Zur Strukturierung dieser Literatur existiert die Ontologie SNIK \citep{snikgraphposter}, ein semantisches Netzwerk\todo{Achtung: semantic network übersetzt man als Semantisches Netz, nicht Semantisches Netzwerk} klassifiert\todo{wieso klassifiziert?} in das SNIK Metamodell und Projekt des Instituts für Medizinische Informatik, Statistik und Epidemiologie \citep{imise} an der Universität Leipzig.\todo{Achtung, das hatte ich letztes mal schon angemerkt. SNIK existiert nicht zur Strukturierung von Literatur, und bezieht sich auch nicht auf medizinische Informatik im Allgemeinen. Steckt doch im Namen: \enquote{Semantisches Netz des Informationsmanagements im Krankenhaus}, nicht der medizinischen Informatik.}
+\todo{den vorigen Satz bitte noch mal überarbeiten, das Semantische Netz beinhaltet doch nicht das Projekt}
 Durch die Verwendung dieses Netzwerkes wird eine systematische Darstellung von Rollen, Entitäten und Funktionen des Informationsmanagements in Krankenhäusern ermöglicht, losgelöst von den Definition der zugrunde liegenden Literaturquellen.\\
 
-Die Bedeutung von maschinellem Lernen, Deep Learning und Sprachmodellen nimmt in der heutigen Zeit immer mehr zu. Diese Technologien werden in vielen Bereichen eingesetzt, von der Automobilindustrie bis hin zu medizinischen Anwendungen, um neue Methoden der Informationsgewinnung und -verarbeitung zu bieten. 
-Eine Studie von \citet{mckinsey} zeigt, dass maschinelles Lernen und künstliche Intelligenz in den nächsten Jahren in der Wirtschaft zunehmend eingesetzt werden und dabei helfen werden, die Effizienz und Produktivität zu steigern.
+Die Bedeutung von maschinellem Lernen, Deep Learning und Sprachmodellen nimmt in der heutigen Zeit immer mehr zu. Diese Technologien werden in vielen Bereichen eingesetzt, von der Automobilindustrie bis hin zu medizinischen Anwendungen, um neue Methoden der Informationsgewinnung und -verarbeitung zu bieten.\todo{ich empfehle, immer eine newline zwischen zwei Sätze zu stellen, das lässt sich einfacher lesen und ist angenehmer fürs Git.}%geht am einfachsten mit einem regulären Ausdruck, z.B. im vim ":%s/\. /\.\r/c"
+Eine Studie von \citet{mckinsey} zeigt, dass maschinelles Lernen und künstliche Intelligenz in den nächsten Jahren in der Wirtschaft zunehmend eingesetzt werden und dabei helfen werden, die Effizienz und Produktivität zu steigern.\todo{Ich denke, das ist keine zitierfähige Quelle, die durch ein peer review ging. Im Bibtex Entry steht auch nichts drin außer Titel Author und Jahr. Wenn doch, bitte Konferenz/Journal hinzufügen, Verlag usw..}
 Sprachmodelle wie beispielsweise das GPT-3-Modell von OpenAI \citep{gpt3} können dazu beitragen, Texte in verschiedenen Sprachen automatisch zu übersetzen und sogar kreative Schreibarbeiten zu erledigen. 
 Deep Learning, das auf künstlichen neuronalen Netzwerken basiert, ermöglicht eine noch tiefere und komplexere Verarbeitung von Daten. 
 In der Medizin kann Deep Learning zum Beispiel bei der Diagnose von Krankheiten und bei der Analyse von medizinischen Bildern eingesetzt werden \citep{skincancer}.
@@ -24,7 +25,7 @@ In der Medizin kann Deep Learning zum Beispiel bei der Diagnose von Krankheiten 
 Das Management von Informationssystemen ist eine komplexe Aufgabe, die sich nicht nur auf die Anwendung durch Mitarbeiter in Krankenhäusern beschränkt. Es ist auch wichtig für Studierende, um ein besseres Verständnis der vorhandenen Systeme zu erlangen, sowie für Wissenschaftler, um diese Systeme zu erweitern oder neue Methoden zum Management zu entwerfen.
 Eine konkrete und konsistente Wissensbasis ist sowohl für die Anwendung als auch die Lehre und Forschung von großer Bedeutung. Die Forschung liefert hierfür eine Fülle von Literatur zu verschiedenen Aspekten der Medizinischen Informatik und dem Management von Informationssystemen.\\
 
-Zwischen verschiedenen Literaturquellen herrscht jedoch oft Inkonsistenz bei der Definition und Benennung von Fachbegriffen. 
+Zwischen verschiedenen Literaturquellen herrscht jedoch oft Inkonsistenz bei der Definition und Benennung von Fachbegriffen.\todo{dieses Problem lösen wir doch hier nicht, es wird ja nur ein Buch als Quelle benutzt.}
 Zum Beispiel wird der Begriff \enquote{Krankenhausinformationssystem (engl. Hospital Information System)} in \citet{kis_winter} als das sozio-technische Subsystem eines Krankenhauses beschrieben,
 das aus allen assoziierten menschlichen und technischen Akteuren, den damit verbundenen informationsverarbeitenden Rollen und allen Prozessen zur Verarbeitung dieser Informationen besteht.
 Im Gegensatz dazu schließt die Definition in \citet{kis_italy} keine menschlichen Akteure ein.\\
@@ -39,12 +40,14 @@ erschweren eine schnelle Informationsbeschaffung, insbesondere für Studierende,
 \section{Motivation}
 
 Eine Strukturierung von Informationen über das Management von Informationssystemen in Krankenhäusern ist bereits Teil des Projektes SNIK \citep{snikposter}, 
-ein semantischen Netz des Instituts für Medizinische Informatik, Statistik und Epidemiologie der Universität Leipzig \citep{imise}. SNIK nutzt als Basis verschiedene Literaturquellen um eine Ontologie basierend auf dem SNIK Metamodell aufzubauen. 
+ein semantischen Netz des Instituts für Medizinische Informatik, Statistik und Epidemiologie der Universität Leipzig \citep{imise}.
+\todo{bitte kein poster zitieren wenn es paper gibt}
+SNIK nutzt als Basis verschiedene Literaturquellen um eine Ontologie basierend auf dem SNIK Metamodell aufzubauen.\todo{nicht zu viel SNIK, das ist ja nur am Rande für die Arbeit relevant}
 Der Vorteil ist eine Umgehung von semantischen Unterschieden in den Literaturquellen durch eine Abstrahierung von Grundbegriffen in die Übergruppen Rolle, Entität und Funktion.
 Auf Basis dieses Netzwerkes wurden bereits verschiedene Methoden untersucht, wie Informationen extrahiert werden können.\\
 
 Die BeLL-Arbeit mit dem Titel \enquote{Question Answering auf SNIK} \citep{hannesbell} erweiterte den Zugang zu diesem Netzwerk durch die Nutzung natürlicher englischer Sprache. 
-Im Kontrast dazu untersuchten \citet{chatgpt_qas} die Leistung von Konversations-KI (in diesem Fall ChatGPT) im Vergleich zu herkömmlichen Question-Answering-Systemen, die auf Wissensgraphen basieren (hier als $KGQA_N$ bezeichnet). 
+Im Kontrast dazu untersuchten \citet{chatgpt_qas} die Leistung von Konversations-KI (in diesem Fall ChatGPT) im Vergleich zu herkömmlichen Question-Answering-Systemen, die auf Wissensgraphen basieren (hier als $KGQA_N$ bezeichnet).\todo{nein, KGQAn bezeichnet ein bestimmtes System. In dem Paper werden QA Systeme als QAS abgekürzt aber es wird keine Abkürzung für }
 Die Ergebnisse zeigten, dass ChatGPT erstaunlich stabile und nachvollziehbare Antworten im Vergleich zum genutzten $KGQA_N$ lieferte.
 
 Die Ergebnisse der BeLL-Arbeit wurden im Projekt QAnswer \citep{qanswer} umgesetzt, zeigen jedoch bei der Erklärbarkeit und dem Verständis von komplexeren Fragen mangelnde Resultate. 
@@ -53,7 +56,7 @@ Es ist daher notwendig zu untersuchen, ob die Verwendung einer Konversations-KI 
 \section{Zielsetzung}\label{sec:zielsetzung}
 
 Dem in \ref{sec:problemstellung} gezeigten Problem P1 werden folgende Ziele dieser Arbeit zugeordnet.
-
+\todo{Ziele und Aufgaben finde ich gut. Eventuell könnte man A2.1 (soll eigentlich A2.2 sein) weglassen und sich nur auf A2.3 konzentrieren. Bzw. A2.1 zu \enquote{Klausurfragen und richtige Antworten sammeln} oder so ähnlich ändern.}
 \begin{itemize}
   \item Ziel Z1: Beantwortung von Fragen zu \citet{bb} in natürlicher Sprache durch eine Konversation-KI
   \item Ziel Z2: Lösung einer Beispielklausur des Moduls \enquote{Architektur von Informationssystemem im Gesundheitswesen} mit Hilfe einer Konversations-KI
