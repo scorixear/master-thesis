@@ -66,23 +66,32 @@ Dem in~\ref{sec:problemstellung} gezeigten Problem werden folgende Ziele dieser 
   \item Ziel Z1: Beantwortung von Fragen zu Informationssystemen im Gesundheitswesen in natürlicher Sprache durch eine Konversation-KI mit Hilfe von \citet{bb}
   \item Ziel Z2: Lösung einer Beispielklausur des Moduls \enquote{Architektur von Informationssystemen im Gesundheitswesen}\footnote{\raggedright{}einem Modul des Masterstudiengangs Medizinische Informatik an der Universität Leipzig, das inhaltlich auf \citet{bb} aufbaut} mit Hilfe einer Konversations-KI.\@
   Das Ergebnis wird kein produktives System darstellen, sondern lediglich die Machbarkeit der Beantwortung von Fragen mit Hilfe einer Konversations-KI aufzeigen.
+  \todo{Futur 1 umformulieren, im Präsens bleiben (z.B. kann/soll/muss... oder Ziel ist... oder so ähnlich).}
 \end{itemize}
 
 \section{Bezug zu ethischen Leitlinien der GMDS}
 
 Die ethischen Leitlinien der \ac{gmds} \citep{gmds_eth} geben \enquote{sowohl den tragenenden Gesellschaften als Institution als auch dem einzelnen Mitglied eine Orientierung,
 welche ethischen Forderungen in ihrem bzw.\ seinem jeweiligen Aufgaben- und Verantwortungsbereicht relevant sein können.}\footnote{\label{ft:gmds}\citet{gmds_eth}}
+\todo{cite Kommandos bitte nicht in Fußnoten packen}
 Aufgeteilt in 16 Artikel werden hier verschiedene Kompetenzen und Verantwortlichkeiten definiert, unter die auch das hier beschriebene System fällt.
 Da die zu entwickelnde Konversations-KI (im folgenden KI genannt) Informationen über medizinisches Wissen, insbesondere über Informationssysteme im Gesundheitswesen, bereitstellt,
 unterliegt sie in ihrer Existenz als \enquote{Informationsbasis} einer Vielzahl von Artikeln.
+\todo{Ich finde es nicht gut, Konversations-KI mit KI abzukürzen, weil du in der Arbeit sicher auch von KI im Allgemeinen schreiben wirst.}
 Sie wirkt unterstützend in den Artikeln 1 \enquote{Auftrag}, 2 \enquote{Fachkompetenz}, 3 \enquote{Kommunikative Kompetenz}, 
 kann aber durch unsachgemäßen Gebrauch und ihr zugrundeliegendes Wesen entgegen den Artikeln 1 \enquote{Auftrag}, 2 \enquote{Fachkompetenz}, 3 \enquote{Kommunikative Kompetenz},
 4 \enquote{Medizinethische Kompetenz}, 6 \enquote{Soziale Verantwortung} und 13 \enquote{Forschung} handeln.\\
 
 In Artikel 1 \enquote{Auftrag} heißt es unter anderem, dass 
 \enquote{Die Würde des Menschen und das Persönlichkeitsrecht [$\dots$] dabei vorrangig geachtet und geschützt werden [müssen]}\footref{ft:gmds}.
-Dazu gehört insbesondere die \enquote{Allgemeine Erklärung der Menschenrechte}\footnote{\url{https://www.un.org/depts/german/menschenrechte/aemr.pdf} (abgerufen am 24.04.2023) },
-in der das \enquote{Verbot der Diskriminierung z.B. nach Geschlecht oder Rasse (Art. 2, 7)} verankert ist und 
+Dazu gehört insbesondere die \enquote{Allgemeine Erklärung der Menschenrechte}\footnote{\url{https://www.un.org/depts/german/menschenrechte/aemr.pdf} (abgerufen
+am 24.04.2023) },
+\todo{ich kann es nur immer wieder schreiben: bitte ordentliche Bibtex-Einträge zitieren und nicht einfach Webseitenfußnoten erstellen :-)}
+in der das \enquote{Verbot der Diskriminierung z.B. nach Geschlecht oder Rasse (Art. 2, 7)}
+\todo{den Begriff Rasse finde ich im Deutschen problematisch, da es biologisch keine Menschenrassen gibt.
+Es gibt aber anscheinend keine Version 2.0 davon also ist es wohl ein korrektes Zitat. Ich persönlich
+würde wohl ein indirektes Zitat verwenden und \enquote{aus rassistischen Gründen} oder so schreiben aber wie du willst.}
+verankert ist und
 der \enquote{Schutz des (geistigen) Eigentums (Art. 17, 27)} und die \enquote{Gedanken-, Gewissens-, Religions- und Meinungsfreiheit (Art. 18, 19)} beschrieben werden.
 Die von der KI zu generierenden Antworten ergeben sich aus einer Vielzahl von zuvor genutzten Datensätzen aus dem Internet, die nicht notwendigerweise diesen ethischen Leitlinien folgen.
 Eine inhaltliche Garantie für die Einhaltung dieser Leitlinien ist daher ohne zusätzliche Filterung der Antworten zu gestellten Fragen nicht möglich. 
@@ -98,11 +107,11 @@ Dies ist teilweise durch die KI gegeben, da die extrahierten Informationen auf d
 Eine Fehlervermeidung ist hier jedoch nicht vorgesehen. 
 Wie in \citet{chatgpt_qas} gezeigt, weist ChatGPT als \ac{gpt}-Modell eine geringe Wahrheitsquote auf, 
 wodurch die fehlerfreie Beantwortung von Fragen zwar angestrebt, aber nicht garantiert werden kann.\\
-
+\todo{Du benutzt aber doch am Ende kein ChatGPT, bitte noch den Bogen dahin schlagen.}
 Artikel 3 \enquote{Kommunikative Kompetenz} beschreibt die Fähigkeit 
 \enquote{Recht, Interessen [und] Konventionen der verschiedenen von [dem Mitglied] seiner Arbeit Betroffenen zu verstehen und zu berücksichtigen [$\dots$][und]
 Wissenschaftliche Erkentnisse in verständlicher Form der Öffentlichkeit zugänglich [zu machen][$\dots$]}\footref{ft:gmds}.
-Die KI unterstützt dabei den/die Fragende/n durch eine Antwort in möglicherweise verständlicherer Form der wissenschaftlichen Erkenntnisse in \citet{bb}, 
+Die KI unterstützt dabei den/die Fragende/n\todo{klingt für mich persönlich zu holprig, würde hier einfach Plural Fragende benutzen} durch eine Antwort in möglicherweise verständlicherer Form der wissenschaftlichen Erkenntnisse in \citet{bb}, 
 jedoch ist hier nicht gegeben, dass die Betroffenen in der Antwort berücksichtigt oder verstanden wurden.\\
 
 Artikel 4 \enquote{Medizinethische Kompetenz} legt fest, dass das Mitglied 
@@ -135,6 +144,7 @@ Die in~\ref{sec:zielsetzung} genannten Ziele $Z_i$ werden durch die hier aufgef�
     Dazu muss das Modell frei verfügbar sein und unter einer Open-Source-Lizenz stehen. Außerdem muss das Modell am Rechenzentrum der Universität Leipzig geladen und trainiert werden können. Aufgrund der großen Anzahl an Parametern sind auch hier Grenzen des Arbeitsspeichers und damit der Größe des Modells gesetzt.
     \item Aufgabe A1.2: Für ein effizientes und erfolgreiches Feintuning der Konversations-KI ist eine Datenkuration von \citet{bb} notwendig. 
     Abschnitte wie Literaturverzeichnis, Buchcover oder Grafiken müssen vor der Verwendung des Textes entfernt oder umgeschrieben werden.
+	\todo{finde die Beispiele nicht optimal, Buchcover und Grafiken sind doch schon gar nicht mit drin wenn man z.B. das PDF als Text abspeichert.}
     \item Aufgabe A1.3: Die trainierte Konversations-KI wird dann zur Beantwortung von Fragen zu \citet{bb} verwendet. 
     Dabei wird während des Trainings der in \citet{gpt3} beschriebene \enquote{Zero-Shot}-Ansatz verfolgt.
     Dies bedeutet, dass das Verständnis der Fragestellung und die Bewertung wichtiger Informationen allein durch das Modell erfolgt und nicht durch vordefinierte Fragen im Datensatz dem Modell beigebracht wird.
