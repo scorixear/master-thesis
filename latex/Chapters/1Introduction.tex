@@ -65,69 +65,61 @@ Dem in~\ref{sec:problemstellung} gezeigten Problem werden folgende Ziele dieser 
 \begin{itemize}
   \item Ziel Z1: Beantwortung von Fragen zu Informationssystemen im Gesundheitswesen in natürlicher Sprache durch eine Konversation-KI mit Hilfe von \citet{bb}
   \item Ziel Z2: Lösung einer Beispielklausur des Moduls \enquote{Architektur von Informationssystemen im Gesundheitswesen}\footnote{\raggedright{}einem Modul des Masterstudiengangs Medizinische Informatik an der Universität Leipzig, das inhaltlich auf \citet{bb} aufbaut} mit Hilfe einer Konversations-KI.\@
-  Das Ergebnis wird kein produktives System darstellen, sondern lediglich die Machbarkeit der Beantwortung von Fragen mit Hilfe einer Konversations-KI aufzeigen.
-  \todo{Futur 1 umformulieren, im Präsens bleiben (z.B. kann/soll/muss... oder Ziel ist... oder so ähnlich).}
+  Das Ziel ist kein produktives System, sondern lediglich die Machbarkeit der Beantwortung von Fragen mit Hilfe einer Konversations-KI aufzeigen.
 \end{itemize}
 
 \section{Bezug zu ethischen Leitlinien der GMDS}
 
 Die ethischen Leitlinien der \ac{gmds} \citep{gmds_eth} geben \enquote{sowohl den tragenenden Gesellschaften als Institution als auch dem einzelnen Mitglied eine Orientierung,
-welche ethischen Forderungen in ihrem bzw.\ seinem jeweiligen Aufgaben- und Verantwortungsbereicht relevant sein können.}\footnote{\label{ft:gmds}\citet{gmds_eth}}
-\todo{cite Kommandos bitte nicht in Fußnoten packen}
+welche ethischen Forderungen in ihrem bzw.\ seinem jeweiligen Aufgaben- und Verantwortungsbereicht relevant sein können} \citep{gmds_eth}.
 Aufgeteilt in 16 Artikel werden hier verschiedene Kompetenzen und Verantwortlichkeiten definiert, unter die auch das hier beschriebene System fällt.
-Da die zu entwickelnde Konversations-KI (im folgenden KI genannt) Informationen über medizinisches Wissen, insbesondere über Informationssysteme im Gesundheitswesen, bereitstellt,
+Da die zu entwickelnde Konversations-KI Informationen über medizinisches Wissen, insbesondere über Informationssysteme im Gesundheitswesen, bereitstellt,
 unterliegt sie in ihrer Existenz als \enquote{Informationsbasis} einer Vielzahl von Artikeln.
-\todo{Ich finde es nicht gut, Konversations-KI mit KI abzukürzen, weil du in der Arbeit sicher auch von KI im Allgemeinen schreiben wirst.}
 Sie wirkt unterstützend in den Artikeln 1 \enquote{Auftrag}, 2 \enquote{Fachkompetenz}, 3 \enquote{Kommunikative Kompetenz}, 
 kann aber durch unsachgemäßen Gebrauch und ihr zugrundeliegendes Wesen entgegen den Artikeln 1 \enquote{Auftrag}, 2 \enquote{Fachkompetenz}, 3 \enquote{Kommunikative Kompetenz},
 4 \enquote{Medizinethische Kompetenz}, 6 \enquote{Soziale Verantwortung} und 13 \enquote{Forschung} handeln.\\
 
 In Artikel 1 \enquote{Auftrag} heißt es unter anderem, dass 
-\enquote{Die Würde des Menschen und das Persönlichkeitsrecht [$\dots$] dabei vorrangig geachtet und geschützt werden [müssen]}\footref{ft:gmds}.
-Dazu gehört insbesondere die \enquote{Allgemeine Erklärung der Menschenrechte}\footnote{\url{https://www.un.org/depts/german/menschenrechte/aemr.pdf} (abgerufen
-am 24.04.2023) },
-\todo{ich kann es nur immer wieder schreiben: bitte ordentliche Bibtex-Einträge zitieren und nicht einfach Webseitenfußnoten erstellen :-)}
-in der das \enquote{Verbot der Diskriminierung z.B. nach Geschlecht oder Rasse (Art. 2, 7)}
-\todo{den Begriff Rasse finde ich im Deutschen problematisch, da es biologisch keine Menschenrassen gibt.
-Es gibt aber anscheinend keine Version 2.0 davon also ist es wohl ein korrektes Zitat. Ich persönlich
-würde wohl ein indirektes Zitat verwenden und \enquote{aus rassistischen Gründen} oder so schreiben aber wie du willst.}
+\enquote{Die Würde des Menschen und das Persönlichkeitsrecht [$\dots$] dabei vorrangig geachtet und geschützt werden [müssen]} \citep{gmds_eth}.
+Dazu gehört insbesondere die \enquote{Allgemeine Erklärung der Menschenrechte},
+in der das \enquote{Verbot der Diskriminierung z.B. nach Geschlecht oder [aus rassistischen Gründen] (Art. 2, 7)}
 verankert ist und
 der \enquote{Schutz des (geistigen) Eigentums (Art. 17, 27)} und die \enquote{Gedanken-, Gewissens-, Religions- und Meinungsfreiheit (Art. 18, 19)} beschrieben werden.
-Die von der KI zu generierenden Antworten ergeben sich aus einer Vielzahl von zuvor genutzten Datensätzen aus dem Internet, die nicht notwendigerweise diesen ethischen Leitlinien folgen.
+Die von der Konversations-KI zu generierenden Antworten ergeben sich aus einer Vielzahl von zuvor genutzten Datensätzen aus dem Internet, die nicht notwendigerweise diesen ethischen Leitlinien folgen.
 Eine inhaltliche Garantie für die Einhaltung dieser Leitlinien ist daher ohne zusätzliche Filterung der Antworten zu gestellten Fragen nicht möglich. 
 Durch eine optimale Filterung können Antworten, die den Leitlinien widersprechen, ausgeschlossen werden. 
 Diese Filterung ist jedoch aufgrund ihrer Komplexität sowohl in zeitlicher als auch in finanzieller Hinsicht nicht Bestandteil dieser Arbeit.
 Es muss daher davon ausgegangen werden, dass es durchaus Antworten geben kann, die gegen die Leitlinien verstoßen.\\
 
-Artikel 1 wird durch die KI gefördert, in dem sie Medizinische Versorgungseinrichtungen durch effiziente und schnelle Informationsbeschaffung in ihren Fähigkeiten unterstützt, 
-\enquote{ihre Leistungen qualitativ und quantitativ nachweisen, überwachen und sicherstellen [zu] können.}\footref{ft:gmds}.\\
+Artikel 1 wird durch die Konversations-KI gefördert, in dem sie Medizinische Versorgungseinrichtungen durch effiziente und schnelle Informationsbeschaffung in ihren Fähigkeiten unterstützt, 
+\enquote{ihre Leistungen qualitativ und quantitativ nachweisen, überwachen und sicherstellen [zu] können} \citep{gmds_eth}.\\
 
-Artikel 2 \enquote{Fachkompetenz} definiert, dass das Mitglied seine \enquote{Fachkompetenz nach dem Stand der Wissenschaft und Technik erwirbt [$\dots$][und] Maßnahmen zur Fehlervermeidung ergreift}\footref{ft:gmds}. 
-Dies ist teilweise durch die KI gegeben, da die extrahierten Informationen auf dem Stand des zugrundeliegenden Buches \citet{bb} sind. 
+Artikel 2 \enquote{Fachkompetenz} definiert, dass das Mitglied seine \enquote{Fachkompetenz nach dem Stand der Wissenschaft und Technik erwirbt [$\dots$]} und \enquote{Maßnahmen zur Fehlervermeidung ergreift} \citep{gmds_eth}. 
+Dies ist teilweise durch die Konversations-KI gegeben, da die extrahierten Informationen auf dem Stand des zugrundeliegenden Buches \citet{bb} sind. 
 Eine Fehlervermeidung ist hier jedoch nicht vorgesehen. 
-Wie in \citet{chatgpt_qas} gezeigt, weist ChatGPT als \ac{gpt}-Modell eine geringe Wahrheitsquote auf, 
-wodurch die fehlerfreie Beantwortung von Fragen zwar angestrebt, aber nicht garantiert werden kann.\\
-\todo{Du benutzt aber doch am Ende kein ChatGPT, bitte noch den Bogen dahin schlagen.}
+Wie in \citet{chatgpt_qas} gezeigt, weist ChatGPT als \ac{gpt}-Modell eine geringe Wahrheitsquote auf. 
+Da es sich bei der zu entwickelnden Konversations-KI um ein \ac{gpt}-Modell handelt, wird die fehlerfreie Beantwortung von Fragen zwar angestrebt, kann aber nicht garantiert werden.\\
+
 Artikel 3 \enquote{Kommunikative Kompetenz} beschreibt die Fähigkeit 
-\enquote{Recht, Interessen [und] Konventionen der verschiedenen von [dem Mitglied] seiner Arbeit Betroffenen zu verstehen und zu berücksichtigen [$\dots$][und]
-Wissenschaftliche Erkentnisse in verständlicher Form der Öffentlichkeit zugänglich [zu machen][$\dots$]}\footref{ft:gmds}.
-Die KI unterstützt dabei den/die Fragende/n\todo{klingt für mich persönlich zu holprig, würde hier einfach Plural Fragende benutzen} durch eine Antwort in möglicherweise verständlicherer Form der wissenschaftlichen Erkenntnisse in \citet{bb}, 
+\enquote{Recht, Interessen [und] Konventionen der verschiedenen von [dem Mitglied] seiner Arbeit Betroffenen zu verstehen und zu berücksichtigen [$\dots$]} und
+\enquote{Wissenschaftliche Erkentnisse in verständlicher Form der Öffentlichkeit zugänglich [$\dots$]} \citep{gmds_eth} zu machen.
+Die Konversations-KI unterstützt dabei Fragende durch eine Antwort in möglicherweise verständlicherer Form der wissenschaftlichen Erkenntnisse in \citet{bb}, 
 jedoch ist hier nicht gegeben, dass die Betroffenen in der Antwort berücksichtigt oder verstanden wurden.\\
 
 Artikel 4 \enquote{Medizinethische Kompetenz} legt fest, dass das Mitglied 
-\enquote{ethische Prinzipien der Medizin [$\dots$] bei seinem beruflichen Handeln beachtet}\footref{ft:gmds}.
-Zu den ethischen Prinzipien\footref{ft:gmds} gehören auch die \enquote{Achtung vor dem Menschen zu wahren} und die \enquote{Würde des Invidiums zu schützen}.
-Beides kann nicht allein durch die KI gewährleistet werden und muss durch mögliche Filter ergänzt werden.\\
+\enquote{ethische Prinzipien der Medizin [$\dots$] bei seinem beruflichen Handeln beachtet} \citep{gmds_eth}.
+Zu den ethischen Prinzipien \citep{gmds_eth} gehören auch die \enquote{Achtung vor dem Menschen zu wahren} und die \enquote{Würde des Invidiums zu schützen}.
+Beides kann nicht allein durch die Konversations-KI gewährleistet werden und muss durch mögliche Filter ergänzt werden.\\
 
 Artikel 6 \enquote{Soziale Verantwortung} definiert die Verantwortungen des Mitglied 
-\enquote{gesellschaftliche Auswirkungen [zu] berücksichtigen [$\dots$] [und die] Allgemeine Erklärung der Menschenrechte und ethische[n] Prinzipien der Medizin [zu beachten]}\footref{ft:gmds}. 
-Wie bereits zu den Artikeln 1 und 4 ausgeführt, ist es der KI aufgrund der Datengrundlage nicht möglich, diesen Artikel, insbesondere die hier genannten Punkte, in ihrer Antwort zu berücksichtigen.\\
+\enquote{gesellschaftliche Auswirkungen [zu] berücksichtigen [$\dots$]} und die 
+\enquote{Allgemeine Erklärung der Menschenrechte und ethische[n] Prinzipien der Medizin} \citep{gmds_eth}zu beachten. 
+Wie bereits zu den Artikeln 1 und 4 ausgeführt, ist es der Konversations-KI aufgrund der Datengrundlage nicht möglich, diesen Artikel, insbesondere die hier genannten Punkte, in ihrer Antwort zu berücksichtigen.\\
 
-Artikel 13 \enquote{Forschung} definiert, dass das Mitglied \enquote{gute Wissenschaftliche Arbeit, inbesondere Offenheit und Transparenz [und] Akzeptanz von Kritik}\footref{ft:gmds}
-einhalten soll. 
+Artikel 13 \enquote{Forschung} definiert, dass das Mitglied \enquote{gute Wissenschaftliche Arbeit, inbesondere Offenheit und Transparenz [und] Akzeptanz von Kritik} \citep{gmds_eth} einhalten soll. 
 Gute wissenschaftliche Arbeit wird weiter definiert als 
-\enquote{die strikte Ehrlichkeit im Hinblick auf die Beiträge von Partnern, Konkurenten, Vorgängern zu wahren [und] weder Fälschung oder Plagiate [zu] benutzen}\footref{ft:gmds}.
-Da die KI auf dem Inhalt eines Buches trainiert wird, in ihrer Datenbasis aber bereits eine Vielzahl von Texten, darunter auch Plagiate und Fälschungen, gelernt hat, 
+\enquote{die strikte Ehrlichkeit im Hinblick auf die Beiträge von Partnern, Konkurenten, Vorgängern zu wahren} und \enquote{weder Fälschung oder Plagiate [zu] benutzen} \citep{gmds_eth}.
+Da die Konversations-KI auf dem Inhalt eines Buches trainiert wird, in ihrer Datenbasis aber bereits eine Vielzahl von Texten, darunter auch Plagiate und Fälschungen, gelernt hat, 
 ist es nicht möglich, die Antworten als wissenschaftliche Quelle zu verwenden, da sowohl Plagiate als auch Fälschungen ohne Annotation vorhanden sein können.
 Die Antworten sollten als reine Informationsextraktion und nicht als Quelle für wissenschaftliche Arbeiten betrachtet werden.
 
@@ -143,8 +135,7 @@ Die in~\ref{sec:zielsetzung} genannten Ziele $Z_i$ werden durch die hier aufgef�
     Ein eigenes Training eines Modells würde sowohl den zeitlichen als auch den finanziellen Rahmen übersteigen, weshalb auf ein vortrainiertes Modell zurückgegriffen werden muss. 
     Dazu muss das Modell frei verfügbar sein und unter einer Open-Source-Lizenz stehen. Außerdem muss das Modell am Rechenzentrum der Universität Leipzig geladen und trainiert werden können. Aufgrund der großen Anzahl an Parametern sind auch hier Grenzen des Arbeitsspeichers und damit der Größe des Modells gesetzt.
     \item Aufgabe A1.2: Für ein effizientes und erfolgreiches Feintuning der Konversations-KI ist eine Datenkuration von \citet{bb} notwendig. 
-    Abschnitte wie Literaturverzeichnis, Buchcover oder Grafiken müssen vor der Verwendung des Textes entfernt oder umgeschrieben werden.
-	\todo{finde die Beispiele nicht optimal, Buchcover und Grafiken sind doch schon gar nicht mit drin wenn man z.B. das PDF als Text abspeichert.}
+    Abschnitte wie das Literaturverzeichnis, Aufzählungen oder Grafiken und deren Beschriftung müssen vor der Verwendung des Textes entfernt oder umgeschrieben werden.
     \item Aufgabe A1.3: Die trainierte Konversations-KI wird dann zur Beantwortung von Fragen zu \citet{bb} verwendet. 
     Dabei wird während des Trainings der in \citet{gpt3} beschriebene \enquote{Zero-Shot}-Ansatz verfolgt.
     Dies bedeutet, dass das Verständnis der Fragestellung und die Bewertung wichtiger Informationen allein durch das Modell erfolgt und nicht durch vordefinierte Fragen im Datensatz dem Modell beigebracht wird.
