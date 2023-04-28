@@ -21,4 +21,12 @@ journal publish: https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5e
 - Transformer, only attention mechanism, no reccurence and convolutions
 - BLEU score of 41.8, 3.5 Days Training, 8 GPUs
 
-# Introduction
+# 1. Introduction
+- recurrent models factor computation along symbol positions of input and output sequences
+- generate hidden states $h_t$ as a function of previous hidden states $h_{t-1}$ and the input for position $t$
+- attention mechanisms are integral parts, allowing modeling of dependencies without regard to their distance in the input or output sequences
+- transfomers eschewing reccurence and rely entirely on an attention mechanism
+- global dependencies between input and output
+- significantly more parallelizable
+
+# 2. Background
