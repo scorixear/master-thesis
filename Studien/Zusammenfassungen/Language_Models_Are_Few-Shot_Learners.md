@@ -89,3 +89,66 @@ https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bf
 - DROP (discrete reasoning andnumeracy), few-hot outperforms fine-tuned BERT, well below human performance
 
 ## 3.3 Translation
+- 93% english in dataset
+- zero-shot underperforms recent unsupervised nmt result
+- one-shot improves by 7 BLEU, few-shot by 4
+- translating into english overperforms, from english underperforms
+  - could be because byte-level bpe encoding from gpt2 almost entirely on english dataset
+
+## 3.4 SuperGLUE
+- benchmark with standardized collection of datasets
+- score improves with model size and number of examples
+- a lot of tests show almost SOTA or better than SOTA performance
+
+# 4 Measuring and Preventing Memorization Of Benchmarks
+- model does not overfit against validation sets
+- clean versions of benchmarks (<13-gram overlapp) compared to original score
+  - most cases performance changes are negligible
+
+# 5 Limitations
+- repeats semantically
+- loses coherence over long sequences
+- contradicts themselves
+- no bidirectional architecture, worse  performance for such tasks
+  - fill in the blank
+  - comparing two pieces
+  - long passage input with very short answer
+
+- objective weighs tokens equally => no preference for important tokens
+- not grounded on other domains (video, physical interaction) => lack of context about the world => will hit limitations
+- size is challenging to deploy => task-specific distillation
+
+# 6 Related Work
+- scale effect on language model performance
+- approach for scaling
+- decrease of computational cost
+- task instructions in natural language
+- multi-task, multi-stage
+- metalearning
+- algorithmic innovation (denoising-based bidirectionality, prefixLM, encoder-decoder architectures, random permutations during trainine, architecturs for sampling efficency, data and training improvements, embedding parameters efficiency)
+
+# 7 Conclusion
+
+
+# Broader Impacts
+- misuse of language models
+  - social harmful activities agumented by text generation (spam, phishing, abuse)
+  - threat actor analysis (no significant usage of gpt2 sofar)
+  - external incentive structures
+
+- fairness, bias, and representation
+  - gender bias
+  - race bias
+  - religion bias
+  - future bias and fairness challeng
+
+- energy isage
+  - thousands of petaflop/s-days of compute
+  - suprisingly efficient once trained
+    - 100 pages of content = 0.4kW-hr
+  - model distillation brings cost down
+
+- News Generation
+  -  86% detection for bad articles
+  -  largest model 52% detection
+  -  automatic text detection like GROVER and GLTR
