@@ -49,4 +49,27 @@ Connections Between Self-Attention and FFN
 - factual knowledge stored in FFN
 
 ## 3.1 Knowledge Assessing Task
+- fill-in-blank cloze task
+- triplet hrt, h = head entity, t = tail entity, r = relation
+- given fact, models answers cloze query x
+- = knowledge-expressing prompt
+
+## 3.2 Knowledge Attribution
+- based on integrated gradients
+- examine FFN intermediate neurons for masked token
+- model output probability of correct answer
+  - $P_x(\^{w}_i^{(l)})=p(y^*|x,w_i^{(l)}=\^{w}_i^{(l)})$
+  - $y^*$ correct answer
+  - $w_i^{(l)}$ i-th neuron in l-th layer
+  - $\^{w}_i^{(l)}$ given constant assigned to $w_i^{(l)}$
+- attribute Score $Attr(w_i^{(l)})$ gradually change $w_i^{(l)}$ from 0 to $\bar{w}_i^{(l)}$ (original value)
+- integrate gradients, $Attr()$ accumlates output probability change caused by chaning $w$
+- if influence is great, gradient is salient, integration is large
+- use Rieman approximation with 20 approximation steps instead of calculating continuous integrals
+
+## 3.3 Knowledge Neuron Refining
+- may contain false-positive neurons, that represent other information
+  - syntaic information
+  - lexical information
+- refining to filter these out
 - 
