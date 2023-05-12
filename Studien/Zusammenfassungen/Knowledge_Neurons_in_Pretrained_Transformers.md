@@ -72,4 +72,104 @@ Connections Between Self-Attention and FFN
   - syntaic information
   - lexical information
 - refining to filter these out
-- 
+- different prompts have same knowledge neurons
+- do not share false-positive
+
+- produce n diverse prompts
+- for each prompt, calculate knowledge attribution score
+- for each prompts, retain neurons with score > threshold t
+- consider all sets of neurons, choose neurons with >p% prompts
+
+# 4 Experiments
+## 4.1 Expreimental Settings
+- BERT-base-cased
+- 12 transformer blocks, 768 hidden size, 3072 ffn size
+- easily generalized to other models
+- attribution threshold t = 0.2x max(Attr(w))
+- refining threshold p = 0.7, de/increased by 0.05
+- v100 GPUs
+- avg. 13.3s to identify knowledge neurons (9 Prompts)
+
+## 4.2 Dataset
+- fill-in-the-blank cloze task
+- ParaRel dataset
+  - prompt templates for 28 relations from T-REx
+  - filter out relations with <4 prompt templates
+  - 34 relations, 8.63 prompt templates
+  - 253k knowledge expressing prompts
+  - 27k relational facts
+
+## 4.3 Attribution Baseline
+- neuron activation value = attribution score
+- choose hyperparameters t, p% to have [2,5] knowledge neurons per relation
+
+## 4.4 Statistics of Knowledge Neurons
+- most fact-related neuron in topmost layers
+- 4.13 knowledge neurons avg
+- baseline identifies knowledge neurons mostly shared by intra-relation fact and often in common for inter-relation facts
+- proposed method identifies exclusive knowledge neurons
+
+## 4.5 Knowledge Neurons Affect Knowledge Expression
+- surpress by setting activation to 0
+  - 29.03% decrease in correct probability
+  - base-line negligible influence
+- amplify by doubling activation
+  - 31.17% increase in correct probability
+  - base-line decrease by 1.27%
+- if knowledge neurons are distributed more widely, need to manipulate more top-k neurons
+
+## 4.6 Knowledge Neurons are Activated by Knowledge-Expressing Prompts
+- BingRel Dataset
+  - crawling bing search engine for new prompts
+  - for ParaRel facts, get up to 10 text containing head and tail
+  - get upt to 10 texts containing only head
+  - surpressed tails for first 10 to get knowledge expressing prompts
+  - surpressed random words for second 10 to get control group
+  - random sampled prompts as third control group
+- knowledge neurons significantly activated by knowledge-expressing prompts
+- baseline cannot distinguish prompts
+
+# 5 Case Studies
+## 5.1 Updating Facts
+Methods
+- identify knowledge neurons for <h, r, t>
+- retain neurons shared <10% in intra-relation facts
+- modify value slot: $FFN_i^{(val)}=FFN_i^{(val)}-\lambda_1t+\lambda_2t'$
+- $t$, $t'$ = word embeddings of t and t'
+- $\lambda_1$, $\lambda_2$ = 1 and 8
+
+Setup
+- on ParaRel
+- sample ten facts
+- choose random different entity t' for <h, r, t> of same type
+- manipulate four top knowledge neurons
+
+Evaluation Metrics
+- change rate t is modified to t'
+- success rate t' becomes top prediction
+- influence on other neurons intra-relation PPL (increase of perplexity for prompts with same relation r)
+- inter-relation PPL (increase of perplexity for prompts with different relations)
+
+Results
+- non-trivial success rate for knowledge neurons
+- insufficient for random neurons
+- little negative influence on other neurons
+- improve success rate by including more top knowledge neurons
+
+
+## 5.2 Erasing Relations
+Methods
+- given relation r, identify knowledge neurons for all relational facts with r
+- retain 20 knowledge neurons, that appear most frequently
+- set $FFN^{(val)}$ to 0
+
+Results
+- erasing operation results in increased perplexity
+- provides promising way to erase undesired knowledge
+
+# Limitations
+- fill-in-blank cloze task for knowledge expression -> could be more implicit expressed
+- un-answered for generalized tasks such as reasoning
+- only focused on factual knowledge
+- used single-word blank
+- multilingual pre-trained models not explored
