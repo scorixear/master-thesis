@@ -5,13 +5,11 @@
               language models",
   author   = "Kalyan, Katikapalli Subramanyam and Rajasekharan, Ajit and
               Sangeetha, Sivanesan",
-  journal  = "J Biomed Inform",
+  journal  = "Journal of biomedical informatics",
   volume   =  126,
   pages    = "103982",
-  month    =  dec,
-  year     =  2021,
-  address  = "United States",
-  language = "en"
+  year     =  2022,
+  doi      = "10.1016/j.jbi.2021.103982",
 }
 ```
 
@@ -283,3 +281,267 @@ Semantic Group Embeddings
 
 # 4 Taxonomy
 ## 4.1 Pretraining Corpus-based
+General
+- GPT1, BERT, BART
+Social Media-based
+- limited performance
+- normally only effective in continual pretraining
+- HateBERT, BERT-SentiX
+Language-based
+- monolingual/multilingual
+- e.g. mBert for multilingual
+- multilingual cannot represent all languages equally
+- monolingual: BanglaBERT, IndoBERT, AraBERT
+- multilingual: mT5, mBERT, mBART
+Domain-Specific
+- domains: finance, legal, news, programming, dialogue, networking, academic, biomedical
+- usually continual pretraining
+- BioBERT, CoText, BluBERT
+- converges faster
+- domain-specific vocabulary good
+
+## 4.2 Architecture
+Encoder-based
+- embedding layer + stack of transformer encoder layers
+- BERT-base = 12 encoder layers
+- BERT-large = 24 encoder layers
+- RoBERTa, XLNet, BERT
+Decoder-based
+- embedding layer + stack of transformer decoder layers
+- decoder layer = masked multi-head attention + feed-foward network layers
+- multi-head attention module wit encoder-decoder cross-attention removed
+- GPT1, GPT2, GPT3
+Encoder-Decoder-based
+- better for sequence-to-sequence tasks (translation, summarization)
+- MASS, BART, T5, PALM
+
+## 4.3 SSL
+Generative SSL
+- prediction of tokens based on current Tokens (CLM)
+- prediction of masked tokens based on context (MLM)
+- reconstruction of corrupted text (DAE)
+- GPT1, GPT2, RoBERTa, XLM, BART, MASS
+Contrastive SSL
+- used in continual pretraining
+- improves sentence-level semantics
+- learn by comparison
+- MirrorBERT, CERT, SImCSE
+Adversarial SSL
+- distinguishing corrupted tokens (replaced, shuffled)
+- ELECTRA, XLM-E
+Hybrid SSL
+- combination of generative and contrastive SSL = BERT
+- RoBERTa = generative, contrastive, adversarial SSL
+## 4.4 Extensions
+Compact T-PTLMs
+- model compression techniques toi reduce size
+- pruning
+  - models often over-parameterized (weights can be removed without impact)
+  - reduces storage space and inference time
+  - most of attention heads redundant during inference
+  - encoder layer dropped during pretraining
+  - layer dropping eliminiates training from scratch
+- Knowledge Distillation
+  - training student models from teacher models
+  - student learns generalization from teacher
+  - using L2 loss from teacher and student logits
+  - using corss-entropy between softmax of logits of student and teacher
+  - DistilBert
+- Quantization
+  - fewer bits to represent weights (generally 32/16 bits)
+  - mixed-bit quanitation, knowledge distillation combined
+  - Q8BERT
+- Parameter Sharing
+  - cross-layer parameter sharing
+  - factorized embedding parameterization
+    - split vocab in two small matricies
+    - allows growing hidden vector size without increasing vocab paramteres
+  - prevents growth of parameters with increase in depth
+  - ALBERT
+Character-Based T-PTLMs
+- problem sub-word: large vocabulary size and OOV problem
+- idea: rare & misspelled words represented as subwords, others as words
+- drawback
+  - cannot encode fine-grained characterlevel information
+  - brittleness to noise (simple typos changes representation)
+- dual-channel CNN in every transformer; enables character & sub-word channels
+- CharBERT, AlphaBERT
+Green T-PTLMs
+- vs continual pretraining for specific domains
+- expensive, not environmentally friendly
+- extending vocab
+- extending domain-specific WordPiece embeddings
+- only extension module parameters updated, rest freezed
+- GreenBioBERT, exBERT
+Sentence-based T-PTLMs
+- fine-tuning over NLI ans STSb (sentence pair classification tasks)
+- SBERT, IS-BERT, Mirror-BERT
+Tokenization-Free T-PTLMs
+- subword/character tokenization drawbacks
+  - fixed vocabulary
+  - matrix (each token gets vector and softmax matrix) = more model parameters
+  - adaptation to other models inefficient
+  - explicit tokenizers, split at space / punctation => not usable for datasets with no space deliminiator
+- convolutional layer on character sequence
+- higher depth of encoder
+- CANINE, ByT5
+Large Scale T-PTLMs
+- performance increases with model size, training on larger volumes, training more steps
+- GPT3, PANGU, GShard
+Knowledge Enriched T-PTLMs
+- intregrating knowledge from external knowledge sources
+- Knowledge Sources: WordNet, WikiData, UMLS
+- novel pretraining tasks
+- CasualBERT, KnowBERT, SenseBERT
+Long-Sequence T-PTLMs
+- quadratic time complexity of self-attention modules limits long input sequences
+- sparse/linearized self-attention
+- sparce: reduces query-key pairs that each query attends to
+- linearized: disentangling attention with kernel feature maps
+- BigBird, Reformer, Performer
+Efficient T-PTLMs
+- DeBERTa
+- disentangled attention mechanism, enhanced masked decoder
+  - represent word with separate vectors for content and position
+  - predict masked tokens instead of softmax layer
+- ConvBERT
+- mixed attention block
+  - self-attention and span based dynamic convolution modules
+  - span-based model local dependencies, self-attention models global dependencies
+# 5 Downstream Adaption Methods
+## 5.1 Feature-based
+- contextual word vectors
+  - are contextual unlike word2vec, GloVe
+  - overcome OOV words problem
+  - encode more information
+- requires training downstream model from scratch
+## 5.2 Fine-tuning
+- imparts task-specific knowledge
+- adapting weights on task-specific loss
+- clusters different labels away
+- higher layers more subject to changes
+- Vanilla Fine-tuning
+  - prone to overfit with small datasets
+  - based on task-specific loss
+- Intermediate Fine-tuning
+  - train on intermediate dataset with labels
+  - does not guarantee better performance
+  - domain adaptive
+    - train on domain dataset with large number of labeled instances
+  - Task adaptive
+    - train on task dataset with labeled instances
+    - do not need to be from same domain
+- Multi-task fine-tuning
+  - auxiliary tasks
+  - training from multiple datasources => less labeled data required
+  - avoids overfitting to specific target task
+  - vanilla
+    - fine-tune on multiple dataset simultaneously
+    - taskspecific layer for embedding and transformer
+    - not guaranteed to improve performance
+  - Iterative
+    - select best dataset for fine-tuning
+  - Hybrid
+    - fine-tune on multiple related datasets
+    - then finetune on target dataset with msall learning rate
+- Parameter Efficient Fine-tuning
+  - adapters
+    - two feed-forward layers
+    - non-linear layer between
+    - projects into smaller layer, then back to original size
+    - added to each sublayer
+    - only adapter parameters updated during fine-tuning
+    - improves in intermediate fine-tuning
+  - pruning-based fine-tuning
+    - remove unused parameters
+
+## 5.3 Prompt-based Tuning
+- discrepancy between finetuning and pretraining task degrades performance
+- prompt have close or pre-fix shape
+- generated manually or automatically
+  - prompt mining, prompt generation, prompt paraphrasing, gradient-based search
+
+# 6 Evaluation
+- knowledge types: syntactic, semantic, factual, common-sense
+- effectiveness evaluation: instrinsic, extrinsic
+  - instrinsic: probes knowledge encoded
+  - extrinsic: real-world downstream tasks
+
+## 6.1 Intrinsic Evaluation
+- probes: LAMA, XLAMA, X-FACTR, MickeyProbe
+- LAMA: factual and common-sense under zero-shot settings
+  - corpus of facts (relation triplet, question-answer pair)
+  - converted to fill-in-the-blank
+  - evaluated based on prediction of blank tokens
+  - drawbacks
+    - limites prediction over model vocabulary
+    - probes only english languags
+    - restricts to single token entities
+    - easy to guess examples
+- XLAMA: multiple languages, multi-token entities
+- X-FACTR: multiple languages, multi-token
+- MickeyProbe: common-sense probe, sentence-level ranking
+
+## 6.2 Extrinsic Evaluation
+- assess performance of downstream tasks
+- evaluating generalization ability
+- consists of: dataset, leaderboard, single metric
+- datasets represent diverse challenging tasks
+- GLUE, SuperGLUE: natural language understanding ability
+  - GLUE: 9 tasks, single sentence & sentence pairs
+  - SuperGLUE: more challening tasks (QA, Word sense disambiguation, coreference resolution)
+- GENIE; GEM, GLGE: natural language generation ability
+  - GENIE: 4 tasks (summarization, question generation, dialogue generation, translation)
+  - GEM: 8 tasks (summarization, question generation, dialogue generation, translation, commonsense reasoning)
+  - GLGE: 4 tasks (summarization, question generation, dialogue generation, translation)
+- XGLUE, XTREME: cross-lingual models
+- TweetEval, UMSAB: social media based
+  - tweet classification
+
+# 7 Useful Libraries
+- Transformers, Fairseq: model training and evaluation
+- SimpleTransformers, HappyTransformers, AdaptNLP: easier training and evaluation
+- FastSeq, DeepSpeed, FastT5, OnnxT5, LightSeq: increase model speed
+- Ecco, BertViz, exBERT: visual analysis
+- Transformer-interpret, Captum: explain model decision
+
+# 8 Discussion and Future Directions
+## 8.1 Better Pretraining Methods
+- Knowledge inherited Pretraining
+  - SSL and Knowledge Distillation
+## 8.2 Sample Efficient Pretraining Tasks
+- MLM is less sample efficient
+- RTD, RTS, STD early attempts for sample-efficient pretraining tasks
+## 8.3 Efficient Models
+- better perfromance even though with less data
+## 8.4 Better Position Encoding Mechanisms
+- absolute position embeddings suffer from generalization issues
+- relative position embeddings robust to sequence length, difficult to implement, yield less performance
+## 8.5 Improving existing T-PMTLs
+- e.g. by sentence-level semantics
+## 8.6 Beyond Vanilla Fine-tuning
+- vanilla drawback: requires maintaining separate copy for each task
+- Adapters, Pruning-based tuning: parameter efficient
+## 8.7 Benchmarks
+- not sufficient to cover al scenarios
+  - progress in compact pretrained models
+  - robustness
+  - specific to social media / other domains
+## 8.8 Compact Models
+- pruning, quantization, knowledge distillation, paraemter sharing,  factorization
+## 8.9 Robustness to Noise
+- brittle to noise due to sub-word embeddings
+- character embeddings, hybrid, tokenization-free
+## 8.10 Novel Adaptation Methods
+- continual pretraining: lack of domain-specific vocabulary
+- vocabulary expansion, ad apt and distill
+## 8.11 Privacy Issues
+- data leakage if dataset is private
+- possible to retrieve sensitive data
+## 8.12 Mitigating Bias
+- prone to learn and amplify bias
+- data augmentation-based approach, dynamically identify bias-sensitive tokens
+## 8.13 Mitigating Fine-Tuning Instabilities
+- catastrophic forgetting, small dataset sizes
+- optimization difficulties (vanishing gradients), generalization issues
+- intermediate fine-tuning, mix-out, smaller learning rates, supervised contrastive loss
