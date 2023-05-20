@@ -30,7 +30,7 @@
 - only requires large unlabeled text, labeled data very expensive
 - T-PTLMs combine transformers and self-supervised
   - GPT (decoder), BERT (encoder) first models
-  - Kaplan proved performance can be increased by increasing model size (TODO:)
+  - Kaplan proved performance can be increased by increasing model size (Scaling Laws)
   - more models, bigger, for other domains
 
 - can be adapted to downstream tasks by fine-tuning & prompt-tuning on target dataset

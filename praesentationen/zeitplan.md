@@ -7,8 +7,8 @@
 | Literaturrecherche | 01.05 - 01.06 |
 | Lösungsansatz Erarbeiten | 22.05 - 01.07 |
 | Einarbeitung | 01.06 - 01.07 |
-| Schreiben: Grundlagen | 01.06 - 12.06 |
-| Schreiben: Stand der Forschung | 12.06 - 01.07 |
+| Schreiben: Stand der Forschung | 22.05 - 15.06 |
+| Schreiben: Grundlagen | 15.06 - 01.07 |
 | Durchführung Besprechung | 01.07 |
 | Implementierung | 01.07 - 01.08 |
 | Schreiben: Lösungansatz | 01.07 - 15.07 |
