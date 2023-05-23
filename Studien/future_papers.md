@@ -18,7 +18,7 @@ Improving Language Understanding
 
 Dont't Stop Pretraining
 - continued pretraining on domain-specific unlabeled data shows benefit
-  - BioBERT: a pre-trained biomedical language representation model for biomedical text mining
+  - BioBERT: a pre-trained biomedical language representation model for biomedical text mining (DONE)
 - 
 
 Fine-Tuning
