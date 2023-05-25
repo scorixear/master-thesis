@@ -23,7 +23,7 @@ Dont't Stop Pretraining
 
 Fine-Tuning
 - in some scases fine-tuning not necessary
-  - Language Models are Unsupervised Multitask Learners GPT2
+  - Language Models are Unsupervised Multitask Learners GPT2 (DONE)
 
 Scaling Laws
 - none
