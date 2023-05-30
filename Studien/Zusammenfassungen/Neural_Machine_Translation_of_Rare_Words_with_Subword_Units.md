@@ -109,3 +109,66 @@
 - final symbol vocab size = initial vocab size + number of merge operations
 
 - do not consider cross-word boundaries
+- dictionary with weighted words (frequency)
+- main difference: symbols are still subword units
+
+- issues if all occurences merged into large symbols => unkown symbol
+- solution: recursively reversing merges
+
+- evaluate two methods
+  - two independent encodings (source, target)
+  - union of two vocabularies
+
+- names segmented differently depending on language
+- solution: transliterate into latin alphabet, bpe, transliterate back
+
+# Evaluation
+- can translation of rare/unseen words be improved
+- which segmentation performs best
+
+- english-german (4.2 million sentence pairs)
+- english-russian (2.6 million sentence pairs)
+- results reported with BLEU, CHRF3, and others
+
+- hidden layer size of 1000
+- embedding layer size of 620
+- 7 day training, last 4 saved models (12h timespan)
+- continue training with fixed embedding layer
+
+
+## 4.1 Subword statistics
+- translation quality empirically verified
+- efficient training and decoding statistics
+- n-gram tradeoff between sequence length and vocabulary size
+- reduce sequence length by leaving short list of k most frequent word types
+- unigram representation performed poorly
+- bigram unable to represent some tokens
+
+- bpe meets goals
+- produces no unknown symbols
+- more compact representation allows for shorter sequences
+
+## 4.2 Translation experiments
+- base line WDict = word-level model with backoff dictionary
+- WUnk = no backoff dictionary, replaces unknown words with UNK
+
+- small improvements with backoff
+- often unable for english-> russian (no transliteration)
+- best improvement of bpe when alphabets differ
+
+- learning from vocab union is more effective than separate vocabularies
+- but all methods perform better than baseline
+
+- suspect underestimation of rare words in BLEU und CHRF3 score
+- since words often hold essential information
+
+- good performance with e->d
+- but slightly worse than newstest2015 (used dropout)
+
+- performance highly differ between models
+- future research to control randomness
+
+# 5 Analysis
+## 5.1 Unigram acccuracy
+- main claim: translation of rare words is poor in word-level nmt models
+- 
