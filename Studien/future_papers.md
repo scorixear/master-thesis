@@ -35,10 +35,10 @@ GPT4 Technical
 - none
 
 GPt-NeoX
-- GPT-J
+- GPT-J (DONE)
 
 LLaMa
-- bytepair encoding
+- bytepair encoding (Neural Machine Translation)
 
 AdapterHub
 - ff-nn with bottleneck
