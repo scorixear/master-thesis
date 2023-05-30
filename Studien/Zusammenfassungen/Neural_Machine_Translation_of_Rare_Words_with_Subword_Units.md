@@ -171,4 +171,24 @@
 # 5 Analysis
 ## 5.1 Unigram acccuracy
 - main claim: translation of rare words is poor in word-level nmt models
-- 
+- illustrate effect by plotting targetside word sorted by frequency in training set
+
+- 50.000 most frequent words representation is same for all neuronal networks
+- c2-3/500k degrades in performance up to 500k (single unit representation), recovers afterwards by using subwords
+- subwords are less sparse -> better performance
+
+## 5.2 Manual Analysis
+- base line fails by deleting content or copying source words without translation / transliteration
+- bpe oversplits, or splits with non-matching morphene boundaries
+- if translation fails, see plausible loanwords translation
+
+- transliteration possible, but sometimes wrong
+- ambiguous transliteration, non-consistent segmentation between source and target
+
+# 6 Conclusion
+- improvement over back-off dictionary
+- byte pair encoding segmentation, simple character bigram segmentation
+
+- analysis shows rare in-vocabulary words and out-of-vocabulary words are translated poorly by baseline
+- recuding vocabulary size can improve performance
+- future avenue: optimal vocabulary size
