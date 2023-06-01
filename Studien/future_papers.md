@@ -38,12 +38,14 @@ GPt-NeoX
 - GPT-J (DONE)
 
 LLaMa
-- bytepair encoding (Neural Machine Translation)
+- bytepair encoding (Neural Machine Translation) (DONE)
 
 AdapterHub
-- ff-nn with bottleneck
+- ff-nn with bottleneck (DONE)
 
 Knowledge Neurons
+- language models as knowledge base
+- x-factr: multilingual factual knowledge retrieval
 - softmax und key/value
 
 GPT4 System Card
