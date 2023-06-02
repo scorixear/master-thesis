@@ -2,7 +2,7 @@ Attention is all you need
 - none
 
 AMMUS
-- Scaling Laws - DONE
+- Scaling Laws - [DONE]
 
 Deep Residual Learning
 - none
@@ -18,12 +18,12 @@ Improving Language Understanding
 
 Dont't Stop Pretraining
 - continued pretraining on domain-specific unlabeled data shows benefit
-  - BioBERT: a pre-trained biomedical language representation model for biomedical text mining (DONE)
+  - BioBERT: a pre-trained biomedical language representation model for biomedical text mining [DONE]
 - 
 
 Fine-Tuning
 - in some scases fine-tuning not necessary
-  - Language Models are Unsupervised Multitask Learners GPT2 (DONE)
+  - Language Models are Unsupervised Multitask Learners GPT2 [DONE]
 
 Scaling Laws
 - none
@@ -35,16 +35,16 @@ GPT4 Technical
 - none
 
 GPt-NeoX
-- GPT-J (DONE)
+- GPT-J [DONE]
 
 LLaMa
-- bytepair encoding (Neural Machine Translation) (DONE)
+- bytepair encoding (Neural Machine Translation) [DONE]
 
 AdapterHub
-- ff-nn with bottleneck (DONE)
+- ff-nn with bottleneck [DONE]
 
 Knowledge Neurons
-- language models as knowledge base
+- language models as knowledge base [DONE]
 - x-factr: multilingual factual knowledge retrieval
 - softmax und key/value
 
