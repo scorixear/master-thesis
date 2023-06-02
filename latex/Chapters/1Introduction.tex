@@ -2,38 +2,47 @@
 \chapter{Einleitung}\label{ch:introduction}
 %************************************************
 \section{Gegenstand}\label{sec:gegenstand}
-Eine effektive und effiziente Informationsbeschaffung bildet einen fundamentalen Bestandteil einer qualitativ hochwertigen klinischen Praxis in der Medizin. 
-Bei jeder medizinischen Handlung werden große Mengen an Informationen genutzt und erzeugt, sei es als Grundlage für eine Diagnose oder zur Dokumentation des Behandlungsprozesses. 
+Eine effektive und effiziente Informationsbeschaffung bildet einen fundamentalen Bestandteil einer qualitativ hochwertigen klinischen Praxis in der Medizin.
+Bei jeder medizinischen Handlung werden große Mengen an Informationen genutzt und erzeugt, sei es als Grundlage für eine Diagnose oder zur Dokumentation des Behandlungsprozesses.
 Die strukturierte und klassifizierte Speicherung und Wiedergabe dieser Informationen ist ein kontinuierlicher Entwicklungsprozess und Gegenstand aktueller Forschung.\\
 
-Die Digitalisierung der Medizin ist ein weites Themenfeld mit stetig wachsendem Bedarf. 
+Die Digitalisierung der Medizin ist ein weites Themenfeld mit stetig wachsendem Bedarf.
 Die Medizinische Informatik beschreibt dabei~\enquote{die Wissenschaft der systematischen Erschließung, Verwaltung, Aufbewahrung, Verarbeitung und Bereitstellung von Daten, Informationen und Wissen in der Medizin und im Gesundheitswesen. [$\dots$]}\footnote{\raggedright{}\ac{gmds} (2023). Definition Medizinische Informatik.\ \url{https://www.gmds.de/aktivitaeten/medizinische-informatik/} (abgerufen am 07. 03. 2023).}.
+\todo{full space in german dates (hier in den Fußnoten) sieht komisch aus. ich würde entweder half space (7.\,3.\,2023) oder gar kein Leerzeichen benutzen. Wenn das oft genug vorkommt kannst du auch z.B. das datetime package benutzen aber für ein paar mal lohnt sich das wohl nicht.
+Ich empfehle den half space, da urldate in deinem Literaturverzeichnis ja genauso formatiert wird.
+}
 Vor diesem Hintergrund gewinnt die Entwicklung und Implementierung effizienter Informationssysteme und Technologien zur Unterstützung der klinischen Praxis zunehmend an Bedeutung.\\
 
 In der Lehre wird die Praxis der Medizinischen Informatik durch umfangreiche Literatur, z.B. in \citet{bb}, unterstützt.
 Zur Strukturierung von Fachbegriffen und Rollen des Informationsmanagements im Krankenhaus existiert die Ontologie SNIK \citep{semantischesnetz}, ein semantisches Netz, kategorisiert in der Metaontologie SNIK und Teil des Projekts SNIK des Instituts für Medizinische Informatik, Statistik und Epidemiologie%
 \footnote{\raggedright{}Institut für Medizinische Informatik, Statistik und Epidemiologie.\ \url{https://www.imise.uni-leipzig.de/Institut} (besucht am 09. 03. 2023).} an der Universität Leipzig.
+\todo{semantisches Netz und Ontologie werden in diesem Fall ja synonym verwendet, ich würde den Begriff semantisches Netz hier streichen}
+\todo{wieso kategorisiert? das ist doch eine einfach besteht-aus Beziehung}
+\todo{snik ins abkürzungsverzeichnis}
 Die Nutzung dieses Netzes ermöglicht eine systematische Darstellung von Rollen, Entitäten und Funktionen des Informationsmanagements im Krankenhaus, unabhängig von der Definition der zugrunde liegenden Literaturquellen.\\
 
-Die Bedeutung von maschinellem Lernen, Deep Learning und Sprachmodellen ist in der heutigen Zeit sehr präsent. 
-Diese Technologien werden in vielen Bereichen, von der Automobilindustrie bis hin zu medizinischen Anwendungen, eingesetzt, um neue Methoden der Informationsgewinnung und -verarbeitung zu ermöglichen. 
+Die Bedeutung von maschinellem Lernen, Deep Learning und Sprachmodellen ist in der heutigen Zeit sehr präsent.
+Diese Technologien werden in vielen Bereichen, von der Automobilindustrie bis hin zu medizinischen Anwendungen, eingesetzt, um neue Methoden der Informationsgewinnung und -verarbeitung zu ermöglichen.
 Verschiedene KI-Modelle können in vielen Bereichen, wie z.B. der Erkennung seltener Krankheiten \citep{rare_diseases}, der personalisierten Medizin \citep{precision_med} oder dem Marketing \citep{ai_marketing}, weitreichende Auswirkungen auf zukünftige Arbeitsprozesse haben.
-Sprachmodelle wie das \ac{gpt}-3-Modell von OpenAI \citep{gpt3} können dazu beitragen, Texte in verschiedenen Sprachen automatisch zu übersetzen und sogar kreatives Schreiben zu ermöglichen. 
-Deep Learning, das auf künstlichen neuronalen Netzen basiert, ermöglicht eine noch tiefere und komplexere Verarbeitung von Daten. 
+Sprachmodelle wie das \ac{gpt}-3-Modell von OpenAI \citep{gpt3} können dazu beitragen, Texte in verschiedenen Sprachen automatisch zu übersetzen und sogar kreatives Schreiben zu ermöglichen.
+Deep Learning, das auf künstlichen neuronalen Netzen basiert, ermöglicht eine noch tiefere und komplexere Verarbeitung von Daten.
 In der Medizin kann Deep Learning beispielsweise zur Diagnose von Krankheiten und zur Analyse medizinischer Bilder eingesetzt werden \citep{skincancer}.
 
 \section{Problemstellung}\label{sec:problemstellung}
 Informationssysteme im Gesundheitswesen sind hochkomplex, abhängig von den Anforderungen der jeweiligen Organisation und unterliegen einer ständigen Weiterentwicklung.
 Die Anforderungen sind vielfältig und umfassen beispielsweise die Speicherung und Verarbeitung von Patientendaten, die Dokumentation von Behandlungsprozessen, die Unterstützung von Diagnose- und Therapieprozessen sowie die Unterstützung von Forschungsaktivitäten.
-Ausgehend von diesen Anforderungen gibt es eine Fülle von Literatur, die sich mit der Definition, Implementierung und Wartung von Informationssystemen im Gesundheitswesen befasst. 
+Ausgehend von diesen Anforderungen gibt es eine Fülle von Literatur, die sich mit der Definition, Implementierung und Wartung von Informationssystemen im Gesundheitswesen befasst.
 Das Buch \citetitle{bb} von \citeauthor{bb} beschäftigt sich umfassend mit diesen Anforderungen und ist im März 2023 in der 3. Auflage erschienen \citep{bb}.\\
+\todo{für später wenn es sich nicht mehr ändert: ich würde einzelne Wörter am Ende eines Blockabsatzes wenn möglich vermeiden, da es visuell unausgewogen wirkt. Gilt allgemein für die ganze Arbeit.}
 
 Das Management von Informationssystemen ist eine anspruchsvolle Aufgabe, die sich nicht nur auf die Anwendung durch das Krankenhauspersonal beschränkt.
 Es ist auch von großer Bedeutung für Studierende, um ein besseres Verständnis der bestehenden Systeme zu erlangen, und für Wissenschaftler, um diese Systeme zu erweitern oder neue Managementmethoden zu entwerfen.
 Eine konkrete und konsistente Wissensbasis ist sowohl für die Anwendung als auch für Lehre und Forschung von großer Bedeutung.\\
+\todo{Ich persönlich finde den Begriff Wissensbasis wie du ihn in der Arbeit gebrauchst verwirrend, da er eine ganz spezielle Bedeutung als Menge von RDF Tripeln im Semantic Web hat, worüber du ja im Rande mit SNIK auch schreibst.
+So wie ich das verstehe benutzt du den Begriff eher als allgemeine Ansammlung von Wissen.}
 
 Eine weitere Herausforderung bei der Auseinandersetzung mit der Literatur zu Informationssystemen ist die Komplexität der Übertragung von theoretischen Konzepten auf praktische Anwendungsfälle.
-Insbesondere für Studierende und Praktiker erfordert die praktische Anwendung ein tiefes Verständnis der Zusammenhänge und der Anwendbarkeit der vorgestellten Konzepte auf konkrete Arbeitsumgebungen. 
+Insbesondere für Studierende und Praktiker erfordert die praktische Anwendung ein tiefes Verständnis der Zusammenhänge und der Anwendbarkeit der vorgestellten Konzepte auf konkrete Arbeitsumgebungen.
 Da die verfügbare Literatur oft sehr umfangreich und ihre Definitionen fragmentiert sind, stellt die Identifikation relevanter Informationen für spezifische Problemstellungen eine weitere Herausforderung dar.
 Die Fragmentierung von Definitionen bezieht sich hier auf die Erläuterung eines Fachbegriffs oder Konzepts innerhalb einer Literaturquelle.
 Diese Definitionen werden häufig nicht zusammenfassend aufgelistet, sondern ergeben sich im Laufe der Texte und Kapitel.
@@ -48,12 +57,12 @@ erschweren eine schnelle Informationsbeschaffung, insbesondere für Studierende,
 
 \section{Motivation}
 
-Eine Strukturierung von Informationen zum Management von Krankenhausinformationssystemen ist bereits Bestandteil des Projekts SNIK \citep{semantischesnetz, domaene}, 
+Eine Strukturierung von Informationen zum Management von Krankenhausinformationssystemen ist bereits Bestandteil des Projekts SNIK \citep{semantischesnetz, domaene},
 ein semantisches Netz des Instituts für Medizinische Informatik, Statistik und Epidemiologie der Universität Leipzig.
 Auf Basis dieses Netzes wurden bereits verschiedene Methoden zur Informationsextraktion untersucht.\\
-
-Die BeLL mit dem Titel \enquote{Question Answering on SNIK} \citep{hannesbell} erweiterte den Zugang zu diesem Netz durch die Verwendung natürlicher englischer Sprache. 
-Die Ergebnisse der BeLL wurden in einem \ac{qas} QAnswer \citep{qanswer} umgesetzt, zeigen aber Defizite in der Erklärbarkeit und Verständlichkeit komplexerer Fragen. 
+\todo{auch hier und generell in dieser Arbeit würde ich den Begriff semantisches Netz komplett streichen, außer beim wörtlichen nennen des ausgeschriebenen titels von SNIK bei der ersten Nennung. Lieber konsistent von Ontologie schreiben.}
+Die BeLL mit dem Titel \enquote{Question Answering on SNIK} \citep{hannesbell} erweiterte den Zugang zu diesem Netz durch die Verwendung natürlicher englischer Sprache.\todo{bell ins abkürzungsverzeichnis}
+Die Ergebnisse der BeLL wurden in einem \ac{qas} QAnswer \citep{qanswer} umgesetzt, zeigen aber Defizite in der Erklärbarkeit und Verständlichkeit komplexerer Fragen.
 Im Gegensatz dazu untersuchte \citet{chatgpt_qas} auf einem anderen Datensatz die Leistung einer Konversations-KI (in diesem Fall ChatGPT) im Vergleich zu einer herkömmlichen, auf einem Wissensgraphen basierenden \ac{qas} (verwendet wurde $KGQA_N$).
 Die Ergebnisse zeigten, dass ChatGPT im Vergleich zum verwendeten $KGQA_N$ erstaunlich stabile und verständliche Antworten lieferte, jedoch bei der Ausgabe korrekter Antworten deutlich schlechter abschnitt. Hier steht zu erwarten, dass durch ein besseres Feintuning die Anzahl der falschen Antworten deutlich reduziert werden kann.\\
 
@@ -75,51 +84,51 @@ welche ethischen Forderungen in ihrem bzw.\ seinem jeweiligen Aufgaben- und Vera
 Aufgeteilt in 16 Artikel werden hier verschiedene Kompetenzen und Verantwortlichkeiten definiert, unter die auch das hier beschriebene System fällt.
 Da die zu entwickelnde Konversations-KI Informationen über medizinisches Wissen, insbesondere über Informationssysteme im Gesundheitswesen, bereitstellt,
 unterliegt sie in ihrer Existenz als \enquote{Informationsbasis} einer Vielzahl von Artikeln.
-Sie wirkt unterstützend in den Artikeln 1 \enquote{Auftrag}, 2 \enquote{Fachkompetenz}, 3 \enquote{Kommunikative Kompetenz}, 
+Sie wirkt unterstützend in den Artikeln 1 \enquote{Auftrag}, 2 \enquote{Fachkompetenz}, 3 \enquote{Kommunikative Kompetenz},
 kann aber durch unsachgemäßen Gebrauch und ihr zugrundeliegendes Wesen entgegen den Artikeln 1 \enquote{Auftrag}, 2 \enquote{Fachkompetenz}, 3 \enquote{Kommunikative Kompetenz},
 4 \enquote{Medizinethische Kompetenz}, 6 \enquote{Soziale Verantwortung} und 13 \enquote{Forschung} handeln.\\
 
-In Artikel 1 \enquote{Auftrag} heißt es unter anderem, dass 
+In Artikel 1 \enquote{Auftrag} heißt es unter anderem, dass
 \enquote{Die Würde des Menschen und das Persönlichkeitsrecht [$\dots$] dabei vorrangig geachtet und geschützt werden [müssen]} \citep{gmds_eth}.
 Dazu gehört insbesondere die \enquote{Allgemeine Erklärung der Menschenrechte},
 in der das \enquote{Verbot der Diskriminierung z.B. nach Geschlecht oder [aus rassistischen Gründen] (Art. 2, 7)}
 verankert ist und
 der \enquote{Schutz des (geistigen) Eigentums (Art. 17, 27)} und die \enquote{Gedanken-, Gewissens-, Religions- und Meinungsfreiheit (Art. 18, 19)} beschrieben werden.
 Die von der Konversations-KI zu generierenden Antworten ergeben sich aus einer Vielzahl von zuvor genutzten Datensätzen aus dem Internet, die nicht notwendigerweise diesen ethischen Leitlinien folgen.
-Eine inhaltliche Garantie für die Einhaltung dieser Leitlinien ist daher ohne zusätzliche Filterung der Antworten zu gestellten Fragen nicht möglich. 
-Durch eine optimale Filterung können Antworten, die den Leitlinien widersprechen, ausgeschlossen werden. 
+Eine inhaltliche Garantie für die Einhaltung dieser Leitlinien ist daher ohne zusätzliche Filterung der Antworten zu gestellten Fragen nicht möglich.
+Durch eine optimale Filterung können Antworten, die den Leitlinien widersprechen, ausgeschlossen werden.
 Diese Filterung ist jedoch aufgrund ihrer Komplexität sowohl in zeitlicher als auch in finanzieller Hinsicht nicht Bestandteil dieser Arbeit.
 Es muss daher davon ausgegangen werden, dass es durchaus Antworten geben kann, die gegen die Leitlinien verstoßen.\\
 
-Artikel 1 wird durch die Konversations-KI gefördert, in dem sie Medizinische Versorgungseinrichtungen durch effiziente und schnelle Informationsbeschaffung in ihren Fähigkeiten unterstützt, 
+Artikel 1 wird durch die Konversations-KI gefördert, in dem sie Medizinische Versorgungseinrichtungen durch effiziente und schnelle Informationsbeschaffung in ihren Fähigkeiten unterstützt,
 \enquote{ihre Leistungen qualitativ und quantitativ nachweisen, überwachen und sicherstellen [zu] können} \citep{gmds_eth}.\\
 
-Artikel 2 \enquote{Fachkompetenz} definiert, dass das Mitglied seine \enquote{Fachkompetenz nach dem Stand der Wissenschaft und Technik erwirbt [$\dots$]} und \enquote{Maßnahmen zur Fehlervermeidung ergreift} \citep{gmds_eth}. 
-Dies ist teilweise durch die Konversations-KI gegeben, da die extrahierten Informationen auf dem Stand des zugrundeliegenden Buches \citet{bb} sind. 
-Eine Fehlervermeidung ist hier jedoch nicht vorgesehen. 
-Wie in \citet{chatgpt_qas} gezeigt, weist ChatGPT als \ac{gpt}-Modell eine geringe Wahrheitsquote auf. 
+Artikel 2 \enquote{Fachkompetenz} definiert, dass das Mitglied seine \enquote{Fachkompetenz nach dem Stand der Wissenschaft und Technik erwirbt [$\dots$]} und \enquote{Maßnahmen zur Fehlervermeidung ergreift} \citep{gmds_eth}.
+Dies ist teilweise durch die Konversations-KI gegeben, da die extrahierten Informationen auf dem Stand des zugrundeliegenden Buches \citet{bb} sind.
+Eine Fehlervermeidung ist hier jedoch nicht vorgesehen.
+Wie in \citet{chatgpt_qas} gezeigt, weist ChatGPT als \ac{gpt}-Modell eine geringe Wahrheitsquote auf.
 Da es sich bei der zu entwickelnden Konversations-KI um ein \ac{gpt}-Modell handelt, wird die fehlerfreie Beantwortung von Fragen zwar angestrebt, kann aber nicht garantiert werden.\\
 
-Artikel 3 \enquote{Kommunikative Kompetenz} beschreibt die Fähigkeit 
+Artikel 3 \enquote{Kommunikative Kompetenz} beschreibt die Fähigkeit
 \enquote{Recht, Interessen [und] Konventionen der verschiedenen von [dem Mitglied] seiner Arbeit Betroffenen zu verstehen und zu berücksichtigen [$\dots$]} und
 \enquote{Wissenschaftliche Erkentnisse in verständlicher Form der Öffentlichkeit zugänglich [$\dots$]} \citep{gmds_eth} zu machen.
-Die Konversations-KI unterstützt dabei Fragende durch eine Antwort in möglicherweise verständlicherer Form der wissenschaftlichen Erkenntnisse in \citet{bb}, 
+Die Konversations-KI unterstützt dabei Fragende durch eine Antwort in möglicherweise verständlicherer Form der wissenschaftlichen Erkenntnisse in \citet{bb},
 jedoch ist hier nicht gegeben, dass die Betroffenen in der Antwort berücksichtigt oder verstanden wurden.\\
 
-Artikel 4 \enquote{Medizinethische Kompetenz} legt fest, dass das Mitglied 
+Artikel 4 \enquote{Medizinethische Kompetenz} legt fest, dass das Mitglied
 \enquote{ethische Prinzipien der Medizin [$\dots$] bei seinem beruflichen Handeln beachtet} \citep{gmds_eth}.
 Zu den ethischen Prinzipien \citep{gmds_eth} gehören auch die \enquote{Achtung vor dem Menschen zu wahren} und die \enquote{Würde des Invidiums zu schützen}.
 Beides kann nicht allein durch die Konversations-KI gewährleistet werden und muss durch mögliche Filter ergänzt werden.\\
 
-Artikel 6 \enquote{Soziale Verantwortung} definiert die Verantwortungen des Mitglied 
-\enquote{gesellschaftliche Auswirkungen [zu] berücksichtigen [$\dots$]} und die 
-\enquote{Allgemeine Erklärung der Menschenrechte und ethische[n] Prinzipien der Medizin} \citep{gmds_eth}zu beachten. 
+Artikel 6 \enquote{Soziale Verantwortung} definiert die Verantwortungen des Mitglied
+\enquote{gesellschaftliche Auswirkungen [zu] berücksichtigen [$\dots$]} und die
+\enquote{Allgemeine Erklärung der Menschenrechte und ethische[n] Prinzipien der Medizin} \citep{gmds_eth}zu beachten.
 Wie bereits zu den Artikeln 1 und 4 ausgeführt, ist es der Konversations-KI aufgrund der Datengrundlage nicht möglich, diesen Artikel, insbesondere die hier genannten Punkte, in ihrer Antwort zu berücksichtigen.\\
 
-Artikel 13 \enquote{Forschung} definiert, dass das Mitglied \enquote{gute Wissenschaftliche Arbeit, inbesondere Offenheit und Transparenz [und] Akzeptanz von Kritik} \citep{gmds_eth} einhalten soll. 
-Gute wissenschaftliche Arbeit wird weiter definiert als 
+Artikel 13 \enquote{Forschung} definiert, dass das Mitglied \enquote{gute Wissenschaftliche Arbeit, inbesondere Offenheit und Transparenz [und] Akzeptanz von Kritik} \citep{gmds_eth} einhalten soll.
+Gute wissenschaftliche Arbeit wird weiter definiert als
 \enquote{die strikte Ehrlichkeit im Hinblick auf die Beiträge von Partnern, Konkurenten, Vorgängern zu wahren} und \enquote{weder Fälschung oder Plagiate [zu] benutzen} \citep{gmds_eth}.
-Da die Konversations-KI auf dem Inhalt eines Buches trainiert wird, in ihrer Datenbasis aber bereits eine Vielzahl von Texten, darunter auch Plagiate und Fälschungen, gelernt hat, 
+Da die Konversations-KI auf dem Inhalt eines Buches trainiert wird, in ihrer Datenbasis aber bereits eine Vielzahl von Texten, darunter auch Plagiate und Fälschungen, gelernt hat,
 ist es nicht möglich, die Antworten als wissenschaftliche Quelle zu verwenden, da sowohl Plagiate als auch Fälschungen ohne Annotation vorhanden sein können.
 Die Antworten sollten als reine Informationsextraktion und nicht als Quelle für wissenschaftliche Arbeiten betrachtet werden.
 
@@ -130,13 +139,13 @@ Die in~\ref{sec:zielsetzung} genannten Ziele $Z_i$ werden durch die hier aufgef�
 \begin{itemize}
   \item Aufgabe zu Ziel Z1
   \begin{itemize}
-    \item Aufgabe A1.1: Es sollen aktuelle Sprachmodelle verglichen werden. Dabei sind die Einschränkungen der Verfügbarkeit und Verwendbarkeit zu berücksichtigen. 
-    \ac{gpt}-Modelle basieren auf großen Datenmengen und enthalten mehrere Milliarden Parameter. 
-    Ein eigenes Training eines Modells würde sowohl den zeitlichen als auch den finanziellen Rahmen übersteigen, weshalb auf ein vortrainiertes Modell zurückgegriffen werden muss. 
+    \item Aufgabe A1.1: Es sollen aktuelle Sprachmodelle verglichen werden. Dabei sind die Einschränkungen der Verfügbarkeit und Verwendbarkeit zu berücksichtigen.
+    \ac{gpt}-Modelle basieren auf großen Datenmengen und enthalten mehrere Milliarden Parameter.
+    Ein eigenes Training eines Modells würde sowohl den zeitlichen als auch den finanziellen Rahmen übersteigen, weshalb auf ein vortrainiertes Modell zurückgegriffen werden muss.
     Dazu muss das Modell frei verfügbar sein und unter einer Open-Source-Lizenz stehen. Außerdem muss das Modell am Rechenzentrum der Universität Leipzig geladen und trainiert werden können. Aufgrund der großen Anzahl an Parametern sind auch hier Grenzen des Arbeitsspeichers und damit der Größe des Modells gesetzt.
-    \item Aufgabe A1.2: Für ein effizientes und erfolgreiches Feintuning der Konversations-KI ist eine Datenkuration von \citet{bb} notwendig. 
+    \item Aufgabe A1.2: Für ein effizientes und erfolgreiches Feintuning der Konversations-KI ist eine Datenkuration von \citet{bb} notwendig.
     Abschnitte wie das Literaturverzeichnis, Aufzählungen oder Grafiken und deren Beschriftung müssen vor der Verwendung des Textes entfernt oder umgeschrieben werden.
-    \item Aufgabe A1.3: Die trainierte Konversations-KI wird dann zur Beantwortung von Fragen zu \citet{bb} verwendet. 
+    \item Aufgabe A1.3: Die trainierte Konversations-KI wird dann zur Beantwortung von Fragen zu \citet{bb} verwendet.
     Dabei wird während des Trainings der in \citet{gpt3} beschriebene \enquote{Zero-Shot}-Ansatz verfolgt.
     Dies bedeutet, dass das Verständnis der Fragestellung und die Bewertung wichtiger Informationen allein durch das Modell erfolgt und nicht durch vordefinierte Fragen im Datensatz dem Modell beigebracht wird.
   \end{itemize}
@@ -150,8 +159,8 @@ Die in~\ref{sec:zielsetzung} genannten Ziele $Z_i$ werden durch die hier aufgef�
 \end{itemize}
 
 \section{Aufbau der Arbeit}
-Kapitel 1 beschreibt das grundlegende Umfeld dieser Arbeit, formuliert exitierende Probleme und Anforderungen, bietet Ziele zur Lösung dieser Probleme an und gibt Aufgaben, zur Umsetzung dieser Ziele. 
-In Kapitel 2 werden Grundlagen gelegt zum Verständnis der in dieser Arbeit verwendeten Technologie, während in Kapitel 3 der aktuelle Stand der Forschung zusammengefasst wird. 
-Kapitel 4 umfasst Lösungsstrategien des in~\ref{sec:problemstellung} formulierten Problem mit einer anschließenden Beschreibung der Umsetzung dieser Lösungen in Kapitel 5. 
-Die Ergebnisse dieser Arbeit werden in Kapitel 6 präsentiert und in Kapitel 7 zusammengefasst diskutiert. 
+Kapitel 1 beschreibt das grundlegende Umfeld dieser Arbeit, formuliert exitierende Probleme und Anforderungen, bietet Ziele zur Lösung dieser Probleme an und gibt Aufgaben, zur Umsetzung dieser Ziele.
+In Kapitel 2 werden Grundlagen gelegt zum Verständnis der in dieser Arbeit verwendeten Technologie, während in Kapitel 3 der aktuelle Stand der Forschung zusammengefasst wird.
+Kapitel 4 umfasst Lösungsstrategien des in~\ref{sec:problemstellung} formulierten Problem mit einer anschließenden Beschreibung der Umsetzung dieser Lösungen in Kapitel 5.
+Die Ergebnisse dieser Arbeit werden in Kapitel 6 präsentiert und in Kapitel 7 zusammengefasst diskutiert.
 Zusätzlich gibt Kapitel 7 einen Ausblick dieser Arbeit.

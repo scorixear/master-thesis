@@ -2,7 +2,30 @@
 \chapter{Stand der Forschung}\label{ch:relatedWork}
 %*****************************************
 \section{Grundlagen der Architektur}
+\todo{ist ungünstig, wenn die grundlagen im stand der forschung kapitel sind und nicht im grundlagenkapitel. aber es ist natürlich auch blöd, ein thema auseinanderzureissen.
+Ich verstehe auch dass es bei so einem Thema schwer ist, weil alles gefühlt neu und noch active research ist.
+Ich würde dir aber trotzdem raten das klar zu separieren.
+Erstens schon rein formal für die Bewertung weil du ja mit der Arbeit zeigst, dass du das richtig auseinander halten kannst.
+Aber auch unabhängig davon finde ich, würde es sich so besser lesen.
+Also mein Rat wäre:
+
+Grundlagen:
+- das was du schon drin hast mit "General Pretrained Transformer - Neuronal Networks - Zero Shot Ansatz - Finetuning - Datenkuration"
+- aber alles was mit GPT zu tun hat nicht, das ist ein spezieller Ansatz und das sollte zu state of the art
+- alles was im Titel steht :-) Question Answering, unsupervised und supervised training und so
+- Definitionen Daten, Informationen und Wissen nach Winter passt hier denke ich auch rein
+
+State of the Art:
+- aktuelle Paper
+- Vergleich verschiedener Systeme und Modelle
+- und das was du da schon hast, also das meiste ist ja schon am richtigen Ort
+
+Ahja und "Grundlagen der Architektur" und "Weiterentwicklung der Architektur" finde ich zu allgemein. Da weiß man ja auf den ersten Blick gar nicht, welche Architektur gemeint ist.
+Also 3.1 und 3.2 würde ich beides unter ein überkapitel "Transformer" (oder "Transformer-Modelle" oder so) in die Grundlagen stellen.
+Bei 3.3 bin ich mir auf den ersten Blick unsicher, 3.4 und Folgendes ist dann aber definitiv richtig bei State of the Art.
+}
 Die erste schriftliche Erwähnung des Transformer-Models und zusätzlich auch Einführung der zwei Teil-Modelle Encoder und Decoder findet sich in \citet{attention}.
+\todo{Zusammengesetzte Substantive deren beide Teile deutsch sind werden normalerweise zusammengeschrieben. Also Teilmodelle, nicht Teil-Modelle.}
 Die hier beschriebene bidirektionale Architektur beinhaltet jedoch die Grundlage aller darauf aufbauenden Modelle und Weiterentwicklungen. 
 Die grundlegene Architektur wurde für unterschiedliche Anwendungen stark modifiziert. 
 Seit 2017 gibt es grundsätzliche Differenzen in den Modellen und deren Möglichkeiten. 
@@ -83,12 +106,19 @@ Zusätzlich lassen sich dadurch bereits vortrainierte Adapter zu weiteren Domän
 \citet{knowledge_neurons} untersuchten die Eigenschaften von \ac{llm}s auf ihre Eigenschaft, faktisches Wissen wiedergeben zu können, ohne eine Wissensdatenbank als Grundlage während der Nutzung zu besitzen.
 Sie stellten fest, dass besonders in weiter hinten liegenden Ebenen die Neuronalen Netze sogenannte \enquote{Wissensneuronen} besitzen, die zu bestimmen Fakten korrelieren.
 Diese Wissensneuronen aktiveren sich, wenn ein bestimmter Fakt in der Eingabe angesprochen wird und können mittels Verstärkung oder Unterdrückung dazu führen, dass das Modell diesen Fakt besser berücksichtigt oder \enquote{vergisst}.\\
+\todo{jetzt natürlich noch nicht relevant da sich der Text ja noch ändert, aber ich will schonmal awareness schaffen, dass ein einzelnes Wort auf einer neuen Seite in der Typographie besonders ungern gesehen wird.}
 
 Neben den überaus großen Erfolgen von neuen Modellen erheben sich jedoch auch neue Probleme bei der Benutzung dieser Modelle.
 Neben Falschaussagen ergeben sich Probleme durch sozialen und anderen Bias in den Antworten, Selbstüberschätzung bei falschen Aussagen, welches wiederum zu schwerwiegenden Problemen in der Anwendung dieser Modelle kommen kann, Generierung von schädlichen Inhalten, Unterstützung von Kriminalität mit Expertise und weiteren Probleme.
+\todo{hier vielleicht auf deine betrachtung der ethikrichtlinien verweisen oder das anders in verbindung bringen?}
 \citet{gpt4} dedizierten einen eigenen Abschnitt ihres Artikels zur Untersuchung dieser Probleme und deren Adressierung.
 Sie zeigten hier grundlegende Probleme bei der Anwendung von Sprachmodellen auf, hielten jedoch konkreten Lösungsansätzen zurück.\\
 
 In \citet{plagiarism} beschreibt der Author weitere Fragestellungen zu dem Umgang mit Antworten von Sprachmodellen und deren Konflikt zum Urheberrecht.
 Wem gehört der generierte Text - den Authoren der Datensätze auf dem das Modell trainiert wurde, der Firma dem das Modell gehört, dem Nutzer der das Modell anleitet? 
-Auch hier zeigen sich  ungelöste Probleme in der Anwendung von Sprachmodellen und bieten Raum für weitere Forschung.\\
+Auch hier zeigen sich ungelöste Probleme in der Anwendung von Sprachmodellen und bieten Raum für weitere Forschung.\\
+\todo{hier vielleicht noch den Bogen schlagen, was davon für uns relevant ist.
+Also schränkt das irgendwie ein, welche Lizenzen die Modelle, die wir verwenden dürfen, haben müssen und wenn ja, was schließt das genau aus?
+Oder ist das für deine Fragestellung gar nicht relevant?
+Winter u.a. 2023 (also das neue blaue buch) ist ja open access, vielleicht noch rausfinden was das genau für eine lizenz ist und ob das irgendwas einschränkt (kurz).
+}
