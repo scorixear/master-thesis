@@ -45,7 +45,7 @@ AdapterHub
 
 Knowledge Neurons
 - language models as knowledge base [DONE]
-- x-factr: multilingual factual knowledge retrieval
+- x-factr: multilingual factual knowledge retrieval [DONE]
 - softmax und key/value
 
 GPT4 System Card
