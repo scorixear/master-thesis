@@ -1,16 +1,72 @@
 %*****************************************
 \chapter{Grundlagen}\label{ch:preliminaries}
 %*****************************************
+\section{Transformer}\label{sec:transformer}
+\todo{
+Grundlagen:
+- das was du schon drin hast mit "General Pretrained Transformer - Neuronal Networks - Zero Shot Ansatz - Finetuning - Datenkuration"
+- aber alles was mit GPT zu tun hat nicht, das ist ein spezieller Ansatz und das sollte zu state of the art
+- alles was im Titel steht :-) Question Answering, unsupervised und supervised training und so
+- Definitionen Daten, Informationen und Wissen nach Winter passt hier denke ich auch rein
 
-Themen:
-- General Pretrained Transformer
-- Neuronal Networks
-- Zero Shot Ansatz
-- Finetuning
-- Datenkuration
+State of the Art:
+- aktuelle Paper
+- Vergleich verschiedener Systeme und Modelle
+- und das was du da schon hast, also das meiste ist ja schon am richtigen Ort
+}
+Die erste schriftliche Erwähnung des Transformer-Models und zusätzlich auch Einführung der zwei Teilmodelle Encoder und Decoder findet sich in \citet{attention}.
+\todo{Zusammengesetzte Substantive deren beide Teile deutsch sind werden normalerweise zusammengeschrieben. Also Teilmodelle, nicht Teil-Modelle.}
+Die hier beschriebene bidirektionale Architektur beinhaltet jedoch die Grundlage aller darauf aufbauenden Modelle und Weiterentwicklungen. 
+Die grundlegene Architektur wurde für unterschiedliche Anwendungen stark modifiziert. 
+Seit 2017 gibt es grundsätzliche Differenzen in den Modellen und deren Möglichkeiten. 
+Deshalb führte \citet{ammus} eine Taxonomie der Transformer-basierenden Vortrainierten Sprachmodelle ein. 
+Dieser Taxonomie wird hier zur Beschreibung weitere Architekturen und Methodiken gefolgt.\\
 
-Topics:
-- GPT als Chat
-- Wissenextraktion mit GPT
-- Finetuning Variables
+Neben dem Grundbaustein eines Transformers - dem Attention-\ac{nn} - sind zwei wichtige Änderungen zu normalen neuronalen Netzwerken in Transformer eingeflossen. 
+Restverbindungen als Ebenen-Normalizierung, im Englischen \enquote{Deep Residual Connections}, verändern die Zielsetzung eines \ac{nn}, behalten jedoch durch ihre Ebenen-Normalisierung die selben Ausgaben. 
+In \citet{deep_residual} wurde dieses Konzept erstmals eingeführt und liefert die Lösung zu einem Grundproblem von großen, aus mehreren Ebenen bestehenden Transformer-Modellen. 
+Es zeigte sich schon 2016 im Bereich der Bilderkennung, das mit steigender Tiefe die Korrektheit von Modellen sich sätigt und dann schnell verschlechtert, sollte jenes Modell weitertrainiert werden. 
+Dies setzte ein praktische Grenze der Tiefe von \ac{nn}s und verhinderte somit komplexere Probleme mit größeren Modellen zu lösen. 
+\citet{deep_residual} beschreiben eine Lösung durch die genannten Restverbindungen, welche normale \ac{nn} simple ersetzen können, und belegen ebenso die Effektivität dieser Methode.\\
+
+Die zweite wichtige Änderung ist die Einführung von Dropout. 
+Dropout ist eine Methode, welche die Trainingszeit von \ac{nn}s verkürzt und die Generalisierung verbessert. 
+\citet{dropout} beschreiben die Methode als das zufällige Aussetzen von Neuronen in einem \ac{nn}. 
+Dieses Aussetzen wird zufällig gewählt und ist nicht von der Eingabe abhängig. 
+Durch das Aussetzen von Neuronen wird das \ac{nn} gezwungen, sich nicht auf andere Neuronen zu verlassen und somit eine bessere Generalisierung zu erreichen. 
+Dieses Aussetzen wird nur während des Trainings durchgeführt und nicht während der Inferenz. 
+Die Methode wurde 2014 eingeführt und ist seitdem ein fester Bestandteil von \ac{nn}s.\\
+
+\section{Tokenization}\label{sec:tokenization}
+Transformer-Modelle können ohne zusätzliche Umformung der Eingabe diese nicht verarbeiten.
+Neben der Erstellung von Encodingvektoren muss die Eingabe vorerst in kleinere Einheiten, genannt Tokens zerlegt werden.
+Unterschiedliche ältere Modelle nutzen hierfür Wörter oder Symbolunterteilungen.
+Jedoch birgt dies ein Problem.
+Bei der Zerlegung der Eingaben in Symbole ist zwar das Vokabular kleiner, welches zu schnelleren Trainingdurchläufen führt, jedoch muss das Modell vor der Erlernung von Zusammenhängen von Wörtern, Satzstrukturen und Fakten erst die Bedeutung von Wörtern und ihrer Zusammenstellung aus Symbolen erlernen.
+Dies führt dazu, das ein Großteil der Trainingszeit für die Erlernung der Sprache wegfällt und dadurch die finale Leistung der Modelle massiv eingeschränkt wird.
+Eine logische Schlussfolgerung wäre hier die nutzung von Wörtern oder sogar Phrasen als Tokens.
+Mit steigender Größe der Datensätze, welche zum Training der Modelle genutzt werden, vergrößert sich hier das Vokabular immens.
+Dies führt zu einer großen Verlangsamung der Trainingsdurchläufe und sehr großen Modellen ohne jeglichen Vorteil in ihren Fähigkeiten.
+Wörter mit gleichen Wortstamm oder ähnlicher Bedeutung auf Grund von grammatikalischen Regeln (Plural, Geschlecht, Zeitformen) müssen erst von dem Modell als \enquote{gleiches Wort} erlernt werden.
+Deswegen setzte sich die Unterteilung von Wörtern in Sub-Wörter als Standard durch.
+
+\subsection{Byte-Pair-Encoding}\label{subsec:bpe}
+\citet{bpe} schlugen hierfür die Nutzung von \ac{bpe} vor.
+Die Unterteilung von Wörtern in Untergruppen von Wörter zeigten schon in der Übersetzung von Sätzen erhebliche Verbesserungen, setzten sich jedoch auch in anderen Bereichen und Aufgaben wie zum Beispiel der Textgenerierung, Text-Klassifizierung, Gefühlsanalyse und weitere durch.
+Die Unterteilung von Wörtern ist hierbei eher zu verstehen als Zusammenführung von kleineren Subwörtern.
+Angefangen mit dem Vokabular bestehend aus allen Symbolen eines Alphabets wird jenes erweitert durch Zusammenführung (engl. \enquote{Merge}) von Symbolen, welche am häufigsten in dem Datensatz vorkommen.
+Dieser Vorgang wird solange wiederholt, bis die gewünschte Anzahl an Subwörtern erreicht ist.
+Die Anzahl der Subwörter ist hierbei ein Hyperparameter, welcher je nach Modell und Datensatz variiert.
+Die Unterteilung von Wörtern in Subwörter hat den Vorteil, dass die Anzahl der Subwörter im Vokabular nicht mit der Größe des Datensatzes wächst.
+Dies führt zu einer schnelleren Verarbeitung der Eingabe und zu einer besseren Generalisierung der Modelle.
+Die Unterteilung von Wörtern in Subwörter hat jedoch auch Nachteile. Sie ist nicht eindeutig - das heißt, dass ein Wort in mehrere Mengen an Subwörter zerlegt werden kann.
+Dies führt zu einer höheren Anzahl an möglichen Eingaben, welche das Modell erlernen muss.
+Ein weiterer Nachteil ist, dass die Unterteilung von Wörtern in Subwörter nicht immer sinnvoll ist.
+So kann es passieren, dass ein Wort in Subwörter zerlegt wird, welche in der Sprache nicht existieren.
+Dies minimiert wiederum die Generalisierung der Modelle.
+Ein Beispiel hierfür ist das Wort \enquote{Datensatz}.
+Eine sinnvolle Unterteilung wäre hier \enquote{Daten} und \enquote{satz}, jedoch durch den Aufbau des Vokabulars auf Basis der Symbole des Datensatzes, kann es vorkommen, dass das Subwort \enquote{Daten} nicht die notwendige Häufigkeit besitzt.
+Dadurch muss dieses Wort ebenso zerlegt werden, zum Beispiel in \enquote{Da} und \enquote{ten}.
+Beide Subwörter haben in keine Bedeutung in der deutschen Sprache, werden jedoch durch das Modell in Relation zu anderen Wörtern gesetzt.
+Dies führt zu einer unverständlichen Annotation von Bedeutung zu Sub-Wörtern und verschlechtert die Leistung als auch die Nachvollziehbarkeit des Modells und erschwert die Forschung an den Modellen. 
 

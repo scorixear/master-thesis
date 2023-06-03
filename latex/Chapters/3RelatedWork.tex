@@ -1,58 +1,11 @@
 %*****************************************
 \chapter{Stand der Forschung}\label{ch:relatedWork}
 %*****************************************
-\section{Grundlagen der Architektur}
-\todo{ist ungünstig, wenn die grundlagen im stand der forschung kapitel sind und nicht im grundlagenkapitel. aber es ist natürlich auch blöd, ein thema auseinanderzureissen.
-Ich verstehe auch dass es bei so einem Thema schwer ist, weil alles gefühlt neu und noch active research ist.
-Ich würde dir aber trotzdem raten das klar zu separieren.
-Erstens schon rein formal für die Bewertung weil du ja mit der Arbeit zeigst, dass du das richtig auseinander halten kannst.
-Aber auch unabhängig davon finde ich, würde es sich so besser lesen.
-Also mein Rat wäre:
-
-Grundlagen:
-- das was du schon drin hast mit "General Pretrained Transformer - Neuronal Networks - Zero Shot Ansatz - Finetuning - Datenkuration"
-- aber alles was mit GPT zu tun hat nicht, das ist ein spezieller Ansatz und das sollte zu state of the art
-- alles was im Titel steht :-) Question Answering, unsupervised und supervised training und so
-- Definitionen Daten, Informationen und Wissen nach Winter passt hier denke ich auch rein
-
-State of the Art:
-- aktuelle Paper
-- Vergleich verschiedener Systeme und Modelle
-- und das was du da schon hast, also das meiste ist ja schon am richtigen Ort
-
-Ahja und "Grundlagen der Architektur" und "Weiterentwicklung der Architektur" finde ich zu allgemein. Da weiß man ja auf den ersten Blick gar nicht, welche Architektur gemeint ist.
-Also 3.1 und 3.2 würde ich beides unter ein überkapitel "Transformer" (oder "Transformer-Modelle" oder so) in die Grundlagen stellen.
-Bei 3.3 bin ich mir auf den ersten Blick unsicher, 3.4 und Folgendes ist dann aber definitiv richtig bei State of the Art.
-}
-Die erste schriftliche Erwähnung des Transformer-Models und zusätzlich auch Einführung der zwei Teil-Modelle Encoder und Decoder findet sich in \citet{attention}.
-\todo{Zusammengesetzte Substantive deren beide Teile deutsch sind werden normalerweise zusammengeschrieben. Also Teilmodelle, nicht Teil-Modelle.}
-Die hier beschriebene bidirektionale Architektur beinhaltet jedoch die Grundlage aller darauf aufbauenden Modelle und Weiterentwicklungen. 
-Die grundlegene Architektur wurde für unterschiedliche Anwendungen stark modifiziert. 
-Seit 2017 gibt es grundsätzliche Differenzen in den Modellen und deren Möglichkeiten. 
-Deshalb führte \citet{ammus} eine Taxonomie der Transformer-basierenden Vortrainierten Sprachmodelle. 
-Dieser Taxonomie wird hier zur Beschreibung weitere Architekturen und Methodiken gefolgt.\\
-
-\section{Weiterentwicklung der Architektur}
-Neben dem Grundbaustein eines Transformers - dem Attention-\ac{nn} - sind zwei wichtige Änderungen zu normalen neuronalen Netzwerken in Transformer eingeflossen. 
-Restverbindungen als Ebenen-Normalizierung, im Englischen \enquote{Deep Residual Connections}, verändern die Zielsetzung eines \ac{nn}, behalten jedoch durch ihre Ebenen-Normalisierung die selben Ausgaben. 
-In \citet{deep_residual} wurde dieses Konzept erstmals eingeführt und liefert die Lösung zu einem Grundproblem von großen, aus mehreren Ebenen bestehenden Transformer-Modellen. 
-Es zeigte sich schon 2016 im Bereich der Bilderkennung, das mit steigender Tiefe die Korrektheit von Modellen sich sätigt und dann schnell verschlechtert, sollte jenes Modell weitertrainiert werden. 
-Dies setzte ein praktische Grenze der Tiefe von \ac{nn}s und verhinderte somit komplexere Probleme mit größeren Modellen zu lösen. 
-\citet{deep_residual} beschreiben eine Lösung durch die genannten Restverbindungen, welche normale \ac{nn} simple ersetzen können, und belegen ebenso die Effektivität dieser Methode.\\
-
-Die zweite wichtige Änderung ist die Einführung von Dropout. 
-Dropout ist eine Methode, welche die Trainingszeit von \ac{nn}s verkürzt und die Generalisierung verbessert. 
-\citet{dropout} beschreiben die Methode als das zufällige Aussetzen von Neuronen in einem \ac{nn}. 
-Dieses Aussetzen wird zufällig gewählt und ist nicht von der Eingabe abhängig. 
-Durch das Aussetzen von Neuronen wird das \ac{nn} gezwungen, sich nicht auf andere Neuronen zu verlassen und somit eine bessere Generalisierung zu erreichen. 
-Dieses Aussetzen wird nur während des Trainings durchgeführt und nicht während der Inferenz. 
-Die Methode wurde 2014 eingeführt und ist seitdem ein fester Bestandteil von \ac{nn}s.\\
-
 \section{Continual Pretraining und die Nutzung von Sprachmodellen}
 
 Ein Tranformer-Modell als Wissensbasis ist in \citet{chatgpt_qas} verglichen mit verschiedenen \ac{sota}-Modellen. 
 Sie zeigen eine deutliche Verbesserung der Robustheit gegenüber fehlerhafter Eingabe, Erklärbarkeit von Antworten und Fragenverständnis von komplexeren Fragen mit mehreren Fakten durch ChatGPT, zeigen allerdings Probleme in der Aktualität von Informationen, dem Wissen zu spezifischen Domänen und dem wohl wichtigsten, der korrekten Beantwortung von Fragen. 
-Grund hierfür ist eine einerseits grundlegene Eigenschaft von \ac{gpt}-Modellen, keine Inkorperation von aktuellen Informationen. 
+Grund hierfür ist eine grundlegene Eigenschaft von \ac{gpt}-Modellen, keine Inkorperation von aktuellen Informationen. 
 Das Trainieren von \ac{gpt}-Modellen ist ein aufwändiger Prozess und kann nicht bei jeder Inferenz (der Nutzung des Modells durch die Generierung von Text) durchgeführt werden. 
 Desweiteren wurde ChatGPT jedoch ohne zusätzliches Continual Pretraining genutzt.
 Eine Anpassung auf Domänen und Verbesserung der Korrektheit von Antworten steht somit noch aus.\\
@@ -65,7 +18,7 @@ Der Artikel endet mit einer Vermutung auf die theoretische maximale Leistung und
 
 Um diesen beschriebenen Skalierungsregeln zu folgen, jedoch die Trainigszeit und notwendige Datenmenge zu reduzieren, gibt es die Möglichkeit Continual Pretraining zu nutzen. 
 \citet{dont_stop_pretraining} wendeten diese Methodik an und zeigten, dass Modelle immens davon profitieren, Domäne-spezifisches Wissen zu adaptieren und aus der großen Menge an grundlegenden Daten bessere korrekte Antworten in einer spezifischen Domäne zu generieren. 
-Erstmals in \citet{biobert} genutzt um das Basismodell BERT auf die biomedizinische Domäne anzupassen, erweitern \citet{dont_stop_pretraining} diese Methode und zeigen die Anwendbarkeit auf verschiedene Domänen und Aufgaben. 
+Erstmals in \citet{biobert} genutzt um das Basismodell \ac{bert} auf die biomedizinische Domäne anzupassen, erweitern \citet{dont_stop_pretraining} diese Methode und zeigen die Anwendbarkeit auf verschiedene Domänen und Aufgaben. 
 Das Continual Pretraining auf Aufgaben-Spezifische Daten verbessert die Leistung für spezifischen Aufgaben, während die Trainingszeit 60 mal kürzer ausfällt im Vergleich zu Continual Pretraining auf Domäne. 
 Eine Verbindung beider Arten liefert hier die besten Ergebnisse.\\
 
@@ -73,11 +26,15 @@ Doch nicht nur Continual Pretraining verbessern die Ausgaben der Modelle, sonder
 \citet{finetuning} beschreiben in ihrem Artikel die Effektivität von Reinforcement Learning als Fine-Tuning Methode um die Aufgaben der Weiterführung und Zusammenfassung von Texten zu lösen. 
 Fine-Tuning benötigt jedoch gekennzeichnete Daten (engl. \enquote{labeled data}, Daten mit bekannten korrekten Ausgaben), welche in der Regel aufwändig zu Erstellen sind und nicht immer in der notwendigen Menge zur Verfügung stehen. 
 In dieser Arbeit wird von einem Fine-Tuning durch die fehlende Verfügbarkeit von gekennzeichneten Daten abgesehen.\\
-
 \section{Aktuelle Modelle und deren Nutzbarkeit}
 
-Mit der Feststellung, dass die Leistung von Modellen mit steigender Größe, Trainigszeit und Daten steigt, wurden eine Reihe an Modellen entworfen, welche unterschiedlichste Architekturen, Anwendungsfälle und Leistungen besitzen. 
-OpenAI erreichten mit \ac{gpt}-3 einen Durchbruch in Popularität und beschrieben ihr Vorgehen in \citet{gpt3}.
+Mit der Feststellung, dass die Leistung von Modellen mit steigender Größe, Trainigszeit und Daten steigt, wurden eine Reihe an Modellen entworfen, welche unterschiedlichste Architekturen, Anwendungsfälle und Leistungen besitzen.
+Erstmalig einen Durchbruch in der Leistung von Transformer-Modellen erreichten \citet{gpt2} mit dem \ac{gpt}-2 Modell.
+Sie zeigten im Vergleich zum ersten veröffentlichten \ac{gpt}-1 Model \citep{gpt1}, dass Sprachmodelle Aufgaben lösen können, ohne explizit überwacht zu werden.
+Ebenso stellten sie fest, dass die Größe eines Modells, sei es hier die Anzahl an Parametern, die Größe des Datensatzes oder die Länge des Trainings, eine grundlegende Notwendigkeit für eine erfolgreiche ZeroShot Nutzung ist.
+Schon hier erreichten sie ohne jegliche Architekturänderung im ZeroShot Setting erfolgreiche, \ac{sota} kompetitive Ergebnisse abhängig von den Aufgaben.\\
+
+OpenAI gelang mit \ac{gpt}-3 einen Durchbruch in Popularität und beschrieben ihr Vorgehen in \citet{gpt3}.
 In ihrem Artikel belegten sie die Leistungssteigerung durch größere Modelle und zeigten, dass diese Leistung ebenso ohne Fine-Tuning erreicht werden kann. 
 Auch verglichen sie das Verhalten der Antworten abhängig von FewShot und ZeroShot Eingaben, wobei ersteres bessere Ergebnisse erzielten. 
 Diese Erkenntnisse unterstützen die Annahme, dass auch ohne Fine-Tuning das in dieser Arbeit verwendete Modell gute Leistungen erreichen kann.\\
@@ -88,37 +45,34 @@ Dieser Artikel wiederum unterstreicht die Annahme, dass größere Modelle besser
 Eine Nutzung dieses Modells, ebenso wie \ac{gpt}-3 ist nicht möglich, da diese Modelle zum aktuellen Zeitpunkt nicht veröffentlicht wurden.\\
 
 In Kontrast zu den bisherigen Modellen veröffentlichten \citet{gpt_neox} \ac{gpt}-NeoX. 
-Ein Modell, welches in seiner Größe und Leistung \ac{gpt}-3 ähnelt, jedoch auf der Architektur von \ac{gpt}-J basierend im Open-Source Rahmen veröffentlicht wurde. 
+Ein Modell, welches in seiner Größe und Leistung \ac{gpt}-3 ähnelt, jedoch auf der Architektur von \ac{gpt}-J\footnote{Ben Wang \url{https://github.com/kingoflolz/mesh-transformer-jax} (abgerufen am 3.6.2023)} basierend im Open-Source Rahmen veröffentlicht wurde. 
 Sie zeigten, dass die meisten interessanten Fähigkeiten eines Modells erst ab eine bestimmen Anzahl an Parametern gezeigt werden.\\
 
 Zuletzt veröffentlichte \citet{llama} die \ac{llama}-Modelle in unterschiedlicher Größe. 
 Ein klarer Vorteil gegenüber anderen Modellen in ihrer Nutzbarkeit ist hier der Fokus auf längere Trainings-Zeit und einem größeren Datensatz gegenüber der Größe des Modells. 
-Sie zeigten bessere Ergebnisse in fast allen Aufgabenbereichen gegenüber anderen Modellen wie \ac{gpt}-3 und \ac{PaLM} mit wesentlich weniger Parametern. 
+Sie zeigten bessere Ergebnisse in fast allen Aufgabenbereichen gegenüber anderen Modellen wie \ac{gpt}-3 und \ac{palm} mit wesentlich weniger Parametern. 
 Dadurch ist eine Nutzung jener Modelle billiger und schneller, einfacher und schneller zu trainieren mit gleichen oder besseren Ergebnissen. 
 Auch diese Modelle wurden veröffentlicht und stehen somit zur Auswahl für diese Arbeit.
 
 \section{Forschung und Probleme von Modellen}
 Neben der Entwicklung von neuen Modellen wurden auch neue Ansätze zur besserem Continual Pretraining und Adaption von Modellen entworfen. 
-\citet{adapterhub} stellten in ihrem Artikel den Adapter vor, welche ein Einsatz von zusätzlichen \ac{nn}s in verschiedene Ebenen der Transformer-Architektur ermöglichen.
-Durch Sie lässt sich die Adaption zu anderen Aufgaben und Domänen ohne Continual Pretraining des gesamten Modells erreichen, da während des Trainings sämtliche Parameter des Ursprungmodells fixiert bleiben, während die neu eingefügten Adapter trainiert werden.
-Zusätzlich lassen sich dadurch bereits vortrainierte Adapter zu weiteren Domänen und Aufgaben in aktuelle Modelle einfügen, ohne die Notwendigkeit jeglichen Trainings.\\
+\citet{adapterhub} stellten in ihrem Artikel die Adapter vor, welche ein Einsatz von zusätzlichen \ac{nn}s in verschiedene Ebenen der Transformer-Architektur ermöglichen.
+Durch sie lässt sich die Adaption zu anderen Aufgaben und Domänen ohne Continual Pretraining des gesamten Modells erreichen, da während des Trainings sämtliche Parameter des Ursprungmodells fixiert bleiben, während die neu eingefügten Adapter trainiert werden.
+Zusätzlich lassen sich dadurch bereits vortrainierte Adapter zu weiteren Domänen und Aufgaben in aktuelle Modelle einfügen, ohne die Notwendigkeit jeglichen Trainings.
+Das veröffentliche System basiert auf dem Artikel von \citet{adapter_build_on}, in denen die Autoren das \ac{bert}-Modell auf 26 verschiedene \ac{nlp}-Aufgaben trainierten, mit einer Anpassung von nur 3,6\% Parametern und 0,4\% Leistungsminimierung (ein ursprüngliches Training der Modelle auf diese Aufgaben hätte 100\% aller Parameter angepasst). Sie bewiesen damit die Effizienz dieser Vorgehensweise, ohne eine große Beeinträchtigung der Ergebnisse.\\
 
-\citet{knowledge_neurons} untersuchten die Eigenschaften von \ac{llm}s auf ihre Eigenschaft, faktisches Wissen wiedergeben zu können, ohne eine Wissensdatenbank als Grundlage während der Nutzung zu besitzen.
+\citet{knowledge_neurons} untersuchten die Fähigkeiten von \ac{llm}s auf ihre Eigenschaft, faktisches Wissen wiedergeben zu können, ohne eine Wissensdatenbank als Grundlage während der Nutzung zu besitzen.
 Sie stellten fest, dass besonders in weiter hinten liegenden Ebenen die Neuronalen Netze sogenannte \enquote{Wissensneuronen} besitzen, die zu bestimmen Fakten korrelieren.
 Diese Wissensneuronen aktiveren sich, wenn ein bestimmter Fakt in der Eingabe angesprochen wird und können mittels Verstärkung oder Unterdrückung dazu führen, dass das Modell diesen Fakt besser berücksichtigt oder \enquote{vergisst}.\\
-\todo{jetzt natürlich noch nicht relevant da sich der Text ja noch ändert, aber ich will schonmal awareness schaffen, dass ein einzelnes Wort auf einer neuen Seite in der Typographie besonders ungern gesehen wird.}
+
+Die Erforschung von Modellen und ihrer Eigenschaft Fakten zu erlernen und zu reproduzieren stoßen \citet{knowledge_base} an. Die hier verwendeten Modelle \ac{bert} und \ac{elmo} wurden auf ihr Potential als unüberwachtes Open-Domain \ac{qas} untersucht und zeigten gute Ergebnisse im Vergleich zu anderen \ac{sota}-Systemen.
+Fortführend untersuchen \citet{xfactr} Multilinguale Modelle auf gleiche Eigenschaften, erhielten jedoch deutlich schlechtere Ergebnisse. Diese Ergebnisse deuten daraufhin, dass ein multilinguales Modell deutlich schlechter geeignet für die Nutzung als \ac{qas} ist, da ein Großteil der Leistung dieser Modelle in das Verständnis von Übersetzungen in andere Sprachen fließt.\\
 
 Neben den überaus großen Erfolgen von neuen Modellen erheben sich jedoch auch neue Probleme bei der Benutzung dieser Modelle.
-Neben Falschaussagen ergeben sich Probleme durch sozialen und anderen Bias in den Antworten, Selbstüberschätzung bei falschen Aussagen, welches wiederum zu schwerwiegenden Problemen in der Anwendung dieser Modelle kommen kann, Generierung von schädlichen Inhalten, Unterstützung von Kriminalität mit Expertise und weiteren Probleme.
-\todo{hier vielleicht auf deine betrachtung der ethikrichtlinien verweisen oder das anders in verbindung bringen?}
+Neben Falschaussagen ergeben sich Probleme durch sozialen und anderen Bias in den Antworten, Selbstüberschätzung bei falschen Aussagen, welches wiederum zu schwerwiegenden Problemen in der Anwendung dieser Modelle kommen kann, Generierung von schädlichen Inhalten, Unterstützung von Kriminalität mit Expertise und weiteren Probleme. Eine Analyse der Ergebnisse dieser Arbeit im Bezug zu den ethischen Richtlinien der \ac{gmds} findet sich in \ref{sec:gmds_ethik}.
 \citet{gpt4} dedizierten einen eigenen Abschnitt ihres Artikels zur Untersuchung dieser Probleme und deren Adressierung.
 Sie zeigten hier grundlegende Probleme bei der Anwendung von Sprachmodellen auf, hielten jedoch konkreten Lösungsansätzen zurück.\\
 
-In \citet{plagiarism} beschreibt der Author weitere Fragestellungen zu dem Umgang mit Antworten von Sprachmodellen und deren Konflikt zum Urheberrecht.
-Wem gehört der generierte Text - den Authoren der Datensätze auf dem das Modell trainiert wurde, der Firma dem das Modell gehört, dem Nutzer der das Modell anleitet? 
-Auch hier zeigen sich ungelöste Probleme in der Anwendung von Sprachmodellen und bieten Raum für weitere Forschung.\\
-\todo{hier vielleicht noch den Bogen schlagen, was davon für uns relevant ist.
-Also schränkt das irgendwie ein, welche Lizenzen die Modelle, die wir verwenden dürfen, haben müssen und wenn ja, was schließt das genau aus?
-Oder ist das für deine Fragestellung gar nicht relevant?
-Winter u.a. 2023 (also das neue blaue buch) ist ja open access, vielleicht noch rausfinden was das genau für eine lizenz ist und ob das irgendwas einschränkt (kurz).
-}
+In \citet{plagiarism} beschreibt der Autor weitere Fragestellungen zu dem Umgang mit Antworten von Sprachmodellen und deren Konflikt zum Urheberrecht.
+Wem gehört der generierte Text - den Autoren der Datensätze auf dem das Modell trainiert wurde, der Firma dem das Modell gehört, dem Nutzer der das Modell anleitet? 
+Auch hier zeigen sich ungelöste Probleme in der Anwendung von Sprachmodellen und bieten Raum für weitere Forschung. Eine definitive Antwort auf diese Fragen gibt es noch nicht, daher ist die Nutzung eines Sprachmodells zum Zeitpunkt dieser Arbeit nur abhängig von der Lizensierung des jeweiligen Modells durch die Autoren des Modells und der Lizensierung der Datensätze, die für das Continual Pretraining genutzt werden. Das hier verwendete Buch \citet{bb} steht unter der Open-Access Lizenz und kann somit uneingeschränkt für ein Continual Pretraining genutzt werden.\\
