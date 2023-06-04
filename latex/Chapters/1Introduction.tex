@@ -7,18 +7,12 @@ Bei jeder medizinischen Handlung werden große Mengen an Informationen genutzt u
 Die strukturierte und klassifizierte Speicherung und Wiedergabe dieser Informationen ist ein kontinuierlicher Entwicklungsprozess und Gegenstand aktueller Forschung.\\
 
 Die Digitalisierung der Medizin ist ein weites Themenfeld mit stetig wachsendem Bedarf.
-Die Medizinische Informatik beschreibt dabei~\enquote{die Wissenschaft der systematischen Erschließung, Verwaltung, Aufbewahrung, Verarbeitung und Bereitstellung von Daten, Informationen und Wissen in der Medizin und im Gesundheitswesen. [$\dots$]}\footnote{\raggedright{}\ac{gmds} (2023). Definition Medizinische Informatik.\ \url{https://www.gmds.de/aktivitaeten/medizinische-informatik/} (abgerufen am 07. 03. 2023).}.
-\todo{full space in german dates (hier in den Fußnoten) sieht komisch aus. ich würde entweder half space (7.\,3.\,2023) oder gar kein Leerzeichen benutzen. Wenn das oft genug vorkommt kannst du auch z.B. das datetime package benutzen aber für ein paar mal lohnt sich das wohl nicht.
-Ich empfehle den half space, da urldate in deinem Literaturverzeichnis ja genauso formatiert wird.
-}
+Die Medizinische Informatik beschreibt dabei~\enquote{die Wissenschaft der systematischen Erschließung, Verwaltung, Aufbewahrung, Verarbeitung und Bereitstellung von Daten, Informationen und Wissen in der Medizin und im Gesundheitswesen. [$\dots$]}\footnote{\raggedright{}\ac{gmds} (2023). Definition Medizinische Informatik.\ \url{https://www.gmds.de/aktivitaeten/medizinische-informatik/} (abgerufen am 7.3.2023).}.
 Vor diesem Hintergrund gewinnt die Entwicklung und Implementierung effizienter Informationssysteme und Technologien zur Unterstützung der klinischen Praxis zunehmend an Bedeutung.\\
 
 In der Lehre wird die Praxis der Medizinischen Informatik durch umfangreiche Literatur, z.B. in \citet{bb}, unterstützt.
-Zur Strukturierung von Fachbegriffen und Rollen des Informationsmanagements im Krankenhaus existiert die Ontologie SNIK \citep{semantischesnetz}, ein semantisches Netz, kategorisiert in der Metaontologie SNIK und Teil des Projekts SNIK des Instituts für Medizinische Informatik, Statistik und Epidemiologie%
-\footnote{\raggedright{}Institut für Medizinische Informatik, Statistik und Epidemiologie.\ \url{https://www.imise.uni-leipzig.de/Institut} (besucht am 09. 03. 2023).} an der Universität Leipzig.
-\todo{semantisches Netz und Ontologie werden in diesem Fall ja synonym verwendet, ich würde den Begriff semantisches Netz hier streichen}
-\todo{wieso kategorisiert? das ist doch eine einfach besteht-aus Beziehung}
-\todo{snik ins abkürzungsverzeichnis}
+Zur Strukturierung von Fachbegriffen und Rollen des Informationsmanagements im Krankenhaus existiert die Ontologie \ac{snik} \citep{semantischesnetz}, folgend der Metaontologie \ac{snik} und Teil des Projekts \ac{snik} des Instituts für Medizinische Informatik, Statistik und Epidemiologie%
+\footnote{\raggedright{}Institut für Medizinische Informatik, Statistik und Epidemiologie.\ \url{https://www.imise.uni-leipzig.de/Institut} (besucht am 9.3.2023).} an der Universität Leipzig.
 Die Nutzung dieses Netzes ermöglicht eine systematische Darstellung von Rollen, Entitäten und Funktionen des Informationsmanagements im Krankenhaus, unabhängig von der Definition der zugrunde liegenden Literaturquellen.\\
 
 Die Bedeutung von maschinellem Lernen, Deep Learning und Sprachmodellen ist in der heutigen Zeit sehr präsent.
@@ -29,17 +23,15 @@ Deep Learning, das auf künstlichen neuronalen Netzen basiert, ermöglicht eine 
 In der Medizin kann Deep Learning beispielsweise zur Diagnose von Krankheiten und zur Analyse medizinischer Bilder eingesetzt werden \citep{skincancer}.
 
 \section{Problemstellung}\label{sec:problemstellung}
-Informationssysteme im Gesundheitswesen sind hochkomplex, abhängig von den Anforderungen der jeweiligen Organisation und unterliegen einer ständigen Weiterentwicklung.
+Informationssysteme im Gesundheitswesen sind komplex, abhängig von den Anforderungen der jeweiligen Organisation und unterliegen einer ständigen Weiterentwicklung.
 Die Anforderungen sind vielfältig und umfassen beispielsweise die Speicherung und Verarbeitung von Patientendaten, die Dokumentation von Behandlungsprozessen, die Unterstützung von Diagnose- und Therapieprozessen sowie die Unterstützung von Forschungsaktivitäten.
 Ausgehend von diesen Anforderungen gibt es eine Fülle von Literatur, die sich mit der Definition, Implementierung und Wartung von Informationssystemen im Gesundheitswesen befasst.
 Das Buch \citetitle{bb} von \citeauthor{bb} beschäftigt sich umfassend mit diesen Anforderungen und ist im März 2023 in der 3. Auflage erschienen \citep{bb}.\\
 \todo{für später wenn es sich nicht mehr ändert: ich würde einzelne Wörter am Ende eines Blockabsatzes wenn möglich vermeiden, da es visuell unausgewogen wirkt. Gilt allgemein für die ganze Arbeit.}
 
 Das Management von Informationssystemen ist eine anspruchsvolle Aufgabe, die sich nicht nur auf die Anwendung durch das Krankenhauspersonal beschränkt.
-Es ist auch von großer Bedeutung für Studierende, um ein besseres Verständnis der bestehenden Systeme zu erlangen, und für Wissenschaftler, um diese Systeme zu erweitern oder neue Managementmethoden zu entwerfen.
-Eine konkrete und konsistente Wissensbasis ist sowohl für die Anwendung als auch für Lehre und Forschung von großer Bedeutung.\\
-\todo{Ich persönlich finde den Begriff Wissensbasis wie du ihn in der Arbeit gebrauchst verwirrend, da er eine ganz spezielle Bedeutung als Menge von RDF Tripeln im Semantic Web hat, worüber du ja im Rande mit SNIK auch schreibst.
-So wie ich das verstehe benutzt du den Begriff eher als allgemeine Ansammlung von Wissen.}
+Es ist auch von großer Bedeutung für Studierende, um ein besseres Verständnis der bestehenden Systeme zu erlangen, und für Forschende, um diese Systeme zu erweitern oder neue Managementmethoden zu entwerfen.
+Eine konkrete und konsistente Wissensgrundlage ist sowohl für die Anwendung als auch für Lehre und Forschung von großer Bedeutung.\\
 
 Eine weitere Herausforderung bei der Auseinandersetzung mit der Literatur zu Informationssystemen ist die Komplexität der Übertragung von theoretischen Konzepten auf praktische Anwendungsfälle.
 Insbesondere für Studierende und Praktiker erfordert die praktische Anwendung ein tiefes Verständnis der Zusammenhänge und der Anwendbarkeit der vorgestellten Konzepte auf konkrete Arbeitsumgebungen.
@@ -57,12 +49,11 @@ erschweren eine schnelle Informationsbeschaffung, insbesondere für Studierende,
 
 \section{Motivation}
 
-Eine Strukturierung von Informationen zum Management von Krankenhausinformationssystemen ist bereits Bestandteil des Projekts SNIK \citep{semantischesnetz, domaene},
-ein semantisches Netz des Instituts für Medizinische Informatik, Statistik und Epidemiologie der Universität Leipzig.
-Auf Basis dieses Netzes wurden bereits verschiedene Methoden zur Informationsextraktion untersucht.\\
-\todo{auch hier und generell in dieser Arbeit würde ich den Begriff semantisches Netz komplett streichen, außer beim wörtlichen nennen des ausgeschriebenen titels von SNIK bei der ersten Nennung. Lieber konsistent von Ontologie schreiben.}
-Die BeLL mit dem Titel \enquote{Question Answering on SNIK} \citep{hannesbell} erweiterte den Zugang zu diesem Netz durch die Verwendung natürlicher englischer Sprache.\todo{bell ins abkürzungsverzeichnis}
-Die Ergebnisse der BeLL wurden in einem \ac{qas} QAnswer \citep{qanswer} umgesetzt, zeigen aber Defizite in der Erklärbarkeit und Verständlichkeit komplexerer Fragen.
+Eine Strukturierung von Informationen zum Management von Krankenhausinformationssystemen ist bereits Bestandteil des Projekts \ac{snik} \citep{semantischesnetz, domaene},
+eine Ontologie des Instituts für Medizinische Informatik, Statistik und Epidemiologie der Universität Leipzig.
+Auf Basis dieser Ontologie wurden bereits verschiedene Methoden zur Informationsextraktion untersucht.\\
+Die \ac{bell} mit dem Titel \enquote{Question Answering on \ac{snik}} \citep{hannesbell} erweiterte den Zugang zu diesem Netz durch die Verwendung natürlicher englischer Sprache.
+Die Ergebnisse der \ac{bell} wurden in einem \ac{qas} QAnswer \citep{qanswer} umgesetzt, zeigen aber Defizite in der Erklärbarkeit und Verständlichkeit komplexerer Fragen.
 Im Gegensatz dazu untersuchte \citet{chatgpt_qas} auf einem anderen Datensatz die Leistung einer Konversations-KI (in diesem Fall ChatGPT) im Vergleich zu einer herkömmlichen, auf einem Wissensgraphen basierenden \ac{qas} (verwendet wurde $KGQA_N$).
 Die Ergebnisse zeigten, dass ChatGPT im Vergleich zum verwendeten $KGQA_N$ erstaunlich stabile und verständliche Antworten lieferte, jedoch bei der Ausgabe korrekter Antworten deutlich schlechter abschnitt. Hier steht zu erwarten, dass durch ein besseres Feintuning die Anzahl der falschen Antworten deutlich reduziert werden kann.\\
 
