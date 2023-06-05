@@ -10,7 +10,7 @@ Das Training von \ac{gpt}-Modellen ist ein aufwendiger Prozess und kann nicht be
 Darüber hinaus wurde ChatGPT ohne zusätzliches Continual Pretraining eingesetzt.
 Eine Anpassung an die Domänen und eine Verbesserung der Korrektheit der Antworten stehen daher noch aus.\\
 
-\citet{improve_language} zeigen die Verbesserung der Leistung von Transformer-Modellen durch generatives Pretraining und eine weitere Verbesserung durch überwachtes Fine-Tuning.
+\citet{gpt1} zeigen die Verbesserung der Leistung von Transformer-Modellen durch generatives Pretraining und eine weitere Verbesserung durch überwachtes Fine-Tuning.
 Auch hier ist ein klarer Trend erkennbar. Die Ergebnisse der Modelle verbessern sich mit zunehmender Größe des Datensatzes, mit zunehmender Länge des Trainingsprozesses und mit zunehmender Größe der Modelle.\\
 
 Diese Tendenz wird durch \citet{scaling_laws} bestätigt, die hier den Einfluss verschiedener Einflussgrößen auf die Gesamtleistung eines Modells berechnen. Die hier verwendeten Einflussgrößen erlauben eine Vorhersage der Leistung eines Modells. 
@@ -66,7 +66,7 @@ Das veröffentlichte System basiert auf dem Artikel von \citet{adapter_build_on}
 Sie stellten fest, dass vor allem in tieferen Ebenen die neuronalen Netze so genannte \enquote{Wissensneuronen} besitzen, die mit bestimmten Fakten korrelieren.
 Diese Wissensneuronen werden aktiv, wenn ein bestimmter Fakt in der Eingabe angesprochen wird und können durch Verstärkung oder Unterdrückung dazu führen, dass das Modell diesen Fakt besser berücksichtigt oder \enquote{vergisst}.\\
 
-Die Untersuchung von Modellen und ihrer Fähigkeit, Sachverhalte zu erlernen und zu reproduzieren, wurde erstmals von "\citet{knowledge_base}" vorgestellt.
+Die Untersuchung von Modellen und ihrer Fähigkeit, Sachverhalte zu erlernen und zu reproduzieren, wurde erstmals von \citet{knowledge_base} vorgestellt.
 Die hier verwendeten Modelle \ac{bert} und \ac{elmo} wurden auf ihr Potential als unüberwachte offene Domäne \ac{qas} untersucht und zeigten gute Ergebnisse im Vergleich zu anderen \ac{sota}-Systemen.
 Mehrsprachige Modelle wurden von \citet{xfactr} auf die gleichen Eigenschaften hin untersucht, schnitten jedoch deutlich schlechter ab. Diese Ergebnisse deuten darauf hin, dass ein mehrsprachiges Modell für den Einsatz als \ac{qas} deutlich weniger geeignet ist, da ein Großteil der Leistung dieser Modelle in das Verstehen von Übersetzungen in andere Sprachen fließt.\\
 
