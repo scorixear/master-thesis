@@ -30,8 +30,8 @@ Dies setzte eine praktische Grenze für die Tiefe von \ac{nn}s und verhinderte s
 
 Die zweite wichtige Änderung ist die Einführung von Dropout. 
 Dropout ist eine Methode, die die Trainingszeit von \ac{nn}s verkürzt und die Generalisierung verbessert. 
-\citet{dropout} beschreibt die Methode als das zufällige Aussetzen von Neuronen in einem \ac{nn}. 
-Diese Aussetzung ist zufällig und hängt nicht von der Eingabe ab. 
+\citet{dropout} beschreiben die Methode als das zufällige Aussetzen von Neuronen in einem \ac{nn}. 
+Diese Aussetzung hängt nicht von der Eingabe ab. 
 Durch das Aussetzen von Neuronen wird das \ac{nn} gezwungen, sich nicht auf andere Neuronen zu verlassen und somit eine bessere Generalisierung zu erreichen. 
 Das Aussetzen erfolgt nur während des Trainings und nicht während der Inferenz. 
 Die Methode wurde 2014 eingeführt und ist seitdem ein fester Bestandteil von \ac{nn}s.\\
@@ -60,7 +60,7 @@ Die Anzahl der Teilwörter ist dabei ein Hyperparameter, der je nach Modell und 
 
 Die Unterteilung von Wörtern in Teilwörter hat den Vorteil, dass die Größe des Vokabulars nicht mit der Größe des Datensatzes wächst.
 Dies führt zu einer schnelleren Eingabeverarbeitung und einer besseren Generalisierung der Modelle.
-Die Unterteilung von Wörtern in Teilwörter hat jedoch auch Nachteile. Sie ist nicht eindeutig, d.h. ein Wort kann in mehrere Sätze von Teilwörtern zerlegt werden.
+Die Unterteilung von Wörtern in Teilwörter hat jedoch auch Nachteile. Sie ist nicht eindeutig, d.h. ein Wort kann in unterschiedliche Mengen von Teilwörtern zerlegt werden.
 Dies führt zu einer größeren Anzahl möglicher Eingaben, die das Modell lernen muss.
 Ein weiterer Nachteil ist, dass die Zerlegung von Wörtern in Teilwörter nicht immer sinnvoll ist.
 So kann es vorkommen, dass ein Wort in Teilwörter zerlegt wird, die in der Sprache nicht existieren.

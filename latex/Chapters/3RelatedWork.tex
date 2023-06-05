@@ -3,7 +3,7 @@
 %*****************************************
 \section{Continual Pretraining und die Nutzung von Sprachmodellen}
 
-Ein Tranformer-Modell als Wissensbasis wird in \citet{chatgpt_qas} mit verschiedenen \ac{sota}-Modellen verglichen. 
+Ein Tranformer-Modell als Informationsbasis wird in \citet{chatgpt_qas} mit verschiedenen \ac{sota}-Modellen verglichen. 
 Sie zeigen eine deutliche Verbesserung der Robustheit gegenüber Eingabefehlern, der Erklärbarkeit von Antworten und des Fragenverständnisses bei komplexeren Fragen mit mehreren Fakten durch ChatGPT, zeigen aber Probleme bei der Aktualität von Informationen, dem Wissen über spezifische Domänen und vor allem bei der korrekten Beantwortung von Fragen. 
 Der Grund dafür ist eine grundlegende Eigenschaft von \ac{gpt}-Modellen, nämlich die fehlende Inkorporation aktueller Informationen. 
 Das Training von \ac{gpt}-Modellen ist ein aufwendiger Prozess und kann nicht bei jeder Inferenz (Nutzung des Modells durch Generierung von Text) durchgeführt werden. 
@@ -14,7 +14,7 @@ Eine Anpassung an die Domänen und eine Verbesserung der Korrektheit der Antwort
 Auch hier ist ein klarer Trend erkennbar. Die Ergebnisse der Modelle verbessern sich mit zunehmender Größe des Datensatzes, mit zunehmender Länge des Trainingsprozesses und mit zunehmender Größe der Modelle.\\
 
 Diese Tendenz wird durch \citet{scaling_laws} bestätigt, die hier den Einfluss verschiedener Einflussgrößen auf die Gesamtleistung eines Modells berechnen. Die hier verwendeten Einflussgrößen erlauben eine Vorhersage der Leistung eines Modells. 
-Der Beitrag schließt mit einer Abschätzung der theoretischen Maximalleistung und damit der Maximalgröße von Transformer-Modellen.\\
+Der Artikel schließt mit einer Abschätzung der theoretischen Maximalleistung und damit der Maximalgröße von Transformer-Modellen.\\
 
 Um den beschriebenen Skalierungsregeln zu folgen, aber die Trainingszeit und die benötigte Datenmenge zu reduzieren, gibt es die Möglichkeit des Continual Pretraining. 
 \citet{dont_stop_pretraining} hat diese Methodik angewandt und gezeigt, dass Modelle immens davon profitieren, domänenspezifisches Wissen zu adaptieren und aus der großen Menge an Basisdaten bessere korrekte Antworten in einer spezifischen Domäne zu generieren. 
@@ -68,9 +68,9 @@ Diese Wissensneuronen werden aktiv, wenn ein bestimmter Fakt in der Eingabe ange
 
 Die Untersuchung von Modellen und ihrer Fähigkeit, Sachverhalte zu erlernen und zu reproduzieren, wurde erstmals von "\citet{knowledge_base}" vorgestellt.
 Die hier verwendeten Modelle \ac{bert} und \ac{elmo} wurden auf ihr Potential als unüberwachte offene Domäne \ac{qas} untersucht und zeigten gute Ergebnisse im Vergleich zu anderen \ac{sota}-Systemen.
-Mehrsprachige \citet{xfactr}-Modelle wurden auf die gleichen Eigenschaften hin untersucht, schnitten jedoch deutlich schlechter ab. Diese Ergebnisse deuten darauf hin, dass ein mehrsprachiges Modell für den Einsatz deutlich weniger geeignet ist als \ac{qas}, da ein Großteil der Leistung dieser Modelle in das Verstehen von Übersetzungen in andere Sprachen fließt.\\
+Mehrsprachige Modelle wurden von \citet{xfactr} auf die gleichen Eigenschaften hin untersucht, schnitten jedoch deutlich schlechter ab. Diese Ergebnisse deuten darauf hin, dass ein mehrsprachiges Modell für den Einsatz als \ac{qas} deutlich weniger geeignet ist, da ein Großteil der Leistung dieser Modelle in das Verstehen von Übersetzungen in andere Sprachen fließt.\\
 
-neue Probleme bei der Anwendung dieser Modelle auf.
+Neben den überaus großen Erfolgen von neuen Modellen erheben sich jedoch auch neue Probleme bei der Anwendung dieser Modelle auf.
 Neben Falschaussagen ergeben sich Probleme durch soziale und andere Biases in den Antworten, Selbstüberschätzung bei Falschaussagen, die wiederum zu schwerwiegenden Problemen in der Anwendung dieser Modelle führen können, Generierung von schädlichen Inhalten, Unterstützung von Kriminalität durch Expertise und andere Probleme. Eine Analyse der Ergebnisse dieser Arbeit in Bezug auf die ethischen Richtlinien der \ac{gmds} findet sich in \ref{sec:gmds_ethik}.
 \citet{gpt4} widmeten einen eigenen Abschnitt ihres Artikels der Untersuchung dieser Probleme und ihrer Adressierung.
 Sie zeigen darin grundsätzliche Probleme bei der Anwendung von Sprachmodellen auf, halten sich aber mit konkreten Lösungsvorschlägen zurück.\\
