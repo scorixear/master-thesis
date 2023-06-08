@@ -54,9 +54,9 @@ Auf Basis dieser Ontologie wurden bereits verschiedene Methoden zur Informations
 Die \ac{bell} mit dem Titel \enquote{Question Answering on \ac{snik}} \citep{hannesbell} erweiterte den Zugang zu diesem Netz durch die Verwendung natürlicher englischer Sprache.
 Die Ergebnisse der \ac{bell} wurden in einem \ac{qas} QAnswer \citep{qanswer} umgesetzt, zeigen aber Defizite in der Erklärbarkeit und Verständlichkeit komplexerer Fragen.
 Im Gegensatz dazu untersuchte \citet{chatgpt_qas} auf einem anderen Datensatz die Leistung einer Konversations-KI (in diesem Fall ChatGPT) im Vergleich zu einer herkömmlichen, auf einem Wissensgraphen basierenden \ac{qas} (verwendet wurde $KGQA_N$).
-Die Ergebnisse zeigten, dass ChatGPT im Vergleich zum verwendeten $KGQA_N$ erstaunlich stabile und verständliche Antworten lieferte, jedoch bei der Ausgabe korrekter Antworten deutlich schlechter abschnitt. Hier steht zu erwarten, dass durch ein besseres Fine-Tuning die Anzahl der falschen Antworten deutlich reduziert werden kann.\\
+Die Ergebnisse zeigten, dass ChatGPT im Vergleich zum verwendeten $KGQA_N$ erstaunlich stabile und verständliche Antworten lieferte, jedoch bei der Ausgabe korrekter Antworten deutlich schlechter abschnitt. Hier steht zu erwarten, dass durch ein besseres Training die Anzahl der falschen Antworten deutlich reduziert werden kann.\\
 
-Es ist daher notwendig zu untersuchen, ob der Einsatz einer Konversations-KI die Anwendungsschwierigkeiten in QAnswer beheben kann und ob die Wiedergabe mit niedrigem Wahrheitswert durch Fine-Tuning verbessert werden kann.
+Es ist daher notwendig zu untersuchen, ob der Einsatz einer Konversations-KI die Anwendungsschwierigkeiten in QAnswer beheben kann und ob die Wiedergabe mit niedrigem Wahrheitswert durch zusätzliches Training verbessert werden kann.
 
 \section{Zielsetzung}\label{sec:zielsetzung}
 
@@ -133,7 +133,7 @@ Die in~\ref{sec:zielsetzung} genannten Ziele $Z_i$ werden durch die hier aufgef�
     \ac{gpt}-Modelle basieren auf großen Datenmengen und enthalten mehrere Milliarden Parameter.
     Ein eigenes Training eines Modells würde sowohl den zeitlichen als auch den finanziellen Rahmen übersteigen, weshalb auf ein vortrainiertes Modell zurückgegriffen werden muss.
     Dazu muss das Modell frei verfügbar sein und unter einer Open-Source-Lizenz stehen. Außerdem muss das Modell am Rechenzentrum der Universität Leipzig geladen und trainiert werden können. Aufgrund der großen Anzahl an Parametern sind auch hier Grenzen des Arbeitsspeichers und damit der Größe des Modells gesetzt.
-    \item Aufgabe A1.2: Für ein effizientes und erfolgreiches Fine-Tuning der Konversations-KI ist eine Datenkuration von \citet{bb} notwendig.
+    \item Aufgabe A1.2: Für ein effizientes und erfolgreiches Training der Konversations-KI ist eine Datenkuration von \citet{bb} notwendig.
     Abschnitte wie das Literaturverzeichnis, Aufzählungen oder Grafiken und deren Beschriftung müssen vor der Verwendung des Textes entfernt oder umgeschrieben werden.
     \item Aufgabe A1.3: Die trainierte Konversations-KI wird dann zur Beantwortung von Fragen zu \citet{bb} verwendet.
     Dabei wird während des Trainings der in \citet{gpt3} beschriebene \enquote{Zero-Shot}-Ansatz verfolgt.
@@ -143,7 +143,7 @@ Die in~\ref{sec:zielsetzung} genannten Ziele $Z_i$ werden durch die hier aufgef�
   \begin{itemize}
     \item Aufgabe A2.1: Die in dieser Arbeit erstellte Konversations-KI wird vor und nach dem Training hinsichtlich ihrer Fähigkeit, Fragen korrekt zu beantworten, evaluiert.
     Dies ermöglicht eine Aussage über die Effektivität des Trainings und die Leistungssteigerung der Konversations-KI.\@
-    Ebenso wird ein Vergleich mit dem aktuellen GPT-4 Modell \citep{gpt4} durchgeführt, um die Notwendigkeit eines Fine-Tunings zu ermitteln.
+    Ebenso wird ein Vergleich mit dem aktuellen GPT-4 Modell \citep{gpt4} durchgeführt, um die Notwendigkeit eines Trainings zu ermitteln.
     \item Aufgabe A2.2: Bewertung der Antwortoptionen von Klausurfragen nach gleichen Kriterien wie in \citet{chatgpt_qas}
   \end{itemize}
 \end{itemize}
