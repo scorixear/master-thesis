@@ -19,5 +19,87 @@
 - Modellvergleich GPT4
     - Omar folgende Kriterien
 
-\section*{Arbeitshypothese}
+\section{Auswahl von Sprachmodellen}
+
+- Modelle mit speziellen Eigenschaften
+    - Transformer-Architektur
+    - Decoder-basiert
+    - Autoregressiv
+    - Gewichte sind verfügbar
+
+- Modelle mit gewünschten Eigenschaften
+    - gute Zero-Shot Performance
+    - ohne Fine-Tuning nutzbar
+    - überschreitet nicht Kapazität des Rechnernetzes
+
+- Modelle zur Auswahl
+    - GPT-2
+    - GPT-3
+    - GPT-4
+    - GPT-J
+    - GPT-NeoX
+    - LLaMa
+
+- Modelle die nicht zur Auswahl stehen
+    - BERT-basierend (Text Klassifikation): BERT, RoBERTa, DistillBERT
+    - ZeroShot Classification: BART
+    - Übersetzung: T5, Opus
+    - Zusammenfassung: Pegasus
+    - Dialogbasierend: DialoGPT, Blenderbot
+    - Text-2-Text: FLan-T5
+
+
+- Auswahlentscheidung
+    - GPT-2: klein, einfach zu trainieren, öffentlich verfügbar, keine gute ZeroShot Performance
+    - GPT-3 \& GPT-4: groß, sehr gute Zeroshot Performance, nicht öffentlich verfügbar, überschreitet Kapazität des Rechnernetzes
+    - GPT-J: zwischen GPT-2 und GPT-3, öffentlich verfügbar, keine gute ZeroShot Performance
+    - GPT-NeoX: groß, sehr gute Zeroshot Performance, öffentlich verfügbar, überschreitet Kapazität des Rechnernetzes
+    - LLaMa: verschiedene Größen - optimale Größe auswählbar, sehr gute Zeroshot Performance, öffentlich verfügbar*, wird ausgewählt
+
+\section{Datenkuration}
+
+- Formate die das Modell nicht verarbeiten kann
+    - Bilder
+
+Textpassagen ohne Wissen oder Kontext:
+    - Bild-Beschreibun
+    - Seitenzahlen
+    - Vorwort
+    - Autorenvorstellung
+
+Optionale Textentfernung mit potentiell besserer Leistung:
+    - Inhaltsverzeichnis
+    - Literaturverzeichnis
+    - Stichwortverzeichnis
+    - Überschriften
+
+\section{Unüberwachtes Weitertrainieren}
+- HuggingFace Trainer
+- Parallelisierung auf verschiedenen GPUS
+- Kommunikation zwischen GPUS mit Paket
+
+- Alternativen zu Trainer
+    - PyTorch
+    - PyTorchLighning
+    - Tensorflow
+
+- Alternativen zu SLURM: keine, vorgegeben
+
+\section{Ausführen des Training-Programme}
+- Nutzung von SLURM
+- Kommunikation zwischen GPUS und Nodes
+- Long-Time Nodes
+- Speicherung von Modellen mit Checkpoints
+- Größe der Modelle = Anzahl notwendiger GPUs
+
+\section{Klausurfragen}
+- Klausurfragen Antwortenerstellung
+- Umformulierung zu Prompt (da Finetuning nicht vorhanden)
+
+\section{Modellvergleich}
+- Berechnung von Precision, Recall, F-Score
+- Aggregation der Ergebnisse
+- Vergleich der Modelle
+- Vergleich mit SOTA Modell
+    - Nutzung von Kontext als Input?
 
