@@ -21,6 +21,59 @@
 
 \section{Auswahl von Sprachmodellen}
 
+Um eine Auswahl eines Sprachmodells zu treffen, müssen verschiedene Kriterien erreicht werden.
+Basierend auf der Aufgabenstellung in \ref{sec:zielsetzung} stehen unterschiedliche Modelle der Transformer-Architektur zur Auswahl.
+Desweiteren wird dies eingeschränkt auf Decoder-Basierende Modelle, da diese die Eigenschaften eines Autoregressiven Modells besitzen.
+Wie schon in  \ref{sec:grundlagen_transformer} beschrieben, ist das Ziel eine Generierung von Text auf Basis einer Fragestellung.
+Diese Fragestellung steht am Anfang als Eingabe zur Verfügung, darauf folgend generiert das Modell kontinuierlich nachkommende Tokens.
+Neu generierte Tokens werden zusätzlich der ursprünglichen Fragestellung als Eingabe genutzt, um das darauf folgende Token zu generieren.
+Dieses Verhalten entspricht den Autoregressiven Modellen und benötigt Decoder-Basierte Modelle.
+Ein Decoder-basiertes Modell nutzt zu Generierung von Tokens (auch als Vorhersage von Tokens zu sehen) alle zuvor kommenden Tokens, während ein Encoder-Modell sowohl zuvor als auch nachstehende Tokens nutzt.
+Encoder-Modelle sind für die Text-Ausfüllung oder Text-Klassifikation gedacht, jedoch nicht für die Text-Generierung.\\
+
+Desweiteren sind folgende Eigenschaften erwünscht. Das Modell sollte eine gute ZeroShot Leistung besitzen und nicht erst im FewShot oder OneShot Verfahren gute Leistungen erzielen.
+Diese Arbeit untersucht die Leistungsfähigkeit eines Modells, Wissen von domänspezifischer Literatur (hier von \citet{bb}) wiedergeben zu können.
+Durch das nutzen von zuvorigen Fragen und Antworten als Kontext, werden die Ergebnisse durch zusätzliches Wissen im Kontext synthetisch verbessert.
+Einige Fragen könnten nicht durch das Modell mit Hilfe des erlernten Wissens beantwortet werden, sondern durch das Wissen im Kontext.
+Auch sollte eine gute Leistung des Modells ohne notwendiges Fine-Tuning vorhanden sein.
+Da ein Fine-Tuning in dieser Arbeit nicht möglich ist, begründet wegen der fehlenden Datenmenge, sollte ein Modell ausgewählt werden, welches ebenso gute Leistung ohne dieses Fine-Tuning erreicht.\\
+
+Modelle die hier zur Auswahl stehend betrachtet werden sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMa.
+Modelle, die eine große Popularität gewonnen haben, jedoch nicht zur Auswahl stehen sind in Ausschnitten BERT, RoBERTa, DistillBERT, BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5.
+Möchte man die Aufgabenstellung des Question Answering lösen, ist eine erste Wahl BERT-basierende Modell. 
+Modelle wie BERT, RoBERTa und DistillBERT besitzen durch ihre Encoder-Architektur eine optimale Eigenschaft der Informationsextraktion aus Text.
+Jedoch ist dieser Ansatz limitiert in zwei Punkten. Die Modelle lernen hier nicht die Fakten und können neue Antworten auf Basis einer Fragestellung formulieren, sondern finden Textstellen eines Kontextes, welche die Fragestellung beantworten.
+Hier findet keine Textgenerierung statt, sondern es werden Auschnitte aus einem gegebenen Text-Kontext als Antwort gefunden.
+Dieser Kontext ist wiederum durch die Größe des Modells limitiert und beschränkt sich auf 512 Tokens.
+Ist die Antwort auf diese Fragestellung nicht im Kontext enthalten, kann das Modell keine Antwort finden. Da die Fragestellungen unabhängig vom Kontext beantwortet werden sollen, können diese Modelle nicht genutzt werden.
+Andere Modelle wie BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5 sind für andere Aufgabenstellungen gedacht und können nicht auf die gegebene Aufgabenstellung angwendet werden. Sie sind für die Text-Klassifikation, Text-Übersetzung, Text-Zusammenfassung, Dialoge oder Text-2-Text Aufgaben gedacht.\\
+
+GPT-2 ist das kleinste Modell der GPT-Reihe von OpenAI und wurde unter \citet{gpt2} erstmalig vorgestellt.
+Durch die geringe Größe kann das Modell auf einzelnen GPUs trainiert und genutzt (inferiert) werden, welches den Gebrauch des Modells deutlich vereinfacht.
+Auch ist es frei verfügbar und kann ohne weitere Maßnahmen genutzt werden. Jedoch ist die ZeroShot-Leistung nicht ausreichend.
+Das Modell erreicht eine Nachahmung der Texte, jedoch kein Verständis und Wiedergabe von Text.\\
+
+GPT-3 und das darauf aufbauende GPT-3.5 (ChatGPT), vorgestellt in \citet{gpt3}, lässt sich kostenlos zum Zeitpunkt der Arbeit nutzen, verfügt über eine sehr gute ZeroShot-Leistung und besitzt die Notwendige Größe um als Question-Answering Modell zu fungieren. Jedoch ist das Modell nicht frei verfügbar.
+Zwar existiert eine \ac{api}, jedoch dient diese nur zur Interferenz des Modells, ein Training ist nicht möglich.
+Damit fällst das Modell bereits aus der Auswahl. Ein weiteres Problem ist die Größe des Modells.
+Mit ungefähr 175 Milliarden Parametern ist eine Nutzung des Modells erst mit 8 A100 GPUs möglich. Das Trainieren benötigt zusätzlich ungefähr 4 mal so viel Leistung.
+Diese Leistung ist zwar durch das Rechenzentrum der Universität Leipzig zu bringen, verhindert allerdings die Nutzung des Modells in einer langfristigeren Umgebung.\\
+
+GPT-4 ist das leistungsstärkste Modell von OpenAI und wurde in \citet{gpt4} vorgestelt.
+Auch dieses Modell ist nicht frei verfügbar und kann nur über eine \ac{api} genutzt werden.
+Die Leistung von GPT-4 ist jedoch gegenüber GPT-3 immens größer, weshalb die Untersuchung dieses Modells als Ersatz für ein eigens weitertrainiertes Modell angesehen ist.
+Die Größe des Modells wurde nicht von OpenAI veröffentlicht, liegt allerdings definitiv über GPT-3, weshalb  hier eine Nutzung allein wegen der Größe ausgeschlossen ist.\\
+
+GPT-J erreicht die Größe des kleinsten GPT-3 Modells mit 6.7 Milliarden Parametern, zeigt jedoch deutlich bessere Leistungen gegenüber GPT-2.
+Das Modell ist unter \citet{gptj} veröffentlicht und frei verfügbar.
+Die Leistung des Modells ist im Vergleich zu anderen Modellen in der Auswahl geringer und wird deshalb ausgeschlossen.\\
+
+GPT-NeoX wurde in \citet{gpt_neox} vorgestellt und erreich mit einer Größe von 20 Milliarden Parametern die Leistungen von GPT-3 mit 175 Milliarden Parametern.
+Das Modell ist frei verfügbar und kann ohne weitere Maßnahmen genutzt werden.
+Die Leistung des Modells sind vergleichbar mit GPT-3, während die Größe des Modells ein Training mit 8 A100 GPUs ermöglicht.
+Diese Leistung wird jedoch von LLaMa übertroffen und wird deshalb nicht ausgewählt.\\
+
+
 - Modelle mit speziellen Eigenschaften
     - Transformer-Architektur
     - Decoder-basiert
