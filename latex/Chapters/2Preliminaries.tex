@@ -5,7 +5,7 @@
 Wissen, Information, Daten (Winter)
 FScore, Precision, Recall
 Question Answering (Aggregation, erst FScore für Frage, dann Durchschnitt, oder andersrum)
-API
+API, Overfitting
 
 
 \section*{Inhalte des Kapitels}
@@ -44,6 +44,39 @@ Sprachmodell Definition (Was ist das)
     - DropOut
 
 
+\section{Neuronale Netzwerke}
+Erstmalig erklärt in \dots
+
+Ein Neuronales Netz besteht aus einer Kombination aus Gleichungen.
+Jedes Neuronale Netzt besitzt eine feste Anzahl an Eingabewerten und eine feste Anzahl an Ausgabewerten.
+Diese Werte werden folgend als Neuronen $E_N$ und $A_N$ bezeichnet.
+$A_N$ berechnet sich aus einer Ansammlung an mathematischen Gleichungen, welche sich ultimativ aus  $E_N$ zusammensetzen.
+Neben $A_N$ und $E_N$ besteht ein Neuronales Netz auch aus sogenannten \enquote{Hidden States}, hier als $H_N$ bezeichnet.
+$H_N$ agieren sowohl als Ausgabe von vorangegangen Gleichungen, als auch als Eingabe für zukünftige Gleichungen.
+Abbildung \ref{nn_simple} zeigt einen Beispielaufbau mit 3 $E_N$, hier bezeichnet als $E_1,E_2,E_3$, zwei Hidden Layer mit je zwei $H_N$, hier bezeichnet als $H^1_1, H^1_2$ und $H^2_1, H^2_2$ und einem Ausgabeneuron $A_1$.
+Bei der Nutzung dieses Neuronalen Netzes wird von der Eingabe zur Ausgabe gerechnet.
+Dies bedeutet $E_N$ ist gegeben, und zu erst werden $H^1_N$ berechnet.
+Eine Beispielgleichung für $H^1_1$ ist wie folgt:
+\begin{align}
+    H^1_1=ReLU(W^1_1*E_1 + W^1_2*E_2 + W^1_3*E_3 + B^1_1)
+\end{align}
+$W^1_N$ repräsentiert hier sogenannte Gewichte.
+Gewichte sind Parameter, die während des Trainings eines Netzwerkes angepasst werden, um eine optimale Ausgabe von $A_N$ zu erhalten.
+$B^1_N$ ist der Bias und ist ebenso ein lernbarer Parameter.
+Alle Werte der Eingabe werden der Formel folgend zusammengerechnet und mit Hilfe einer Aktivierungsfunktion umgewandelt.
+Diese Aktivierungsfunktion war in früheren Netzen die Sigmoid-Funktion mit $f(x)=\frac{1}{1+e^{-x}}$. In modernen Netzen und ebenso in Transformer-Modellen wird hier die ReLU Funktion verwendet, welche als $f(x)=max(0,x)$ definiert ist.
+Üblicherweise repräsentiert eine Aktivierungsfunktion eine Transformation der Eingabewerte auf einen Non-linearen Ausgabewert zwischen 0 und 1.
+Jedoch ist dies nicht zwingend notwendig, da zum Beispiel die ReLU Funktion nur Werte zwischen 0 und $\infty$ ausgibt, sich jedoch schneller berechnen lässt als die Sigmoid-Funktion.
+Aktivierungsfunktion sind notwendig, um die Komplexität eines Neuronalen Netzes zu erhöhen und damit die Fähigkeit, komplexere Probleme zu lösen, zu ermöglichen.
+Ohne eine Aktivierungsfunktion würden $A_N$ Neuronen eine Linearkombination der Eingabewerte ergeben, wodurch hier nur lineare Probleme gelöst werden können.
+
+Die Ausgabe $A_N$ ist ebenso Werte in dem Bereich der Aktivierungsfunktion und ist nicht immer repräsentativ für das Problem, das das Neuronale Netz lösen soll.
+Deshalb werden diese Werte interpretiert und repräsentieren häufig einen Confidence-Score für eine bestimmte Klasse.
+Ist das Neuron $A_1$ auf dem Maximalwert 1, dann ist das Netz zu 100\% sicher, dass die Eingabe der Klasse 1 enspricht.
+Im Bezug auf Transformer ist die Ausgabe $A_N$ ein Vektor über das gesamte Vokabular des Transformers, und gibt aus, in wie fern das Modell glaubt, das jeweilige Token folgt auf den Eingabetext.
+
+hier weiter mit Kostfunktion
+
 \section{Transformer}\label{sec:transformer}
 %\todo{
 %Grundlagen:
@@ -58,25 +91,39 @@ Sprachmodell Definition (Was ist das)
 %- und das was du da schon hast, also das meiste ist ja schon am richtigen Ort
 %}
 Die erste schriftliche Erwähnung des Transformer-Modells und zusätzlich auch die Einführung der beiden Teilmodelle Encoder und Decoder findet sich in \citet{attention}.
-Die hier beschriebene bidirektionale Architektur bildet die Grundlage für alle darauf aufbauenden Modelle und Weiterentwicklungen. 
-Die grundlegende Architektur wurde für verschiedene Anwendungen stark modifiziert. 
-Seit 2017 gibt es grundlegende Unterschiede in den Modellen und deren Möglichkeiten. 
-Aus diesem Grund haben \citet{ammus} eine Taxonomie der Transformer-basierten vortrainierten Sprachmodelle eingeführt. 
+Die hier beschriebene bidirektionale Architektur bildet die Grundlage für alle darauf aufbauenden Modelle und Weiterentwicklungen.
+
+Die grundlegende Architektur wurde für verschiedene Anwendungen stark modifiziert.
+
+Seit 2017 gibt es grundlegende Unterschiede in den Modellen und deren Möglichkeiten.
+
+Aus diesem Grund haben \citet{ammus} eine Taxonomie der Transformer-basierten vortrainierten Sprachmodelle eingeführt.
+
 Diese Taxonomie wird hier zur Beschreibung weiterer Architekturen und Methodiken verwendet.\\
 
-Neben dem Grundbaustein eines Transformers - dem Attention-\ac{nn} - sind zwei wichtige Modifikationen gegenüber normalen neuronalen Netzen in Transformer eingeflossen. 
-Residuale Verbindungen als Level-Normalisierung, auf Englisch \enquote{Deep Residual Connections}, verändern das Ziel eines \ac{nn}, behalten aber durch ihre Level-Normalisierung die gleichen Ausgaben bei. 
-Dieses Konzept wurde erstmals in \citet{deep_residual} eingeführt und liefert die Lösung für ein grundlegendes Problem von großen, aus mehreren Ebenen bestehenden Transformer-Modellen. 
-Bereits 2016 wurde im Bereich der Bilderkennung festgestellt, dass sich die Korrektheit von Modellen mit zunehmender Tiefe sättigt und dann schnell verschlechtert, wenn dieses Modell weiter trainiert wird. 
-Dies setzte eine praktische Grenze für die Tiefe von \ac{nn}s und verhinderte somit die Lösung komplexerer Probleme mit größeren Modellen. 
+Neben dem Grundbaustein eines Transformers - dem Attention-\ac{nn} - sind zwei wichtige Modifikationen gegenüber normalen neuronalen Netzen in Transformer eingeflossen.
+
+Residuale Verbindungen als Level-Normalisierung, auf Englisch \enquote{Deep Residual Connections}, verändern das Ziel eines \ac{nn}, behalten aber durch ihre Level-Normalisierung die gleichen Ausgaben bei.
+
+Dieses Konzept wurde erstmals in \citet{deep_residual} eingeführt und liefert die Lösung für ein grundlegendes Problem von großen, aus mehreren Ebenen bestehenden Transformer-Modellen.
+
+Bereits 2016 wurde im Bereich der Bilderkennung festgestellt, dass sich die Korrektheit von Modellen mit zunehmender Tiefe sättigt und dann schnell verschlechtert, wenn dieses Modell weiter trainiert wird.
+
+Dies setzte eine praktische Grenze für die Tiefe von \ac{nn}s und verhinderte somit die Lösung komplexerer Probleme mit größeren Modellen.
+
 \citet{deep_residual} beschreiben eine Lösung durch die genannten Residuen, die normale \ac{nn} simple ersetzen können, und zeigen ebenfalls die Wirksamkeit dieser Methode.\\
 
-Die zweite wichtige Änderung ist die Einführung von Dropout. 
-Dropout ist eine Methode, die die Trainingszeit von \ac{nn}s verkürzt und die Generalisierung verbessert. 
+Die zweite wichtige Änderung ist die Einführung von Dropout.
+
+Dropout ist eine Methode, die die Trainingszeit von \ac{nn}s verkürzt und die Generalisierung verbessert.
+
 \citet{dropout} beschreiben die Methode als das zufällige Aussetzen von Neuronen in einem \ac{nn}. 
-Diese Aussetzung hängt nicht von der Eingabe ab. 
-Durch das Aussetzen von Neuronen wird das \ac{nn} gezwungen, sich nicht auf andere Neuronen zu verlassen und somit eine bessere Generalisierung zu erreichen. 
-Das Aussetzen erfolgt nur während des Trainings und nicht während der Inferenz. 
+Diese Aussetzung hängt nicht von der Eingabe ab.
+
+Durch das Aussetzen von Neuronen wird das \ac{nn} gezwungen, sich nicht auf andere Neuronen zu verlassen und somit eine bessere Generalisierung zu erreichen.
+
+Das Aussetzen erfolgt nur während des Trainings und nicht während der Inferenz.
+
 Die Methode wurde 2014 eingeführt und ist seitdem ein fester Bestandteil von \ac{nn}s.\\
 
 \section{Tokenization}\label{sec:tokenization}
@@ -95,22 +142,28 @@ Daher hat sich die Unterteilung von Wörtern in Teilwörter als Standard durchge
 
 \subsection{Byte-Pair-Encoding}\label{subsec:bpe}
 \citet{bpe} schlugen zu diesem Zweck die Verwendung von \ac{bpe} vor.
-Die Unterteilung von Wörtern in Untergruppen von Wörtern hat bereits bei der Übersetzung von Sätzen zu erheblichen Verbesserungen geführt. Sie hat sich aber auch in anderen Bereichen und Aufgaben wie der Textgenerierung, der Textklassifikation und der Analyse von Emotionen durchgesetzt.
+Die Unterteilung von Wörtern in Untergruppen von Wörtern hat bereits bei der Übersetzung von Sätzen zu erheblichen Verbesserungen geführt.
+Sie hat sich aber auch in anderen Bereichen und Aufgaben wie der Textgenerierung, der Textklassifikation und der Analyse von Emotionen durchgesetzt.
 Die Unterteilung von Wörtern ist hier eher als das Zusammenfügen kleinerer Teilwörter zu verstehen.
-Ausgehend von einem Vokabular, das aus allen Symbolen eines Alphabets besteht, wird dieses durch das Zusammenführen (engl. \enquote{Merge}) von Symbolen erweitert, deren Kombination im Datensatz am häufigsten vorkommt.
+Ausgehend von einem Vokabular, das aus allen Symbolen eines Alphabets besteht, wird dieses durch das Zusammenführen (engl.
+\enquote{Merge}) von Symbolen erweitert, deren Kombination im Datensatz am häufigsten vorkommt.
 Dieser Vorgang wird solange wiederholt, bis die gewünschte Anzahl von Teilwörtern erreicht ist.
 Die Anzahl der Teilwörter ist dabei ein Hyperparameter, der je nach Modell und Datensatz variiert.\\
 
 Die Unterteilung von Wörtern in Teilwörter hat den Vorteil, dass die Größe des Vokabulars nicht mit der Größe des Datensatzes wächst.
 Dies führt zu einer schnelleren Eingabeverarbeitung und einer besseren Generalisierung der Modelle.
-Die Unterteilung von Wörtern in Teilwörter hat jedoch auch Nachteile. Sie ist nicht eindeutig, d.h. ein Wort kann in unterschiedliche Mengen von Teilwörtern zerlegt werden.
+Die Unterteilung von Wörtern in Teilwörter hat jedoch auch Nachteile.
+Sie ist nicht eindeutig, d.h.
+ein Wort kann in unterschiedliche Mengen von Teilwörtern zerlegt werden.
 Dies führt zu einer größeren Anzahl möglicher Eingaben, die das Modell lernen muss.
 Ein weiterer Nachteil ist, dass die Zerlegung von Wörtern in Teilwörter nicht immer sinnvoll ist.
 So kann es vorkommen, dass ein Wort in Teilwörter zerlegt wird, die in der Sprache nicht existieren.
 Dies wiederum minimiert die Verallgemeinerbarkeit der Modelle.
 Ein Beispiel hierfür ist das Wort \enquote{Datensatz}.
 Eine sinnvolle Unterteilung wäre hier \enquote{Daten} und \enquote{satz}, aber durch den Aufbau des Vokabulars aus den Symbolen des Datensatzes kann es vorkommen, dass das Teilwort \enquote{Daten} nicht die notwendige Häufigkeit besitzt und somit nicht im Vokabular vorhanden ist.
-Daher muss auch dieses Wort zerlegt werden, z.B. in \enquote{Da} und \enquote{ten}.
+Daher muss auch dieses Wort zerlegt werden, z.B.
+in \enquote{Da} und \enquote{ten}.
 Beide Teilwörter haben in der deutschen Sprache keine Bedeutung, werden aber durch das Modell mit Bedeutung belegt und in Beziehung zu anderen Wörtern gesetzt.
-Dies führt zu einer unverständlichen Bedeutungsannotation von Teilwörtern und verschlechtert sowohl die Leistung als auch die Nachvollziehbarkeit des Modells und erschwert die Forschung an den Modellen. 
+Dies führt zu einer unverständlichen Bedeutungsannotation von Teilwörtern und verschlechtert sowohl die Leistung als auch die Nachvollziehbarkeit des Modells und erschwert die Forschung an den Modellen.
+
 

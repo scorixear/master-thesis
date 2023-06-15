@@ -15,7 +15,5 @@ pip install --user -r requirements.txt
 GPUS_PER_NODE=4
 MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
 MASTER_PORT=6000
-srun --jobid $SLURM_JOBID bash -c 'python -m torch.distributed.run \
---nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID \
---master_addr $MASTER_ADDR --master_port $MASTER_PORT \
-torch-distributed-gpu-test.py'
+echo "python -m torch.distributed.run --nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID --master_addr $MASTER_ADDR --master_port $MASTER_PORT torch-distributed-gpu-test.py"
+srun --jobid $SLURM_JOBID bash -c "python -m torch.distributed.run --nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID --master_addr $MASTER_ADDR --master_port $MASTER_PORT torch-distributed-gpu-test.py"
