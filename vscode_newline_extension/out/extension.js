@@ -24,7 +24,7 @@ function activate(context) {
 }
 exports.activate = activate;
 function replaceDots(text) {
-    return text?.replace(/(\w+\.) +([^ ]+)/g, '$1\n$2');
+    return text?.replace(/(\w{2,}\.) +([^ .]{2})/g, '$1\n$2');
 }
 exports.replaceDots = replaceDots;
 // This method is called when your extension is deactivated
