@@ -26,5 +26,9 @@ suite('Extension Test Suite', () => {
         assert.strictEqual((0, extension_1.replaceDots)('Hello World New Line.'), 'Hello World New Line.');
         assert.strictEqual((0, extension_1.replaceDots)('Hello World New Line.  '), 'Hello World New Line.  ');
     });
+    test('single Letter words do not end sentence', () => {
+        assert.strictEqual((0, extension_1.replaceDots)('Hello W. Not Newline'), 'Hello W. Not Newline');
+        assert.strictEqual((0, extension_1.replaceDots)('Hello World. Z. Not New Line'), 'Hello World. Z. Not New Line');
+    });
 });
 //# sourceMappingURL=extension.test.js.map

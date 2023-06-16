@@ -25,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function replaceDots(text: string | undefined) {
-	return text?.replace(/(\w+\.) +([^ ]+)/g, '$1\n$2');
+	return text?.replace(/(\w{2,}\.) +([^ .]{2})/g, '$1\n$2');
 }
 
 // This method is called when your extension is deactivated
