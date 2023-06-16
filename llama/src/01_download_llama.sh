@@ -1,9 +1,9 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 # This software may be used and distributed according to the terms of the GNU General Public License version 3.
 
-PRESIGNED_URL=""             # replace with presigned url from email
+PRESIGNED_URL="https://dobf1k6cxlizq.cloudfront.net/*?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kb2JmMWs2Y3hsaXpxLmNsb3VkZnJvbnQubmV0LyoiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2ODM4Mzc5Mzl9fX1dfQ__&Signature=qLapPjaKxQkpy-dfGpk~sLCaD~dkilyb744bY12ptCEHzPaSCf9YeCNC6f3rf4mQvaW3ICtndZ9GEcS6IVZVv5HYLdeRNpL6QiSL5ygtFASAYnJbamZUrQQDyY3Fncbcskh9foT3z9g-0pGVCXt5moGvHUjl8GZ-EqR1jJOEXDDv12NwZHaGGSOVjsDW5~2MCHfV8mZEkSgYKGO3NjCyaoJqehjk73ztSb4FFN7ttce~OE9ii8HiuxLAWPhiRwg0SbobCZnR2h2zfCl47Bf~sO6aXpgcwQeORlBA5zMAONiGlFgtPuo1MwAimL7j32gQhrBDwPVvgRrIzrbf36N3qg__&Key-Pair-Id=K231VYXPC1TA1R"             # replace with presigned url from email
 MODEL_SIZE="7B,30B"  # edit this list with the model sizes you wish to download
-TARGET_FOLDER="../llama_model"             # where all files should end up
+TARGET_FOLDER="../models/llama_model"             # where all files should end up
 
 declare -A N_SHARD_DICT
 
