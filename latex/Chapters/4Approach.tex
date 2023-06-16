@@ -31,7 +31,8 @@ Dieses Verhalten entspricht autoregressiven Modellen und erfordert Decoder-basie
 Ein Decoder-basiertes Modell verwendet alle vorhergehenden Tokens zur Generierung von Tokens (auch als Vorhersage von Tokens bezeichnet), während ein Encoder-Modell sowohl vorhergehende als auch nachfolgende Tokens verwendet.
 Encoder-basierte Modelle sind für die Textvervollständigung oder Textklassifikation gedacht, aber nicht für die Textgenerierung.\\
 
-Darüber hinaus sind folgende Eigenschaften erwünscht. Das Modell sollte eine gute ZeroShot-Performance haben und nicht nur eine gute FewShot- oder OneShot-Performance.
+Darüber hinaus sind folgende Eigenschaften erwünscht.
+Das Modell sollte eine gute ZeroShot-Performance haben und nicht nur eine gute FewShot- oder OneShot-Performance.
 Diese Arbeit untersucht die Fähigkeit eines Modells, Wissen aus domänenspezifischer Literatur (hier aus \citet{bb}) zu reproduzieren.
 Durch die Verwendung früherer Fragen und Antworten als Kontext werden die Ergebnisse synthetisch durch zusätzliches Wissen im Kontext verbessert.
 Einige Fragen könnten nicht durch das Modell mit Hilfe des gelernten Wissens beantwortet werden, sondern durch das Wissen im Kontext.
@@ -40,23 +41,32 @@ Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht mög
 
 Die hier zur Auswahl stehenden Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMa.
 Modelle, die sehr populär geworden sind, aber nicht zur Auswahl stehen, sind BERT, RoBERTa, DistillBERT, BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5.
-Wenn die Aufgabe des Question Answering gelöst werden soll, ist ein BERT-basiertes Modell die erste Wahl. 
+Wenn die Aufgabe des Question Answering gelöst werden soll, ist ein BERT-basiertes Modell die erste Wahl.
+
 Modelle wie BERT, RoBERTa und DistillBERT besitzen aufgrund ihrer Encoder-Architektur eine optimale Eigenschaft zur Informationsextraktion aus Text.
-Allerdings ist dieser Ansatz in zwei Punkten eingeschränkt. Die Modelle lernen nicht Fakten und können auf Basis einer Fragestellung neue Antworten formulieren, sondern finden Textstellen in einem Kontext, die die Fragestellung beantworten.
+Allerdings ist dieser Ansatz in zwei Punkten eingeschränkt.
+Die Modelle lernen nicht Fakten und können auf Basis einer Fragestellung neue Antworten formulieren, sondern finden Textstellen in einem Kontext, die die Fragestellung beantworten.
 Es findet keine Textgenerierung statt, sondern es werden Ausschnitte aus einem gegebenen Textkontext als Antwort gefunden.
 Dieser Kontext ist wiederum durch die Größe des Modells begrenzt und beschränkt sich in den meisten Fällen auf 512 Tokens.
-Ist die Antwort auf die Frage nicht im Kontext enthalten, kann das Modell keine Antwort finden. Da die Fragen unabhängig vom Kontext beantwortet werden sollen, können diese Modelle nicht verwendet werden.
-Andere Modelle wie BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5 sind für andere Aufgabenstellungen konzipiert und können nicht auf die gegebene Aufgabenstellung angewendet werden. Sie sind für Textklassifikation, Textübersetzung, Textzusammenfassung, Dialoge oder Text-2-Text-Aufgaben ausgelegt.\\
+Ist die Antwort auf die Frage nicht im Kontext enthalten, kann das Modell keine Antwort finden.
+Da die Fragen unabhängig vom Kontext beantwortet werden sollen, können diese Modelle nicht verwendet werden.
+Andere Modelle wie BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5 sind für andere Aufgabenstellungen konzipiert und können nicht auf die gegebene Aufgabenstellung angewendet werden.
+Sie sind für Textklassifikation, Textübersetzung, Textzusammenfassung, Dialoge oder Text-2-Text-Aufgaben ausgelegt.\\
 
 GPT-2 ist das kleinste Modell der OpenAI GPT-Serie und wurde erstmals in \citet{gpt2} vorgestellt.
 Aufgrund seiner geringen Größe kann das Modell auf einzelnen GPUs trainiert und verwendet (inferiert) werden, was die Nutzung des Modells erheblich vereinfacht.
-Außerdem ist es frei verfügbar und kann ohne weitere Maßnahmen verwendet werden. Allerdings ist die Performance in der Einstellung ZeroShot nicht ausreichend.
+Außerdem ist es frei verfügbar und kann ohne weitere Maßnahmen verwendet werden.
+Allerdings ist die Performance in der Einstellung ZeroShot nicht ausreichend.
 Das Modell erreicht eine Imitation von Texten, aber kein Verständnis und keine Wiedergabe von Fakten.\\
 
-GPT-3 und das darauf aufbauende GPT-3.5 (ChatGPT), vorgestellt in \citet{gpt3}, kann zum Zeitpunkt der Arbeit kostenlos genutzt werden, hat eine sehr gute ZeroShot-Performance und besitzt die notwendige Größe, um als QA-Modell zu fungieren. Allerdings ist das Modell nicht frei verfügbar.
+GPT-3 und das darauf aufbauende GPT-3.5 (ChatGPT), vorgestellt in \citet{gpt3}, kann zum Zeitpunkt der Arbeit kostenlos genutzt werden, hat eine sehr gute ZeroShot-Performance und besitzt die notwendige Größe, um als QA-Modell zu fungieren.
+Allerdings ist das Modell nicht frei verfügbar.
 Es existiert zwar eine \ac{api}, diese dient jedoch nur zur Interferenz des Modells, ein Training ist nicht möglich.
-Damit fällt das Modell bereits aus der Auswahl. Ein weiteres Problem stellt die Größe des Modells dar.
-Mit ca. 175 Milliarden Parametern ist eine Nutzung des Modells nur mit 8 A100 GPUs möglich. Das Training benötigt zusätzlich etwa die 4-fache Leistung.
+Damit fällt das Modell bereits aus der Auswahl.
+Ein weiteres Problem stellt die Größe des Modells dar.
+Mit ca.
+175 Milliarden Parametern ist eine Nutzung des Modells nur mit 8 A100 GPUs möglich.
+Das Training benötigt zusätzlich etwa die 4-fache Leistung.
 Diese Leistung kann zwar vom Rechenzentrum der Universität Leipzig bereitgestellt werden, verhindert aber den Einsatz des Modells in einer längerfristigen Umgebung.\\
 
 GPT-4 ist das mächtigste Modell von OpenAI und wurde in \citet{gpt4} vorgestellt.
@@ -90,44 +100,9 @@ Die Modelle sind jedoch nicht öffentlich verfügbar, sondern werden nur zu Fors
 Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
 
 Eine Alternative zu den LLaMa-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}.
-Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMa-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar. 
+Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMa-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar.
+
 Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf diese Modelle verzichtet.\\
-
-
-- Modelle mit speziellen Eigenschaften
-    - Transformer-Architektur
-    - Decoder-basiert
-    - Autoregressiv
-    - Gewichte sind verfügbar
-
-- Modelle mit gewünschten Eigenschaften
-    - gute Zero-Shot Performance
-    - ohne Fine-Tuning nutzbar
-    - überschreitet nicht Kapazität des Rechnernetzes
-
-- Modelle zur Auswahl
-    - GPT-2
-    - GPT-3
-    - GPT-4
-    - GPT-J
-    - GPT-NeoX
-    - LLaMa
-
-- Modelle die nicht zur Auswahl stehen
-    - BERT-basierend (Text Klassifikation): BERT, RoBERTa, DistillBERT
-    - ZeroShot Classification: BART
-    - Übersetzung: T5, Opus
-    - Zusammenfassung: Pegasus
-    - Dialogbasierend: DialoGPT, Blenderbot
-    - Text-2-Text: FLan-T5
-
-
-- Auswahlentscheidung
-    - GPT-2: klein, einfach zu trainieren, öffentlich verfügbar, keine gute ZeroShot Performance
-    - GPT-3 \& GPT-4: groß, sehr gute Zeroshot Performance, nicht öffentlich verfügbar, überschreitet Kapazität des Rechnernetzes
-    - GPT-J: zwischen GPT-2 und GPT-3, öffentlich verfügbar, keine gute ZeroShot Performance
-    - GPT-NeoX: groß, sehr gute Zeroshot Performance, öffentlich verfügbar, überschreitet Kapazität des Rechnernetzes
-    - LLaMa: verschiedene Größen - optimale Größe auswählbar, sehr gute Zeroshot Performance, öffentlich verfügbar*, wird ausgewählt
 
 \section{Datenkuration}
 
@@ -147,24 +122,89 @@ Optionale Textentfernung mit potentiell besserer Leistung:
     - Überschriften
 
 \section{Unüberwachtes Weitertrainieren}
-Um das LLaMa Modell zu trainieren, wird ein Programm benötigt, dass den Datensatz in Tokens umwandelt, und diese dann in Batches dem Modell übergibt. Auf Basis dieser Batches wird das Modell genutzt um die Gewichte mit Backpropagation anzupassen. Dieser Prozess stellt demnach eine Epoche dar. Bei kleineren Datensätzen und Fine-Tuning wird häufig mehrere Epochen gewählt, während größere Datensätze (mehrere hundert Gigabyte) nur eine Epoche oder nicht einmal eine Epoche benötigen. Mit steigender Epoche passt das Modell sich weiter an den Text der Literatur an, wobei ab einem bestimmten Zeitpunkt eine Grenze überschritten wird. Diese Grenze wird häufig als \enquote{Overfitting} bezeichnet, und repräsentiert ein Modell, welches sich zu sehr an einen Datensatz angepasst hat. Dadurch verliert das Modell die Fähigkeit, auf unbekannte Daten zu generalisieren, welches im diesem Anwendungsfall dazuführt, dass keine Fragen mehr beantwortet werden können.\\
+Um das LLaMa Modell zu trainieren, wird ein Programm benötigt, dass den Datensatz in Tokens umwandelt, und diese dann in Batches dem Modell übergibt.
+Auf Basis dieser Batches wird das Modell genutzt um die Gewichte mit Backpropagation anzupassen.
+Dieser Prozess stellt demnach eine Epoche dar.
+Bei kleineren Datensätzen und Fine-Tuning wird häufig mehrere Epochen gewählt, während größere Datensätze (mehrere hundert Gigabyte) nur eine Epoche oder nicht einmal eine Epoche benötigen.
+Mit steigender Epoche passt das Modell sich weiter an den Text der Literatur an, wobei ab einem bestimmten Zeitpunkt eine Grenze überschritten wird.
+Diese Grenze wird häufig als \enquote{Overfitting} bezeichnet, und repräsentiert ein Modell, welches sich zu sehr an einen Datensatz angepasst hat.
+Dadurch verliert das Modell die Fähigkeit, auf unbekannte Daten zu generalisieren, welches im diesem Anwendungsfall dazuführt, dass keine Fragen mehr beantwortet werden können.\\
 
-Um Overfitting zu vermeiden, wird der Datensatz in Trainings- und Validierungsdatensatz aufgeteilt. Hierbei wird eine Unterteilung von 90\% Training, 10\% Validierung genutzt. Das Modell trainiert nur auf dem Trainingsdatensatz, wird jedoch in regelmäßigen Abschnitten mit dem Validierungsdatensatz überprüft. Die Ergebnisse des Validierungsdatensatz haben keinen Einfluss auf die Anpassung der Gewichte sondern dienen nur zur Überprüfung, in wie fern das Modell generalisieren kann.
-Erwartet wird ein Abfall der Kost-Funktion sowohl auf dem Trainings- als auch auf dem Validierungsdatensatz. Dieser Abfall ist ein Indikator dafür, dass das Modell sich an den Datensatz anpasst. Sobald der Abfall auf dem Validierungsdatensatz aufhört, ist das Training abgeschlossen. Die Ergebnisse zeigen in den meisten Fällen, dass die Kostfunktion des Trainingsdatensatzes tiefer als die des Validierungsdatensatzes ist. Solange die Differenz zwischen den beiden Kostfunktionen nicht zu groß ist, konnte das Modell erfolgreich trainiert werden.\\
+Um Overfitting zu vermeiden, wird der Datensatz in Trainings- und Validierungsdatensatz aufgeteilt.
+Hierbei wird eine Unterteilung von 90\% Training, 10\% Validierung genutzt.
+Das Modell trainiert nur auf dem Trainingsdatensatz, wird jedoch in regelmäßigen Abschnitten mit dem Validierungsdatensatz überprüft.
+Die Ergebnisse des Validierungsdatensatz haben keinen Einfluss auf die Anpassung der Gewichte sondern dienen nur zur Überprüfung, in wie fern das Modell generalisieren kann.
+Erwartet wird ein Abfall der Kost-Funktion sowohl auf dem Trainings- als auch auf dem Validierungsdatensatz.
+Dieser Abfall ist ein Indikator dafür, dass das Modell sich an den Datensatz anpasst.
+Sobald der Abfall auf dem Validierungsdatensatz aufhört, ist das Training abgeschlossen.
+Die Ergebnisse zeigen in den meisten Fällen, dass die Kostfunktion des Trainingsdatensatzes tiefer als die des Validierungsdatensatzes ist.
+Solange die Differenz zwischen den beiden Kostfunktionen nicht zu groß ist, konnte das Modell erfolgreich trainiert werden.\\
 
-Zur Durchführung dieser Trainingsschritte wird die Programmiersprache Python genutzt, da sie eine große Anzahl an Bibliotheken für die Verarbeitung von Texten und die Nutzung von neuronalen Netzen bietet. Die Bibliothek HuggingFace bietet eine Vielzahl an Modellen und Trainingsmethoden und baut auf der populären Bibliothek PyTorch auf.\\
-- HuggingFace Trainer
-- Parallelisierung auf verschiedenen GPUS
-- Kommunikation zwischen GPUS mit Paket
+Zur Durchführung dieser Trainingsschritte wird die Programmiersprache Python genutzt, da sie eine große Anzahl an Bibliotheken für die Verarbeitung von Texten und die Nutzung von neuronalen Netzen bietet.
+Die Bibliothek Transformers von HuggingFace bietet eine Vielzahl an Modellen und Trainingsmethoden und baut auf der populären Bibliothek PyTorch auf.
+PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer NVIDIA GPU durchzuführen, welches die Rechenschritte beschrieben in \ref{sec:grundlagen:training} um ein Vielfaches beschleunigt.
+Ebenso kann mit Hilfe von DeepSpeed dieses Training auf mehrere GPUs aufgeteilt werden.
+Das ist notwendig, da das verwendete Modell mit 33 Milliarden Parametern zu groß ist, um in den RAM-Speicher einer einzelnen GPU zu passen.
 
-- Alternativen zu Trainer
-    - PyTorch
-    - PyTorchLighning
-    - Tensorflow
+Bevor das Training beginnt, müssen einige Konfigurationsparameter festgelegt werden.
+Diese Parameter sind in Tabelle \ref{tab:training:parameter} aufgelistet und folgen den Training-Parametern von \citet{llama}.\\
 
-- Alternativen zu SLURM: keine, vorgegeben
+\begin{table}
+    \centering
+    \begin{tabular}{ll}
+        \hline
+        \textbf{Parameter} & \textbf{Wert} \\
+        \hline
+        Lernrate & $1,5e^{-4}$\\
+        AdamW $\beta_1$ & 0,9\\
+        AdamW $\beta_2$ & 0,95\\
+        Gewichtsreduktion & 0,1\\
+        Gradientenlimitierung & 1,0\\
+        Aufwärmphase & 0\\
+        Epochen & 2\\
+        \hline
+    \end{tabular}
+    \caption{Parameter für das Training des LLaMa 33B-Modells}
+    \label{tab:training:parameter}
+\end{table}
 
-\section{Ausführen des Training-Programme}
+Die Lernrate (engl.
+\enquote{Learning Rate}) ist ein Parameter, der die Größe der Anpassung der Gewichte bestimmt.
+Mit einer hohen Lernrate werden Gewichte stärker angepasst.
+Dies kann dazu führen, dass das Modell nicht konvergiert, sondern über den optimalen Punkt hinausschießt.
+Mit einer zu niedrigen Lernrate konvergiert das Modell nur sehr langsam.
+Die Lernrate wird während des Trainings angepasst, um eine schnelle Konvergenz zu ermöglichen.
+Diese Anpassing folgt der Cosinus-Learning-Rate Schedule, sodass die endgüligte Lernrate bei 10\% des ursprünglichen Wertes liegt.
+Lernraten sind abhängig von der Größe des Modells.
+Generell gilt, dass größere Modelle eine niedrigere Lernrate benötigen.\\
+Der Optimierer AdamW übernimmt den zeitlichen Abfall der Gewichte und wurde  in \citet{adamw} vorgestellt.
+Er ist in aktuellen Modellen die häufigste Wahl und wurde ebenso für das Training der LLaMa Modelle genutzt.\\
+
+Gewichtsreduktion (engl.
+\enquote{Weight Decay}) ist ein Parameter, der die Gewichte während des Trainings reduziert.
+Er stellt eine Regularisierung dar, die Overfitting verhindern soll.
+$0,1$ entspricht einer Gewichtsreduktion von 10\%.\\
+
+Gradientenlimitierung (engl.
+\enquote{Gradient Clipping}) ist ein Parameter, der die Größe der Gradienten begrenzt.
+Dies ist notwendig, da die Gradienten bei großen Modellen während der Backpropagation mit steigender Tiefe immer größer werden.
+Ohne eine Begrenzung würden die Gradienten hier exdponentiell steigen.
+Ein Gradientenlimitierung limitiert die Gradienten auf $1.0$\\
+
+Die Aufwärmphase beschreibt die Anzahl der Schritte, die das Modell benötigt, um die Lernrate von $0$ auf den ursprünglichen Wert linear zu erhöhen.
+Dies ist notwendig, da zu Beginn eines Trainings Modelle zu schnell auf nicht allgemeingültige Muster anpassen.
+Normalerweise wird dies durch ein längeres Training behoben, wodurch die zuerst gelernten Muster verlernt werden müssen.
+Mit Hilfe der Aufwärmphase verhindert man ein verlängertes Training.
+Da in diesem Fall das Modell bereits auf einem großen Datensatz trainiert wurde, ist eine Aufwärmphase nicht notwendig.\\
+
+Der Artikel von \citet{llama} beschreibt ein Training über ein Epoche. 
+Da in diesem Fall jedoch der Datensatz minimal im Vergleich ist, wird eine höhere Anzahl an Epochen genutzt.\\
+
+\subsection{Ausführen des Training-Programme}
+
+Zur Ausführung der Trainingsprogramme wird SLURM genutzt \footnote{https://slurm.schedmd.com/overview.html (abgerufen am 16.6.2023)}. Mit Hilfe von SLURM-Skripten können Programm über mehrere Nodes, CPUs und GPUs verteilt berechnet werden. Diese Skript-Sprache wird vom Rechenzentrum der Universität Leipzig genutzt, um verschiedene Programme auf den Supercomputern Clara und Paula auszuführen.\\
+
+Die Supercomputer Clara und Paula sind Rechennetzwerke, spezialisiert für GPU-beschleunigte Berechnung. Sie besitzen 
 - Nutzung von SLURM
 - Kommunikation zwischen GPUS und Nodes
 - Long-Time Nodes
