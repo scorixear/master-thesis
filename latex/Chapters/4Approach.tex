@@ -101,25 +101,68 @@ Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
 
 Eine Alternative zu den LLaMa-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}.
 Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMa-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar.
-
 Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf diese Modelle verzichtet.\\
 
 \section{Datenkuration}
+Um die Literatur optimal nutzen zu können, muss eine Datenkuration durchgeführt werden. Die Daten liegen im Word-Format vor, können jedoch nicht in diesem Format verarbeitet werden, da dass Modell lediglich Text verarbeiten kann. Die Datenkuration enthält mehrere Schritte die im Folgenden beschrieben werden.\\
+
+\subsection{Extraktion der Texte}
+Die Extraktion der Text wird händisch durchgeführt. Dazu wird das Word-Dokument geöffnet und der Text kopiert. Der Text wird in einem Texteditor eingefügt und als \texttt{.md} Datei gespeichert. \texttt{.md}-Dateien folgen dem Markdown-Format und haben die besondere Eigenschaft, mit Hilfe von Text-Symbolen Formatierungen wie Überschriften, Aufzählungen und Tabellen darzustellen.
+
+\subsection{Unverständliche Formate}
+Während der Extraktion des Textes fallen alle Bilder als auch Kopf- und Fußzeilen weg.
+Da ein einzelne Text-Datei keine sinnvolle Unterteilung in Seiten hat, sind Kopf- und Fußzeilen und damit einhergehend Seitenzahlen nicht relevant. Bilder können nicht von dem Modell verarbeitet werden und werden daher entfernt. Die Bildunterschriften als auch Referenzen auf Bilder stehen somit ohne Kontext in den Kapiteln und werden ebenso entfernt.
+
+\subsection{Textpassagen ohne Wissen oder Kontext}
+Teile des Dokumentes enthalten kein Wissen, stehen in keinem Kontext oder sind für das Modell unverständlich formatiert.
+Die Titel-Seite wird reduziert auf den Titel des Buches, das Vorwort entfällt da es kein Wissen zur Thematik enthält und Tabellen- und Bildverzeichnise entfallen ebenfalls. Bild- und Tabellenverzeichnise enthalten Wissen, können aber in keinem Kontext gesetzt werden, da die genutzten Attention-Mechanismen des Modells nicht diese Verzeichnisse mit Texten in späteren Kapiteln verbinden können, da der Kontext zu groß ist. Die Autorenvorstellung enthält ebenfalls kein Wissen zur Thematik und wird daher entfernt.
+Zusätzlich werden fehlerhafte Textstellen wie fehlende Verweise entfernt. Diese Textstellen existieren nur in der Word-Version des Buches, jedoch nicht in der finalen PDF-Version. Da eine Extraktion von Text aus PDF-Dateien jedoch zu groben Problemen in der Formatierung von Text führt, wurde darauf verzichtet.
+
+\subsection{Optionale Textentfernungen}
+Es ist zu untersuchen, ob die Entfernung von Literaturverzeichnissen, Überschriften und Tabellen zu einer besseren Leistung führen.
+Literaturverzeichnisse beziehen sich auf das vorangegangen Kapitel, sind jedoch in einem schwierigen Format.
+Inbesondere \ac{url}s müssen vom Modell in Tokens zerlegt werden, die den Inhalt der \ac{url} nicht wiederspiegelt.
+Überschriften haben im Vergleich zum Text einen minimalen Anteil der Gesamtmenge an Tokens, wordurch ihr enthaltenes Wissen durchaus verloren geht. Die für den Menschen verständliche Formatierung einer Überschrift hat keinen Einfluss auf die Bewertung des Modells.
+Tabellen sind in einem Format, das vom Modell nicht nativ verarbeitet werden kann. Selbst die Tabellendarstellung in Markdown ist zwar einlesbar, aber zu bezweifeln ob diese verständlich ist. Durch die geringe Größe des Datensatzes, ist auch nicht zu erwarten, dass dieses Format verstanden wird. Es wird daher hier eine Aufzählung als Ersatz für Tabellen genutzt.
+
+\subsection{}
 
 - Formate die das Modell nicht verarbeiten kann
     - Bilder
+    - Referenzen auf Bilder
+    - Bild-Unterschriften
 
 Textpassagen ohne Wissen oder Kontext:
-    - Bild-Beschreibun
-    - Seitenzahlen
+    - Cover Page
     - Vorwort
+    - Inhaltsverzeichnis
+    - Tabellenverzeichnis, Bildverzeichnis
     - Autorenvorstellung
+    - Seitenzahlen, Kopf und Fußzeile
+    - Fehlerhafte Textstellen (fehlende Verweise)
 
 Optionale Textentfernung mit potentiell besserer Leistung:
-    - Inhaltsverzeichnis
     - Literaturverzeichnis
-    - Stichwortverzeichnis
     - Überschriften
+    - Tabellen
+
+Textpassagen die enthalten bleiben
+    - Abkürzungsverzeichnis
+    - Glossar
+
+Text der anders Repräsentiert wird
+    - Überschriften
+    - Tabellen
+    - Formatierung (Schrägschrift, Fett, Unterstrichen, etc.)
+    - Hochgestellte / Tiefgestellte Zeichen
+    - Formeln
+
+
+Potentielle Fragenextraktion
+    - Exercises mit Antworten
+    - Glossar mit Definitionen
+    - Abkürzungsverzeichnis
+
 
 \section{Unüberwachtes Weitertrainieren}
 Um das LLaMa Modell zu trainieren, wird ein Programm benötigt, dass den Datensatz in Tokens umwandelt, und diese dann in Batches dem Modell übergibt.
@@ -168,8 +211,7 @@ Diese Parameter sind in Tabelle \ref{tab:training:parameter} aufgelistet und fol
     \label{tab:training:parameter}
 \end{table}
 
-Die Lernrate (engl.
-\enquote{Learning Rate}) ist ein Parameter, der die Größe der Anpassung der Gewichte bestimmt.
+Die Lernrate (engl. \enquote{Learning Rate}) ist ein Parameter, der die Größe der Anpassung der Gewichte bestimmt.
 Mit einer hohen Lernrate werden Gewichte stärker angepasst.
 Dies kann dazu führen, dass das Modell nicht konvergiert, sondern über den optimalen Punkt hinausschießt.
 Mit einer zu niedrigen Lernrate konvergiert das Modell nur sehr langsam.
@@ -180,13 +222,11 @@ Generell gilt, dass größere Modelle eine niedrigere Lernrate benötigen.\\
 Der Optimierer AdamW übernimmt den zeitlichen Abfall der Gewichte und wurde  in \citet{adamw} vorgestellt.
 Er ist in aktuellen Modellen die häufigste Wahl und wurde ebenso für das Training der LLaMa Modelle genutzt.\\
 
-Gewichtsreduktion (engl.
-\enquote{Weight Decay}) ist ein Parameter, der die Gewichte während des Trainings reduziert.
+Gewichtsreduktion (engl. \enquote{Weight Decay}) ist ein Parameter, der die Gewichte während des Trainings reduziert.
 Er stellt eine Regularisierung dar, die Overfitting verhindern soll.
 $0,1$ entspricht einer Gewichtsreduktion von 10\%.\\
 
-Gradientenlimitierung (engl.
-\enquote{Gradient Clipping}) ist ein Parameter, der die Größe der Gradienten begrenzt.
+Gradientenlimitierung (engl. \enquote{Gradient Clipping}) ist ein Parameter, der die Größe der Gradienten begrenzt.
 Dies ist notwendig, da die Gradienten bei großen Modellen während der Backpropagation mit steigender Tiefe immer größer werden.
 Ohne eine Begrenzung würden die Gradienten hier exdponentiell steigen.
 Ein Gradientenlimitierung limitiert die Gradienten auf $1.0$\\

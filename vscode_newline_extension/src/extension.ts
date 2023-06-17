@@ -25,7 +25,63 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function replaceDots(text: string | undefined) {
-	return text?.replace(/(\w{2,}\.) +([^ .]{2})/g, '$1\n$2');
+	let allowed = ['Mr.', 
+	'Mrs.', 
+	'Ms.', 
+	'Dr.', 
+	'Prof.', 
+	'St.', 
+	'Mt.', 
+	'etc.', 
+	'e.g.', 
+	'i.e.',
+	'cf.',
+	'vs.',
+	'Fig.',
+	'Figs.',
+	'Eq.',
+	'Eqs.',
+	'Sec.',
+	'Secs.',
+	'Ch.',
+	'Chs.',
+	'App.',
+	'Apps.',
+	'Ref.',
+	'Refs.',
+	'Jan.',
+	'Feb.',
+	'Mar.',
+	'Apr.',
+	'Jun.',
+	'Jul.',
+	'Aug.',
+	'Sep.',
+	'Sept.',
+	'Oct.',
+	'Nov.',
+	'Dec.',
+	'Dez.',
+	'Mon.',
+	'Tue.',
+	'Wed.',
+	'Thu.',
+	'Fri.',
+	'Sat.',
+	'Sun.',
+	'a.m.',
+	'p.m.',
+	'et al.',
+	'engl.',
+	'approx.',
+	'z.',
+	'Z.',];
+	allowed = allowed.map((word) => ' '+word.replace('.', '\\.')+ ' ');
+	const allowedRegex = new RegExp('('+allowed.join('|')+')', 'g');
+	text = text?.replace(allowedRegex, (match) => match.replace(/\./g, '§§LATEX_NEWLINE§§'));
+	text = text?.replace(/(\w{2,}\.) +([^ .]{2})/g, '$1\n$2');
+	text = text?.replace(/§§LATEX_NEWLINE§§/g, '.');
+	return text;
 }
 
 // This method is called when your extension is deactivated
