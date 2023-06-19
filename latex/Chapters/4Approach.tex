@@ -104,65 +104,59 @@ Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden P
 Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf diese Modelle verzichtet.\\
 
 \section{Datenkuration}
-Um die Literatur optimal nutzen zu können, muss eine Datenkuration durchgeführt werden. Die Daten liegen im Word-Format vor, können jedoch nicht in diesem Format verarbeitet werden, da dass Modell lediglich Text verarbeiten kann. Die Datenkuration enthält mehrere Schritte die im Folgenden beschrieben werden.\\
+Um die Literatur optimal nutzen zu können, muss eine Datenkuration durchgeführt werden.
+Die Daten liegen im Word-Format vor, können jedoch nicht in diesem Format verarbeitet werden, da dass Modell lediglich Text verarbeiten kann.
+Die Datenkuration enthält mehrere Schritte die im Folgenden beschrieben werden.\\
 
 \subsection{Extraktion der Texte}
-Die Extraktion der Text wird händisch durchgeführt. Dazu wird das Word-Dokument geöffnet und der Text kopiert. Der Text wird in einem Texteditor eingefügt und als \texttt{.md} Datei gespeichert. \texttt{.md}-Dateien folgen dem Markdown-Format und haben die besondere Eigenschaft, mit Hilfe von Text-Symbolen Formatierungen wie Überschriften, Aufzählungen und Tabellen darzustellen.
+Die Extraktion der Text wird händisch durchgeführt.
+Dazu wird das Word-Dokument geöffnet und der Text kopiert.
+Der Text wird in einem Texteditor eingefügt und als \texttt{.md} Datei gespeichert.
+\texttt{.md}-Dateien folgen dem Markdown-Format und haben die besondere Eigenschaft, mit Hilfe von Text-Symbolen Formatierungen wie Überschriften, Aufzählungen und Tabellen darzustellen.
 
 \subsection{Unverständliche Formate}
 Während der Extraktion des Textes fallen alle Bilder als auch Kopf- und Fußzeilen weg.
-Da ein einzelne Text-Datei keine sinnvolle Unterteilung in Seiten hat, sind Kopf- und Fußzeilen und damit einhergehend Seitenzahlen nicht relevant. Bilder können nicht von dem Modell verarbeitet werden und werden daher entfernt. Die Bildunterschriften als auch Referenzen auf Bilder stehen somit ohne Kontext in den Kapiteln und werden ebenso entfernt.
+Da ein einzelne Text-Datei keine sinnvolle Unterteilung in Seiten hat, sind Kopf- und Fußzeilen und damit einhergehend Seitenzahlen nicht relevant.
+Bilder können nicht von dem Modell verarbeitet werden und werden daher entfernt.
+Die Bildunterschriften als auch Referenzen auf Bilder stehen somit ohne Kontext in den Kapiteln und werden ebenso entfernt.
 
 \subsection{Textpassagen ohne Wissen oder Kontext}
 Teile des Dokumentes enthalten kein Wissen, stehen in keinem Kontext oder sind für das Modell unverständlich formatiert.
-Die Titel-Seite wird reduziert auf den Titel des Buches, das Vorwort entfällt da es kein Wissen zur Thematik enthält und Tabellen- und Bildverzeichnise entfallen ebenfalls. Bild- und Tabellenverzeichnise enthalten Wissen, können aber in keinem Kontext gesetzt werden, da die genutzten Attention-Mechanismen des Modells nicht diese Verzeichnisse mit Texten in späteren Kapiteln verbinden können, da der Kontext zu groß ist. Die Autorenvorstellung enthält ebenfalls kein Wissen zur Thematik und wird daher entfernt.
-Zusätzlich werden fehlerhafte Textstellen wie fehlende Verweise entfernt. Diese Textstellen existieren nur in der Word-Version des Buches, jedoch nicht in der finalen PDF-Version. Da eine Extraktion von Text aus PDF-Dateien jedoch zu groben Problemen in der Formatierung von Text führt, wurde darauf verzichtet.
+Die Titel-Seite wird reduziert auf den Titel des Buches, das Vorwort entfällt da es kein Wissen zur Thematik enthält und Tabellen- und Bildverzeichnise entfallen ebenfalls.
+Bild- und Tabellenverzeichnise enthalten Wissen, können aber in keinem Kontext gesetzt werden, da die genutzten Attention-Mechanismen des Modells nicht diese Verzeichnisse mit Texten in späteren Kapiteln verbinden können, da der Kontext zu groß ist.
+Die Autorenvorstellung enthält ebenfalls kein Wissen zur Thematik und wird daher entfernt.
+Zusätzlich werden fehlerhafte Textstellen wie fehlende Verweise entfernt.
+Diese Textstellen existieren nur in der Word-Version des Buches, jedoch nicht in der finalen PDF-Version.
+Da eine Extraktion von Text aus PDF-Dateien jedoch zu groben Problemen in der Formatierung von Text führt, wurde darauf verzichtet.
 
 \subsection{Optionale Textentfernungen}
 Es ist zu untersuchen, ob die Entfernung von Literaturverzeichnissen, Überschriften und Tabellen zu einer besseren Leistung führen.
 Literaturverzeichnisse beziehen sich auf das vorangegangen Kapitel, sind jedoch in einem schwierigen Format.
 Inbesondere \ac{url}s müssen vom Modell in Tokens zerlegt werden, die den Inhalt der \ac{url} nicht wiederspiegelt.
-Überschriften haben im Vergleich zum Text einen minimalen Anteil der Gesamtmenge an Tokens, wordurch ihr enthaltenes Wissen durchaus verloren geht. Die für den Menschen verständliche Formatierung einer Überschrift hat keinen Einfluss auf die Bewertung des Modells.
-Tabellen sind in einem Format, das vom Modell nicht nativ verarbeitet werden kann. Selbst die Tabellendarstellung in Markdown ist zwar einlesbar, aber zu bezweifeln ob diese verständlich ist. Durch die geringe Größe des Datensatzes, ist auch nicht zu erwarten, dass dieses Format verstanden wird. Es wird daher hier eine Aufzählung als Ersatz für Tabellen genutzt.
+Überschriften haben im Vergleich zum Text einen minimalen Anteil der Gesamtmenge an Tokens, wordurch ihr enthaltenes Wissen durchaus verloren geht.
+Die für den Menschen verständliche Formatierung einer Überschrift hat keinen Einfluss auf die Bewertung des Modells.
+Tabellen sind in einem Format, das vom Modell nicht nativ verarbeitet werden kann.
+Selbst die Tabellendarstellung in Markdown ist zwar einlesbar, aber zu bezweifeln ob diese verständlich ist.
+Durch die geringe Größe des Datensatzes, ist auch nicht zu erwarten, dass dieses Format verstanden wird.
+Es wird daher hier eine Aufzählung als Ersatz für Tabellen genutzt.
 
-\subsection{}
+\subsection{Bleibende Texte}
+Das Abkürzungsverzeichnis und das Glossar bleiben im Text enthalten, da hier wichtiges Wissen zum Verständnis von eventuellen Fragen definiert wird.
+Einige Fragen können Akronyme oder Fachbegriffe benutzen, welche von dem Modell verstanden werden sollten.
 
-- Formate die das Modell nicht verarbeiten kann
-    - Bilder
-    - Referenzen auf Bilder
-    - Bild-Unterschriften
+\subsection{Formatierung von Text}
+Die Formatierung des Textes in dem Word-Dokument kann nicht beachtet werden.
+Deshalb muss hier ein Ersatz in Form von Markdown-Formatierung gefunden werden.
+Überschriften werden durch \texttt{\#} dargestellt, Aufzählungen durch \texttt{-} und \texttt{1.}.
+Tabellen werden durch eine Aufzählung dargestellt, wobei die erste Zeile die Überschriften enthält und die zweite Zeile die Trennung zwischen Überschriften und Inhalt darstellt.
+Die Trennung zwischen den Spalten wird durch \texttt{|} dargestellt.
+Hochgestellte und tiefgestellte Zahlen werden durch \texttt{\^} und \texttt{\_} dargestellt.
+Formeln werden in den \LaTeX Math-Modus umformuliert.
 
-Textpassagen ohne Wissen oder Kontext:
-    - Cover Page
-    - Vorwort
-    - Inhaltsverzeichnis
-    - Tabellenverzeichnis, Bildverzeichnis
-    - Autorenvorstellung
-    - Seitenzahlen, Kopf und Fußzeile
-    - Fehlerhafte Textstellen (fehlende Verweise)
-
-Optionale Textentfernung mit potentiell besserer Leistung:
-    - Literaturverzeichnis
-    - Überschriften
-    - Tabellen
-
-Textpassagen die enthalten bleiben
-    - Abkürzungsverzeichnis
-    - Glossar
-
-Text der anders Repräsentiert wird
-    - Überschriften
-    - Tabellen
-    - Formatierung (Schrägschrift, Fett, Unterstrichen, etc.)
-    - Hochgestellte / Tiefgestellte Zeichen
-    - Formeln
-
-
-Potentielle Fragenextraktion
-    - Exercises mit Antworten
-    - Glossar mit Definitionen
-    - Abkürzungsverzeichnis
-
+\subsection{Potentielle Extraktion von Fragen}
+Neben der Nutzung des Textes als Eingabe in das Modell kann ebenso weiterer Nutzung gezogen werden.
+Abschnitte, welche Übungsaufgaben darstellen, als auch das Glossar und das Abkürzungsverzeichnis können als Quelle für Fragen genutzt werden,
+um das Modell und andere Modelle besser zu evaluieren.
 
 \section{Unüberwachtes Weitertrainieren}
 Um das LLaMa Modell zu trainieren, wird ein Programm benötigt, dass den Datensatz in Tokens umwandelt, und diese dann in Batches dem Modell übergibt.
@@ -237,19 +231,30 @@ Normalerweise wird dies durch ein längeres Training behoben, wodurch die zuerst
 Mit Hilfe der Aufwärmphase verhindert man ein verlängertes Training.
 Da in diesem Fall das Modell bereits auf einem großen Datensatz trainiert wurde, ist eine Aufwärmphase nicht notwendig.\\
 
-Der Artikel von \citet{llama} beschreibt ein Training über ein Epoche. 
+Der Artikel von \citet{llama} beschreibt ein Training über ein Epoche.
 Da in diesem Fall jedoch der Datensatz minimal im Vergleich ist, wird eine höhere Anzahl an Epochen genutzt.\\
 
-\subsection{Ausführen des Training-Programme}
+\subsection{Ausführen der Training-Programme}
 
-Zur Ausführung der Trainingsprogramme wird SLURM genutzt \footnote{https://slurm.schedmd.com/overview.html (abgerufen am 16.6.2023)}. Mit Hilfe von SLURM-Skripten können Programm über mehrere Nodes, CPUs und GPUs verteilt berechnet werden. Diese Skript-Sprache wird vom Rechenzentrum der Universität Leipzig genutzt, um verschiedene Programme auf den Supercomputern Clara und Paula auszuführen.\\
+Zur Ausführung der Trainingsprogramme wird SLURM genutzt \footnote{https://slurm.schedmd.com/overview.html (abgerufen am 16.6.2023)}.
+Mit Hilfe von SLURM-Skripten können Programm über mehrere Nodes, CPUs und GPUs verteilt berechnet werden.
+Diese Skript-Sprache wird vom Rechenzentrum der Universität Leipzig genutzt, um verschiedene Programme auf den Supercomputern Clara und Paula auszuführen.\\
 
-Die Supercomputer Clara und Paula sind Rechennetzwerke, spezialisiert für GPU-beschleunigte Berechnung. Sie besitzen 
-- Nutzung von SLURM
-- Kommunikation zwischen GPUS und Nodes
-- Long-Time Nodes
-- Speicherung von Modellen mit Checkpoints
-- Größe der Modelle = Anzahl notwendiger GPUs
+Die Supercomputer Clara und Paula sind Rechennetzwerke, spezialisiert für GPU-beschleunigte Berechnung.
+Paula besteht aus 12 Nodes, welche jeweils 8 Nvidia Tesla A30 GPUs besitzen.
+Clara ist zweigeteilt und besteht aus 8 Nodes mit jeweils 4 Nvidia Tesla V100 GPUs und 22 Nodes mit jeweils 8 Nvidid GeForce RTX 2080 TI GPUs.
+Die Nodes sind über ein Infiniband-Netzwerk verbunden, welches eine hohe Bandbreite und geringe Latenz bietet.\\
+
+Supercomputer sind geteilte Ressourcen und können von mehreren Nutzern reserviert werden.
+Daher ist die Auswahl der Supercomputer abhängig davon, welche Nodes zu welchem Zeitpunkt frei sind.
+Generell werden Nodes von Clara mit V100 GPUs bevorzugt, da hier der größtmögliche Speicher zur Verfügung pro GPU zur Verfügung steht.
+Dies führt dazu, dass weniger Nodes gleichzeitig reserviert werden müssen, somit die Wartezeit verkürzt wird und die Kommunikation zwischen Nodes minimiert wird.\\
+
+Die Trainingsprogramme müssen ebenso mit der Multi-GPU Architektur umgehen können.
+Hierfür wird die Bibliothek DeepSpeed \citep{deepspeed} in Kombination mit der Transformers Bibliothek genutzt.
+DeepSpeed ermöglicht verschiedene Arten der Parallelisierung, der Fokus ist hier ZeRO 2 \citep{ZeRO}. Die ZeRO Parallelisierung erlaubt verteilte parallele Datenverarbeitung, wodurch das Modell auf mehrere GPUs aufgeteilt wird.
+Ohne diese Option ist ein Training nicht möglich, da wie bereits beschrieben einzelne Modelle nicht vollständig auf eine GPU passen.
+Genauere Erklärung zur Konfiguration von DeepSpeed und der Nutzung der Transformers Bibliothek sind in \ref{ch:solution} beschrieben.
 
 \section{Klausurfragen}
 - Klausurfragen Antwortenerstellung
