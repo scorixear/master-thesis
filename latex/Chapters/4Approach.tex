@@ -24,7 +24,7 @@
 Für die Auswahl eines Sprachmodells müssen verschiedene Kriterien erfüllt sein.
 Ausgehend von der Aufgabenstellung in \ref{sec:zielsetzung} stehen verschiedene Modelle der Transformer-Architektur zur Auswahl.
 Die Auswahl beschränkt sich auf Decoder-basierte Modelle, da diese die Eigenschaften eines autoregressiven Modells besitzen.
-Wie bereits in \ref{sec:grundlagen_transformer} beschrieben, ist das Ziel die Generierung von Text auf Basis einer Fragestellung.
+Wie bereits in \ref{sec:grundlagen:transformer} beschrieben, ist das Ziel die Generierung von Text auf Basis einer Fragestellung. % TODO: grundlagen Kapitel + Label
 Diese Fragestellung wird zu Beginn als Eingabe zur Verfügung gestellt, woraufhin das Modell kontinuierlich neue Tokens generiert.
 Neu generierte Tokens werden in Verbindung mit der ursprünglichen Fragestellung als Eingabe verwendet, um das nächste Token zu generieren.
 Dieses Verhalten entspricht autoregressiven Modellen und erfordert Decoder-basierte Modelle.
@@ -75,7 +75,7 @@ Die Leistungsfähigkeit von GPT-4 ist jedoch deutlich höher als die von GPT-3, 
 Die Größe des Modells wurde von OpenAI nicht veröffentlicht, ist aber definitiv größer als GPT-3, weshalb eine Verwendung hier allein aufgrund der Größe ausscheidet.\\
 
 GPT-J erreicht mit 6,7 Milliarden Parametern die Größe des kleinsten Modells GPT-3, zeigt aber eine deutlich bessere Performance als GPT-2.
-Das Modell ist unter \citet{gptj} veröffentlicht und frei verfügbar.
+Das Modell ist unter \citet{gptj} veröffentlicht und frei verfügbar. % TODO: Citation
 Die Leistungsfähigkeit des Modells ist im Vergleich zu den anderen Modellen in der Auswahl geringer und wird daher ausgeschlossen.\\
 
 GPT-NeoX wurde in \citet{gpt_neox} vorgestellt und erreicht mit einer Größe von 20 Milliarden Parametern die Leistungsfähigkeit von GPT-3 mit 175 Milliarden Parametern.
@@ -88,7 +88,7 @@ Durch die Ausrichtung auf längeres Training und größere Datensätze bieten si
 Um die bestmögliche Performance mit den kleinstmöglichen Modellen zu erreichen, werden die Modelle von LLaMa ausgewählt.
 Hier stellt sich die Frage, welches Modell aus der LLaMa-Reihe verwendet werden soll.
 Die Modelle unterscheiden sich sowohl in der Größe als auch proportional in der Leistung.
-Abbildung \ref{llama_naturalquestion} zeigt die Leistung der Modelle im Vergleich zu anderen Modellen und in verschiedenen Einstellungen (ZeroShot bis 64Shot).
+Abbildung \ref{llama_naturalquestion} zeigt die Leistung der Modelle im Vergleich zu anderen Modellen und in verschiedenen Einstellungen (ZeroShot bis 64Shot). % TODO: Abbildung aus LLama Paper
 Selbst das kleinste Modell mit 7 Milliarden Parametern übertrifft die Leistung von GPT-3 und kann während der Interferenz auf einer einzelnen V100 GPU verwendet werden.
 Nach Angaben der Autoren kann auch das 13 Milliarden Parameter Modell auf einer einzelnen V100 GPU genutzt werden, was für die Wahl dieses Modells spricht.
 Das 33 Milliarden Parameter Modell erzielt sogar etwas bessere Ergebnisse im ZeroShot als das 65 Milliarden Parameter Modell, weshalb hier die Wahl des 33 Milliarden Parameter Modells sinnvoll ist.
@@ -99,7 +99,7 @@ Aufgrund der vielversprechenden ZeroShot Performance wird in dieser Arbeit das 3
 Die Modelle sind jedoch nicht öffentlich verfügbar, sondern werden nur zu Forschungszwecken über einen Antrag veröffentlicht.
 Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
 
-Eine Alternative zu den LLaMa-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}.
+Eine Alternative zu den LLaMa-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}. % TODO: Citation
 Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMa-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar.
 Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf diese Modelle verzichtet.\\
 
@@ -132,7 +132,7 @@ Da eine Extraktion von Text aus PDF-Dateien jedoch zu groben Problemen in der Fo
 \subsection{Optionale Textentfernungen}
 Es ist zu untersuchen, ob die Entfernung von Literaturverzeichnissen, Überschriften und Tabellen zu einer besseren Leistung führen.
 Literaturverzeichnisse beziehen sich auf das vorangegangen Kapitel, sind jedoch in einem schwierigen Format.
-Inbesondere \ac{url}s müssen vom Modell in Tokens zerlegt werden, die den Inhalt der \ac{url} nicht wiederspiegelt.
+Inbesondere \ac{url}s müssen vom Modell in Tokens zerlegt werden, die den Inhalt der \ac{url} nicht wiederspiegelt. 
 Überschriften haben im Vergleich zum Text einen minimalen Anteil der Gesamtmenge an Tokens, wordurch ihr enthaltenes Wissen durchaus verloren geht.
 Die für den Menschen verständliche Formatierung einer Überschrift hat keinen Einfluss auf die Bewertung des Modells.
 Tabellen sind in einem Format, das vom Modell nicht nativ verarbeitet werden kann.
@@ -179,12 +179,12 @@ Solange die Differenz zwischen den beiden Kostfunktionen nicht zu groß ist, kon
 
 Zur Durchführung dieser Trainingsschritte wird die Programmiersprache Python genutzt, da sie eine große Anzahl an Bibliotheken für die Verarbeitung von Texten und die Nutzung von neuronalen Netzen bietet.
 Die Bibliothek Transformers von HuggingFace bietet eine Vielzahl an Modellen und Trainingsmethoden und baut auf der populären Bibliothek PyTorch auf.
-PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer NVIDIA GPU durchzuführen, welches die Rechenschritte beschrieben in \ref{sec:grundlagen:training} um ein Vielfaches beschleunigt.
+PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer NVIDIA GPU durchzuführen, welches die Rechenschritte beschrieben in \ref{sec:grundlagen:training} um ein Vielfaches beschleunigt. % TODO: Rechenschritte in Grundlagen erklären, label hinzufügen
 Ebenso kann mit Hilfe von DeepSpeed dieses Training auf mehrere GPUs aufgeteilt werden.
 Das ist notwendig, da das verwendete Modell mit 33 Milliarden Parametern zu groß ist, um in den RAM-Speicher einer einzelnen GPU zu passen.
 
 Bevor das Training beginnt, müssen einige Konfigurationsparameter festgelegt werden.
-Diese Parameter sind in Tabelle \ref{tab:training:parameter} aufgelistet und folgen den Training-Parametern von \citet{llama}.\\
+Diese Parameter sind in Tabelle~\ref{tab:training:parameter} aufgelistet und folgen den Training-Parametern von \citet{llama}.\\
 
 \begin{table}
     \centering
@@ -213,7 +213,7 @@ Die Lernrate wird während des Trainings angepasst, um eine schnelle Konvergenz 
 Diese Anpassing folgt der Cosinus-Learning-Rate Schedule, sodass die endgüligte Lernrate bei 10\% des ursprünglichen Wertes liegt.
 Lernraten sind abhängig von der Größe des Modells.
 Generell gilt, dass größere Modelle eine niedrigere Lernrate benötigen.\\
-Der Optimierer AdamW übernimmt den zeitlichen Abfall der Gewichte und wurde  in \citet{adamw} vorgestellt.
+Der Optimierer AdamW übernimmt den zeitlichen Abfall der Gewichte und wurde  in \citet{adamw} vorgestellt. % TODO: Citation
 Er ist in aktuellen Modellen die häufigste Wahl und wurde ebenso für das Training der LLaMa Modelle genutzt.\\
 
 Gewichtsreduktion (engl. \enquote{Weight Decay}) ist ein Parameter, der die Gewichte während des Trainings reduziert.
@@ -251,14 +251,16 @@ Generell werden Nodes von Clara mit V100 GPUs bevorzugt, da hier der größtmög
 Dies führt dazu, dass weniger Nodes gleichzeitig reserviert werden müssen, somit die Wartezeit verkürzt wird und die Kommunikation zwischen Nodes minimiert wird.\\
 
 Die Trainingsprogramme müssen ebenso mit der Multi-GPU Architektur umgehen können.
-Hierfür wird die Bibliothek DeepSpeed \citep{deepspeed} in Kombination mit der Transformers Bibliothek genutzt.
-DeepSpeed ermöglicht verschiedene Arten der Parallelisierung, der Fokus ist hier ZeRO 2 \citep{ZeRO}. Die ZeRO Parallelisierung erlaubt verteilte parallele Datenverarbeitung, wodurch das Modell auf mehrere GPUs aufgeteilt wird.
+Hierfür wird die Bibliothek DeepSpeed \citep{deepspeed} in Kombination mit der Transformers Bibliothek genutzt. % TODO: Citation
+DeepSpeed ermöglicht verschiedene Arten der Parallelisierung, der Fokus ist hier ZeRO 2 \citep{ZeRO}. Die ZeRO Parallelisierung erlaubt verteilte parallele Datenverarbeitung, wodurch das Modell auf mehrere GPUs aufgeteilt wird. % TODO: Citation
 Ohne diese Option ist ein Training nicht möglich, da wie bereits beschrieben einzelne Modelle nicht vollständig auf eine GPU passen.
 Genauere Erklärung zur Konfiguration von DeepSpeed und der Nutzung der Transformers Bibliothek sind in \ref{ch:solution} beschrieben.
+% TODO: Kapitel Solutions reminder
 
 \section{Klausurfragen}
 - Klausurfragen Antwortenerstellung
 - Umformulierung zu Prompt (da Finetuning nicht vorhanden)
+% TODO: Klausurfragen Zugang noch ausstehend
 
 \section{Modellvergleich}
 - Berechnung von Precision, Recall, F-Score
