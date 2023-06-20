@@ -21,6 +21,18 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	});
 
+	let disposable2 = vscode.commands.registerCommand('latex-newline.replace_dots_selection', () => {
+		const editor = vscode.window.activeTextEditor;
+		const selection = editor?.selection;
+		if (selection && !selection.isEmpty) {
+			const selectionRange = new vscode.Range(selection.start.line, selection.start.character, selection.end.line, selection.end.character);
+			const highlightedText = editor?.document.getText(selectionRange);
+			editor?.edit(editBuilder => {
+				editBuilder.replace(selectionRange, replaceDots(highlightedText)??"");
+			});
+		}
+	});
+
 	context.subscriptions.push(disposable);
 }
 

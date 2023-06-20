@@ -16,6 +16,10 @@
       {
         "command": "latex-newline.replace_dots",
         "title": "LaTeX NewLine: Replace dots with newlines"
+      },
+      {
+        "command": "latex-newline.replace_dots_selection",
+        "title": "LaTeX NewLine: Selection->Replace dots with newlines"
       }
     ]
   },
