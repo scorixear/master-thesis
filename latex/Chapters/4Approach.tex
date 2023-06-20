@@ -54,7 +54,7 @@ Andere Modelle wie BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5 sin
 Sie sind für Textklassifikation, Textübersetzung, Textzusammenfassung, Dialoge oder Text-2-Text-Aufgaben ausgelegt.\\
 
 GPT-2 ist das kleinste Modell der OpenAI GPT-Serie und wurde erstmals in \citet{gpt2} vorgestellt.
-Aufgrund seiner geringen Größe kann das Modell auf einzelnen GPUs trainiert und verwendet (inferiert) werden, was die Nutzung des Modells erheblich vereinfacht.
+Aufgrund seiner geringen Größe kann das Modell auf einzelnen \ac{gpu}s trainiert und verwendet (inferiert) werden, was die Nutzung des Modells erheblich vereinfacht.
 Außerdem ist es frei verfügbar und kann ohne weitere Maßnahmen verwendet werden.
 Allerdings ist die Performance in der Einstellung ZeroShot nicht ausreichend.
 Das Modell erreicht eine Imitation von Texten, aber kein Verständnis und keine Wiedergabe von Fakten.\\
@@ -65,7 +65,7 @@ Es existiert zwar eine \ac{api}, diese dient jedoch nur zur Interferenz des Mode
 Damit fällt das Modell bereits aus der Auswahl.
 Ein weiteres Problem stellt die Größe des Modells dar.
 Mit ca.
-175 Milliarden Parametern ist eine Nutzung des Modells nur mit 8 A100 GPUs möglich.
+175 Milliarden Parametern ist eine Nutzung des Modells nur mit 8 A100 \ac{gpu}s möglich.
 Das Training benötigt zusätzlich etwa die 4-fache Leistung.
 Diese Leistung kann zwar vom Rechenzentrum der Universität Leipzig bereitgestellt werden, verhindert aber den Einsatz des Modells in einer längerfristigen Umgebung.\\
 
@@ -75,31 +75,56 @@ Die Leistungsfähigkeit von GPT-4 ist jedoch deutlich höher als die von GPT-3, 
 Die Größe des Modells wurde von OpenAI nicht veröffentlicht, ist aber definitiv größer als GPT-3, weshalb eine Verwendung hier allein aufgrund der Größe ausscheidet.\\
 
 GPT-J erreicht mit 6,7 Milliarden Parametern die Größe des kleinsten Modells GPT-3, zeigt aber eine deutlich bessere Performance als GPT-2.
-Das Modell ist unter \citet{gptj} veröffentlicht und frei verfügbar. % TODO: Citation
+Das Modell ist unter \citet{gptj} veröffentlicht und frei verfügbar.
 Die Leistungsfähigkeit des Modells ist im Vergleich zu den anderen Modellen in der Auswahl geringer und wird daher ausgeschlossen.\\
 
 GPT-NeoX wurde in \citet{gpt_neox} vorgestellt und erreicht mit einer Größe von 20 Milliarden Parametern die Leistungsfähigkeit von GPT-3 mit 175 Milliarden Parametern.
 Das Modell ist frei verfügbar und kann ohne weitere Maßnahmen verwendet werden.
-Die Leistung des Modells ist vergleichbar mit GPT-3, während die Größe des Modells ein Training mit 8 A100 GPUs erlaubt.
+Die Leistung des Modells ist vergleichbar mit GPT-3, während die Größe des Modells ein Training mit 8 A100 \ac{gpu}s erlaubt.
 Diese Leistung wird jedoch von LLaMa übertroffen und daher nicht ausgewählt.\\
 
 Die in \citet{llama} vorgestellten LLaMa-Modelle haben einen besonderen Ansatz.
 Durch die Ausrichtung auf längeres Training und größere Datensätze bieten sie parametereffiziente Modelle, die sehr gute Leistungen erzielen können.
 Um die bestmögliche Performance mit den kleinstmöglichen Modellen zu erreichen, werden die Modelle von LLaMa ausgewählt.
 Hier stellt sich die Frage, welches Modell aus der LLaMa-Reihe verwendet werden soll.
-Die Modelle unterscheiden sich sowohl in der Größe als auch proportional in der Leistung.
-Abbildung \ref{llama_naturalquestion} zeigt die Leistung der Modelle im Vergleich zu anderen Modellen und in verschiedenen Einstellungen (ZeroShot bis 64Shot). % TODO: Abbildung aus LLama Paper
-Selbst das kleinste Modell mit 7 Milliarden Parametern übertrifft die Leistung von GPT-3 und kann während der Interferenz auf einer einzelnen V100 GPU verwendet werden.
-Nach Angaben der Autoren kann auch das 13 Milliarden Parameter Modell auf einer einzelnen V100 GPU genutzt werden, was für die Wahl dieses Modells spricht.
+Die Modelle unterscheiden sich sowohl in der Größe als auch proportional in der Leistung.\\
+
+\begin{table}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{lrcccccccc}
+        \midrule
+        &&BoolQ&PIQA&SIQA&HellaSwag&WinoGrande&ARC-e&ARC-c&OBQA\\
+        \midrule
+        GPT-3&175B&60.5&81.0&-&78.0&70.2&68.8&51.4&57.6\\
+        Gopher&280B&79.3&81.8&50.6&79.2&70.1&-&-&-\\
+        Chinchilla&70B&83.7&81.8&51.3&80.8&74.9&-&-&-\\
+        PaLM&62B&84.8&80.5&-&79.7&77.0&75.2&52.5&50.4\\
+        PaLM-cont&62B&83.9&81.4&-&80.6&77.0&-&-&-\\
+        PaLM&540B&\textbf{88.0}&82.3&-&83.4&\textbf{81.1}&76.6&53.0&53.4\\
+        \midrule
+        \multirow{4}{*}{LLaMa}&7B&76.5&79.8&48.9&76.1&70.1&72.8&47.6&57.2\\
+        &13B&78.1&80.1&50.4&79.2&73.0&74.8&52.7&56.4\\
+        &33B&83.1&82.3&50.4&82.8&76.0&\textbf{80.0}&\textbf{57.8}&58.6\\
+        &65B&85.3&\textbf{82.8}&\textbf{52.3}&\textbf{84.2}&77.0&78.9&56.0&\textbf{60.2}\\
+        \midrule
+    \end{tabular}
+    }
+    \caption{Zero-Shot Leistung verschiedener Modelle in Begründungsaufgaben für gesunden Menschenverstand. Veröffentlicht in \citet{llama}}
+    \label[table]{tab:llama_naturalquestion}
+\end{table}
+
+Tabelle \ref{tab:llama_naturalquestion} zeigt die Leistung der Modelle im Vergleich zu anderen Modellen und in verschiedenen Einstellungen (ZeroShot bis 64Shot).
+Selbst das kleinste Modell mit 7 Milliarden Parametern übertrifft die Leistung von GPT-3 und kann während der Interferenz auf einer einzelnen V100 \ac{gpu} verwendet werden.
+Nach Angaben der Autoren kann auch das 13 Milliarden Parameter Modell auf einer einzelnen V100 \ac{gpu} genutzt werden, was für die Wahl dieses Modells spricht.
 Das 33 Milliarden Parameter Modell erzielt sogar etwas bessere Ergebnisse im ZeroShot als das 65 Milliarden Parameter Modell, weshalb hier die Wahl des 33 Milliarden Parameter Modells sinnvoll ist.
-Mit 33 Milliarden Parametern und der Verwendung von Float16 Werten (auch Half-Precision genannt) benötigt das Modell 66 GB GPU RAM, um für die Interferenz verwendet werden zu können.
-Für das Training werden 264 GB GPU RAM benötigt, was 4 A100 GPUs entspricht.
-Das Modell mit 65 Milliarden Parametern benötigt 7 A100 GPUs für das Training und 2 A100 GPUs für die Nutzung.
+Mit 33 Milliarden Parametern und der Verwendung von Float16 Werten (auch Half-Precision genannt) benötigt das Modell 66 GB \ac{gpu} RAM, um für die Interferenz verwendet werden zu können.
+Für das Training werden 264 GB \ac{gpu} RAM benötigt, was 4 A100 \ac{gpu}s entspricht.
+Das Modell mit 65 Milliarden Parametern benötigt 7 A100 \ac{gpu}s für das Training und 2 A100 \ac{gpu}s für die Nutzung.
 Aufgrund der vielversprechenden ZeroShot Performance wird in dieser Arbeit das 33 Milliarden Parameter Modell gewählt.
 Die Modelle sind jedoch nicht öffentlich verfügbar, sondern werden nur zu Forschungszwecken über einen Antrag veröffentlicht.
 Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
 
-Eine Alternative zu den LLaMa-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}. % TODO: Citation
+Eine Alternative zu den LLaMa-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}.
 Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMa-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar.
 Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf diese Modelle verzichtet.\\
 
@@ -179,9 +204,9 @@ Solange die Differenz zwischen den beiden Kostfunktionen nicht zu groß ist, kon
 
 Zur Durchführung dieser Trainingsschritte wird die Programmiersprache Python genutzt, da sie eine große Anzahl an Bibliotheken für die Verarbeitung von Texten und die Nutzung von neuronalen Netzen bietet.
 Die Bibliothek Transformers von HuggingFace bietet eine Vielzahl an Modellen und Trainingsmethoden und baut auf der populären Bibliothek PyTorch auf.
-PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer NVIDIA GPU durchzuführen, welches die Rechenschritte beschrieben in \ref{sec:grundlagen:training} um ein Vielfaches beschleunigt. % TODO: Rechenschritte in Grundlagen erklären, label hinzufügen
-Ebenso kann mit Hilfe von DeepSpeed dieses Training auf mehrere GPUs aufgeteilt werden.
-Das ist notwendig, da das verwendete Modell mit 33 Milliarden Parametern zu groß ist, um in den RAM-Speicher einer einzelnen GPU zu passen.
+PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer NVIDIA \ac{gpu} durchzuführen, welches die Rechenschritte beschrieben in \ref{sec:grundlagen:training} um ein Vielfaches beschleunigt. % TODO: Rechenschritte in Grundlagen erklären, label hinzufügen
+Ebenso kann mit Hilfe von DeepSpeed dieses Training auf mehrere \ac{gpu}s aufgeteilt werden.
+Das ist notwendig, da das verwendete Modell mit 33 Milliarden Parametern zu groß ist, um in den RAM-Speicher einer einzelnen \ac{gpu} zu passen.
 
 Bevor das Training beginnt, müssen einige Konfigurationsparameter festgelegt werden.
 Diese Parameter sind in Tabelle~\ref{tab:training:parameter} aufgelistet und folgen den Training-Parametern von \citet{llama}.\\
@@ -213,7 +238,7 @@ Die Lernrate wird während des Trainings angepasst, um eine schnelle Konvergenz 
 Diese Anpassing folgt der Cosinus-Learning-Rate Schedule, sodass die endgüligte Lernrate bei 10\% des ursprünglichen Wertes liegt.
 Lernraten sind abhängig von der Größe des Modells.
 Generell gilt, dass größere Modelle eine niedrigere Lernrate benötigen.\\
-Der Optimierer AdamW übernimmt den zeitlichen Abfall der Gewichte und wurde  in \citet{adamw} vorgestellt. % TODO: Citation
+Der Optimierer AdamW übernimmt den zeitlichen Abfall der Gewichte und wurde  in \citet{adamw} vorgestellt.
 Er ist in aktuellen Modellen die häufigste Wahl und wurde ebenso für das Training der LLaMa Modelle genutzt.\\
 
 Gewichtsreduktion (engl. \enquote{Weight Decay}) ist ein Parameter, der die Gewichte während des Trainings reduziert.
@@ -237,23 +262,24 @@ Da in diesem Fall jedoch der Datensatz minimal im Vergleich ist, wird eine höhe
 \subsection{Ausführen der Training-Programme}
 
 Zur Ausführung der Trainingsprogramme wird SLURM genutzt \footnote{https://slurm.schedmd.com/overview.html (abgerufen am 16.6.2023)}.
-Mit Hilfe von SLURM-Skripten können Programm über mehrere Nodes, CPUs und GPUs verteilt berechnet werden.
+Mit Hilfe von SLURM-Skripten können Programm über mehrere Nodes, CPUs und \ac{gpu}s verteilt berechnet werden.
 Diese Skript-Sprache wird vom Rechenzentrum der Universität Leipzig genutzt, um verschiedene Programme auf den Supercomputern Clara und Paula auszuführen.\\
 
-Die Supercomputer Clara und Paula sind Rechennetzwerke, spezialisiert für GPU-beschleunigte Berechnung.
-Paula besteht aus 12 Nodes, welche jeweils 8 Nvidia Tesla A30 GPUs besitzen.
-Clara ist zweigeteilt und besteht aus 8 Nodes mit jeweils 4 Nvidia Tesla V100 GPUs und 22 Nodes mit jeweils 8 Nvidid GeForce RTX 2080 TI GPUs.
+Die Supercomputer Clara und Paula sind Rechennetzwerke, spezialisiert für \ac{gpu}-beschleunigte Berechnung.
+Paula besteht aus 12 Nodes, welche jeweils 8 Nvidia Tesla A30 \ac{gpu}s besitzen.
+Clara ist zweigeteilt und besteht aus 8 Nodes mit jeweils 4 Nvidia Tesla V100 \ac{gpu}s und 22 Nodes mit jeweils 8 Nvidid GeForce RTX 2080 TI \ac{gpu}s.
 Die Nodes sind über ein Infiniband-Netzwerk verbunden, welches eine hohe Bandbreite und geringe Latenz bietet.\\
 
 Supercomputer sind geteilte Ressourcen und können von mehreren Nutzern reserviert werden.
 Daher ist die Auswahl der Supercomputer abhängig davon, welche Nodes zu welchem Zeitpunkt frei sind.
-Generell werden Nodes von Clara mit V100 GPUs bevorzugt, da hier der größtmögliche Speicher zur Verfügung pro GPU zur Verfügung steht.
+Generell werden Nodes von Clara mit V100 \ac{gpu}s bevorzugt, da hier der größtmögliche Speicher zur Verfügung pro \ac{gpu} zur Verfügung steht.
 Dies führt dazu, dass weniger Nodes gleichzeitig reserviert werden müssen, somit die Wartezeit verkürzt wird und die Kommunikation zwischen Nodes minimiert wird.\\
 
-Die Trainingsprogramme müssen ebenso mit der Multi-GPU Architektur umgehen können.
-Hierfür wird die Bibliothek DeepSpeed \citep{deepspeed} in Kombination mit der Transformers Bibliothek genutzt. % TODO: Citation
-DeepSpeed ermöglicht verschiedene Arten der Parallelisierung, der Fokus ist hier ZeRO 2 \citep{ZeRO}. Die ZeRO Parallelisierung erlaubt verteilte parallele Datenverarbeitung, wodurch das Modell auf mehrere GPUs aufgeteilt wird. % TODO: Citation
-Ohne diese Option ist ein Training nicht möglich, da wie bereits beschrieben einzelne Modelle nicht vollständig auf eine GPU passen.
+Die Trainingsprogramme müssen ebenso mit der Multi-\ac{gpu} Architektur umgehen können.
+Hierfür wird die Bibliothek DeepSpeed \citep{deepspeed} in Kombination mit der Transformers Bibliothek genutzt.
+DeepSpeed ermöglicht verschiedene Arten der Parallelisierung, der Fokus ist hier ZeRO 2 \citep{ZeRO}.
+Die ZeRO Parallelisierung erlaubt verteilte parallele Datenverarbeitung, wodurch das Modell auf mehrere \ac{gpu}s aufgeteilt wird.
+Ohne diese Option ist ein Training nicht möglich, da wie bereits beschrieben einzelne Modelle nicht vollständig auf eine \ac{gpu} passen.
 Genauere Erklärung zur Konfiguration von DeepSpeed und der Nutzung der Transformers Bibliothek sind in \ref{ch:solution} beschrieben.
 % TODO: Kapitel Solutions reminder
 
@@ -263,21 +289,70 @@ Genauere Erklärung zur Konfiguration von DeepSpeed und der Nutzung der Transfor
 % TODO: Klausurfragen Zugang noch ausstehend
 
 \section{Modellvergleich}
-- Berechnung von Precision, Recall, F-Score
-- Aggregation der Ergebnisse
+Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Evaluierung.
+Hierzu werden Fragen der Klausuren der letzten Jahre aus dem Modul \enquote{Architektur von Informationssystemen im Gesundheitswesen} und weitere Fragen aus den Buch \citet{bb} als Fragenkatalog genutzt.
+Diese Fragen werden in drei Kategorien unterteilt:
+\begin{enumerate}
+    \item Singulär-Faktfragen, welche einen spezifischen Fakt abfragen
+    \item Multi-Faktfragen, welche mehrere Fakten abfragen
+    \item Transferfragen, welche einen Fakt aus einem Kontext in einen anderen Kontext übertragen
+\end{enumerate}
+Diese Fragen werden von dem LLaMa Modell 7B und 33B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
+Die Antworten werden manuell evaluiert und mit den Antworten aus dem Buch \citet{bb} verglichen.
+Die Lösungen unterteilen sich ebenfalls in drei Kategorien:
+\begin{enumerate}
+    \item Korrekt, wenn die Antwort mit der Antwort aus dem Buch übereinstimmt
+    \item Falsch, wenn die Antwort falsches Wissen enthält
+    \item Nicht Beantwortet, wenn der generierte Text keinerlei Bezug zur Frage hat
+\end{enumerate}
 
-Nutzung von Omar Kriterien:
-    - Correctness
-    - Determinism
-    - Robustness
-    - Explainability
-    - Question understanding
+Die Modelle werden mit Hilfe der micro-F1 Bewertung verglichen.
+Die Definition folgt der in \citet{chatgpt_qas} beschriebenen Formeln:
+\begin{ceqn}
+\begin{align}
+    C &= S \cap G \\
+    m_{prec} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|S_{qi}|} \\
+    m_{recall} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|G_{qi}|} \\
+    microF1 &= \frac{2 \cdot m_{prec} \cdot m_{recall}}{m_{prec} + m_{recall}}
+\end{align}
+\end{ceqn}
+Hierbei ist $S_q$ die Menge an Antworten, welche zu den Fragen $q$ generiert wurden, $G_q$ die Menge an korrekten Antworten aus dem Buch \citet{bb} und $C_q$ die Menge an korrekten Antworten, welche sowohl in $S_q$ als auch in $G_q$ enthalten sind.
+$N$ ist die Anzahl der Fragen, $m_{prec}$ die Micro-Präzision und $m_{recall}$ der Micro-Recall.
+Der $microF1$ Wert ist das harmonische Mittel aus $m_{prec}$ und $m_{recall}$.
+Fragen gelten als beantwortet, wenn sie den Kategorien 1 und 2 entsprechen.
+Gleiche Berechnungen werden ingesammt und separat für alle drei Fragekategorien durchgeführt.
+Micro-Präszision beschreibt den Anteil korrekter Fragen gegenüber aller beantworteten Fragen.
+Micro-Recall beschreibt den Anteil korrekter Fragen gegenüber aller Fragen.\\
 
-Nicht genutzte Omar Kriterien
-    - Incorporating recent Information
-    - Generailty across different domains
-    
-- Vergleich der Modelle
-- Vergleich mit SOTA Modell
-    - Nutzung von Kontext als Input?
+Den in \citet{chatgpt_qas} beschriebenen Ansatz folgend werden die Modelle auf die Kriterien Korrektheit, Determinismus, Robustheit, Erklärbarkeit und Fragenverständnis evaluiert.
+Die Kriterien \enquote{Nutzung von aktuellen Informationen} und \enquote{Generalisierung über verschiedene Domänen} werden nicht betrachtet, da die Modelle keinen Zugang zu aktuellen Informationen und verschiedenen Domänen besitzen.\\
 
+\noindent\textbf{Korrektheit:}\newline
+Korrektheit wird durch die oben beschriebenen Formeln berechnet und verglichen.
+Höhere Korrektheit entspricht hier einem besseren Ergebniss.
+Im Zuge einer Nutzung des Modells ist ein höhere Mikro-Präzision wichtiger als ein hoher Mikro-Recall, da eine falsche Antwort deutlich mehr einem nicht-wissenden Nutzenden schadet, als keine Antwort.
+Die Modelle sollten stets keine Antwort gegenüber eine falschen Antwort präferieren.\\
+
+\noindent\textbf{Determinismus:}\newline
+Determinismus beschreibt die Reproduzierbarkeit der Antworten.
+Gegeben der gleichen Frage und dem gleichen Modell sollten Antworten stets gleich sein.
+Sprachmodelle besitzen eine gewissen Grad an nicht-deterministischem Verhalten, weshalb diese Statisik ein wichtiges Kriterium ist.
+Hierzu werden Fragen 3 mal an die Modelle gestellt und deren beste Antwort zur Berechnung der Korrektheit genutzt.
+Im Zuge dessen wird auch diese Statistik berechnet.
+Eine Antwort gilt als deterministisch, wenn die selben Fakten mit leichten Umformulierungen in der Antwort enthalten sind.\\
+
+\noindent\textbf{Robustheit:}\newline
+Robustheit beschreibt die Fähigkeit des Modells, auch bei fehlerhaften Eingaben korrekte Antworten zu generieren.
+Hierzu werden grammatikalische Fehler als auch Schreibfehler in eine Teilmenge der Fragen eingefügt und die Korrektheit der Antworten berechnet.
+Eine Antwort gilt als robust, wenn sie auch bei fehlerhaften Eingaben korrekt ist.\\
+
+\noindent\textbf{Erklärbarkeit:}\newline
+Erklärbarkeit beschreibt die Fähigkeit des Modells, die generierten Antworten zu erklären.
+Hierzu werden die Antworten der Modelle manuell überprüft, ob diese eine Erklärung enthalten.
+Sollte dies nicht der Fall sein, wird eine zusätzliche Eingabe erstellt, welche ein Erklärung fordert.
+Eine Antwort gilt als erklärbar, wenn sie eine Erklärung enthält.
+Die Ergebnisse werden unterschieden in \enquote{Ohne zusätzliche Eingabe} und \enquote{Mit zusätzlicher Eingabe}.\\
+
+\noindent\textbf{Fragenverständnis:}\newline
+Fragenverständnis beschreibt die Fähigkeit des Modells, die Frage zu verstehen.
+Hierzu werden die Antworten der Modelle manuell überprüft, ob diese die Frage verstanden haben. Eine Frage gilt als verstanden, wenn die Antwort sich inhaltlich auf die Frage und deren Fakten bezieht. Die Antwort muss dabei nicht korrekt sein.\\
