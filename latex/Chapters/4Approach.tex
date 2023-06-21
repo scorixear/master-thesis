@@ -284,19 +284,38 @@ Genauere Erklärung zur Konfiguration von DeepSpeed und der Nutzung der Transfor
 % TODO: Kapitel Solutions reminder
 
 \section{Klausurfragen}
-- Klausurfragen Antwortenerstellung
-- Umformulierung zu Prompt (da Finetuning nicht vorhanden)
-% TODO: Klausurfragen Zugang noch ausstehend
-
-\section{Modellvergleich}
-Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Evaluierung.
-Hierzu werden Fragen der Klausuren der letzten Jahre aus dem Modul \enquote{Architektur von Informationssystemen im Gesundheitswesen} und weitere Fragen aus den Buch \citet{bb} als Fragenkatalog genutzt.
+\label[section]{sec:approch:questions}
+Zur Überprüfung der Modelle werden Klausurfragen genutzt.
+Diese Klausurfragen ergeben sich aus den mündlichen Prüfungsfragen des Moduls \enquote{Architektur von Informationssystemen im Gesundheitswesen},
+den schriftlichen Klausuren des Moduls \enquote{Informationssysteme in medizinischen Versorgung und Forschung} und aus Teilen des Buches \citet{bb}.
 Diese Fragen werden in drei Kategorien unterteilt:
 \begin{enumerate}
     \item Singulär-Faktfragen, welche einen spezifischen Fakt abfragen
     \item Multi-Faktfragen, welche mehrere Fakten abfragen
     \item Transferfragen, welche einen Fakt aus einem Kontext in einen anderen Kontext übertragen
 \end{enumerate}
+
+Jedoch ist die Anzahl an geschriebenen Klausuren zum Zeitpunkt dieser Arbeit geringer als erwartet, da der Studiengang erst seit 2021 existiert.
+Dies resultiert in einer minderen Qualität der Evaluation,
+beeinfluss aber nicht die Qualität des Models.\\
+
+Die LLaMa Modelle sind ohne zusätzliches Fine-Tuning vorhanden und wurden dementsprechend nicht auf die Aufgabe der Beantwortung von Fragen angepasst.
+Dies führt dazu, dass die Modelle bei einer Fragestellung wie \enquote{Welche Farbe hat der Himmel?} nicht die Antwort liefern, sondern den Text im gleichen Stile mit weiteren Fragen fortführen.
+Um eine Antwort zu einer Frage zu erhalten, müssen diese zu einer unvollständigen Aussage umformuliert werden.
+Hier wird im gegebenen Beispiel aus \enquote{Welche Farbe hat der Himmel?} die Aussage \enquote{Der Himmel hat die Farbe}, welche dann von dem Modell weitergeführt mit \enquote{blau.} beantwortet wird.
+Diesen Prozess der Fragenumformulierung wird bei allen vorhandenen Fragen durchgeführt.
+Das \ac{gpt}-4 Modell wurde auf die Aufgabe der Beanwortung von Fragen trainiert und kann daher mit normalen Fragen evaluiert werden.\\
+
+Einige Fragestellungen erwarten das Skizzieren von Systemen oder das Verbinden von Begriffen mit Pfeilen.
+Da das Modell keine Fähigkeit besitzt, Bilder zu generieren, werden diese Fragestellungen umformuliert um als Textfrage beantwortet werden zu können.
+Eine Skizze wird dementsprechend zur Beschreibung des Systems und eine Verbindung von Begriffen zur Auflistung der Begriffe umformuliert.
+In anderen Fragestellungen werden auf Lösungen der zuvorigen Fragestellung aufgebaut.
+Dies ist nur sinnvoll, wenn das Modell einen Verlauf der Fragestellungen besitzt, welches es nicht tut.
+Diese Fragestellungen müssen ebenso umformuliert werden, um unabhängig von anderen Fragen zu sein.
+
+\section{Modellvergleich}
+Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Evaluierung.
+Hierzu werden die definierten Fragen aus \ref{sec:approch:questions} genutzt.
 Diese Fragen werden von dem LLaMa Modell 7B und 33B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
 Die Antworten werden manuell evaluiert und mit den Antworten aus dem Buch \citet{bb} verglichen.
 Die Lösungen unterteilen sich ebenfalls in drei Kategorien:
