@@ -1,80 +1,60 @@
 %*****************************************
 \chapter{Lösungsansatz}\label{ch:approach}
 %*****************************************
-\section*{Vorgehen}
-- Rerchnernetz Aufbau und Konfiguration (warum reicht nicht eigener Computer)
-
-- Auswahl Autoregressives Modell
-- Datenkuration Blaues Buch
-- Unüberwacht Weitertrainiert = Continual Pretraining
-    - Nutzung von HuggingFace Trainer
-    - Parallelisierung auf Rechennetz
-
-- Auswahl Beispielklausuren
-- Beantwortung von Fragen
-
-- Modellvergleich
-    - Omar folgende Kriterien
-    - Precision, Recall, F-Score als Benchmark
-- Modellvergleich GPT4
-    - Omar folgende Kriterien
-
 \section{Auswahl von Sprachmodellen}
-
 Für die Auswahl eines Sprachmodells müssen verschiedene Kriterien erfüllt sein.
-Ausgehend von der Aufgabenstellung in \ref{sec:zielsetzung} stehen verschiedene Modelle der Transformer-Architektur zur Auswahl.
+Ausgehend von der Aufgabenstellung in~\ref{sec:zielsetzung} stehen verschiedene Modelle der Transformer-Architektur zur Auswahl.
 Die Auswahl beschränkt sich auf Decoder-basierte Modelle, da diese die Eigenschaften eines autoregressiven Modells besitzen.
-Wie bereits in \ref{sec:grundlagen:transformer} beschrieben, ist das Ziel die Generierung von Text auf Basis einer Fragestellung. % TODO: grundlagen Kapitel + Label
-Diese Fragestellung wird zu Beginn als Eingabe zur Verfügung gestellt, woraufhin das Modell kontinuierlich neue Tokens generiert.
-Neu generierte Tokens werden in Verbindung mit der ursprünglichen Fragestellung als Eingabe verwendet, um das nächste Token zu generieren.
+Wie bereits in~\ref{sec:grundlagen:transformer} beschrieben, ist das Ziel die Generierung von Text auf Basis einer Fragestellung. % TODO: Grundlagen Kapitel + Label
+Diese Fragestellung wird zu Beginn als Eingabe zur Verfügung gestellt, woraufhin das Modell kontinuierlich neue Token generiert.
+Neu generierte Token werden zusammen mit der ursprünglichen Frage als Eingabe verwendet, um den nächsten Token zu generieren.
 Dieses Verhalten entspricht autoregressiven Modellen und erfordert Decoder-basierte Modelle.
-Ein Decoder-basiertes Modell verwendet alle vorhergehenden Tokens zur Generierung von Tokens (auch als Vorhersage von Tokens bezeichnet), während ein Encoder-Modell sowohl vorhergehende als auch nachfolgende Tokens verwendet.
+Ein Decoder-basiertes Modell verwendet alle vorhergehenden Token, um Token zu generieren (auch als Vorhersage von Token bezeichnet), während ein Encoder-basiertes Modell sowohl vorhergehende als auch nachfolgende Token verwendet.
 Encoder-basierte Modelle sind für die Textvervollständigung oder Textklassifikation gedacht, aber nicht für die Textgenerierung.\\
 
-Darüber hinaus sind folgende Eigenschaften erwünscht.
+Zusätzlich sind folgende Eigenschaften erwünscht.
 Das Modell sollte eine gute ZeroShot-Performance haben und nicht nur eine gute FewShot- oder OneShot-Performance.
 Diese Arbeit untersucht die Fähigkeit eines Modells, Wissen aus domänenspezifischer Literatur (hier aus \citet{bb}) zu reproduzieren.
-Durch die Verwendung früherer Fragen und Antworten als Kontext werden die Ergebnisse synthetisch durch zusätzliches Wissen im Kontext verbessert.
+Indem frühere Fragen und Antworten als Kontext verwendet werden, werden die Ergebnisse synthetisch durch zusätzliches Wissen im Kontext verbessert.
 Einige Fragen könnten nicht durch das Modell mit Hilfe des gelernten Wissens beantwortet werden, sondern durch das Wissen im Kontext.
 Das Modell sollte auch ohne Fine-Tuning eine gute Leistung erbringen.
-Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht möglich ist, sollte ein Modell gewählt werden, das auch ohne diess Fine-Tuning eine gute Performance erreicht.\\
+Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht möglich ist, sollte ein Modell gewählt werden, das auch ohne dieses Fine-Tuning eine gute Performance erreicht.\\
 
 Die hier zur Auswahl stehenden Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMa.
 Modelle, die sehr populär geworden sind, aber nicht zur Auswahl stehen, sind BERT, RoBERTa, DistillBERT, BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5.
-Wenn die Aufgabe des Question Answering gelöst werden soll, ist ein BERT-basiertes Modell die erste Wahl.
+Wenn die Aufgabe des Question Answering gelöst werden soll, ist ein BERT-basiertes Modell die erste Wahl.\\
 
-Modelle wie BERT, RoBERTa und DistillBERT besitzen aufgrund ihrer Encoder-Architektur eine optimale Eigenschaft zur Informationsextraktion aus Text.
-Allerdings ist dieser Ansatz in zwei Punkten eingeschränkt.
-Die Modelle lernen nicht Fakten und können auf Basis einer Fragestellung neue Antworten formulieren, sondern finden Textstellen in einem Kontext, die die Fragestellung beantworten.
+Modelle wie BERT, RoBERTa und DistillBERT besitzen aufgrund ihrer Encoder-Architektur optimale Eigenschaften für die Informationsextraktion aus Text.
+Dieser Ansatz ist jedoch in zwei Punkten eingeschränkt.
+Die Modelle lernen nicht Fakten und können auf Basis einer Frage neue Antworten formulieren, sondern finden Textstellen in einem Kontext, die die Frage beantworten.
 Es findet keine Textgenerierung statt, sondern es werden Ausschnitte aus einem gegebenen Textkontext als Antwort gefunden.
-Dieser Kontext ist wiederum durch die Größe des Modells begrenzt und beschränkt sich in den meisten Fällen auf 512 Tokens.
+Dieser Kontext ist wiederum durch die Größe des Modells begrenzt und beschränkt sich in den meisten Fällen auf 512 Token.
 Ist die Antwort auf die Frage nicht im Kontext enthalten, kann das Modell keine Antwort finden.
 Da die Fragen unabhängig vom Kontext beantwortet werden sollen, können diese Modelle nicht verwendet werden.
-Andere Modelle wie BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5 sind für andere Aufgabenstellungen konzipiert und können nicht auf die gegebene Aufgabenstellung angewendet werden.
-Sie sind für Textklassifikation, Textübersetzung, Textzusammenfassung, Dialoge oder Text-2-Text-Aufgaben ausgelegt.\\
+Andere Modelle wie BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5 wurden für andere Aufgaben entwickelt und können nicht auf die vorliegende Aufgabe angewendet werden.
+Sie sind für Textklassifikation, Textübersetzung, Textzusammenfassung, Dialoge oder Text-2-Text-Aufgaben konzipiert.\\
 
 GPT-2 ist das kleinste Modell der OpenAI GPT-Serie und wurde erstmals in \citet{gpt2} vorgestellt.
 Aufgrund seiner geringen Größe kann das Modell auf einzelnen \ac{gpu}s trainiert und verwendet (inferiert) werden, was die Nutzung des Modells erheblich vereinfacht.
 Außerdem ist es frei verfügbar und kann ohne weitere Maßnahmen verwendet werden.
 Allerdings ist die Performance in der Einstellung ZeroShot nicht ausreichend.
-Das Modell erreicht eine Imitation von Texten, aber kein Verständnis und keine Wiedergabe von Fakten.\\
+Das Modell erreicht eine Imitation von Texten, aber kein Verständnis und keine Wiedergabe von Fakten.
 
-GPT-3 und das darauf aufbauende GPT-3.5 (ChatGPT), vorgestellt in \citet{gpt3}, kann zum Zeitpunkt der Arbeit kostenlos genutzt werden, hat eine sehr gute ZeroShot-Performance und besitzt die notwendige Größe, um als QA-Modell zu fungieren.
-Allerdings ist das Modell nicht frei verfügbar.
+GPT-3 und das darauf basierende GPT-3.5 (ChatGPT), vorgestellt in \citet{gpt3}, ist zum Zeitpunkt der Arbeit frei nutzbar, hat eine sehr gute ZeroShot-Performance und ist groß genug, um als QA-Modell zu dienen.
+Das Modell ist jedoch nicht frei verfügbar.
 Es existiert zwar eine \ac{api}, diese dient jedoch nur zur Interferenz des Modells, ein Training ist nicht möglich.
-Damit fällt das Modell bereits aus der Auswahl.
-Ein weiteres Problem stellt die Größe des Modells dar.
-Mit ca.
-175 Milliarden Parametern ist eine Nutzung des Modells nur mit 8 A100 \ac{gpu}s möglich.
+Damit scheidet das Modell bereits aus.
+Ein weiteres Problem ist die Größe des Modells.
+Bei ca. 175 Milliarden Parametern ist eine Nutzung des Modells erst mit 8 A100 \ac{gpu}s möglich.
 Das Training benötigt zusätzlich etwa die 4-fache Leistung.
-Diese Leistung kann zwar vom Rechenzentrum der Universität Leipzig bereitgestellt werden, verhindert aber den Einsatz des Modells in einer längerfristigen Umgebung.\\
+Diese Leistung kann zwar vom Rechenzentrum der Universität Leipzig zur Verfügung gestellt werden, verhindert aber den Einsatz des Modells in einer längerfristigen Umgebung.\\
 
 GPT-4 ist das mächtigste Modell von OpenAI und wurde in \citet{gpt4} vorgestellt.
-Auch dieses Modell ist nicht frei verfügbar und kann nur über eine \ac{api} genutzt werden.
-Die Leistungsfähigkeit von GPT-4 ist jedoch deutlich höher als die von GPT-3, weshalb die Untersuchung dieses Modells als Ersatz für ein eigens trainiertes Modell geplant ist.
+Auch dieses Modell ist nicht frei verfügbar und kann nur über eine \ac{api} verwendet werden.
+Die Leistungsfähigkeit von GPT-4 ist jedoch deutlich höher als die von GPT-3, weshalb die Untersuchung dieses Modells als Ersatz für ein speziell trainiertes Modell geplant ist.
 Die Größe des Modells wurde von OpenAI nicht veröffentlicht, ist aber definitiv größer als GPT-3, weshalb eine Verwendung hier allein aufgrund der Größe ausscheidet.\\
 
-GPT-J erreicht mit 6,7 Milliarden Parametern die Größe des kleinsten Modells GPT-3, zeigt aber eine deutlich bessere Performance als GPT-2.
+GPT-J erreicht mit 6,7 Milliarden Parametern die Größe des kleinsten Modells der GPT-3 Serie, zeigt aber eine deutlich bessere Performance als GPT-2.
 Das Modell ist unter \citet{gptj} veröffentlicht und frei verfügbar.
 Die Leistungsfähigkeit des Modells ist im Vergleich zu den anderen Modellen in der Auswahl geringer und wird daher ausgeschlossen.\\
 
@@ -84,15 +64,15 @@ Die Leistung des Modells ist vergleichbar mit GPT-3, während die Größe des Mo
 Diese Leistung wird jedoch von LLaMa übertroffen und daher nicht ausgewählt.\\
 
 Die in \citet{llama} vorgestellten LLaMa-Modelle haben einen besonderen Ansatz.
-Durch die Ausrichtung auf längeres Training und größere Datensätze bieten sie parametereffiziente Modelle, die sehr gute Leistungen erzielen können.
-Um die bestmögliche Performance mit den kleinstmöglichen Modellen zu erreichen, werden die Modelle von LLaMa ausgewählt.
+Durch den Fokus auf längeres Training und größere Datensätze bieten sie parametereffiziente Modelle, die sehr gute Leistungen erzielen können.
+Die Modelle von LLaMa werden ausgewählt, um die bestmögliche Performance mit den kleinstmöglichen Modellen zu erreichen.
 Hier stellt sich die Frage, welches Modell aus der LLaMa-Reihe verwendet werden soll.
 Die Modelle unterscheiden sich sowohl in der Größe als auch proportional in der Leistung.\\
 
 \begin{table}
     \resizebox{\textwidth}{!}{
     \begin{tabular}{lrcccccccc}
-        \midrule
+        \toprule
         &&BoolQ&PIQA&SIQA&HellaSwag&WinoGrande&ARC-e&ARC-c&OBQA\\
         \midrule
         GPT-3&175B&60.5&81.0&-&78.0&70.2&68.8&51.4&57.6\\
@@ -106,32 +86,30 @@ Die Modelle unterscheiden sich sowohl in der Größe als auch proportional in de
         &13B&78.1&80.1&50.4&79.2&73.0&74.8&52.7&56.4\\
         &33B&83.1&82.3&50.4&82.8&76.0&\textbf{80.0}&\textbf{57.8}&58.6\\
         &65B&85.3&\textbf{82.8}&\textbf{52.3}&\textbf{84.2}&77.0&78.9&56.0&\textbf{60.2}\\
-        \midrule
-    \end{tabular}
-    }
-    \caption{Zero-Shot Leistung verschiedener Modelle in Begründungsaufgaben für gesunden Menschenverstand. Veröffentlicht in \citet{llama}}
-    \label[table]{tab:llama_naturalquestion}
+        \bottomrule
+    \end{tabular}}
+\caption{Zero-Shot Leistung verschiedener Modelle in Begründungsaufgaben für gesunden Menschenverstand. Veröffentlicht in \citet{llama}}\label{tab:llama_naturalquestion}
 \end{table}
 
-Tabelle \ref{tab:llama_naturalquestion} zeigt die Leistung der Modelle im Vergleich zu anderen Modellen und in verschiedenen Einstellungen (ZeroShot bis 64Shot).
+Die Tabelle~\ref{tab:llama_naturalquestion} zeigt die Leistungsfähigkeit der Modelle im Vergleich zu anderen Modellen und bei verschiedenen Einstellungen (ZeroShot bis 64Shot).
 Selbst das kleinste Modell mit 7 Milliarden Parametern übertrifft die Leistung von GPT-3 und kann während der Interferenz auf einer einzelnen V100 \ac{gpu} verwendet werden.
-Nach Angaben der Autoren kann auch das 13 Milliarden Parameter Modell auf einer einzelnen V100 \ac{gpu} genutzt werden, was für die Wahl dieses Modells spricht.
-Das 33 Milliarden Parameter Modell erzielt sogar etwas bessere Ergebnisse im ZeroShot als das 65 Milliarden Parameter Modell, weshalb hier die Wahl des 33 Milliarden Parameter Modells sinnvoll ist.
+Nach Angaben der Autoren kann auch das Modell mit 13 Milliarden Parametern auf einer einzigen V100 \ac{gpu} eingesetzt werden, was für die Wahl dieses Modells spricht.
+Das 33-Milliarden-Parameter-Modell erzielt im ZeroShot sogar etwas bessere Ergebnisse als das 65-Milliarden-Parameter-Modell, weshalb die Wahl des 33-Milliarden-Parameter-Modells hier sinnvoll ist.
 Mit 33 Milliarden Parametern und der Verwendung von Float16 Werten (auch Half-Precision genannt) benötigt das Modell 66 GB \ac{gpu} RAM, um für die Interferenz verwendet werden zu können.
 Für das Training werden 264 GB \ac{gpu} RAM benötigt, was 4 A100 \ac{gpu}s entspricht.
-Das Modell mit 65 Milliarden Parametern benötigt 7 A100 \ac{gpu}s für das Training und 2 A100 \ac{gpu}s für die Nutzung.
-Aufgrund der vielversprechenden ZeroShot Performance wird in dieser Arbeit das 33 Milliarden Parameter Modell gewählt.
+Das Modell mit 65 Milliarden Parametern benötigt 7 A100 \ac{gpu}s für das Training und 2 A100 \ac{gpu}s für den Betrieb.
+Aufgrund der vielversprechenden ZeroShot-Performance wird in dieser Arbeit das Modell mit 33 Milliarden Parametern gewählt.
 Die Modelle sind jedoch nicht öffentlich verfügbar, sondern werden nur zu Forschungszwecken über einen Antrag veröffentlicht.
 Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
 
-Eine Alternative zu den LLaMa-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}.
+Eine Alternative zu den LLaMa-Modellen ist OpenLLaMa, veröffentlicht unter \citet{openllama}.
 Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMa-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar.
-Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf diese Modelle verzichtet.\\
+Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf diese Modelle verzichtet.
 
 \section{Datenkuration}
 Um die Literatur optimal nutzen zu können, muss eine Datenkuration durchgeführt werden.
-Die Daten liegen im Word-Format vor, können jedoch nicht in diesem Format verarbeitet werden, da dass Modell lediglich Text verarbeiten kann.
-Die Datenkuration enthält mehrere Schritte die im Folgenden beschrieben werden.\\
+Die Daten liegen im Word-Format vor, können aber in diesem Format nicht verarbeitet werden, da das Modell nur Text verarbeiten kann.
+Die Datenkuration umfasst mehrere Schritte, die im Folgenden beschrieben werden.\\
 
 \subsection{Extraktion der Texte}
 Die Extraktion der Text wird händisch durchgeführt.
@@ -140,83 +118,82 @@ Der Text wird in einem Texteditor eingefügt und als \texttt{.md} Datei gespeich
 \texttt{.md}-Dateien folgen dem Markdown-Format und haben die besondere Eigenschaft, mit Hilfe von Text-Symbolen Formatierungen wie Überschriften, Aufzählungen und Tabellen darzustellen.
 
 \subsection{Unverständliche Formate}
-Während der Extraktion des Textes fallen alle Bilder als auch Kopf- und Fußzeilen weg.
-Da ein einzelne Text-Datei keine sinnvolle Unterteilung in Seiten hat, sind Kopf- und Fußzeilen und damit einhergehend Seitenzahlen nicht relevant.
-Bilder können nicht von dem Modell verarbeitet werden und werden daher entfernt.
-Die Bildunterschriften als auch Referenzen auf Bilder stehen somit ohne Kontext in den Kapiteln und werden ebenso entfernt.
+Die Extraktion des Textes erfolgt manuell.
+Dazu wird das Word-Dokument geöffnet und der Text kopiert.
+Der Text wird in einen Texteditor eingefügt und als \texttt{.md}-Datei gespeichert.
+\texttt{.md}-Dateien folgen dem Markdown-Format und haben die besondere Eigenschaft, Formatierungen wie Überschriften, Aufzählungen und Tabellen mit Hilfe von Textsymbolen darzustellen.
 
 \subsection{Textpassagen ohne Wissen oder Kontext}
-Teile des Dokumentes enthalten kein Wissen, stehen in keinem Kontext oder sind für das Modell unverständlich formatiert.
-Die Titel-Seite wird reduziert auf den Titel des Buches, das Vorwort entfällt da es kein Wissen zur Thematik enthält und Tabellen- und Bildverzeichnise entfallen ebenfalls.
-Bild- und Tabellenverzeichnise enthalten Wissen, können aber in keinem Kontext gesetzt werden, da die genutzten Attention-Mechanismen des Modells nicht diese Verzeichnisse mit Texten in späteren Kapiteln verbinden können, da der Kontext zu groß ist.
-Die Autorenvorstellung enthält ebenfalls kein Wissen zur Thematik und wird daher entfernt.
-Zusätzlich werden fehlerhafte Textstellen wie fehlende Verweise entfernt.
-Diese Textstellen existieren nur in der Word-Version des Buches, jedoch nicht in der finalen PDF-Version.
-Da eine Extraktion von Text aus PDF-Dateien jedoch zu groben Problemen in der Formatierung von Text führt, wurde darauf verzichtet.
+Teile des Dokuments enthalten kein Wissen, stehen in keinem Zusammenhang oder sind für das Modell unverständlich formatiert.
+Die Titelseite wird auf den Buchtitel reduziert, das Vorwort wird weggelassen, da es kein Wissen zum Thema enthält, Tabellen- und Abbildungsverzeichnisse werden ebenfalls entfernt.
+Bild- und Tabellenverzeichnisse enthalten zwar Wissen, können aber nicht in Kontext gesetzt werden, da die verwendeten Attention-Mechanismen des Modells diese Verzeichnisse nicht mit Texten in späteren Kapiteln verknüpfen können, da der Kontext zu groß ist.
+Auch die Vorstellung der Autoren enthält kein Wissen zum Thema und wird daher entfernt.
+Zusätzlich werden fehlerhafte Textpassagen wie fehlende Verweise entfernt.
+Diese Textstellen existieren nur in der Word-Version des Buches, nicht aber in der endgültigen PDF-Version.
+Da eine Textextraktion aus PDF-Dateien jedoch zu gravierenden Problemen in der Textformatierung führt, wurde darauf verzichtet.
 
 \subsection{Optionale Textentfernungen}
-Es ist zu untersuchen, ob die Entfernung von Literaturverzeichnissen, Überschriften und Tabellen zu einer besseren Leistung führen.
-Literaturverzeichnisse beziehen sich auf das vorangegangen Kapitel, sind jedoch in einem schwierigen Format.
-Inbesondere \ac{url}s müssen vom Modell in Tokens zerlegt werden, die den Inhalt der \ac{url} nicht wiederspiegelt. 
-Überschriften haben im Vergleich zum Text einen minimalen Anteil der Gesamtmenge an Tokens, wordurch ihr enthaltenes Wissen durchaus verloren geht.
-Die für den Menschen verständliche Formatierung einer Überschrift hat keinen Einfluss auf die Bewertung des Modells.
-Tabellen sind in einem Format, das vom Modell nicht nativ verarbeitet werden kann.
-Selbst die Tabellendarstellung in Markdown ist zwar einlesbar, aber zu bezweifeln ob diese verständlich ist.
-Durch die geringe Größe des Datensatzes, ist auch nicht zu erwarten, dass dieses Format verstanden wird.
-Es wird daher hier eine Aufzählung als Ersatz für Tabellen genutzt.
+Es sollte geprüft werden, ob das Weglassen von Literaturverweisen, Überschriften und Tabellen zu einer besseren Leistung führt.
+Literaturverzeichnisse beziehen sich auf das vorhergehende Kapitel, haben aber ein schwieriges Format.
+Insbesondere \ac{url}s müssen vom Modell in Token zerlegt werden, die nicht den Inhalt der \ac{url}s widerspiegeln. 
+Überschriften haben im Vergleich zum Text nur einen minimalen Anteil an der Gesamtzahl der Tokens, wodurch das in ihnen enthaltene Wissen verloren geht.
+Die menschenlesbare Formatierung einer Überschrift hat keinen Einfluss auf die Bewertung durch das Modell.
+Tabellen liegen in einem Format vor, das vom Modell nicht nativ verarbeitet werden kann.
+Selbst die Tabellendarstellung in Markdown ist zwar einlesbar, aber es ist fraglich, ob sie verständlich ist.
+Aufgrund der geringen Größe des Datensatzes ist auch nicht zu erwarten, dass dieses Format verstanden wird.
+Daher wird hier eine Aufzählung als Tabellenersatz verwendet.
 
 \subsection{Bleibende Texte}
-Das Abkürzungsverzeichnis und das Glossar bleiben im Text enthalten, da hier wichtiges Wissen zum Verständnis von eventuellen Fragen definiert wird.
-Einige Fragen können Akronyme oder Fachbegriffe benutzen, welche von dem Modell verstanden werden sollten.
+Das Abkürzungsverzeichnis und das Glossar bleiben im Text enthalten, da sie für das Verständnis der Fragen wichtige Begriffe definieren.
+Einige Fragen können Akronyme oder Fachbegriffe verwenden, die vom Modell verstanden werden müssen.
 
 \subsection{Formatierung von Text}
-Die Formatierung des Textes in dem Word-Dokument kann nicht beachtet werden.
-Deshalb muss hier ein Ersatz in Form von Markdown-Formatierung gefunden werden.
-Überschriften werden durch \texttt{\#} dargestellt, Aufzählungen durch \texttt{-} und \texttt{1.}.
+Die Formatierung des Textes im Word-Dokument kann nicht berücksichtigt werden.
+Daher muss hier ein Ersatz in Form einer Markdown-Formatierung gefunden werden.
+Überschriften werden durch \texttt{\#}, Aufzählungen durch \texttt{-} und \texttt{1.} dargestellt.
 Tabellen werden durch eine Aufzählung dargestellt, wobei die erste Zeile die Überschriften enthält und die zweite Zeile die Trennung zwischen Überschriften und Inhalt darstellt.
-Die Trennung zwischen den Spalten wird durch \texttt{|} dargestellt.
-Hochgestellte und tiefgestellte Zahlen werden durch \texttt{\^} und \texttt{\_} dargestellt.
-Formeln werden in den \LaTeX Math-Modus umformuliert.
+Die Trennung zwischen den Spalten erfolgt durch \texttt{|}.
+Hoch- und tiefgestellte Zahlen werden durch \texttt{\^} und \texttt{\_} dargestellt.
+Formeln werden im \LaTeX{} Mathe-Modus dargestellt.
 
 \subsection{Potentielle Extraktion von Fragen}
-Neben der Nutzung des Textes als Eingabe in das Modell kann ebenso weiterer Nutzung gezogen werden.
-Abschnitte, welche Übungsaufgaben darstellen, als auch das Glossar und das Abkürzungsverzeichnis können als Quelle für Fragen genutzt werden,
-um das Modell und andere Modelle besser zu evaluieren.
+Neben der Verwendung des Textes als Eingabe in das Modell ist auch eine weitergehende Nutzung möglich.
+Die Übungsabschnitte sowie das Glossar und das Abkürzungsverzeichnis können als Quelle für Fragen genutzt werden,
+um das Modell und andere Modelle besser bewerten zu können.
 
 \section{Unüberwachtes Weitertrainieren}
-Um das LLaMa Modell zu trainieren, wird ein Programm benötigt, dass den Datensatz in Tokens umwandelt, und diese dann in Batches dem Modell übergibt.
-Auf Basis dieser Batches wird das Modell genutzt um die Gewichte mit Backpropagation anzupassen.
-Dieser Prozess stellt demnach eine Epoche dar.
-Bei kleineren Datensätzen und Fine-Tuning wird häufig mehrere Epochen gewählt, während größere Datensätze (mehrere hundert Gigabyte) nur eine Epoche oder nicht einmal eine Epoche benötigen.
-Mit steigender Epoche passt das Modell sich weiter an den Text der Literatur an, wobei ab einem bestimmten Zeitpunkt eine Grenze überschritten wird.
-Diese Grenze wird häufig als \enquote{Overfitting} bezeichnet, und repräsentiert ein Modell, welches sich zu sehr an einen Datensatz angepasst hat.
-Dadurch verliert das Modell die Fähigkeit, auf unbekannte Daten zu generalisieren, welches im diesem Anwendungsfall dazuführt, dass keine Fragen mehr beantwortet werden können.\\
+Um das LLaMa-Modell zu trainieren, wird ein Programm benötigt, das den Datensatz in Token umwandelt und diese dann in Batches an das Modell übergibt.
+Basierend auf diesen Batches wird das Modell verwendet, um die Gewichte mittels Backpropagation anzupassen.
+Dieser Prozess stellt somit eine Epoche dar.
+Bei kleineren Datensätzen und Fine-Tuning werden oft mehrere Epochen gewählt, während größere Datensätze (mehrere hundert Gigabyte) nur eine Epoche oder nicht einmal eine Epoche benötigen.
+Mit zunehmender Epoche passt sich das Modell immer mehr an die Literatur an, bis eine Grenze überschritten wird.
+Diese Grenze wird oft als \enquote{Overfitting} bezeichnet und stellt ein Modell dar, das sich zu sehr an einen Datensatz angepasst hat.
+Dadurch verliert das Modell die Fähigkeit, auf unbekannte Daten zu verallgemeinern, was in diesem Anwendungsfall dazu führt, dass keine Fragen mehr beantwortet werden können.\\
 
-Um Overfitting zu vermeiden, wird der Datensatz in Trainings- und Validierungsdatensatz aufgeteilt.
-Hierbei wird eine Unterteilung von 90\% Training, 10\% Validierung genutzt.
-Das Modell trainiert nur auf dem Trainingsdatensatz, wird jedoch in regelmäßigen Abschnitten mit dem Validierungsdatensatz überprüft.
-Die Ergebnisse des Validierungsdatensatz haben keinen Einfluss auf die Anpassung der Gewichte sondern dienen nur zur Überprüfung, in wie fern das Modell generalisieren kann.
-Erwartet wird ein Abfall der Kost-Funktion sowohl auf dem Trainings- als auch auf dem Validierungsdatensatz.
-Dieser Abfall ist ein Indikator dafür, dass das Modell sich an den Datensatz anpasst.
-Sobald der Abfall auf dem Validierungsdatensatz aufhört, ist das Training abgeschlossen.
-Die Ergebnisse zeigen in den meisten Fällen, dass die Kostfunktion des Trainingsdatensatzes tiefer als die des Validierungsdatensatzes ist.
-Solange die Differenz zwischen den beiden Kostfunktionen nicht zu groß ist, konnte das Modell erfolgreich trainiert werden.\\
+Um Overfitting zu vermeiden, wird der Datensatz in einen Trainings- und einen Validierungsdatensatz aufgeteilt.
+Dabei wird eine Aufteilung von 90\% Training und 10\% Validierung verwendet.
+Das Modell wird nur auf dem Trainingsdatensatz trainiert, aber in regelmäßigen Abständen mit dem Validierungsdatensatz überprüft.
+Die Ergebnisse des Validierungsdatensatzes haben keinen Einfluss auf die Anpassung der Gewichte, sondern dienen nur zur Überprüfung der Generalisierungsfähigkeit des Modells.
+Sowohl für den Trainings- als auch für den Validierungsdatensatz wird ein Absinken der Kostenfunktion erwartet.
+Dieses Absinken ist ein Indikator dafür, dass das Modell sich an den Datensatz anpasst.
+Sobald das Absinken auf dem Validierungsdatensatz aufhört, ist das Training abgeschlossen.
+Die Ergebnisse zeigen in den meisten Fällen, dass die Kostenfunktion des Trainingsdatensatzes niedriger ist als die des Validierungsdatensatzes.
+Solange der Unterschied zwischen den beiden Kostenfunktionen nicht zu groß ist, konnte das Modell erfolgreich trainiert werden.\\
 
-Zur Durchführung dieser Trainingsschritte wird die Programmiersprache Python genutzt, da sie eine große Anzahl an Bibliotheken für die Verarbeitung von Texten und die Nutzung von neuronalen Netzen bietet.
-Die Bibliothek Transformers von HuggingFace bietet eine Vielzahl an Modellen und Trainingsmethoden und baut auf der populären Bibliothek PyTorch auf.
-PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer NVIDIA \ac{gpu} durchzuführen, welches die Rechenschritte beschrieben in \ref{sec:grundlagen:training} um ein Vielfaches beschleunigt. % TODO: Rechenschritte in Grundlagen erklären, label hinzufügen
-Ebenso kann mit Hilfe von DeepSpeed dieses Training auf mehrere \ac{gpu}s aufgeteilt werden.
-Das ist notwendig, da das verwendete Modell mit 33 Milliarden Parametern zu groß ist, um in den RAM-Speicher einer einzelnen \ac{gpu} zu passen.
+Für die Umsetzung dieser Trainingsschritte wird die Programmiersprache Python verwendet, da sie eine Vielzahl von Bibliotheken für die Textverarbeitung und den Einsatz von neuronalen Netzen bietet.
+Die Bibliothek Transformers von HuggingFace bietet eine Vielzahl von Modellen und Trainingsmethoden und basiert auf der populären Bibliothek PyTorch.
+PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer NVIDIA \ac{gpu} durchzuführen, was die in~\ref{sec:grundlagen:training} beschriebenen Rechenschritte um ein Vielfaches beschleunigt. % TODO: Rechenschritte in Grundlagen erklären, label hinzufügen
+Mit Hilfe von DeepSpeed kann dieses Training auch auf mehrere \ac{gpu}s verteilt werden.
+Dies ist notwendig, da das verwendete Modell mit 33 Milliarden Parametern zu groß ist, um in den Arbeitsspeicher einer einzelnen \ac{gpu} zu passen.\\
 
-Bevor das Training beginnt, müssen einige Konfigurationsparameter festgelegt werden.
-Diese Parameter sind in Tabelle~\ref{tab:training:parameter} aufgelistet und folgen den Training-Parametern von \citet{llama}.\\
-
+Vor Beginn des Trainings müssen einige Konfigurationsparameter festgelegt werden.
+Diese Parameter sind in der Tabelle~\ref{tab:training:parameter} aufgelistet und folgen den Trainingsparametern von \citet{llama}.
 \begin{table}
     \centering
     \begin{tabular}{ll}
-        \hline
+        \toprule
         \textbf{Parameter} & \textbf{Wert} \\
-        \hline
+        \midrule
         Lernrate & $1,5e^{-4}$\\
         AdamW $\beta_1$ & 0,9\\
         AdamW $\beta_2$ & 0,95\\
@@ -224,109 +201,107 @@ Diese Parameter sind in Tabelle~\ref{tab:training:parameter} aufgelistet und fol
         Gradientenlimitierung & 1,0\\
         Aufwärmphase & 0\\
         Epochen & 2\\
-        \hline
+        \bottomrule
     \end{tabular}
-    \caption{Parameter für das Training des LLaMa 33B-Modells}
-    \label{tab:training:parameter}
+    \caption{Parameter für das Training des LLaMa 33B-Modells}\label{tab:training:parameter}
 \end{table}
 
-Die Lernrate (engl. \enquote{Learning Rate}) ist ein Parameter, der die Größe der Anpassung der Gewichte bestimmt.
-Mit einer hohen Lernrate werden Gewichte stärker angepasst.
+Die Lernrate (engl. \enquote{Learning Rate}) ist ein Parameter, der das Ausmaß der Anpassung der Gewichte bestimmt.
+Je höher die Lernrate, desto stärker werden die Gewichte angepasst.
 Dies kann dazu führen, dass das Modell nicht konvergiert, sondern über den optimalen Punkt hinausschießt.
-Mit einer zu niedrigen Lernrate konvergiert das Modell nur sehr langsam.
+Bei einer zu niedrigen Lernrate konvergiert das Modell sehr langsam.
 Die Lernrate wird während des Trainings angepasst, um eine schnelle Konvergenz zu ermöglichen.
-Diese Anpassing folgt der Cosinus-Learning-Rate Schedule, sodass die endgüligte Lernrate bei 10\% des ursprünglichen Wertes liegt.
-Lernraten sind abhängig von der Größe des Modells.
-Generell gilt, dass größere Modelle eine niedrigere Lernrate benötigen.\\
-Der Optimierer AdamW übernimmt den zeitlichen Abfall der Gewichte und wurde  in \citet{adamw} vorgestellt.
-Er ist in aktuellen Modellen die häufigste Wahl und wurde ebenso für das Training der LLaMa Modelle genutzt.\\
+Diese Anpassung folgt dem Kosinus-Lernratenschema, so dass die endgültige Lernrate 10\% des Anfangswertes beträgt.
+Die Lernraten hängen von der Modellgröße ab.
+Im Allgemeinen benötigen größere Modelle eine niedrigere Lernrate.
+Der Optimierer AdamW berücksichtigt den zeitlichen Abfall der Gewichte und wurde in \citet{adamw} vorgestellt.
+Er ist die häufigste Wahl in aktuellen Modellen und wurde auch für das Training der LLaMa-Modelle verwendet.\\
 
-Gewichtsreduktion (engl. \enquote{Weight Decay}) ist ein Parameter, der die Gewichte während des Trainings reduziert.
+Gewichtsabnahme (engl. \enquote{Weight Decay}) ist ein Parameter, der die Gewichte während des Trainings reduziert.
 Er stellt eine Regularisierung dar, die Overfitting verhindern soll.
 $0,1$ entspricht einer Gewichtsreduktion von 10\%.\\
 
-Gradientenlimitierung (engl. \enquote{Gradient Clipping}) ist ein Parameter, der die Größe der Gradienten begrenzt.
-Dies ist notwendig, da die Gradienten bei großen Modellen während der Backpropagation mit steigender Tiefe immer größer werden.
-Ohne eine Begrenzung würden die Gradienten hier exdponentiell steigen.
-Ein Gradientenlimitierung limitiert die Gradienten auf $1.0$\\
+Die Gradientenbegrenzung (engl. \enquote{Gradient Clipping}) ist ein Parameter, der die Größe der Gradienten begrenzt.
+Dies ist notwendig, da bei großen Modellen die Gradienten während der Backpropagation mit zunehmender Tiefe immer größer werden.
+Ohne eine Begrenzung würden die Gradienten hier exponentiell wachsen.
+Eine Gradientenbegrenzung beschränkt die Gradienten auf $1.0$\\
 
-Die Aufwärmphase beschreibt die Anzahl der Schritte, die das Modell benötigt, um die Lernrate von $0$ auf den ursprünglichen Wert linear zu erhöhen.
-Dies ist notwendig, da zu Beginn eines Trainings Modelle zu schnell auf nicht allgemeingültige Muster anpassen.
-Normalerweise wird dies durch ein längeres Training behoben, wodurch die zuerst gelernten Muster verlernt werden müssen.
-Mit Hilfe der Aufwärmphase verhindert man ein verlängertes Training.
-Da in diesem Fall das Modell bereits auf einem großen Datensatz trainiert wurde, ist eine Aufwärmphase nicht notwendig.\\
+Die Aufwärmphase beschreibt die Anzahl der Schritte, die das Modell benötigt, um die Lernrate von $0$ linear auf den Anfangswert zu erhöhen.
+Dies ist notwendig, da sich die Modelle zu Beginn des Trainings zu schnell an nicht universelle Muster anpassen.
+Normalerweise wird dies durch ein längeres Training korrigiert, bei dem die zuerst gelernten Muster wieder verlernt werden müssen.
+Durch die Aufwärmphase wird ein längeres Training vermieden.
+Da in diesem Fall das Modell bereits auf einem großen Datensatz trainiert wurde, ist eine Aufwärmphase nicht notwendig.
 
-Der Artikel von \citet{llama} beschreibt ein Training über ein Epoche.
-Da in diesem Fall jedoch der Datensatz minimal im Vergleich ist, wird eine höhere Anzahl an Epochen genutzt.\\
+Der Artikel von \citet{llama} beschreibt ein Training über eine Epoche.
+Da in diesem Fall jedoch der Datensatz im Vergleich minimal ist, wird eine größere Anzahl von Epochen verwendet.\\
 
 \subsection{Ausführen der Training-Programme}
 
-Zur Ausführung der Trainingsprogramme wird SLURM genutzt \footnote{https://slurm.schedmd.com/overview.html (abgerufen am 16.6.2023)}.
-Mit Hilfe von SLURM-Skripten können Programm über mehrere Nodes, CPUs und \ac{gpu}s verteilt berechnet werden.
-Diese Skript-Sprache wird vom Rechenzentrum der Universität Leipzig genutzt, um verschiedene Programme auf den Supercomputern Clara und Paula auszuführen.\\
+Zur Ausführung der Trainingsprogramme wird SLURM\footnote{https://slurm.schedmd.com/overview.html (abgerufen am 16.6.2023)} verwendet.
+Mit Hilfe von SLURM-Skripten können Programme über mehrere Knoten, \ac{cpu}s und \ac{gpu}s verteilt berechnet werden.
+Diese Skriptsprache wird vom Rechenzentrum der Universität Leipzig verwendet, um verschiedene Programme auf den Supercomputern Clara und Paula laufen zu lassen.\\
 
-Die Supercomputer Clara und Paula sind Rechennetzwerke, spezialisiert für \ac{gpu}-beschleunigte Berechnung.
-Paula besteht aus 12 Nodes, welche jeweils 8 Nvidia Tesla A30 \ac{gpu}s besitzen.
-Clara ist zweigeteilt und besteht aus 8 Nodes mit jeweils 4 Nvidia Tesla V100 \ac{gpu}s und 22 Nodes mit jeweils 8 Nvidid GeForce RTX 2080 TI \ac{gpu}s.
-Die Nodes sind über ein Infiniband-Netzwerk verbunden, welches eine hohe Bandbreite und geringe Latenz bietet.\\
+Die Supercomputer Clara und Paula sind Rechennetze, die auf \ac{gpu}beschleunigte Berechnungen spezialisiert sind.
+Paula besteht aus 12 Knoten mit je 8 Nvidia Tesla A30 \ac{gpu}s.
+Clara ist zweigeteilt und besteht aus 8 Nodes mit je 4 Nvidia Tesla V100 \ac{gpu}s und 22 Nodes mit je 8 Nvidid GeForce RTX 2080 TI \ac{gpu}s.
+Die Knoten sind über ein Infiniband-Netzwerk verbunden, das eine hohe Bandbreite und geringe Latenz bietet.\\
 
-Supercomputer sind geteilte Ressourcen und können von mehreren Nutzern reserviert werden.
-Daher ist die Auswahl der Supercomputer abhängig davon, welche Nodes zu welchem Zeitpunkt frei sind.
-Generell werden Nodes von Clara mit V100 \ac{gpu}s bevorzugt, da hier der größtmögliche Speicher zur Verfügung pro \ac{gpu} zur Verfügung steht.
-Dies führt dazu, dass weniger Nodes gleichzeitig reserviert werden müssen, somit die Wartezeit verkürzt wird und die Kommunikation zwischen Nodes minimiert wird.\\
+Supercomputer sind gemeinsam genutzte Ressourcen, die von mehreren Nutzern gebucht werden können.
+Die Auswahl der Supercomputer hängt also davon ab, welche Knoten gerade frei sind.
+Generell werden Clara-Nodes mit V100 \ac{gpu}s bevorzugt, da hier der größtmögliche Speicher pro \ac{gpu} zur Verfügung steht.
+Dies hat zur Folge, dass weniger Knoten gleichzeitig reserviert werden müssen, was die Wartezeit verkürzt und die Kommunikation zwischen den Knoten minimiert.\\
 
-Die Trainingsprogramme müssen ebenso mit der Multi-\ac{gpu} Architektur umgehen können.
-Hierfür wird die Bibliothek DeepSpeed \citep{deepspeed} in Kombination mit der Transformers Bibliothek genutzt.
-DeepSpeed ermöglicht verschiedene Arten der Parallelisierung, der Fokus ist hier ZeRO 2 \citep{ZeRO}.
-Die ZeRO Parallelisierung erlaubt verteilte parallele Datenverarbeitung, wodurch das Modell auf mehrere \ac{gpu}s aufgeteilt wird.
-Ohne diese Option ist ein Training nicht möglich, da wie bereits beschrieben einzelne Modelle nicht vollständig auf eine \ac{gpu} passen.
-Genauere Erklärung zur Konfiguration von DeepSpeed und der Nutzung der Transformers Bibliothek sind in \ref{ch:solution} beschrieben.
+Die Trainingsprogramme müssen auch in der Lage sein, mit der Multi-\ac{gpu}-Architektur umzugehen.
+Dazu wird die Bibliothek DeepSpeed \citep{deepspeed} in Kombination mit der Bibliothek Transformers verwendet.
+DeepSpeed erlaubt verschiedene Arten der Parallelisierung, der Fokus liegt hier auf ZeRO 2 \citep{ZeRO}.
+Die ZeRO Parallelisierung erlaubt eine verteilte parallele Datenverarbeitung, bei der das Modell auf mehrere \ac{gpu}s aufgeteilt wird.
+Ohne diese Option ist ein Training nicht möglich, da, wie oben beschrieben, einzelne Modelle nicht vollständig auf eine \ac{gpu} passen.
+Genauere Erläuterungen zur Konfiguration von DeepSpeed und zur Verwendung der Transformer-Bibliothek sind in~\ref{ch:solution} beschrieben.
 % TODO: Kapitel Solutions reminder
 
-\section{Klausurfragen}
-\label[section]{sec:approch:questions}
-Zur Überprüfung der Modelle werden Klausurfragen genutzt.
+\section{Klausurfragen}\label{sec:approach:questions}
+Zur Überprüfung der Modelle werden Klausurfragen verwendet.
 Diese Klausurfragen ergeben sich aus den mündlichen Prüfungsfragen des Moduls \enquote{Architektur von Informationssystemen im Gesundheitswesen},
-den schriftlichen Klausuren des Moduls \enquote{Informationssysteme in medizinischen Versorgung und Forschung} und aus Teilen des Buches \citet{bb}.
-Diese Fragen werden in drei Kategorien unterteilt:
+den schriftlichen Prüfungsfragen des Moduls \enquote{Informationssysteme in medizinischer Versorgung und Forschung} und aus Teilen des Buches \citet{bb}.
+Die Fragen sind in drei Kategorien unterteilt:
 \begin{enumerate}
-    \item Singulär-Faktfragen, welche einen spezifischen Fakt abfragen
-    \item Multi-Faktfragen, welche mehrere Fakten abfragen
-    \item Transferfragen, welche einen Fakt aus einem Kontext in einen anderen Kontext übertragen
+    \item Einzelfragen, die einen bestimmten Sachverhalt abfragen
+    \item Multi-Fakten-Fragen, die mehrere Fakten abfragen
+    \item Transferfragen, die einen Sachverhalt von einem Kontext in einen anderen übertragen
 \end{enumerate}
 
-Jedoch ist die Anzahl an geschriebenen Klausuren zum Zeitpunkt dieser Arbeit geringer als erwartet, da der Studiengang erst seit 2021 existiert.
-Dies resultiert in einer minderen Qualität der Evaluation,
-beeinfluss aber nicht die Qualität des Models.\\
+Allerdings ist die Anzahl der durchgeführten Klausuren zum Zeitpunkt der Erstellung dieser Arbeit geringer als erwartet, da der Studiengang erst seit 2021 existiert.
+Dies führt zu einer geringeren Qualität der Bewertung,
+hat aber keinen Einfluss auf die Qualität des Modells.\\
 
-Die LLaMa Modelle sind ohne zusätzliches Fine-Tuning vorhanden und wurden dementsprechend nicht auf die Aufgabe der Beantwortung von Fragen angepasst.
-Dies führt dazu, dass die Modelle bei einer Fragestellung wie \enquote{Welche Farbe hat der Himmel?} nicht die Antwort liefern, sondern den Text im gleichen Stile mit weiteren Fragen fortführen.
-Um eine Antwort zu einer Frage zu erhalten, müssen diese zu einer unvollständigen Aussage umformuliert werden.
-Hier wird im gegebenen Beispiel aus \enquote{Welche Farbe hat der Himmel?} die Aussage \enquote{Der Himmel hat die Farbe}, welche dann von dem Modell weitergeführt mit \enquote{blau.} beantwortet wird.
-Diesen Prozess der Fragenumformulierung wird bei allen vorhandenen Fragen durchgeführt.
-Das \ac{gpt}-4 Modell wurde auf die Aufgabe der Beanwortung von Fragen trainiert und kann daher mit normalen Fragen evaluiert werden.\\
+Die LLaMa-Modelle sind ohne weiteres Fine-Tuning verfügbar und wurden daher nicht an die Aufgabe der Beantwortung von Fragen angepasst.
+Dies hat zur Folge, dass die Modelle bei einer Frage wie \enquote{Welche Farbe hat der Himmel?} nicht die Antwort liefern, sondern den Text im gleichen Stil mit weiteren Fragen fortsetzen.
+Um eine Antwort auf eine Frage zu erhalten, muss die Frage in eine unvollständige Aussage umformuliert werden.
+Im gegebenen Beispiel wird aus \enquote{Welche Farbe hat der Himmel?} die Aussage \enquote{Der Himmel hat die Farbe}, die dann vom Modell mit \enquote{blau.} beantwortet wird.
+Dieser Prozess der Umformulierung von Fragen wird für alle vorhandenen Fragen durchgeführt.
+Das \ac{gpt}-4-Modell wurde auf die Aufgabe der Beantwortung von Fragen trainiert und kann daher mit normalen Fragen evaluiert werden.\\
 
-Einige Fragestellungen erwarten das Skizzieren von Systemen oder das Verbinden von Begriffen mit Pfeilen.
-Da das Modell keine Fähigkeit besitzt, Bilder zu generieren, werden diese Fragestellungen umformuliert um als Textfrage beantwortet werden zu können.
-Eine Skizze wird dementsprechend zur Beschreibung des Systems und eine Verbindung von Begriffen zur Auflistung der Begriffe umformuliert.
-In anderen Fragestellungen werden auf Lösungen der zuvorigen Fragestellung aufgebaut.
-Dies ist nur sinnvoll, wenn das Modell einen Verlauf der Fragestellungen besitzt, welches es nicht tut.
-Diese Fragestellungen müssen ebenso umformuliert werden, um unabhängig von anderen Fragen zu sein.
+Einige Fragen erfordern das Zeichnen von Systemen oder das Verbinden von Begriffen mit Pfeilen.
+Da das Modell keine Bilder erzeugen kann, werden diese Fragen so umformuliert, dass sie als Textfragen beantwortet werden können.
+Eine Skizze wird entsprechend in eine Systembeschreibung umformuliert und eine Begriffsverbindung in eine Begriffsliste.
+Andere Fragen bauen auf Lösungen der vorhergehenden Frage auf.
+Dies ist nur dann sinnvoll, wenn das Modell den Verlauf der Fragestellungen kennt, was nicht der Fall ist.
+Diese Fragen müssen ebenfalls umformuliert werden, um unabhängig von anderen Fragen zu sein.
 
 \section{Modellvergleich}
-Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Evaluierung.
-Hierzu werden die definierten Fragen aus \ref{sec:approch:questions} genutzt.
+Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Bewertung.
+Dazu werden die in~\ref{sec:approach:questions} definierten Fragen verwendet.
 Diese Fragen werden von dem LLaMa Modell 7B und 33B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
-Die Antworten werden manuell evaluiert und mit den Antworten aus dem Buch \citet{bb} verglichen.
-Die Lösungen unterteilen sich ebenfalls in drei Kategorien:
+Die Antworten werden manuell ausgewertet und mit den Antworten aus dem Buch \citet{bb} verglichen.
+Die Lösungen werden ebenfalls in drei Kategorien eingeteilt:
 \begin{enumerate}
-    \item Korrekt, wenn die Antwort mit der Antwort aus dem Buch übereinstimmt
+    \item Richtig, wenn die Antwort mit der Antwort im Buch übereinstimmt
     \item Falsch, wenn die Antwort falsches Wissen enthält
-    \item Nicht Beantwortet, wenn der generierte Text keinerlei Bezug zur Frage hat
+    \item Nicht beantwortet, wenn der generierte Text keinen Bezug zur Frage hat
 \end{enumerate}
 
 Die Modelle werden mit Hilfe der micro-F1 Bewertung verglichen.
-Die Definition folgt der in \citet{chatgpt_qas} beschriebenen Formeln:
+Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
 \begin{ceqn}
 \begin{align}
     C &= S \cap G \\
@@ -335,43 +310,43 @@ Die Definition folgt der in \citet{chatgpt_qas} beschriebenen Formeln:
     microF1 &= \frac{2 \cdot m_{prec} \cdot m_{recall}}{m_{prec} + m_{recall}}
 \end{align}
 \end{ceqn}
-Hierbei ist $S_q$ die Menge an Antworten, welche zu den Fragen $q$ generiert wurden, $G_q$ die Menge an korrekten Antworten aus dem Buch \citet{bb} und $C_q$ die Menge an korrekten Antworten, welche sowohl in $S_q$ als auch in $G_q$ enthalten sind.
-$N$ ist die Anzahl der Fragen, $m_{prec}$ die Micro-Präzision und $m_{recall}$ der Micro-Recall.
-Der $microF1$ Wert ist das harmonische Mittel aus $m_{prec}$ und $m_{recall}$.
+Dabei ist $S_q$ die Menge der für die Fragen $q$ generierten Antworten, $G_q$ die Menge der richtigen Antworten aus dem Buch \citet{bb} und $C_q$ die Menge der richtigen Antworten, die sowohl in $S_q$ als auch in $G_q$ enthalten sind.
+$N$ ist die Anzahl der Fragen, $m_{prec}$ die Mikro-Präzision und $m_{recall}$ der Mikro-Recall.
+Der Wert $microF1$ ist das harmonische Mittel aus $m_{prec}$ und $m_{recall}$.
 Fragen gelten als beantwortet, wenn sie den Kategorien 1 und 2 entsprechen.
-Gleiche Berechnungen werden ingesammt und separat für alle drei Fragekategorien durchgeführt.
-Micro-Präszision beschreibt den Anteil korrekter Fragen gegenüber aller beantworteten Fragen.
-Micro-Recall beschreibt den Anteil korrekter Fragen gegenüber aller Fragen.\\
+Dieselben Berechnungen werden insgesamt und getrennt für alle drei Fragekategorien durchgeführt.
+Mikro-Präzision beschreibt den Anteil richtiger Antworten an allen beantworteten Fragen.
+Der Mikro-Recall beschreibt den Anteil der richtigen Antworten an allen Fragen.\\
 
 Den in \citet{chatgpt_qas} beschriebenen Ansatz folgend werden die Modelle auf die Kriterien Korrektheit, Determinismus, Robustheit, Erklärbarkeit und Fragenverständnis evaluiert.
-Die Kriterien \enquote{Nutzung von aktuellen Informationen} und \enquote{Generalisierung über verschiedene Domänen} werden nicht betrachtet, da die Modelle keinen Zugang zu aktuellen Informationen und verschiedenen Domänen besitzen.\\
+Die Kriterien \enquote{Nutzung aktueller Informationen} und \enquote{Generalisierung über verschiedene Domänen} werden nicht betrachtet, da die Modelle keinen Zugriff auf aktuelle Informationen und verschiedene Domänen haben.\\
 
 \noindent\textbf{Korrektheit:}\newline
-Korrektheit wird durch die oben beschriebenen Formeln berechnet und verglichen.
-Höhere Korrektheit entspricht hier einem besseren Ergebniss.
-Im Zuge einer Nutzung des Modells ist ein höhere Mikro-Präzision wichtiger als ein hoher Mikro-Recall, da eine falsche Antwort deutlich mehr einem nicht-wissenden Nutzenden schadet, als keine Antwort.
-Die Modelle sollten stets keine Antwort gegenüber eine falschen Antwort präferieren.\\
+Die Korrektheit wird durch die oben beschriebenen Formeln berechnet und verglichen.
+Eine höhere Korrektheit entspricht einem besseren Ergebnis.
+Bei der Anwendung des Modells ist eine hohe Mikro-Präzision wichtiger als ein hoher Mikro-Recall, da eine falsche Antwort für einen unkundigen Anwender wesentlich schädlicher ist als keine Antwort.
+Die Modelle sollten immer keine Antwort einer falschen Antwort vorziehen.\\
 
 \noindent\textbf{Determinismus:}\newline
-Determinismus beschreibt die Reproduzierbarkeit der Antworten.
-Gegeben der gleichen Frage und dem gleichen Modell sollten Antworten stets gleich sein.
-Sprachmodelle besitzen eine gewissen Grad an nicht-deterministischem Verhalten, weshalb diese Statisik ein wichtiges Kriterium ist.
-Hierzu werden Fragen 3 mal an die Modelle gestellt und deren beste Antwort zur Berechnung der Korrektheit genutzt.
-Im Zuge dessen wird auch diese Statistik berechnet.
-Eine Antwort gilt als deterministisch, wenn die selben Fakten mit leichten Umformulierungen in der Antwort enthalten sind.\\
+Determinismus beschreibt die Reproduzierbarkeit von Antworten.
+Für die gleiche Frage und das gleiche Modell sollten die Antworten immer gleich sein.
+Sprachmodelle zeigen ein gewisses Maß an nichtdeterministischem Verhalten, daher ist diese Statisik ein wichtiges Kriterium.
+Um dies zu erreichen, werden Fragen 3 mal an die Modelle gestellt und die beste Antwort wird zur Berechnung der Korrektheit verwendet.
+Dabei wird auch diese Statistik berechnet.
+Eine Antwort gilt als deterministisch, wenn die gleichen Fakten mit leichten Umformulierungen in der Antwort enthalten sind.\\
 
 \noindent\textbf{Robustheit:}\newline
-Robustheit beschreibt die Fähigkeit des Modells, auch bei fehlerhaften Eingaben korrekte Antworten zu generieren.
-Hierzu werden grammatikalische Fehler als auch Schreibfehler in eine Teilmenge der Fragen eingefügt und die Korrektheit der Antworten berechnet.
-Eine Antwort gilt als robust, wenn sie auch bei fehlerhaften Eingaben korrekt ist.\\
+Die Robustheit beschreibt die Fähigkeit des Modells, auch bei fehlerhaften Eingaben korrekte Antworten zu generieren.
+Dazu werden grammatikalische Fehler sowie Rechtschreibfehler in eine Teilmenge der Fragen eingefügt und die Korrektheit der Antworten berechnet.
+Eine Antwort wird als robust bezeichnet, wenn sie auch bei fehlerhaften Eingaben korrekt ist.\\
 
 \noindent\textbf{Erklärbarkeit:}\newline
-Erklärbarkeit beschreibt die Fähigkeit des Modells, die generierten Antworten zu erklären.
-Hierzu werden die Antworten der Modelle manuell überprüft, ob diese eine Erklärung enthalten.
-Sollte dies nicht der Fall sein, wird eine zusätzliche Eingabe erstellt, welche ein Erklärung fordert.
+Die Erklärbarkeit beschreibt die Fähigkeit des Modells, die erzeugten Antworten zu erklären.
+Dazu werden die Modellantworten manuell daraufhin überprüft, ob sie eine Erklärung enthalten.
+Ist dies nicht der Fall, wird eine zusätzliche Eingabe erzeugt, der nach einer Erklärung fragt.
 Eine Antwort gilt als erklärbar, wenn sie eine Erklärung enthält.
-Die Ergebnisse werden unterschieden in \enquote{Ohne zusätzliche Eingabe} und \enquote{Mit zusätzlicher Eingabe}.\\
+Die Ergebnisse werden in \enquote{ohne zusätzliche Eingabe} und \enquote{mit zusätzlicher Eingabe} unterschieden.\\
 
 \noindent\textbf{Fragenverständnis:}\newline
-Fragenverständnis beschreibt die Fähigkeit des Modells, die Frage zu verstehen.
-Hierzu werden die Antworten der Modelle manuell überprüft, ob diese die Frage verstanden haben. Eine Frage gilt als verstanden, wenn die Antwort sich inhaltlich auf die Frage und deren Fakten bezieht. Die Antwort muss dabei nicht korrekt sein.\\
+Das Fragenverständnis beschreibt die Fähigkeit des Modells, die Frage zu verstehen.
+Dazu werden die Antworten der Modelle manuell daraufhin überprüft, ob sie die Frage verstanden haben. Eine Frage gilt als verstanden, wenn sich die Antwort inhaltlich auf die Frage und deren Sachverhalt bezieht. Die Antwort muss nicht korrekt sein.
