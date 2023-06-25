@@ -47,6 +47,7 @@ Sprachmodell Definition (Was ist das)
 \section{Neuronale Netzwerke}
 Erstmalig erklärt in \dots
 
+\subsection{Architektur eines einfachen Neuronalen Netzes}
 Ein Neuronales Netz besteht aus einer Kombination aus Gleichungen.
 Jedes Neuronale Netzt besitzt eine feste Anzahl an Eingabewerten und eine feste Anzahl an Ausgabewerten.
 Diese Werte werden folgend als Neuronen $E_N$ und $A_N$ bezeichnet.
@@ -100,6 +101,7 @@ Deshalb werden diese Werte interpretiert und repräsentieren häufig einen Confi
 Ist das Neuron $A_1$ auf dem Maximalwert 1, dann ist das Netz zu 100\% sicher, dass die Eingabe der Klasse 1 enspricht.
 Im Bezug auf Transformer ist die Ausgabe $A_N$ ein Vektor über das gesamte Vokabular des Transformers, und gibt aus, in wie fern das Modell glaubt, das jeweilige Token folgt auf den Eingabetext.\\
 
+\subsection{Kost-Funktion}
 Mit Hilfe dieser Ausgabe kann nun eine Kostfunktion beschrieben werden.
 Eine Kostfunktion ist eine Funktion, welche angibt, wie falsch das Modell liegt.
 Bei einem Neuronalen Netz, welches Klassifiziert, wäre eine einfache Kost-Funktion die Summe der Differenzen zwischen der Ausgabe des Netzes und der tatsächlichen Klasse.
@@ -117,6 +119,96 @@ Hier ergibt sich aus der Eingabe die Erwartete Ausgabe, da der darauf folgende T
 Unüberwachtes Verfahren sind zum Beispiel Agents, welche Spiele lernen.
 Hier existiert in den meisten Fällen eine Belohungsfunktion, welche angibt, wie gut das Modell gespielt hat.
 Belohungsfunktionen können beschreiben, wie weit das Auto im Spiel gefahren ist oder wie viele Punkte gesammelt wurden.\\
+
+\subsection{Backpropagation}
+Die Kost-Funktion repräsentiert eine Funktion über alle Bias und Gewichtsparameter des Neuronalen Netzes und ihrer Ausgabe und wird hier als $C$ bezeichnet.
+Sie repräsentiert demnach eine multi-dimensionale nicht-lineare Funktion mit einem globalen Minimum.
+Zur Verbesserung des Modells wird nun versucht, dieses Minimum zu finden, in dem die Parameter des Modells angepasst werden. Diesen Prozess nennt man Backpropagation.
+Eine Vorwärts-Propagierung (engl. Forward Propagation) beschreibt die Berechnung der Ausgabe des Modells mit den aktuellen Parametern, während die Backpropagation die Berechnung der Ableitung der Kost-Funktion nach den Parametern beschreibt.
+Diese Ableitung wird von der Ausgabe aus in Richtung der Eingabe berechnet, daher der Name Backpropagation.
+
+Möchte man nun einen lokales Minimum von $C$ ermitteln, muss der Gradient von $C$ nach den Parametern des Modells berechnet werden. Der Gradient ist die partielle Ableitung der Kost-Funktion über jeden Parameter.
+\begin{equation}
+    \Delta C = \begin{bmatrix}
+        \frac{\partial C}{\partial w_1} \\
+        \frac{\partial C}{\partial w_2} \\
+        \vdots \\
+        \frac{\partial C}{\partial w_n} \\
+        \frac{\partial C}{\partial b_1} \\
+        \vdots \\
+        \end{bmatrix}
+\end{equation}
+
+Um diese partiellen Ableitungen zu berechnen, stellen wir zuerst die Kostfunktion $C$ als Funktion der zuvorliegenden Ebene $a^{(L)}$  und der gewollten Ausgabe $y$ dar.
+\begin{align}
+    C_0 &= (a^{(L)} - y)^2\\
+    a^{(L)} &= \sigma(z^{(L)})\\
+    z^{(L)} &= w^{(L)}a^{(L-1)} + b^{(L)}\\
+    a^{(L-1)} &= \sigma(z^{(L-1)})\\
+    z^{(L-1)} &= w^{(L-1)}a^{(L-2)} + b^{(L-1)}\\
+\end{align}
+
+Hierbei ist $a^{(L)}$ die Ausgabe der Ebene $L$, $w^{(L)}$ die Gewichte, welche zur Ausgabe von $a^{(L)}$ führen, $b^{(L)}$ die Bias der Ebene $L$ und $\sigma$ die Aktivierungsfunktion der Ebene $L$.
+Weitere Ebenen werden durch $L-k$ beschrieben für $k=1\hdots L$. $z^{(L)}$ ist hier die Eingabe in die Aktivierungsfunktion der Ebene $L$.
+
+Die Partielle Ableitung von $C$ nach $w^{(L)}$ ist nun die Partielle Ableitung dieser Gleichungen.
+\begin{align}
+    \frac{\partial C_0}{\partial a^{(L)}} &= 2(a^{(L)} - y)\\
+    \frac{\partial a^{(L)}}{\partial z^{(L)}} &= \sigma'(z^{(L)})\\
+    \frac{\partial z^{(L)}}{\partial w^{(L)}} &= a^{(L-1)}\\
+\end{align}
+
+Demnach gilt folgendes:
+\begin{align}
+    \frac{\partial C_0}{\partial w^{(L)}} &= \frac{\partial z^{(L)}}{\partial w^{(L)}}\frac{\partial a^{(L)}}{\partial z^{(L)}}\frac{\partial C_0}{\partial a^{(L)}}\\
+    \frac{\partial C_0}{\partial w^{(L)}} &= a^{(L-1)}\sigma'(z^{(L)})2(a^{(L)} - y)\\
+\end{align}
+
+
+Um nun über alle Parameter des Modells den Gradienten zu berechnen, erstellen wir gleichermaßen eine partielle Ableitung nach dem Bias $b^{(L)}$.
+\begin{align}
+    \frac{\partial C_0}{\partial b^{(L)}} &= \frac{\partial z^{(L)}}{\partial b^{(L)}}\frac{\partial a^{(L)}}{\partial z^{(L)}}\frac{\partial C_0}{\partial a^{(L)}}\\
+    \frac{z^{(L)}}{\partial b^{(L)}} &= 1\\
+    \frac{\partial C_0}{\partial b^{(L)}} &= \sigma'(z^{(L)})2(a^{(L)} - y)\\
+\end{align}
+
+Zu letzt für die Ebene $L$ benötigen wir noch die partielle Ableitung nach $a^{(L-1)}$.
+\begin{align}
+    \frac{\partial C_0}{\partial a^{(L-1)}} &= \frac{\partial z^{(L)}}{\partial a^{(L-1)}}\frac{\partial a^{(L)}}{\partial z^{(L)}}\frac{\partial C_0}{\partial a^{(L)}}\\
+    \frac{\partial z^{(L)}}{\partial a^{(L-1)}} &= w^{(L)}\\
+    \frac{\partial C_0}{\partial a^{(L-1)}} &= w^{(L)}\sigma'(z^{(L)})2(a^{(L)} - y)\\
+\end{align}
+
+Sind in der vorherigen Ebene mehrere Neuronen vorhanden, werden alle partiellen Ableitungen über $a_k^{(L-1)}$ aufsummiert.
+\begin{equation}
+    \frac{\partial C_0}{\partial a_k^{(L-1)}} = \sum_{j=0}^{n_L-1}\frac{\partial z_j^{(L)}}{\partial a_k^{(L-1)}}\frac{\partial a_j^{(L)}}{\partial z_j^{(L)}}\frac{\partial C_0}{\partial a_j^{(L)}}\\
+\end{equation}
+
+Die Ableitung in vorherigen Ebenen, also $C_0$ nach $w^{(L-1)}$ und $b^{(L-1)}$ werden analog berechnet. Hier als Beispiel für $w^{(L-1)}$.
+
+\begin{equation}
+    \frac{\partial C_0}{\partial w^{(L-1)}} = \frac{\partial z^{(L-1)}}{\partial w^{(L-1)}}\frac{\partial a^{(L-1)}}{\partial z^{(L-1)}}\frac{\partial z^{(L)}}{\partial a^{(L-1)}}\frac{\partial a^{(L)}}{\partial z^{(L)}}\frac{\partial C_0}{\partial a^{(L)}}\\
+\end{equation}
+
+Eine Ausgabe der Kost-Funktion $C$ über eine Eingabe beschreibt jedoch nicht die Leistung des Modells über den gesamten Datensatz. Daher müssen alle Ergebniss der Kost-Funktion über den gesamten Datensatz gemittelt werden. 
+\begin{equation}
+    C = \frac{1}{n}\sum_{k=0}^{n-1}C_k\\
+    \frac{\partial C}{\partial w^{(L)}} = \frac{1}{n}\sum_{k=0}^{n-1}\frac{\partial C_k}{\partial w^{(L)}}	
+\end{equation}
+\subsection{Stochastischer Gradientenabstieg}
+Es ist jedoch nicht sinnvoll für alle Eingaben zu erst die Kostfunktion zu berechnen, um dann den korrekten Weg in Richtung einer optimalen Lösung zu gehen.
+Dies würde selbst bei kleineren Datensätzen zu viel Rechenaufwand bedeuten.
+Deshalb unterteilt man den Datensatz in sogenannte Minibatches.
+Minibatches beschreiben einen Bruchteil des Datensatzes, über den der Gradient der Kost-Funktion berechnet wird.
+Dadurch ist die Richtung des Gradient nur noch annäherungsweise dem tatsächlichen Gradienten, die Berechnung jedoch deutlich schneller.
+Die Größe der Minibatches ist ein Hyperparameter des Modells und wird in der Regel in Potenzen von 2 gewählt, um die Berechnung zu vereinfachen.
+Die Größe der Minibatches ist ein Kompromiss zwischen der Genauigkeit des Gradienten und der Geschwindigkeit der Berechnung.
+Dieses Prozess nennt man Stochastischer Gradientenabstieg (engl. Stochastic Gradient Descent).
+
+\subsection{Lernrate}
+Diese partiellen Ableitungen beschreiben den Einfluss der Veränderung eines Parameters auf die Kost-Funktion. Der Gradient gibt uns die Richtung an, in welche die Funktion C sich maximiert, dementsprechend wählen wir den negativen Gradienten, um die Funktion zu minimieren und nehmen einen Schritt in diese Richtung. Die Schrittweite wird als Lernrate bezeichnet (engl. Learning Rate) und ist ein wichtiger Hyperparameter eines Neuronalen Netzes.
+Ein Hyperparameter ist ein Parameter, welcher von den Nutzern des Neuronalen Netzes eingestellt wird und nicht erlernt wird. Wählt man die Lernrate zu hoch, besteht die Gefahr, dass ein Minimum der Kost-Funktion übersprungen wird und um diesen Punkt osziliert, wählt man die Lernrate zu niedrig, braucht das Training des Neuronalen Netzwerkes zu lange um das Minimum zu erreichen.
+In Transformern und tiefen Neuronalen Netzen ist die Lernrate nicht konstant, sondern wird über den Prozess des Trainings regelmäßig angpasst. 
 
 \section{Transformer}\label{sec:transformer}
 %\todo{
