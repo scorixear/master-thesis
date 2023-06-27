@@ -1,11 +1,22 @@
 %*****************************************
 \chapter{Lösungsansatz}\label{ch:approach}
 %*****************************************
+Diese Arbeit beschäftigt sich mit der Beantwortung von Wissensfragen zu \citet{bb} mit Hilfe
+eines vortrainierten Sprachmodells, welches mit Hilfe des Buches \citet{bb} auf diese Domäne trainiert wird.
+Die Aufgabenstellung unterteilt sich hier in fünf Teile:
+\begin{enumerate}
+    \item Die Auswahl eines Sprachmodells, welches die Aufgabe lösen kann.
+    \item Die Kuration und Umwandlung des Buches von \citet{bb} in eine von dem Modell verständliche Form.
+    \item Die Durchführung des Trainings des ausgewählten Modells.
+    \item Die Erstellung eines Evaluierungsdatensatzes auf Basis von Klausuren, welche inhaltlich auf dem Buch von \citet{bb} basieren.
+    \item Die Evaluierung des Modells mit Hilfe des erstellten Evaluierungsdatensatzes.
+\end{enumerate}
+
 \section{Auswahl von Sprachmodellen}
 Für die Auswahl eines Sprachmodells müssen verschiedene Kriterien erfüllt sein.
-Ausgehend von der Aufgabenstellung in~\ref{sec:zielsetzung} stehen verschiedene Modelle der Transformer-Architektur zur Auswahl.
+Ausgehend von der Aufgabenstellung in \cref{sec:zielsetzung} stehen verschiedene Modelle der Transformer-Architektur zur Auswahl.
 Die Auswahl beschränkt sich auf Decoder-basierte Modelle, da diese die Eigenschaften eines autoregressiven Modells besitzen.
-Wie bereits in~\ref{sec:grundlagen:transformer} beschrieben, ist das Ziel die Generierung von Text auf Basis einer Fragestellung. % TODO: Grundlagen Kapitel + Label
+Wie bereits in \cref{sec:grundlagen:transformer} beschrieben, ist das Ziel die Generierung von Text auf Basis einer Fragestellung. % TODO: Grundlagen Kapitel + Label
 Diese Fragestellung wird zu Beginn als Eingabe zur Verfügung gestellt, woraufhin das Modell kontinuierlich neue Token generiert.
 Neu generierte Token werden zusammen mit der ursprünglichen Frage als Eingabe verwendet, um den nächsten Token zu generieren.
 Dieses Verhalten entspricht autoregressiven Modellen und erfordert Decoder-basierte Modelle.
@@ -13,14 +24,43 @@ Ein Decoder-basiertes Modell verwendet alle vorhergehenden Token, um Token zu ge
 Encoder-basierte Modelle sind für die Textvervollständigung oder Textklassifikation gedacht, aber nicht für die Textgenerierung.\\
 
 Zusätzlich sind folgende Eigenschaften erwünscht.
-Das Modell sollte eine gute ZeroShot-Performance haben und nicht nur eine gute FewShot- oder OneShot-Performance.
+Das Modell soll eine gute ZeroShot-Performance haben und nicht nur eine gute FewShot- oder OneShot-Performance.
 Diese Arbeit untersucht die Fähigkeit eines Modells, Wissen aus domänenspezifischer Literatur (hier aus \citet{bb}) zu reproduzieren.
 Indem frühere Fragen und Antworten als Kontext verwendet werden, werden die Ergebnisse synthetisch durch zusätzliches Wissen im Kontext verbessert.
 Einige Fragen könnten nicht durch das Modell mit Hilfe des gelernten Wissens beantwortet werden, sondern durch das Wissen im Kontext.
-Das Modell sollte auch ohne Fine-Tuning eine gute Leistung erbringen.
-Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht möglich ist, sollte ein Modell gewählt werden, das auch ohne dieses Fine-Tuning eine gute Performance erreicht.\\
+Das Modell soll auch ohne Fine-Tuning eine gute Leistung erbringen.
+Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht möglich ist, soll ein Modell gewählt werden, das auch ohne dieses Fine-Tuning eine gute Performance erreicht.\\
 
-Die hier zur Auswahl stehenden Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMa.
+\begin{table}
+    \centering
+    \setlength{\tabcolsep}{5pt}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{lllll}
+        \toprule
+        Modell & Verfügbarkeit & ZeroShot & Größe & GPU-Speicher\\
+        \midrule
+        GPT-2       & frei               & schlecht  & 1,5 Mrd. Parameter & 24 GB\\
+        GPT-3       & nur Interferenz   & gut       & 175 Mrd. Parameter & 1,4 TB\\
+        GPT-4       & nur Interferenz   & sehr gut  & --- & --- \\
+        GPT-J       & frei              & gut       & 6,7 Mrd. Parameter & 104 GB\\
+        GPT-NeoX    & frei              & gut       & 20 Mrd. Parameter  & 160 GB\\
+        \multirow{4}{*}{LLaMa}
+                    & limitiert         & gut       & 7 Mrd. Parameter   & 56 GB\\
+                    & limitiert         & gut       & 13 Mrd. Parameter  & 104 GB\\
+                    & limitiert         & sehr gut  & 33 Mrd. Parameter  & 264 GB\\
+                    & limitiert         & sehr gut  & 65 Mrd. Parameter  & 520 GB\\
+        \bottomrule
+    \end{tabular}}
+    \caption{Übersicht über die zur Auswahl stehenden Modelle.\label{tab:approach:models}}
+\end{table}
+
+Die hier zur Auswahl stehenden Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMa, gezeigt in \cref{tab:approach:models}.
+Die angegebenen GPU-Speicher Anforderungen beziehen sich hier auf die notwendige Speichermenge zum Training des Modells.
+Berechnet wird diese mit der \cref{eq:speicher}.
+\begin{equation}\label{eq:speicher}
+    \text{Speicher}=\text{Anzahl Parameter} \cdot \frac{\text{Parameterformat}}{8} \cdot 4
+\end{equation}
+Verschiedene Modelle benutzen die Parameterformate FP16 oder FP32, welche 2 bzw. 4 Byte pro Parameter benötigen. Zusätzlich muss das Modell während des Trainings circa 4 mal in den Speicher geladen werden, um die Backpropagation durchzuführen. Zur Interferenz der Modelle ist dementsprechend ein Speicherbedarf von $\frac{1}{4}$ der angegebenen Werte notwendig.
 Modelle, die sehr populär geworden sind, aber nicht zur Auswahl stehen, sind BERT, RoBERTa, DistillBERT, BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5.
 Wenn die Aufgabe des Question Answering gelöst werden soll, ist ein BERT-basiertes Modell die erste Wahl.\\
 
@@ -69,29 +109,35 @@ Die Modelle von LLaMa werden ausgewählt, um die bestmögliche Performance mit d
 Hier stellt sich die Frage, welches Modell aus der LLaMa-Reihe verwendet werden soll.
 Die Modelle unterscheiden sich sowohl in der Größe als auch proportional in der Leistung.\\
 
-\begin{table}
+\begin{table}[t!]
+    \centering
+    \setlength{\tabcolsep}{5pt}
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{lrcccccccc}
-        \toprule
-        &&BoolQ&PIQA&SIQA&HellaSwag&WinoGrande&ARC-e&ARC-c&OBQA\\
-        \midrule
-        GPT-3&175B&60.5&81.0&-&78.0&70.2&68.8&51.4&57.6\\
-        Gopher&280B&79.3&81.8&50.6&79.2&70.1&-&-&-\\
-        Chinchilla&70B&83.7&81.8&51.3&80.8&74.9&-&-&-\\
-        PaLM&62B&84.8&80.5&-&79.7&77.0&75.2&52.5&50.4\\
-        PaLM-cont&62B&83.9&81.4&-&80.6&77.0&-&-&-\\
-        PaLM&540B&\textbf{88.0}&82.3&-&83.4&\textbf{81.1}&76.6&53.0&53.4\\
-        \midrule
-        \multirow{4}{*}{LLaMa}&7B&76.5&79.8&48.9&76.1&70.1&72.8&47.6&57.2\\
-        &13B&78.1&80.1&50.4&79.2&73.0&74.8&52.7&56.4\\
-        &33B&83.1&82.3&50.4&82.8&76.0&\textbf{80.0}&\textbf{57.8}&58.6\\
-        &65B&85.3&\textbf{82.8}&\textbf{52.3}&\textbf{84.2}&77.0&78.9&56.0&\textbf{60.2}\\
-        \bottomrule
+    \begin{tabular}{lrccccccccc}
+    \toprule
+    & & BoolQ & PIQA & SIQA & \hspace{-0.3cm} HellaSwag \hspace{-0.2cm} & \hspace{-0.2cm} WinoGrande \hspace{-0.3cm} & ARC-e & ARC-c & OBQA \\
+    \midrule
+    GPT-3        & 175B & 60.5 & 81.0 & -    & 78.9 & 70.2 & 68.8 & 51.4 & 57.6 \\
+    Gopher       & 280B & 79.3 & 81.8 & 50.6 & 79.2 & 70.1 & -    & -    & -    \\
+    Chinchilla   & 70B  & 83.7 & 81.8 & 51.3 & 80.8 & 74.9 & -    & -    & -    \\
+    PaLM         & 62B  & 84.8 & 80.5 & -    & 79.7 & 77.0 & 75.2 & 52.5 & 50.4 \\
+    PaLM-cont    & 62B  & 83.9 & 81.4 & -    & 80.6 & 77.0 & -    & -    & -    \\
+    PaLM         & 540B & \textbf{88.0} & 82.3 & - & 83.4 & \textbf{81.1} & 76.6 & 53.0 & 53.4 \\
+    \midrule
+    \multirow{4}{*}{LLaMa}
+       & 7B   & 76.5 & 79.8       & 48.9 & 76.1 & 70.1 & 72.8       & 47.6       & 57.2 \\
+       & 13B  & 78.1 & 80.1       & 50.4 & 79.2 & 73.0 & 74.8       & 52.7       & 56.4 \\
+       & 33B  & 83.1 & 82.3 & 50.4 & 82.8 & 76.0 & \textbf{80.0} & \textbf{57.8} & 58.6       \\
+       & 65B  & 85.3 & \textbf{82.8}  & \textbf{52.3} &  \textbf{84.2}    &  77.0    & 78.9  & 56.0 &   \textbf{60.2} \\
+  \bottomrule
     \end{tabular}}
-\caption{Zero-Shot Leistung verschiedener Modelle in Begründungsaufgaben für gesunden Menschenverstand. Veröffentlicht in \citet{llama}}\label{tab:llama_naturalquestion}
+\caption{
+Zero-Shot Leistung verschiedener Modelle in Begründungsaufgaben für gesunden Menschenverstand.
+Veröffentlicht in \citet{llama}\label{tab:llama_naturalquestion}
+}
 \end{table}
 
-Die Tabelle~\ref{tab:llama_naturalquestion} zeigt die Leistungsfähigkeit der Modelle im Vergleich zu anderen Modellen und bei verschiedenen Einstellungen (ZeroShot bis 64Shot).
+Die \cref{tab:llama_naturalquestion} zeigt die Leistungsfähigkeit der Modelle im Vergleich zu anderen Modellen und bei verschiedenen Einstellungen (ZeroShot bis 64Shot).
 Selbst das kleinste Modell mit 7 Milliarden Parametern übertrifft die Leistung von GPT-3 und kann während der Interferenz auf einer einzelnen V100 \ac{gpu} verwendet werden.
 Nach Angaben der Autoren kann auch das Modell mit 13 Milliarden Parametern auf einer einzigen V100 \ac{gpu} eingesetzt werden, was für die Wahl dieses Modells spricht.
 Das 33-Milliarden-Parameter-Modell erzielt im ZeroShot sogar etwas bessere Ergebnisse als das 65-Milliarden-Parameter-Modell, weshalb die Wahl des 33-Milliarden-Parameter-Modells hier sinnvoll ist.
@@ -104,7 +150,9 @@ Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
 
 Eine Alternative zu den LLaMa-Modellen ist OpenLLaMa, veröffentlicht unter \citet{openllama}.
 Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMa-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar.
-Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf diese Modelle verzichtet.
+Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf diese Modelle verzichtet.\\
+
+In dieser Arbeit werden die Modelle LLaMa 7B und 33B verwendet, da sie eine sehr gute Leistung mit minimalen Ressourcenanforderungen bieten. Eine Auswahl beider Modellgrößen begründet sich daher, dass eine Nutzung des 33B Modells auf einzelnen GPUs nicht möglich ist, und dadurch die Nutzbarkeit eingeschränkt wird. Deshalb wird ebenso die Leistung des kleinsten LLaMa Modells zum Vergleich herangezogen.\\
 
 \section{Datenkuration}
 Um die Literatur optimal nutzen zu können, muss eine Datenkuration durchgeführt werden.
@@ -133,7 +181,7 @@ Diese Textstellen existieren nur in der Word-Version des Buches, nicht aber in d
 Da eine Textextraktion aus PDF-Dateien jedoch zu gravierenden Problemen in der Textformatierung führt, wurde darauf verzichtet.
 
 \subsection{Optionale Textentfernungen}
-Es sollte geprüft werden, ob das Weglassen von Literaturverweisen, Überschriften und Tabellen zu einer besseren Leistung führt.
+Es soll geprüft werden, ob das Weglassen von Literaturverweisen, Überschriften und Tabellen zu einer besseren Leistung führt.
 Literaturverzeichnisse beziehen sich auf das vorhergehende Kapitel, haben aber ein schwieriges Format.
 Insbesondere \ac{url}s müssen vom Modell in Token zerlegt werden, die nicht den Inhalt der \ac{url}s widerspiegeln. 
 Überschriften haben im Vergleich zum Text nur einen minimalen Anteil an der Gesamtzahl der Tokens, wodurch das in ihnen enthaltene Wissen verloren geht.
@@ -171,7 +219,7 @@ Diese Grenze wird oft als \enquote{Overfitting} bezeichnet und stellt ein Modell
 Dadurch verliert das Modell die Fähigkeit, auf unbekannte Daten zu verallgemeinern, was in diesem Anwendungsfall dazu führt, dass keine Fragen mehr beantwortet werden können.\\
 
 Um Overfitting zu vermeiden, wird der Datensatz in einen Trainings- und einen Validierungsdatensatz aufgeteilt.
-Dabei wird eine Aufteilung von 90\% Training und 10\% Validierung verwendet.
+Dabei wird eine Aufteilung von \SI{90}{\percent} Training und \SI{10}{\percent} Validierung verwendet.
 Das Modell wird nur auf dem Trainingsdatensatz trainiert, aber in regelmäßigen Abständen mit dem Validierungsdatensatz überprüft.
 Die Ergebnisse des Validierungsdatensatzes haben keinen Einfluss auf die Anpassung der Gewichte, sondern dienen nur zur Überprüfung der Generalisierungsfähigkeit des Modells.
 Sowohl für den Trainings- als auch für den Validierungsdatensatz wird ein Absinken der Kostenfunktion erwartet.
@@ -182,12 +230,12 @@ Solange der Unterschied zwischen den beiden Kostenfunktionen nicht zu groß ist,
 
 Für die Umsetzung dieser Trainingsschritte wird die Programmiersprache Python verwendet, da sie eine Vielzahl von Bibliotheken für die Textverarbeitung und den Einsatz von neuronalen Netzen bietet.
 Die Bibliothek Transformers von HuggingFace bietet eine Vielzahl von Modellen und Trainingsmethoden und basiert auf der populären Bibliothek PyTorch.
-PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer NVIDIA \ac{gpu} durchzuführen, was die in~\ref{sec:grundlagen:training} beschriebenen Rechenschritte um ein Vielfaches beschleunigt. % TODO: Rechenschritte in Grundlagen erklären, label hinzufügen
+PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer Nvidia \ac{gpu} durchzuführen, was die in \cref{sec:grundlagen:training} beschriebenen Rechenschritte um ein Vielfaches beschleunigt. % TODO: Rechenschritte in Grundlagen erklären, label hinzufügen
 Mit Hilfe von DeepSpeed kann dieses Training auch auf mehrere \ac{gpu}s verteilt werden.
 Dies ist notwendig, da das verwendete Modell mit 33 Milliarden Parametern zu groß ist, um in den Arbeitsspeicher einer einzelnen \ac{gpu} zu passen.\\
 
 Vor Beginn des Trainings müssen einige Konfigurationsparameter festgelegt werden.
-Diese Parameter sind in der Tabelle~\ref{tab:training:parameter} aufgelistet und folgen den Trainingsparametern von \citet{llama}.
+Diese Parameter sind in der \cref{tab:training:parameter} aufgelistet und folgen den Trainingsparametern von \citet{llama}.
 \begin{table}
     \centering
     \begin{tabular}{ll}
@@ -211,7 +259,7 @@ Je höher die Lernrate, desto stärker werden die Gewichte angepasst.
 Dies kann dazu führen, dass das Modell nicht konvergiert, sondern über den optimalen Punkt hinausschießt.
 Bei einer zu niedrigen Lernrate konvergiert das Modell sehr langsam.
 Die Lernrate wird während des Trainings angepasst, um eine schnelle Konvergenz zu ermöglichen.
-Diese Anpassung folgt dem Kosinus-Lernratenschema, so dass die endgültige Lernrate 10\% des Anfangswertes beträgt.
+Diese Anpassung folgt dem Kosinus-Lernratenschema, so dass die endgültige Lernrate \SI{10}{\percent} des Anfangswertes beträgt.
 Die Lernraten hängen von der Modellgröße ab.
 Im Allgemeinen benötigen größere Modelle eine niedrigere Lernrate.
 Der Optimierer AdamW berücksichtigt den zeitlichen Abfall der Gewichte und wurde in \citet{adamw} vorgestellt.
@@ -219,7 +267,7 @@ Er ist die häufigste Wahl in aktuellen Modellen und wurde auch für das Trainin
 
 Gewichtsabnahme (engl. \enquote{Weight Decay}) ist ein Parameter, der die Gewichte während des Trainings reduziert.
 Er stellt eine Regularisierung dar, die Overfitting verhindern soll.
-$0,1$ entspricht einer Gewichtsreduktion von 10\%.\\
+$0,1$ entspricht einer Gewichtsreduktion von \SI{10}{\percent}.\\
 
 Die Gradientenbegrenzung (engl. \enquote{Gradient Clipping}) ist ein Parameter, der die Größe der Gradienten begrenzt.
 Dies ist notwendig, da bei großen Modellen die Gradienten während der Backpropagation mit zunehmender Tiefe immer größer werden.
@@ -237,13 +285,13 @@ Da in diesem Fall jedoch der Datensatz im Vergleich minimal ist, wird eine grö�
 
 \subsection{Ausführen der Training-Programme}
 
-Zur Ausführung der Trainingsprogramme wird SLURM\footnote{https://slurm.schedmd.com/overview.html (abgerufen am 16.6.2023)} verwendet.
+Zur Ausführung der Trainingsprogramme wird SLURM\footnote{\url{https://slurm.schedmd.com/overview.html} (abgerufen am 16.6.2023)} verwendet.
 Mit Hilfe von SLURM-Skripten können Programme über mehrere Knoten, \ac{cpu}s und \ac{gpu}s verteilt berechnet werden.
 Diese Skriptsprache wird vom Rechenzentrum der Universität Leipzig verwendet, um verschiedene Programme auf den Supercomputern Clara und Paula laufen zu lassen.\\
 
 Die Supercomputer Clara und Paula sind Rechennetze, die auf \ac{gpu}beschleunigte Berechnungen spezialisiert sind.
 Paula besteht aus 12 Knoten mit je 8 Nvidia Tesla A30 \ac{gpu}s.
-Clara ist zweigeteilt und besteht aus 8 Nodes mit je 4 Nvidia Tesla V100 \ac{gpu}s und 22 Nodes mit je 8 Nvidid GeForce RTX 2080 TI \ac{gpu}s.
+Clara ist zweigeteilt und besteht aus 8 Nodes mit je 4 Nvidia Tesla V100 \ac{gpu}s und 22 Nodes mit je 8 Nvidia GeForce RTX 2080 TI \ac{gpu}s.
 Die Knoten sind über ein Infiniband-Netzwerk verbunden, das eine hohe Bandbreite und geringe Latenz bietet.\\
 
 Supercomputer sind gemeinsam genutzte Ressourcen, die von mehreren Nutzern gebucht werden können.
@@ -256,7 +304,7 @@ Dazu wird die Bibliothek DeepSpeed \citep{deepspeed} in Kombination mit der Bibl
 DeepSpeed erlaubt verschiedene Arten der Parallelisierung, der Fokus liegt hier auf ZeRO 2 \citep{ZeRO}.
 Die ZeRO Parallelisierung erlaubt eine verteilte parallele Datenverarbeitung, bei der das Modell auf mehrere \ac{gpu}s aufgeteilt wird.
 Ohne diese Option ist ein Training nicht möglich, da, wie oben beschrieben, einzelne Modelle nicht vollständig auf eine \ac{gpu} passen.
-Genauere Erläuterungen zur Konfiguration von DeepSpeed und zur Verwendung der Transformer-Bibliothek sind in~\ref{ch:solution} beschrieben.
+Genauere Erläuterungen zur Konfiguration von DeepSpeed und zur Verwendung der Transformer-Bibliothek sind in \cref{ch:solution} beschrieben.
 % TODO: Kapitel Solutions reminder
 
 \section{Klausurfragen}\label{sec:approach:questions}
@@ -290,7 +338,7 @@ Diese Fragen müssen ebenfalls umformuliert werden, um unabhängig von anderen F
 
 \section{Modellvergleich}
 Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Bewertung.
-Dazu werden die in~\ref{sec:approach:questions} definierten Fragen verwendet.
+Dazu werden die in \cref{sec:approach:questions} definierten Fragen verwendet.
 Diese Fragen werden von dem LLaMa Modell 7B und 33B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
 Die Antworten werden manuell ausgewertet und mit den Antworten aus dem Buch \citet{bb} verglichen.
 Die Lösungen werden ebenfalls in drei Kategorien eingeteilt:
@@ -302,7 +350,7 @@ Die Lösungen werden ebenfalls in drei Kategorien eingeteilt:
 
 Die Modelle werden mit Hilfe der micro-F1 Bewertung verglichen.
 Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
-\begin{ceqn}
+\begin{ceqn} % TODO: mprec und mrecall ausformulieren
 \begin{align}
     C &= S \cap G \\
     m_{prec} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|S_{qi}|} \\
@@ -310,6 +358,7 @@ Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
     microF1 &= \frac{2 \cdot m_{prec} \cdot m_{recall}}{m_{prec} + m_{recall}}
 \end{align}
 \end{ceqn}
+% TODO: MacroF1 nutzen? oder begründen warum microF1
 Dabei ist $S_q$ die Menge der für die Fragen $q$ generierten Antworten, $G_q$ die Menge der richtigen Antworten aus dem Buch \citet{bb} und $C_q$ die Menge der richtigen Antworten, die sowohl in $S_q$ als auch in $G_q$ enthalten sind.
 $N$ ist die Anzahl der Fragen, $m_{prec}$ die Mikro-Präzision und $m_{recall}$ der Mikro-Recall.
 Der Wert $microF1$ ist das harmonische Mittel aus $m_{prec}$ und $m_{recall}$.
@@ -325,11 +374,11 @@ Die Kriterien \enquote{Nutzung aktueller Informationen} und \enquote{Generalisie
 Die Korrektheit wird durch die oben beschriebenen Formeln berechnet und verglichen.
 Eine höhere Korrektheit entspricht einem besseren Ergebnis.
 Bei der Anwendung des Modells ist eine hohe Mikro-Präzision wichtiger als ein hoher Mikro-Recall, da eine falsche Antwort für einen unkundigen Anwender wesentlich schädlicher ist als keine Antwort.
-Die Modelle sollten immer keine Antwort einer falschen Antwort vorziehen.\\
+Die Modelle sollen immer keine Antwort einer falschen Antwort vorziehen.\\
 
 \noindent\textbf{Determinismus:}\newline
 Determinismus beschreibt die Reproduzierbarkeit von Antworten.
-Für die gleiche Frage und das gleiche Modell sollten die Antworten immer gleich sein.
+Für die gleiche Frage und das gleiche Modell sollen die Antworten immer gleich sein.
 Sprachmodelle zeigen ein gewisses Maß an nichtdeterministischem Verhalten, daher ist diese Statisik ein wichtiges Kriterium.
 Um dies zu erreichen, werden Fragen 3 mal an die Modelle gestellt und die beste Antwort wird zur Berechnung der Korrektheit verwendet.
 Dabei wird auch diese Statistik berechnet.
