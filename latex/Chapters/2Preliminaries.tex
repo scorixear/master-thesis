@@ -87,7 +87,7 @@ Das Neuron mit der höchsten Ausgabe repräsentiert die erkannte Ziffer.\\
 
 Eine Beispielrechnung für das erste Neuron der ersten Hidden Layer $H^1_1$ ist wie folgt:
 \begin{equation}
-    H^1_1=ReLU(W^1_1*E_1 + W^1_2*E_2 + W^1_3*E_3 + B^1_1)
+    H^1_1=ReLU(W^1_1\cdot E_1 + W^1_2\cdot E_2 + W^1_3\cdot E_3 + B^1_1)
 \end{equation}
 $W^1_N$ repräsentieren hier Gewichte der ersten Schicht.
 Gewichte sind Parameter, die während des Trainings eines Netzwerkes angepasst werden, um eine optimale Ausgabe von $A_N$ zu erhalten.
@@ -128,7 +128,7 @@ Deshalb werden diese Werte interpretiert und repräsentieren häufig einen Confi
 Ist das Neuron $A_1$ auf dem Maximalwert 1, dann ist das Netz zu \SI{100}{\percent} sicher, dass die Eingabe der Klasse 1 enspricht.
 Im Bezug auf Transformer ist die Ausgabe $A_N$ ein Vektor über das gesamte Vokabular des Transformers, und gibt aus, in wie fern das Modell glaubt, das jeweilige Token folgt auf den Eingabetext.\\
 
-\subsection{Training eines Neuronalen Netzes}
+\subsection{Training eines Neuronalen Netzes}\label{subsec:grundlagen:training}
 Bevor ein Neuronales Netz korrekte Ausgaben liefern kann, muss es trainiert werden.
 Trainig bedeutet das iterative Anpassen der lernbaren Parameter, um eine möglichst gute Ausgabe zu erhalten.
 Eine gute Ausgabe wird durch eine Fehlerfunktion beschrieben.
@@ -196,7 +196,7 @@ Stochastic Gradient Descent) bezeichnet, da die Stichprobe des Datensatzes nur e
 Dadurch gleicht die Richtung des Gradient nur noch annäherungsweise dem tatsächlichen Gradienten, die Berechnung verläuft jedoch deutlich schneller.
 Die Größe der Batches ist ein Kompromiss zwischen der Genauigkeit des Gradienten und der Geschwindigkeit der Berechnung.\\
 
-\section{Transformer}\label{sec:transformer}
+\section{Transformer}\label{sec:grundlagen:transformer}
 %\todo{
 %Grundlagen:
 %- das was du schon drin hast mit "General Pretrained Transformer - Neuronal Networks - Zero Shot Ansatz - Finetuning - Datenkuration"

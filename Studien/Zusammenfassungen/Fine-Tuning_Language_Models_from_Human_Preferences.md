@@ -28,7 +28,7 @@ arxiv publish
 
 - nlp successfully done with unsupervised pre-training and supervised fine-tuning
 - outperforms supervised dataset from scratch
-- in some cases fine-tuning not required (#TODO: check this https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
+- in some cases fine-tuning not required 
 
 - reinforcement learning uses algorithmically defined reward functions (BLEU for translation, ROUGE for summarization, music theory-based rewards, event detectors for story generation)
 
