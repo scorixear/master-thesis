@@ -20,8 +20,8 @@ Wie bereits in \cref{sec:grundlagen:transformer} beschrieben, ist das Ziel die G
 Diese Fragestellung wird zu Beginn als Eingabe zur Verfügung gestellt, woraufhin das Modell kontinuierlich neue Tokens generiert.
 Neu generierte Tokens werden zusammen mit der ursprünglichen Frage als Eingabe verwendet, um den nächsten Token zu generieren.
 Dieses Verhalten entspricht autoregressiven Modellen und erfordert Decoder-basierte Modelle.
-Ein Decoder-basiertes Modell verwendet alle vorhergehenden Tokens, um Tokens zu generieren (auch als Vorhersage von Tokens bezeichnet), während ein Encoder-basiertes Modell sowohl vorhergehende als auch nachfolgende Tokens verwendet.
-Encoder-basierte Modelle sind für die Textvervollständigung oder Textklassifikation gedacht, aber nicht für die Textgenerierung.\\
+Ein Decoder-basiertes Modell verwendet sowohl Encoder als auch Decoder-Schichten um Eingaben zu verstehen und daraus Text zu generieren.
+Encoder-basierte Modelle besitzen in der Regel keine Decoder-Schichten und sind nur für die Textvervollständigung oder Textklassifikation gedacht, aber nicht für die Textgenerierung.\\
 
 Zusätzlich sind folgende Eigenschaften erwünscht.
 Das Modell soll eine gute ZeroShot-Performance haben und nicht nur eine gute FewShot- oder OneShot-Performance.
@@ -353,19 +353,21 @@ Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
 \begin{ceqn} % TODO: mprec und mrecall ausformulieren
 \begin{align}
     C &= S \cap G \\
-    m_{prec} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|S_{qi}|} \\
-    m_{recall} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|G_{qi}|} \\
+    micro_{prec} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|S_{qi}|} \\
+    micro_{recall} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|G_{qi}|} \\
     microF1 &= \frac{2 \cdot m_{prec} \cdot m_{recall}}{m_{prec} + m_{recall}}
 \end{align}
 \end{ceqn}
 % TODO: MacroF1 nutzen? oder begründen warum microF1
 Dabei ist $S_q$ die Menge der für die Fragen $q$ generierten Antworten, $G_q$ die Menge der richtigen Antworten aus dem Buch \citet{bb} und $C_q$ die Menge der richtigen Antworten, die sowohl in $S_q$ als auch in $G_q$ enthalten sind.
-$N$ ist die Anzahl der Fragen, $m_{prec}$ die Mikro-Präzision und $m_{recall}$ der Mikro-Recall.
-Der Wert $microF1$ ist das harmonische Mittel aus $m_{prec}$ und $m_{recall}$.
+$N$ ist die Anzahl der Fragen, $micro_{prec}$ die Mikro-Präzision und $micro_{recall}$ der Mikro-Recall.
+Der Wert $microF1$ ist das harmonische Mittel aus $micro_{prec}$ und $micro_{recall}$.
 Fragen gelten als beantwortet, wenn sie den Kategorien 1 und 2 entsprechen.
 Dieselben Berechnungen werden insgesamt und getrennt für alle drei Fragekategorien durchgeführt.
 Mikro-Präzision beschreibt den Anteil richtiger Antworten an allen beantworteten Fragen.
-Der Mikro-Recall beschreibt den Anteil der richtigen Antworten an allen Fragen.\\
+Der Mikro-Recall beschreibt den Anteil der richtigen Antworten an allen Fragen.
+Es wird der Mikro-F1 Wert genutzt, um den globalen durchschnittlichen F1 Wert zu berechnen.
+Ein Makro-F1 Wert wie in \citet{qald9} beschrieben kann in diesem Fall nicht angewendet werden, da keine Anzahl an Fragen in Kategorien aufgeteilt werden können. Jede Frage ist ihre eigene Kategorie, wodurch der der berechnete F1 Wert pro Kategorie nur den Wert 0 oder 1 annehmen kann. Dies bedeutet, dass der berechnete Makro-F1 equivalent zur Berechnung der durschnittlich richtig beantworten Fragen ist und damit weniger aussagekräftig als der Mikro-F1 Wert.\\
 
 Den in \citet{chatgpt_qas} beschriebenen Ansatz folgend werden die Modelle auf die Kriterien Korrektheit, Determinismus, Robustheit, Erklärbarkeit und Fragenverständnis evaluiert.
 Die Kriterien \enquote{Nutzung aktueller Informationen} und \enquote{Generalisierung über verschiedene Domänen} werden nicht betrachtet, da die Modelle keinen Zugriff auf aktuelle Informationen und verschiedene Domänen haben.\\

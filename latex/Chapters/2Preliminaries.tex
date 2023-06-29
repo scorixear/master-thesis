@@ -2,6 +2,153 @@
 \chapter{Grundlagen}\label{ch:preliminaries}
 %*****************************************
 
+%************ Sprachmodelle
+\begin{definition}[Sprachmodell]\label{def:sprachmodell}
+     Ein Sprachmodell ist ein computergestütztes System, welches menschliche Sprach versteht und darauf reagiert.
+    Es basiert auf künstlicher Intelligenz und wird in der Regel durch maschinelles Lernen trainiert.
+    Sprachmodelle finden in einer Vielzahl an Anwendungen ihren Einsatz, wie zum Beispiel in der Übersetzung,
+    Textgenerierung, Spracherkennung, Chatbots und Textklassifizierung.
+\end{definition}
+
+\begin{definition}[Transformer-Modell]\label{def:transformer-modell}
+    Ein Transformer-Modell ist ein Sprachmodell, das auf der Transformer-Architektur von \citet{attention} basiert.
+    Im Gegensatz zu früheren Sprachmodelle, die auf rekurrenten oder faltenden neuronalen Netzen basieren,
+    verwendet der Transformer ein Aufmerksamkeitsmechanismus (engl. Attentionmechanism), um Beziehungen zwischen Wörtern in einem Satz zu modellieren.
+    Transformer-Modelle bestehen aus einer Stapelung von Encoder- und Decoder-Schichten, wobei der Encoder zur Extraktion von Kontextinformationen aus der Eingabe dient,
+    während der Decoder die Ausgabe des Encoders verwendet, um die gewünschte Aufgabe zu lösen.
+\end{definition}
+
+\begin{definition}[Encoder-basierte Modelle]\label{def:encoder-basierte-modelle}
+    Encoder-basierte Modelle sind Sprachmodelle, die hauptsächlich auf der Encoder-Architektur basieren.
+    Sie wurden entwickel, um Eingabesequenzen zu verarbeiten und eine kompakte Repräsentation (auch Kontextvektor genannt) zu erstellen.
+    Ein zentrale Komponente eines Encoder-basierten Modells ist der Encoder.
+    Er nimmt die Eingabesequenz entgegen und lernt schrittweise die strukturellen und semantischen Informationen zu erfassen.
+    Die erzeugte Repräsentation des Encoders kann von anderen Modulen oder Schichten des Modells zur Lösung von verschiedenen Aufgaben 
+    wie zum Beispiel der Klassifikation verwendet werden.
+    Encoder-basierte Modelle besitzen in der Regel keine Decoder-Schichten.
+\end{definition}
+\begin{definition}[Decoder-basierte Modelle]\label{def:decoder-basierte-modelle}
+    Decoder-basierte Modelle sind Sprachmodelle, die auf einer speziellen Architektur basieren, bei der der Decoder eine zentrale Rolle spielt.
+    Der Decoder ist eine Komponente, die darauf spezialisiert ist aus einer gegebenen Eingabe iene sinvolle und zusammenhängende Ausgabe zu generieren.
+    Im Kontext der Textgenerierung erhält der Decoder in der Regel eine Sequenz von Vektoren als Eingabe, die von einem Encoder-Modul erstellt wurden.
+    Bei der Textgenerierung kann der Decoder auf einer gegebenen Anfangssequenz fortlaufend neue Wörter oder Sätze generieren, um einen zusammenhängenden Text zu erzeugen.
+\end{definition}
+
+\begin{definition}[Autoregressive Sprachmodelle]\label{def:autoregressive-sprachmodelle}
+    Autoregressive Sprachmodelle sind eine Art von Sprachmodellen, die entwickelt wurden, um Texte zu generieren,
+    indem sie die Wahrscheinlichkeit von Wörtern oder Zeichen in einer Sequenz vorhersagen.
+    Sie basieren auf der Annahme, dass jedes Element in der Dequenz abhängig von den vorherigen Elementen ist.
+    In einem Autoregressiven Sprachmodell wird die generative Wahrscheinlichkeit eines nächsten Elements in der Sequenz geschätzt.
+    Die Ausgabe im Kontext von Decoder-basierten Modellen ist demnach eine Wahrscheinlichkeitsverteilung über das mögliche nächste Element.
+    Das wahrscheinlichste Element wird dann der Sequenz hinzugefügt und der Prozess wird wiederholt, bis die Sequenz fertig ist.
+    Überlicherweise werde Autoregressive Sprachmodelle auf großen Textdatenmaengen trainiert, um die statistischen Zusammenhänge in den Trainingsdaten zu erfassen.
+\end{definition}
+
+
+%************ Transformer-Spezifische Architekturidentitäten
+\begin{definition}
+    \textbf{ZeroShot, OneShot, MultiShot} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Attention-Mechanismus} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Multi-Head Attention} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Feed-Foward Netze} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Parameterformate} normaler Text
+\end{definition}
+%************ Transformer-Spezifische Eingaben
+
+\begin{definition}
+    \textbf{Pretraining, Continual Pretraining} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Token} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Input Embeddings} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Position Embeddings} normaler Text
+\end{definition}
+
+
+%************ Neuronale Netze allgemein
+
+\begin{definition}[Lernbare Parameter]
+
+\end{definition}
+
+\begin{definition}[Hyperparameter]
+    
+\end{definition}
+
+\begin{definition}
+    \textbf{Aktivierungsfunktion} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Backpropagation} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Supervised, Unsupervised, Selfsupervised} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Batch} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Lernrate} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Overfitting} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Interferenz} normaler Text
+\end{definition}
+
+%************ Datenverarbeitung allgemein
+
+\begin{definition}
+    \textbf{Wissen, Information, Daten} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Datenkuration} normaler Text
+\end{definition}
+
+\begin{definition}
+    \textbf{Micro-F1, Macro-F1} normaler Text
+\end{definition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29,11 +176,11 @@
 
 Sprachmodell Definition (Was ist das)
 
-- Autoregressive Modelle
+- Autoregressive Modelle % DONE
     - Self-supervised Learning % DONE
     - Pretraining
     - continual Pretraining
-    - Decoder-Based
+    - Decoder-Based % DONE
     - ZeroShot / FewShot
 
 - Weiterentwicklungen
