@@ -4,7 +4,7 @@
 
 %************ Sprachmodelle
 \begin{definition}[Sprachmodell]\label{def:sprachmodell}
-     Ein Sprachmodell ist ein computergestütztes System, welches menschliche Sprach versteht und darauf reagiert.
+    Ein Sprachmodell ist ein computergestütztes System, welches menschliche Sprache versteht und darauf reagiert.
     Es basiert auf künstlicher Intelligenz und wird in der Regel durch maschinelles Lernen trainiert.
     Sprachmodelle finden in einer Vielzahl an Anwendungen ihren Einsatz, wie zum Beispiel in der Übersetzung,
     Textgenerierung, Spracherkennung, Chatbots und Textklassifizierung.
@@ -46,41 +46,60 @@
 
 
 %************ Transformer-Spezifische Architekturidentitäten
-\begin{definition}
-    \textbf{ZeroShot, OneShot, MultiShot} normaler Text
+\begin{definition}[ZeroShot, OneShot, MultiShot]\label{def:zeroshot-oneshot-multishot}
+    Die Bezeichnung ZeroShot, OneShot und MultiShot bezieht sich auf die Interferenz von Modellen.
+    Gerade bei \ac{QA}-Aufgaben und Text-Generierungen kommen häufig diese Methoden zu Anwendung.
+    Hierbei geht es um die Anzahl der Aufgabenbeispiele, die dem Modell vor der eigentlichen Aufgabe gegeben werden.
+    Bei der Beantwortung von Fragen könnten dies mehrere Beispielfragen und deren Antworten sein, bevor die eigentliche Frage gestellt wird.
+    Dies führt dazu, dass das Modell aus dem Kontext die Formatierung und Art der Aufgabe erkennt und bessere Antworten liefern kann.
+    ZeroShot bedeutet, dass das Modell keine Trainingsbeispiele erhält, um eine bestimmte Aufgabe zu lösen.
+    OneShot bedeutet, dass das Modell nur ein Trainingsbeispiel erhält, um eine bestimmte Aufgabe zu lösen.
+    MultiShot bedeutet, dass das Modell mehrere Trainingsbeispiele erhält, um eine bestimmte Aufgabe zu lösen.
 \end{definition}
 
-\begin{definition}
-    \textbf{Attention-Mechanismus} normaler Text
+\begin{definition}[Self-Attention-Mechanismus]\label{def:self-attention-mechanismus}
+    Der Self-Attention-Mechanismus ist ein zentrales Konzept in der Transformer-Architektur.
+    Hier wird ein Eingabevektor in drei separate Vektoren transformiert:
+    den Abfragenvektor (engl. Query), den Schlüsselvektor (engl. Key) und den Wertvektor (engl. Value).
+    Anschließend wird die Ähnlichkeit zwischen Abfragevektor und Schlüsselvektor berechnet,
+    um die Aufmerksamkeitsgewichte zu erhalten.
+    Die Aufmerksamkeitsgewichte geben an, wie wichtig jeder Wertvektor für die Berechnung eines gewichteten
+    Durschnitts ist. Die gewichteten Wertvektoren werden schließlich summiert, um den Ausgabevektor zu erhalten.
+    Self-Attention-Mechanismen ermöglichen es Modellen, komplexe Abhängigkeiten zwischen den Element einer
+    Eingabesequenz zu erfassen.
 \end{definition}
 
-\begin{definition}
-    \textbf{Multi-Head Attention} normaler Text
+\begin{definition}[Multi-Head Attention]\label{def:multi-head-attention}
+    Anstelle eines einzelnen Self-Attention-Mechanismus verwendet die Transformer-Architektur mehrere Self-Attention-Mechanismen in parallel. Hier werden Abfrage, Schlüssel und Wert linear $h$ mal auf mehrere Versionen projeziert und parallel berechnet. Die Ausgabee wird daraufhin konkateniert und erneut linear projeziert, um den Ausgabevektor zu erhalten. Die Multi-Head Attention ermöglicht es dem Modell, verschiedene Repräsentation-Subspaces der Eingabe an unterschiedlichen Positionen zu erfassen.
 \end{definition}
 
-\begin{definition}
-    \textbf{Feed-Foward Netze} normaler Text
+\begin{definition}[Feed-Forward Netz]\label{def:feed-forward-netz}
+    Ein Feed-Foward-Netz ist eine Art von kpnstlichem neuronalem Netz, welches aus mehreren Schichten bestehend Information ausschließlich vorwärts von der Eingabe in Richtung der Ausgabe fließen lässt. Hier sind keine zyklischen Verbindungen oder Rückkopplungsschleifen eingebaut.
 \end{definition}
 
-\begin{definition}
-    \textbf{Parameterformate} normaler Text
+\begin{definition}[Parameterformate]\label{def:parameterformate}
+    Sprachmodelle enthalten eine große Anzahl an lernbaren Parametern (wie zum Beispiel Gewichte und Bias), als auch
+    Zwischenwerte, die während der Interferenz berechnet werden. Diese Werte können in verschieden Formaten gespeichert werden. Häufige Formate sind hier \enquote{Float16} und \enquote{Float32}. Float steht hier für Floating Value und repräsentiert eine Gleitkommazahl. Die Zahl hinter Float gibt die Anzahl der Bits an, die für die Darstellung der Zahl verwendet werden. Eine höhere Bitzahl bedeutet eine höhere Genauigkeit, aber auch einen höheren Speicherbedarf.
 \end{definition}
 %************ Transformer-Spezifische Eingaben
 
-\begin{definition}
-    \textbf{Pretraining, Continual Pretraining} normaler Text
+\begin{definition}[Continual Pretraining]\label{def:continual-pretraining}
+    Continual Pretraining beschreibt den Prozess des fortlaufenden self-supervised Trainings eines vortrainieren Modells.
+    Hier werden lediglich die Hyperparameter des Modells angepasst und neue Datensätze verwendet, während die erlernten Parameter des Modells beibehalten werden.
 \end{definition}
 
-\begin{definition}
-    \textbf{Token} normaler Text
+\begin{definition}[Token]\label{def:token}
+    Ein Token repräsentiert eine Teilmenge eines Wortes und wird in Transformer-Modellen verwendet, um die Eingabe in logische Einheiten zu unterteilen. Tokens repräsentieren einen Kompromiss zwischen den Ausdrucksmöglichkeiten eines Modells und der Komplexität der Eingabe.
 \end{definition}
 
-\begin{definition}
-    \textbf{Input Embeddings} normaler Text
+\begin{definition}[Input Embeddings]\label{def:input-embeddings}
+    Input Embeddings sind eine Darstellung der Eingabedaten wie Tokens in einem dichten Vektorraum.
+    Diese Darstellung muss erlernt werden und ermöglicht es,
+    Tokens die semantsiche Ähnlichkeiten aufweisen oder Beziehungen zueinander haben, geometrisch nahe beieinander zu platzieren. Dadurch ist nicht nur der eigentliche Token bekannt, sondern auch die Beziehung zu anderen Tokens.
 \end{definition}
 
-\begin{definition}
-    \textbf{Position Embeddings} normaler Text
+\begin{definition}[Positional Encodings]\label{def:positional-encodings}
+    Neben den Input Embeddings repräsentierten Positional Encodings sogenannte relative und absolute Positionen der Tokens in der Eingabe. Diese Positionen werden in einem Vektorraum dargestellt und erlauben es dem Modell, die Positionen der Tokens zu berücksichtigen. Positional Encodings können erlernt oder berechnet werden.
 \end{definition}
 
 
