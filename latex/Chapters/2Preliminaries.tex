@@ -1,49 +1,138 @@
 %*****************************************
 \chapter{Grundlagen}\label{ch:preliminaries}
 %*****************************************
+% \section*{Inhalte des Kapitels}
+% - Taxonomie von Ammus (\citet{ammus}) % DONE
+% - Transformer Architektur (\citet{attention}) % DONE
 
+% - Neuronales Netz (https://katalog.ub.uni-leipzig.de/Record/0-1066754535) % DONE
+% - Activation Functions (https://katalog.ub.uni-leipzig.de/Record/0-1066754535) % DONE
+% - Backpropagation (https://katalog.ub.uni-leipzig.de/Record/0-1066754535)% DONE
+% - Training eines Modells % DONE
+%     - Batching % DONE
+%     - Optimizer % DONE
+%     - Learning Rate % DONE
+
+% - Feed-Forward Netze
+% - Multi-Head Attention
+% - Encoder und Decoder
+
+% - Input embeddings = Embeddings
+% - Positional Embeddings
+% - Tokenization % DONE
+%     - Byte Pair Encoding % DONE
+
+
+% Sprachmodell Definition (Was ist das)
+
+% - Autoregressive Modelle % DONE
+%     - Self-supervised Learning % DONE
+%     - Pretraining
+%     - continual Pretraining
+%     - Decoder-Based % DONE
+%     - ZeroShot / FewShot
+
+% - Weiterentwicklungen
+%     - Deep Residual Connections % DONE
+%     - DropOut   % DONE
+
+% Wissen, Information, Daten (Winter)
+% FScore, Precision, Recall, Micro und MacroF1 (QUALD9)
+% Question Answering (Aggregation, erst FScore für Frage, dann Durchschnitt, oder andersrum)
+% API, Overfitting
 %************ Sprachmodelle
-\begin{definition}[Sprachmodell]\label{def:sprachmodell}
-    Ein Sprachmodell ist ein computergestütztes System, welches menschliche Sprache versteht und darauf reagiert.
-    Es basiert auf künstlicher Intelligenz und wird in der Regel durch maschinelles Lernen trainiert.
-    Sprachmodelle finden in einer Vielzahl an Anwendungen ihren Einsatz, wie zum Beispiel in der Übersetzung,
-    Textgenerierung, Spracherkennung, Chatbots und Textklassifizierung.
+\section{Sprachmodelle}
+\begin{definition}\label{def:sprachmodell}
+   \textbf{Sprachmodelle} sind computergestützte Systeme, welche menschliche Sprache  verstehen und darauf reagieren.
 \end{definition}
+Sie basieren auf künstlicher Intelligenz und werden in der Regel durch maschinelles Lernen trainiert.
+Sprachmodelle finden in einer Vielzahl an Anwendungen ihren Einsatz, wie zum Beispiel in der Übersetzung,
+Textgenerierung, Spracherkennung, Chatbots und Textklassifizierung.
 
-\begin{definition}[Transformer-Modell]\label{def:transformer-modell}
-    Ein Transformer-Modell ist ein Sprachmodell, das auf der Transformer-Architektur von \citet{attention} basiert.
-    Im Gegensatz zu früheren Sprachmodelle, die auf rekurrenten oder faltenden neuronalen Netzen basieren,
-    verwendet der Transformer ein Aufmerksamkeitsmechanismus (engl. Attentionmechanism), um Beziehungen zwischen Wörtern in einem Satz zu modellieren.
-    Transformer-Modelle bestehen aus einer Stapelung von Encoder- und Decoder-Schichten, wobei der Encoder zur Extraktion von Kontextinformationen aus der Eingabe dient,
-    während der Decoder die Ausgabe des Encoders verwendet, um die gewünschte Aufgabe zu lösen.
-\end{definition}
-
-\begin{definition}[Encoder-basierte Modelle]\label{def:encoder-basierte-modelle}
-    Encoder-basierte Modelle sind Sprachmodelle, die hauptsächlich auf der Encoder-Architektur basieren.
-    Sie wurden entwickel, um Eingabesequenzen zu verarbeiten und eine kompakte Repräsentation (auch Kontextvektor genannt) zu erstellen.
-    Ein zentrale Komponente eines Encoder-basierten Modells ist der Encoder.
-    Er nimmt die Eingabesequenz entgegen und lernt schrittweise die strukturellen und semantischen Informationen zu erfassen.
-    Die erzeugte Repräsentation des Encoders kann von anderen Modulen oder Schichten des Modells zur Lösung von verschiedenen Aufgaben 
-    wie zum Beispiel der Klassifikation verwendet werden.
-    Encoder-basierte Modelle besitzen in der Regel keine Decoder-Schichten.
-\end{definition}
-\begin{definition}[Decoder-basierte Modelle]\label{def:decoder-basierte-modelle}
-    Decoder-basierte Modelle sind Sprachmodelle, die auf einer speziellen Architektur basieren, bei der der Decoder eine zentrale Rolle spielt.
-    Der Decoder ist eine Komponente, die darauf spezialisiert ist aus einer gegebenen Eingabe iene sinvolle und zusammenhängende Ausgabe zu generieren.
-    Im Kontext der Textgenerierung erhält der Decoder in der Regel eine Sequenz von Vektoren als Eingabe, die von einem Encoder-Modul erstellt wurden.
-    Bei der Textgenerierung kann der Decoder auf einer gegebenen Anfangssequenz fortlaufend neue Wörter oder Sätze generieren, um einen zusammenhängenden Text zu erzeugen.
-\end{definition}
-
-\begin{definition}[Autoregressive Sprachmodelle]\label{def:autoregressive-sprachmodelle}
-    Autoregressive Sprachmodelle sind eine Art von Sprachmodellen, die entwickelt wurden, um Texte zu generieren,
+\begin{definition}\label{def:autoregressive-sprachmodelle}
+    \textbf{Autoregressive Sprachmodelle} sind eine Art von Sprachmodellen, die entwickelt wurden, um Texte zu generieren,
     indem sie die Wahrscheinlichkeit von Wörtern oder Zeichen in einer Sequenz vorhersagen.
-    Sie basieren auf der Annahme, dass jedes Element in der Dequenz abhängig von den vorherigen Elementen ist.
-    In einem Autoregressiven Sprachmodell wird die generative Wahrscheinlichkeit eines nächsten Elements in der Sequenz geschätzt.
-    Die Ausgabe im Kontext von Decoder-basierten Modellen ist demnach eine Wahrscheinlichkeitsverteilung über das mögliche nächste Element.
-    Das wahrscheinlichste Element wird dann der Sequenz hinzugefügt und der Prozess wird wiederholt, bis die Sequenz fertig ist.
-    Überlicherweise werde Autoregressive Sprachmodelle auf großen Textdatenmaengen trainiert, um die statistischen Zusammenhänge in den Trainingsdaten zu erfassen.
 \end{definition}
 
+Autoregressive Modelle basieren auf der Annahme, dass jedes Element in der Sequenz abhängig von den vorherigen Elementen ist.
+In einem Autoregressiven Sprachmodell wird die generative Wahrscheinlichkeit eines nächsten Elements in der Sequenz geschätzt.
+Die Ausgabe im Kontext von Decoder-basierten Modellen ist demnach eine Wahrscheinlichkeitsverteilung über das mögliche nächste Element.
+Das wahrscheinlichste Element wird dann der Sequenz hinzugefügt und der Prozess wird wiederholt, bis die Sequenz fertig ist.
+Überlicherweise werde Autoregressive Sprachmodelle auf großen Textdatenmaengen trainiert, um die statistischen Zusammenhänge in den Trainingsdaten zu erfassen.
+
+\subsection{Transformer-Modelle}\label{sec:grundlagen:transformer}
+\begin{definition}\label{def:transformer-modell}
+    Ein \textbf{Transformer-Modell} ist ein Sprachmodell, das auf der Transformer-Architektur von \citet{attention} basiert.
+\end{definition}
+Im Gegensatz zu früheren Sprachmodelle, die auf rekurrenten oder faltenden neuronalen Netzen basieren, verwendet der Transformer ein Aufmerksamkeitsmechanismus (engl. Attentionmechanism), um Beziehungen zwischen Wörtern in einem Satz zu modellieren.
+Transformer-Modelle bestehen aus einer Stapelung von Encoder- und Decoder-Schichten, wobei der Encoder zur Extraktion von Kontextinformationen aus der Eingabe dient,
+während der Decoder die Ausgabe des Encoders verwendet, um die gewünschte Aufgabe zu lösen.\\
+
+Die erste schriftliche Erwähnung des Transformer-Modells und zusätzlich auch die Einführung der beiden Teilmodelle Encoder und Decoder findet sich in \citet{attention}.
+Die hier beschriebene bidirektionale Architektur bildet die Grundlage für alle darauf aufbauenden Modelle und Weiterentwicklungen.
+Die grundlegende Architektur wurde für verschiedene Anwendungen stark modifiziert.
+Seit 2017 gibt es grundlegende Unterschiede in den Modellen und deren Möglichkeiten.
+Aus diesem Grund haben \citet{ammus} eine Taxonomie der Transformer-basierten vortrainierten Sprachmodelle eingeführt.
+Diese Taxonomie wird hier zur Beschreibung weiterer Architekturen und Methodiken verwendet.\\
+
+Neben dem Grundbaustein eines Transformers - dem Attention-\ac{nn} - sind zwei wichtige Modifikationen gegenüber normalen neuronalen Netzen in Transformer eingeflossen: Residuale Verbindungen und Dropout.\\
+\paragraph{Residuale Verbindungen}
+\begin{definition}\label{def:residuale-verbindungen}
+    \textbf{Residuale Verbindungen} oder auch Deep Residual Connections, sind direkte Verbindungen zwischen Eingabe und Ausgabe und überspringen somit eine oder mehrere Schichten eines \ac{nn}.
+\end{definition}
+Residuale Verbindungen als Level-Normalisierung verändern das Ziel eines \ac{nn}, behalten aber durch ihre Level-Normalisierung die gleichen Ausgaben bei.
+Dieses Konzept wurde erstmals in \citet{deep_residual} eingeführt und liefert die Lösung für ein grundlegendes Problem von großen, aus mehreren Ebenen bestehenden Transformer-Modellen.
+Bereits 2016 wurde im Bereich der Bilderkennung festgestellt, dass sich die Korrektheit von Modellen mit zunehmender Tiefe sättigt und dann schnell verschlechtert, wenn dieses Modell weiter trainiert wird.
+Dies setzte eine praktische Grenze für die Tiefe von \ac{nn}s und verhinderte somit die Lösung komplexerer Probleme mit größeren Modellen.
+\citet{deep_residual} beschreiben eine Lösung durch die genannten Residuen, die normale \ac{nn} simple ersetzen können, und zeigen ebenfalls die Wirksamkeit dieser Methode.\\
+
+\paragraph{Dropout}
+Die zweite wichtige Änderung zur Weiterentwicklung der Transformer-Architektur ist die Einführung von Dropouts.
+\begin{definition}\label{def:dropout}
+    \textbf{Dropout} ist eine Methode, die die Trainingszeit von \ac{nn}s verkürzt und die Generalisierung verbessert.
+    \citet{dropout} beschreiben die Methode als das zufällige Aussetzen von Neuronen unabhängig von der Eingabe in einem \ac{nn} während des Trainings. 
+\end{definition}
+Durch das Aussetzen von Neuronen wird das \ac{nn} gezwungen, sich nicht auf andere Neuronen zu verlassen und somit eine bessere Generalisierung zu erreichen.
+Das Aussetzen erfolgt nur während des Trainings und nicht während der Inferenz.
+Die Methode wurde 2014 eingeführt und ist seitdem ein fester Bestandteil von \ac{nn}s.\\
+
+\paragraph{Modellarten von Transformer-Modellen}
+Auf Basis der eingeführten Transformer-Architektur wurden verschiedene Modellarten entwickelt, welche nur Teile der Architektur verwenden und sich in ihrer Funktionsweise unterscheiden.
+
+\begin{definition}\label{def:encoder-basierte-modelle}
+    \textbf{Encoder-basierte Modelle} sind Sprachmodelle, die hauptsächlich auf der Encoder-Architektur basieren.
+    Sie wurden entwickel, um Eingabesequenzen zu verarbeiten und eine kompakte Repräsentation (auch Kontextvektor genannt) zu erstellen.
+\end{definition}
+Ein zentrale Komponente eines Encoder-basierten Modells ist der Encoder.
+Er nimmt die Eingabesequenz entgegen und lernt schrittweise die strukturellen und semantischen Informationen zu erfassen.
+Die erzeugte Repräsentation des Encoders kann von anderen Modulen oder Schichten des Modells zur Lösung von verschiedenen Aufgaben 
+wie zum Beispiel der Klassifikation verwendet werden.
+Encoder-basierte Modelle besitzen in der Regel keine Decoder-Schichten.\\
+
+\begin{definition}\label{def:decoder-basierte-modelle}
+    \textbf{Decoder-basierte Modelle} sind Sprachmodelle, die auf einer speziellen Architektur basieren, bei der der Decoder eine zentrale Rolle spielt.
+    Der Decoder ist eine Komponente, die darauf spezialisiert ist aus einer gegebenen Eingabe eine sinvolle und zusammenhängende Ausgabe zu generieren.
+\end{definition}
+Im Kontext der Textgenerierung erhält der Decoder in der Regel eine Sequenz von Vektoren als Eingabe, die von einem Encoder-Modul erstellt wurden.
+Bei der Textgenerierung kann der Decoder auf einer gegebenen Anfangssequenz fortlaufend neue Wörter oder Sätze generieren, um einen zusammenhängenden Text zu erzeugen.
+
+\subsection{Transformer-spezifische Architekturen}
+
+\begin{definition}\label{def:self-attention-mechanismus}
+    Der \textbf{Self-Attention-Mechanismus} ist ein zentrales Konzept in der Transformer-Architektur und beschreibt die Gewichtung der Eingabesequenz auf Basis eines aktuellen Tokens.
+\end{definition}
+Hier wird ein Eingabevektor in drei separate Vektoren transformiert:
+den Abfragenvektor (engl. Query), den Schlüsselvektor (engl. Key) und den Wertvektor (engl. Value).
+Anschließend wird die Ähnlichkeit zwischen Abfragevektor und Schlüsselvektor berechnet,
+um die Aufmerksamkeitsgewichte zu erhalten.
+Die Aufmerksamkeitsgewichte geben an, wie wichtig jeder Wertvektor für die Berechnung eines gewichteten
+Durchschnitts ist. Die gewichteten Wertvektoren werden schließlich summiert, um den Ausgabevektor zu erhalten.
+Self-Attention-Mechanismen ermöglichen es Modellen, komplexe Abhängigkeiten zwischen den Element einer Eingabesequenz zu erfassen.\\
+
+\begin{definition}[Multi-Head Attention]\label{def:multi-head-attention}
+    \textbf{Multi-Head Attention} beschreibt den Ersatz eines einzelnen Self-Attention-Mechanismus in der Transformer-Architektur durch mehrere Self-Attention-Mechanismen in parallel.
+\end{definition}
+Hier werden Abfrage, Schlüssel und Wert linear $h$ mal auf mehrere Versionen projeziert und parallel berechnet. Die Ausgabee wird daraufhin konkateniert und erneut linear projeziert, um den Ausgabevektor zu erhalten. Die Multi-Head Attention ermöglicht es dem Modell, verschiedene Repräsentation-Subspaces der Eingabe an unterschiedlichen Positionen zu erfassen.
 
 %************ Transformer-Spezifische Architekturidentitäten
 \begin{definition}[ZeroShot, OneShot, MultiShot]\label{def:zeroshot-oneshot-multishot}
@@ -57,29 +146,17 @@
     MultiShot bedeutet, dass das Modell mehrere Trainingsbeispiele erhält, um eine bestimmte Aufgabe zu lösen.
 \end{definition}
 
-\begin{definition}[Self-Attention-Mechanismus]\label{def:self-attention-mechanismus}
-    Der Self-Attention-Mechanismus ist ein zentrales Konzept in der Transformer-Architektur.
-    Hier wird ein Eingabevektor in drei separate Vektoren transformiert:
-    den Abfragenvektor (engl. Query), den Schlüsselvektor (engl. Key) und den Wertvektor (engl. Value).
-    Anschließend wird die Ähnlichkeit zwischen Abfragevektor und Schlüsselvektor berechnet,
-    um die Aufmerksamkeitsgewichte zu erhalten.
-    Die Aufmerksamkeitsgewichte geben an, wie wichtig jeder Wertvektor für die Berechnung eines gewichteten
-    Durschnitts ist. Die gewichteten Wertvektoren werden schließlich summiert, um den Ausgabevektor zu erhalten.
-    Self-Attention-Mechanismen ermöglichen es Modellen, komplexe Abhängigkeiten zwischen den Element einer
-    Eingabesequenz zu erfassen.
-\end{definition}
-
-\begin{definition}[Multi-Head Attention]\label{def:multi-head-attention}
-    Anstelle eines einzelnen Self-Attention-Mechanismus verwendet die Transformer-Architektur mehrere Self-Attention-Mechanismen in parallel. Hier werden Abfrage, Schlüssel und Wert linear $h$ mal auf mehrere Versionen projeziert und parallel berechnet. Die Ausgabee wird daraufhin konkateniert und erneut linear projeziert, um den Ausgabevektor zu erhalten. Die Multi-Head Attention ermöglicht es dem Modell, verschiedene Repräsentation-Subspaces der Eingabe an unterschiedlichen Positionen zu erfassen.
-\end{definition}
-
 \begin{definition}[Feed-Forward Netz]\label{def:feed-forward-netz}
-    Ein Feed-Foward-Netz ist eine Art von kpnstlichem neuronalem Netz, welches aus mehreren Schichten bestehend Information ausschließlich vorwärts von der Eingabe in Richtung der Ausgabe fließen lässt. Hier sind keine zyklischen Verbindungen oder Rückkopplungsschleifen eingebaut.
+    Ein Feed-Foward-Netz ist eine Art von kpnstlichem neuronalem Netz, welches aus mehreren Schichten bestehend Information ausschließlich vorwärts von der Eingabe
+    in Richtung der Ausgabe fließen lässt. Hier sind keine zyklischen Verbindungen oder Rückkopplungsschleifen eingebaut.
 \end{definition}
 
 \begin{definition}[Parameterformate]\label{def:parameterformate}
     Sprachmodelle enthalten eine große Anzahl an lernbaren Parametern (wie zum Beispiel Gewichte und Bias), als auch
-    Zwischenwerte, die während der Interferenz berechnet werden. Diese Werte können in verschieden Formaten gespeichert werden. Häufige Formate sind hier \enquote{Float16} und \enquote{Float32}. Float steht hier für Floating Value und repräsentiert eine Gleitkommazahl. Die Zahl hinter Float gibt die Anzahl der Bits an, die für die Darstellung der Zahl verwendet werden. Eine höhere Bitzahl bedeutet eine höhere Genauigkeit, aber auch einen höheren Speicherbedarf.
+    Zwischenwerte, die während der Interferenz berechnet werden. Diese Werte können in verschieden Formaten gespeichert werden.
+    Häufige Formate sind hier \enquote{Float16} und \enquote{Float32}. Float steht hier für Floating Value und repräsentiert eine Gleitkommazahl.
+    Die Zahl hinter Float gibt die Anzahl der Bits an, die für die Darstellung der Zahl verwendet werden.
+    Eine höhere Bitzahl bedeutet eine höhere Genauigkeit, aber auch einen höheren Speicherbedarf.
 \end{definition}
 %************ Transformer-Spezifische Eingaben
 
@@ -89,127 +166,107 @@
 \end{definition}
 
 \begin{definition}[Token]\label{def:token}
-    Ein Token repräsentiert eine Teilmenge eines Wortes und wird in Transformer-Modellen verwendet, um die Eingabe in logische Einheiten zu unterteilen. Tokens repräsentieren einen Kompromiss zwischen den Ausdrucksmöglichkeiten eines Modells und der Komplexität der Eingabe.
+    Ein Token repräsentiert eine Teilmenge eines Wortes und wird in Transformer-Modellen verwendet, um die Eingabe in logische Einheiten zu unterteilen.
+    Tokens repräsentieren einen Kompromiss zwischen den Ausdrucksmöglichkeiten eines Modells und der Komplexität der Eingabe.
 \end{definition}
 
 \begin{definition}[Input Embeddings]\label{def:input-embeddings}
     Input Embeddings sind eine Darstellung der Eingabedaten wie Tokens in einem dichten Vektorraum.
     Diese Darstellung muss erlernt werden und ermöglicht es,
-    Tokens die semantsiche Ähnlichkeiten aufweisen oder Beziehungen zueinander haben, geometrisch nahe beieinander zu platzieren. Dadurch ist nicht nur der eigentliche Token bekannt, sondern auch die Beziehung zu anderen Tokens.
+    Tokens die semantsiche Ähnlichkeiten aufweisen oder Beziehungen zueinander haben, geometrisch nahe beieinander zu platzieren.
+    Dadurch ist nicht nur der eigentliche Token bekannt, sondern auch die Beziehung zu anderen Tokens.
 \end{definition}
 
 \begin{definition}[Positional Encodings]\label{def:positional-encodings}
-    Neben den Input Embeddings repräsentierten Positional Encodings sogenannte relative und absolute Positionen der Tokens in der Eingabe. Diese Positionen werden in einem Vektorraum dargestellt und erlauben es dem Modell, die Positionen der Tokens zu berücksichtigen. Positional Encodings können erlernt oder berechnet werden.
+    Neben den Input Embeddings repräsentierten Positional Encodings sogenannte relative und absolute Positionen der Tokens in der Eingabe.
+    Diese Positionen werden in einem Vektorraum dargestellt und erlauben es dem Modell, die Positionen der Tokens zu berücksichtigen.
+    Positional Encodings können erlernt oder berechnet werden.
 \end{definition}
 
 
 %************ Neuronale Netze allgemein
 
-\begin{definition}[Lernbare Parameter]
-
+\begin{definition}[Lernbare Parameter]\label{def:lernbare-parameter}
+    Ein Lernbarer Parameter ist ein Parameter, der zufällig initialisiert wird und während des Trainings angepasst wird.
 \end{definition}
 
-\begin{definition}[Hyperparameter]
-    
+\begin{definition}[Hyperparameter]\label{def:hyperparameter}
+    Hyperparameter sind Parameter, die Eigenschaften oder Techniken des Modells repräsentieren, und vor dem Training eingestellt werden.
+    Sie sind nicht durch das Netzwerk lernbar.
 \end{definition}
 
-\begin{definition}
-    \textbf{Aktivierungsfunktion} normaler Text
+\begin{definition}[Aktivierungsfunktion]\label{def:aktivierungsfunktion}
+    Die Aktivierungsfunktion weißt jedem potentiellen Wert eines Neurons einen Wert in einem vorgegebenem Intervall zu.
+    Sie ist nicht-linear und verhindert somit die Reduzierung eines Neuronalen Netzes auf eine lineare Funktion.
 \end{definition}
 
-\begin{definition}
-    \textbf{Backpropagation} normaler Text
+\begin{definition}[Backpropagation]\label{def:backpropagation}
+    Beschreibt den Prozess des iterativen Anpassens von Gewichten und Bias auf Basis des Gradienten einer Fehlerfunktion.
 \end{definition}
 
-\begin{definition}
-    \textbf{Supervised, Unsupervised, Selfsupervised} normaler Text
+\begin{definition}[Überwachtes Lernen]\label{def:überwachtes-lernen}
+    Während des Training sind sowohl die Eingabe als auch die erwartete Ausgabe bekannt.
+    Die genutzte Fehlerfunktion ergibt sich aus der Differenz der erwarteten Ausgabe und der tatsächlichen Ausgabe.
 \end{definition}
 
-\begin{definition}
-    \textbf{Batch} normaler Text
+\begin{definition}[Unüberwachtes Lernen]\label{def:unüberwachtes-lernen}
+    Während des Training ist nur die Eingabe bekannt.
+    Die Fehlerfunktion muss errechnet oder erschlossen werden auf Basis des Kontextes.
+    Hier findet meist keine Backpropagation statt.
 \end{definition}
 
-\begin{definition}
-    \textbf{Lernrate} normaler Text
+\begin{definition}[Selbstüberwachtes Lernen]\label{def:selbstüberwachtes-lernen}
+    Während des Training ist nur die Eingabe bekannt.
+    Jedoch entspricht die Ausgabe einem Teil der Eingabe, wodurch die Fehlerfunktion errechnet werden kann.
 \end{definition}
 
-\begin{definition}
-    \textbf{Overfitting} normaler Text
+\begin{definition}[Batch]\label{def:batch}
+    Repräsentiert eine Teilmenge an Eingaben, welche geschlossen verarbeitet werden, bevor die Gewichte und Bias angepasst werden.
 \end{definition}
 
-\begin{definition}
-    \textbf{Interferenz} normaler Text
+\begin{definition}[Lernrate]\label{def:lernrate}
+    Entspricht der Schrittweite des Gradientenabstiegs. Höhere Lernraten führen zu schnelleren Lernprozessen, können jedoch auch zu Oszillationen führen.
+    Kleinere Lernraten führen zu langsameren Lernprozessen und können möglicherweise nicht zu einem Minimum konvergieren
+\end{definition}
+
+\begin{definition}[Overfitting]\label{def:overfitting}
+    Overfitting beschreibt den Prozess, bei dem ein Modell die Trainingsdaten auswendig lernt und nicht mehr in der Lage ist,
+    neue Daten korrekt zu klassifizieren. Das Model verliert seine Generalisierungsfähigkeit. Overfitting lässt sich durch einen Leistungsabfall zwischen 
+    Trainings- und Testdaten erkennen.
+\end{definition}
+
+\begin{definition}[Interferenz]\label{def:interferenz}
+    Interferenz beschreibt den Prozess, bei dem ein Modell auf Basis der gelernten Parameter eine Vorhersage trifft.
+    Es werden keine neuen Parameter gelernt, sondern lediglich Eingaben in Ausgaben umgewandelt.
 \end{definition}
 
 %************ Datenverarbeitung allgemein
 
-\begin{definition}
-    \textbf{Wissen, Information, Daten} normaler Text
+\begin{definition}[Wissen]\label{def:wissen}
+    Wissen sind generelle Informationen über Konzepte in einer bestimmten Domäne.
 \end{definition}
 
-\begin{definition}
-    \textbf{Datenkuration} normaler Text
+\begin{definition}[Information]\label{def:information}
+    Information sind spezifische Festlegungen über Entitäten wie zum Beispiel Fakten, Dinge, Personen, Prozesse, Ideen, Konzepte oder Ereignisse.
 \end{definition}
 
-\begin{definition}
-    \textbf{Micro-F1, Macro-F1} normaler Text
+\begin{definition}[Daten]\label{def:daten}
+    Daten sind Informationen oder Wissen in einer strukturierten Form, die für die Verarbeitung, Kommunikation oder Interpretation von Menschen oder Maschinen geeignet sind.
 \end{definition}
 
+\begin{definition}[Datenkuration]\label{def:datenkuration}
+    Datenkuration beschreibt den Prozess der Datensammlung, -bereinigung und Integration von Daten. Sie findet in dieser Arbeit Anwendung um die Daten für das Training vorzubereiten.
+\end{definition}
 
+\begin{definition}[Micro-F1]\label{def:micro-f1}
+    Der Micro-F1 Wert repräsentiert das harmonische Mittel aus Präzision und Recall.
+    Sie repräsentiert die Gesamtleistung unabhängig von der Klassenzugehörigkeit.
+\end{definition}
 
+\begin{definition}[Macro-F1]\label{def:macro-f1}
+    Der Macro-F1 Wert repräsentiert den arithmetischen Mittelwert aller F1 Werte jeder Klasse. Er stellt in einem nicht-balancierten Datensatz eine bessere Metrik dar, um alle Klassen gleich zu gewichten.
+\end{definition}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-\section*{Inhalte des Kapitels}
-- Taxonomie von Ammus (\citet{ammus}) % DONE
-- Transformer Architektur (\citet{attention}) % DONE
-
-- Neuronales Netz (https://katalog.ub.uni-leipzig.de/Record/0-1066754535) % DONE
-- Activation Functions (https://katalog.ub.uni-leipzig.de/Record/0-1066754535) % DONE
-- Backpropagation (https://katalog.ub.uni-leipzig.de/Record/0-1066754535)% DONE
-- Training eines Modells % DONE
-    - Batching % DONE
-    - Optimizer % DONE
-    - Learning Rate % DONE
-
-- Feed-Forward Netze
-- Multi-Head Attention
-- Encoder und Decoder
-
-- Input embeddings = Embeddings
-- Positional Embeddings
-- Tokenization % DONE
-    - Byte Pair Encoding % DONE
-
-
-Sprachmodell Definition (Was ist das)
-
-- Autoregressive Modelle % DONE
-    - Self-supervised Learning % DONE
-    - Pretraining
-    - continual Pretraining
-    - Decoder-Based % DONE
-    - ZeroShot / FewShot
-
-- Weiterentwicklungen
-    - Deep Residual Connections % DONE
-    - DropOut   % DONE
-
-Wissen, Information, Daten (Winter)
-FScore, Precision, Recall, Micro und MacroF1 (QUALD9)
-Question Answering (Aggregation, erst FScore für Frage, dann Durchschnitt, oder andersrum)
-API, Overfitting
 
 \section{Neuronale Netzwerke}
 Zum Verständnis der Transformer-Architektur ist es notwendig, die Grundlagen von Neuronalen Netzen zu verstehen.
@@ -362,40 +419,6 @@ Stochastic Gradient Descent) bezeichnet, da die Stichprobe des Datensatzes nur e
 Dadurch gleicht die Richtung des Gradient nur noch annäherungsweise dem tatsächlichen Gradienten, die Berechnung verläuft jedoch deutlich schneller.
 Die Größe der Batches ist ein Kompromiss zwischen der Genauigkeit des Gradienten und der Geschwindigkeit der Berechnung.\\
 
-\section{Transformer}\label{sec:grundlagen:transformer}
-%\todo{
-%Grundlagen:
-%- das was du schon drin hast mit "General Pretrained Transformer - Neuronal Networks - Zero Shot Ansatz - Finetuning - Datenkuration"
-%- aber alles was mit GPT zu tun hat nicht, das ist ein spezieller Ansatz und das sollte zu state of the art
-%- alles was im Titel steht :-) Question Answering, unsupervised und supervised training und so
-%- Definitionen Daten, Informationen und Wissen nach Winter passt hier denke ich auch rein
-%
-%State of the Art:
-%- aktuelle Paper
-%- Vergleich verschiedener Systeme und Modelle
-%- und das was du da schon hast, also das meiste ist ja schon am richtigen Ort
-%}
-Die erste schriftliche Erwähnung des Transformer-Modells und zusätzlich auch die Einführung der beiden Teilmodelle Encoder und Decoder findet sich in \citet{attention}.
-Die hier beschriebene bidirektionale Architektur bildet die Grundlage für alle darauf aufbauenden Modelle und Weiterentwicklungen.
-Die grundlegende Architektur wurde für verschiedene Anwendungen stark modifiziert.
-Seit 2017 gibt es grundlegende Unterschiede in den Modellen und deren Möglichkeiten.
-Aus diesem Grund haben \citet{ammus} eine Taxonomie der Transformer-basierten vortrainierten Sprachmodelle eingeführt.
-Diese Taxonomie wird hier zur Beschreibung weiterer Architekturen und Methodiken verwendet.\\
-
-Neben dem Grundbaustein eines Transformers - dem Attention-\ac{nn} - sind zwei wichtige Modifikationen gegenüber normalen neuronalen Netzen in Transformer eingeflossen.
-Residuale Verbindungen als Level-Normalisierung, auf Englisch \enquote{Deep Residual Connections}, verändern das Ziel eines \ac{nn}, behalten aber durch ihre Level-Normalisierung die gleichen Ausgaben bei.
-Dieses Konzept wurde erstmals in \citet{deep_residual} eingeführt und liefert die Lösung für ein grundlegendes Problem von großen, aus mehreren Ebenen bestehenden Transformer-Modellen.
-Bereits 2016 wurde im Bereich der Bilderkennung festgestellt, dass sich die Korrektheit von Modellen mit zunehmender Tiefe sättigt und dann schnell verschlechtert, wenn dieses Modell weiter trainiert wird.
-Dies setzte eine praktische Grenze für die Tiefe von \ac{nn}s und verhinderte somit die Lösung komplexerer Probleme mit größeren Modellen.
-\citet{deep_residual} beschreiben eine Lösung durch die genannten Residuen, die normale \ac{nn} simple ersetzen können, und zeigen ebenfalls die Wirksamkeit dieser Methode.\\
-
-Die zweite wichtige Änderung ist die Einführung von Dropout.
-Dropout ist eine Methode, die die Trainingszeit von \ac{nn}s verkürzt und die Generalisierung verbessert.
-\citet{dropout} beschreiben die Methode als das zufällige Aussetzen von Neuronen in einem \ac{nn}. 
-Diese Aussetzung hängt nicht von der Eingabe ab.
-Durch das Aussetzen von Neuronen wird das \ac{nn} gezwungen, sich nicht auf andere Neuronen zu verlassen und somit eine bessere Generalisierung zu erreichen.
-Das Aussetzen erfolgt nur während des Trainings und nicht während der Inferenz.
-Die Methode wurde 2014 eingeführt und ist seitdem ein fester Bestandteil von \ac{nn}s.\\
 
 \section{Tokenization}\label{sec:tokenization}
 Transformer-Modelle können Eingaben nicht ohne zusätzliche Umwandlung verarbeiten.
