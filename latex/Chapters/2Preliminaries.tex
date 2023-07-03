@@ -43,7 +43,7 @@
 %************ Sprachmodelle
 Um die genannten Ziele aus \cref{sec:zielsetzung} lösen zu können und den Lösungsschritten in \cref{ch:approach} zu folgen, werden in diesem Kapitel Grundlagen gelegt für Begriffe und Konzepte, die in dieser Arbeit verwendet werden.
 Das Kapitel teilt sich auf in einer generellen Begriffserklärung zu Sprachmodellen in \cref{sec:sprachmodelle} mit einer genaueren Erklärung zu der Transformer-spezifischen Architektur.
-Anschließend wird ein kurzer Einstieg in das Thema Neuronale Netzwerke gegeben, in der die Funktionsweise dieser genauer betrachtet wird \pcref{sec:neuronale-netzwerke}.
+Anschließend wird ein kurzer Einstieg in das Thema Neuronale Netze gegeben, in der die Funktionsweise dieser genauer betrachtet wird \pcref{sec:neuronale-netze}.
 Zuletzt finden sich noch einige Begriffserklärungen aus der Medizininformatik und der Davenverarbeitung in \cref{sec:datenverarbeitung}.
 
 \section{Sprachmodelle}\label{sec:sprachmodelle}
@@ -51,7 +51,7 @@ Zuletzt finden sich noch einige Begriffserklärungen aus der Medizininformatik u
 \begin{definition}\label{def:sprachmodell}
    \textbf{Sprachmodelle} sind computergestützte Systeme, welche menschliche Sprache  verstehen und darauf reagieren.
 \end{definition}
-Sie basieren auf künstlicher Intelligenz und werden in der Regel durch maschinelles Lernen trainiert.
+Sprachmodelle basieren auf künstlicher Intelligenz und werden in der Regel durch maschinelles Lernen trainiert.
 Sprachmodelle finden in einer Vielzahl an Anwendungen ihren Einsatz, wie zum Beispiel in der Übersetzung,
 Textgenerierung, Spracherkennung, Chatbots und Textklassifizierung.
 
@@ -64,7 +64,7 @@ Autoregressive Modelle basieren auf der Annahme, dass jedes Element in der Seque
 In einem Autoregressiven Sprachmodell wird die generative Wahrscheinlichkeit eines nächsten Elements in der Sequenz geschätzt.
 Die Ausgabe im Kontext von Decoder-basierten Modellen ist demnach eine Wahrscheinlichkeitsverteilung über das mögliche nächste Element.
 Das wahrscheinlichste Element wird dann der Sequenz hinzugefügt und der Prozess wird wiederholt, bis die Sequenz fertig ist.
-Überlicherweise werde Autoregressive Sprachmodelle auf großen Textdatenmaengen trainiert, um die statistischen Zusammenhänge in den Trainingsdaten zu erfassen.
+Überlicherweise werde Autoregressive Sprachmodelle auf großen Textdatenmengen trainiert, um die statistischen Zusammenhänge in den Trainingsdaten zu erfassen.
 
 \subsection{Transformer-Modelle}\label{sec:grundlagen:transformer}
 
@@ -92,7 +92,7 @@ Diese Taxonomie wird hier zur Beschreibung weiterer Architekturen und Methodiken
 
 Neben dem Grundbaustein eines Transformers - dem Attention-\ac{nn} - sind zwei wichtige Modifikationen gegenüber normalen neuronalen Netzen in Transformer eingeflossen: Residuale Verbindungen und Dropout.\\
 
-\paragraph{Residuale Verbindungen}\mbox{} \\
+\subsubsection{Residuale Verbindungen}
 
 \begin{definition}\label{def:residuale-verbindungen}
     \textbf{Residuale Verbindungen} oder auch Deep Residual Connections, sind direkte Verbindungen zwischen Eingabe und Ausgabe und überspringen somit eine oder mehrere Schichten eines \ac{nn}.
@@ -103,7 +103,7 @@ Bereits 2016 wurde im Bereich der Bilderkennung festgestellt, dass sich die Korr
 Dies setzte eine praktische Grenze für die Tiefe von \ac{nn}s und verhinderte somit die Lösung komplexerer Probleme mit größeren Modellen.
 \citet{deep_residual} beschreiben eine Lösung durch die genannten Residuen, die normale \ac{nn} simple ersetzen können, und zeigen ebenfalls die Wirksamkeit dieser Methode.\\
 
-\paragraph{Dropout}\mbox{} \\
+\subsubsection{Dropout}
 
 Die zweite wichtige Änderung zur Weiterentwicklung der Transformer-Architektur ist die Einführung von Dropouts.
 \begin{definition}\label{def:dropout}
@@ -114,7 +114,8 @@ Durch das Aussetzen von Neuronen wird das \ac{nn} gezwungen, sich nicht auf ande
 Das Aussetzen erfolgt nur während des Trainings und nicht während der Inferenz.
 Die Methode wurde 2014 eingeführt und ist seitdem ein fester Bestandteil von \ac{nn}s.\\
 
-\paragraph{Modellarten von Transformer-Modellen}
+\subsubsection{Modellarten von Transformer-Modellen}
+
 Auf Basis der eingeführten Transformer-Architektur wurden verschiedene Modellarten entwickelt, welche nur Teile der Architektur verwenden und sich in ihrer Funktionsweise unterscheiden.
 
 \begin{definition}\label{def:encoder-basierte-modelle}
@@ -150,25 +151,27 @@ Self-Attention-Mechanismen ermöglichen es Modellen, komplexe Abhängigkeiten zw
 \begin{definition}\label{def:multi-head-attention}
     \textbf{Multi-Head Attention} beschreibt den Ersatz eines einzelnen Self-Attention-Mechanismus in der Transformer-Architektur durch mehrere Self-Attention-Mechanismen in parallel.
 \end{definition}
-Hier werden Abfrage, Schlüssel und Wert linear $h$ mal auf mehrere Versionen projeziert und parallel berechnet. Die Ausgabee wird daraufhin konkateniert und erneut linear projeziert, um den Ausgabevektor zu erhalten. Die Multi-Head Attention ermöglicht es dem Modell, verschiedene Repräsentation-Subspaces der Eingabe an unterschiedlichen Positionen zu erfassen.
+Bei dem Prozess es Multi-Head Attention werden Abfrage, Schlüssel und Wert linear $h$ mal auf mehrere Versionen projeziert und parallel berechnet. Die Ausgabe wird daraufhin konkateniert und erneut linear projeziert, um den Ausgabevektor zu erhalten. Multi-Head Attention ermöglicht es dem Modell, verschiedene Repräsentation-Subspaces der Eingabe an unterschiedlichen Positionen zu erfassen.
 
 \begin{definition}\label{def:feed-forward-netz}
     Ein \textbf{Feed-Foward-Netz} ist eine Art von künstlichem neuronalem Netz, welches aus mehreren Schichten bestehend Information ausschließlich vorwärts von der Eingabe
     in Richtung der Ausgabe fließen lässt.
 \end{definition}
-Hier sind keine zyklischen Verbindungen oder Rückkopplungsschleifen eingebaut. Feed-Forward Netze dienen in Transformern repräsentieren neben Attention-Netzen als einzige zweite Komponente der Architektur. Sie enthalten das erlernte Faktenwissen des Modells durch so genannte Wissensneuronen \citep{knowledge_neurons}.\\
+Feed-Foward-Netz besitzen keine zyklischen Verbindungen oder Rückkopplungsschleifen.
+Sie dienen in Transformern neben Attention-Netzen als einzige zweite Komponente der Architektur.
+Sie enthalten das erlernte Faktenwissen des Modells durch so genannte Wissensneuronen \citep{knowledge_neurons}.\\
 
 \subsection{Eigenheiten von Transformer-Modellen}
 \begin{definition}\label{def:zeroshot-oneshot-multishot}
-    Die Bezeichnungen \textbf{ZeroShot, OneShot und MultiShot} beziehen sich auf die Interferenz von Modellen.
+    Die Bezeichnungen \textbf{ZeroShot, OneShot} und \textbf{MultiShot} beziehen sich auf die Inferenz von Modellen.
     Die Eingabe enthält hierbei Aufgabenbeispiele, bevor die eigentliche Aufgabe gestellt wird.
 \end{definition}
-Gerade bei \ac{QA}-Aufgaben und Text-Generierungen kommen häufig diese Methoden zu Anwendung.
+Gerade bei \ac{qa}-Aufgaben und Text-Generierungen kommen häufig diese Methoden zu Anwendung.
 Bei der Beantwortung von Fragen können Eingaben mehrere Beispielfragen und deren Antworten enthalten, bevor die eigentliche Frage gestellt wird.
 Dies führt dazu, dass das Modell aus dem Kontext die Formatierung und Art der Aufgabe erkennt und bessere Antworten liefern kann.
-ZeroShot bedeutet, dass das Modell keine Trainingsbeispiele erhält, um eine bestimmte Aufgabe zu lösen.
+\mbox{ZeroShot} bedeutet, dass das Modell keine Trainingsbeispiele erhält, um eine bestimmte Aufgabe zu lösen.
 OneShot bedeutet, dass das Modell nur ein Trainingsbeispiel erhält, um eine bestimmte Aufgabe zu lösen.
-MultiShot bedeutet, dass das Modell mehrere Trainingsbeispiele erhält, um eine bestimmte Aufgabe zu lösen.
+MultiShot bedeutet, dass das Modell mehrere Trainingsbeispiele erhält.
 
 
 \begin{definition}\label{def:parameterformate}
@@ -176,7 +179,7 @@ MultiShot bedeutet, dass das Modell mehrere Trainingsbeispiele erhält, um eine 
     Häufig benutzt sind hier \enquote{Float16} und \enquote{Float32}.
 \end{definition}
 Sprachmodelle enthalten eine große Anzahl an lernbaren Parametern (wie zum Beispiel Gewichte und Bias),
-als auch Zwischenwerte, die während der Interferenz berechnet werden.
+als auch Zwischenwerte, die während der Inferenz berechnet werden.
 Diese Werte können in verschieden Formaten gespeichert werden.
 Häufige Formate sind hier \enquote{Float16} und \enquote{Float32}.
 Float steht hier für Floating Value und repräsentiert eine Gleitkommazahl.
@@ -184,15 +187,15 @@ Die Zahl hinter Float gibt die Anzahl der Bits an, die für die Darstellung der 
 Eine höhere Bitzahl bedeutet eine höhere Genauigkeit, aber auch ein höherer Speicherbedarf.
 
 \begin{definition}\label{def:continual-pretraining}
-    \textbf{Continual Pretraining} beschreibt den Prozess des fortlaufenden self-supervised Trainings eines vortrainieren Modells.
+    \textbf{Continual Pretraining} beschreibt den Prozess des fortlaufenden selbstüberwachten Trainings eines vortrainieren Modells.
 \end{definition}
-Hier werden lediglich die Hyperparameter des Modells angepasst und neue Datensätze verwendet, während die erlernten Parameter des Modells beibehalten werden.
+Bei Continual Pretraining werden lediglich die Hyperparameter des Modells angepasst und neue Datensätze verwendet, während die erlernten Parameter des Modells beibehalten werden.
 
 %************ Transformer-Spezifische Eingaben
 
 \subsection{Eingaben von Transformer-Modellen}
-\begin{definition}[Token]\label{def:token}
-    Ein Token repräsentiert eine Teilmenge eines Wortes und wird in Transformer-Modellen verwendet, um die Eingabe in logische Einheiten zu unterteilen.
+\begin{definition}\label{def:token}
+    Ein \textbf{Token} repräsentiert eine Teilmenge eines Wortes und wird in Transformer-Modellen verwendet, um die Eingabe in logische Einheiten zu unterteilen.
 \end{definition}
 Transformer-Modelle können Eingaben nicht ohne zusätzliche Umwandlung verarbeiten.
 Neben der Erzeugung von Eingabevektoren muss die Eingabe zunächst in kleinere Einheiten, sogenannte Tokens, zerlegt werden.
@@ -203,7 +206,7 @@ Durch die Zerlegung der Eingaben in Symbole ist zwar das Vokabular kleiner, welc
 Dies führt dazu, dass ein großer Teil der Trainingszeit für das Erlernen der Sprache verloren geht, was die endgültige Leistungsfähigkeit der Modelle massiv einschränkt \citep{bpe}.\\
 
 \begin{definition}\label{def:vokabular}
-    Das \textbf{Vokabular} eines Modells ist die Menge aller Tokens, die das Modell als einzelne Einheiten erkennt. Die Größe des Vokabluar bestimmt die Größe der Input Embeddings und limitiert damit die Größe der Eingaben.
+    Das \textbf{Vokabular} eines Modells ist die Menge aller Tokens, die das Modell als einzelne Einheiten erkennt. Die Größe des Vokabluars bestimmt die Größe der Input Embeddings und limitiert damit die Größe der Eingaben.
 \end{definition}
 
 Eine logische Schlussfolgerung wäre hier die Verwendung von Wörtern oder sogar Satzphrasen als Tokens.
@@ -212,7 +215,7 @@ Dies führt zu einer starken Verlangsamung der Trainingsläufe und zu sehr groß
 Wörter mit gleichem Wortstamm oder ähnlicher Bedeutung aufgrund grammatikalischer Regeln (Plural, Genus, Tempora) müssen vom Modell erst als \enquote{gleiches Wort} gelernt werden.
 Daher hat sich die Unterteilung von Wörtern in Teilwörter als Standard durchgesetzt.
 
-\paragraph{Byte Pair Encoding}\mbox{} \\
+\subsubsection{Byte Pair Encoding}
 \begin{definition}\label{def:bpe}
     \textbf{Byte Pair Encoding} ist ein Algorithmus, der iterativ ein Vokabluar aufbaut auf Basis der Häufigkeit von Symbolkombinationen in einem Datensatz.
     Die Vokabulargröße ist dabei der einzige Parameter.
@@ -240,7 +243,7 @@ Daher muss auch dieses Wort zerlegt werden, z.B. in \enquote{Dat} und \enquote{e
 Beide Teilwörter haben in der deutschen Sprache keine Bedeutung, werden aber durch das Modell mit Bedeutung belegt und in Beziehung zu anderen Wörtern gesetzt.
 Dies führt zu einer unverständlichen Bedeutungsannotation von Teilwörtern und verschlechtert sowohl die Leistung als auch die Nachvollziehbarkeit des Modells und erschwert die Forschung an den Modellen.
 
-\paragraph{Eingabevektoren}\mbox{} \\
+\subsubsection{Eingabevektoren}
 
 \begin{definition}\label{def:input-embeddings}
     \textbf{Input Embeddings} sind eine Darstellung der Eingabedaten wie Tokens in einem dichten Vektorraum.
@@ -252,10 +255,10 @@ Dadurch ist nicht nur der eigentliche Token bekannt, sondern auch die Beziehung 
 \begin{definition}[Positional Encodings]\label{def:positional-encodings}
     \textbf{Positional Encodings} repräsentieren sogenannte relative und absolute Positionen der Tokens in der Eingabe.
 \end{definition}
-Relative und Absolute Positionen von Tokens innerhalb einer Eingabe werden in einem Vektorraum dargestellt und erlauben es dem Modell, die Positionen der Tokens zu berücksichtigen.
+Relative und absolute Positionen von Tokens innerhalb einer Eingabe werden in einem Vektorraum dargestellt und erlauben es dem Modell, die Positionen der Tokens zu berücksichtigen.
 Positional Encodings können erlernt oder berechnet werden und werden ausschließlich in Kombination mit Input Embeddings verwendet.
 
-\section{Neuronale Netzwerke}
+\section{Neuronale Netze}\label{sec:neuronale-netze}
 Zum Verständnis der Transformer-Architektur ist es notwendig, die Grundlagen von Neuronalen Netzen zu verstehen.
 Neuronale Netze wurden erstmalig 1943 von \citet{neuronal_networks_first} beschrieben und unterliefen seitdem vielen Veränderungen und Verbesserungen.
 Eine Beschreibung grundlegender Techniken findet sich in \citet{neuronale-netze}.
@@ -286,9 +289,9 @@ Hier nicht gezeigt enthält jedes Neuron auch eine Eingangsverbindung von einem 
 Die Nutzung des Neuronalen Netzes erfolgt in zwei Schritten.
 Zu erst wird eine Eingabe in die Eingangsneuronen $E_N$ gegeben.
 Diese Eingabe wird durch die Schichten weitergegeben, bis sie in der Ausgabeschicht $A_N$ ankommt.
-Nun muss das Ergebnis interpretiert werden. Diesen Prozess nennt man auch Interferenz.\\
-\begin{definition}\label{def:interferenz}
-    \textbf{Interferenz} beschreibt den Prozess, bei dem ein Modell auf Basis der gelernten Parameter eine Vorhersage trifft.
+Nun muss das Ergebnis interpretiert werden. Diesen Prozess nennt man auch Inferenz.\\
+\begin{definition}\label{def:inferenz}
+    \textbf{Inferenz} beschreibt den Prozess, bei dem ein Modell auf Basis der gelernten Parameter eine Vorhersage trifft.
 \end{definition}
 
 Eine Beispielanwendung wäre hier die Erkennung von handgeschriebenen Ziffern.
@@ -338,7 +341,7 @@ In modernen Netzen und ebenso in Transformer-Modellen wird hier die ReLU Funktio
 
 Die Funktionen sind in \cref{img:sigmoid,img:relu} dargestellt.
 Üblicherweise repräsentiert eine Aktivierungsfunktion eine Transformation der Eingabewerte auf einen nichtlinearen Ausgabewert zwischen 0 und 1.
-Jedoch ist dies nicht zwingend notwendig, da zum Beispiel die ReLU Funktion nur Werte zwischen 0 und $\infty$ ausgibt, sich jedoch schneller berechnen lässt als die Sigmoid-Funktion.
+Jedoch ist dies nicht zwingend notwendig, da zum Beispiel die ReLU Funktion Werte zwischen 0 und $\infty$ ausgibt, sich jedoch schneller berechnen lässt als die Sigmoid-Funktion.
 Aktivierungsfunktion sind notwendig, um die Komplexität eines Neuronalen Netzes zu erhöhen und damit die Fähigkeit komplexere Probleme zu lösen, zu ermöglichen.
 Ohne eine Aktivierungsfunktion würden $A_N$ Neuronen eine Linearkombination der Eingabewerte ergeben, wodurch hier nur lineare Probleme gelöst werden können.
 Ein einfaches Beispiel wäre die Berechnung der XOR-Funktion.
@@ -358,7 +361,8 @@ Eine gute Ausgabe wird durch eine Fehlerfunktion beschrieben.
 Diese Fehlerfunktion gibt einen einzelnen Wert zurück, gegeben der Eingaben in das Neuronale Netz, und steht invers proportional zur richtigen Ausgabe.
 Geometrisch repräsentiert eine Fehlerfunktion eine multidimensionale Fläche mit jedem lernbaren Parameter als Achse, in der das Minimum dieser Fläche ein Optimum darstellt.
 Dieses Optimum ist das Ziel des Trainings.
-Kleine Veränderungen in einzelnen Parametern verändern die Ausgabe der Fehlerfunktion und können somit zeigen, ob diese Veränderung zu einer Verbesserung oder Verschlechterung des Neuronalen Netzes geführt hat.\\
+Kleine Veränderungen in einzelnen Parametern verändern die Ausgabe der Fehlerfunktion und können somit zeigen, ob diese Veränderung zu einer Verbesserung oder Verschlechterung des Neuronalen Netzes geführt hat.
+Hier existiert auch bereits die Unterscheidung zwischen einem Überwachten, Selbstüberwachten und Unüberwachten Lernverfahren.\\
 
 \begin{definition}\label{def:ueberwachtes-lernen}
     Bei dem \textbf{Überwachten Lernen} sind während des Training sowohl die Eingabe als auch die erwartete Ausgabe bekannt.
@@ -370,19 +374,18 @@ Kleine Veränderungen in einzelnen Parametern verändern die Ausgabe der Fehlerf
     Die Fehlerfunktion muss errechnet oder erschlossen werden auf Basis des Kontextes.
 \end{definition}
 
-\begin{definition}\label{def:selbstüberwachtes-lernen}
+\begin{definition}\label{def:selbstueberwachtes-lernen}
     Bei dem \textbf{selbstüberwachten Lernen} ist während des Training nur die Eingabe bekannt.
     Jedoch entspricht die Ausgabe einem Teil der Eingabe, wodurch die Fehlerfunktion errechnet werden kann.
 \end{definition}
 
-Hier existiert auch bereits die Unterscheidung zwischen einem Überwachten, Selbstüberwachten und Unüberwachten Lernverfahren.
 Ein Beispiel für ein Überwachtes Lernen wäre die Klassifizierung von Bildern.
 Der Datensatz enthält sowohl Bilder, als auch zugehörige Klassen.
 Somit ist die erwartete Ausgabe des Modells zu einem Bild exakt die Klasse.
 Transformer-Modelle sind Selbstüberwachte Systeme.
 Hier ergibt sich aus der Eingabe die erwartete Ausgabe, da der darauf folgende Token der Eingabe als korrekt angesehen wird.
 Unüberwachtes Verfahren sind zum Beispiel Agents, welche Spiele lernen.
-Hier existiert in den meisten Fällen eine Belohungsfunktion, welche angibt, wie gut das Modell gespielt hat.
+Hier existiert in den meisten Fällen eine Belohnungsfunktion, welche angibt, wie gut das Modell gespielt hat.
 Belohnungsfunktionen können beschreiben, wie weit das Auto im Spiel gefahren ist oder wie viele Punkte gesammelt wurden.\\
 
 \subsubsection{Backpropagation}
@@ -405,7 +408,7 @@ Dieser Gradient setzt sich aus partiellen Ableitung der Fehlerfunktion über all
 \paragraph{Lernrate}
 \begin{definition}\label{def:lernrate}
     Die \textbf{Lernrate} entspricht der Schrittweite des Gradientenabstiegs. Höhere Lernraten führen zu schnelleren Lernprozessen, können jedoch auch zu Oszillationen führen.
-    Kleinere Lernraten führen zu langsameren Lernprozessen und können möglicherweise nicht zu einem Minimum konvergieren
+    Kleinere Lernraten führen zu langsameren Lernprozessen und können möglicherweise nicht zu einem Minimum konvergieren.
 \end{definition}
 Den Prozess des \enquote{in Richtung des Minimum schreiten} bedeutet, die lernbaren Parameter den partiellen Ableitungen folgend anzupassen.
 Die Anpassung der Parameter ist ein Hyperparameter des Trainings und wird als Lernrate bezeichnet (engl. Learning Rate).\\
@@ -416,14 +419,14 @@ Die Anpassung der Parameter ist ein Hyperparameter des Trainings und wird als Le
 \end{definition}
 
 Wählt man die Lernrate zu hoch, besteht die Gefahr, dass ein Minimum der Fehlerfunktion übersprungen wird und um diesen Punkt osziliert.
-Wählt man die Lernrate zu niedrig, braucht das Training des Neuronalen Netzwerkes zu lange um das Minimum zu erreichen.
-In Transformern und tiefen Neuronalen Netzen ist die Lernrate nicht konstant, sondern wird über den Prozess des Trainings regelmäßig angpasst.
+Wählt man die Lernrate zu niedrig, braucht das Training des Neuronalen Netzes zu lange um das Minimum zu erreichen.
+In Transformern und tiefen Neuronalen Netzen ist die Lernrate nicht konstant, sondern wird über den Prozess des Trainings regelmäßig angepasst.
 Sehr große Modelle besitzen oft mehrere Milliarden Parameter und benötigen daher eine sehr kleine Lernrate um nicht zu oszillieren.
 Zu Beginn eines Trainings passt sich das Modell mit höhere Lernrate zu stark an kleine Änderungen an und findet ein lokales Minimum, welches weit aus über dem globalen Minimum liegt.
 Daher wird eine Aufwärmphase (engl. Warmup) genutzt, um die Lernrate langsam zu erhöhen und das Modell an die Daten anzupassen.
 Nach der Aufwärmphase wird die Lernrate langsam verringert, so dass anfänglich große Anpassungen der Parameter möglich sind, gegen Ende des Trainings das gefundene Minimum nur noch feinjustiert wird.\\
 
-\paragraph{Stochastischer Gradientenabstieg}
+\paragraph{Stochastischer Gradientenabstieg}\mbox{}\\
 Die Berechnung des Gradienten der Fehlerfunktion über alle lernbaren Parameter ist nur sinnvoll, wenn sie über den gesamten Datensatz berechnet wird.
 Jede Eingabe des Datensatzes verändert die Ausgabe des Modells und somit auch die Fehlerfunktion.
 Die Summe der Fehlerfunktionen über alle Eingaben des Datensatzes ist die Fehlerfunktion des gesamten Datensatzes.
@@ -454,11 +457,12 @@ Die Größe der Batches ist ein Kompromiss zwischen der Genauigkeit des Gradient
 Ein logisches Ende des Trainings ist erreicht, wenn die Fehlerfunktion sich über einen Zeitraum nicht mehr verändert und somit ein lokales Minimum gefunden wurde.
 Dieses lokale Minimum ist jedoch nicht immer gewünscht.
 Modelle, die den Datensatz auswendig lernen erzielen bei der Fehlerfunktion einen sehr guten Wert, der Prozess der Backprogatation wirkt fördernd.
-Jedoch können diese Modelle keine neuen Daten korrekt klassifizieren und sind daher ungeeignet in der Praxis. Dieses Prozess des Auswendiglernens wird als Overfitting bezeichnet.\\
+Jedoch können diese Modelle keine neuen Daten korrekt klassifizieren und sind daher ungeeignet in der Praxis.
+Diesen Prozess des Auswendiglernens wird als Overfitting bezeichnet.\\
 
 Overfitting wird kann durch verschiedene Methoden verhindert werden.
 Zur Erkennung von Overfitting wird der Datensatz in Trainings- und Testdaten aufgeteilt.
-Trainiert wird nur auf den Trainingsdaten, verglich wird jedoch mit den Testdaten.
+Trainiert wird nur auf den Trainingsdaten, verglichen wird jedoch mit den Testdaten.
 Dadurch kann festgestellt werden, in wie fern das Modell auf Daten, die es noch nicht gesehen hat, generalisiert.
 Nähert sich die Fehlerfunktion einem Minimum bei den Testdaten, kann das Training beendet werden, da weitere Anpassungen der Parameter lediglich zum Auswendiglernen des Trainigsdatensatzes führen.\\
 

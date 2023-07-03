@@ -40,8 +40,8 @@ Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht mög
         Modell & Verfügbarkeit & ZeroShot & Größe & GPU-Speicher\\
         \midrule
         GPT-2       & frei              & schlecht  & \SI{1,5}{Mrd.~Parameter} & \SI{24}{\giga\byte}\\
-        GPT-3       & nur Interferenz   & gut       & \SI{175}{Mrd.~Parameter} & \SI{1,4}{\tera\byte}\\
-        GPT-4       & nur Interferenz   & sehr gut  & --- & --- \\
+        GPT-3       & nur Inferenz   & gut       & \SI{175}{Mrd.~Parameter} & \SI{1,4}{\tera\byte}\\
+        GPT-4       & nur Inferenz   & sehr gut  & --- & --- \\
         GPT-J       & frei              & gut       & \SI{6,7}{Mrd.~Parameter} & \SI{104}{\giga\byte}\\
         GPT-NeoX    & frei              & gut       & \SI{20}{Mrd.~Parameter}  & \SI{160}{\giga\byte}\\
         \multirow{4}{*}{LLaMa}
@@ -60,7 +60,8 @@ Berechnet wird diese mit der \cref{eq:speicher}.
 \begin{equation}\label{eq:speicher}
     \text{Speicher}=\text{Anzahl Parameter} \cdot \frac{\text{Parameterformat}}{8} \cdot 4
 \end{equation}
-Sprachmodelle benutzen die Parameterformate FP16 oder FP32, welche 2 bzw. 4 Byte pro Parameter benötigen. Zusätzlich muss das Modell während des Trainings circa 4 mal in den Speicher geladen werden, um die Backpropagation durchzuführen. Zur Interferenz der Modelle ist dementsprechend ein Speicherbedarf von $\frac{1}{4}$ der angegebenen Werte notwendig.
+Sprachmodelle benutzen die Parameterformate FP16 oder FP32, welche 2 bzw. 4 Byte pro Parameter benötigen. Zusätzlich muss das Modell während des Trainings circa 4 mal in den Speicher geladen werden, um die Backpropagation durchzuführen. 
+Zur Inferenz der Modelle ist dementsprechend ein Speicherbedarf von $\frac{1}{4}$ der angegebenen Werte notwendig.
 Modelle, die sehr populär geworden sind, aber nicht zur Auswahl stehen, sind BERT, RoBERTa, DistillBERT, BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5.
 Wenn die Aufgabe des Question Answering gelöst werden soll, ist ein BERT-basiertes Modell die erste Wahl.\\
 
@@ -82,7 +83,7 @@ Das Modell erreicht eine Imitation von Texten, aber kein Verständnis und keine 
 
 GPT-3 und das darauf basierende GPT-3.5 (ChatGPT), vorgestellt in \citet{gpt3}, ist zum Zeitpunkt der Arbeit frei nutzbar, hat eine sehr gute ZeroShot-Performance und ist groß genug, um als QA-Modell zu dienen.
 Das Modell ist jedoch nicht frei verfügbar.
-Es existiert zwar eine \ac{api}, diese dient jedoch nur zur Interferenz des Modells, ein Training ist nicht möglich.
+Es existiert zwar eine \ac{api}, diese dient jedoch nur zur Inferenz des Modells, ein Training ist nicht möglich.
 Damit scheidet das Modell bereits aus.
 Ein weiteres Problem ist die Größe des Modells.
 Bei ca. 175 Milliarden Parametern ist eine Nutzung des Modells erst mit 8 A100 \ac{gpu}s möglich (eine Nvidia A100 \ac{gpu} besitzt \SI{80}{\giga\byte} VRAM).
@@ -138,10 +139,10 @@ Veröffentlicht in \citet{llama}\label{tab:llama_naturalquestion}
 \end{table}
 
 Die \cref{tab:llama_naturalquestion} zeigt die Leistungsfähigkeit der Modelle im Vergleich zu anderen Modellen und bei verschiedenen Einstellungen (ZeroShot bis 64Shot).
-Selbst das kleinste Modell mit 7 Milliarden Parametern übertrifft die Leistung von GPT-3 und kann während der Interferenz auf einer einzelnen V100 \ac{gpu} verwendet werden (eine Nvidia V100 \ac{GPU} besitzt \SI{32}{\giga\byte} VRAM).
+Selbst das kleinste Modell mit 7 Milliarden Parametern übertrifft die Leistung von GPT-3 und kann während der Inferenz auf einer einzelnen V100 \ac{gpu} verwendet werden (eine Nvidia V100 \ac{GPU} besitzt \SI{32}{\giga\byte} VRAM).
 Nach Angaben der Autoren kann auch das Modell mit 13 Milliarden Parametern auf einer einzigen V100 \ac{gpu} eingesetzt werden, was für die Wahl dieses Modells spricht.
 Das 33-Milliarden-Parameter-Modell erzielt im ZeroShot in Teilen sogar etwas bessere Ergebnisse als das 65-Milliarden-Parameter-Modell, weshalb die Wahl des 33-Milliarden-Parameter-Modells hier sinnvoll ist.
-Mit 33 Milliarden Parametern und der Verwendung von FP16 Werten (auch Half-Precision genannt) benötigt das Modell \SI{66}{\giga\byte} \ac{gpu} RAM, um für die Interferenz verwendet werden zu können.
+Mit 33 Milliarden Parametern und der Verwendung von FP16 Werten (auch Half-Precision genannt) benötigt das Modell \SI{66}{\giga\byte} \ac{gpu} RAM, um für die Inferenz verwendet werden zu können.
 Für das Training werden \SI{264}{\giga\byte} \ac{gpu} RAM benötigt, was 4 A100 \ac{gpu}s entspricht.
 Das Modell mit 65 Milliarden Parametern benötigt 7 A100 \ac{gpu}s für das Training und 2 A100 \ac{gpu}s für den Betrieb.
 Aufgrund der vielversprechenden ZeroShot-Performance wird in dieser Arbeit das Modell mit 33 Milliarden Parametern gewählt.
