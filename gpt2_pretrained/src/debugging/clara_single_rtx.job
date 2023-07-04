@@ -1,0 +1,24 @@
+#!/bin/bash
+#SBATCH --job-name=rtx-distribution-test        # name
+#SBATCH --nodes=1                               # nodes
+#SBATCH --ntasks-per-node=1                     # crucial - only 1 task per dist per node!
+#SBATCH --partition=clara       
+#SBATCH --gres=gpu:rtx2080ti:6                  # number of gpus
+#SBATCH --time 01:15:00                         # maximum execution time (HH:MM:SS)
+#SBATCH --output=clara_single/%x-%j.out            # output file name
+#SBATCH --mail-type=ALL
+
+# load modules
+module load Python
+srun pip install --user -r requirements.txt
+
+GPUS_PER_NODE=6
+
+export NCCL_DEBUG=INFO
+echo "srun bash -c \"python -m torch.distributed.run --nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID torch-distributed-gpu-test_no_flock.py\""
+LOGLEVEL=INFO
+
+
+srun --jobid $SLURM_JOBID bash -c "NCCL_DEBUG=INFO python -m torch.distributed.run --nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID torch-distributed-gpu-test_no_flock.py"
+
+#srun --jobid $SLURM_JOBID bash -c "python -m torch.distributed.run --rdzv_id=$SLURM_JOBID --rdzv_backend=c10d --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT --nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES  torch-distributed-gpu-test_no_flock.py"

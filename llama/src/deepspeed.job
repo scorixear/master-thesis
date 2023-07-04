@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH --job-name=deepspeed-test           # name
+#SBATCH --nodes=2                           # nodes
+#SBATCH --ntasks-per-node=1                 # crucial - only 1 task per dist per node!
+#SBATCH --cpus-per-task=4                   # number of cores per tasks
+#SBATCH --partition=clara
+#SBATCH --gres=gpu:v100:1                   # number of gpus
+#SBATCH --time 0:15:00                      # maximum execution time (HH:MM:SS)
+#SBATCH --output=%x-%j.out                  # output file name
+
+module load Python
+pip install --user -r requirements.txt
+
+export GPUS_PER_NODE=1
+export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
+export MASER_PORT=9901
+
+srun --jobid $SLURM_JOBID bash -c 'python -m torch.distributed.run \
+ --nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID \
+ --master_addr $MASTER_ADDR --master_port $MASTER_PORT \
+ test_deepspeed.py --deepspeed ds_config.json'
