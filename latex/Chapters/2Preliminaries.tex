@@ -468,29 +468,65 @@ Nähert sich die Fehlerfunktion einem Minimum bei den Testdaten, kann das Traini
 
 
 \section{Datenverarbeitung}\label{sec:datenverarbeitung}
-Um ein Modell trainieren zu können, müssen verwendeten Datensätze in eine Form verständlich für das Modell gebracht werden. Ebenso müssen Ausgaben des Modells evaluiert werden, um die Leistungsfähigkeit des Modells zu bestimmen.\\
+Um ein Modell trainieren zu können, müssen verwendeten Datensätze in eine Form verständlich für das Modell gebracht werden.
+Ebenso müssen Ausgaben des Modells evaluiert werden, um die Leistungsfähigkeit des Modells zu bestimmen.\\
+\begin{definition}\label{def:datenkuration}
+    \textbf{Datenkuration} beschreibt den Prozess der Datenaufbereitung, um diese für die Verarbeitung durch ein Modell vorzubereiten.
+\end{definition}
+Die Datenkuration ist ein wichtiger Schritt dieser Arbeit und wird weiter in \cref{sec:datenkuration} genauer beschrieben.
+Da Modelle nicht mit normalen Text-Dateien wie zum Beispiel Word oder PDF umgehen können, müssen diese in eine für das Modell Verständliche Form umgewandelt werden.
+
+\subsection{Glossar der Daten}
+In dieser Arbeit dreht sich vieles um Daten und deren Information und Wissen die sie enthalten.
+Um diese Unterscheidung besser zu verstehen, folgt hier die Definition jener nach \citet{bb}.
 
 \begin{definition}\label{def:wissen}
     \textbf{Wissen} sind generelle Informationen über Konzepte in einer bestimmten Domäne.
 \end{definition}
+Im Kontext dieser Arbeit repräsentiert Wissen Informationen aus \citet{bb}.
+Diese Informationen sollen von einem Modell erlernt werden, damit das darin enthaltene Wissen wiedergeben kann.
 
 \begin{definition}\label{def:information}
-    \textbf{Information} sind spezifische Festlegungen über Entitäten wie zum Beispiel Fakten, Dinge, Personen, Prozesse, Ideen, Konzepte oder Ereignisse.
+    \textbf{Informationen} sind spezifische Festlegungen über Entitäten wie zum Beispiel Fakten, Dinge, Personen, Prozesse, Ideen, Konzepte oder Ereignisse.
 \end{definition}
+Eine Information ist unabhängig von ihrer Darstellung und ist das grundlegende Ziel dieser Arbeit.
+Informationen können unterschiedlich formuliert werden, enthalten aber gleichen Informationsgehalt.
+Daher gilt wie in \cref{sec:approach:questions} beschrieben eine Antwort mit richtigen Informationen auf eine Frage unabhängig von ihrer Darstellung als richtig.
 
 \begin{definition}\label{def:daten}
     \textbf{Daten} sind Informationen oder Wissen in einer strukturierten Form, die für die Verarbeitung, Kommunikation oder Interpretation von Menschen oder Maschinen geeignet sind.
 \end{definition}
+Daten werden genutzt um die Informationen und das Wissen aus \citet{bb} zu repräsentieren.
+Das Modell enthält ebenso Daten, jedoch in einer für das Modell verständlichen Form.
+Antworten des Modells auf Fragen sind ebenso Daten, die jedoch in einer für Menschen verständlichen Form vorliegen müssen.
 
-\begin{definition}\label{def:datenkuration}
-    \textbf{Datenkuration} beschreibt den Prozess der Datensammlung, -bereinigung und Integration von Daten. Sie findet in dieser Arbeit Anwendung um die Daten für das Training vorzubereiten.
+
+\subsection{Evaluierung}
+Um die Leistungsfähigkeit eines Modells zu bestimmen, müssen die Ausgaben des Modells evaluiert werden.
+Diese Evaluierung ist weiter in \cref{sec:approach:comparison} beschrieben.
+Zur Quantifizierung der Leistungsfähigkeit werden Metriken verwendet.
+Die Berechnung dieser Metriken findet sich ebenso in \cref{sec:approach:comparison}.
+Die dort genannten Metriken Micro-F1 und Macro-F1 besitzen jedoch einen grundlegenden Unterschied und werden hier genauer definiert.
+
+\begin{definition}
+    \textbf{Präzision} ist der Anteil an korrekt klassifizierten Instanzen unter allen klassifizierten Instanzen.
 \end{definition}
+
+\begin{definition}
+    \textbf{Recall} ist der Anteil an korrekt klassifizierten Instanzen unter allen Instanzen.
+\end{definition}
+Eine Instanz beschreibt im Kontext dieser Arbeit eine Frage. Fragen können richtig beantwortet werden und gelten dann als korrekt klassifiziert.
+Fragen können ebenso auch nicht beantwortet werden und gelten dann als nicht klassifiziert, im Gegenzug zu falsch beantworteten Fragen, die als falsch klassifiziert gelten.\\
 
 \begin{definition}\label{def:micro-f1}
     Der \textbf{Micro-F1} Wert repräsentiert das harmonische Mittel aus Präzision und Recall.
-    Sie repräsentiert die Gesamtleistung unabhängig von der Klassenzugehörigkeit.
+    Er repräsentiert die Gesamtleistung unabhängig von der Klassenzugehörigkeit.
 \end{definition}
 
 \begin{definition}\label{def:macro-f1}
-    Der \textbf{Macro-F1} Wert repräsentiert den arithmetischen Mittelwert aller F1 Werte jeder Klasse. Er stellt in einem nicht-balancierten Datensatz eine bessere Metrik dar, um alle Klassen gleich zu gewichten.
+    Der \textbf{Macro-F1} Wert repräsentiert den arithmetischen Mittelwert aller F1 Werte jeder Klasse.
+    Er stellt in einem nicht-balancierten Datensatz eine bessere Metrik dar, um alle Klassen gleich zu gewichten.
 \end{definition}
+
+Klassen repräsentieren Gruppen aus Instanzen. Mehrere Instanzen können zu einer Klasse gehören und werden als korrekt klassifiziert angesehen, wenn diese Klasse gewählt wurde.
+Eine genauere Begründung welche Metrik in dieser Arbeit genutzt wird, findet sich unter \cref{sec:approach:comparison}.

@@ -155,7 +155,7 @@ Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf dies
 
 In dieser Arbeit werden die Modelle LLaMa 7B und 33B verwendet, da sie eine sehr gute Leistung mit minimalen Ressourcenanforderungen bieten. Eine Auswahl beider Modellgrößen begründet sich daher, dass eine Nutzung des 33B Modells auf einzelnen GPUs nicht möglich ist, und dadurch die Nutzbarkeit eingeschränkt wird. Deshalb wird ebenso die Leistung des kleinsten LLaMa Modells zum Vergleich herangezogen.\\
 
-\section{Datenkuration}
+\section{Datenkuration}\label{sec:datenkuration}
 Um die Literatur optimal nutzen zu können, muss eine Datenkuration durchgeführt werden.
 Die Daten liegen im Word-Format vor, können aber in diesem Format nicht verarbeitet werden, da das Modell nur Text verarbeiten kann.
 Die Datenkuration umfasst mehrere Schritte, die im Folgenden beschrieben werden.\\
@@ -337,7 +337,7 @@ Andere Fragen bauen auf Lösungen der vorhergehenden Frage auf.
 Dies ist nur dann sinnvoll, wenn das Modell den Verlauf der Fragestellungen kennt, was nicht der Fall ist.
 Diese Fragen müssen ebenfalls umformuliert werden, um unabhängig von anderen Fragen zu sein.
 
-\section{Modellvergleich}
+\section{Modellvergleich}\label{sec:approach:comparison}
 Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Bewertung.
 Dazu werden die in \cref{sec:approach:questions} definierten Fragen verwendet.
 Diese Fragen werden von dem LLaMa Modell 7B und 33B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
