@@ -139,21 +139,23 @@ Veröffentlicht in \citet{llama}\label{tab:llama_naturalquestion}
 \end{table}
 
 Die \cref{tab:llama_naturalquestion} zeigt die Leistungsfähigkeit der Modelle im Vergleich zu anderen Modellen und bei verschiedenen Einstellungen (ZeroShot bis 64Shot).
-Selbst das kleinste Modell mit 7 Milliarden Parametern übertrifft die Leistung von GPT-3 und kann während der Inferenz auf einer einzelnen V100 \ac{gpu} verwendet werden (eine Nvidia V100 \ac{GPU} besitzt \SI{32}{\giga\byte} VRAM).
+Selbst das kleinste Modell mit 7 Milliarden Parametern übertrifft die Leistung von GPT-3 und kann während der Inferenz auf einer einzelnen V100 \ac{gpu} verwendet werden (eine Nvidia V100 \ac{gpu} besitzt \SI{32}{\giga\byte} VRAM).
 Nach Angaben der Autoren kann auch das Modell mit 13 Milliarden Parametern auf einer einzigen V100 \ac{gpu} eingesetzt werden, was für die Wahl dieses Modells spricht.
-Das 33-Milliarden-Parameter-Modell erzielt im ZeroShot in Teilen sogar etwas bessere Ergebnisse als das 65-Milliarden-Parameter-Modell, weshalb die Wahl des 33-Milliarden-Parameter-Modells hier sinnvoll ist.
+Das 33-Milliarden-Parameter-Modell erzielt im ZeroShot in Teilen sogar etwas bessere Ergebnisse als das 65-Milliarden-Parameter-Modell, weshalb eine Wahl des 33 Milliarden oder 65 Milliarden Parameter Modells hier sinnvoll ist.
 Mit 33 Milliarden Parametern und der Verwendung von FP16 Werten (auch Half-Precision genannt) benötigt das Modell \SI{66}{\giga\byte} \ac{gpu} RAM, um für die Inferenz verwendet werden zu können.
 Für das Training werden \SI{264}{\giga\byte} \ac{gpu} RAM benötigt, was 4 A100 \ac{gpu}s entspricht.
 Das Modell mit 65 Milliarden Parametern benötigt 7 A100 \ac{gpu}s für das Training und 2 A100 \ac{gpu}s für den Betrieb.
-Aufgrund der vielversprechenden ZeroShot-Performance wird in dieser Arbeit das Modell mit 33 Milliarden Parametern gewählt.
 Die Modelle sind jedoch nicht öffentlich verfügbar, sondern werden nur zu Forschungszwecken über einen Antrag weitergegeben.
 Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
 
 Eine Alternative zu den LLaMa-Modellen ist OpenLLaMa, veröffentlicht unter \citet{openllama}.
-Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMa-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar.
-Da jedoch kein Modell mit 33 Milliarden Parametern verfügbar ist, wird auf diese Modelle verzichtet.\\
+Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMa-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar. Da hier jedoch keine Publikation über den Prozess der Erstellung dieser Modelle vorhanden ist, wird von der Verwendung dieser Modelle vorerst abgesehen.\\
 
-In dieser Arbeit werden die Modelle LLaMa 7B und 33B verwendet, da sie eine sehr gute Leistung mit minimalen Ressourcenanforderungen bieten. Eine Auswahl beider Modellgrößen begründet sich daher, dass eine Nutzung des 33B Modells auf einzelnen GPUs nicht möglich ist, und dadurch die Nutzbarkeit eingeschränkt wird. Deshalb wird ebenso die Leistung des kleinsten LLaMa Modells zum Vergleich herangezogen.\\
+In dieser Arbeit wird zunächst das Modell LLaMa 7B ausgewählt, da es eine sehr gute Leistung mit minimalen Ressourcenanforderungen bietet.
+Eine Auswahl dieser Modellgröße begründet sich daher, dass eine Nutzung der Modelle ab 33 Milliarden Parameter auf einzelnen GPUs nicht möglich ist, und dadurch die Nutzbarkeit eingeschränkt wird.
+Ebenso übersteigen die technischen Speicheranforderungen größerer Modelle die Kapazitäten einzelner Knoten im genutzten GPU-Computing Cluster, weshalb dadurch die technische Umsetzung des Trainings drastisch in ihrer Komplexität zunimmt.
+Einzelne Tests der Knoten-übergreifenden Kommunikation zeigten grundlegende Probleme und sollten deshalb vermieden werden.
+Auf weitere Einzelheiten über den Aufbau der verwendenten GPU-Computing Clusters wird in \cref{sec:approach:training} eingegangen.\\
 
 \section{Datenkuration}\label{sec:datenkuration}
 Um die Literatur optimal nutzen zu können, muss eine Datenkuration durchgeführt werden.
@@ -243,7 +245,7 @@ Diese Parameter sind in der \cref{tab:training:parameter} aufgelistet und folgen
         \toprule
         \textbf{Parameter} & \textbf{Wert} \\
         \midrule
-        Lernrate & $1,5e^{-4}$\\
+        Lernrate & $3e^{-4}$\\
         AdamW $\beta_1$ & \SI{0,9}{}\\
         AdamW $\beta_2$ & \SI{0,95}{}\\
         Gewichtsreduktion & \SI{0,1}{}\\
@@ -252,14 +254,11 @@ Diese Parameter sind in der \cref{tab:training:parameter} aufgelistet und folgen
         Epochen & 2\\
         \bottomrule
     \end{tabular}
-    \caption{Parameter für das Training des LLaMa 33B-Modells}\label{tab:training:parameter}
+    \caption{Parameter für das Training des LLaMa 7B-Modells}\label{tab:training:parameter}
 \end{table}
 
-Die Lernrate (engl. \enquote{Learning Rate}) ist ein Parameter, der das Ausmaß der Anpassung der Gewichte bestimmt.
-Je höher die Lernrate, desto stärker werden die Gewichte angepasst.
-Dies kann dazu führen, dass das Modell nicht konvergiert, sondern über den optimalen Punkt hinausschießt.
-Bei einer zu niedrigen Lernrate konvergiert das Modell sehr langsam.
-Die Lernrate wird während des Trainings angepasst, um eine schnelle Konvergenz zu ermöglichen.
+Die Lernrate (engl. \enquote{Learning Rate}) ist ein Parameter, der das Ausmaß der Anpassung der Gewichte bestimmt (siehe \cref{def:lernrate}).
+Sie wird während des Trainings angepasst, um eine schnelle Konvergenz zu ermöglichen.
 Diese Anpassung folgt dem Kosinus-Lernratenschema, so dass die endgültige Lernrate \SI{10}{\percent} des Anfangswertes beträgt.
 Die Lernraten hängen von der Modellgröße ab.
 Im Allgemeinen benötigen größere Modelle eine niedrigere Lernrate.
@@ -284,7 +283,7 @@ Da in diesem Fall das Modell bereits auf einem großen Datensatz trainiert wurde
 Der Artikel von \citet{llama} beschreibt ein Training über eine Epoche.
 Da in diesem Fall jedoch der Datensatz im Vergleich minimal ist, wird eine größere Anzahl von Epochen verwendet.\\
 
-\subsection{Ausführen der Training-Programme}
+\subsection{Ausführen der Training-Programme}\label{sec:approach:training}
 
 Zur Ausführung der Trainingsprogramme wird SLURM\footnote{\url{https://slurm.schedmd.com/overview.html} (abgerufen am 16.6.2023)} verwendet.
 Mit Hilfe von SLURM-Skripten können Programme über mehrere Knoten, \ac{cpu}s und \ac{gpu}s verteilt berechnet werden.
@@ -298,7 +297,7 @@ Die Knoten sind über ein Infiniband-Netzwerk verbunden, das eine hohe Bandbreit
 Supercomputer sind gemeinsam genutzte Ressourcen, die von mehreren Nutzern gebucht werden können.
 Die Auswahl der Supercomputer hängt also davon ab, welche Knoten gerade frei sind.
 Generell werden Clara-Nodes mit V100 \ac{gpu}s bevorzugt, da hier der größtmögliche Speicher pro \ac{gpu} zur Verfügung steht.
-Dies hat zur Folge, dass weniger Knoten gleichzeitig reserviert werden müssen, was die Wartezeit verkürzt und die Kommunikation zwischen den Knoten minimiert.\\
+Dies hat zur Folge, dass weniger \ac{gpu}s gleichzeitig reserviert werden müssen, was die Wartezeit verkürzt und die Kommunikation zwischen den \ac{gpu}s minimiert.\\
 
 Die Trainingsprogramme müssen auch in der Lage sein, mit der Multi-\ac{gpu}-Architektur umzugehen.
 Dazu wird die Bibliothek DeepSpeed \citep{deepspeed} in Kombination mit der Bibliothek Transformers verwendet.
@@ -337,7 +336,7 @@ Andere Fragen bauen auf Lösungen der vorhergehenden Frage auf.
 Dies ist nur dann sinnvoll, wenn das Modell den Verlauf der Fragestellungen kennt, was nicht der Fall ist.
 Diese Fragen müssen ebenfalls umformuliert werden, um unabhängig von anderen Fragen zu sein.
 
-\section{Modellvergleich}\label{sec:approach:comparison}
+\section{Modellevaluation}\label{sec:approach:comparison}
 Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Bewertung.
 Dazu werden die in \cref{sec:approach:questions} definierten Fragen verwendet.
 Diese Fragen werden von dem LLaMa Modell 7B und 33B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
@@ -351,7 +350,7 @@ Die Lösungen werden ebenfalls in drei Kategorien eingeteilt:
 
 Die Modelle werden mit Hilfe der micro-F1 Bewertung verglichen.
 Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
-\begin{ceqn} % TODO: mprec und mrecall ausformulieren
+\begin{ceqn}
 \begin{align}
     C &= S \cap G \\
     micro_{prec} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|S_{qi}|} \\
@@ -359,7 +358,6 @@ Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
     microF1 &= \frac{2 \cdot m_{prec} \cdot m_{recall}}{m_{prec} + m_{recall}}
 \end{align}
 \end{ceqn}
-% TODO: MacroF1 nutzen? oder begründen warum microF1
 Dabei ist $S_q$ die Menge der für die Fragen $q$ generierten Antworten, $G_q$ die Menge der richtigen Antworten aus dem Buch \citet{bb} und $C_q$ die Menge der richtigen Antworten, die sowohl in $S_q$ als auch in $G_q$ enthalten sind.
 $N$ ist die Anzahl der Fragen, $micro_{prec}$ die Mikro-Präzision und $micro_{recall}$ der Mikro-Recall.
 Der Wert $microF1$ ist das harmonische Mittel aus $micro_{prec}$ und $micro_{recall}$.
