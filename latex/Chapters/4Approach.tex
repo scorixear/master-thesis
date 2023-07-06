@@ -123,13 +123,13 @@ Die Modelle unterscheiden sich sowohl in der Größe als auch proportional in de
     Chinchilla   & 70B  & \SI{83,7}{} & \SI{81,8}{} & \SI{51,3}{} & \SI{80,8}{} & \SI{74,9}{} & -    & -    & -    \\
     PaLM         & 62B  & \SI{84,8}{} & \SI{80,5}{} & -    & \SI{79,7}{} & \SI{77,0}{} & \SI{75,2}{} & \SI{52,5}{} & \SI{50,4}{} \\
     PaLM-cont    & 62B  & \SI{83,9}{} & \SI{81,4}{} & -    & \SI{80,6}{} & \SI{77,0}{} & -    & -    & -    \\
-    PaLM         & 540B & \textbf{\SI{88,0}{}} & \SI{82,3}{} & - & \SI{83,4}{} & \textbf{\SI{81,1}{}} & \SI{76,6}{} & \SI{53,0}{} & \SI{53,4}{} \\
+    PaLM         & 540B & \textbf{88,0} & \SI{82,3}{} & - & \SI{83,4}{} & \textbf{81,1} & \SI{76,6}{} & \SI{53,0}{} & \SI{53,4}{} \\
     \midrule
     \multirow{4}{*}{LLaMa}
        & 7B   & \SI{76,5}{} & \SI{79,8}{} & \SI{48,9}{} & \SI{76,1}{} & \SI{70,1}{} & \SI{72,8}{}          & \SI{47,6}{}          & \SI{57,2}{} \\
        & 13B  & \SI{78,1}{} & \SI{80,1}{} & \SI{50,4}{} & \SI{79,2}{} & \SI{73,0}{} & \SI{74,8}{}          & \SI{52,7}{}          & \SI{56,4}{} \\
-       & 33B  & \SI{83,1}{} & \SI{82,3}{} & \SI{50,4}{} & \SI{82,8}{} & \SI{76,0}{} & \textbf{\SI{80,0}{}} & \textbf{\SI{57,8}{}} & \SI{58,6}{} \\
-       & 65B  & \SI{85,3}{} & \textbf{\SI{82,8}{}} & \textbf{\SI{52,3}{}} & \textbf{\SI{84,2}{}} & \SI{77,0}{} & \SI{78,9}{} & \SI{56,0}{} & \textbf{60.2} \\
+       & 33B  & \SI{83,1}{} & \SI{82,3}{} & \SI{50,4}{} & \SI{82,8}{} & \SI{76,0}{} & \textbf{80,0} & \textbf{57,8} & \SI{58,6}{} \\
+       & 65B  & \SI{85,3}{} & \textbf{82,8} & \textbf{52,3} & \textbf{84,2} & \SI{77,0}{} & \SI{78,9}{} & \SI{56,0}{} & \textbf{60,2} \\
   \bottomrule
     \end{tabular}}
 \caption{
@@ -339,7 +339,7 @@ Diese Fragen müssen ebenfalls umformuliert werden, um unabhängig von anderen F
 \section{Modellevaluation}\label{sec:approach:comparison}
 Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Bewertung.
 Dazu werden die in \cref{sec:approach:questions} definierten Fragen verwendet.
-Diese Fragen werden von dem LLaMa Modell 7B und 33B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
+Diese Fragen werden von dem LLaMa Modell 7B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
 Die Antworten werden manuell ausgewertet und mit den Antworten aus dem Buch \citet{bb} verglichen.
 Die Lösungen werden ebenfalls in drei Kategorien eingeteilt:
 \begin{enumerate}
@@ -355,7 +355,7 @@ Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
     C &= S \cap G \\
     micro_{prec} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|S_{qi}|} \\
     micro_{recall} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|G_{qi}|} \\
-    microF1 &= \frac{2 \cdot m_{prec} \cdot m_{recall}}{m_{prec} + m_{recall}}
+    microF1 &= \frac{2 \cdot micro_{prec} \cdot micro_{recall}}{micro_{prec} + micro_{recall}}
 \end{align}
 \end{ceqn}
 Dabei ist $S_q$ die Menge der für die Fragen $q$ generierten Antworten, $G_q$ die Menge der richtigen Antworten aus dem Buch \citet{bb} und $C_q$ die Menge der richtigen Antworten, die sowohl in $S_q$ als auch in $G_q$ enthalten sind.
