@@ -41,7 +41,7 @@
 % Question Answering (Aggregation, erst FScore für Frage, dann Durchschnitt, oder andersrum)
 % API, Overfitting
 %************ Sprachmodelle
-Um die in \cref{sec:zielsetzung} genannten Ziele zu erreichen und die Lösungsschritte in \cref{ch:approach} nachvollziehen zu können, werden in diesem Kapitel die Grundlagen für die in dieser Arbeit verwendeten Begriffe und Konzepte gelegt.
+Zum Verständnis der in \cref{sec:zielsetzung} genannten Ziele und Ausführungen dieser Arbeit werden in diesem Kapitel Grundlagen zu den verwendeten Begriffen und Konzepten geschaffen.
 Das Kapitel gliedert sich in eine allgemeine Definition von Sprachmodellen in \cref{sec:sprachmodelle} mit einer genaueren Erläuterung der Transformer-spezifischen Architektur.
 Danach folgt eine kurze Einführung in das Thema Neuronale Netze, in der die Funktionsweise von Neuronalen Netzen näher erläutert wird.
 Abschließend werden einige Begriffe aus der Medizinischen Informatik und der Datenverarbeitung in \cref{sec:Datenverarbeitung} erläutert.
@@ -49,14 +49,14 @@ Abschließend werden einige Begriffe aus der Medizinischen Informatik und der Da
 \section{Sprachmodelle}\label{sec:sprachmodelle}
 
 \begin{definition}\label{def:sprachmodell}
-   \textbf{Sprachmodelle} sind computergestützte Systeme, welche menschliche Sprache  verstehen und darauf reagieren.
+   \textbf{Sprachmodelle} sind neuronale Netze, welche menschliche Sprache verstehen und darauf reagieren.
 \end{definition}
 Sprachmodelle basieren auf künstlicher Intelligenz und werden in der Regel durch maschinelles Lernen trainiert.
-Sprachmodelle werden in einer Vielzahl von Anwendungen eingesetzt, wie z.B. in der Übersetzung,
-Textgenerierung, Spracherkennung, Chatbots und Textklassifikation.
+Sie werden in einer Vielzahl von Anwendungen eingesetzt, wie z.B. in der Übersetzung,
+Textgenerierung, Spracherkennung und Textklassifikation.
 
 \begin{definition}\label{def:autoregressive-sprachmodelle}
-    \textbf{Autoregressive Sprachmodelle} sind eine Art von Sprachmodellen, die entwickelt wurden, um Texte zu generieren,
+    \textbf{Autoregressive Sprachmodelle} sind Sprachmodelle, die Texte generieren,
     indem sie die Wahrscheinlichkeit von Wörtern oder Zeichen in einer Sequenz vorhersagen.
 \end{definition}
 
@@ -90,7 +90,7 @@ Seit 2017 gibt es grundlegende Unterschiede in den Modellen und deren Möglichke
 Aus diesem Grund haben \citet{ammus} eine Taxonomie der Transformer-basierten vortrainierten Sprachmodelle eingeführt.
 Diese Taxonomie wird hier zur Beschreibung weiterer Architekturen und Methodiken verwendet.\\
 
-Neben dem Grundbaustein eines Transformers - dem Attention-\ac{nn} - sind zwei wichtige Modifikationen gegenüber normalen neuronalen Netzen in Transformer eingeflossen: Residuale Verbindungen und Dropout.\\
+Neben dem Grundbaustein eines Transformers --- dem Aufmerksamkeitsmechanismus --- sind zwei wichtige Modifikationen gegenüber normalen neuronalen Netzen in Transformer eingeflossen: Residuale Verbindungen und Dropout.\\
 
 \subsubsection{Residuale Verbindungen}
 
@@ -314,23 +314,19 @@ Diese Parameter werden auch als lernbare Parameter bezeichnet.\\
 
 $B^1_N$ ist der Bias und ebenfalls ein lernbarer Parameter.
 Alle Eingabewerte werden gemäß der Formel aufsummiert und mit Hilfe einer Aktivierungsfunktion transformiert.
-Diese Aktivierungsfunktion war in früheren Netzen die Sigmoidfunktion \pcref{eq:sigmoid}.
-In modernen Netzen und auch in Transformer-Modellen wird hier die ReLU-Funktion \pcref{eq:relu} verwendet.
-\begin{align}
-    f(x) &= \frac{1}{1+e^{-x}}\label{eq:sigmoid}\\
-    f(x) &= \max(0,x) \label{eq:relu}
-\end{align}
+Diese Aktivierungsfunktion war in früheren Netzen die Sigmoidfunktion \pcref{img:sigmoid}.
+In modernen Netzen und auch in Transformer-Modellen wird hier die ReLU-Funktion \pcref{img:relu} verwendet.
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{zeichnungen/sigmoid.png}
-    \caption{Die Sigmoid-Funktion}\label{img:sigmoid}
+    \caption{Die Sigmoid-Funktion $f(x) = \frac{1}{1+e^{-x}}$}\label{img:sigmoid}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{zeichnungen/relu.png}
-    \caption{Die ReLU-Funktion}\label{img:relu}
+    \caption{Die ReLU-Funktion $f(x) = \max(0,x)$}\label{img:relu}
 \end{figure}
 
 \begin{definition}\label{def:aktivierungsfunktion}
@@ -338,7 +334,6 @@ In modernen Netzen und auch in Transformer-Modellen wird hier die ReLU-Funktion 
     Sie ist nicht-linear und verhindert somit die Reduzierung eines Neuronalen Netzes auf eine lineare Funktion.
 \end{definition}
 
-Die Funktionen werden in \cref{img:sigmoid,img:relu} dargestellt.
 Üblicherweise stellt eine Aktivierungsfunktion eine Transformation der Eingabewerte in einen nichtlinearen Ausgabewert zwischen 0 und 1 dar.
 Dies ist jedoch nicht zwingend, da z.B. die ReLU-Funktion Werte zwischen 0 und $\infty$ ausgibt, aber schneller berechnet werden kann als die Sigmoidfunktion.
 Aktivierungsfunktionen sind notwendig, um die Komplexität eines neuronalen Netzes zu erhöhen und damit seine Fähigkeit, komplexere Probleme zu lösen, zu ermöglichen.
@@ -369,7 +364,7 @@ Hier besteht bereits die Unterscheidung zwischen einem überwachten, selbstüber
 \end{definition}
 
 \begin{definition}\label{def:unueberwachtes-lernen}
-    Bei dem \textbf{Unüberwachten Lernen}ist während des Trainings nur die Eingabe bekannt.
+    Bei dem \textbf{Unüberwachten Lernen} ist während des Trainings nur die Eingabe bekannt.
     Die Fehlerfunktion muss aus dem Kontext berechnet oder abgeleitet werden.
 \end{definition}
 
