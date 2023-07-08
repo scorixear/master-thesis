@@ -295,7 +295,7 @@ Jetzt muss das Ergebnis interpretiert werden. Dieser Vorgang wird auch als Infer
 
 Ein Anwendungsbeispiel wäre die Erkennung von handgeschriebenen Zahlen.
 Die Eingabe wäre hier ein Bild der Ziffer, das in ein neuronales Netz eingespeist wird.
-Jedes Neuron repräsentiert den Grauwert eines Pixels im Bereich $[0,1]$.
+Jedes Neuron repräsentiert den Grauwert eines Pixels im Bereich $[0;1]$.
 Die Ausgabe stellt die erkannte Ziffer dar.
 Für jede mögliche Ziffer (0-9) gibt es ein Ausgangsneuron, das vom neuronalen Netz einen Wert zwischen 0 und 1 erhält.
 Das Neuron mit dem höchsten Ausgang repräsentiert die erkannte Ziffer.\\
@@ -319,13 +319,13 @@ In modernen Netzen und auch in Transformer-Modellen wird hier die ReLU-Funktion 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{zeichnungen/sigmoid.png}
+    \includegraphics[width=0.8\textwidth]{zeichnungen/sigmoid.png}
     \caption{Die Sigmoid-Funktion $f(x) = \frac{1}{1+e^{-x}}$}\label{img:sigmoid}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{zeichnungen/relu.png}
+    \includegraphics[width=0.8\textwidth]{zeichnungen/relu.png}
     \caption{Die ReLU-Funktion $f(x) = \max(0,x)$}\label{img:relu}
 \end{figure}
 
@@ -422,7 +422,7 @@ Nach der Aufwärmphase wird die Lernrate langsam reduziert, so dass zu Beginn gr
 \paragraph{Stochastischer Gradientenabstieg}\mbox{}\\
 Die Berechnung des Gradienten der Fehlerfunktion über alle lernbaren Parameter ist nur sinnvoll, wenn sie über den gesamten Datensatz berechnet wird.
 Jede Eingabe des Datensatzes verändert die Ausgabe des Modells und somit auch die Fehlerfunktion.
-Die Summe der Fehlerfunktionen über alle Eingaben des Datensatzes ist die Fehlerfunktion des gesamten Datensatzes.
+Das arithmetische Mittel der Fehlerfunktionen über alle Eingaben des Datensatzes ist die Fehlerfunktion des gesamten Datensatzes.
 
 \begin{equation}
     C = \frac{1}{n}\sum_{k=0}^{n-1}C_k\\
@@ -462,7 +462,6 @@ Nähert sich die Fehlerfunktion bei den Testdaten einem Minimum, kann das Traini
 
 \section{Datenverarbeitung}\label{sec:datenverarbeitung}
 Um ein Modell trainieren zu können, müssen die verwendeten Datensätze in eine für das Modell verständliche Form gebracht werden.
-Ebenso müssen die Modellausgaben evaluiert werden, um die Leistungsfähigkeit des Modells zu bestimmen.\\
 \begin{definition}\label{def:datenkuration}
     \textbf{Datenkuration} beschreibt den Prozess der Datenaufbereitung, um diese für die Verarbeitung durch ein Modell vorzubereiten.
 \end{definition}
@@ -491,34 +490,3 @@ Daher wird, wie in \cref{sec:approach:questions} beschrieben, eine Antwort auf e
 \end{definition}
 Die in dieser Arbeit verwendeten Daten sind Eingabedaten wie das Buch von \citet{bb} und die Fragen zu diesem Buch, Ausgabedaten aus dem trainierten Modell
 als Antworten auf die Fragen und Daten, die im Modell enthalten sind, aber nicht in einer für Menschen verständlichen Form vorliegen.
-
-
-\subsection{Evaluierung}
-Um die Leistung eines Modells zu bestimmen, müssen die Ausgaben des Modells berechnet werden.
-Diese Evaluierung wird unter \cref{sec:approach:comparison} näher beschrieben.
-Zur Quantifizierung der Leistung werden Metriken verwendet.
-Die Berechnung dieser Metriken ist ebenfalls in \cref{sec:approach:comparison} beschrieben.
-Die dort genannten Metriken Micro-F1 und Macro-F1 unterscheiden sich jedoch grundlegend und werden hier genauer definiert.
-
-\begin{definition}
-    \textbf{Präzision} ist der Anteil der richtig klassifizierten Instanzen an allen klassifizierten Instanzen.
-\end{definition}
-
-\begin{definition}
-    \textbf{Recall} ist der Anteil der richtig klassifizierten Instanzen an allen Instanzen.
-\end{definition}
-Eine Instanz beschreibt eine Frage im Kontext dieser Arbeit. Fragen können richtig beantwortet werden und gelten dann als richtig klassifiziert.
-Fragen können auch nicht beantwortet werden und gelten dann als nicht klassifiziert, im Gegenzug zu falsch beantworteten Fragen, die als falsch klassifiziert gelten.\\
-
-\begin{definition}\label{def:micro-f1}
-    Der \textbf{Micro-F1} Wert ist das harmonische Mittel aus Präzision und Recall.
-    Er repräsentiert die Gesamtleistung unabhängig von der Klassenzugehörigkeit.
-\end{definition}
-
-\begin{definition}\label{def:macro-f1}
-    Der \textbf{Macro-F1} Wert repräsentiert den arithmetischen Mittelwert aller F1 Werte jeder Klasse.
-    In einem unbalancierten Datensatz ist dies eine bessere Metrik, um alle Klassen gleich zu gewichten.
-\end{definition}
-
-Klassen stellen Gruppen von Instanzen dar. Mehrere Instanzen können zu einer Klasse gehören und gelten als korrekt klassifiziert, wenn diese Klasse ausgewählt wurde.
-Eine genauere Erläuterung der in dieser Arbeit verwendeten Metrik findet sich unter \cref{sec:approach:comparison}.

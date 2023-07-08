@@ -35,33 +35,33 @@ Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht mög
     \centering
     \setlength{\tabcolsep}{5pt}
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{lllll}
+    \begin{tabular}{lllrrr}
         \toprule
-        Modell & Verfügbarkeit & ZeroShot & Größe & GPU-Speicher\\
+        Modell      & Verfügbarkeit     & ZeroShot  & Größe                    & Training & Inferenz\\
         \midrule
-        GPT-2       & frei              & schlecht  & \SI{1,5}{Mrd.~Parameter} & \SI{24}{\giga\byte}\\
-        GPT-3       & nur Inferenz   & gut       & \SI{175}{Mrd.~Parameter} & \SI{1,4}{\tera\byte}\\
-        GPT-4       & nur Inferenz   & sehr gut  & --- & --- \\
-        GPT-J       & frei              & gut       & \SI{6,7}{Mrd.~Parameter} & \SI{104}{\giga\byte}\\
-        GPT-NeoX    & frei              & gut       & \SI{20}{Mrd.~Parameter}  & \SI{160}{\giga\byte}\\
-        \multirow{4}{*}{LLaMa}
-                    & limitiert         & gut       & \SI{7}{Mrd.~Parameter}   & \SI{56}{\giga\byte}\\
-                    & limitiert         & gut       & \SI{13}{Mrd.~Parameter}  & \SI{104}{\giga\byte}\\
-                    & limitiert         & sehr gut  & \SI{33}{Mrd.~Parameter}  & \SI{264}{\giga\byte}\\
-                    & limitiert         & sehr gut  & \SI{65}{Mrd.~Parameter}  & \SI{520}{\giga\byte}\\
+        GPT-2       & frei              & schlecht  & \SI{1,5}{Mrd.~Parameter} & \SI{24}{\giga\byte}    & \SI{6}{\giga\byte}\\
+        GPT-3       & nur Inferenz      & gut       & \SI{175}{Mrd.~Parameter} & \SI{1,4}{\tera\byte}   & \SI{350}{\giga\byte}\\
+        GPT-4       & nur Inferenz      & sehr gut  & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} \\
+        GPT-J       & frei              & gut       & \SI{6,7}{Mrd.~Parameter} & \SI{104}{\giga\byte}   & \SI{26}{\giga\byte}\\
+        GPT-NeoX    & frei              & gut       & \SI{20}{Mrd.~Parameter}  & \SI{160}{\giga\byte}   & \SI{40}{\giga\byte}\\
+        \multirow{4}{*}{LLaMA}
+                    & limitiert         & gut       & \SI{7}{Mrd.~Parameter}   & \SI{56}{\giga\byte}    & \SI{14}{\giga\byte}\\
+                    & limitiert         & gut       & \SI{13}{Mrd.~Parameter}  & \SI{104}{\giga\byte}   & \SI{23}{\giga\byte}\\
+                    & limitiert         & sehr gut  & \SI{33}{Mrd.~Parameter}  & \SI{264}{\giga\byte}   & \SI{66}{\giga\byte}\\
+                    & limitiert         & sehr gut  & \SI{65}{Mrd.~Parameter}  & \SI{520}{\giga\byte}   & \SI{130}{\giga\byte}\\
         \bottomrule
     \end{tabular}}
     \caption{Übersicht über die zur Auswahl stehenden Modelle.\label{tab:approach:models}}
 \end{table}
 
-Hier zur Auswahl stehendene Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMa, gezeigt in \cref{tab:approach:models}.
-Die angegebenen GPU-Speicher Anforderungen beziehen sich hier auf die notwendige Speichermenge zum Training des Modells.
-Berechnet wird diese mit der \cref{eq:speicher}.
+Hier zur Auswahl stehendene Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMA, gezeigt in \cref{tab:approach:models}.
+Die angegebenen Speichergrößen beziehen sich hier auf die notwendige Speichermenge zum Training des Modells und der Inferenz.
+Berechnet wird die Speicheranforderung zum Training mit der \cref{eq:speicher}.
 \begin{equation}\label{eq:speicher}
-    \text{Speicher}=\text{Anzahl Parameter} \cdot \frac{\text{Parameterformat}}{8} \cdot 4
+    \text{Training Speicherbedarf}=\text{Anzahl Parameter} \cdot \frac{\text{Parameterformat}}{8} \cdot 4
 \end{equation}
 Sprachmodelle benutzen die Parameterformate FP16 oder FP32, welche 2 bzw. 4 Byte pro Parameter benötigen. Zusätzlich muss das Modell während des Trainings circa 4 mal in den Speicher geladen werden, um die Backpropagation durchzuführen. 
-Zur Inferenz der Modelle ist dementsprechend ein Speicherbedarf von $\frac{1}{4}$ der angegebenen Werte notwendig.
+Zur Inferenz der Modelle ist dementsprechend ein Speicherbedarf von $\frac{1}{4}$ der Trainingswerte notwendig.
 Modelle, die sehr populär geworden sind, aber nicht zur Auswahl stehen, sind BERT, RoBERTa, DistillBERT, BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5.
 Wenn die Aufgabe des Question Answering gelöst werden soll, ist ein BERT-basiertes Modell die erste Wahl.\\
 
@@ -102,12 +102,12 @@ Die Leistungsfähigkeit des Modells ist im Vergleich zu den anderen Modellen in 
 GPT-NeoX wurde in \citet{gpt_neox} vorgestellt und erreicht mit einer Größe von 20 Milliarden Parametern die Leistungsfähigkeit von GPT-3 mit 175 Milliarden Parametern.
 Das Modell ist frei verfügbar und kann ohne weitere Maßnahmen verwendet werden.
 Die Leistung des Modells ist vergleichbar mit GPT-3, während die Größe des Modells ein Training mit 8 A100 \ac{gpu}s erlaubt.
-Diese Leistung wird jedoch von LLaMa übertroffen und daher nicht ausgewählt.\\
+Diese Leistung wird jedoch von LLaMA übertroffen und daher nicht ausgewählt.\\
 
-Die in \citet{llama} vorgestellten LLaMa-Modelle haben einen besonderen Ansatz.
+Die in \citet{llama} vorgestellten LLaMA-Modelle haben einen besonderen Ansatz.
 Durch den Fokus auf längeres Training und größere Datensätze bieten sie parametereffiziente Modelle, die sehr gute Leistungen erzielen können.
-Die Modelle von LLaMa werden ausgewählt, um die bestmögliche Performance mit den kleinstmöglichen Modellen zu erreichen.
-Hier stellt sich die Frage, welches Modell aus der LLaMa-Reihe verwendet werden soll.
+Die Modelle von LLaMA werden ausgewählt, um die bestmögliche Performance mit den kleinstmöglichen Modellen zu erreichen.
+Hier stellt sich die Frage, welches Modell aus der LLaMA-Reihe verwendet werden soll.
 Die Modelle unterscheiden sich sowohl in der Größe als auch proportional in der Leistung.\\
 
 \begin{table}[t!]
@@ -125,7 +125,7 @@ Die Modelle unterscheiden sich sowohl in der Größe als auch proportional in de
     PaLM-cont    & 62B  & \SI{83,9}{} & \SI{81,4}{} & -    & \SI{80,6}{} & \SI{77,0}{} & -    & -    & -    \\
     PaLM         & 540B & \textbf{88,0} & \SI{82,3}{} & - & \SI{83,4}{} & \textbf{81,1} & \SI{76,6}{} & \SI{53,0}{} & \SI{53,4}{} \\
     \midrule
-    \multirow{4}{*}{LLaMa}
+    \multirow{4}{*}{LLaMA}
        & 7B   & \SI{76,5}{} & \SI{79,8}{} & \SI{48,9}{} & \SI{76,1}{} & \SI{70,1}{} & \SI{72,8}{}          & \SI{47,6}{}          & \SI{57,2}{} \\
        & 13B  & \SI{78,1}{} & \SI{80,1}{} & \SI{50,4}{} & \SI{79,2}{} & \SI{73,0}{} & \SI{74,8}{}          & \SI{52,7}{}          & \SI{56,4}{} \\
        & 33B  & \SI{83,1}{} & \SI{82,3}{} & \SI{50,4}{} & \SI{82,8}{} & \SI{76,0}{} & \textbf{80,0} & \textbf{57,8} & \SI{58,6}{} \\
@@ -148,10 +148,10 @@ Das Modell mit 65 Milliarden Parametern benötigt 7 A100 \ac{gpu}s für das Trai
 Die Modelle sind jedoch nicht öffentlich verfügbar, sondern werden nur zu Forschungszwecken über einen Antrag weitergegeben.
 Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
 
-Eine Alternative zu den LLaMa-Modellen ist OpenLLaMa, veröffentlicht unter \citet{openllama}.
-Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMa-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar. Da hier jedoch keine Publikation über den Prozess der Erstellung dieser Modelle vorhanden ist, wird von der Verwendung dieser Modelle vorerst abgesehen.\\
+Eine Alternative zu den LLaMA-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}.
+Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMA-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar. Da hier jedoch keine Publikation über den Prozess der Erstellung dieser Modelle vorhanden ist, wird von der Verwendung dieser Modelle vorerst abgesehen.\\
 
-In dieser Arbeit wird zunächst das Modell LLaMa 7B ausgewählt, da es eine sehr gute Leistung mit minimalen Ressourcenanforderungen bietet.
+In dieser Arbeit wird zunächst das Modell LLaMA 7B ausgewählt, da es eine sehr gute Leistung mit minimalen Ressourcenanforderungen bietet.
 Eine Auswahl dieser Modellgröße begründet sich daher, dass eine Nutzung der Modelle ab 33 Milliarden Parameter auf einzelnen GPUs nicht möglich ist, und dadurch die Nutzbarkeit eingeschränkt wird.
 Ebenso übersteigen die technischen Speicheranforderungen größerer Modelle die Kapazitäten einzelner Knoten im genutzten GPU-Computing Cluster, weshalb dadurch die technische Umsetzung des Trainings drastisch in ihrer Komplexität zunimmt.
 Einzelne Tests der Knoten-übergreifenden Kommunikation zeigten grundlegende Probleme und sollten deshalb vermieden werden.
@@ -213,7 +213,7 @@ Die Übungsabschnitte sowie das Glossar und das Abkürzungsverzeichnis können a
 um das Modell und andere Modelle besser bewerten zu können.
 
 \section{Unüberwachtes Weitertrainieren}
-Um das LLaMa-Modell zu trainieren, wird ein Programm benötigt, das den Datensatz in Tokens umwandelt und diese dann in Batches an das Modell übergibt.
+Um das LLaMA-Modell zu trainieren, wird ein Programm benötigt, das den Datensatz in Tokens umwandelt und diese dann in Batches an das Modell übergibt.
 Basierend auf diesen Batches wird das Modell verwendet, um die Gewichte mittels Backpropagation anzupassen.
 Dieser Prozess stellt somit eine Epoche dar.
 Bei kleineren Datensätzen und Fine-Tuning werden oft mehrere Epochen gewählt, während größere Datensätze (mehrere hundert Gigabyte) nur eine Epoche oder nicht einmal eine Epoche benötigen.
@@ -250,11 +250,11 @@ Diese Parameter sind in der \cref{tab:training:parameter} aufgelistet und folgen
         AdamW $\beta_2$ & \SI{0,95}{}\\
         Gewichtsreduktion & \SI{0,1}{}\\
         Gradientenlimitierung & \SI{1,0}{}\\
-        Aufwärmphase & 0\\
-        Epochen & 2\\
+        Aufwärmphase & \SI{0}{}\\
+        Epochen & \SI{2}{}\\
         \bottomrule
     \end{tabular}
-    \caption{Parameter für das Training des LLaMa 7B-Modells}\label{tab:training:parameter}
+    \caption{Parameter für das Training des LLaMA 7B-Modells}\label{tab:training:parameter}
 \end{table}
 
 Die Lernrate (engl. \enquote{Learning Rate}) ist ein Parameter, der das Ausmaß der Anpassung der Gewichte bestimmt (siehe \cref{def:lernrate}).
@@ -263,7 +263,7 @@ Diese Anpassung folgt dem Kosinus-Lernratenschema, so dass die endgültige Lernr
 Die Lernraten hängen von der Modellgröße ab.
 Im Allgemeinen benötigen größere Modelle eine niedrigere Lernrate.
 Der Optimierer AdamW berücksichtigt den zeitlichen Abfall der Gewichte und wurde in \citet{adamw} vorgestellt.
-Er ist die häufigste Wahl in aktuellen Modellen und wurde auch für das Training der LLaMa-Modelle verwendet.\\
+Er ist die häufigste Wahl in aktuellen Modellen und wurde auch für das Training der LLaMA-Modelle verwendet.\\
 
 Gewichtsabnahme (engl. \enquote{Weight Decay}) ist ein Parameter, der die Gewichte während des Trainings reduziert.
 Er stellt eine Regularisierung dar, die Overfitting verhindern soll.
@@ -322,7 +322,7 @@ Allerdings ist die Anzahl der durchgeführten Klausuren zum Zeitpunkt der Erstel
 Dies führt zu einer geringeren Qualität der Bewertung,
 hat aber keinen Einfluss auf die Qualität des Modells.\\
 
-Die LLaMa-Modelle sind ohne weiteres Fine-Tuning verfügbar und wurden daher nicht an die Aufgabe der Beantwortung von Fragen angepasst.
+Die LLaMA-Modelle sind ohne weiteres Fine-Tuning verfügbar und wurden daher nicht an die Aufgabe der Beantwortung von Fragen angepasst.
 Dies hat zur Folge, dass die Modelle bei einer Frage wie \enquote{Welche Farbe hat der Himmel?} nicht die Antwort liefern, sondern den Text im gleichen Stil mit weiteren Fragen fortsetzen.
 Um eine Antwort auf eine Frage zu erhalten, muss die Frage in eine unvollständige Aussage umformuliert werden.
 Im gegebenen Beispiel wird aus \enquote{Welche Farbe hat der Himmel?} die Aussage \enquote{Der Himmel hat die Farbe}, die dann vom Modell mit \enquote{blau.} beantwortet wird.
@@ -339,7 +339,7 @@ Diese Fragen müssen ebenfalls umformuliert werden, um unabhängig von anderen F
 \section{Modellevaluation}\label{sec:approach:comparison}
 Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Bewertung.
 Dazu werden die in \cref{sec:approach:questions} definierten Fragen verwendet.
-Diese Fragen werden von dem LLaMa Modell 7B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
+Diese Fragen werden von dem LLaMA Modell 7B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
 Die Antworten werden manuell ausgewertet und mit den Antworten aus dem Buch \citet{bb} verglichen.
 Die Lösungen werden ebenfalls in drei Kategorien eingeteilt:
 \begin{enumerate}
@@ -361,12 +361,33 @@ Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
 Dabei ist $S_q$ die Menge der für die Fragen $q$ generierten Antworten, $G_q$ die Menge der richtigen Antworten aus dem Buch \citet{bb} und $C_q$ die Menge der richtigen Antworten, die sowohl in $S_q$ als auch in $G_q$ enthalten sind.
 $N$ ist die Anzahl der Fragen, $micro_{prec}$ die Mikro-Präzision und $micro_{recall}$ der Mikro-Recall.
 Der Wert $microF1$ ist das harmonische Mittel aus $micro_{prec}$ und $micro_{recall}$.
+\begin{definition}
+    \textbf{Präzision} ist der Anteil der richtig Antworten an allen beantworteten Fragen.
+\end{definition}
+
+\begin{definition}
+    \textbf{Recall} ist der Anteil der richtig Antworten an allen Fragen.
+\end{definition}
+
+\begin{definition}
+    Der \textbf{F1} Wert ist das harmonische Mittel aus Präzision und Recall.
+\end{definition}
+
+\begin{definition}\label{def:micro-f1}
+    Der \textbf{Micro-F1} Wert beschreibt einen Gesamt-F1 Wert über alle Fragen und deren Antworten.
+\end{definition}
+
+\begin{definition}\label{def:macro-f1}
+    Der \textbf{Macro-F1} Wert beschreibt das Mittel aller F1 Werte für jede Frage.
+    In einem unbalancierten Datensatz ist dies eine bessere Metrik, um alle Fragen gleich zu gewichten.
+\end{definition}
+
 Fragen gelten als beantwortet, wenn sie den Kategorien 1 und 2 entsprechen.
 Dieselben Berechnungen werden insgesamt und getrennt für alle drei Fragekategorien durchgeführt.
-Mikro-Präzision beschreibt den Anteil richtiger Antworten an allen beantworteten Fragen.
-Der Mikro-Recall beschreibt den Anteil der richtigen Antworten an allen Fragen.
 Es wird der Mikro-F1 Wert genutzt, um den globalen durchschnittlichen F1 Wert zu berechnen.
-Ein Makro-F1 Wert wie in \citet{qald9} beschrieben kann in diesem Fall nicht angewendet werden, da keine Anzahl an Fragen in Kategorien aufgeteilt werden können. Jede Frage ist ihre eigene Kategorie, wodurch der der berechnete F1 Wert pro Kategorie nur den Wert 0 oder 1 annehmen kann. Dies bedeutet, dass der berechnete Makro-F1 equivalent zur Berechnung der durschnittlich richtig beantworten Fragen ist und damit weniger aussagekräftig als der Mikro-F1 Wert.\\
+Ein Makro-F1 Wert wie in \citet{qald9} beschrieben kann in diesem Fall nicht angewendet werden, da die Mehrheit der Fragen nur einzelne Antworten erwarten. 
+Dadurch kann der berechnete F1 Wert pro Frage nur den Wert 0 oder 1 annehmen. 
+Dies bedeutet, dass der berechnete Makro-F1 equivalent zur Berechnung der durschnittlich richtig beantworten Fragen ist und damit weniger aussagekräftig als der Mikro-F1 Wert.\\
 
 Den in \citet{chatgpt_qas} beschriebenen Ansatz folgend werden die Modelle auf die Kriterien Korrektheit, Determinismus, Robustheit, Erklärbarkeit und Fragenverständnis evaluiert.
 Die Kriterien \enquote{Nutzung aktueller Informationen} und \enquote{Generalisierung über verschiedene Domänen} werden nicht betrachtet, da die Modelle keinen Zugriff auf aktuelle Informationen und verschiedene Domänen haben.\\
