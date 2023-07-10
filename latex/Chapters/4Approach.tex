@@ -353,20 +353,19 @@ Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
 \begin{ceqn}
 \begin{align}
     C &= S \cap G \\
-    micro_{prec} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|S_{qi}|} \\
-    micro_{recall} &= \frac{\sum_{i=1}^{N}|C_{qi}|}{\sum_{i=1}^{N}|G_{qi}|} \\
-    microF1 &= \frac{2 \cdot micro_{prec} \cdot micro_{recall}}{micro_{prec} + micro_{recall}}
+    prec &= \frac{|C_{q}|}{|S_{q}|} \\
+    recall &= \frac{|C_{q}|}{|G_{q}|} \\
+    F1 &= 2\frac{prec \cdot recall}{prec + recall}
 \end{align}
 \end{ceqn}
 Dabei ist $S_q$ die Menge der für die Fragen $q$ generierten Antworten, $G_q$ die Menge der richtigen Antworten aus dem Buch \citet{bb} und $C_q$ die Menge der richtigen Antworten, die sowohl in $S_q$ als auch in $G_q$ enthalten sind.
-$N$ ist die Anzahl der Fragen, $micro_{prec}$ die Mikro-Präzision und $micro_{recall}$ der Mikro-Recall.
-Der Wert $microF1$ ist das harmonische Mittel aus $micro_{prec}$ und $micro_{recall}$.
+$prec$ ist die Präzision, $recall$ der Recall und $F1$ der F1-Wert pro Frage.
 \begin{definition}
-    \textbf{Präzision} ist der Anteil der richtig Antworten an allen beantworteten Fragen.
+    \textbf{Präzision} ist der Anteil der richtigen Antworten an allen Antworten des Modells.
 \end{definition}
 
 \begin{definition}
-    \textbf{Recall} ist der Anteil der richtig Antworten an allen Fragen.
+    \textbf{Recall} ist der Anteil der richtig Antworten an alle korrekten Antworten des Evaluierungsdatensatzes.
 \end{definition}
 
 \begin{definition}
@@ -384,10 +383,12 @@ Der Wert $microF1$ ist das harmonische Mittel aus $micro_{prec}$ und $micro_{rec
 
 Fragen gelten als beantwortet, wenn sie den Kategorien 1 und 2 entsprechen.
 Dieselben Berechnungen werden insgesamt und getrennt für alle drei Fragekategorien durchgeführt.
-Es wird der Mikro-F1 Wert genutzt, um den globalen durchschnittlichen F1 Wert zu berechnen.
-Ein Makro-F1 Wert wie in \citet{qald9} beschrieben kann in diesem Fall nicht angewendet werden, da die Mehrheit der Fragen nur einzelne Antworten erwarten. 
-Dadurch kann der berechnete F1 Wert pro Frage nur den Wert 0 oder 1 annehmen. 
-Dies bedeutet, dass der berechnete Makro-F1 equivalent zur Berechnung der durschnittlich richtig beantworten Fragen ist und damit weniger aussagekräftig als der Mikro-F1 Wert.\\
+Es wird der Makro-F1 Wert genutzt um eine bessere Metrik unabhängig einzelner Ausreißer zu erhalten.
+Wie in \citet{qald9} beschrieben, werden größtenteils Makro-F1 Werte in Evaluierung verwendet.
+Der Mikro-F1 Wert ist sensitiv zu einzelnen Fehlschlägen des Modells.
+Generiert z.B. das Modell $1000$ falsche Antworten zu einer aus $100$ Fragen, beantwortet jedoch alle anderen Fragen korrekt, sinkt der Mikro-F1 Wert stark.
+Jedoch ist das Modell in diesem Fall als sehr gut anzusehen, da es $99\%$ der Fragen korrekt beantwortet.
+Der Makro-F1 Wert ist hier repräsentiver, da er jede einzelne Frage gleich gewichtet.\\
 
 Den in \citet{chatgpt_qas} beschriebenen Ansatz folgend werden die Modelle auf die Kriterien Korrektheit, Determinismus, Robustheit, Erklärbarkeit und Fragenverständnis evaluiert.
 Die Kriterien \enquote{Nutzung aktueller Informationen} und \enquote{Generalisierung über verschiedene Domänen} werden nicht betrachtet, da die Modelle keinen Zugriff auf aktuelle Informationen und verschiedene Domänen haben.\\
@@ -395,7 +396,7 @@ Die Kriterien \enquote{Nutzung aktueller Informationen} und \enquote{Generalisie
 \noindent\textbf{Korrektheit:}\newline
 Die Korrektheit wird durch die oben beschriebenen Formeln berechnet und verglichen.
 Eine höhere Korrektheit entspricht einem besseren Ergebnis.
-Bei der Anwendung des Modells ist eine hohe Mikro-Präzision wichtiger als ein hoher Mikro-Recall, da eine falsche Antwort für einen unkundigen Anwender wesentlich schädlicher ist als keine Antwort.
+Bei der Anwendung des Modells ist eine hohe Präzision wichtiger als ein hoher Recall, da eine falsche Antwort für einen unkundigen Anwender wesentlich schädlicher ist als keine Antwort.
 Die Modelle sollen immer keine Antwort einer falschen Antwort vorziehen.\\
 
 \noindent\textbf{Determinismus:}\newline
