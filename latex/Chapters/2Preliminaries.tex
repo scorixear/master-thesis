@@ -44,7 +44,7 @@
 Zum Verständnis der in \cref{sec:zielsetzung} genannten Ziele und Ausführungen dieser Arbeit werden in diesem Kapitel Grundlagen zu den verwendeten Begriffen und Konzepten geschaffen.
 Das Kapitel gliedert sich in eine allgemeine Definition von Sprachmodellen in \cref{sec:sprachmodelle} mit einer genaueren Erläuterung der Transformer-spezifischen Architektur.
 Danach folgt eine kurze Einführung in das Thema Neuronale Netze, in der die Funktionsweise von Neuronalen Netzen näher erläutert wird.
-Abschließend werden einige Begriffe aus der Medizinischen Informatik und der Datenverarbeitung in \cref{sec:Datenverarbeitung} erläutert.
+Abschließend werden einige Begriffe aus der Medizinischen Informatik und der Datenverarbeitung in \cref{sec:datenverarbeitung} erläutert.
 
 \section{Sprachmodelle}\label{sec:sprachmodelle}
 
@@ -269,7 +269,7 @@ Ein Netz besteht aus einer Anzahl von Neuronen, die sowohl Eingangs- als auch Au
 Neuronen haben die Eigenschaft, von bestimmten Eingängen einen Impuls an die Ausgänge zu senden, wenn ein Schwellenwert überschritten wird.
 Im Gegensatz zum Gehirn sind normale neuronale Netze jedoch logischer aufgebaut.
 Die Neuronen sind in Schichten angeordnet, wobei die erste Schicht die Eingangsschicht mit den Eingangsneuronen $E_N$ und die letzte Schicht die Ausgangsschicht mit den Ausgangsneuronen $A_N$ ist.
-Die Schichten zwischen diesen beiden Grenzen werden als versteckte Schichten (engl. Hidden Layers) mit Neuronen $H^L_N$ bezeichnet.\\
+Die Schichten zwischen diesen beiden Grenzen werden als versteckte Schichten (engl. \enquote{Hidden Layers}) mit Neuronen $H^L_N$ bezeichnet.\\
 
 \begin{figure}
     \centering
@@ -353,7 +353,7 @@ Bevor ein neuronales Netz korrekte Ergebnisse liefern kann, muss es trainiert we
 Training bedeutet die iterative Anpassung der Trainingsparameter, um eine möglichst gute Ausgabe zu erhalten.
 Eine gute Ausgabe wird durch eine Fehlerfunktion beschrieben.
 Diese Fehlerfunktion gibt einen einzelnen Wert zurück, der den Eingaben in das neuronale Netz entspricht und umgekehrt proportional zur guten Ausgabe ist.
-Geometrisch stellt eine Fehlerfunktion eine mehrdimensionale Fläche dar, wobei jeder lernfähige Parameter auf einer Achse liegt und das Minimum dieser Fläche ein Optimum darstellt.
+Geometrisch stellt eine Fehlerfunktion eine mehrdimensionale Fläche dar, wobei jeder lernbare Parameter auf einer Achse liegt und das Minimum dieser Fläche ein Optimum darstellt.
 Dieses Optimum ist das Trainingsziel.
 Kleine Änderungen einzelner Parameter verändern die Ausgabe der Fehlerfunktion und können somit zeigen, ob diese Änderung zu einer Verbesserung oder Verschlechterung des neuronalen Netzes geführt hat.
 Hier besteht bereits die Unterscheidung zwischen einem überwachten, selbstüberwachten und unüberwachten Lernverfahren.\\
@@ -387,7 +387,7 @@ Belohnungsfunktionen können beschreiben, wie weit das Auto im Spiel gefahren is
 \end{definition}
 
 Eine der wichtigsten Methoden zur iterativen Anpassung von Gewichten und Bias und damit zum Training neuronaler Netze ist die Methode der Fehlerrückführung (engl. Backpropagation).
-Diese Gradientenabstiegsmethode wurde erstmals 1986 von \citet{backpropagation} beschrieben und ist ausführlich in \citet{neuronale-netze} beschrieben.
+Diese Gradientenabstiegsmethode wurde erstmals 1986 von \citet{backpropagation} beschrieben und ist ausführlich in \citet{neuronale-netze} erklärt.
 Um den Rahmen dieser Arbeit nicht zu sprengen, wird hier auf eine mathematische Beschreibung verzichtet und nur die Grundidee beschrieben.\\
 
 Die Fehlerfunktion $C$ ist eine Funktion aller Gewichte und Bias des neuronalen Netzes und seiner Ausgabe.
@@ -404,7 +404,7 @@ Dieser Gradient setzt sich aus partiellen Ableitungen der Fehlerfunktion über a
     Kleinere Lernraten führen zu langsameren Lernvorgängen und konvergieren möglicherweise nicht zu einem Minimum.
 \end{definition}
 Der Prozess des \enquote{Voranschreiten zum Minimum} bedeutet die Anpassung der lernbaren Parameter gemäß den partiellen Ableitungen.
-Die Anpassung der Parameter ist ein Hyperparameter des Trainings und wird als Lernrate (engl. Learning Rate) bezeichnet.\\
+Die Anpassung der Parameter ist ein Hyperparameter des Trainings und wird als Lernrate (engl. \enquote{Learning Rate}) bezeichnet.\\
 
 \begin{definition}\label{def:hyperparameter}
     \textbf{Hyperparameter} sind Parameter, die Eigenschaften oder Techniken des Modells repräsentieren und vor dem Training festgelegt werden.

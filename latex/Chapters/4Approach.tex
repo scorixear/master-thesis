@@ -235,7 +235,7 @@ Für die Umsetzung dieser Trainingsschritte wird die Programmiersprache Python v
 Die Bibliothek Transformers von HuggingFace\footnote{\url{https://huggingface.co/docs/transformers/index} (abgerufen am 28.6.2023)} bietet eine Vielzahl von Modellen und Trainingsmethoden und basiert auf der populären Bibliothek PyTorch\footnote{\url{https://pytorch.org/} (abgerufen am 28.6.2023)}.
 PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer Nvidia \ac{gpu} durchzuführen, was die in \cref{subsec:grundlagen:training} beschriebenen Schritte um ein Vielfaches beschleunigt.
 Mit Hilfe von DeepSpeed\footnote{\url{https://www.deepspeed.ai/} (abgerufen am 28.6.2023)} kann dieses Training auch auf mehrere \ac{gpu}s verteilt werden.
-Dies ist notwendig, da das verwendete Modell mit 33 Milliarden Parametern zu groß ist, um in den Arbeitsspeicher einer einzelnen \ac{gpu} zu passen.\\
+Dies ist notwendig, da das verwendete Modell mit 7 Milliarden Parametern zu groß ist, um in den Arbeitsspeicher einer einzelnen \ac{gpu} zu passen.\\
 
 Vor Beginn des Trainings müssen einige Konfigurationsparameter festgelegt werden.
 Diese Parameter sind in der \cref{tab:training:parameter} aufgelistet und folgen den Trainingsparametern von \citet{llama}.\\
@@ -348,7 +348,7 @@ Die Lösungen werden ebenfalls in drei Kategorien eingeteilt:
     \item Nicht beantwortet, wenn der generierte Text keinen Bezug zur Frage hat
 \end{enumerate}
 
-Die Modelle werden mit Hilfe der micro-F1 Bewertung verglichen.
+Die Modelle werden mit Hilfe der Makro-F1 Bewertung verglichen.
 Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
 \begin{ceqn}
 \begin{align}
@@ -373,11 +373,11 @@ $prec$ ist die Präzision, $recall$ der Recall und $F1$ der F1-Wert pro Frage.
 \end{definition}
 
 \begin{definition}\label{def:micro-f1}
-    Der \textbf{Micro-F1} Wert beschreibt einen Gesamt-F1 Wert über alle Fragen und deren Antworten.
+    Der \textbf{Mikro-F1} Wert beschreibt einen Gesamt-F1 Wert über alle Fragen und deren Antworten.
 \end{definition}
 
 \begin{definition}\label{def:macro-f1}
-    Der \textbf{Macro-F1} Wert beschreibt das Mittel aller F1 Werte für jede Frage.
+    Der \textbf{Makro-F1} Wert beschreibt das Mittel aller F1 Werte für jede Frage.
     In einem unbalancierten Datensatz ist dies eine bessere Metrik, um alle Fragen gleich zu gewichten.
 \end{definition}
 
