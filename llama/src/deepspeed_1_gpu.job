@@ -1,10 +1,10 @@
 #!/bin/bash
-#SBATCH --job-name=deepspeed-llama7b        # name
+#SBATCH --job-name=deepspeed-llama7b-1gpu       # name
 #SBATCH --nodes=1                           # nodes
 #SBATCH --ntasks-per-node=1                 # crucial - only 1 task per dist per node!
 #SBATCH --cpus-per-task=4                   # number of cores per tasks
 #SBATCH --partition=clara
-#SBATCH --gres=gpu:v100:3                   # number of gpus
+#SBATCH --gres=gpu:v100:1                   # number of gpus
 #SBATCH --output=%x-%j.out                  # output file name
 #SBATCH --mail-type=ALL
 
@@ -12,7 +12,7 @@ module load Python
 module load PyTorch
 srun pip install --user -r requirements.txt
 
-export GPUS_PER_NODE=3
+export GPUS_PER_NODE=1
 export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
 export MASER_PORT=9906
 
