@@ -21,20 +21,20 @@ export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
 export MASTER_PORT=9907
 
 # Model Arguments
-MODEL_PATH=llama_model/7B
+MODEL_PATH=./llama_models/7B
 USE_FAST_TOKENIZER=true
 TORCH_DTYPE=auto
 LOW_CPU_MEM_USAGE=true
 
 # DataTraining Arguments
-TRAIN_FILE=input/health_information_systems_epub.md
+TRAIN_FILE=./input/health_information_systems_epub.md
 MAX_TRAIN_SAMPLES=1000
 VALIDATION_SPLIT_PERCENTAGE=5
 PREPROCESSING_NUM_WORKERS=1
 KEEP_LINEBREAKS=true
 
 # Training Arguments
-OUTPUT_DIR=trained/7B
+OUTPUT_DIR=./trained/7B
 OVERWRITE_OUTPUT_DIR=false
 DO_TRAIN=true
 DO_EVAL=true
