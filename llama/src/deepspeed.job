@@ -5,28 +5,96 @@
 #SBATCH --cpus-per-task=4                   # number of cores per tasks
 #SBATCH --partition=clara
 #SBATCH --gres=gpu:v100:3                   # number of gpus
-#SBATCH --output=%x-%j.out                  # output file name
+#SBATCH --output=logs/%x-%j.out                  # output file name
 #SBATCH --mail-type=ALL
+
+# command: sbatch --mail-type=ALL deepspeed.job
 
 module load Python
 module load PyTorch
 srun pip install --user -r requirements.txt
+srun pip install --user git+https://github.com/huggingface/transformers
 
+# Torch Distributed Run Variables
 export GPUS_PER_NODE=3
 export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
-export MASER_PORT=9906
+export MASTER_PORT=9907
+
+# Model Arguments
+MODEL_PATH=llama_model/7B
+USE_FAST_TOKENIZER=true
+TORCH_DTYPE=auto
+LOW_CPU_MEM_USAGE=true
+
+# DataTraining Arguments
+TRAIN_FILE=input/health_information_systems_epub.md
+MAX_TRAIN_SAMPLES=1000
+VALIDATION_SPLIT_PERCENTAGE=5
+PREPROCESSING_NUM_WORKERS=1
+KEEP_LINEBREAKS=true
+
+# Training Arguments
+OUTPUT_DIR=trained/7B
+OVERWRITE_OUTPUT_DIR=false
+DO_TRAIN=true
+DO_EVAL=true
+EVALUATION_STRATEGY=steps
+EVAL_STEPS=100
+LEARNING_RATE=3e-4
+WEIGHT_DECAY=0.1
+ADAM_BETA1=0.9
+ADAM_BETA2=0.95
+ADAM_EPSILON=1e-8
+MAX_GRAD_NORM=1.0
+NUM_TRAIN_EPOCHS=3
+LR_SCHEDULER_TYPE=cosine
+WARMUP_STEPS=0
+LOG_LEVEL=passive
+SAVE_STRATEGY=steps
+SAVE_STEPS=500
+SAVE_TOTAL_LIMIT=1
+NO_CUDA=false
+SEED=42
+FP16=true
+HALF_PRECISION_BACKEND=auto
+DDP_BACKEND=nccl
+DEEPSPEED=ds_config.json
+OPTIM=adamw_hf
+
+echo "srun --jobid $SLURM_JOBID bash -c \"python -m torch.distributed.run "
+echo "--nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID "
+echo "--master_addr $MASTER_ADDR --master_port $MASTER_PORT 03_train_llama.py "
+echo "--model_path $MODEL_PATH --use_fast_tokenizer $USE_FAST_TOKENIZER "
+echo "--torch_dtype $TORCH_DTYPE --low_cpu_mem_usage $LOW_CPU_MEM_USAGE "
+echo "--train_file $TRAIN_FILE --max_train_samples $MAX_TRAIN_SAMPLES "
+echo "--validation_split_percentage $VALIDATION_SPLIT_PERCENTAGE "
+echo "--preprocessing_num_workers $PREPROCESSING_NUM_WORKERS "
+echo "--keep_linebreaks $KEEP_LINEBREAKS --output_dir $OUTPUT_DIR "
+echo "--overwrite_output_dir $OVERWRITE_OUTPUT_DIR --do_train $DO_TRAIN --do_eval $DO_EVAL "
+echo "--evaluation_strategy $EVALUATION_STRATEGY --eval_steps $EVAL_STEPS "
+echo "--learning_rate $LEARNING_RATE --weight_decay $WEIGHT_DECAY --adam_beta1 $ADAM_BETA1 "
+echo "--adam_beta2 $ADAM_BETA2 --adam_epsilon $ADAM_EPSILON --max_grad_norm $MAX_GRAD_NORM "
+echo "--num_train_epochs $NUM_TRAIN_EPOCHS --lr_scheduler_type $LR_SCHEDULER_TYPE "
+echo "--warmup_steps $WARMUP_STEPS --log_level $LOG_LEVEL --save_strategy $SAVE_STRATEGY "
+echo "--save_steps $SAVE_STEPS --save_total_limit $SAVE_TOTAL_LIMIT --no_cuda $NO_CUDA "
+echo "--seed $SEED --fp16 $FP16 --half_precision_backend $HALF_PRECISION_BACKEND "
+echo "--local_rank $SLURM_PROCID --ddp_backend $DDP_BACKEND --deepspeed $DEEPSPEED --optim $OPTIM\""
 
 srun --jobid $SLURM_JOBID bash -c "python -m torch.distributed.run \
 --nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID \
---master_addr $MASTER_ADDR --master_port $MASTER_PORT 03_train_llama.py\
---model_path llama_model/7B --use_fast_tokenizer true --torch_dtype auto --low_cpu_mem_usage true \
---train_file input/health_information_systems_epub.md \
---max_train_samples 1000 --validation_split_percentage 5 --preprocessing_num_workers 1 --keep_linebreaks true \
---output_dir trained/7B --overwrite_output_dir false --do_train true --do_eval true \
---evaluation_strategy steps --eval_steps 100 \
---learning_rate 3e-4 --weight_decay 0.1 --adam_beta1 0.9 --adam_beta2 0.95 --adam_epsilon 1e-8 \
---max_grad_norm 1.0 --num_train_epochs 3 --lr_scheduler_type cosine --warmup_steps 0 --log_level passive \
---save_strategy steps --save_steps 500 --save_total_limit 1 \
---no_cuda false --seed 42 \
---fp16 true --half_precision_backend auto --local_rank $SLURM_PROCID --ddp_backend nccl \
---deepspeed ds_config.json --optim adamw_hf"
+--master_addr $MASTER_ADDR --master_port $MASTER_PORT 03_train_llama.py \
+--model_path $MODEL_PATH --use_fast_tokenizer $USE_FAST_TOKENIZER \
+--torch_dtype $TORCH_DTYPE --low_cpu_mem_usage $LOW_CPU_MEM_USAGE \
+--train_file $TRAIN_FILE --max_train_samples $MAX_TRAIN_SAMPLES \
+--validation_split_percentage $VALIDATION_SPLIT_PERCENTAGE \
+--preprocessing_num_workers $PREPROCESSING_NUM_WORKERS \
+--keep_linebreaks $KEEP_LINEBREAKS --output_dir $OUTPUT_DIR \
+--overwrite_output_dir $OVERWRITE_OUTPUT_DIR --do_train $DO_TRAIN --do_eval $DO_EVAL \
+--evaluation_strategy $EVALUATION_STRATEGY --eval_steps $EVAL_STEPS \
+--learning_rate $LEARNING_RATE --weight_decay $WEIGHT_DECAY --adam_beta1 $ADAM_BETA1 \
+--adam_beta2 $ADAM_BETA2 --adam_epsilon $ADAM_EPSILON --max_grad_norm $MAX_GRAD_NORM \
+--num_train_epochs $NUM_TRAIN_EPOCHS --lr_scheduler_type $LR_SCHEDULER_TYPE \
+--warmup_steps $WARMUP_STEPS --log_level $LOG_LEVEL --save_strategy $SAVE_STRATEGY \
+--save_steps $SAVE_STEPS --save_total_limit $SAVE_TOTAL_LIMIT --no_cuda $NO_CUDA \
+--seed $SEED --fp16 $FP16 --half_precision_backend $HALF_PRECISION_BACKEND \
+--local_rank $SLURM_PROCID --ddp_backend $DDP_BACKEND --deepspeed $DEEPSPEED --optim $OPTIM"

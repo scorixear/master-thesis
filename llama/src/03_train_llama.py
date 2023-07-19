@@ -147,7 +147,7 @@ def main():
     # Log on each process the small summary:
     logger.warning(
         f"Process rank: {training_args.local_rank}, device: {training_args.device}, n_gpu: {training_args.n_gpu}"
-        + f"distributed training: {bool(training_args.local_rank != -1)}, 16-bits training: {training_args.fp16}"
+        + f" distributed training: {bool(training_args.local_rank != -1)}, 16-bits training: {training_args.fp16}"
     )
     logger.info(f"Training/evaluation parameters {training_args}")
     
@@ -178,7 +178,7 @@ def main():
     dataset_args["keep_linebreaks"] = data_args.keep_linebreaks
     raw_datasets = load_dataset(
         extension,
-        datafiles=data_files,
+        data_files=data_files,
         **dataset_args,
     )
     raw_datasets["validation"] = load_dataset(
