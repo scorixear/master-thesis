@@ -2,7 +2,6 @@
 #SBATCH --job-name=deepspeed-llama7b        # name
 #SBATCH --nodes=1                           # nodes
 #SBATCH --ntasks-per-node=1                 # crucial - only 1 task per dist per node!
-#SBATCH --cpus-per-task=4                   # number of cores per tasks
 #SBATCH --partition=clara
 #SBATCH --gres=gpu:v100:3                   # number of gpus
 #SBATCH --output=logs/%x-%j.out                  # output file name
@@ -14,6 +13,8 @@ module load Python
 module load PyTorch
 srun pip install --user -r requirements.txt
 srun pip install --user git+https://github.com/huggingface/transformers
+
+echo GPUS=$SLURM_GPUS_PER_NODE
 
 # Torch Distributed Run Variables
 export GPUS_PER_NODE=3
