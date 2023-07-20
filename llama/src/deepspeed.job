@@ -2,9 +2,11 @@
 #SBATCH --job-name=deepspeed-llama7b        # name
 #SBATCH --nodes=1                           # nodes
 #SBATCH --ntasks-per-node=1                 # crucial - only 1 task per dist per node!
+#SBATCH --cpus-per-task=3                            # cores per task
+#SBTACH --mem=96G
 #SBATCH --partition=clara
 #SBATCH --gres=gpu:v100:3                   # number of gpus
-#SBATCH --output=logs/%x-%j.out                  # output file name
+#SBATCH --output=logs/%x-stage3-%j.out                  # output file name
 #SBATCH --mail-type=ALL
 
 # command: sbatch --mail-type=ALL deepspeed.job
@@ -13,8 +15,6 @@ module load Python
 module load PyTorch
 srun pip install --user -r requirements.txt
 srun pip install --user git+https://github.com/huggingface/transformers
-
-echo GPUS=$SLURM_GPUS_PER_NODE
 
 # Torch Distributed Run Variables
 export GPUS_PER_NODE=3
@@ -25,7 +25,7 @@ export MASTER_PORT=9907
 MODEL_PATH=./llama_models/7B
 USE_FAST_TOKENIZER=true
 TORCH_DTYPE=auto
-LOW_CPU_MEM_USAGE=true
+LOW_CPU_MEM_USAGE=false
 
 # DataTraining Arguments
 TRAIN_FILE=./input/health_information_systems_epub.md
@@ -38,7 +38,7 @@ KEEP_LINEBREAKS=true
 OUTPUT_DIR=./trained/7B
 OVERWRITE_OUTPUT_DIR=false
 DO_TRAIN=true
-DO_EVAL=true
+DO_EVAL=false
 EVALUATION_STRATEGY=steps
 EVAL_STEPS=100
 LEARNING_RATE=3e-4
@@ -59,7 +59,7 @@ SEED=42
 FP16=true
 HALF_PRECISION_BACKEND=auto
 DDP_BACKEND=nccl
-DEEPSPEED=ds_config.json
+DEEPSPEED=ds_configs/stage3.json
 OPTIM=adamw_hf
 
 echo "srun --jobid $SLURM_JOBID bash -c \"NCCL_DEBUG=INFO python -m torch.distributed.run "
