@@ -21,7 +21,7 @@ export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
 export MASTER_PORT=9907
 
 # Model Arguments
-MODEL_PATH=meta-llama/Llama-2-7b-hf
+MODEL_NAME=meta-llama/Llama-2-7b-hf
 CACHE_DIR=./cache
 USE_FAST_TOKENIZER=false
 MODEL_REVISION=main
@@ -62,7 +62,7 @@ SEED=42
 FP16=true
 HALF_PRECISION_BACKEND=auto
 DDP_BACKEND=nccl
-DEEPSPEED=ds_configs/stage2.json
+DEEPSPEED=./ds_configs/stage2.json
 OPTIM=adamw_hf
 
 echo "srun --jobid $SLURM_JOBID bash -c \"NCCL_DEBUG=INFO python -m torch.distributed.run "
@@ -72,12 +72,16 @@ echo "--node_rank $SLURM_PROCID "
 echo "--master_addr $MASTER_ADDR "
 echo "--master_port $MASTER_PORT "
 echo "03_train_llama2.py "
-echo "--model_path $MODEL_PATH "
+echo "--model_name $MODEL_NAME "
+echo "--cache_dir $CACHE_DIR "
 echo "--use_fast_tokenizer $USE_FAST_TOKENIZER "
+echo "--model_revision $MODEL_REVISION "
+echo "--auth_token $AUTH_TOKEN "
 echo "--torch_dtype $TORCH_DTYPE "
 echo "--low_cpu_mem_usage $LOW_CPU_MEM_USAGE "
 echo "--train_file $TRAIN_FILE "
 echo "--max_train_samples $MAX_TRAIN_SAMPLES "
+echo "--overwrite_cache $OVERWRITE_CACHE "
 echo "--validation_split_percentage $VALIDATION_SPLIT_PERCENTAGE "
 echo "--preprocessing_num_workers $PREPROCESSING_NUM_WORKERS "
 echo "--keep_linebreaks $KEEP_LINEBREAKS "
@@ -115,13 +119,17 @@ srun --jobid $SLURM_JOBID bash -c "NCCL_DEBUG=INFO python -m torch.distributed.r
 --node_rank $SLURM_PROCID \
 --master_addr $MASTER_ADDR \
 --master_port $MASTER_PORT \
-03_train_llama.py \
---model_path $MODEL_PATH \
+03_train_llama2.py \
+--model_name $MODEL_NAME \
+--cache_dir $CACHE_DIR \
 --use_fast_tokenizer $USE_FAST_TOKENIZER \
+--model_revision $MODEL_REVISION \
+--auth_token $AUTH_TOKEN \
 --torch_dtype $TORCH_DTYPE \
 --low_cpu_mem_usage $LOW_CPU_MEM_USAGE \
 --train_file $TRAIN_FILE \
 --max_train_samples $MAX_TRAIN_SAMPLES \
+--overwrite_cache $OVERWRITE_CACHE \
 --validation_split_percentage $VALIDATION_SPLIT_PERCENTAGE \
 --preprocessing_num_workers $PREPROCESSING_NUM_WORKERS \
 --keep_linebreaks $KEEP_LINEBREAKS \
