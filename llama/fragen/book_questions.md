@@ -103,7 +103,7 @@ The physician wants to have access to the right information (the most recent blo
 If the information system does not support this, the physician may obtain an incorrect or outdated blood pressure measurement, or he may misinterpret it, thereby coming to a decision that is suboptimal for the patient.
 
 ### 2.16.4 3LGM^2 Metamodel
-Look at the 3LGM^22 example in Sect. 2.15.
+Look at the 3LGM^2 example in Sect. 2.15.
 Use this example to explain the meaning of the following elements: functions, entity types, application systems, non-computer-based application components, physical data processing system, and inter-layer relationships.
 
 Answer:

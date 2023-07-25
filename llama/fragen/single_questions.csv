@@ -1,0 +1,81 @@
+Fragen;Umformuliert;Antworten;Anzahl_Antworten;Quelle;Kontext
+Look at the functions presented in Sect. 3.3.2. Now imagine a small hospital (e.g., 350 beds) and a large university medical center (e.g., 1500 beds). What are the differences between these hospitals with regard to their functions? Explain your answer.;;"A typical hospital needs all functions to function as expected.
+The functions to be performed by health care professionals are mostly similar in all health care facilities, independent of their size.
+Only some functions may differ.
+For example, not all health care facilities are involved in clinical research, thus their information will not need to support the function research and education.
+";1;Book;
+"Look at the functions listed in Sect. 3.3.2. Look at the relationships between the functions and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices.
+Select one health care professional group and describe which functions are most important for this group.";;"Physicians: Important functions are medical admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of diagnostic and therapeutic procedures, coding of diagnoses and procedures, and medical discharge and medical discharge summary writing.
+
+Nurses: Important functions are nursing admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of nursing procedures, and nursing discharge and nursing discharge summary writing.
+
+Administrative staff: Important functions are patient identification, administrative admission, and administrative discharge and billing.";1;Book;
+"Look at the entity type “patient” that is interpreted and updated by various functions.
+Which functions update the patient information, which functions interpret it?
+";;"The entity type “patient” is updated by the function “patient admission.” All other functions that are related to patient care interpret it.
+";1;Book;
+"In Sect. 4.2, we introduced a three-dimensional classification of activities of management of information systems.
+How would you describe the scope and tasks of the following activities of managing information systems?
+- Developing a strategic information management plan (e.g., this is related to strategic planning),";;- Developing a strategic information management plan: strategic planning.;1;Book;
+- Initiating projects from the strategic project portfolio,;;- Initiating projects from the strategic project portfolio: strategic directing.;1;Book;
+- Collection and analysis of data from user surveys on their general satisfaction with the health information system,;;- Collecting and analyzing data from user surveys on their general health information system’s satisfaction: strategic monitoring.;1;Book;
+- Planning a project to select and introduce a new CPOE system,;;- Planning a project to select and introduce a new CPOE system: tactical planning.;1;Book;
+- Executing work packages within an evaluation project of a CPOE system,;;- Executing work packages within an evaluation project of a CPOE system: tactical directing.;1;Book;
+- Assessment of user satisfaction with a new intensive care system,;;- Assessment of user satisfaction with a new intensive care system: tactical monitoring.;1;Book;
+- Planning of a user service desk for a group of clinical application components,;;- Planning of a user service desk for a group of clinical application components: operational planning.;1;Book;
+- Operation of a service desk for a group of clinical application components,;;- Operation of a service desk for a group of clinical application components: operational directing.;1;Book;
+"- Daily monitoring of network availability and network failures.
+";;- Daily monitoring of network availability and network failures: operational monitoring.;1;Book;
+"Read Examples 5.5.1 and 5.5.2 and determine which methods for collecting data (as described in Sects. 5.4.3 and 5.4.4) have been used.
+";;"Study “Unintended Effects of a Computerized Physician Order Entry Nearly Hard-stop Alert”: The effectiveness of a nearly “hard-stop” alert was evaluated in a field study.
+The data was collected via analysis of the prescriptions in the CPOE systems.
+The overall data collection method is thus a quantitative observation of available data.
+
+Study “Clinical Decision Support for Worker Health: A Five-Site Qualitative Needs Assessment in Primary Care Setting”: data were collected via interviews and qualitative observations.
+";1;Book;
+In which of the health care settings above will the function medical admission need to be supported?;;"The function “medical admission” is relevant in several health care and research settings.
+It comprises the provision of forms for documenting medical history, documenting diagnoses, and scanning documents from referring physician and other sources of information about the medical history.
+It is obvious that this function needs to be supported in hospitals, nursing homes, ambulatory nursing organizations, and medical offices.
+Yet it is often also necessary in research settings, for example, when a person is recruited for a clinical trial and their data are entered into an EDC system.
+Furthermore, therapeutic offices need this function for documentation purposes, as do rehabilitation facilities and—to a limited extent—wellness or sports facilities.
+For personal environments, medical admission also plays a role, especially in telecare situations or when prevention measures are conducted, respectively.";1;Book;
+"Definieren Sie den Begriff „Krankenhausinformationssystem“. (2 Punkte) ";;;;IS_2020_07_18;
+" Auf einer Hersteller-Webseite heißt es: „i.s.h.med ist das einzige vollständig in SAP for Healthcare integrierte Krankenhausinformationssystem“. Welches Begriffsverständnis liegt hier zugrunde? (1 Punkt)";;;;IS_2020_07_18;
+1. An welcher Stelle im Szenario aus Aufgabe 2 könnte der Dienst „KIM“ aus der Telematikinfrastruktur Abhilfe schaffen? (2 Punkte);;;;IS_2020_07_18;
+"Wie erhalten Apotheker:innen Zugriff auf verordnete eRezepte? (2 Punkte) ";;;;IS_2020_07_18;
+"Definieren Sie den Begriff „transinstitutionelles Gesundheitsinformationssystem“. Verwenden Sie dabei den Begriff des „Settings“. (3 Punkte) ";;;;IS_2020_09_27;
+"Was ist ein Krankenhausinformationssystem?
+        2.1 Warum ist diese Definition wichtig?";;;;;
+tHIS?;;;;;
+" Was hat das Krankenhausinformationssystem mit einer ganzheitlichen Sicht auf den Patienten zu tun?";;;;;
+" Was ist ein Arztbrief?";;;;;
+"Was ist openEHR ";;;;;
+"Was ist ein Archetype? ";;;;;
+"Ist openEHR ein Standard? ";;;;;
+Was wird standardisiert?;;;;;
+Könnte man mit Hilfe von openEHR eine (DB1, ACn, Vn)-Architektur realisieren?;;;;;
+Was ist ein Modell?;;;;;
+Wann ist ein Modell gut?;;;;;
+Wie können ISdGW modelliert werden?;;;;;
+Was ist ARIS;;;;;
+Wie kann man dynamische Aspekte von IS modellieren?;;;;;
+Was ist IHE?;;;;;
+Was tut ein Kommunikationsserver?;;;;;
+Wozu setzt man Remote Function Calls ein?;;;;;
+Welche Kommunikation erfolgt unmittelbar nach der Aufnahme des Patienten Alfred Winter?;;;;;
+Wie findet ein Labormitarbeiter mit einer Fallnummer in der Hand Geburtsdatum und Geschlecht eines Patienten?;;;;;
+" Erläutern Sie die Taxonomy für Krankenhausinformationssysteme!";;;;;
+Wieso haben wir meist (ACn, Vn)?;;;;;
+" Was ist der Unterschied zwischen dem PVS und dem PDMS?";;;;;
+Wie kann man auch bei fehlender Vollausleuchtung mit den allgegenwärtigen Funklöchern hinter metallwagen so umgehen, dass Mobile Anwendungen nicht laufend abstürzen?;;;;;
+Welche Speichermedien gewährleisten eine Unveränderbarkeit der Daten?;;;;;
+Ist „Dokumentation“ eine datenverarbeitende Aufgabe bzw. eine enterprise function?;;;;;
+Woher kommen die neuen Pflegekräfte für Deutschland?;;;;;
+Wie ist der Stand der Digitalisierung in der Pflege?;;;;;
+Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterstützt?;;(Laborinformationssystem, nicht CIS!);;;
+"Wie erfolgt die Kommunikation der Anforderung (order) an das LIS? ";;(gar nicht, Es werden bei Aufruf des LIS am Arbeitsplatz im Rahmen der Kontextintegration die patientenidentifizierenden Daten an das LIS übertragen.);;;
+" Mit welchem Anwendungssystem wird im UKL ein Laborbefund (finding) angezeigt?";;(COPRA, LIS direkt!);;;
+;;;;;
+;;;;;
+;;;;;
+;;;;;
