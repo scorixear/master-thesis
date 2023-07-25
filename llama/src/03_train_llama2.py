@@ -1,9 +1,5 @@
 # source https://huggingface.co/docs/transformers/main/main_classes/deepspeed#main-deepspeed-resources
-"""
-
-Execute with:
-srun -- jobid $SLURM_JOBID bash -c `python -m torch.distributed.run --nproc_per_node=GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID --master_addr $MASTER_ADDR --master_port $MASTER_PORT 03_train_llama.py
-"""
+import json
 import math
 import os
 import sys
@@ -24,6 +20,7 @@ from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version
 from transformers.testing_utils import CaptureLogger
 from transformers.utils.versions import require_version
+import huggingface_hub
 
 check_min_version("4.32.0.dev0")
 require_version("datasets>=1.8.0", "To fix: pip install -r examples/pytorch/language-modeling/requirements.txt")
@@ -57,9 +54,19 @@ class ModelArguments:
         metadata={"help": "The specific model version to use (can be a branch name, tag name or commit id)."},
     )
     
-    auth_token: Optional[str] = field(
-        default=None,
-        metadata={"help": "The token to use to download model weights from huggingface.co"},
+    use_auth_token: bool = field(
+        default=False,
+        metadata={
+            "help": (
+                "Will use the token generated when running `huggingface-cli login` (necessary to use this script "
+                "with private models)."
+            )
+        },
+    )
+    
+    hugging_token: str = field(
+        default="",
+        metadata={"help": "The token to login to the HuggingFace Hub (neccessary to use lambda2)."},
     )
     
     torch_dtype: Optional[str] = field(
@@ -145,6 +152,15 @@ def main():
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
     
+    # load deepspeed
+    ds_config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), training_args.deepspeed)
+    with open(ds_config_path, "r", encoding="UTF-8") as f:
+        ds_config = json.load(f)
+    training_args.deepspeed = ds_config
+    
+    # login to huggingface.co
+    huggingface_hub.login(token=model_args.hugging_token)
+    
     # setup logging
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s -   %(message)s",
@@ -223,7 +239,7 @@ def main():
     config_kwargs = {
         "cache_dir": model_args.cache_dir,
         "revision": model_args.model_revision,
-        "token": model_args.auth_token,
+        "use_auth_token": True if model_args.use_auth_token else None,
     }
     
     if model_args.config_name:
@@ -235,7 +251,7 @@ def main():
         "cache_dir": model_args.cache_dir,
         "use_fast": model_args.use_fast_tokenizer,
         "revision": model_args.model_revision,
-        "token": model_args.auth_token,
+        "use_auth_token": True if model_args.use_auth_token else None,
     }
     if model_args.tokenizer_name:
         tokenizer = AutoTokenizer.from_pretrained(model_args.tokenizer_name, **tokenizer_kwargs)
@@ -250,11 +266,11 @@ def main():
     )
     
     model = AutoModelForCausalLM.from_pretrained(
-        model_args.model_path,
+        model_args.model_name,
         config=config,
         cache_dir=model_args.cache_dir,
         revision=model_args.model_revision,
-        token=model_args.auth_token,
+        use_auth_token=True if model_args.use_auth_token else None,
         torch_dtype=torch_dtype,
         low_cpu_mem_usage=model_args.low_cpu_mem_usage,
     )
@@ -414,7 +430,7 @@ def main():
         
         trainer.log_metrics("eval", metrics)
         trainer.save_metrics("eval", metrics)
-
+    huggingface_hub.logout()
 
 def _mp_fn(index):
     main()

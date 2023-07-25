@@ -1,1 +1,45 @@
-python -m torch.distributed.run --nproc_per_node 1 --nnodes 1 --node_rank 0 --master_addr localhost --master_port 9907 03_train_llama2.py --model_name meta-llama/Llama-2-7b-hf --cache_dir ./cache --use_fast_tokenizer false --model_revision main --auth_token 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 --torch_dtype auto --low_cpu_mem_usage true --train_file ./input/health_information_systems_epub.md --max_train_samples 1000 --overwrite_cache false --validation_split_percentage 5 --preprocessing_num_workers 1 --keep_linebreaks true --output_dir ./trained/7B --overwrite_output_dir false --do_train true --do_eval true --evaluation_strategy steps --eval_steps 100 --learning_rate 3e-4 --weight_decay 0.1 --adam_beta1 0.9 --adam_beta2 0.95 --adam_epsilon 1e-8 --max_grad_norm 1.0 --num_train_epochs 3 --lr_scheduler_type cosine --warmup_steps 0 --log_level passive --save_strategy steps --save_steps 500 --save_total_limit 1 --no_cuda false --seed 42 --fp16 true --half_precision_backend auto --local_rank 0 --ddp_backend nccl --deepspeed ./ds_configs/stage2.json --optim adamw_hf
+python -m torch.distributed.run --nproc_per_node 1 \
+--nnodes 1 \
+--node_rank 0 \
+--master_addr localhost \
+--master_port 9907 \
+03_train_llama2.py \
+--model_name meta-llama/Llama-2-7b-hf \
+--cache_dir ./cache \
+--use_fast_tokenizer false \
+--model_revision main \
+--use_auth_token true \
+--torch_dtype auto \
+--low_cpu_mem_usage true \
+--train_file ./input/health_information_systems_epub.md \
+--max_train_samples 1000 \
+--overwrite_cache false \
+--validation_split_percentage 5 \
+--preprocessing_num_workers 1 \
+--keep_linebreaks true \
+--output_dir ./trained/7B \
+--overwrite_output_dir false \
+--do_train true \
+--do_eval true \
+--evaluation_strategy steps \
+--eval_steps 100 \
+--learning_rate 3e-4 \
+--weight_decay 0.1 \
+--adam_beta1 0.9 \
+--adam_beta2 0.95 \
+--adam_epsilon 1e-8 \
+--max_grad_norm 1.0 \
+--num_train_epochs 3 \
+--lr_scheduler_type cosine \
+--warmup_steps 0 \
+--log_level passive \
+--save_strategy steps \
+--save_steps 500 \
+--save_total_limit 1 \
+--no_cuda false \
+--seed 42 \
+--fp16 true \
+--half_precision_backend auto \
+--local_rank 0 \
+--ddp_backend nccl \
+--optim adamw_hf

@@ -31,8 +31,8 @@
         "contiguous_gradients": true,
         "overlap_comm": true,
         "reduce_scatter": true,
-        "reduce_bucket_size": 5e8,
-        "allgather_bucket_size": 5e8
+        "reduce_bucket_size": 2e8,
+        "allgather_bucket_size": 2e8
     },
     "gradient_clipping": 1.0,
     "steps_per_print": 500,
