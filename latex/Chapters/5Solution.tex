@@ -6,3 +6,15 @@
 % - requirements txt erstellen
 % - DeepSpeed Config mit https://www.deepspeed.ai/docs/config-json/#batch-size-related-parameters+
 % - Nutzung von ZeRO Stage2 optimization
+% - llama2 7b genutzt
+% - dataclasses um Datensatz einzulesen
+% - Kleinere Block_size für Loss Scaling
+% - BF16 nur auf AMP GPU Architektur möglich (hier nicht)
+% - Deutlich mehr RAM erforderlich (180GB?)
+% - Leistungen bei 11s/it von 3600 Iteration = 11h Training
+% - Evaluation aller 50 Iterations, Saves aller 100 Iterations
+% - Stage2/3 ohne CPU Offloading führt zu OOM
+% - 3 Epochen = 14s/it 1800 = 7h Training (256 Block_size)
+% - Deepspeed Launcher mit 3 GPUs (32GB v100, 1 Maschine)
+% - Weitere Hyperparameter aus Llama2 Modell
+% - Nutzung von Epub anstelle Word Datei da bessere Konvertierung
