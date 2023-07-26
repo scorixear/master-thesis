@@ -1,35 +1,12 @@
 Fragen;Umformuliert;Antworten;Anzahl_Antworten;Quelle;Context
-Consider a recent health-related situation you were involed in. Which life situation does it correspond to and what was your role in this life situation? List some of the requirements you had in this role and in this life situation.;Consider a recent health-related situation one could be involved in. Here are the life situation it corresponds to, which role was taken in this situation and a list of requirements one had during this life situation. \n Life situation:;My father was admitted to the hospital after suddenly showing symptoms of numbness in the left arm, confusion, and trouble seeing while at home. We called the ambulance, and after a short examination, the ambulance team took him to the nearest hospital for further diagnosis and treatment.My father was admitted to the hospital after suddenly showing symptoms of numbness in the left arm, confusion, and trouble seeing while at home. We called the ambulance, and after a short examination, the ambulance team took him to the nearest hospital for further diagnosis and treatment. This situation corresponds to an emergency life situation. I participated in this situation as a close relative. My urgent requirements were to know which hospital my father was taken to and to obtain more information on the suspected diagnosis (here: stroke) and the next steps of diagnosis and therapy.;5;Book;
-"Imagine that a physician is given the following information about his patient, Mr. Russo: “Diagnosis: hypertension.
-Last blood pressure measurement: 160/100 mmHg.” Use this example to discuss the difference between “data,” “information,” and “knowledge”!";;"“160,” “100,” “hypertension,” and “blood pressure” represent data that cannot be interpreted without knowledge about the context.
-The information is that Mr. Russo has been diagnosed with hypertension and that his last blood pressure is 160/100 mmHg.
-The medical knowledge embedded in this example is that a blood pressure of 160/100 mmHg indicates hypertension that should be treated.";3;Book;
-"Consider the requirements of various stakeholders when it comes to health information systems supporting various life situations.
-Can you imagine situations where the requirements of two stakeholder groups differ or even contradict each other? What does this imply when building health information systems?
-";Consider the requirements of various stakeholders when it comes to health information systems supporting various life situations. The following situation leads to contradiciton of difference between requirements of two stake holders. This will also have impliciations on building health information systems as explained now.\n Situation:;"While a patient is being treated for an acute disease, the requirements of the treating physicians and nurses as well as of the patient and relatives may differ.
-For example, patient and relatives want to be kept informed of ongoing diagnostic outcomes (e.g., lab values) as soon as possible.
-However, physicians and nurses may want to discuss the findings with the patient in person to avoid causing unnecessary confusion and stress in the patient.
-Therefore, the health information system must be able to provide detailed information to physicians and nurses, but it must be able to only present confirmed information to the patient (e.g., via a patient portal).";2;Book;
-"Look up some information on the nervous system of the human body.
-Then try to identify subsystems of the nervous system.
-In the same way, can you also describe subsystems of the system “hospital”?";"Whe comparing the nervous system of the humand body to the system ""hospital"" the following subsystems can be identified and described:\n";"The nervous system comprises two main categories of cells: neurons and glial cells.
-Neurons communicate with each other via synapses and thus form their own subsystem.
-Glial cells form another subsystem that provides support and nutrition to the neurons.
-
-The hospital can be understood as a system comprising at least two subsystems: the subsystem where clinical care takes place and the subsystem where management takes place.
-The clinical subsystem can again be split into several subsystems, such as inpatient area, outpatient area, and specialized diagnostic or therapeutic areas.
-The inpatient area itself can be divided into various subsystems, each represented by one ward.
-The way I define the subsystems of a hospital depends on the questions or intentions I have.";2;Book;
-"Imagine a situation in which a physician speaks with Mr. Russo at the patient’s bedside.
-The physician looks up Mr. Russo’s recent blood pressure measurement and ongoing medication, decides to increase the level of one medication, and explains this to Mr. Russo.
-Use this example to discuss the meaning of “information and knowledge logistics.” What in this example indicates the right information, the right place, the right people, the right form, and the right decision? What could happen if an information system does not support high-quality information and knowledge logistics?";;"The physician wants to have access to the right information (the most recent blood pressure) at the right time (when talking to Mr. Russo) at the right place (at the patient’s bedside) in the right form (hopefully the blood pressure is provided in an easy-to-grasp, visual way) so that he can make the right decision (here: to decide on the level of a certain medication).
-If the information system does not support this, the physician may obtain an incorrect or outdated blood pressure measurement, or he may misinterpret it, thereby coming to a decision that is suboptimal for the patient.";2;Book;
+Look at the entity type “patient” that is interpreted and updated by various functions. Which functions update the patient information, which functions interpret it?;"Look at the entity type “patient” that is interpreted and updated by various functions to be performed by health care professionals and other staff in health care facilities. Which functions update the patient information, which functions interpret it?
+";The entity type “patient” is updated by the function “patient admission.” All other functions that are related to patient care interpret it.;1;Book;
 "Look at the 3LGM^2 example in Sect. 2.15.
-Use this example to explain the meaning of the following elements: functions, entity types, application systems, non-computer-based application components, physical data processing system, and inter-layer relationships.";;"Administrative admission is an enterprise function that is supported by the patient administration system.
+Use this example to explain the meaning of the following elements: functions, entity types, application systems, non-computer-based application components, physical data processing system, and inter-layer relationships.";Use the provided example to explain the meaning of the following elements: functions, entity types, application systems, non-computer-based application components, physical data processing system, and inter-layer relationships.;"Administrative admission is an enterprise function that is supported by the patient administration system.
 One entity type that is used and updated by this function is “patient.” The paper-based patient data privacy form system is an example of a non-computer-based application component.
 The virtualized server farm is an example of a physical tool.
 The inter-layer relationships of this example show which functions are supported by which application system and which physical data processing system the application systems are installed on.
-";6;Book;"Four subfunctions of patient admission (appointment scheduling, patient identification and checking for readmitted patients, administrative admission, and visitor and information services) are supported by the patient administration system, which is a part of the ERPS.
+";6;Book;"Example: Four subfunctions of patient admission (appointment scheduling, patient identification and checking for readmitted patients, administrative admission, and visitor and information services) are supported by the patient administration system, which is a part of the ERPS.
 Medical admission and nursing admission are supported by the MDMS.
 Obtaining consent for processing of patient-related data is supported by the non-computer-based application component for patient data privacy forms.
 This application component is based on paper forms which are scanned by a clerk (see physical tool layer) and then stored in the MDMS.
@@ -53,7 +30,12 @@ The matrix view is an alternative representation of configuration lines between 
 (b) What is the meaning of the arrows pointing from patient identification to “patient” and from “patient” to medical admission ?
 (c) What entity type that is stored in the paper-based patient data privacy form system should be added at the domain layer?
 (d) Why is the function patient admission not connected with any application system?
-(e) Which physical data processing systems are needed for the function “obtaining patient consent for the processing of data”?";;"(a) The function “patient admission” is decomposed into five subfunctions—patient admission is only complete if all the subfunctions are completed. The entity type “patient” is decomposed into four entity types—data regarding that entity type are only complete if data about all sub-entity types is complete. There are no examples of specialization at the domain layer of Fig. 2.11.
+(e) Which physical data processing systems are needed for the function “obtaining patient consent for the processing of data”?";"Answer the following questions under the given example context.
+(a) Find examples of specialization or decomposition at the domain layer.
+(b) What is the meaning of the arrows pointing from patient identification to “patient” and from “patient” to medical admission ?
+(c) What entity type that is stored in the paper-based patient data privacy form system should be added at the domain layer?
+(d) Why is the function patient admission not connected with any application system?
+(e) Which physical data processing systems are needed for the function “obtaining patient consent for the processing of data”?";"(a) The function “patient admission” is decomposed into five subfunctions—patient admission is only complete if all the subfunctions are completed. The entity type “patient” is decomposed into four entity types—data regarding that entity type are only complete if data about all sub-entity types is complete. There are no examples of specialization at the domain layer of Fig. 2.11.
 
 (b) The function “patient identification” updates the entity type “patient.” The function “medical admission” uses the entity type “patient.” This indicates that identifying patient data are updated or created during patient admission and then used for medical admission.
  
@@ -83,7 +65,10 @@ The matrix view is an alternative representation of configuration lines between 
 "Imagine a hospital information system that comprises four application systems: a PAS, an MDMS, a RIS, and a PDMS.
 The hospital is now considering the introduction of a communication server to improve data integration.
 Discuss the short-term and long-term pros and cons of this decision.
-Which syntactic and semantic standards could be used?";;"Short-term advantages: The communication server can handle the communication between all four application systems, including receiving, buffering, transforming, and multicasting of messages.
+Which syntactic and semantic standards could be used?";"Imagine a hospital information system that comprises four application systems: a PAS, an MDMS, a RIS, and a PDMS.
+The hospital is now considering the introduction of a communication server to improve data integration.
+Discuss the short-term and long-term pros and cons of this decision.
+Which syntactic and semantic standards could be used?";"Short-term advantages: The communication server can handle the communication between all four application systems, including receiving, buffering, transforming, and multicasting of messages.
 It can also be used for monitoring the communication traffic.
 The communication server thus supports data integration in heterogeneous information system architectures.
 
@@ -92,29 +77,19 @@ Long-term advantages: In the resulting (ACn, CP1) architecture, new application 
 Standards: For the exchange of administrative data, HL7 V2 or V3 could be used as syntactic or semantic standard.
 For the exchange of clinical data, various communication standards can be chosen such as HL7 FHIR, DICOM for medical images, or HL7 CDA for clinical documents.
 ";3;Book;
-"During a night shift, a nurse uses the patient administration system to conduct the administrative patient admission.
-The nurse then uses the NMDS to plan nursing care.
-Now consider the types of integration presented in Sect. 3.8 and discuss how this nurse would recognize a high (or low) level of data integration, semantic integration, user interface integration, context integration, feature integration, and process integration.
-";;"Data integration would be considered high when the nurse documents patient administrative data only once in the patient administration system and then can use this data in the NMDS.
-
-Semantic integration would be considered high when the nurse documents a nursing diagnosis using a standardized terminology (such as NANDA) and when this standardized diagnosis is then understood by the NMDS that may, for example, suggest a standard nursing care plan for this patient based on this diagnosis.
-
-User interface integration would be considered high when the user interfaces of both application systems look sufficiently similar, which reduces the risk of data entry or data interpretation errors.
-For example, in both application systems, the names of the patients are always displayed at the same place, the birthdates are presented in standardized form, and colors that are used to highlight important information are used in the same way.
-
-Context integration would be considered high when the user context and the patient context is preserved when the nurse shifts from one application system to the other.
-The nurse thus would not have to repeat user login or the selection of the patient in the second application system.
-
-Feature integration would be considered high when only the patient administration system offers the needed administrative features (such as documentation of patient address). The nurse would be able to call up these features from within the NMDS.
-
-Process integration would be considered high if both application systems work together in a highly integrated way so that the process of patient admission and nursing care planning from the point of view of the nurse is supported in an efficient way.";6;Book;
 "The following questions can be answered by reading the text and analyzing the 3LGM^2 figures of the CityCare Example 3.11.
 (a) The EHRS and the VNA in CityCare are not linked with any function they support. Which function of the domain layer may (partly) be supported by these application systems? Which functions (as introduced in Sect. 3.3) that are supported by these application systems could be added at the domain layer?
 (b) In which database systems shown in the logical tool layer should the entity type “patient” be stored?
 (c) The MPI should receive messages containing PINs (entity type “patient”) from all patient administration systems. Why is there no communication link between the MPI and the patient administration system of Ernst Jokl Hospital?
 (d) According to the matrix view, which functions are supported redundantly in CityCare? Discuss pros and cons of the functional redundancies in this scenario. What redundancies would you resolve and how?
 (e) Which functions in which health care facility cannot be performed anymore if “Application Server 1 Ernst Jokl Hospital” fails? Suggest a change to the physical tool layer that would minimize the risk of missing function support in case a single application server fails.
-(f) For the CityCare network, would it make sense to implement further profiles from IHE? Explain your decision.";;"(a) EHR systems as comprehensive application systems combine the functionalities of MDMS, NDMS, and CPOE systems. The EHRS of CityCare could therefore be used for medical admission, preparation of an order, or execution of diagnostic and therapeutic procedures. However, each of the three health care facilities in CityCare has its own MDMS. Therefore, the EHRS is probably mainly used for accessing findings from the other health care facilities, for example, during medical admission. For the VNA, no suitable function is modeled at the domain layer. At the domain layer, archiving of patient information could be added which is supported by the VNA and, to some extent, also by the EHRS.
+(f) For the CityCare network, would it make sense to implement further profiles from IHE? Explain your decision.";"The following questions can be answered reading the provided text.
+(a) The EHRS and the VNA in CityCare are not linked with any function they support. Which function of the domain layer may (partly) be supported by these application systems? Which functions (as introduced in Sect. 3.3) that are supported by these application systems could be added at the domain layer?
+(b) In which database systems shown in the logical tool layer should the entity type “patient” be stored?
+(c) The MPI should receive messages containing PINs (entity type “patient”) from all patient administration systems. Why is there no communication link between the MPI and the patient administration system of Ernst Jokl Hospital?
+(d) According to the matrix view, which functions are supported redundantly in CityCare? Discuss pros and cons of the functional redundancies in this scenario. What redundancies would you resolve and how?
+(e) Which functions in which health care facility cannot be performed anymore if “Application Server 1 Ernst Jokl Hospital” fails? Suggest a change to the physical tool layer that would minimize the risk of missing function support in case a single application server fails.
+(f) For the CityCare network, would it make sense to implement further profiles from IHE? Explain your decision.";"(a) EHR systems as comprehensive application systems combine the functionalities of MDMS, NDMS, and CPOE systems. The EHRS of CityCare could therefore be used for medical admission, preparation of an order, or execution of diagnostic and therapeutic procedures. However, each of the three health care facilities in CityCare has its own MDMS. Therefore, the EHRS is probably mainly used for accessing findings from the other health care facilities, for example, during medical admission. For the VNA, no suitable function is modeled at the domain layer. At the domain layer, archiving of patient information could be added which is supported by the VNA and, to some extent, also by the EHRS.
 (b) The entity type “patient” represents the persons who are the subject of health care. Information about a patient includes the PIN and other administrative data about the person. Each of the application systems supporting subfunctions of patient care and having an own database system stores the entity type “patient,” for example, the patient administration system including the MPI, the MDMS, the EHRS, and the VNA.
 (c) In Ernst Jokl Hospital, there is a star architecture at the logical tool layer, i.e., a communication server is used for the exchange of messages between application systems. The patient administration system of Ernst Jokl Hospital, where the PINs of Ernst Jokl Hospital are generated, sends this information in a message to the communication server. The communication server forwards the message to the MPI of the health care network. In the central MPI of the tHIS, the local patient identification numbers of the different health care facilities are linked to the unique transinstitutional patient identification number of CityCare.
 (d) Administrative admission, appointment scheduling, medical admission, order entry, patient identification, and preparation of an order are each supported by at least three application systems in the scenario.
@@ -153,31 +128,20 @@ We can see that there are no functions modeled that are supported by the financi
 
 The matrix view is an alternative representation of configuration lines between functions at the domain layer and application components at the logical tool layer. Matrix views are also available for visualizing relations between other pairs of connected 3LGM^2 classes.
 "
-"Imagine you are the CIO of a hospital in which almost no computer-based tools are used.
-One of the hospital’s goals is to support health care professionals in their daily tasks by offering up-to-date patient information at their workplace.
-
-Which main goals for management of information systems could you define based on this information? Which functions should be prioritized to be supported by new application systems? What could a strategic project portfolio and a migration plan for the next 5 years look like?";;"Goals: efficient and high-quality information logistics to support patient care.
-
-Functions: patient administration and all functions related to patient care (Sect. 3.​3.​2.​1).
-Project portfolio and migration plan:
-- Year 1: Introduction of a patient administration system.
-- Year 2: Introduction of a CIS, an LIS and an RIS.
-- Year 3: Introduction of a DAS and a PACS.
-- Year 4: Introduction of an OMS and of a PDMS.
-- Year 5: Introduction of a DWS and of a patient portal.
-
-Please note: This is a simplified solution. Other solutions may be valid, too. In case the different application systems are meant to come from different vendors, an integration technology such as a communication server needs to be implemented.";5;Book;
 "In Sect. 4.8.1, we presented the structure of the strategic information management plan of Ploetzberg Hospital.
 Compare its structure to the general structure presented in Sect. 4.3.1.2, consisting of strategic goals, description of current state, assessment of current state, future state, and migration path.
 Where can you find this general structure in Ploetzberg Hospital’s plan?
-";;"- Strategic goals of the health care facility (business goals) and of management of information systems: are visible in Chaps. 1 and 2 of Ploetzberg Hospital’s plan.
+";"Given the structure of the strategic information management plan of Ploetzberg Hospital.
+Compare its structure to the general structure, consisting of strategic goals, description of current state, assessment of current state, future state, and migration path.
+Where can you find this general structure in Ploetzberg Hospital’s plan?
+";"- Strategic goals of the health care facility (business goals) and of management of information systems: are visible in Chaps. 1 and 2 of Ploetzberg Hospital’s plan.
 - Description of the current state of the information system: are visible in Chap. 3 of Ploetzberg Hospital’s plan.
 - Assessment of the current state of the information system: are visible in Chap. 4 of Ploetzberg Hospital’s plan.
 - Future state of the information system: are visible in Chap. 5 of Ploetzberg Hospital’s plan.
 - Migration path from the current to the planned state: are visible in Chap. 6 of Ploetzberg Hospital’s plan.
 ";5;Book;
 "Look at the health information system’s KPIs of Ploetzberg Hospital in Example 4.8.2. Try to figure out some of these numbers for a real hospital and compare both hospitals’ KPIs in the form of a benchmarking report.
-It may help to look at the strategic information management plan of this hospital or at its website.";;"- KPI | Ploetzberg Hospital | My hospital
+It may help to look at the strategic information management plan of this hospital or at its website.";Look at the health information system’s KPIs of Ploetzberg Hospital in the context. Try to figure out 10 of these numbers for a real hospital and compare both hospitals’ KPIs in the form of a benchmarking report.;"- KPI | Ploetzberg Hospital | My hospital
 - Number of HIS staff | 46 | 89
 - Number of HIS users | 4800 | 9000
 - Number of workstations | 1350 | 6200
@@ -187,41 +151,60 @@ It may help to look at the strategic information management plan of this hospita
 - Percentage of solved IT problem tickets | 96% | 92%
 - Availability of the overall HIS systems | 98.5% | 96%
 - Number of finalized strategic IT projects | 13 | 10
-- Percentage of successful IT projects | 76% | 86%";10;Book;
-"Imagine you are the CIO and have to select the three most relevant indicators for the quality of your information system at your hospital: Which would you select? You can look at the examples in Sect. 4.8.2 to get ideas.
-Explain your choice.
-";;"Several solutions are possible here. One possible solution:
-1. HIS user per mobile IT tool: Efficient information logistics everywhere (e.g., at the patient’s bedside) requires enough mobile IT tools.
-2. Number of application systems: I would strive for an integrated information system and reduce the number of application systems in the long run in order to reduce integration problems.
-3. HIS budget in relation to the overall hospital budget: Sufficient funding is the precondition for high-quality and well-integrated information system and the necessary competent IT staff.";3;Book;
+- Percentage of successful IT projects | 76% | 86%";10;Book;"The CIO of Ploetzberg Hospital annually reports to the hospital’s management about the amount, quality, and costs of information processing of the Ploetzberg Hospital information system.
+For this report, the CIO uses health information system KPIs that have been agreed on by a regional group of hospital CIOs (Table 4.3). Each year, the hospitals exchange and discuss their reports as part of a best practice benchmark with other hospitals—this comparison is not shown in the table.
+
+Table 4.3: Extract from the Ploetzberg Hospital health information system’s benchmarking report 2024.
+KPI key performance indicator
+- KPIs for the hospital
+- Number of staff | 5500
+- Number of beds | 1100
+- Number of inpatient cases 40,000
+- Mean duration of stay | 8.1 days
+- Hospital budget | €800 million
+- KPIs for health information system’s costs
+- Overall IT costs | €20 million
+- IT costs per inpatient case | €500
+- IT costs in relation to hospital budget | 2.5%
+- KPIs for health information system’s management
+- Number of HIS staff | 46
+- Number of HIS users | 4800
+- Number of workstations | 1350
+- Number of mobile IT tools | 2500
+- HIS user per mobile IT tool | 1.9
+- Number of IT problem tickets | 15,500
+- Percentage of solved IT problem tickets | 96%
+- Availability of the overall HIS systems | 98.5%
+- Number of finalized strategic IT projects | 13
+- Percentage of successful IT projects | 76%
+- KPIs for health information system’s functionality
+- Percentage of all documents available electronically | 45%
+- Percentage of all diagnosis coded electronically | 77%
+- Functionality index of patient administration system | 52%
+- Functionality index of MDMS | 87%
+- KPIs for health information system’s architecture
+- Number of computer-based application components | 84
+- Percentage of standard interfaces between applications | 87%
+- Functional redundancy rate | 0.44"
 "You are asked to organize regular (e.g., every half year) quantitative user feedback on the general user satisfaction with major clinical application components of your hospital as part of health information system’s monitoring.
-Which user groups would you consider? How could you gather user feedback regularly in an automatic way? Explain your choice.";;"User groups: physicians, nurses, technical staff (e.g., lab, radiology), and management staff—these groups are typically large health information systems user groups. I would also organize regular survey of CIS key users, as they are experts in judging the quality of the information systems.
+Which user groups would you consider? How could you gather user feedback regularly in an automatic way? Explain your choice.";"You are asked to organize regular (e.g., every half year) quantitative user feedback on the general user satisfaction with major clinical application components of your hospital as part of health information system’s monitoring.
+Which user groups would you consider? How could you gather user feedback regularly in an automatic way? Explain your choice.";"User groups: physicians, nurses, technical staff (e.g., lab, radiology), and management staff—these groups are typically large health information systems user groups. I would also organize regular survey of CIS key users, as they are experts in judging the quality of the information systems.
 
 Organization of user feedback: (1) Health information system users are randomly invited to an automatic short and standardized survey that is displayed during CIS login.
 (2) Every half year, I would organize sounding boards (a structured approach to obtain active feedback from stakeholders) with key users and with representatives from the larger user groups to discuss recent challenges with the CIS and opportunities for improvements.";2;Book;
-"Information systems managers can be partly compared to architects.
-Read the following statement and discuss similarities and differences between information system architects and building architects [8]:
-
-“We are architects.
-[…] We have designed numerous buildings, used by many people.
-[…] We know what users want.
-We know their complaints: buildings that get in the way of the things they want to do.
-[…] We also know the users’ joy of relaxing, working, learning, buying, manufacturing, and worshipping in buildings which were designed with love and care as well as function in mind.
-[…] We are committed to the belief that buildings can help people to do their jobs or may impede them and that good buildings bring joy as well as efficiency.”
-";;"Health information managers can indeed be compared with architects.
-Health information managers design information systems that are used by many different user groups.
-Health information managers regularly monitor the quality of information systems to obtain feedback and to improve the information system.
-Health information managers understand that information systems support many different functions for many different user groups within health care facilities.
-Health information managers make sure that the application systems are user-friendly and support working processes in an efficient way.
-Health information managers understand that an information system serves the overall goal of a health care facility and ultimately serves the need of the patients.
-";6;Book;
 "Read the following case descriptions and discuss the integration problems using the types of integration presented in Sect. 5.3.4. Which negative effects for information logistics result from the identified integration problems?
 1. A physician enters a medical diagnosis for a patient first in the medical documentation and management system (MDMS) and later, when ordering an X-ray, again in the CPOE system.
 2. The position of the patient’s name and the formatting of the patient’s birthdate vary between the MDMS and the CPOE system.
 3. When physicians shift from the MDMS to the CPOE system, they have to log in again and again search for the correct patient.
 4. The CPOE system and the RIS use slightly different catalogs of available radiology examinations.
 5. When physicians write the discharge letter for a patient in the MDMS, they also have to code the discharge diagnosis of a patient. For this coding, they have to use a feature that is only available in the patient administration system, so they have to shift to this application system.
-6. While at the patient’s bedside during their ward rounds, physicians have to use several application components at the same time, such as MDMS for retrieving recent findings, the CPOE system for ordering, and the PACS for retrieving images.";;"1. A physician enters a medical diagnosis for a patient first in the MDMS and later, when ordering an X-ray, again in the CPOE system. → No data integration, resulting in reentering of data, which is time-consuming and may lead to errors and inconsistencies in the data, which has the potential for patient harm.
+6. While at the patient’s bedside during their ward rounds, physicians have to use several application components at the same time, such as MDMS for retrieving recent findings, the CPOE system for ordering, and the PACS for retrieving images.";"Read the following case descriptions and discuss the integration problems using the types of integration. Which negative effects for information logistics result from the identified integration problems?
+1. A physician enters a medical diagnosis for a patient first in the medical documentation and management system (MDMS) and later, when ordering an X-ray, again in the CPOE system.
+2. The position of the patient’s name and the formatting of the patient’s birthdate vary between the MDMS and the CPOE system.
+3. When physicians shift from the MDMS to the CPOE system, they have to log in again and again search for the correct patient.
+4. The CPOE system and the RIS use slightly different catalogs of available radiology examinations.
+5. When physicians write the discharge letter for a patient in the MDMS, they also have to code the discharge diagnosis of a patient. For this coding, they have to use a feature that is only available in the patient administration system, so they have to shift to this application system.
+6. While at the patient’s bedside during their ward rounds, physicians have to use several application components at the same time, such as MDMS for retrieving recent findings, the CPOE system for ordering, and the PACS for retrieving images.";"1. A physician enters a medical diagnosis for a patient first in the MDMS and later, when ordering an X-ray, again in the CPOE system. → No data integration, resulting in reentering of data, which is time-consuming and may lead to errors and inconsistencies in the data, which has the potential for patient harm.
  
 2. The position of the patient’s name and the formatting of the patient’s birthdate vary between the MDMS and the CPOE system. → No user interface integration, resulting in increased time effort when using various application components, increased time needed for user training, and increased risk in overlooking or misinterpreting important patient information, which has the potential for patient harm.
  
@@ -232,65 +215,62 @@ Health information managers understand that an information system serves the ove
 5. When physicians write the discharge letter for a patient in the MDMS, they also have to code the discharge diagnosis of a patient. For this coding, they have to use a feature that is only available in the patient administration system, so they have to shift to this application system. → No feature integration, leading to increased time needed to shift to the patient administration system.
  
 6. While being at the patient’s bedside during their ward rounds, physicians have to use several application components at the same time, such as MDMS for retrieving recent findings, the CPOE system for ordering, and the PACS for retrieving images. → No process integration; a process should be organized in a way that frequent change of application systems is avoided if possible.";6;Book;
-"A clinical researcher at Ploetzberg Hospital has won a grant to set up a register for patients who have received a knee endoprosthesis.
-Disease registers are research databases for collecting data about a specific disease, aiming for full coverage of the respective patient collective.
-The aim of a knee endoprosthesis registry is to collect longitudinal data to find out which type of endoprosthesis works best over time.
-The researcher wants to integrate data from patient-reported outcome questionnaires, findings from inpatient or outpatient visits at the hospital, and results from laboratory examinations.
-Which entity types need to be integrated and from which application components do they come? Devise a plan how you would set up a sustainable research architecture, i.e., an architecture that also could be used in other research settings and for different disease or research entities, considering Sect. 6.6.
-";;"The following entity types have to be integrated: patient, person, diagnosis, finding, health record, medical procedure, patient record, self-gathered symptoms, material, medical device, classification, nomenclature.
-
-Application components to be integrated depend on local settings and implementation but will likely include: patient administration system, MDMS, LIS, OMS, PDMS, and self-diagnosis systems (e.g., an app for collecting patient-reported outcome data) or patient portals.
-
-A research architecture for setting up multiple registries might include a DWS for research that is fed via ETL processes from the above-mentioned application components and can be tapped for data in different use cases or research scenarios.
-Finally, an open platform architecture would enable reuse of patient data in various research contexts.
-";3;Book;
 "Skizzieren Sie die Fachliche Ebene und die Logische Werkzeugebene des folgenden Szenarios als 3LGM²-Modell auf dem nächsten Blatt (9 Punkte).
-   1. Die administrative Patientenaufnahme erfolgt mit dem Patientenverwaltungssystem. Die administrativen Patientendaten, repräsentiert durch den Objekttyp „Patient“ werden vom Patientenverwaltungssystem über den Kommunikationsserver an das CPOE-System, das Medizinische Dokumentationssystem und das Laborinformationssystem gesendet. Auf Papier mitgebrachte Vorbefunde werden bei der administrativen Patientenaufnahme eingescannt und im Medizinischen Dokumentationssystem gespeichert. 2. Ergänzen Sie je eine Aufgabe des CPOE-Systems, des Medizinischen Dokumentationssystems und des Laborinformationssystems (inkl. Konfigurationslinien).
-   3. Ergänzen Sie einen passenden Objekttyp sowie je zwei sinnvolle „bearbeitet“- und „nutzt“-Beziehungen zwischen Objekttypen und Aufgaben.  ";;;;IS_2020_07_18;
-"Nennen Sie 3 Dinge, die die Hausärztin Frau Meier in ihrer Praxis benötigt, um auf die in der Telematikinfrastruktur gespeicherten Daten des Patienten Herrn Schulz zuzugreifen? (3 Punkte) ";;;;IS_2020_07_18;
-"Ordnen Sie folgende Begriffe und Definitionen einander zu. (6 Punkte)
+   1. Die administrative Patientenaufnahme erfolgt mit dem Patientenverwaltungssystem. Die administrativen Patientendaten, repräsentiert durch den Objekttyp „Patient“ werden vom Patientenverwaltungssystem über den Kommunikationsserver an das CPOE-System, das Medizinische Dokumentationssystem und das Laborinformationssystem gesendet. Auf Papier mitgebrachte Vorbefunde werden bei der administrativen Patientenaufnahme eingescannt und im Medizinischen Dokumentationssystem gespeichert. 
+   2. Ergänzen Sie je eine Aufgabe des CPOE-Systems, des Medizinischen Dokumentationssystems und des Laborinformationssystems (inkl. Konfigurationslinien).
+   3. Ergänzen Sie einen passenden Objekttyp sowie je zwei sinnvolle „bearbeitet“- und „nutzt“-Beziehungen zwischen Objekttypen und Aufgaben. ";"Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.
+1. administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.
+2. Add one task each of the CPOE system, the medical documentation system and the laboratory information system
+3. add a suitable object type as well as two meaningful ""processed"" and ""uses"" relationships between object types and tasks. ";;9;IS_2020_07_18;
+Nennen Sie 3 Dinge, die die Hausärztin Frau Meier in ihrer Praxis benötigt, um auf die in der Telematikinfrastruktur gespeicherten Daten des Patienten Herrn Schulz zuzugreifen?;Name 3 things that the GP Ms Meier needs in her practice in order to access the data of the patient Mr Schulz stored in the telematics infrastructure?;;3;IS_2020_07_18;
+"Ordnen Sie folgende Begriffe und Definitionen einander zu.
    1. Datenintegrität, Interoperabilität, Syntaktische Interoperabilität, Referentielle Integrität, Semantische Integration, Datenintegration
    2. Fähigkeit eines Anwendungssystems (AWS), Informationen mit anderen AWS auszutauschen und zu nutzen
    3. Zustand eines Informationssystems, in dem Daten, die einmal erfasst wurden, überall  verfügbar sind, wo sie benötigt werden
    4. Zustand eines Informationssystems, in dem interoperable Anwendungssysteme das gleiche Begriffssystem nutzen
    5. Fähigkeit eines Anwendungssystems, Nachrichten mit einer definierten Struktur auszutauschen
    6. Korrektheit der Daten
-   7. Korrekte und eindeutige Zuordnung eines Objekts zu anderen Objekten";;;;IS_2020_07_18;
-Erklären Sie für einen Interoperabilitätsstandard im Gesundheitswesen dessen Einsatzgebiet, Funktionsprinzip und die unterstützten Interoperabilitätsarten (4 Punkte).;;;;IS_2020_07_18;
-Vergleichen Sie HL7 V2 und HL7 FHIR. Erläutern Sie mindestens drei Unterschiede. (3 Punkte + max. 1 Zusatzpunkt);;;;IS_2020_07_18;
-"Skizzieren Sie die Fachliche Ebene und die Logische Werkzeugebene des folgenden Szenarios als 3LGM²-Modell auf dem nächsten Blatt (9 Punkte).
+   7. Korrekte und eindeutige Zuordnung eines Objekts zu anderen Objekten";"Match the following terms and definitions.
+Terms:
+data integrity, interoperability, syntactic interoperability, referential integrity, semantic integration, data integration.
+Definitions:
+1. ability of an application system (AWS) to exchange and use information with other AWSs
+2. state of an information system in which data, once captured, is available wherever it is needed
+3. state of an information system in which interoperable application systems use the same conceptual system
+4. ability of an application system to exchange messages with a defined structure
+5. correctness of data
+6. correct and unambiguous assignment of an object to other objects";;6;IS_2020_07_18;
+Erklären Sie für einen Interoperabilitätsstandard im Gesundheitswesen dessen Einsatzgebiet, Funktionsprinzip und die unterstützten Interoperabilitätsarten.;For a healthcare interoperability standard, explain its area of use, operating principle and the types of interoperability supported.;;4;IS_2020_07_18;
+Vergleichen Sie HL7 V2 und HL7 FHIR. Erläutern Sie mindestens drei Unterschiede.;Compare HL7 V2 and HL7 FHIR. Explain at least three differences;;3;IS_2020_07_18;
+"Skizzieren Sie die Fachliche Ebene und die Logische Werkzeugebene des folgenden Szenarios als 3LGM²-Modell auf dem nächsten Blatt.
    1. Die administrative Patientenaufnahme erfolgt mit dem Patientenverwaltungssystem. Die administrativen Patientendaten, repräsentiert durch den Objekttyp „Patient“ werden vom Patientenverwaltungssystem über den Kommunikationsserver an das CPOE-System, das Medizinische Dokumentationssystem und das Radiologieinformationssystem gesendet. Auf Papier mitgebrachte Vorbefunde werden bei der administrativen Patientenaufnahme eingescannt und im Medizinischen Dokumentationssystem gespeichert.
    2. Ergänzen Sie je eine Aufgabe des CPOE-Systems, des Medizinischen Dokumentationssystems und des Radiologieinformationssystems (inkl. Konfigurationslinien).
-   3. Ergänzen Sie einen passenden Objekttyp sowie je zwei sinnvolle „bearbeitet“- und „nutzt“-Beziehungen zwischen Objekttypen und Aufgaben.  ";;;;IS_2020_09_27;
-" Wer stellt die „elektronische Patientenakte (ePA)“ nach § 341 SGB V zur Verfügung? Wie wird der Zugriff auf die enthaltenen medizinischen Daten geregelt? (2 Punkte)";;;;IS_2020_09_27;
-" Was ist IHE und welchen Nutzen hat es? Erläutern Sie den Zusammenhang zwischen IHE und Interoperabilitätsstandards (4 Punkte).";;;;IS_2020_09_27;
-"Was ist an dieser Projektbeschreibung falsch?
-            ◦ Problem: Auf dem Software-Markt existiert eine Vielzahl unterschiedlicher Informationssysteme, welche im Bereich der Krankenhaushygiene eingesetzt werden können. Der Funktionsumfang und der Einsatzbereich der Informationssysteme ist sehr vielfältig.
-            Ziel: Ziel ist eine Systematik zur Erfassung von Informationssystemen und eine systematische Auflistung aller am Markt verfügbarer Informationssysteme im Bereich der Krankenhaushygiene.";;;;A_2021;
-Was sind Daten, Informationen, Wissen?;;;;;
-Was sind System, soziotechnisches System;;;;;
-Wie geht 3LGM² genauer?;;;;;
-"""Was ist eine datenverarbeitende Aufgabe (enterprise function)? Bitte nennen Sie Beispiele
-               2. Bitte erläutern Sie die Aufgabe „Patientenaufnahme“ / „ """;;;;;
-Nennen Sie Beispiele für Objekttypen in einem Krankenhausinformationssystem;;;;;
-Bitte skizzieren Sie eine typische LWE;;;;;
-Bitte erläutern Sie die Begriffe Integration, Interoperabilität, Integrität.;;;;;
-Welche Arten von Integrität haben wir diskutiert? (Objektidentität, Referenzielle Integrität, Konsistenz);;;;;
-Welche Typen der Integration haben wir diskutiert?;;;;;
-Nennen Sie ein Beispiel für fehlende Datenintegration in der Pflege;;;;;
-Nennen Sie zwei Kommunikationsstandards für KIS?;;;;;
-"Wie hängen 3LGM², IHE; HL7, DICOM, Profil, Ereignis zusammen";;;;;
-Wie hängen IHE – Objektidentität – tHIS zusammen?;;;;;
-Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?;;;;;
-Was ist Transaktionsmanagement? Wie wird das in KIS organisiert?;;;;;
-Nennen Sie drei Anwendungssysteme und die jeweils unterstützten Aufgaben!;;;;;
-Wie würden sie die PWE eines KIS gestalten?;;;;;
-Wie sorgen Sie für Ausfallsicherheit in einem KIS?;;;;;
-Wie kann man Krankenhausinformationssysteme vergleichen? (Referenzmodelle, Taxonomy);;;;;
-Leistungsanforderung: Welche grundsätzlichen Arten der Leistungsanforderung müssen unterschieden werden (mit Terminvereinbarung, mit Probe)? Wo liegen bei der Unterstützung jeweils die Herausforderungen?;;;;;
-" Wie funktioniert die Versorgung einer Station mit Medikamenten und Verbrauchsmaterialien? Was ist ein Modulsystem?";;;;;
-;;;;;
-;;;;;
-;;;;;
-;;;;;
-;;;;;
+   3. Ergänzen Sie einen passenden Objekttyp sowie je zwei sinnvolle „bearbeitet“- und „nutzt“-Beziehungen zwischen Objekttypen und Aufgaben.  ";"Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.
+1. The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.
+2. Add one task each of the CPOE system, the medical documentation system and the radiology information system (incl. configuration lines).
+3. Add a suitable object type as well as two meaningful ""processed"" and ""uses"" relationships between object types and tasks.  ";;;IS_2020_09_27;
+Wer stellt die „elektronische Patientenakte (ePA)“ nach § 341 SGB V zur Verfügung? Wie wird der Zugriff auf die enthaltenen medizinischen Daten geregelt?;"Who provides the ""electronic patient file (ePA)"" according to § 341 SGB V? How is access to the medical data it contains regulated?";;;IS_2020_09_27;
+Was ist IHE und welchen Nutzen hat es? Erläutern Sie den Zusammenhang zwischen IHE und Interoperabilitätsstandards.;What is IHE and what are its benefits? Explain the relationship between IHE and interoperability standards.;;;IS_2020_09_27;
+Was wird standardisiert?;What are common standards used in health information systems?;;x;IS_2020_09_27;
+Was sind Daten, Informationen, Wissen?;What are data, information, knowledge?;;;A_2021;
+Was sind System, soziotechnisches System;What are system and socio-technical system?;;;A_2021;
+Wie geht 3LGM² genauer?;How dows 3LGM^2 work?;;;A_2021;
+Was ist eine datenverarbeitende Aufgabe (enterprise function)? Bitte nennen Sie Beispiele;What is a data processing task (enterprise function)? Please give examples;;;A_2021;
+Bitte erläutern Sie die Aufgabe „Patientenaufnahme“;"please explain the task ""patient admission""";;;;
+Nennen Sie Beispiele für Objekttypen in einem Krankenhausinformationssystem;Give examples of object types in a hospital information system;;;A_2021;
+Bitte skizzieren Sie eine typische LWE;Describe the logical tool layer.;;;A_2021;
+Bitte erläutern Sie die Begriffe Integration, Interoperabilität, Integrität.;Please explain the terms integration, interoperability, integrity.;;;A_2021;
+Welche Arten von Integrität haben wir diskutiert?;What types of integrity exist in the context of health information systems?;" (Objektidentität, Referenzielle Integrität, Konsistenz)";;A_2021;
+Welche Typen der Integration haben wir diskutiert?;What types of integration exist in the context of health information systems?;;;A_2021;
+Nennen Sie ein Beispiel für fehlende Datenintegration in der Pflege;Give an example of lack of data integration in care;;;A_2021;
+Nennen Sie zwei Kommunikationsstandards für KIS?;Name two communication standards for HIS?;;;A_2021;
+"Wie hängen 3LGM², IHE; HL7, DICOM, Profil, Ereignis zusammen";How are 3LGM^2, IHE, HL7, DICOM, Profile, Event related?;;;A_2021;
+Wie hängen IHE – Objektidentität – tHIS zusammen?;How are IHE - object identity - tHIS related?;;;A_2021;
+Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?;What is the importance of software development in a hospital?;;;A_2021;
+Was ist Transaktionsmanagement? Wie wird das in KIS organisiert?;What is transaction management? How is it organised in HIS?;;;A_2021;
+Nennen Sie drei Anwendungssysteme und die jeweils unterstützten Aufgaben!;Name three application systems and the tasks each supports!;;3;A_2021;
+Wie würden sie die PWE eines KIS gestalten?;How would they design the physical tool layer of a HIS?;;;A_2021;
+Wie sorgen Sie für Ausfallsicherheit in einem KIS?;How do you ensure fail-safety in a HIS?;;;A_2021;
+"Wie kann man Krankenhausinformationssysteme vergleichen? ";"How can hospital information systems be compared? ";(Referenzmodelle, Taxonomy);;A_2021;
+Leistungsanforderung: Welche grundsätzlichen Arten der Leistungsanforderung müssen unterschieden werden (mit Terminvereinbarung, mit Probe)? Wo liegen bei der Unterstützung jeweils die Herausforderungen?;Which basic types of service request must be distinguished (with appointment, with rehearsal)? Where do the challenges lie in the support in each case?;;;A_2021;
+Wie funktioniert die Versorgung einer Station mit Medikamenten und Verbrauchsmaterialien? Was ist ein Modulsystem?;How does the supply of a ward with medicines and consumables work? What is a modular system?;;;A_2021;
