@@ -218,11 +218,35 @@ Organization of user feedback: (1) Health information system users are randomly 
 "Skizzieren Sie die Fachliche Ebene und die Logische Werkzeugebene des folgenden Szenarios als 3LGM²-Modell auf dem nächsten Blatt (9 Punkte).
    1. Die administrative Patientenaufnahme erfolgt mit dem Patientenverwaltungssystem. Die administrativen Patientendaten, repräsentiert durch den Objekttyp „Patient“ werden vom Patientenverwaltungssystem über den Kommunikationsserver an das CPOE-System, das Medizinische Dokumentationssystem und das Laborinformationssystem gesendet. Auf Papier mitgebrachte Vorbefunde werden bei der administrativen Patientenaufnahme eingescannt und im Medizinischen Dokumentationssystem gespeichert. 
    2. Ergänzen Sie je eine Aufgabe des CPOE-Systems, des Medizinischen Dokumentationssystems und des Laborinformationssystems (inkl. Konfigurationslinien).
-   3. Ergänzen Sie einen passenden Objekttyp sowie je zwei sinnvolle „bearbeitet“- und „nutzt“-Beziehungen zwischen Objekttypen und Aufgaben. ";"Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.
-1. administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.
-2. Add one task each of the CPOE system, the medical documentation system and the laboratory information system
-3. add a suitable object type as well as two meaningful ""processed"" and ""uses"" relationships between object types and tasks. ";;9;IS_2020_07_18;
-Nennen Sie 3 Dinge, die die Hausärztin Frau Meier in ihrer Praxis benötigt, um auf die in der Telematikinfrastruktur gespeicherten Daten des Patienten Herrn Schulz zuzugreifen?;Name 3 things that the GP Ms Meier needs in her practice in order to access the data of the patient Mr Schulz stored in the telematics infrastructure?;;3;IS_2020_07_18;
+   3. Ergänzen Sie einen passenden Objekttyp sowie je zwei sinnvolle „bearbeitet“- und „nutzt“-Beziehungen zwischen Objekttypen und Aufgaben. ";"Given the scenario from the context, list out the used application components and tasks they perform. Order these in the Domain Layer and Logical Tool Layer of the 3LGM^2 model.
+Add one task each of the CPOE system, the medical documentation system and the laboratory information system
+Add a suitable object type as well as two meaningful ""processed"" and ""uses"" relationships between object types and tasks. ";"Domain Layer:
+- Patient Admission
+
+Logical Tool Layer:
+- Patient Management System
+- Communication Server
+- CPOE System
+- Medical Documentation System
+- Laboratory Information System
+
+
+CPOE System:
+- Task: Creation/Administration of Medication plans
+
+Medical Documentation System:
+- Task: Administration/Storage of Patientanamnesis
+
+Laboratory Information System:
+- Task: Storage/Processing of Laboratory Requests
+
+Object Type:
+- Patient
+  - Uses: Administration/Storage of Patientanamnesis, Creation/Administration of Medication plans
+  - Processed: Patient Admission";11;IS_2020_07_18;"The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system."
+Nennen Sie 3 Dinge, die die Hausärztin Frau Meier in ihrer Praxis benötigt, um auf die in der Telematikinfrastruktur gespeicherten Daten des Patienten Herrn Schulz zuzugreifen?;Name 3 things that the GP Ms Meier needs in her practice in order to access the data of the patient Mr Schulz stored in the telematics infrastructure.;"- electronic health professional card / institution card
+- Access to telematric infrastructure (such as PC)
+- Insured Person's permission to acces their data";3;IS_2020_07_18;
 "Ordnen Sie folgende Begriffe und Definitionen einander zu.
    1. Datenintegrität, Interoperabilität, Syntaktische Interoperabilität, Referentielle Integrität, Semantische Integration, Datenintegration
    2. Fähigkeit eines Anwendungssystems (AWS), Informationen mit anderen AWS auszutauschen und zu nutzen
@@ -239,20 +263,76 @@ Definitions:
 3. state of an information system in which interoperable application systems use the same conceptual system
 4. ability of an application system to exchange messages with a defined structure
 5. correctness of data
-6. correct and unambiguous assignment of an object to other objects";;6;IS_2020_07_18;
-Erklären Sie für einen Interoperabilitätsstandard im Gesundheitswesen dessen Einsatzgebiet, Funktionsprinzip und die unterstützten Interoperabilitätsarten.;For a healthcare interoperability standard, explain its area of use, operating principle and the types of interoperability supported.;;4;IS_2020_07_18;
-Vergleichen Sie HL7 V2 und HL7 FHIR. Erläutern Sie mindestens drei Unterschiede.;Compare HL7 V2 and HL7 FHIR. Explain at least three differences;;3;IS_2020_07_18;
+6. correct and unambiguous assignment of an object to other objects";"Data Integrity: 5. correctness of data
+Interoperability: 1. ability of an application system (AWS) to exchange and use information with other AWSs
+Syntactic Interoperability: 4. ability of an application system to exchange messages with a defined structure
+Referential Integrity: 6. correct and unambiguous assignment of an object to other objects
+Semantic Integration: 3. state of an information system in which interoperable application systems use the same conceptual system
+Data Integration: 2. state of an information system in which data, once captured, is available wherever it is needed
+";6;IS_2020_07_18;
+Erklären Sie für einen Interoperabilitätsstandard im Gesundheitswesen dessen Einsatzgebiet, Funktionsprinzip und die unterstützten Interoperabilitätsarten.;For a healthcare interoperability standard, explain its area of use, operating principle and the types of interoperability supported.;"Health Level 7 Version 2:
+Area of Use:
+- Communication between Application Systems
+
+operating principle:
+- Message based
+- Event driven
+
+Types of Interoperability:
+- Syntactic Interoperability
+- Semantic Interoperability";4;IS_2020_07_18;
+Vergleichen Sie HL7 V2 und HL7 FHIR. Erläutern Sie mindestens drei Unterschiede.;Compare HL7 V2 and HL7 FHIR. Explain at least three differences;"- both used to exchange health information between application systems
+- Syntax HL7 v2: proprietay, ASCII-text
+- Syntax HL7 FHIR: XML / JSON  = easier to implement
+- Structure HL7 v2: fixed, hierarchical, fixed amount of segments and codes
+- Structure HL7 FHIR: flexible, modular, resource/element based";3;IS_2020_07_18;
 "Skizzieren Sie die Fachliche Ebene und die Logische Werkzeugebene des folgenden Szenarios als 3LGM²-Modell auf dem nächsten Blatt.
    1. Die administrative Patientenaufnahme erfolgt mit dem Patientenverwaltungssystem. Die administrativen Patientendaten, repräsentiert durch den Objekttyp „Patient“ werden vom Patientenverwaltungssystem über den Kommunikationsserver an das CPOE-System, das Medizinische Dokumentationssystem und das Radiologieinformationssystem gesendet. Auf Papier mitgebrachte Vorbefunde werden bei der administrativen Patientenaufnahme eingescannt und im Medizinischen Dokumentationssystem gespeichert.
    2. Ergänzen Sie je eine Aufgabe des CPOE-Systems, des Medizinischen Dokumentationssystems und des Radiologieinformationssystems (inkl. Konfigurationslinien).
    3. Ergänzen Sie einen passenden Objekttyp sowie je zwei sinnvolle „bearbeitet“- und „nutzt“-Beziehungen zwischen Objekttypen und Aufgaben.  ";"Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.
 1. The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.
 2. Add one task each of the CPOE system, the medical documentation system and the radiology information system (incl. configuration lines).
-3. Add a suitable object type as well as two meaningful ""processed"" and ""uses"" relationships between object types and tasks.  ";;;IS_2020_09_27;
-Wer stellt die „elektronische Patientenakte (ePA)“ nach § 341 SGB V zur Verfügung? Wie wird der Zugriff auf die enthaltenen medizinischen Daten geregelt?;"Who provides the ""electronic patient file (ePA)"" according to § 341 SGB V? How is access to the medical data it contains regulated?";;;IS_2020_09_27;
-Was ist IHE und welchen Nutzen hat es? Erläutern Sie den Zusammenhang zwischen IHE und Interoperabilitätsstandards.;What is IHE and what are its benefits? Explain the relationship between IHE and interoperability standards.;;;IS_2020_09_27;
-Was wird standardisiert?;What are common standards used in health information systems?;;x;IS_2020_09_27;
-Was sind Daten, Informationen, Wissen?;What are data, information, knowledge?;;;A_2021;
+3. Add a suitable object type as well as two meaningful ""processed"" and ""uses"" relationships between object types and tasks.  ";"Domain Layer:
+- Administrative Patient Admission
+
+Logical Tool Layer:
+- Patient Management System
+- Communication Server
+- CPOE System
+- Medical Documentation System
+- Radiologoy Information System
+
+
+CPOE System:
+- Task: Creation/Administration of Medication plans
+
+Medical Documentation System:
+- Task: Administration/Storage of Patientanamnesis
+
+Radiology Information System:
+- Task: Archive/Processing of Radiological Images
+
+Object Type:
+- Medication Plan
+  - Uses: Administration/Storage of Patientanamnesis
+  - Processed: Creation/Administration of Medication plans";11;IS_2020_09_27;"The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system."
+Wer stellt die „elektronische Patientenakte (ePA)“ nach § 341 SGB V zur Verfügung? Wie wird der Zugriff auf die enthaltenen medizinischen Daten geregelt?;"Who provides the ""electronic patient file (ePA)"" according to § 341 SGB V? How is access to the medical data it contains regulated?";"- provided and managed by the health insurance companies
+- Technical and organizational measures to ensure only authorized access
+- Access rights, role-based access control, documentation of access";2;IS_2020_09_27;
+Was ist IHE und welchen Nutzen hat es? Erläutern Sie den Zusammenhang zwischen IHE und Interoperabilitätsstandards.;What is IHE and what are its benefits? Explain the relationship between IHE and interoperability standards.;IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care;2;IS_2020_09_27;
+Was wird standardisiert?;What are common standards used in health information systems?;"HL7v2
+CDA
+HL7 FHIR
+DICOM
+ISO/IEEE 11073
+CCOW (Clinical Context Object Workgroup)
+EDIFACT (Electronic Data Interchange for Administration, Commerce and Transport)
+SNOMED, LOINC
+openEHR
+CDISC (Clinical Data Interchange Standards Consortium)";11;IS_2020_09_27;
+Was sind Daten, Informationen, Wissen?;What are data, information, knowledge?;"Data are characters, discrete numbers, or continuous signals to be processed in information systems.
+Information is a context-specific fact about entities such as events, things, persons, processes, ideas, or concepts. Information is represented by data.
+Knowledge is general information about concepts in a certain (scientific or professional) domain (e.g., knowledge about diseases or therapeutic methods) at a certain time.";3;A_2021;
 Was sind System, soziotechnisches System;What are system and socio-technical system?;;;A_2021;
 Wie geht 3LGM² genauer?;How dows 3LGM^2 work?;;;A_2021;
 Was ist eine datenverarbeitende Aufgabe (enterprise function)? Bitte nennen Sie Beispiele;What is a data processing task (enterprise function)? Please give examples;;;A_2021;
