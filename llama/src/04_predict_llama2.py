@@ -55,9 +55,9 @@ def generate_for_single_csv(tokenizer: transformers.PreTrainedTokenizer | transf
         context = row["Kontext"]
         
         if context != "":
-            input = f"<<QUESTION>>:{question}\n<<CONTEXT>>:{context}\n<<ANSWER>>:"
+            input = f"Instruction: You are given a question and a context. Answer the question to your best knowledge.\nQuestion: {question}\nContext: {context}\nAnswer: "
         else:
-            input = f"<<QUESTION>>:{question}\n<<ANSWER>>:"
+            input = f"Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: {question}\nAnswer: "
         
         input_ids = tokenizer.encode(input, return_tensors="pt")
         output = model.generate(input=input_ids, temperature=0.9, max_new_tokens=512)
