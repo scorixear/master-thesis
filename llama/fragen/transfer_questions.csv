@@ -160,3 +160,4 @@ Finally, an open platform architecture would enable reuse of patient data in var
             Ziel: Ziel ist eine Systematik zur Erfassung von Informationssystemen und eine systematische Auflistung aller am Markt verfügbarer Informationssysteme im Bereich der Krankenhaushygiene.";"What is wrong with this project description?
 Problem: There are many different information systems on the software market which can be used in the field of hospital hygiene. The range of functions and the field of application of the information systems is very diverse.
 Goal: The goal is to create a system for recording information systems and a systematic listing of all information systems available on the market in the field of hospital hygiene.";;;A_2021;;
+Nennen Sie ein Beispiel für fehlende Datenintegration in der Pflege;Give an example of lack of data integration in care;Patient Admission, Daily Checks and Physical Documentation lead to redundant data management.;1;A_2021;;
