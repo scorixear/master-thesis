@@ -21,7 +21,7 @@ bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_use_double_quant=True,
     bnb_4bit_quant_type="nf4",
-    bnb_4bit_compute_dtype=torch.bfloat16
+    bnb_4bit_compute_dtype=torch.float16
 )
 
 huggingface_hub.login(token=token) 
@@ -150,7 +150,8 @@ tokenizer.bos_token_id = 1
 tokenizer.eos_token_id = 2
 
 model.config.use_cache = False
-train_result = trainer.train()
+with torch.autocast("cuda"):
+    train_result = trainer.train()
 trainer.save_model()
 
 metrics = train_result.metrics

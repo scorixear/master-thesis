@@ -6,7 +6,7 @@
 #SBATCH --partition=clara
 #SBATCH --mem=256G
 #SBATCH --time=2-00:00:00                     # time limit hrs:min:sec
-#SBATCH --gres=gpu:v100:3                   # number of gpus
+#SBATCH --gres=gpu:v100:2                   # number of gpus
 #SBATCH --output=logs/%x-%j.out                  # output file name
 #SBATCH --mail-type=ALL
 
@@ -29,7 +29,7 @@ srun pip install deepspeed
 
 
 # Torch Distributed Run Variables
-export GPUS_PER_NODE=3
+export GPUS_PER_NODE=2
 export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
 export MASTER_PORT=9907
 

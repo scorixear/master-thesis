@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH --job-name=gen_llama2_3e_1gpu        # name
+#SBATCH --nodes=1                           # nodes
+#SBATCH --ntasks-per-node=1                 # crucial - only 1 task per dist per node!
+#SBATCH --cpus-per-task=8
+#SBATCH --partition=clara
+#SBATCH --mem=128G
+#SBATCH --time=2-00:00:00                     # time limit hrs:min:sec
+#SBATCH --gres=gpu:v100:1                   # number of gpus
+#SBATCH --output=logs/%x-%j.out                  # output file name
+#SBATCH --mail-type=ALL
+
+module load Python
+module load PyTorch
+source .env/bin/activate
+
+srun pip install git+https://github.com/huggingface/transformers
+srun pip install typing-extensions
+srun pip install torch
+srun pip install accelerate
+srun pip install sentencepiece
+
+srun python 04_predict_llama2.py
