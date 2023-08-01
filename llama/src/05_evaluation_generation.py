@@ -2,6 +2,9 @@ import json
 import json_fix
 import enum
 
+# import only system from os
+from os import system, name
+
 class AnswerType(enum.Enum):
     Not_Answered = 0
     Wrong_Answer = 1
@@ -39,6 +42,7 @@ def main():
     input("Press Enter to continue...")
     questions = []
     for index, item in enumerate(generated_questions):
+        clear()
         print(f"Question {index+1}/{len(generated_questions)}")
         question = item["Question"]
         transformed = item["Transformed"]
@@ -93,7 +97,18 @@ def save_questions(questions):
         json.dump(questions, json_file, indent=4, ensure_ascii=False)
         
         
-        
+
+ 
+# define our clear function
+def clear():
+ 
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+ 
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
     
 if __name__ == "__main__":
     main()
