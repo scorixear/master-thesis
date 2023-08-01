@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=gen_llama2_3e_1gpu        # name
+#SBATCH --job-name=gen_llama2_1gpu        # name
 #SBATCH --nodes=1                           # nodes
 #SBATCH --ntasks-per-node=1                 # crucial - only 1 task per dist per node!
 #SBATCH --cpus-per-task=8
@@ -20,4 +20,8 @@ srun pip install torch
 srun pip install accelerate
 srun pip install sentencepiece
 
-srun python 04_predict_llama2.py
+
+MODEL_DIR=./trained/7B-1
+OUTPUT_PATH=./output/generated_1e.csv
+
+srun python 04_predict_llama2.py --model-dir $MODEL_DIR --output-path $OUTPUT_PATH

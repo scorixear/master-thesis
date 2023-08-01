@@ -1,6 +1,7 @@
 import json
 import sys
 import logging
+import argparse
 
 import pandas as pd
 import transformers
@@ -12,6 +13,11 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 logger = logging.getLogger(__name__)
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-m", "--model-dir", type=str, default="./trained/7B", help="Path to the model directory")
+    parser.add_argument("-o", "--output-path", type=str, default="./output/generated.csv", help="Path to the output file")
+    
+    args = parser.parse_args()
     # setup logging
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s -   %(message)s",
@@ -37,7 +43,11 @@ def main():
     
     dataframe = pd.DataFrame(columns=["Question", "Transformed", "Generated", "True_Answer", "Num_Answers", "Type", "Source", "Context", "True_Input"])
     
-    model_dir = "./trained/7B"
+    model_dir = args.model_dir
+    output_file = args.output_path
+    
+    print("Loading Model from", model_dir)
+    print("Saving output to", output_file)
     
     model = AutoModelForCausalLM.from_pretrained(model_dir)
     model = model.to(device)
@@ -51,7 +61,7 @@ def main():
     generate_for_single_csv(tokenizer, model, multi_question_dataset, "multi", dataframe)
     generate_for_single_csv(tokenizer, model, transfer_question_dataset, "transfer", dataframe)
     
-    dataframe.to_csv("output/generated.csv", index=False)
+    dataframe.to_csv(output_file, index=False)
 
 def read_json(file):
     with open(file, "r", encoding="utf-8") as f:

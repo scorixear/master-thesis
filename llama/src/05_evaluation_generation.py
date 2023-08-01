@@ -2,6 +2,7 @@ import json
 import json_fix
 import enum
 import sys
+import argparse
 
 # import only system from os
 from os import system, name
@@ -31,10 +32,10 @@ class Question:
         return self.__dict__
 
 def main():
-    input_file = "output/generated.json"
-    if len(sys.argv) > 2:
-        if sys.argv[1] == "--data":
-            input_file = sys.argv[2]
+    parser = argparse.ArgumentParser(description="Evaluation of the generated questions")
+    parser.add_argument("-d", "--data", type=str, help="Path to the generated questions", default="output/generated.json")
+    args = parser.parse_args()
+    input_file = args.data
     with open(input_file, "r", encoding="utf-8") as json_file:
         generated_questions = json.load(json_file)
     
