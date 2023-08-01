@@ -35,7 +35,7 @@ def main():
     multi_question_dataset = read_json("data/multi_questions.json")
     transfer_question_dataset = read_json("data/transfer_questions.json")
     
-    dataframe = pd.DataFrame(columns=["Question", "Transformed", "Generated_1", "Generated_2", "Generated_3", "True_Answer", "Num_Answers", "Type", "Source", "Context", "True_Input"])
+    dataframe = pd.DataFrame(columns=["Question", "Transformed", "Generated", "True_Answer", "Num_Answers", "Type", "Source", "Context", "True_Input"])
     
     model_dir = "./trained/7B"
     
@@ -63,6 +63,7 @@ def read_json(file):
 
 def generate_for_single_csv(tokenizer: transformers.PreTrainedTokenizer | transformers.PreTrainedTokenizerFast, model, csv_df: pd.DataFrame, csv_type: str, output_df: pd.DataFrame):
     for index, row in csv_df.iterrows():
+        print(f"{index}/{len(csv_df)} Questions")
         print(f"Generation {index}/{len(csv_df)}")
         question = row["Fragen"]
         transformed_question = row["Umformuliert"]
@@ -80,15 +81,10 @@ def generate_for_single_csv(tokenizer: transformers.PreTrainedTokenizer | transf
         inputs = tokenizer(prompt, return_tensors="pt")
         inputs = inputs.to(device)
         output = model.generate(inputs.input_ids, temperature=0.9, max_new_tokens=512)
-        generated_1 = tokenizer.batch_decode(output, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
-        print(f"Generated 1: {generated_1}")
-        output = model.generate(inputs.input_ids, temperature=0.9, max_new_tokens=512)
-        generated_2 = tokenizer.batch_decode(output, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
-        print(f"Generated 2: {generated_2}")
-        output = model.generate(inputs.input_ids, temperature=0.9, max_new_tokens=512)
-        generated_3 = tokenizer.batch_decode(output, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
-        print(f"Generated 3: {generated_3}")
-        output_df.loc[len(output_df)] = [question, transformed_question, generated_1, generated_2, generated_3, true_answer, num_answers, csv_type, source, context, prompt]
+        generated = tokenizer.batch_decode(output, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
+        generated = generated[len(prompt):]
+        print(f"Generated: {generated}")
+        output_df.loc[len(output_df)] = [question, transformed_question, generated, true_answer, num_answers, csv_type, source, context, prompt]
 
 if __name__ == "__main__":
     main()

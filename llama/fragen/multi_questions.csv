@@ -1,4 +1,4 @@
-Fragen;Umformuliert;Antworten;Anzahl_Antworten;Quelle;Context
+Fragen;Umformuliert;Antworten;Anzahl_Antworten;Quelle;Kontext
 Look at the entity type “patient” that is interpreted and updated by various functions. Which functions update the patient information, which functions interpret it?;"Look at the entity type “patient” that is interpreted and updated by various functions to be performed by health care professionals and other staff in health care facilities. Which functions update the patient information, which functions interpret it?
 ";The entity type “patient” is updated by the function “patient admission.” All other functions that are related to patient care interpret it.;1;Book;
 "Look at the 3LGM^2 example in Sect. 2.15.
@@ -343,7 +343,7 @@ It distinguishes between the following layers:
 - Physical Tool Layer (Physical data processing systems and their data transmission links)";3;A_2021;
 Was ist eine datenverarbeitende Aufgabe (enterprise function)? Bitte nennen Sie Beispiele;What is a data processing task (enterprise function)? Please give examples;"Enterprise functions mainly emphasize the contribution of activities to business goals.
 Examples are Administrative Admission or Patient Care.";2;A_2021;
-Bitte erläutern Sie die Aufgabe „Patientenaufnahme“;"please explain the task ""patient admission""";"Patient admission updates and uses the entity type patient
+Bitte erläutern Sie die Aufgabe „Patientenaufnahme“;"Please explain the task ""patient admission""";"Patient admission updates and uses the entity type patient
 Consists of refined subfunctions such as Nursing Admission.
 Example Activity of Patient Admission is ""Physician admits Patient""";2;A_2021;
 Nennen Sie Beispiele für Objekttypen in einem Krankenhausinformationssystem;Give examples of object types in a hospital information system;"Patient
@@ -361,13 +361,12 @@ Data integrity means that data are consistent, that object identity is maintaine
 Welche Arten von Integrität haben wir diskutiert?;What types of integrity exist in the context of health information systems?;Object Identity, Referential Integrity, Consistency;3;A_2021;
 Welche Typen der Integration haben wir diskutiert?;What types of integration exist in the context of health information systems?;Data-Integration, Semantic Integration, User-Interface Integration, Context Integration, Functional Integration, Process Integration;6;A_2021;
 Nennen Sie zwei Kommunikationsstandards für KIS?;Name two communication standards for HIS?;HL7, DICOM;2;A_2021;
-"Wie hängen 3LGM², IHE; HL7, DICOM, Profil, Ereignis zusammen";How are 3LGM^2, IHE, HL7, DICOM, Profile, Event related?;;;A_2021;
-Wie hängen IHE – Objektidentität – tHIS zusammen?;How are IHE - object identity - tHIS related?;;;A_2021;
-Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?;What is the importance of software development in a hospital?;;;A_2021;
-Was ist Transaktionsmanagement? Wie wird das in KIS organisiert?;What is transaction management? How is it organised in HIS?;;;A_2021;
-Nennen Sie drei Anwendungssysteme und die jeweils unterstützten Aufgaben!;Name three application systems and the tasks each supports!;;3;A_2021;
-Wie würden sie die PWE eines KIS gestalten?;How would they design the physical tool layer of a HIS?;;;A_2021;
-Wie sorgen Sie für Ausfallsicherheit in einem KIS?;How do you ensure fail-safety in a HIS?;;;A_2021;
-"Wie kann man Krankenhausinformationssysteme vergleichen? ";"How can hospital information systems be compared? ";(Referenzmodelle, Taxonomy);;A_2021;
-Leistungsanforderung: Welche grundsätzlichen Arten der Leistungsanforderung müssen unterschieden werden (mit Terminvereinbarung, mit Probe)? Wo liegen bei der Unterstützung jeweils die Herausforderungen?;Which basic types of service request must be distinguished (with appointment, with rehearsal)? Where do the challenges lie in the support in each case?;;;A_2021;
-Wie funktioniert die Versorgung einer Station mit Medikamenten und Verbrauchsmaterialien? Was ist ein Modulsystem?;How does the supply of a ward with medicines and consumables work? What is a modular system?;;;A_2021;
+Wie hängen 3LGM², IHE zusammen;How are 3LGM^ and IHE related?;3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.;1;A_2021;
+Wie hängen HL7, DICOM zusammen;How are HL7, DICOM related?;Both are Communication Standards commonly used in a Health Information System;1;;
+Wie hängen IHE – Objektidentität – tHIS zusammen?;How are IHE - object identity - tHIS related?;IHE provides standard for Health Information Systems to improve communication between HIS. tHIS describes a System that includes multiple HIS.;1;A_2021;
+Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?;What is the importance of software development in a hospital?;While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.;1;A_2021;
+Was ist Transaktionsmanagement? Wie wird das in KIS organisiert?;What is transaction management? How is it organised in HIS?;Trancations management ensures ACID properties during communication. This is managed by the Communication Server. Each data entity is administered by one application component and changes are broadcast to all application components that use it.;2;A_2021;
+Nennen Sie drei Anwendungssysteme und die jeweils unterstützten Aufgaben!;Name three application systems and the tasks each supports!;Patient Administration System, Patient Data Management System, Laboratory Information System, Radiology Information System, etc.;3;A_2021;
+Wie würden sie die PWE eines KIS gestalten?;How would they design the physical tool layer of a HIS?;Redundancy by mirror servers;1;A_2021;
+Wie sorgen Sie für Ausfallsicherheit in einem KIS?;How do you ensure fail-safety in a HIS?;Redundancy across. Multiple Hardware Components that mirror each other. Separated Infrastructure for energy.;3;A_2021;
+"Wie kann man Krankenhausinformationssysteme vergleichen? ";"How can hospital information systems be compared? ";(Referenzmodelle, Taxonomy);2;A_2021;
