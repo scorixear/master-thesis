@@ -1,6 +1,7 @@
 import json
 import json_fix
 import enum
+import sys
 
 # import only system from os
 from os import system, name
@@ -30,7 +31,11 @@ class Question:
         return self.__dict__
 
 def main():
-    with open("output/generated.json", "r", encoding="utf-8") as json_file:
+    input_file = "output/generated.json"
+    if len(sys.argv) > 2:
+        if sys.argv[1] == "--data":
+            input_file = sys.argv[2]
+    with open(input_file, "r", encoding="utf-8") as json_file:
         generated_questions = json.load(json_file)
     
     print("=====================================================================================================")
