@@ -1,7 +1,6 @@
 import json
 import json_fix
 import enum
-import sys
 import argparse
 
 # import only system from os
@@ -34,6 +33,7 @@ class Question:
 def main():
     parser = argparse.ArgumentParser(description="Evaluation of the generated questions")
     parser.add_argument("-d", "--data", type=str, help="Path to the generated questions", default="output/generated.json")
+    parser.add_argument("-o", "--output", type=str, help="Path to the output file", default="output/evaluated.json")
     args = parser.parse_args()
     input_file = args.data
     with open(input_file, "r", encoding="utf-8") as json_file:
@@ -97,9 +97,9 @@ def main():
                 print("Please input a number")
                 continue
         print("=====================================================================================================\n\n")
-    save_questions(questions)
-def save_questions(questions):
-    with open("output/evaluated.json", "w", encoding="utf-8") as json_file:
+    save_questions(questions, args.output)
+def save_questions(questions, output_file):
+    with open(output_file, "w", encoding="utf-8") as json_file:
         json.dump(questions, json_file, indent=4, ensure_ascii=False)
         
         

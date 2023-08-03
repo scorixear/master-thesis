@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=llama2-7b-2gpu        # name
+#SBATCH --job-name=llama2-7b-3gpu-8e        # name
 #SBATCH --nodes=1                           # nodes
 #SBATCH --ntasks-per-node=1                 # crucial - only 1 task per dist per node!
 #SBATCH --cpus-per-task=8
