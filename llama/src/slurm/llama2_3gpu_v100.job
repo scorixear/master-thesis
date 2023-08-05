@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=llama2-7b-3gpu-8e        # name
+#SBATCH --job-name=llama2-7b-3gpu-3e        # name
 #SBATCH --nodes=1                           # nodes
 #SBATCH --ntasks-per-node=1                 # crucial - only 1 task per dist per node!
 #SBATCH --cpus-per-task=8
@@ -54,13 +54,13 @@ PREPROCESSING_NUM_WORKERS=1
 KEEP_LINEBREAKS=true
 
 # Training Arguments
-OUTPUT_DIR=./trained/7B-8
+OUTPUT_DIR=./trained/7B-3
 OVERWRITE_OUTPUT_DIR=true
 DO_TRAIN=true
 DO_EVAL=true
 PER_DEVICE_TRAIN_BATCH_SIZE=1
 PER_DEVICE_EVAL_BATCH_SIZE=1
-BLOCK_SIZE=128
+BLOCK_SIZE=1024
 EVALUATION_STRATEGY=steps
 EVAL_STEPS=50
 LEARNING_RATE=3e-4
@@ -69,7 +69,7 @@ ADAM_BETA1=0.9
 ADAM_BETA2=0.95
 ADAM_EPSILON=1e-5
 MAX_GRAD_NORM=1.0
-NUM_TRAIN_EPOCHS=8
+NUM_TRAIN_EPOCHS=3
 LR_SCHEDULER_TYPE=cosine
 WARMUP_STEPS=0
 LOG_LEVEL=passive
