@@ -1,37 +1,20 @@
-import json
-from os import system, name
 import os
 import json_fix
 import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pandas import DataFrame
-from scipy.__config__ import show
+from question import Question
 
-class Question:
-    def __init__(self, question, transformed, generated, true_answer, num_answers, type, source, context, true_input, answered, points, total_answers):
-        self.question = question
-        self.transformed = transformed
-        self.generated = generated
-        self.true_answer = true_answer
-        self.num_answers = num_answers
-        self.type = type
-        self.source = source
-        self.context = context
-        self.true_input = true_input
-        self.answered = answered
-        self.points: int = points
-        self.total_answers = total_answers
-    def __json__(self):
-        return self.__dict__
+from pandas import DataFrame
+
 
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluation of the generated questions")
     parser.add_argument("-d", "--data", type=str, help="Path to the evaluated questions", 
                         default="evaluation/input")
-    parser.add_argument("-o", "--output", type=str, help="Path to the output file", default="evaluation/output")
+    parser.add_argument("-o", "--output", type=str, help="Path to the output file", default="evaluation/criterias/correctness")
     args = parser.parse_args()
     
     models: list[list[Question]] = []
@@ -39,8 +22,7 @@ def main():
     for file in os.listdir(args.data):
         if file.endswith(".json"):
             model_names.append(file[:-5])
-            with open(os.path.join(args.data, file), "r", encoding="utf-8") as json_file:
-                models.append(json.load(json_file, object_hook=lambda d: Question(**d)))
+            models.append(Question.read_json(os.path.join(args.data, file)))
     
     df = DataFrame(columns=["Model", "Num_Correct", "Num_Wrong", "Num_Unanswered", "Num_Questions", "MacroF1", "Num_Correct_Single", "Num_Wrong_Single", "Num_Unanswered_Single", "Num_Questions_Single", "MacroF1_Single", "Num_Correct_Multi", "Num_Wrong_Multi", "Num_Unanswered_Multi", "Num_Questions_Multi", "MacroF1_Multi", "Num_Correct_Transfer", "Num_Wrong_Transfer", "Num_Unanswered_Transfer", "Num_Questions_Transfer", "MacroF1_Transfer"])
     
