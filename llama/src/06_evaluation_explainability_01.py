@@ -1,11 +1,9 @@
 import json
-import os
 # import only system from os
 from os import system, name
 from question import Question
 import argparse
 import json_fix
-import matplotlib.pyplot as plt
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluation of the generated questions")
@@ -51,9 +49,10 @@ def main():
         else:
             explained.append(question)
         clear()
-    
-    json.dump(explained, open(f"{args.output}_explained.json", "w", encoding="utf-8"), indent=4, ensure_ascii=False)
-    json.dump(non_explained, open(f"{args.output}_non_explained.json", "w", encoding="utf-8"), indent=4, ensure_ascii=False)
+    with open(f"{args.output}_explained.json", "w", encoding="utf-8") as f:
+        json.dump(explained, f, indent=4, ensure_ascii=False)
+    with  open (f"{args.output}_not_explained.json", "w", encoding="utf-8") as f:
+        json.dump(non_explained, f, indent=4, ensure_ascii=False)
     
     
         

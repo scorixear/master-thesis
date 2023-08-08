@@ -9,36 +9,36 @@ import numpy as np
 def main():
     parser = argparse.ArgumentParser(description="Evaluation of the generated questions")
     parser.add_argument("-d", "--data", type=str, help="Path to the evaluated questions", 
-                        default="evaluation/criterias/explainability")
-    parser.add_argument("-o", "--output", type=str, help="Path to the output file", default="evaluation/criterias/explainability")
+                        default="evaluation/criterias/question_understanding")
+    parser.add_argument("-o", "--output", type=str, help="Path to the output file", default="evaluation/criterias/question_understanding")
     args = parser.parse_args()
     
     models: dict[str, tuple[list[Question], list[Question]]] = {}
     
     for file in os.listdir(args.data):
         if file.endswith(".json"):
-            if(file.endswith("_not_explained.json")):
-                name = file[:-19]
+            if(file.endswith("_not_understood.json")):
+                name = file[:-20]
                 if(name not in models):
                     models[name] = ([], Question.read_json(os.path.join(args.data, file)))
                 else:
                     models[name] = (models[name][0],Question.read_json(os.path.join(args.data, file)))
             else:
-                name = file[:-15]
+                name = file[:-16]
                 if name not in models:
                     models[name] = (Question.read_json(os.path.join(args.data, file)), [])
                 else:
                     models[name] = (Question.read_json(os.path.join(args.data, file)), models[name][1])
     
-    explained = []
-    not_explained = []
+    understood = []
+    not_understood = []
     
     for model in models.keys():
-        explained.append(len(models[model][0]))
-        not_explained.append(len(models[model][1]))
-    explained_plot = {
-        "Nicht Erklärt": np.array(not_explained),
-        "Erklärt": np.array(explained),
+        understood.append(len(models[model][0]))
+        not_understood.append(len(models[model][1]))
+    understood_plot = {
+        "Nicht Verstanden": np.array(not_understood),
+        "Verstamdem": np.array(understood),
     }
     
     fig = plt.figure(figsize=(20, 10))
@@ -46,13 +46,13 @@ def main():
     bottom = np.array([0] * len(models.keys()))
     colors = ["green", "grey"]
     model_names = list(models.keys())
-    for boolean, answer in explained_plot.items():
+    for boolean, answer in understood_plot.items():
         bars = axis.bar(model_names, answer, width=0.5, label=boolean, bottom=bottom, color=colors.pop())
         axis.bar_label(bars)
         bottom += answer
     axis.legend()
-    axis.set_title("Anzahl der Antworten, die erklärt wurden")
-    fig.savefig(os.path.join(args.output, "explained.png"))
+    axis.set_title("Anzahl der Fragen, die verstanden wurden")
+    fig.savefig(os.path.join(args.output, "understood.png"))
 
 if __name__ == "__main__":
     main()

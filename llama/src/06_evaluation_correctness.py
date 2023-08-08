@@ -141,17 +141,19 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     bottom = np.array([0] * len(names))
     colors = ["grey", "red", "green"]
     for boolean, answer in answers.items():
-        axis.bar(names, answer, width=0.5, label=boolean, bottom=bottom, color=colors.pop())
+        bars = axis.bar(names, answer, width=0.5, label=boolean, bottom=bottom, color=colors.pop())
         bottom += answer
+        axis.bar_label(bars)
     axis.legend()
-    axis.set_title(title)
+    axis.set_title(title, pad=15)
     fig.savefig(file_name)
 
 def show_makrof1_bars(f1, names, title, file_name):
     fig = plt.figure(figsize=(20,10))
     axis = fig.subplots()
     
-    axis.bar(names, f1, width=0.5)
+    bars = axis.bar(names, f1, width=0.5)
+    axis.bar_label(bars)
     axis.set_title(title)
     fig.savefig(file_name)
 
