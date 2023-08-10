@@ -1,4 +1,4 @@
-Fragen;Umformuliert;Antworten;Anzahl_Antworten;Quelle;Kontext
+question;transformed;true_answer;num_answers;source;context
 Look at the entity type “patient” that is interpreted and updated by various functions. Which functions update the patient information, which functions interpret it?;"Look at the entity type “patient” that is interpreted and updated by various functions to be performed by health care professionals and other staff in health care facilities. Which functions update the patient information, which functions interpret it?
 ";The entity type “patient” is updated by the function “patient admission.” All other functions that are related to patient care interpret it.;1;Book;
 "Look at the 3LGM^2 example in Sect. 2.15.

@@ -1,4 +1,4 @@
-Question,Transformed,Generated,True_Answer,Num_Answers,Type,Source,Context,True_Input
+question,transformed,generated,true_answer,num_answers,type,source,context,true_input
 "In Sect. 4.2, we introduced a three-dimensional classification of activities of management of information systems. How would you describe the scope and tasks of the following activities of managing information systems? - Developing a strategic information management plan (e.g., this is related to strategic planning),",How would you describe the scope and tasks of the following activities of managing information systems: Developing a strategic information management plan,"Developing a strategic information management plan is a critical activity in managing information systems. It involves the systematic process of establishing a long-term plan that integrates the organization's goals with its information system capabilities. This strategic plan is a key tool for ensuring that an organization's technology and information systems are aligned with its business objectives.
 
 The scope of this activity is wide and typically includes:
