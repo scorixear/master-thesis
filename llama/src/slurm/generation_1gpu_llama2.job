@@ -21,7 +21,7 @@ srun pip install accelerate
 srun pip install sentencepiece
 
 
-MODEL_DIR=./trained/7B-1
-OUTPUT_PATH=./output/generated_1e.csv
+MODEL_DIR=./trained/7B-3
+OUTPUT_PATH=./output/generated_3e_spelling.csv
 
 srun python 04_predict_llama2.py --model-dir $MODEL_DIR --output-path $OUTPUT_PATH

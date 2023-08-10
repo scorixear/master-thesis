@@ -140,8 +140,8 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     }
     bottom = np.array([0] * len(names))
     colors = ["grey", "red", "green"]
-    for boolean, answer in answers.items():
-        bars = axis.bar(names, answer, width=0.5, label=boolean, bottom=bottom, color=colors.pop())
+    for labels, answer in answers.items():
+        bars = axis.bar(names, answer, width=0.5, label=labels, bottom=bottom, color=colors.pop())
         bottom += answer
         axis.bar_label(bars)
     axis.legend()

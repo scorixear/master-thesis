@@ -3,6 +3,7 @@ import json_fix
 import argparse
 import matplotlib.pyplot as plt
 import numpy as np
+from sympy import evaluate
 
 from question import Question
 from pandas import DataFrame
@@ -89,10 +90,11 @@ def main():
                 elif question.answered == 2:
                     num_transfer_correct += 1
                 transfer_f1_scores.append(f1)
-        macro_f1 = sum(f1_scores) / len(f1_scores)
-        macro_f1_single = sum(single_f1_scores) / len(single_f1_scores)
-        macro_f1_multi = sum(multi_f1_scores) / len(multi_f1_scores)
-        macro_f1_transfer = sum(transfer_f1_scores) / len(transfer_f1_scores)
+
+        macro_f1 = sum(f1_scores) / 97
+        macro_f1_single = sum(single_f1_scores) / 38
+        macro_f1_multi = sum(multi_f1_scores) / 38
+        macro_f1_transfer = sum(transfer_f1_scores) / 21
         
         questions = num_correct + num_wrong + num_unanswered
         questions_single = num_single_correct + num_single_wrong + num_single_unanswered
@@ -125,10 +127,10 @@ def main():
     num_transfer_unanswered = np.array(df["Num_Unanswered_Transfer"].tolist())
     show_answer_bars(num_transfer_correct, num_transfer_wrong, num_transfer_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen (Transfer) - Robustheit", args.output + "/answers_transfer.png")
     
-    show_makrof1_bars(df["MacroF1"].toList(), model_names, "Makro F1 - Robustheit", args.output + "/makro_total.png")
-    show_makrof1_bars(df["MacroF1_Single"].toList(), model_names, "Makro F1 (Single) - Robustheit", args.output + "/makro_single.png")
-    show_makrof1_bars(df["MacroF1_Multi"].toList(), model_names, "Makro F1 (Multi) - Robustheit", args.output + "/makro_multi.png")
-    show_makrof1_bars(df["MacroF1_Transfer"].toList(), model_names, "Makro F1 (Transfer) - Robustheit", args.output + "/makro_transfer.png")
+    show_makrof1_bars(df["MacroF1"].tolist(), model_names, "Makro F1 - Robustheit", args.output + "/makro_total.png")
+    show_makrof1_bars(df["MacroF1_Single"].tolist(), model_names, "Makro F1 (Single) - Robustheit", args.output + "/makro_single.png")
+    show_makrof1_bars(df["MacroF1_Multi"].tolist(), model_names, "Makro F1 (Multi) - Robustheit", args.output + "/makro_multi.png")
+    show_makrof1_bars(df["MacroF1_Transfer"].tolist(), model_names, "Makro F1 (Transfer) - Robustheit", args.output + "/makro_transfer.png")
     
     
     makro_eval = evaluated["MacroF1"].tolist()
@@ -155,7 +157,7 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     bottom = np.zeros(len(names))
     colors = ["grey", "red", "green"]
     for labels, answer in answers.items():
-        bars = axis.bar(names, answer, width=0.5, label=labels, bottom=bottom, colors=colors.pop())
+        bars = axis.bar(names, answer, width=0.5, label=labels, bottom=bottom, color=colors.pop())
         bottom += answer
         axis.bar_label(bars)
     axis.legend()
@@ -190,8 +192,8 @@ def show_comparison_bars(f1, evalf1, names, title, file_name):
     axis.set_ylabel("MakroF1")
     axis.set_title(title, pad=15)
     axis.set_xticks(x_labels+width, names)
-    axis.legend(loc="upper left", ncols=2)
-    axis.set_ylim(0, 250)
+    axis.legend(loc="upper left")
+    axis.set_ylim(0, 1)
     
     fig.savefig(file_name)
 

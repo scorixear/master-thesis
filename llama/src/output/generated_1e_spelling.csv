@@ -1,0 +1,158 @@
+Question,Transformed,Generated,True_Answer,Num_Answers,Type,Source,Context,True_Input
+Was wird standardisiert?,What are commen standerds used in health informtion sytems?,"
+ ### 1. Health information systems as information processing systems
+ ### 2. Health information systems as information processing systems
+ ### 3. Health information systems as information processing systems
+ ### 4. Health information systems as information processing systems
+ ### 5. Health information systems as information processing systems
+ ### 6. Health information systems as information processing systems
+ ### 7. Health information systems as information processing systems
+ ### 8. Health information systems as information processing systems
+ ### 9. Health information systems as information processing systems
+ ### 10. Health information systems as information processing systems
+ ### 11. Health information systems as information processing systems
+ ### 12. Health information systems as information processing systems
+ ### 13. Health information systems as information processing systems
+ ### 14. Health information systems as information processing systems
+ ### 15. Health information systems as information processing systems
+ ### 16. Health information systems as information processing systems
+ ### 17. Health information systems as information processing systems
+ ### 18. Health information systems as information processing systems
+ ### 19. Health information systems as information processing systems
+ ### 20. Health information systems as information processing systems
+ ### 21. Health information systems as information processing systems
+ ### 22. Health information systems as information processing systems
+ ### 23. Health information systems as information processing systems
+ ### 24. Health information systems as information processing systems
+ ### 25. Health information systems as information processing systems
+ ### 26. Health information systems as information processing systems
+ ### 27. Health information systems as information processing systems
+ ### 28. Health information systems as information processing systems
+ ### 29. Health information systems as information processing systems
+ ### 30. Health information systems as information processing systems
+ ### 31. Health information systems as information processing systems
+ ### 32. Health information systems as information processing systems
+ ### 33. Health information systems as information processing systems
+ ### 34. Health information systems as information processing systems
+ ### 35. Health information systems as information processing systems
+ ### 36. Health information systems as information processing systems
+ ### 37. Health information systems as information processing systems
+ ###","HL7v2
+CDA
+HL7 FHIR
+DICOM
+ISO/IEEE 11073
+CCOW (Clinical Context Object Workgroup)
+EDIFACT (Electronic Data Interchange for Administration, Commerce and Transport)
+SNOMED, LOINC
+openEHR
+CDISC (Clinical Data Interchange Standards Consortium)",11,multi,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Question: What are commen standerds used in health informtion sytems?
+Answer: "
+"Look at the functions presented in Sect. 3.3.2. Now imagine a small hospital (e.g., 350 beds) and a large university medical center (e.g., 1500 beds). What are the differences between these hospitals with regard to their functions? Explain your answer.","Imagin a small hospitul (e.g., 350 beds) and a large university medical center (e.g., 1500 beds). What are the differnces between these hospitals with regard to their funtions to be preformed by health care proffesionals and other staff in health care facilties? Explain your answear.","
+ ###
+ ### 
+ ### 
+ ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ### ### 
+ ###","A typical hospital needs all functions to function as expected. The functions to be performed by health care professionals are mostly similar in all health care facilities, independent of their size. Only some functions may differ. For example, not all health care facilities are involved in clinical research, thus their information will not need to support the function research and education.",1,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Question: Imagin a small hospitul (e.g., 350 beds) and a large university medical center (e.g., 1500 beds). What are the differnces between these hospitals with regard to their funtions to be preformed by health care proffesionals and other staff in health care facilties? Explain your answear.
+Answer: "
