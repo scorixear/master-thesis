@@ -50,15 +50,15 @@ def main():
     for index, item in enumerate(generated_questions):
         clear()
         print(f"Question {index+1}/{len(generated_questions)}")
-        question = item["Question"]
-        transformed = item["Transformed"]
-        generated = item["Generated"]
-        true_answer = item["True_Answer"]
-        number_of_answers = item["Num_Answers"]
-        q_type = item["Type"]
-        source = item["Source"]
-        context = item["Context"]
-        true_input = item["True_Input"]
+        question = item["question"]
+        transformed = item["transformed"]
+        generated = item["generated"]
+        true_answer = item["true_answer"]
+        number_of_answers = item["num_answers"]
+        q_type = item["type"]
+        source = item["source"]
+        context = item["context"]
+        true_input = item["true_input"]
         
         current_question = Question(question, transformed, generated, true_answer, number_of_answers, q_type, source, context, true_input)
         questions.append(current_question)

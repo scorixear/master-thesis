@@ -74,15 +74,15 @@ Examples can be found in `/output` named `generated_*.json`
 ```json
 [
     {
-        "Question": "Example Question", <-- this is the actual question / questions from the sources
-        "Transformed": "Example Question", <-- this is the question that was used for generating answers. It is "Fragen" translated to english and slightly modified.
-        "Generated": "Example Answer", <-- this is the generated answer
-        "True_Answer": "Example Answer", <-- this is the true answer that is expected
-        "Num_Answers": 1, <-- number of answers that are in "True_Answer" contained
-        "Type": "single", <-- type of question, either "single", "multi" or "transfer"
-        "Source": "Example Source", <-- source of the question
-        "Context": "Example Context", <-- context of the question
-        "True_Input": "Example Input", <-- actual input that was used for generating the answer
+        "question": "Example Question", <-- this is the actual question / questions from the sources
+        "transformed": "Example Question", <-- this is the question that was used for generating answers. It is "question" translated to english and slightly modified.
+        "generated": "Example Answer", <-- this is the generated answer
+        "true_answer": "Example Answer", <-- this is the true answer that is expected
+        "num_answers": 1, <-- number of answers that are in "true_answer" contained
+        "type": "single", <-- type of question, either "single", "multi" or "transfer"
+        "source": "Example Source", <-- source of the question
+        "context": "Example Context", <-- context of the question
+        "true_input": "Example Input", <-- actual input that was used for generating the answer
     }
 ]
 ```
@@ -96,7 +96,7 @@ Examples can be found in `/output` named `evaluated_*.json`
 [
     {
         "question": "Example Question", <-- this is the actual question / questions from the sources
-        "transformed": "Example Question", <-- this is the question that was used for generating answers. It is "Fragen" translated to english and slightly modified.
+        "transformed": "Example Question", <-- this is the question that was used for generating answers. It is "question" translated to english and slightly modified.
         "generated": "Example Answer", <-- this is the generated answer
         "true_answer": "Example Answer", <-- this is the true answer that is expected
         "num_answers": 1, <-- number of answers that are in "true_answer" contained
@@ -119,7 +119,7 @@ Examples can be found under `/output` named `evaluated_*_2.json`.
 [
     {
         "question": "Example Question", <-- this is the actual question / questions from the sources
-        "transformed": "Example Question", <-- this is the question that was used for generating answers. It is "Fragen" translated to english and slightly modified.
+        "transformed": "Example Question", <-- this is the question that was used for generating answers. It is "question" translated to english and slightly modified.
         "generated": "Example Answer", <-- this is the generated answer
         "true_answer": "Example Answer", <-- this is the true answer that is expected
         "num_answers": 1, <-- number of answers that are in "true_answer" contained
@@ -143,7 +143,7 @@ Examples can be found under `/evaluation/criterias/explainability` named `[model
 [
     {
         "question": "Example Question", <-- this is the actual question / questions from the sources
-        "transformed": "Example Question", <-- this is the question that was used for generating answers. It is "Fragen" translated to english and slightly modified.
+        "transformed": "Example Question", <-- this is the question that was used for generating answers. It is "question" translated to english and slightly modified.
         "generated": "Example Answer", <-- this is the generated answer
         "true_answer": "Example Answer", <-- this is the true answer that is expected
         "num_answers": 1, <-- number of answers that are in "true_answer" contained
@@ -167,7 +167,7 @@ Examples can be found under `/evaluation/criterias/question_understanding` named
 [
     {
         "question": "Example Question", <-- this is the actual question / questions from the sources
-        "transformed": "Example Question", <-- this is the question that was used for generating answers. It is "Fragen" translated to english and slightly modified.
+        "transformed": "Example Question", <-- this is the question that was used for generating answers. It is "question" translated to english and slightly modified.
         "generated": "Example Answer", <-- this is the generated answer
         "true_answer": "Example Answer", <-- this is the true answer that is expected
         "num_answers": 1, <-- number of answers that are in "true_answer" contained

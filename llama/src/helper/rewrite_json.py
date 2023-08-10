@@ -1,6 +1,6 @@
 import json
 
-file_path = "llama/src/data/transfer_questions.json"
+file_path = "llama/src/output/generated_1e_spelling.json"
 
 with open(file_path, "r", encoding="UTF-8") as f:
     data = json.load(f)
@@ -8,11 +8,14 @@ with open(file_path, "w", encoding="UTF-8") as f:
     new_data = []
     for d in data:
         new_data.append({
-            "question": d["Fragen"],
-            "transformed": d["Umformuliert"],
-            "true_answer": d["Antworten"],
-            "num_answers": d["Anzahl_Antworten"],
-            "source": d["Quelle"],
-            "context": d["Kontext"],
+            "question": d["Question"],
+            "transformed": d["Transformed"],
+            "generated": d["Generated"],
+            "true_answer": d["True_Answer"],
+            "num_answers": d["Num_Answers"],
+            "type": d["Type"],
+            "source": d["Source"],
+            "context": d["Context"],
+            "true_input": d["True_Input"]
         })
     json.dump(new_data, f, indent=2)
