@@ -37,20 +37,21 @@ def main():
         understood.append(len(models[model][0]))
         not_understood.append(len(models[model][1]))
     understood_plot = {
+        "Verstanden": np.array(understood),
         "Nicht Verstanden": np.array(not_understood),
-        "Verstamdem": np.array(understood),
     }
     
     fig = plt.figure(figsize=(20, 10))
     axis = fig.subplots()
     bottom = np.array([0] * len(models.keys()))
-    colors = ["green", "grey"]
+    colors = ["silver", "green"]
     model_names = list(models.keys())
     for boolean, answer in understood_plot.items():
         bars = axis.bar(model_names, answer, width=0.5, label=boolean, bottom=bottom, color=colors.pop())
         axis.bar_label(bars)
         bottom += answer
     axis.legend()
+    axis.set_ylabel("Anzahl der Fragen")
     axis.set_title("Anzahl der Fragen, die verstanden wurden")
     fig.savefig(os.path.join(args.output, "understood.png"))
 

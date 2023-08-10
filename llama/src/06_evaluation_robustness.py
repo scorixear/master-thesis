@@ -155,12 +155,13 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     }
     
     bottom = np.zeros(len(names))
-    colors = ["grey", "red", "green"]
+    colors = ["silver", "lightcoral", "green"]
     for labels, answer in answers.items():
         bars = axis.bar(names, answer, width=0.5, label=labels, bottom=bottom, color=colors.pop())
         bottom += answer
         axis.bar_label(bars)
     axis.legend()
+    axis.set_ylabel("Anzahl der Antworten")
     axis.set_title(title, pad=15)
     fig.savefig(file_name)
 def show_makrof1_bars(f1, names, title, file_name):
@@ -169,6 +170,7 @@ def show_makrof1_bars(f1, names, title, file_name):
     
     bars = axis.bar(names, f1, width=0.5)
     axis.bar_label(bars)
+    axis.set_ylabel("Makro F1")
     axis.set_title(title, pad=15)
     fig.savefig(file_name)
 
@@ -189,7 +191,7 @@ def show_comparison_bars(f1, evalf1, names, title, file_name):
         axis.bar_label(bars, padding=3)
         multiplier += 1
 
-    axis.set_ylabel("MakroF1")
+    axis.set_ylabel("Makro F1")
     axis.set_title(title, pad=15)
     axis.set_xticks(x_labels+width, names)
     axis.legend(loc="upper left")

@@ -37,20 +37,21 @@ def main():
         explained.append(len(models[model][0]))
         not_explained.append(len(models[model][1]))
     explained_plot = {
-        "Nicht Erklärt": np.array(not_explained),
         "Erklärt": np.array(explained),
+        "Nicht Erklärt": np.array(not_explained),
     }
     
     fig = plt.figure(figsize=(20, 10))
     axis = fig.subplots()
     bottom = np.array([0] * len(models.keys()))
-    colors = ["green", "grey"]
+    colors = ["silver", "green"]
     model_names = list(models.keys())
     for boolean, answer in explained_plot.items():
         bars = axis.bar(model_names, answer, width=0.5, label=boolean, bottom=bottom, color=colors.pop())
         axis.bar_label(bars)
         bottom += answer
     axis.legend()
+    axis.set_ylabel("Anzahl der Antworten")
     axis.set_title("Anzahl der Antworten, die erklärt wurden")
     fig.savefig(os.path.join(args.output, "explained.png"))
 

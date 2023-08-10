@@ -128,7 +128,6 @@ def main():
     show_makrof1_bars(df["MacroF1_Single"].tolist(), model_names, "Makro F1 (Single)", args.output+"/makro_single.png")
     show_makrof1_bars(df["MacroF1_Multi"].tolist(), model_names, "Makro F1 (Multi)", args.output+"/makro_multi.png")
     show_makrof1_bars(df["MacroF1_Transfer"].tolist(), model_names, "Makro F1 (Transfer)", args.output+"/makro_transfer.png")
-    plt.show()
 
 def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     fig = plt.figure(figsize=(20,10))
@@ -139,12 +138,13 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
         "Unbeantwortet": unanswered
     }
     bottom = np.array([0] * len(names))
-    colors = ["grey", "red", "green"]
+    colors = ["silver", "lightcoral", "green"]
     for labels, answer in answers.items():
         bars = axis.bar(names, answer, width=0.5, label=labels, bottom=bottom, color=colors.pop())
         bottom += answer
         axis.bar_label(bars)
     axis.legend()
+    axis.set_ylabel("Anzahl der Fragen")
     axis.set_title(title, pad=15)
     fig.savefig(file_name)
 
@@ -154,6 +154,7 @@ def show_makrof1_bars(f1, names, title, file_name):
     
     bars = axis.bar(names, f1, width=0.5)
     axis.bar_label(bars)
+    axis.set_ylabel("Makro F1")
     axis.set_title(title)
     fig.savefig(file_name)
 
