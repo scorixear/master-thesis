@@ -1,10 +1,12 @@
 import json
 from os import system, name
-import json_fix
+import json_fix  # this import is needed for def __json__(self) although not used
 import argparse
 
 
 class Question:
+    """Represent one question and their data
+    """
     def __init__(self, question, transformed, generated, true_answer, num_answers, q_type, source, context, true_input, answered, points):
         self.question = question
         self.transformed = transformed
@@ -22,15 +24,19 @@ class Question:
         return self.__dict__
 
 def main():
+    # parse arguments
     parser = argparse.ArgumentParser(description="Evaluation of the generated questions")
+    # path to evaluated question json file
     parser.add_argument("-d", "--data", type=str, help="Path to the evaluated questions", 
                         default="output/evaluated.json")
+    # path to json output file
     parser.add_argument("-o", "--output", type=str, help="Path to the output file", default="output/evaluated.json")
     args = parser.parse_args()
+    # read in evaluated questions
     input_file = args.data
     with open(input_file, "r", encoding="utf-8") as json_file:
         evaluated_questions = json.load(json_file)
-        
+    # print starting screen
     print("=====================================================================================================")
     print("2nd Evaluation of the generated questions")
     print("=====================================================================================================")
@@ -39,9 +45,13 @@ def main():
     print("=====================================================================================================")
     input("Press Enter to continue...")
     questions = []
+    # for each question
     for index, item in enumerate(evaluated_questions):
+        # clear the screen
         clear()
+        # print progess
         print(f"Question {index+1}/{len(evaluated_questions)}")
+        # extract question data
         question = item["question"]
         transformed = item["transformed"]
         generated = item["generated"]
@@ -54,12 +64,15 @@ def main():
         answered= item["answered"]
         points= item["points"]
         
+        # create question object
         current_question = Question(question, transformed, generated, true_answer, num_answers, q_type, source, context, true_input, answered, points)
         questions.append(current_question)
         
+        # if the question could not be answered by model, skip it
         if(answered == 0):
             current_question.total_answers = 0
             continue
+        # print question data
         print("=====================================================================================================")
         print(f"Question:\n{transformed}")
         print("=====================================================================================================")
@@ -72,26 +85,37 @@ def main():
         print(f"Generated Answer:\n{generated}")
         print("=====================================================================================================")
         while True:
+            # get total amount of answers contained in generated answer
             total_answers = input("How many answers are given in general?\n")
+            # try parsing int
             total_answers = int(total_answers) if total_answers.isdecimal() else None
+            # if total_answers is int
             if total_answers is not None:
+                # but below 0, get again
                 if total_answers < 0:
                     print("Please enter a positive number")
                     continue
+                # otherwise set
                 current_question.total_answers = total_answers
                 break
+            # if total_answers is not int, get again
             else:
                 print("Please enter a number")
                 continue
         print("=====================================================================================================")
+    # and save the questions
     save_questions(questions, args.output)
 def save_questions(questions, output_file):
     with open(output_file, "w", encoding="utf-8") as json_file:
         json.dump(questions, json_file, indent=4, ensure_ascii=False)
 
 def clear():
+    """Clears terminal screen
+    """
+    # for windows
     if name == "nt":
         _ = system("cls")
+    # for mac, linux
     else:
         _ = system("clear")
 
