@@ -1,50 +1,50 @@
 [
   {
-    "Fragen": "In Sect. 4.2, we introduced a three-dimensional classification of activities of management of information systems. How would you describe the scope and tasks of the following activities of managing information systems? - Developing a strategic information management plan (e.g., this is related to strategic planning),",
-    "Umformuliert": "How would you discribe the scope an tasks for the following activites of managing informations systems: Developping a strategic information managment plan?",
-    "Antworten": "Developing a strategic information management plan: strategic planning",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "In Sect. 4.2, we introduced a three-dimensional classification of activities of management of information systems. How would you describe the scope and tasks of the following activities of managing information systems? - Developing a strategic information management plan (e.g., this is related to strategic planning),",
+    "transformed": "How would you discribe the scope an tasks for the following activites of managing informations systems: Developping a strategic information managment plan?",
+    "true_answer": "Developing a strategic information management plan: strategic planning",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "Definieren Sie den Begriff „transinstitutionelles Gesundheitsinformationssystem“. Verwenden Sie dabei den Begriff des „Settings“.",
-    "Umformuliert": "Define the term \"trans-instutional health information sistem\". Use the term \"seting\" for this porpose.",
-    "Antworten": "A transinstitutional health information system is the socio-technical subsystem which comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. It cdescribes the information system of a health care network, in which multiple Settings are present. Each setting is a context this information system is used in, for example in the stationary or ambulant care, but also rehabilitation or care of the elder.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Definieren Sie den Begriff \u201etransinstitutionelles Gesundheitsinformationssystem\u201c. Verwenden Sie dabei den Begriff des \u201eSettings\u201c.",
+    "transformed": "Define the term \"trans-instutional health information sistem\". Use the term \"seting\" for this porpose.",
+    "true_answer": "A transinstitutional health information system is the socio-technical subsystem which comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. It cdescribes the information system of a health care network, in which multiple Settings are present. Each setting is a context this information system is used in, for example in the stationary or ambulant care, but also rehabilitation or care of the elder.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "tHIS?",
-    "Umformuliert": "Defne the tirm \"tHIS\".",
-    "Antworten": "tHIS stands for transinstitutional health information system, an information system of a health care network which consists of multiple health care settings (contexts). It comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "tHIS?",
+    "transformed": "Defne the tirm \"tHIS\".",
+    "true_answer": "tHIS stands for transinstitutional health information system, an information system of a health care network which consists of multiple health care settings (contexts). It comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Was ist ein Archetype?",
-    "Umformuliert": "What is an archtype in the context of health information sistems?",
-    "Antworten": "An archetype is a formal specification of a clinical concept that can be used to create interoperable and resuable electronic health records. Archetypoes are designed to be independent of any specific EHR system and are intended to be used as building blocks for EHRs.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Was ist ein Archetype?",
+    "transformed": "What is an archtype in the context of health information sistems?",
+    "true_answer": "An archetype is a formal specification of a clinical concept that can be used to create interoperable and resuable electronic health records. Archetypoes are designed to be independent of any specific EHR system and are intended to be used as building blocks for EHRs.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Ist „Dokumentation“ eine datenverarbeitende Aufgabe bzw. eine enterprise function?",
-    "Umformuliert": "Is \"documentaton\" a data procesing task or an enterprise funtion?",
-    "Antworten": "A data processing task",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Ist \u201eDokumentation\u201c eine datenverarbeitende Aufgabe bzw. eine enterprise function?",
+    "transformed": "Is \"documentaton\" a data procesing task or an enterprise funtion?",
+    "true_answer": "A data processing task",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Wie erfolgt die Kommunikation der Anforderung (order) an das LIS?",
-    "Umformuliert": "How is the request (order) comunicated to the LIS?",
-    "Antworten": "It isn't. The call is made from the work place during the context integration of patient identifying data to the LIS.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Wie erfolgt die Kommunikation der Anforderung (order) an das LIS?",
+    "transformed": "How is the request (order) comunicated to the LIS?",
+    "true_answer": "It isn't. The call is made from the work place during the context integration of patient identifying data to the LIS.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   }
 ]

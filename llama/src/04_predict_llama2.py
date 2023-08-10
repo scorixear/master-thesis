@@ -41,7 +41,7 @@ def main():
     multi_question_dataset = read_json("data/multi_questions.json")
     transfer_question_dataset = read_json("data/transfer_questions.json")
     
-    dataframe = pd.DataFrame(columns=["Question", "Transformed", "Generated", "True_Answer", "Num_Answers", "Type", "Source", "Context", "True_Input"])
+    dataframe = pd.DataFrame(columns=["question", "transformed", "generated", "true_answer", "num_answers", "type", "source", "context", "true_input"])
     
     model_dir = args.model_dir
     output_file = args.output_path
@@ -66,21 +66,21 @@ def main():
 def read_json(file):
     with open(file, "r", encoding="utf-8") as f:
         data = json.load(f)
-    df = pd.DataFrame(columns=["Fragen", "Umformuliert", "Antworten", "Anzahl_Antworten", "Quelle", "Kontext"])
+    df = pd.DataFrame(columns=["question", "transformed", "true_answer", "num_answers", "source", "context"])
     for item in data:
-        df.loc[len(df)] = [item["Fragen"], item["Umformuliert"], item["Antworten"], item["Anzahl_Antworten"], item["Quelle"], item["Kontext"]]
+        df.loc[len(df)] = [item["question"], item["transformed"], item["true_answer"], item["num_answers"], item["source"], item["context"]]
     return df
 
 def generate_for_single_csv(tokenizer: transformers.PreTrainedTokenizer | transformers.PreTrainedTokenizerFast, model, csv_df: pd.DataFrame, csv_type: str, output_df: pd.DataFrame):
     for index, row in csv_df.iterrows():
         print(f"{index}/{len(csv_df)} Questions")
         print(f"Generation {index}/{len(csv_df)}")
-        question = row["Fragen"]
-        transformed_question = row["Umformuliert"]
-        true_answer = row["Antworten"]
-        num_answers = row["Anzahl_Antworten"]
-        source = row["Quelle"]
-        context = row["Kontext"]
+        question = row["question"]
+        transformed_question = row["transformed"]
+        true_answer = row["true_answer"]
+        num_answers = row["num_answers"]
+        source = row["source"]
+        context = row["context"]
         
         if context != "":
             prompt = f"Instruction: You are given a question and a context. Answer the question to your best knowledge.\nQuestion: {transformed_question}\nContext: {context}\nAnswer: "

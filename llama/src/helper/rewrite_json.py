@@ -1,6 +1,6 @@
 import json
 
-file_path = "llama/src/data/multi_questions_spelling_llama2_1e.json"
+file_path = "llama/src/data/transfer_questions.json"
 
 with open(file_path, "r", encoding="UTF-8") as f:
     data = json.load(f)

@@ -1,42 +1,42 @@
 [
   {
-    "Fragen": "- Initiating projects from the strategic project portfolio,",
-    "Umformuliert": "How would you discribe the scope an tasks of the following activites of manageing information system: from the startegic project portfollio Initiating project?",
-    "Antworten": "Initiating projects from the strategic project portfolio: strategic directing",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "- Initiating projects from the strategic project portfolio,",
+    "transformed": "How would you discribe the scope an tasks of the following activites of manageing information system: from the startegic project portfollio Initiating project?",
+    "true_answer": "Initiating projects from the strategic project portfolio: strategic directing",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "- Assessment of user satisfaction with a new intensive care system,",
-    "Umformuliert": "How would you discribe the scope an tasks of the following activites of manageing information sytems: Assesment of user satisfaction with a new intensive care system?",
-    "Antworten": "Assessment of user satisfaction with a new intensive care system: tactical monitoring",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "- Assessment of user satisfaction with a new intensive care system,",
+    "transformed": "How would you discribe the scope an tasks of the following activites of manageing information sytems: Assesment of user satisfaction with a new intensive care system?",
+    "true_answer": "Assessment of user satisfaction with a new intensive care system: tactical monitoring",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "Erläutern Sie die Taxonomy für Krankenhausinformationssysteme!",
-    "Umformuliert": "Explain the taxanomy for hospital information sistems!",
-    "Antworten": "The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Erl\u00e4utern Sie die Taxonomy f\u00fcr Krankenhausinformationssysteme!",
+    "transformed": "Explain the taxanomy for hospital information sistems!",
+    "true_answer": "The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Welche Speichermedien gewährleisten eine Unveränderbarkeit der Daten?",
-    "Umformuliert": "Which storage media gurantee that the data cannot be changed?",
-    "Antworten": "Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Welche Speichermedien gew\u00e4hrleisten eine Unver\u00e4nderbarkeit der Daten?",
+    "transformed": "Which storage media gurantee that the data cannot be changed?",
+    "true_answer": "Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterstützt?",
-    "Umformuliert": "Which application sistem is usually used to dislay a laboratory finding in the University Hospitul?",
-    "Antworten": "Laboratory Information System",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterst\u00fctzt?",
+    "transformed": "Which application sistem is usually used to dislay a laboratory finding in the University Hospitul?",
+    "true_answer": "Laboratory Information System",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   }
 ]

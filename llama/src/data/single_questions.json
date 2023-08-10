@@ -1,306 +1,306 @@
 [
   {
-    "Fragen": "In Sect. 4.2, we introduced a three-dimensional classification of activities of management of information systems. How would you describe the scope and tasks of the following activities of managing information systems? - Developing a strategic information management plan (e.g., this is related to strategic planning),",
-    "Umformuliert": "How would you describe the scope and tasks of the following activities of managing information systems: Developing a strategic information management plan",
-    "Antworten": "Developing a strategic information management plan: strategic planning",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "In Sect. 4.2, we introduced a three-dimensional classification of activities of management of information systems. How would you describe the scope and tasks of the following activities of managing information systems? - Developing a strategic information management plan (e.g., this is related to strategic planning),",
+    "transformed": "How would you describe the scope and tasks of the following activities of managing information systems: Developing a strategic information management plan",
+    "true_answer": "Developing a strategic information management plan: strategic planning",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "- Initiating projects from the strategic project portfolio,",
-    "Umformuliert": "How would you describe the scope and tasks of the following activities of managing information systems: Initiating projects from the strategic project portfolio",
-    "Antworten": "Initiating projects from the strategic project portfolio: strategic directing",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "- Initiating projects from the strategic project portfolio,",
+    "transformed": "How would you describe the scope and tasks of the following activities of managing information systems: Initiating projects from the strategic project portfolio",
+    "true_answer": "Initiating projects from the strategic project portfolio: strategic directing",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "- Collection and analysis of data from user surveys on their general satisfaction with the health information system,",
-    "Umformuliert": "How would you describe the scope and tasks of the following activities of managing information systems: Collection and analysis of data from user surveys on their general satisfaction with the health information system",
-    "Antworten": "Collecting and analyzing data from user surveys on their general health information system’s satisfaction: strategic monitoring",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "- Collection and analysis of data from user surveys on their general satisfaction with the health information system,",
+    "transformed": "How would you describe the scope and tasks of the following activities of managing information systems: Collection and analysis of data from user surveys on their general satisfaction with the health information system",
+    "true_answer": "Collecting and analyzing data from user surveys on their general health information system\u2019s satisfaction: strategic monitoring",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "- Planning a project to select and introduce a new CPOE system,",
-    "Umformuliert": "How would you describe the scope and tasks of the following activities of managing information systems: Planning a project to select and introduce a new CPOE system",
-    "Antworten": "Planning a project to select and introduce a new CPOE system: tactical planning",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "- Planning a project to select and introduce a new CPOE system,",
+    "transformed": "How would you describe the scope and tasks of the following activities of managing information systems: Planning a project to select and introduce a new CPOE system",
+    "true_answer": "Planning a project to select and introduce a new CPOE system: tactical planning",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "- Executing work packages within an evaluation project of a CPOE system,",
-    "Umformuliert": "How would you describe the scope and tasks of the following activities of managing information systems: Executing work packages within an evaluation project of a CPOE system",
-    "Antworten": "Executing work packages within an evaluation project of a CPOE system: tactical directing",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "- Executing work packages within an evaluation project of a CPOE system,",
+    "transformed": "How would you describe the scope and tasks of the following activities of managing information systems: Executing work packages within an evaluation project of a CPOE system",
+    "true_answer": "Executing work packages within an evaluation project of a CPOE system: tactical directing",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "- Assessment of user satisfaction with a new intensive care system,",
-    "Umformuliert": "How would you describe the scope and tasks of the following activities of managing information systems: Assessment of user satisfaction with a new intensive care system",
-    "Antworten": "Assessment of user satisfaction with a new intensive care system: tactical monitoring",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "- Assessment of user satisfaction with a new intensive care system,",
+    "transformed": "How would you describe the scope and tasks of the following activities of managing information systems: Assessment of user satisfaction with a new intensive care system",
+    "true_answer": "Assessment of user satisfaction with a new intensive care system: tactical monitoring",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "- Planning of a user service desk for a group of clinical application components,",
-    "Umformuliert": "How would you describe the scope and tasks of the following activities of managing information systems: Planning of a user service desk for a group of clinical application components",
-    "Antworten": "Planning of a user service desk for a group of clinical application components: operational planning",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "- Planning of a user service desk for a group of clinical application components,",
+    "transformed": "How would you describe the scope and tasks of the following activities of managing information systems: Planning of a user service desk for a group of clinical application components",
+    "true_answer": "Planning of a user service desk for a group of clinical application components: operational planning",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "- Operation of a service desk for a group of clinical application components,",
-    "Umformuliert": "How would you describe the scope and tasks of the following activities of managing information systems: Operation of a service desk for a group of clinical application components",
-    "Antworten": "Operation of a service desk for a group of clinical application components: operational directing",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "- Operation of a service desk for a group of clinical application components,",
+    "transformed": "How would you describe the scope and tasks of the following activities of managing information systems: Operation of a service desk for a group of clinical application components",
+    "true_answer": "Operation of a service desk for a group of clinical application components: operational directing",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "- Daily monitoring of network availability and network failures.",
-    "Umformuliert": "How would you describe the scope and tasks of the following activities of managing information systems: Daily monitoring of network availability and network failures",
-    "Antworten": "Daily monitoring of network availability and network failures: operational monitoring",
-    "Anzahl_Antworten": 1,
-    "Quelle": "Book",
-    "Kontext": ""
+    "question": "- Daily monitoring of network availability and network failures.",
+    "transformed": "How would you describe the scope and tasks of the following activities of managing information systems: Daily monitoring of network availability and network failures",
+    "true_answer": "Daily monitoring of network availability and network failures: operational monitoring",
+    "num_answers": 1,
+    "source": "Book",
+    "context": ""
   },
   {
-    "Fragen": "Definieren Sie den Begriff „Krankenhausinformationssystem“.",
-    "Umformuliert": "Define the term \"hospital information system\".",
-    "Antworten": "A Hospital Information system is the socio-technical subsystem of for hospitals. It comprimises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_07_18",
-    "Kontext": ""
+    "question": "Definieren Sie den Begriff \u201eKrankenhausinformationssystem\u201c.",
+    "transformed": "Define the term \"hospital information system\".",
+    "true_answer": "A Hospital Information system is the socio-technical subsystem of for hospitals. It comprimises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",
+    "num_answers": 1,
+    "source": "IS_2020_07_18",
+    "context": ""
   },
   {
-    "Fragen": "Auf einer Hersteller-Webseite heißt es: „i.s.h.med ist das einzige vollständig in SAP for Healthcare integrierte Krankenhausinformationssystem“. Welches Begriffsverständnis liegt hier zugrunde?",
-    "Umformuliert": "On a manufacturer's website it says: \"i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare\". What is the underlying understanding of this term?",
-    "Antworten": "This manufacturer sees the hospital information system as software product, while in reality a HIS includes Software, Hardware and Actors.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_07_18",
-    "Kontext": ""
+    "question": "Auf einer Hersteller-Webseite hei\u00dft es: \u201ei.s.h.med ist das einzige vollst\u00e4ndig in SAP for Healthcare integrierte Krankenhausinformationssystem\u201c. Welches Begriffsverst\u00e4ndnis liegt hier zugrunde?",
+    "transformed": "On a manufacturer's website it says: \"i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare\". What is the underlying understanding of this term?",
+    "true_answer": "This manufacturer sees the hospital information system as software product, while in reality a HIS includes Software, Hardware and Actors.",
+    "num_answers": 1,
+    "source": "IS_2020_07_18",
+    "context": ""
   },
   {
-    "Fragen": "Wie erhalten Apotheker:innen Zugriff auf verordnete eRezepte?",
-    "Umformuliert": "How do pharmacists get access to e-prescriptions?",
-    "Antworten": "Via the CPOE System within a hospital. Extern via their own pharmacists information system.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_07_18",
-    "Kontext": ""
+    "question": "Wie erhalten Apotheker:innen Zugriff auf verordnete eRezepte?",
+    "transformed": "How do pharmacists get access to e-prescriptions?",
+    "true_answer": "Via the CPOE System within a hospital. Extern via their own pharmacists information system.",
+    "num_answers": 1,
+    "source": "IS_2020_07_18",
+    "context": ""
   },
   {
-    "Fragen": "Definieren Sie den Begriff „transinstitutionelles Gesundheitsinformationssystem“. Verwenden Sie dabei den Begriff des „Settings“.",
-    "Umformuliert": "Define the term \"trans-institutional health information system\". Use the term \"setting\" for this purpose.",
-    "Antworten": "A transinstitutional health information system is the socio-technical subsystem which comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. It cdescribes the information system of a health care network, in which multiple Settings are present. Each setting is a context this information system is used in, for example in the stationary or ambulant care, but also rehabilitation or care of the elder.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Definieren Sie den Begriff \u201etransinstitutionelles Gesundheitsinformationssystem\u201c. Verwenden Sie dabei den Begriff des \u201eSettings\u201c.",
+    "transformed": "Define the term \"trans-institutional health information system\". Use the term \"setting\" for this purpose.",
+    "true_answer": "A transinstitutional health information system is the socio-technical subsystem which comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. It cdescribes the information system of a health care network, in which multiple Settings are present. Each setting is a context this information system is used in, for example in the stationary or ambulant care, but also rehabilitation or care of the elder.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "tHIS?",
-    "Umformuliert": "Define the term \"tHIS\".",
-    "Antworten": "tHIS stands for transinstitutional health information system, an information system of a health care network which consists of multiple health care settings (contexts). It comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "tHIS?",
+    "transformed": "Define the term \"tHIS\".",
+    "true_answer": "tHIS stands for transinstitutional health information system, an information system of a health care network which consists of multiple health care settings (contexts). It comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Was ist ein Arztbrief?",
-    "Umformuliert": "What is a doctor's letter?",
-    "Antworten": "A doctor's letter is a transfer document for communication between doctors. It is a form of information for the referring doctor, who has arranged for a referral to a hospital or other medical treatment in the outpatient sector or for the further treating doctor who takes over the further treatment. The doctor's letter provides a summary overview of the patient's status at dicharge, a review of the course of the disease, the thearpy initiated, an interpretation of the events related to the course of the disease in the specific case, information on the classification of the diease according to ICD, OPS, ICF and possibly also DRG and recommendations for continuing therapy.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Was ist ein Arztbrief?",
+    "transformed": "What is a doctor's letter?",
+    "true_answer": "A doctor's letter is a transfer document for communication between doctors. It is a form of information for the referring doctor, who has arranged for a referral to a hospital or other medical treatment in the outpatient sector or for the further treating doctor who takes over the further treatment. The doctor's letter provides a summary overview of the patient's status at dicharge, a review of the course of the disease, the thearpy initiated, an interpretation of the events related to the course of the disease in the specific case, information on the classification of the diease according to ICD, OPS, ICF and possibly also DRG and recommendations for continuing therapy.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Was ist openEHR",
-    "Umformuliert": "What is openEHR?",
-    "Antworten": "openEHR is an open standard specification in health informatics that describes the management and storage, retrieval and exchange of health data in electronic health records (EHRs). In openHER, all health data for a person is stored in a \"one lifetime\", vendor-independent, person-centred EHR. It is completely model-driven, and separates domain semantics out from software, into models created by domain professionals.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Was ist openEHR",
+    "transformed": "What is openEHR?",
+    "true_answer": "openEHR is an open standard specification in health informatics that describes the management and storage, retrieval and exchange of health data in electronic health records (EHRs). In openHER, all health data for a person is stored in a \"one lifetime\", vendor-independent, person-centred EHR. It is completely model-driven, and separates domain semantics out from software, into models created by domain professionals.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Was ist ein Archetype?",
-    "Umformuliert": "What is an archetype in the context of health information systems?",
-    "Antworten": "An archetype is a formal specification of a clinical concept that can be used to create interoperable and resuable electronic health records. Archetypoes are designed to be independent of any specific EHR system and are intended to be used as building blocks for EHRs.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Was ist ein Archetype?",
+    "transformed": "What is an archetype in the context of health information systems?",
+    "true_answer": "An archetype is a formal specification of a clinical concept that can be used to create interoperable and resuable electronic health records. Archetypoes are designed to be independent of any specific EHR system and are intended to be used as building blocks for EHRs.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Ist openEHR ein Standard?",
-    "Umformuliert": "Is openEHR a standard?",
-    "Antworten": "Yes, openEHR is an open standard specification in health informatics that describes the management and storage, retrieval and exchange of health data in electronic health records.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Ist openEHR ein Standard?",
+    "transformed": "Is openEHR a standard?",
+    "true_answer": "Yes, openEHR is an open standard specification in health informatics that describes the management and storage, retrieval and exchange of health data in electronic health records.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Könnte man mit Hilfe von openEHR eine (DB1, ACn, Vn)-Architektur realisieren?",
-    "Umformuliert": "Could one realise a DB^1, AC^n, V^n architecture with the help of openEHR?",
-    "Antworten": "Yes",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "K\u00f6nnte man mit Hilfe von openEHR eine (DB1, ACn, Vn)-Architektur realisieren?",
+    "transformed": "Could one realise a DB^1, AC^n, V^n architecture with the help of openEHR?",
+    "true_answer": "Yes",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Was ist ein Modell?",
-    "Umformuliert": "What is a model in the context of health information systems?",
-    "Antworten": "A model is a representation of a system or process that is used to help understand and predict the behavor of the system or process. Health information systems models can be used to help design and evaluate health information systems. They can also beused to help identify areas for improvement in health information systems.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Was ist ein Modell?",
+    "transformed": "What is a model in the context of health information systems?",
+    "true_answer": "A model is a representation of a system or process that is used to help understand and predict the behavor of the system or process. Health information systems models can be used to help design and evaluate health information systems. They can also beused to help identify areas for improvement in health information systems.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Wann ist ein Modell gut?",
-    "Umformuliert": "When is a model good in the context of health information systems?",
-    "Antworten": "A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Wann ist ein Modell gut?",
+    "transformed": "When is a model good in the context of health information systems?",
+    "true_answer": "A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Was ist ARIS?",
-    "Umformuliert": "What is ARIS?",
-    "Antworten": "The Architecture of Integrated Information Systems is a framework for describing business processes. It provides modeling methods and meta-structures that are comprised in information models.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Was ist ARIS?",
+    "transformed": "What is ARIS?",
+    "true_answer": "The Architecture of Integrated Information Systems is a framework for describing business processes. It provides modeling methods and meta-structures that are comprised in information models.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Wie kann man dynamische Aspekte von IS modellieren?",
-    "Umformuliert": "How can dynamic aspects of Information Systems be modelled?",
-    "Antworten": "With a Business Process Model such as BPMN",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Wie kann man dynamische Aspekte von IS modellieren?",
+    "transformed": "How can dynamic aspects of Information Systems be modelled?",
+    "true_answer": "With a Business Process Model such as BPMN",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Was ist IHE?",
-    "Umformuliert": "What is IHE?",
-    "Antworten": "IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Was ist IHE?",
+    "transformed": "What is IHE?",
+    "true_answer": "IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Was tut ein Kommunikationsserver?",
-    "Umformuliert": "What does a communication server do  in the context of health information systems?",
-    "Antworten": "A communication server in the context of health information systems is a server that enables communication between different systems. It is responsible for routing messages between different applications and systems. It can also be used to manage the flow of data between different systems.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Was tut ein Kommunikationsserver?",
+    "transformed": "What does a communication server do  in the context of health information systems?",
+    "true_answer": "A communication server in the context of health information systems is a server that enables communication between different systems. It is responsible for routing messages between different applications and systems. It can also be used to manage the flow of data between different systems.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Wozu setzt man Remote Function Calls ein?",
-    "Umformuliert": "What are Remote Function Calls used for?",
-    "Antworten": "Remote Function Calls (RFC) is a communications interface based on CPI-C, but with more functions and easier for application programmers to use. It is the call or remote execution of a Remote Function Module in an external system. In the SAP system, these functions are provided by the RFC interface system. The RFC interface system enables function calls between two SAP systems",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Wozu setzt man Remote Function Calls ein?",
+    "transformed": "What are Remote Function Calls used for?",
+    "true_answer": "Remote Function Calls (RFC) is a communications interface based on CPI-C, but with more functions and easier for application programmers to use. It is the call or remote execution of a Remote Function Module in an external system. In the SAP system, these functions are provided by the RFC interface system. The RFC interface system enables function calls between two SAP systems",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Wie findet ein Labormitarbeiter mit einer Fallnummer in der Hand Geburtsdatum und Geschlecht eines Patienten?",
-    "Umformuliert": "How does a lab worker with a case number in hand find a patient's date of birth and gender?",
-    "Antworten": "In the Laboratory Information System, which got its information from a communication server.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Wie findet ein Labormitarbeiter mit einer Fallnummer in der Hand Geburtsdatum und Geschlecht eines Patienten?",
+    "transformed": "How does a lab worker with a case number in hand find a patient's date of birth and gender?",
+    "true_answer": "In the Laboratory Information System, which got its information from a communication server.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Erläutern Sie die Taxonomy für Krankenhausinformationssysteme!",
-    "Umformuliert": "Explain the taxonomy for hospital information systems!",
-    "Antworten": "The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Erl\u00e4utern Sie die Taxonomy f\u00fcr Krankenhausinformationssysteme!",
+    "transformed": "Explain the taxonomy for hospital information systems!",
+    "true_answer": "The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Wieso haben wir meist (ACn, Vn)?",
-    "Umformuliert": "Why do we mostly have (AC^n, V^n)?",
-    "Antworten": "This allows Best of Breed Architecture choosing the best products and being independent from vendors.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Wieso haben wir meist (ACn, Vn)?",
+    "transformed": "Why do we mostly have (AC^n, V^n)?",
+    "true_answer": "This allows Best of Breed Architecture choosing the best products and being independent from vendors.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Was ist der Unterschied zwischen dem PVS und dem PDMS?",
-    "Umformuliert": "What is the difference between the PMS and the PDMS?",
-    "Antworten": "PMS:\n- primary focus on helping health care provides streamline their day-to-day tasks\n\nPDMS:\n- primary focus on capturing mainaining comprehensive and accurate patient medical data.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Was ist der Unterschied zwischen dem PVS und dem PDMS?",
+    "transformed": "What is the difference between the PMS and the PDMS?",
+    "true_answer": "PMS:\n- primary focus on helping health care provides streamline their day-to-day tasks\n\nPDMS:\n- primary focus on capturing mainaining comprehensive and accurate patient medical data.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Wie kann man auch bei fehlender Vollausleuchtung mit den allgegenwärtigen Funklöchern hinter metallwagen so umgehen, dass Mobile Anwendungen nicht laufend abstürzen?",
-    "Umformuliert": "Even in the absence of full coverage, how can you deal with the ubiquitous radio holes behind metal trolleys in such a way that mobile applications don't crash all the time?",
-    "Antworten": "One of this:\n- caching and local storage\n- Offline Mode\n- Background Syncing and Queuing",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Wie kann man auch bei fehlender Vollausleuchtung mit den allgegenw\u00e4rtigen Funkl\u00f6chern hinter metallwagen so umgehen, dass Mobile Anwendungen nicht laufend abst\u00fcrzen?",
+    "transformed": "Even in the absence of full coverage, how can you deal with the ubiquitous radio holes behind metal trolleys in such a way that mobile applications don't crash all the time?",
+    "true_answer": "One of this:\n- caching and local storage\n- Offline Mode\n- Background Syncing and Queuing",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Welche Speichermedien gewährleisten eine Unveränderbarkeit der Daten?",
-    "Umformuliert": "Which storage media guarantee that the data cannot be changed?",
-    "Antworten": "Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Welche Speichermedien gew\u00e4hrleisten eine Unver\u00e4nderbarkeit der Daten?",
+    "transformed": "Which storage media guarantee that the data cannot be changed?",
+    "true_answer": "Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Ist „Dokumentation“ eine datenverarbeitende Aufgabe bzw. eine enterprise function?",
-    "Umformuliert": "Is \"documentation\" a data processing task or an enterprise function?",
-    "Antworten": "A data processing task",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Ist \u201eDokumentation\u201c eine datenverarbeitende Aufgabe bzw. eine enterprise function?",
+    "transformed": "Is \"documentation\" a data processing task or an enterprise function?",
+    "true_answer": "A data processing task",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Woher kommen die neuen Pflegekräfte für Deutschland?",
-    "Umformuliert": "Where are the new care workers for Germany coming from?",
-    "Antworten": "Domestic Workforce, European Union Member States, Non-EU Countries",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Woher kommen die neuen Pflegekr\u00e4fte f\u00fcr Deutschland?",
+    "transformed": "Where are the new care workers for Germany coming from?",
+    "true_answer": "Domestic Workforce, European Union Member States, Non-EU Countries",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Wie ist der Stand der Digitalisierung in der Pflege?",
-    "Umformuliert": "What is the state of digitalisation in care?",
-    "Antworten": "gradually progressing but still facing some challenges",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Wie ist der Stand der Digitalisierung in der Pflege?",
+    "transformed": "What is the state of digitalisation in care?",
+    "true_answer": "gradually progressing but still facing some challenges",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterstützt?",
-    "Umformuliert": "Which application system is used in the University Hospital to support the request for laboratory services (order entry)?",
-    "Antworten": "Laboratory Information System",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterst\u00fctzt?",
+    "transformed": "Which application system is used in the University Hospital to support the request for laboratory services (order entry)?",
+    "true_answer": "Laboratory Information System",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Wie erfolgt die Kommunikation der Anforderung (order) an das LIS?",
-    "Umformuliert": "How is the request (order) communicated to the LIS?",
-    "Antworten": "It isn't. The call is made from the work place during the context integration of patient identifying data to the LIS.",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Wie erfolgt die Kommunikation der Anforderung (order) an das LIS?",
+    "transformed": "How is the request (order) communicated to the LIS?",
+    "true_answer": "It isn't. The call is made from the work place during the context integration of patient identifying data to the LIS.",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   },
   {
-    "Fragen": "Mit welchem Anwendungssystem wird im UKL ein Laborbefund (finding) angezeigt?",
-    "Umformuliert": "Which application system is usually used to display a laboratory finding in the University Hospital?",
-    "Antworten": "(COPRA, LIS direkt!)",
-    "Anzahl_Antworten": 1,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Mit welchem Anwendungssystem wird im UKL ein Laborbefund (finding) angezeigt?",
+    "transformed": "Which application system is usually used to display a laboratory finding in the University Hospital?",
+    "true_answer": "(COPRA, LIS direkt!)",
+    "num_answers": 1,
+    "source": "IS_2020_09_27",
+    "context": ""
   }
 ]

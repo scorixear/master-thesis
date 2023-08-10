@@ -51,12 +51,12 @@ Examples can be found in `/data`.
 ```json
 [
     {
-        "Fragen": "Example Question", <-- this is the actual question / questions from the sources
-        "Umformuliert": "Example Question", <-- this is the question that was used for generating answers. It is "Fragen" translated to english and slightly modified.
-        "Antworten": "Example Answer", <-- this is the true answer that is expected
-        "Anahl_Antworten": 1, <-- number of answers that are in "Antworten" contained
-        "Quelle": "Example Source", <-- source of the question
-        "Kontext": "Example Context", <-- context of the question
+        "question": "Example Question", <-- this is the actual question / questions from the sources
+        "transformed": "Example Question", <-- this is the question that was used for generating answers. It is "question" translated to english and slightly modified.
+        "true_answer": "Example Answer", <-- this is the true answer that is expected
+        "num_answers": 1, <-- number of answers that are in "true_answer" contained
+        "source": "Example Source", <-- source of the question
+        "context": "Example Context", <-- context of the question
     }
 ]
 ```
