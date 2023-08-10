@@ -1,10 +1,10 @@
 [
   {
-    "Fragen": "Was wird standardisiert?",
-    "Umformuliert": "What are commen standerds used in health informtion sytems?",
-    "Antworten": "HL7v2\nCDA\nHL7 FHIR\nDICOM\nISO/IEEE 11073\nCCOW (Clinical Context Object Workgroup)\nEDIFACT (Electronic Data Interchange for Administration, Commerce and Transport)\nSNOMED, LOINC\nopenEHR\nCDISC (Clinical Data Interchange Standards Consortium)",
-    "Anzahl_Antworten": 11,
-    "Quelle": "IS_2020_09_27",
-    "Kontext": ""
+    "question": "Was wird standardisiert?",
+    "transformed": "What are commen standerds used in health informtion sytems?",
+    "true_answer": "HL7v2\nCDA\nHL7 FHIR\nDICOM\nISO/IEEE 11073\nCCOW (Clinical Context Object Workgroup)\nEDIFACT (Electronic Data Interchange for Administration, Commerce and Transport)\nSNOMED, LOINC\nopenEHR\nCDISC (Clinical Data Interchange Standards Consortium)",
+    "num_answers": 11,
+    "source": "IS_2020_09_27",
+    "context": ""
   }
 ]
