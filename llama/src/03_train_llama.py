@@ -1,9 +1,3 @@
-# source https://huggingface.co/docs/transformers/main/main_classes/deepspeed#main-deepspeed-resources
-"""
-
-Execute with:
-srun -- jobid $SLURM_JOBID bash -c `python -m torch.distributed.run --nproc_per_node=GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID --master_addr $MASTER_ADDR --master_port $MASTER_PORT 03_train_llama.py
-"""
 import math
 import os
 import sys
@@ -12,7 +6,6 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 import torch
-# import deepspeed # cannot be installed on windows, release by microsoft, cannot be installed by windows - wtf
 
 from datasets import load_dataset
 import evaluate
@@ -25,11 +18,15 @@ from transformers.utils import check_min_version
 from transformers.testing_utils import CaptureLogger
 from transformers.utils.versions import require_version
 
+# check if version is on or after 4.32.0.dev0
 check_min_version("4.32.0.dev0")
+# check if datasets version is on or after 1.8.0
 require_version("datasets>=1.8.0", "To fix: pip install -r examples/pytorch/language-modeling/requirements.txt")
 
+# initialize logger
 logger = logging.getLogger(__name__)
 
+# define arguments for this script
 @dataclass
 class ModelArguments:
     """
@@ -119,11 +116,14 @@ class DataTrainingArguments:
     
 
 def main():
+    # load in script arguments
     parser = HfArgumentParser((ModelArguments, DataTrainingArguments, TrainingArguments)) # type: ignore
+
+    # If we pass only one argument to the script and it's the path to a json file,
+    # let's parse it to get our arguments.
     if len(sys.argv) == 2 and sys.argv[1].endswith(".json"):
-        # If we pass only one argument to the script and it's the path to a json file,
-        # let's parse it to get our arguments.
         model_args, data_args, training_args = parser.parse_json_file(json_file=os.path.abspath(sys.argv[1]))
+    # otherwise parse into dataclasses
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
     
@@ -134,6 +134,7 @@ def main():
         handlers=[logging.StreamHandler(sys.stdout)],
     )
 
+    # set verbosity of logging to info
     if training_args.should_log:
         transformers.utils.logging.set_verbosity_info()
     
@@ -144,7 +145,7 @@ def main():
     transformers.utils.logging.enable_explicit_format()
     
     
-    # Log on each process the small summary:
+    # Log on each process the small summary of used args
     logger.warning(
         f"Process rank: {training_args.local_rank}, device: {training_args.device}, n_gpu: {training_args.n_gpu}"
         + f" distributed training: {bool(training_args.local_rank != -1)}, 16-bits training: {training_args.fp16}"
@@ -153,19 +154,25 @@ def main():
     
     # Detecting last checkpoint.
     last_checkpoint = None
+    # if output dir is already existent
+    # and we do train and not overwrite the output dir
     if os.path.isdir(training_args.output_dir) and training_args.do_train and not training_args.overwrite_output_dir:
+        # get the last checkpoint
         last_checkpoint = get_last_checkpoint(training_args.output_dir)
+        # if checkpoint cannot be loaded, but something is in the output dir
         if last_checkpoint is None and len(os.listdir(training_args.output_dir)) > 0:
+            # print error as we cannot overwrite output dir
             raise ValueError(
                 f"Output directory ({training_args.output_dir}) already exists and is not empty. Use --overwrite_output_dir to overcome."
             )
+        # if checkpoint can be loaded and training args allow resuming from checkpoint
         if last_checkpoint is not None and training_args.resume_from_checkpoint is None:
             logger.info(
                 f"Checkpoint detected, resuming training at {last_checkpoint}. To avoid this behavior, change "
                 "the `--output_dir` or add `--overwrite_output_dir` to train from scratch."
             )
             
-    # set  seed before initializing model
+    # set seed before initializing model
     set_seed(training_args.seed)
     
     
@@ -174,13 +181,16 @@ def main():
     data_files = {}
     dataset_args = {}
     data_files["train"] = data_args.train_file
+    # as we work with text files only, the extension is set to "text"
     extension = "text"
     dataset_args["keep_linebreaks"] = data_args.keep_linebreaks
+    # first load of full dataset
     raw_datasets = load_dataset(
         extension,
         data_files=data_files,
         **dataset_args,
     )
+    # split into validation and training
     raw_datasets["validation"] = load_dataset(
         extension,
         data_files=data_files,
@@ -196,16 +206,18 @@ def main():
     
     # load pretrained model and tokenizer
     # .from_pretrained ensures only one process can concurrently load the model & vocab
-    
     config = LlamaConfig.from_pretrained(model_args.model_path)
     tokenizer = LlamaTokenizer.from_pretrained(model_args.model_path, use_fast=model_args.use_fast_tokenizer)
     
+    # detect defined dtype
+    # for llama this is fp16
     torch_dtype = (
         model_args.torch_dtype
         if model_args.torch_dtype in ["auto", None]
         else getattr(torch, model_args.torch_dtype)
     )
     
+    # and load the model
     model = LlamaForCausalLM.from_pretrained(
         model_args.model_path,
         config=config,
@@ -219,24 +231,32 @@ def main():
         model.resize_token_embeddings(len(tokenizer))
     
     # preprocess dataset
-    
+    # if we train, extract the features
     if training_args.do_train:
         column_names = list(raw_datasets["train"].features)
+    # otherwise extract the features from the validation set
     else:
         column_names = list(raw_datasets["validation"].features)
+    # if the column names contain "text", use this as text column name
     text_column_name = "text" if "text" in column_names else column_names[0]
     
+    # get tokenizer logging
     tok_logger = transformers.utils.logging.get_logger("transformers.tokenization_utils_base")
     
+    # define inner function for tokenization
     def tokenize_function(examples):
+        # and add capturelogger to catch warnings
         with CaptureLogger(tok_logger) as cl:
             output = tokenizer(examples[text_column_name])
+        # this warning is irrelevant for us
+        # we catch it and resume training
         if "Token indices sequence length is longer than the" in cl.out:
             tok_logger.warning(
                 "^^^^^^^^^^^^^^^^^^^^^^^^ Please ignore the warning above - this long input will be chunked into smaller bits"
                 " before being passed to the model."
             )
         return output
+    # tokenize the datasets
     with training_args.main_process_first(desc="dataset map tokenization"):
         tokenized_datasets = raw_datasets.map(
             tokenize_function,
@@ -245,8 +265,13 @@ def main():
             remove_columns=column_names,
             desc="Running tokenizer on dataset",
         )
+    # if block_size is not set
     if data_args.block_size is None:
+        # get the maximum block size from the tokenizer
+        # for llama this is 1024
         block_size = tokenizer.model_max_length
+        # if the block size is above 1024
+        # we limit it
         if block_size > 1024:
             logger.warning(
                 "The chosen tokenizer supports a `model_max_length` that is longer than the default `block_size` value"
@@ -254,7 +279,10 @@ def main():
                 " override this default with `--block_size xxx`."
             )
             block_size = 1024
+    # if block_size is set
     else:
+        # if block_size is larger than the maximum block_size for the model
+        # we limit it
         if data_args.block_size > tokenizer.model_max_length:
              logger.warning(
                 f"The block_size passed ({data_args.block_size}) is larger than the maximum length for the model"
@@ -264,19 +292,21 @@ def main():
     
     # Main data processing function that will concatenate all texts from our dataset and generate chunks of block_size.
     def group_texts(examples):
+        # concatenate all texts
         concatenated_examples = {k: sum(examples[k], []) for k in examples.keys()}
+        # get total length
         total_length = len(concatenated_examples[list(examples.keys())[0]])
         # if total_length < block_size, excludes batch an returns empty dict
         total_length = (total_length // block_size) * block_size
-        # split by chung of max_len
+        # split by chunk of max_len
         result = {
-            k: [t[i : i + block_size] for i in range(0, total_length, block_size)]
-            for k, t in concatenated_examples.items()
+            key: [value[i : i + block_size] for i in range(0, total_length, block_size)]
+            for key, value in concatenated_examples.items()
         }
         result["labels"] = result["input_ids"].copy()
         return result
 
-
+    # apply grouping into block_size to the dataset
     with training_args.main_process_first(desc="dataset map group_texts"):
         lm_datasets = tokenized_datasets.map(
             group_texts,
@@ -284,22 +314,26 @@ def main():
             num_proc=data_args.preprocessing_num_workers,
             desc=f"Grouping texts in chunks of {block_size}",
         )
-        
+    
+    # if we train, get the train dataset
     if training_args.do_train:
         if "train" not in tokenized_datasets:
             raise ValueError("--do_train requires a train dataset")
         train_dataset = lm_datasets["train"]
+        # if max_train_samples is set, limit the train dataset
         if data_args.max_train_samples is not None:
             max_train_samples = min(len(train_dataset), data_args.max_train_samples)
             train_dataset = train_dataset.select(range(max_train_samples))
+    # if we evaluate, get the validation dataset
     if training_args.do_eval:
         if "validation" not in tokenized_datasets:
             raise ValueError("--do_eval requires a validation dataset")
         eval_dataset = lm_datasets["validation"]
+        # if max_eval_samples is set, limit the validation dataset
         if data_args.max_eval_samples is not None:
             max_eval_samples = min(len(eval_dataset), data_args.max_eval_samples)
             eval_dataset = eval_dataset.select(range(max_eval_samples))
-        
+        # and define logits and metrics functions for evaluation
         def preprocess_logits_for_metrics(logits, labels):
             if isinstance(logits, tuple):
                 logits = logits[0]
@@ -330,25 +364,30 @@ def main():
     
     # Training
     if training_args.do_train:
+        # resume from checkpoint if possible
         checkpoint = None
         if training_args.resume_from_checkpoint is not None:
             checkpoint = training_args.resume_from_checkpoint
         elif last_checkpoint is not None:
             checkpoint = last_checkpoint
+        # train the model
         train_result = trainer.train(resume_from_checkpoint=checkpoint)
+        # and save to location specified in training_args
         trainer.save_model()
         
+        # calculate metrics
         metrics = train_result.metrics
         max_train_samples = (
             data_args.max_train_samples if data_args.max_train_samples is not None else len(train_dataset)
         )
         metrics["train_samples"] = min(max_train_samples, len(train_dataset))
-        
+        # and log them as well as save them
         trainer.log_metrics("train", metrics)
         trainer.save_metrics("train", metrics)
+        # save the trainer state for future resume
         trainer.save_state()
         
-    # Evaluation    
+    # Evaluation  
     if training_args.do_eval:
         logger.info("*** Evaluate ***")
         metrics = trainer.evaluate()
@@ -363,7 +402,7 @@ def main():
         trainer.log_metrics("eval", metrics)
         trainer.save_metrics("eval", metrics)
 
-
+# used by xla_spawn when training on TPUs
 def _mp_fn(index):
     main()
 
