@@ -59,7 +59,7 @@ Erläutern Sie die Taxonomy für Krankenhausinformationssysteme!,Explain the tax
 13. The taxonomy of HIS is also an important tool for researchers, as it helps to organize and categorize information about HIS.
 14. The taxonomy of HIS is an important tool for healthcare providers, as it helps to organize and categorize information about HIS.
 15. The taxonomy of HIS is also an important tool for researchers, as it helps to organize and categorize information about HIS.
-16. The taxonomy of HIS is an important tool for healthcare providers, as it helps to organize and categorize information about HIS","The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+16. The taxonomy of HIS is an important tool for healthcare providers, as it helps to organize and categorize information about HIS","The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Explain the taxanomy for hospital information sistems!
 Answer: "
 Welche Speichermedien gewährleisten eine Unveränderbarkeit der Daten?,Which storage media gurantee that the data cannot be changed?,"1. CD-ROM
@@ -113,7 +113,7 @@ Answer: 1. RAM
 Question: Which of the following is a type of computer memory?
 Answer: 1. RAM
 Question: Which of the following is a type of computer memory?
-Answer: ","Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Answer: ","Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Which storage media gurantee that the data cannot be changed?
 Answer: "
 Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterstützt?,Which application sistem is usually used to dislay a laboratory finding in the University Hospitul?,"1. The answer is: Laboratory Information System (LIS).
@@ -140,7 +140,7 @@ Answer: 11. The answer is: Laboratory Information System (LIS).
 Question: Which application sistem is usually used to dislay a laboratory finding in the University Hospitul?
 Answer: 12. The answer is: Laboratory Information System (LIS).
 Question: Which application sistem is usually used to dislay a laboratory finding in the University Hospitul?
-Answer: 13. The answer",Laboratory Information System,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Answer: 13. The answer",Laboratory Information System,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Which application sistem is usually used to dislay a laboratory finding in the University Hospitul?
 Answer: "
 "Look at the 3LGM^2 example in Sect. 2.15.
@@ -258,7 +258,7 @@ Laboratory Information System:
 Object Type:
 - Patient
   - Uses: Administration/Storage of Patientanamnesis, Creation/Administration of Medication plans
-  - Processed: Patient Admission",11,multi,IS_2020_07_18,"The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
+  - Processed: Patient Admission",11,multi,IS_2022_07_18,"The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
 Question: Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.
 1. The administrative patient admission takes place with the patient managment sistem. The administrative patient data, represented by the object type ""patient"", are send from the patient managment sistem via the comunications server to the CPOE sistem, the medical documentation sistem and the laboratory information sistem. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation sistem.
 2. Add one task each of the CPOE sistem, the medical documentation sistem and the laboratory information sistem (incl. configuration lines).
@@ -277,7 +277,7 @@ Answer: The patient's consent to access the data. The patient's consent to acces
 Question: What is the name of the patient's consent to access the data?
 Answer: The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data. The patient's consent to access the data.","- electronic health professional card / institution card
 - Access to telematric infrastructure (such as PC)
-- Insured Person's permission to acces their data",3,multi,IS_2020_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- Insured Person's permission to acces their data",3,multi,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Name 3 things that the GP Ms Meier needs in her practise in order to acess the data of the patient Mr Schulz stored in the telematics infrastructur.
 Answer: "
 "Erklären Sie für einen Interoperabilitätsstandard im Gesundheitswesen dessen Einsatzgebiet, Funktionsprinzip und die unterstützten Interoperabilitätsarten.","For a healthcare interopebility standard, explan its area of use, operating principle and the types of interopebility suported?","1. Area of use: Healthcare interopebility standard is used to support the interopebility of healthcare information systems.
@@ -308,7 +308,7 @@ operating principle:
 
 Types of Interoperability:
 - Syntactic Interoperability
-- Semantic Interoperability",4,multi,IS_2020_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- Semantic Interoperability",4,multi,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: For a healthcare interopebility standard, explan its area of use, operating principle and the types of interopebility suported?
 Answer: "
 Vergleichen Sie HL7 V2 und HL7 FHIR. Erläutern Sie mindestens drei Unterschiede.,Compare HL7 V2 and HL7 FHIR. Explain at least three differences,"1. HL7 V2 is a standard for exchanging healthcare information between different systems. It is a set of rules that define how data is organized and transmitted between systems. HL7 FHIR, on the other hand, is a newer standard that is based on the RESTful architecture. It is designed to be more flexible and easier to use than HL7 V2.
@@ -321,7 +321,7 @@ Vergleichen Sie HL7 V2 und HL7 FHIR. Erläutern Sie mindestens drei Unterschiede
 - Syntax HL7 v2: proprietay, ASCII-text
 - Syntax HL7 FHIR: XML / JSON  = easier to implement
 - Structure HL7 v2: fixed, hierarchical, fixed amount of segments and codes
-- Structure HL7 FHIR: flexible, modular, resource/element based",3,multi,IS_2020_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- Structure HL7 FHIR: flexible, modular, resource/element based",3,multi,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Compare HL7 V2 and HL7 FHIR. Explain at least three differences
 Answer: "
 "Skizzieren Sie die Fachliche Ebene und die Logische Werkzeugebene des folgenden Szenarios als 3LGM²-Modell auf dem nächsten Blatt.
@@ -359,7 +359,7 @@ Radiology Information System:
 Object Type:
 - Medication Plan
   - Uses: Administration/Storage of Patientanamnesis
-  - Processed: Creation/Administration of Medication plans",11,multi,IS_2020_09_27,"The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
+  - Processed: Creation/Administration of Medication plans",11,multi,IS_2022_09_27,"The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
 Question: Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.
 1. The administrative patient admission takes place with the patient managment sistem. The administrative patient data, represented by the object type ""patient"", are send from the patient managment sistem via the comunications server to the CPOE sistem, the medical documentation sistem and the radiology information sistem. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation sistem.
 2. Add one task each of the CPOE sistem, the medical documentation sistem and the radiology information sistem (incl. configuration lines).
@@ -385,7 +385,7 @@ Wer stellt die „elektronische Patientenakte (ePA)“ nach § 341 SGB V zur Ver
 17. The health insurance funds are obliged to provide the ""electronic patient file (ePA)"" to the health care providers.
 1","- provided and managed by the health insurance companies
 - Technical and organizational measures to ensure only authorized access
-- Access rights, role-based access control, documentation of access",2,multi,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- Access rights, role-based access control, documentation of access",2,multi,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Who provids the ""electronic patiant file (ePA)"" according to § 341 SGB V? How is acces to the medical data its contains regulatd?
 Answer: "
 Was ist IHE und welchen Nutzen hat es? Erläutern Sie den Zusammenhang zwischen IHE und Interoperabilitätsstandards.,What is IHE and what its benifits? Explain the relationship betwen IHE and interoparability standerds.,"1. IHE is a non-profit organization that is dedicated to improving the way in which healthcare information is shared.
@@ -405,7 +405,7 @@ Was ist IHE und welchen Nutzen hat es? Erläutern Sie den Zusammenhang zwischen 
 15. IHE is a non-profit organization that is dedicated to improving the way in which healthcare information is shared.
 16. IHE is a non-profit organization that is dedicated to improving the way in which healthcare information is shared.
 17. IHE is a non-profit organization that is dedicated to improving the way in which healthcare information is shared.
-18. IHE is a non-profit organization that is dedicated to improving the way in which healthcare information is shared.",IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care,2,multi,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+18. IHE is a non-profit organization that is dedicated to improving the way in which healthcare information is shared.",IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care,2,multi,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is IHE and what its benifits? Explain the relationship betwen IHE and interoparability standerds.
 Answer: "
 "Was sind System, soziotechnisches System",What are sistem and socio-technical sistem?,"1. Sistem is a set of interrelated elements that work together to achieve a common goal.
@@ -566,7 +566,7 @@ Question: At which point in the scenario from the context could the ""KIM"" serv
 Context: The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system. The ""KIM"" service from the telematics infrastructure could provide a remedy at the point where the preliminary findings are scanned during administrative patient admission and stored in the medical documentation system.
 Answer: 3. The ""KIM"" service from the telematics infrastructure could provide a remedy at the point where the preliminary findings are scanned during administrative patient admission and stored in the medical documentation system.
 Question: At which point in the scenario from the context could the ""KIM"" service from the telematics infrastructure provide a remedy?
-Context: The administrative patient admission is done with the patient management","Preliminary findings brought in on paper replaced by the KIM service, which provides secure, digital transmission.",1,transfer,IS_2020_07_18,"The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
+Context: The administrative patient admission is done with the patient management","Preliminary findings brought in on paper replaced by the KIM service, which provides secure, digital transmission.",1,transfer,IS_2022_07_18,"The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
 Question: At which point in the scenario from the contex could the ""KIM"" service from the telematics infrastructur provide a remedy?
 Context: The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system.
 Answer: "

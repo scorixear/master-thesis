@@ -6,7 +6,7 @@
     "true_answer": "HL7v2\nCDA\nHL7 FHIR\nDICOM\nISO/IEEE 11073\nCCOW (Clinical Context Object Workgroup)\nEDIFACT (Electronic Data Interchange for Administration, Commerce and Transport)\nSNOMED, LOINC\nopenEHR\nCDISC (Clinical Data Interchange Standards Consortium)",
     "num_answers": 11,
     "type": "multi",
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": "",
     "true_input": "Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: What are commen standerds used in health informtion sytems?\nAnswer:"
   },

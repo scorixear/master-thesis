@@ -1,6 +1,34 @@
 %*****************************************
 \chapter{Ausführung der Lösung}\label{ch:solution}
 %*****************************************
+
+Zur Durchführung des Trainings unterteilt sich die Lösung in 6 Schritte.
+Diese werden im Folgenden näher erläutert. Die Verwendung von Techniken und Bibliotheken erfolgt ebenso abgetrennt zu jedem Schritt.
+Eine grobe Abfolge der Schritte ist wie folgt:
+\begin{itemize}
+    \item Schritt 1: Herunterladen des Modells
+    \item Schritt 2: Umwandlung des Modells in ein kompatibles Format
+    \item Schritt 3: Training des Modells
+    \item Schritt 4: Generierung von Antworten auf Evaluierungsdatensatz
+    \item Schritt 5: Bewertung der generierten Antworten
+    \item Schritt 6: Evaluierung auf Basis der Bewertungen
+\end{itemize}
+
+\section{Schritt 1: Herunterladen des Modells}
+Die LLaMA Modelle sind im Rahmen einer nicht-kommerziellen Lizenz, welche sich auf Forschung fokusiert, freigegeben. Zugang zu den Modellen wird von Fall zu Fall auf Anfrage gewährt. Diese Anfrage wurde im Rahmen dieser Arbeit gestellt und bestätigt.
+Daraufhin kann ein vorbereitetes Skript der Autoren genutzt werden, um die trainieren Parameter des Modells herunterzuladen.
+Der Skript benötigt eine explizite \ac{url}, die nach einer vorgegebenen Zeit von einer Woche nach Freigabe der Modelle ungültig wird. Aus diesem Grund ist diese \ac{url} nicht im Skript enthalten.
+
+\section{Schritt 2: Umwandlung des Modells in ein kompatibles Format}
+Das Training des Modells basiert auf zwei grundlegenden Bibliotheken: der Transformers Bibliothek von Huggingface und der DeepSpeed Bibliothek von Microsoft.
+Diese Bibliotheken, insbesondere Transformers erleichtern den Entwicklungsprozess enorm und bieten eine große Abstraktion. Jedoch können Sie nur mit Modellen arbeiten, welche in einer für die Transformers-Bibliothek verständlichen Form vorhanden sind.
+Aus diesem Grund wird das heruntergeladene Modell mit Hilfe eines Skriptes von Huggingface in die genannte kompatible Form umgewandelt werden.
+Während dieser Umwandlung muss das Modell vollständig in den \ac{ram} des ausführenden Computers geladen werden. Bei dem LLaMA 7B Modell sind hier also über 14 GB RAM notwendig.
+Die Umwandlung dauerte auf einem Computer mit 32 GB RAM und einem AMD Ryzen 7 5800X Prozessor ca. 30 Minuten.
+
+\section{Schritt 3: Training des Modells}
+
+
 %
 % - genertierter Text ohne Stopzeichen: Stopzeichen händisch nach NewLine (double Newline?)
 % - requirements txt erstellen

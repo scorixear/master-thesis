@@ -228,7 +228,7 @@ Definieren Sie den Begriff „Krankenhausinformationssystem“.,"Define the term
 12. A hospital information system (HIS) is a computer-based system that provides a complete set of information and services to support the delivery of healthcare.
 13. A hospital information system (HIS) is a computer-based system that provides a complete set of information and services to support the delivery of healthcare.
 14. A hospital information system (HIS) is a computer-based system that provides a complete set of information and services to support the delivery of healthcare.
-15. A hospital information system (HIS) is a computer-based system that provides a complete set of information and services to support the delivery of","A Hospital Information system is the socio-technical subsystem of for hospitals. It comprimises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",1,single,IS_2020_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+15. A hospital information system (HIS) is a computer-based system that provides a complete set of information and services to support the delivery of","A Hospital Information system is the socio-technical subsystem of for hospitals. It comprimises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",1,single,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Define the term ""hospital information system"".
 Answer: "
 Auf einer Hersteller-Webseite heißt es: „i.s.h.med ist das einzige vollständig in SAP for Healthcare integrierte Krankenhausinformationssystem“. Welches Begriffsverständnis liegt hier zugrunde?,"On a manufacturer's website it says: ""i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare"". What is the underlying understanding of this term?","1. i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare.
@@ -251,7 +251,7 @@ Auf einer Hersteller-Webseite heißt es: „i.s.h.med ist das einzige vollständ
 18. i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare.
 19. i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare.
 20. i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare.
-2","This manufacturer sees the hospital information system as software product, while in reality a HIS includes Software, Hardware and Actors.",1,single,IS_2020_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+2","This manufacturer sees the hospital information system as software product, while in reality a HIS includes Software, Hardware and Actors.",1,single,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: On a manufacturer's website it says: ""i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare"". What is the underlying understanding of this term?
 Answer: "
 Wie erhalten Apotheker:innen Zugriff auf verordnete eRezepte?,How do pharmacists get access to e-prescriptions?,"1. Pharmacists can access e-prescriptions through the e-prescribing software.
@@ -277,7 +277,7 @@ Wie erhalten Apotheker:innen Zugriff auf verordnete eRezepte?,How do pharmacists
 21. Pharmacists can access e-prescriptions through the electronic health record system.
 22. Pharmacists can access e-prescriptions through the pharmacy benefit manager.
 23. Pharmacists can access e-prescriptions through the electronic health record system.
-24",Via the CPOE System within a hospital. Extern via their own pharmacists information system.,1,single,IS_2020_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+24",Via the CPOE System within a hospital. Extern via their own pharmacists information system.,1,single,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How do pharmacists get access to e-prescriptions?
 Answer: "
 Definieren Sie den Begriff „transinstitutionelles Gesundheitsinformationssystem“. Verwenden Sie dabei den Begriff des „Settings“.,"Define the term ""trans-institutional health information system"". Use the term ""setting"" for this purpose.","1. Trans-institutional health information system is a system that is used to share information between different health care providers.
@@ -294,7 +294,7 @@ Question: What is the difference between a ""trans-institutional health informat
 Answer: 1. Trans-institutional health information system is a system that is used to share information between different health care providers. 2. Trans-institutional health information network is a network that is used to share information between different health care providers.
 Question: What is the difference between a ""trans-institutional health information system"" and a ""trans-institutional health information network""?
 Answer: 1. Trans-institutional health information system is a system that is used to share information between different health care providers. 2. Trans-institutional health information network is a network that is used to share information between different health care providers. 3. Trans-institutional health information system is a system that is used to share information between different health care providers. 4. Trans-institutional health information network is a network that is used to share information between different health care providers.
-Question: What is the","A transinstitutional health information system is the socio-technical subsystem which comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. It cdescribes the information system of a health care network, in which multiple Settings are present. Each setting is a context this information system is used in, for example in the stationary or ambulant care, but also rehabilitation or care of the elder.",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Question: What is the","A transinstitutional health information system is the socio-technical subsystem which comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. It cdescribes the information system of a health care network, in which multiple Settings are present. Each setting is a context this information system is used in, for example in the stationary or ambulant care, but also rehabilitation or care of the elder.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Define the term ""trans-institutional health information system"". Use the term ""setting"" for this purpose.
 Answer: "
 tHIS?,"Define the term ""tHIS"".","1. This is a word that is used to describe something that is not the same as something else.
@@ -319,7 +319,7 @@ tHIS?,"Define the term ""tHIS"".","1. This is a word that is used to describe so
 20. This is a word that is used to describe something that is not the same as something else.
 21. This is a word that is used to describe something that is not the same as something else.
 22. This is a word that is used to describe something that is not the same as something else.
-23. This is a word that is used to describe something that is","tHIS stands for transinstitutional health information system, an information system of a health care network which consists of multiple health care settings (contexts). It comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+23. This is a word that is used to describe something that is","tHIS stands for transinstitutional health information system, an information system of a health care network which consists of multiple health care settings (contexts). It comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Define the term ""tHIS"".
 Answer: "
 Was ist ein Arztbrief?,What is a doctor's letter?,"1. A letter from a doctor.
@@ -331,7 +331,7 @@ Was ist ein Arztbrief?,What is a doctor's letter?,"1. A letter from a doctor.
 7. A letter from a doctor to a patient's family about the patient's health and the patient's treatment and the patient's recovery and the patient's death.
 8. A letter from a doctor to a patient's family about the patient's health and the patient's treatment and the patient's recovery and the patient's death and the patient's funeral.
 9. A letter from a doctor to a patient's family about the patient's health and the patient's treatment and the patient's recovery and the patient's death and the patient's funeral and the patient's burial.
-10. A letter from a doctor to a patient's family about the patient's health and the patient's treatment and the patient's recovery and the patient's death and the patient's funeral and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the","A doctor's letter is a transfer document for communication between doctors. It is a form of information for the referring doctor, who has arranged for a referral to a hospital or other medical treatment in the outpatient sector or for the further treating doctor who takes over the further treatment. The doctor's letter provides a summary overview of the patient's status at dicharge, a review of the course of the disease, the thearpy initiated, an interpretation of the events related to the course of the disease in the specific case, information on the classification of the diease according to ICD, OPS, ICF and possibly also DRG and recommendations for continuing therapy.",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+10. A letter from a doctor to a patient's family about the patient's health and the patient's treatment and the patient's recovery and the patient's death and the patient's funeral and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the patient's burial and the","A doctor's letter is a transfer document for communication between doctors. It is a form of information for the referring doctor, who has arranged for a referral to a hospital or other medical treatment in the outpatient sector or for the further treating doctor who takes over the further treatment. The doctor's letter provides a summary overview of the patient's status at dicharge, a review of the course of the disease, the thearpy initiated, an interpretation of the events related to the course of the disease in the specific case, information on the classification of the diease according to ICD, OPS, ICF and possibly also DRG and recommendations for continuing therapy.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is a doctor's letter?
 Answer: "
 Was ist openEHR,What is openEHR?,"1. openEHR is an open source software platform for the development of electronic health record systems.
@@ -357,7 +357,7 @@ Was ist openEHR,What is openEHR?,"1. openEHR is an open source software platform
 21. openEHR is a set of tools for the development of clinical terminology management systems.
 22. openEHR is a set of services for the management of clinical terminology management systems.
 23. openEHR is a set of standards for the exchange of clinical terminology management data.
-24. openEHR is a set of tools for the development of","openEHR is an open standard specification in health informatics that describes the management and storage, retrieval and exchange of helath data in electronic health records (EHRs). In openHER, all health data for a person is stored in a ""one lifetime"", vendor-independent, person-centred EHR. It is completely model-driven, and separates domain semantics out from software, into models created by domain professionals.",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+24. openEHR is a set of tools for the development of","openEHR is an open standard specification in health informatics that describes the management and storage, retrieval and exchange of helath data in electronic health records (EHRs). In openHER, all health data for a person is stored in a ""one lifetime"", vendor-independent, person-centred EHR. It is completely model-driven, and separates domain semantics out from software, into models created by domain professionals.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is openEHR?
 Answer: "
 Was ist ein Archetype?,What is an archetype in the context of health information systems?,"1. An archetype is a model of a system that is used to guide the design of a new system.
@@ -380,7 +380,7 @@ Was ist ein Archetype?,What is an archetype in the context of health information
 18. An archetype is a model of a system that is used to guide the design of a new system.
 19. An archetype is a model of a system that is used to guide the design of a new system.
 20. An archetype is a model of a system that is used to guide the design of a new system.
-2",An archetype is a formal specification of a clinical concept that can be used to create interoperable and resuable electronic health records. Archetypoes are designed to be independent of any specific EHR system and are intended to be used as building blocks for EHRs.,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+2",An archetype is a formal specification of a clinical concept that can be used to create interoperable and resuable electronic health records. Archetypoes are designed to be independent of any specific EHR system and are intended to be used as building blocks for EHRs.,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is an archetype in the context of health information systems?
 Answer: "
 Ist openEHR ein Standard?,Is openEHR a standard?,"1. OpenEHR is a standard.
@@ -428,7 +428,7 @@ Question: Is openEHR a standard?
 Answer: 1. OpenEHR is a standard.
 2. OpenEHR is not a standard.
 Question: Is openEHR a standard?
-Answer: 1.","Yes, openEHR is an open standard specification in health informatics that describes the management and storage, retrieval and exchange of health data in electronic health records.",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Answer: 1.","Yes, openEHR is an open standard specification in health informatics that describes the management and storage, retrieval and exchange of health data in electronic health records.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Is openEHR a standard?
 Answer: "
 "Könnte man mit Hilfe von openEHR eine (DB1, ACn, Vn)-Architektur realisieren?","Could one realise a DB^1, AC^n, V^n architecture with the help of openEHR?","1. Yes, one could realise a DB^1, AC^n, V^n architecture with the help of openEHR.
@@ -447,7 +447,7 @@ Question: Could one realise a DB^1, AC^n, V^n architecture with the help of open
 Answer: 1. Yes, one could realise a DB^1, AC^n, V^n architecture with the help of openEHR.
 Question: Could one realise a DB^1, AC^n, V^n architecture with the help of openEHR?
 Answer: 1. Yes, one could realise a DB^1, AC^n, V^n architecture with the help of openEHR.
-Question: Could one realise a DB^1, AC^n, V^n architecture with the help of",Yes,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Question: Could one realise a DB^1, AC^n, V^n architecture with the help of",Yes,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Could one realise a DB^1, AC^n, V^n architecture with the help of openEHR?
 Answer: "
 Was ist ein Modell?,What is a model in the context of health information systems?,"1. A model is a representation of a system.
@@ -461,7 +461,7 @@ Was ist ein Modell?,What is a model in the context of health information systems
 9. A model is a representation of a system that is used to test the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system.
 10. A model is a representation of a system that is used to test the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system.
 11. A model is a representation of a system that is used to test the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system.
-12. A model is a representation of a system that is used to test the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to",A model is a representatiuon of a system or process that is used to help understand and predict the behavor of the system or process. Health information systems models can be used to help design and evaluate health information systems. They can also beused to help identify areas for improvement in health information systems.,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+12. A model is a representation of a system that is used to test the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to make changes to the system and to",A model is a representatiuon of a system or process that is used to help understand and predict the behavor of the system or process. Health information systems models can be used to help design and evaluate health information systems. They can also beused to help identify areas for improvement in health information systems.,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is a model in the context of health information systems?
 Answer: "
 Wann ist ein Modell gut?,When is a model good in the context of health information systems?,"1. When it is a good representation of the real world.
@@ -498,7 +498,7 @@ Wann ist ein Modell gut?,When is a model good in the context of health informati
 32. When it is a good representation of the real world.
 33. When it is a good representation of the real world.
 34. When it is a good representation of the real world.
-35. When it is a good representation of the","A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+35. When it is a good representation of the","A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: When is a model good in the context of health information systems?
 Answer: "
 Was ist ARIS?,What is ARIS?,"1. ARIS is a software tool for the analysis and design of business processes.
@@ -528,7 +528,7 @@ Was ist ARIS?,What is ARIS?,"1. ARIS is a software tool for the analysis and des
 25. ARIS is a software tool for the analysis and design of business processes.
 26. ARIS is a software tool for the analysis and design of business processes.
 27. ARIS is a software tool for the analysis and design of business processes.
-28. ARIS is a software",The Architecture of Integrated Information Systems is a framework for describing business processes. It provides modeling methods and meta-structures that are comprised in information models.,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+28. ARIS is a software",The Architecture of Integrated Information Systems is a framework for describing business processes. It provides modeling methods and meta-structures that are comprised in information models.,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is ARIS?
 Answer: "
 Wie kann man dynamische Aspekte von IS modellieren?,How can dynamic aspects of Information Systems be modelled?,"1. The dynamic aspects of Information Systems can be modelled using the following techniques:
@@ -543,7 +543,7 @@ h. Model-Driven Development: Model-Driven Development is a technique that is use
 i. Object-Oriented Design: Object-Oriented Design is a technique that is used to model the dynamic aspects of Information Systems. It involves the use of computer programs to simulate the behavior of a system.
 j. Event-Driven Architecture: Event-Driven Architecture is a technique that is used to model the dynamic aspects of Information Systems. It involves the use of computer programs to simulate the behavior of a system.
 k. Service-Oriented Architecture: Service-Oriented Architecture is a technique that is used to model the dynamic aspects of Information Systems. It involves the use of computer programs to simulate the behavior of a system.
-l. Business Process Management: Business Process Management is a technique that is used to model the",With a Business Process Model such as BPMN,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+l. Business Process Management: Business Process Management is a technique that is used to model the",With a Business Process Model such as BPMN,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How can dynamic aspects of Information Systems be modelled?
 Answer: "
 Was ist IHE?,What is IHE?,"1. IHE is a non-profit organization that provides a framework for the exchange, integration, and retrieval of electronic health information.
@@ -570,7 +570,7 @@ Answer: 1. The challenges of IHE include interoperability, security, and privacy
 4. The challenges of IHE include interoperability, security, and privacy.
 5. The challenges of IHE include interoperability, security, and privacy.
 Question: What are the future plans for IHE?
-Answer: 1. The future plans",IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Answer: 1. The future plans",IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is IHE?
 Answer: "
 Was tut ein Kommunikationsserver?,What does a communication server do  in the context of health information systems?," A communication server is a computer that is used to send and receive messages between computers.
@@ -616,7 +616,7 @@ Answer:  There are three types of communication software:
 2. Instant messaging software
 3. Voice over Internet Protocol (VoIP) software
 Question: What are the different types of communication services?
-Answer:  There are three types of",A communication server in the context of health information systems is a server that enables communication between different systems. It is responsible for routing messages between different applications and systems. It can also be used to manage the flow of data between different systems.,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Answer:  There are three types of",A communication server in the context of health information systems is a server that enables communication between different systems. It is responsible for routing messages between different applications and systems. It can also be used to manage the flow of data between different systems.,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What does a communication server do  in the context of health information systems?
 Answer: "
 Wozu setzt man Remote Function Calls ein?,What are Remote Function Calls used for?,"1. To call a function from another file.
@@ -650,7 +650,7 @@ Answer: 1. A static variable is shared by all objects of a class.
 Question: What is the difference between a static and a non-static variable?
 Answer: 1. A static variable is shared by all objects of a class.
 Question: What is the difference between a static and a non-static variable?
-Answer: 1. A static variable is shared by all objects of a","Remote Function Calls (RFC) is a communications interface based on CPI-C, but with more functions and easier for application programmers to use. It is the call or remote execution of a Remote Function Module in an external system. In the SAP system, these functions are provided by the RFC interface system. The RFC interface system enables function calls between two SAP systems",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Answer: 1. A static variable is shared by all objects of a","Remote Function Calls (RFC) is a communications interface based on CPI-C, but with more functions and easier for application programmers to use. It is the call or remote execution of a Remote Function Module in an external system. In the SAP system, these functions are provided by the RFC interface system. The RFC interface system enables function calls between two SAP systems",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What are Remote Function Calls used for?
 Answer: "
 Wie findet ein Labormitarbeiter mit einer Fallnummer in der Hand Geburtsdatum und Geschlecht eines Patienten?,How does a lab worker with a case number in hand find a patient's date of birth and gender?,"1. The lab worker will look up the patient's date of birth and gender in the patient's medical record.
@@ -663,7 +663,7 @@ Answer: 1. The lab worker will look up the patient's date of birth and gender in
 Question: How does a lab worker with a case number in hand find a patient's date of birth and gender?
 Answer: 1. The lab worker will look up the patient's date of birth and gender in the patient's medical record. 2. The lab worker will ask the patient's name and date of birth. 3. The lab worker will ask the patient's name and gender. 4. The lab worker will ask the patient's name and date of birth. 5. The lab worker will ask the patient's name and date of birth and gender. 6. The lab worker will ask the patient's name and date of birth and gender.
 Answer: 1. The lab worker will look up the patient's date of birth and gender in the patient's medical record. 2. The lab worker will ask the patient's name and date of birth. 3. The lab worker will ask the patient's name and gender. 4. The lab worker will ask the patient's name and date of birth. 5. The lab worker will ask the patient's name and date of birth and gender. 6. The lab worker will ask the patient's name and date of birth and gender. 7. The lab worker will ask the patient's name and date of birth and gender.
-Answer","In the Laboratory Information System, which got its information from a communication server.",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Answer","In the Laboratory Information System, which got its information from a communication server.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How does a lab worker with a case number in hand find a patient's date of birth and gender?
 Answer: "
 Erläutern Sie die Taxonomy für Krankenhausinformationssysteme!,Explain the taxonomy for hospital information systems!,"1. The taxonomy for hospital information systems is a classification system that is used to organize and categorize the various components and functions of hospital information systems.
@@ -680,7 +680,7 @@ Erläutern Sie die Taxonomy für Krankenhausinformationssysteme!,Explain the tax
 12. The taxonomy for hospital information systems is an important tool for healthcare organizations to use in order to improve the efficiency and effectiveness of their hospital information systems.
 13. The taxonomy for hospital information systems is an important tool for healthcare organizations to use in order to improve the efficiency and effectiveness of their hospital information systems.
 14. The taxonomy for hospital information systems is an important tool for healthcare organizations to use in order to improve the efficiency and effectiveness of their hospital information systems.
-15. The taxonomy for hospital information systems is an important tool for healthcare organizations to use in order to","The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+15. The taxonomy for hospital information systems is an important tool for healthcare organizations to use in order to","The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Explain the taxonomy for hospital information systems!
 Answer: "
 "Wieso haben wir meist (ACn, Vn)?","Why do we mostly have (AC^n, V^n)?","1. We have AC^n, V^n because we have AC^n, V^n.
@@ -704,7 +704,7 @@ Answer: "
 19. We have AC^n, V^n because we have AC^n, V^n.
 20. We have AC^n, V^n because we have AC^n, V^n.
 21. We have AC^n, V^n because we have AC^n, V^n.
-22. We have AC^n, V^n because we have AC^",This allows Best of Breed Architecture choosing the best products and being independent from vendors.,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+22. We have AC^n, V^n because we have AC^",This allows Best of Breed Architecture choosing the best products and being independent from vendors.,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Why do we mostly have (AC^n, V^n)?
 Answer: "
 Was ist der Unterschied zwischen dem PVS und dem PDMS?,What is the difference between the PMS and the PDMS?,"1. PMS is a polymeric material that is used for making molds. PDMS is a polymeric material that is used for making microfluidic devices.
@@ -721,7 +721,7 @@ Answer: 1. PDMS-PDMS-PDMS-PDMS-PDMS-PDMS-PDMS is a polymeric material that is us
 - primary focus on helping health care provides streamline their day-to-day tasks
 
 PDMS:
-- primary focus on capturing mainaining comprehensive and accurate patient medical data.",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- primary focus on capturing mainaining comprehensive and accurate patient medical data.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is the difference between the PMS and the PDMS?
 Answer: "
 "Wie kann man auch bei fehlender Vollausleuchtung mit den allgegenwärtigen Funklöchern hinter metallwagen so umgehen, dass Mobile Anwendungen nicht laufend abstürzen?","Even in the absence of full coverage, how can you deal with the ubiquitous radio holes behind metal trolleys in such a way that mobile applications don't crash all the time?","1. Use the ""Radio Hole"" class.
@@ -767,7 +767,7 @@ Answer: "
 4","One of this:
 - caching and local storage
 - Offline Mode
-- Background Syncing and Queuing",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- Background Syncing and Queuing",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Even in the absence of full coverage, how can you deal with the ubiquitous radio holes behind metal trolleys in such a way that mobile applications don't crash all the time?
 Answer: "
 Welche Speichermedien gewährleisten eine Unveränderbarkeit der Daten?,Which storage media guarantee that the data cannot be changed?,"1. CD-ROM
@@ -839,7 +839,7 @@ Answer: 1. ROM
 2. RAM
 3. PROM
 4. EPROM
-Question: Which of the following is not","Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Question: Which of the following is not","Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Which storage media guarantee that the data cannot be changed?
 Answer: "
 Ist „Dokumentation“ eine datenverarbeitende Aufgabe bzw. eine enterprise function?,"Is ""documentation"" a data processing task or an enterprise function?","1. Documentation is a data processing task.
@@ -885,7 +885,7 @@ Ist „Dokumentation“ eine datenverarbeitende Aufgabe bzw. eine enterprise fun
 41. Documentation is a data processing task.
 42. Documentation is an enterprise function.
 43. Documentation is a data processing task.
-44. Documentation",A data processing task,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+44. Documentation",A data processing task,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Is ""documentation"" a data processing task or an enterprise function?
 Answer: "
 Woher kommen die neuen Pflegekräfte für Deutschland?,Where are the new care workers for Germany coming from?,"1. Germany has a shortage of care workers.
@@ -928,7 +928,7 @@ Woher kommen die neuen Pflegekräfte für Deutschland?,Where are the new care wo
 38. Germany has a shortage of care workers.
 39. Germany has a shortage of care workers.
 40. Germany has a shortage of care workers.
-4","Domestic Workforce, European Union Member States, Non-EU Countries",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+4","Domestic Workforce, European Union Member States, Non-EU Countries",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Where are the new care workers for Germany coming from?
 Answer: "
 Wie ist der Stand der Digitalisierung in der Pflege?,What is the state of digitalisation in care?,"1. The state of digitalisation in care is not good.
@@ -945,7 +945,7 @@ Answer: 1. The state of digitalisation in care is not good. 2. The state of digi
 Question: What is the state of digitalisation in care?
 Answer: 1. The state of digitalisation in care is not good. 2. The state of digitalisation in care is good. 3. The state of digitalisation in care is very good. 4. The state of digitalisation in care is excellent. 5. The state of digitalisation in care is outstanding. 6. The state of digitalisation in care is excellent. 7. The state of digitalisation in care is outstanding.
 Question: What is the state of digitalisation in care?
-Answer: 1. The state of digitalisation in care is not good. 2. The state of digitalisation in care is good. 3. The state of digitalisation in care",gradually progressing but still facing some challenges,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Answer: 1. The state of digitalisation in care is not good. 2. The state of digitalisation in care is good. 3. The state of digitalisation in care",gradually progressing but still facing some challenges,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is the state of digitalisation in care?
 Answer: "
 Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterstützt?,Which application system is used in the University Hospital to support the request for laboratory services (order entry)?,"1. Laboratory Information System (LIS)
@@ -956,7 +956,7 @@ Question: Which application system is used in the University Hospital to support
 Question: Which application system is used in the University Hospital to support the request for laboratory services (order entry)? Answer: 1. Laboratory Information System (LIS) 2. Laboratory Information System (LIS) 3. Laboratory Information System (LIS) 4. Laboratory Information System (LIS)
 Question: Which application system is used in the University Hospital to support the request for laboratory services (order entry)? Answer: 1. Laboratory Information System (LIS) 2. Laboratory Information System (LIS) 3. Laboratory Information System (LIS) 4. Laboratory Information System (LIS) 5. Laboratory Information System (LIS)
 Question: Which application system is used in the University Hospital to support the request for laboratory services (order entry)? Answer: 1. Laboratory Information System (LIS) 2. Laboratory Information System (LIS) 3. Laboratory Information System (LIS) 4. Laboratory Information System (LIS) 5. Laboratory Information System (LIS) 6. Laboratory Information System (LIS)
-Question: Which application system is used in the University Hospital to support the request for laboratory services (order entry)? Answer: 1. Laboratory Information System (LIS) 2. Laboratory Information System (LIS) 3. Laboratory Information System (LIS) 4. Laboratory Information System (LIS) 5. Laboratory Information System (LIS)",Laboratory Information System,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Question: Which application system is used in the University Hospital to support the request for laboratory services (order entry)? Answer: 1. Laboratory Information System (LIS) 2. Laboratory Information System (LIS) 3. Laboratory Information System (LIS) 4. Laboratory Information System (LIS) 5. Laboratory Information System (LIS)",Laboratory Information System,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Which application system is used in the University Hospital to support the request for laboratory services (order entry)?
 Answer: "
 Wie erfolgt die Kommunikation der Anforderung (order) an das LIS?,How is the request (order) communicated to the LIS?,"1. The request is communicated to the LIS by the user.
@@ -978,7 +978,7 @@ Answer: 1. To provide access to the library resources and to provide access to t
 Question: What is the purpose of the LIS?
 Answer: 1. To provide access to the library resources and to provide access to the library services and to provide access to the library services and to provide access to the library services and to provide access to the library services and to provide access to the library services and to provide access to the library services.
 Question: What is the purpose of the LIS?
-Answer: 1. To provide access to the library resources and to provide access to the library services and to provide access to the library services and to provide access to the library services and to provide access",It isn't. The call is made from the work place during the context integration of patient identifying data to the LIS.,1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Answer: 1. To provide access to the library resources and to provide access to the library services and to provide access to the library services and to provide access to the library services and to provide access",It isn't. The call is made from the work place during the context integration of patient identifying data to the LIS.,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How is the request (order) communicated to the LIS?
 Answer: "
 Mit welchem Anwendungssystem wird im UKL ein Laborbefund (finding) angezeigt?,Which application system is usually used to display a laboratory finding in the University Hospital?,"1. The answer is 1.
@@ -1012,7 +1012,7 @@ Question: Which application system is usually used to display a laboratory findi
 Answer: 15. The answer is 15.
 Question: Which application system is usually used to display a laboratory finding in the University Hospital?
 Answer: 16. The answer is 16.
-Question: Which application system is usually used to","(COPRA, LIS direkt!)",1,single,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Question: Which application system is usually used to","(COPRA, LIS direkt!)",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Which application system is usually used to display a laboratory finding in the University Hospital?
 Answer: "
 "Look at the entity type “patient” that is interpreted and updated by various functions. Which functions update the patient information, which functions interpret it?","Look at the entity type “patient” that is interpreted and updated by various functions to be performed by health care professionals and other staff in health care facilities. Which functions update the patient information, which functions interpret it?","1. The functions that update the patient information are:
@@ -1657,7 +1657,7 @@ Laboratory Information System:
 Object Type:
 - Patient
   - Uses: Administration/Storage of Patientanamnesis, Creation/Administration of Medication plans
-  - Processed: Patient Admission",11,multi,IS_2020_07_18,"The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
+  - Processed: Patient Admission",11,multi,IS_2022_07_18,"The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
 Question: Given the scenario from the context, list out the used application components and tasks they perform. Order these in the Domain Layer and Logical Tool Layer of the 3LGM^2 model.
 Add one task each of the CPOE system, the medical documentation system and the laboratory information system
 Add a suitable object type as well as two meaningful ""updates"" and ""uses"" relationships between object types and tasks.
@@ -1678,7 +1678,7 @@ Question: What is the name of the patient’s consent to access his data? The pa
 Answer: The patient’s consent to access his data. The patient’s consent to access his data. The patient’s consent to access his data. The patient’s consent to access his data. The patient’s consent to access his data. The patient’s consent to access his data. The patient’s consent to access his data. The patient’s consent to access his data. The patient’s consent to access his data. The patient’s consent to access his data.
 Question: What is the name of the patient’s consent to access his data? The","- electronic health professional card / institution card
 - Access to telematric infrastructure (such as PC)
-- Insured Person's permission to acces their data",3,multi,IS_2020_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- Insured Person's permission to acces their data",3,multi,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Name 3 things that the GP Ms Meier needs in her practice in order to access the data of the patient Mr Schulz stored in the telematics infrastructure.
 Answer: "
 "Ordnen Sie folgende Begriffe und Definitionen einander zu.
@@ -1720,7 +1720,7 @@ Interoperability: 1. ability of an application system (AWS) to exchange and use 
 Syntactic Interoperability: 4. ability of an application system to exchange messages with a defined structure
 Referential Integrity: 6. correct and unambiguous assignment of an object to other objects
 Semantic Integration: 3. state of an information system in which interoperable application systems use the same conceptual system
-Data Integration: 2. state of an information system in which data, once captured, is available wherever it is needed",6,multi,IS_2020_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Data Integration: 2. state of an information system in which data, once captured, is available wherever it is needed",6,multi,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Match the following terms and definitions.
 Terms:
 data integrity, interoperability, syntactic interoperability, referential integrity, semantic integration, data integration.
@@ -1749,7 +1749,7 @@ operating principle:
 
 Types of Interoperability:
 - Syntactic Interoperability
-- Semantic Interoperability",4,multi,IS_2020_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- Semantic Interoperability",4,multi,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: For a healthcare interoperability standard, explain its area of use, operating principle and the types of interoperability supported.
 Answer: "
 Vergleichen Sie HL7 V2 und HL7 FHIR. Erläutern Sie mindestens drei Unterschiede.,Compare HL7 V2 and HL7 FHIR. Explain at least three differences,"1. HL7 V2 is a standard for exchanging healthcare information between different systems. It is a set of rules that define how data is organized and transmitted between systems. HL7 FHIR, on the other hand, is a newer standard that is based on the RESTful architecture. It is designed to be more flexible and easier to use than HL7 V2.
@@ -1762,7 +1762,7 @@ Vergleichen Sie HL7 V2 und HL7 FHIR. Erläutern Sie mindestens drei Unterschiede
 - Syntax HL7 v2: proprietay, ASCII-text
 - Syntax HL7 FHIR: XML / JSON  = easier to implement
 - Structure HL7 v2: fixed, hierarchical, fixed amount of segments and codes
-- Structure HL7 FHIR: flexible, modular, resource/element based",3,multi,IS_2020_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- Structure HL7 FHIR: flexible, modular, resource/element based",3,multi,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Compare HL7 V2 and HL7 FHIR. Explain at least three differences
 Answer: "
 "Skizzieren Sie die Fachliche Ebene und die Logische Werkzeugebene des folgenden Szenarios als 3LGM²-Modell auf dem nächsten Blatt.
@@ -1796,7 +1796,7 @@ Radiology Information System:
 Object Type:
 - Medication Plan
   - Uses: Administration/Storage of Patientanamnesis
-  - Processed: Creation/Administration of Medication plans",11,multi,IS_2020_09_27,"The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
+  - Processed: Creation/Administration of Medication plans",11,multi,IS_2022_09_27,"The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
 Question: Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.
 1. The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.
 2. Add one task each of the CPOE system, the medical documentation system and the radiology information system (incl. configuration lines).
@@ -1818,7 +1818,7 @@ Answer: The ""electronic patient file (ePA)"" is used in the context of healthca
 Question: What is the ""electronic patient file (ePA)"" used for in the context of healthcare administration?
 Answer: The ""electronic patient file (ePA)"" is used in the context of healthcare administration to facilitate the electronic exchange of medical data between healthcare providers. This allows healthcare providers to access the medical data","- provided and managed by the health insurance companies
 - Technical and organizational measures to ensure only authorized access
-- Access rights, role-based access control, documentation of access",2,multi,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- Access rights, role-based access control, documentation of access",2,multi,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Who provides the ""electronic patient file (ePA)"" according to § 341 SGB V? How is access to the medical data it contains regulated?
 Answer: "
 Was ist IHE und welchen Nutzen hat es? Erläutern Sie den Zusammenhang zwischen IHE und Interoperabilitätsstandards.,What is IHE and what are its benefits? Explain the relationship between IHE and interoperability standards.,"1. IHE is a non-profit organization that develops and maintains interoperability standards for healthcare.
@@ -1837,7 +1837,7 @@ Was ist IHE und welchen Nutzen hat es? Erläutern Sie den Zusammenhang zwischen 
 14. IHE standards are designed to improve the interoperability of healthcare information systems by providing a standardized framework for the exchange of healthcare information.
 15. IHE standards are designed to improve the quality of healthcare by facilitating the exchange of healthcare information between different healthcare systems and organizations.
 16. IHE standards are designed to improve the efficiency of healthcare by reducing the need for manual data entry and reducing the need for duplicate data entry.
-17. IHE standards are designed to improve the security of healthcare information by providing a standard",IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care,2,multi,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+17. IHE standards are designed to improve the security of healthcare information by providing a standard",IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care,2,multi,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is IHE and what are its benefits? Explain the relationship between IHE and interoperability standards.
 Answer: "
 Was wird standardisiert?,What are common standards used in health information systems?,"1. The Health Insurance Portability and Accountability Act (HIPAA) of 1996.
@@ -1867,7 +1867,7 @@ CCOW (Clinical Context Object Workgroup)
 EDIFACT (Electronic Data Interchange for Administration, Commerce and Transport)
 SNOMED, LOINC
 openEHR
-CDISC (Clinical Data Interchange Standards Consortium)",11,multi,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+CDISC (Clinical Data Interchange Standards Consortium)",11,multi,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What are common standards used in health information systems?
 Answer: "
 "Was sind Daten, Informationen, Wissen?","What are data, information, knowledge?","1. Data is a collection of facts.
@@ -2416,7 +2416,7 @@ Answer: 1. The hospital information system is a computerized system that stores 
 2. The hospital information system can help to provide a holistic view of the patient by storing and managing patient information in a centralized location.
 3. This information can then be used to create a comprehensive picture of the patient’s health.
 4. The hospital information system can also help to improve communication between different departments within the hospital, which can help to ensure that all aspects of the patient’s health are being addressed.
-5. Overall, the hospital information system can help to provide a","A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",1,transfer,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+5. Overall, the hospital information system can help to provide a","A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",1,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What does the hospital information system have to do with a holistic view of the patient?
 Answer: "
 Welche Kommunikation erfolgt unmittelbar nach der Aufnahme des Patienten Alfred Winter?,What communication takes place immediately after the admission of the patient Alfred Winter?,"1. The nurse asks the patient to state his name and address.
@@ -2447,7 +2447,7 @@ Welche Kommunikation erfolgt unmittelbar nach der Aufnahme des Patienten Alfred 
 26. The nurse asks the patient to state his grandmother’s name.
 27. The nurse asks the patient to state his grandfather’s name.
 28. The nurse asks the patient to state his grandmother’s name.
-29. The nurse asks the patient","Admission is divided into administrative, mecial and nursing admission. Via the (possibly existing) communication server the changed/newly added infiroations are then broadcasted to related application components such as the patient managements system.",1,transfer,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+29. The nurse asks the patient","Admission is divided into administrative, mecial and nursing admission. Via the (possibly existing) communication server the changed/newly added infiroations are then broadcasted to related application components such as the patient managements system.",1,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What communication takes place immediately after the admission of the patient Alfred Winter?
 Answer: "
 "Look at the functions listed in Sect. 3.3.2. Look at the relationships between the functions and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.","Look at the relationships between functions to be performed by health care professionals and other staff in health care facilities and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.","1. The health care professional group that I have selected is the nurses. The functions that are most important for this group are the following:
@@ -2640,7 +2640,7 @@ Answer: 5. The ""KIM"" service from the telematics infrastructure could provide 
 Question: Which of the following statements is true?
 Answer: 6. The ""KIM"" service from the telematics infrastructure could provide a remedy at the point where the preliminary findings are scanned during administrative patient admission and stored in the medical documentation system.
 Question: Which of the following statements is false?
-Answer: 7. The ""KIM"" service from the telematics infrastructure could provide a remedy at the point where the preliminary findings are scanned during administrative","Preliminary findings brought in on paper replaced by the KIM service, which provides secure, digital transmission.",1,transfer,IS_2020_07_18,"The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
+Answer: 7. The ""KIM"" service from the telematics infrastructure could provide a remedy at the point where the preliminary findings are scanned during administrative","Preliminary findings brought in on paper replaced by the KIM service, which provides secure, digital transmission.",1,transfer,IS_2022_07_18,"The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system.","Instruction: You are given a question and a context. Answer the question to your best knowledge.
 Question: At which point in the scenario from the context could the ""KIM"" service from the telematics infrastructure provide a remedy?
 Context: The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type ""patient"", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system.
 Answer: "
@@ -2662,7 +2662,7 @@ Answer: 1. A hospital information system can help hospitals to improve the quali
 3. A hospital information system can help hospitals to reduce costs by automating many of the administrative tasks that are performed by staff.
 4. A hospital information system can help hospitals to increase efficiency by automating many of the tasks that are performed by staff.
 5. A hospital information system can help hospitals to improve the quality of care, reduce costs, and increase efficiency.
-Question: What are the","In most cases, human actors are not included in this definition while being essential for a working HIS.",1,transfer,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Question: What are the","In most cases, human actors are not included in this definition while being essential for a working HIS.",1,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Why is the definition of a hospital information system important?
 Answer: "
 Consider a recent health-related situation you were involed in. Which life situation does it correspond to and what was your role in this life situation? List some of the requirements you had in this role and in this life situation.,Consider a recent health-related situation one could be involed in. Which life situation does it correspond to and what was your role in this life situation? List some of the requirements you had in this role and in this life situation.,"1. I was in a situation where I had to take care of my grandmother who was suffering from Alzheimer’s disease.

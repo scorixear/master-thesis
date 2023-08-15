@@ -12,7 +12,7 @@
     "transformed": "At which point in the scenario from the contex could the \"KIM\" service from the telematics infrastructur provide a remedy?",
     "true_answer": "Preliminary findings brought in on paper replaced by the KIM service, which provides secure, digital transmission.",
     "num_answers": 1,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": "The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system."
   },
   {

@@ -46,7 +46,7 @@ CCOW (Clinical Context Object Workgroup)
 EDIFACT (Electronic Data Interchange for Administration, Commerce and Transport)
 SNOMED, LOINC
 openEHR
-CDISC (Clinical Data Interchange Standards Consortium)",11,multi,IS_2020_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+CDISC (Clinical Data Interchange Standards Consortium)",11,multi,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What are commen standerds used in health informtion sytems?
 Answer: "
 "Look at the functions presented in Sect. 3.3.2. Now imagine a small hospital (e.g., 350 beds) and a large university medical center (e.g., 1500 beds). What are the differences between these hospitals with regard to their functions? Explain your answer.","Imagin a small hospitul (e.g., 350 beds) and a large university medical center (e.g., 1500 beds). What are the differnces between these hospitals with regard to their funtions to be preformed by health care proffesionals and other staff in health care facilties? Explain your answear.","

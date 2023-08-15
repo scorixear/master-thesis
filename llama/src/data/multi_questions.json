@@ -76,7 +76,7 @@
     "transformed": "Given the scenario from the context, list out the used application components and tasks they perform. Order these in the Domain Layer and Logical Tool Layer of the 3LGM^2 model.\nAdd one task each of the CPOE system, the medical documentation system and the laboratory information system\nAdd a suitable object type as well as two meaningful \"updates\" and \"uses\" relationships between object types and tasks.",
     "true_answer": "Domain Layer:\n- Patient Admission\n\nLogical Tool Layer:\n- Patient Management System\n- Communication Server\n- CPOE System\n- Medical Documentation System\n- Laboratory Information System\n\n\nCPOE System:\n- Task: Creation/Administration of Medication plans\n\nMedical Documentation System:\n- Task: Administration/Storage of Patientanamnesis\n\nLaboratory Information System:\n- Task: Storage/Processing of Laboratory Requests\n\nObject Type:\n- Patient\n  - Uses: Administration/Storage of Patientanamnesis, Creation/Administration of Medication plans\n  - Processed: Patient Admission",
     "num_answers": 11,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": "The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system."
   },
   {
@@ -84,7 +84,7 @@
     "transformed": "Name 3 things that the GP Ms Meier needs in her practice in order to access the data of the patient Mr Schulz stored in the telematics infrastructure.",
     "true_answer": "- electronic health professional card / institution card\n- Access to telematric infrastructure (such as PC)\n- Insured Person's permission to acces their data",
     "num_answers": 3,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": ""
   },
   {
@@ -92,7 +92,7 @@
     "transformed": "Match the following terms and definitions.\nTerms:\ndata integrity, interoperability, syntactic interoperability, referential integrity, semantic integration, data integration.\nDefinitions:\n1. ability of an application system (AWS) to exchange and use information with other AWSs\n2. state of an information system in which data, once captured, is available wherever it is needed\n3. state of an information system in which interoperable application systems use the same conceptual system\n4. ability of an application system to exchange messages with a defined structure\n5. correctness of data\n6. correct and unambiguous assignment of an object to other objects",
     "true_answer": "Data Integrity: 5. correctness of data\nInteroperability: 1. ability of an application system (AWS) to exchange and use information with other AWSs\nSyntactic Interoperability: 4. ability of an application system to exchange messages with a defined structure\nReferential Integrity: 6. correct and unambiguous assignment of an object to other objects\nSemantic Integration: 3. state of an information system in which interoperable application systems use the same conceptual system\nData Integration: 2. state of an information system in which data, once captured, is available wherever it is needed",
     "num_answers": 6,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": ""
   },
   {
@@ -100,7 +100,7 @@
     "transformed": "For a healthcare interoperability standard, explain its area of use, operating principle and the types of interoperability supported.",
     "true_answer": "Health Level 7 Version 2:\nArea of Use:\n- Communication between Application Systems\n\noperating principle:\n- Message based\n- Event driven\n\nTypes of Interoperability:\n- Syntactic Interoperability\n- Semantic Interoperability",
     "num_answers": 4,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": ""
   },
   {
@@ -108,7 +108,7 @@
     "transformed": "Compare HL7 V2 and HL7 FHIR. Explain at least three differences",
     "true_answer": "- both used to exchange health information between application systems\n- Syntax HL7 v2: proprietay, ASCII-text\n- Syntax HL7 FHIR: XML / JSON  = easier to implement\n- Structure HL7 v2: fixed, hierarchical, fixed amount of segments and codes\n- Structure HL7 FHIR: flexible, modular, resource/element based",
     "num_answers": 3,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": ""
   },
   {
@@ -116,7 +116,7 @@
     "transformed": "Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.\n1. The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.\n2. Add one task each of the CPOE system, the medical documentation system and the radiology information system (incl. configuration lines).\n3. Add a suitable object type as well as two meaningful \"updates\" and \"uses\" relationships between object types and tasks.",
     "true_answer": "Domain Layer:\n- Administrative Patient Admission\n\nLogical Tool Layer:\n- Patient Management System\n- Communication Server\n- CPOE System\n- Medical Documentation System\n- Radiologoy Information System\n\n\nCPOE System:\n- Task: Creation/Administration of Medication plans\n\nMedical Documentation System:\n- Task: Administration/Storage of Patientanamnesis\n\nRadiology Information System:\n- Task: Archive/Processing of Radiological Images\n\nObject Type:\n- Medication Plan\n  - Uses: Administration/Storage of Patientanamnesis\n  - Processed: Creation/Administration of Medication plans",
     "num_answers": 11,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": "The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system."
   },
   {
@@ -124,7 +124,7 @@
     "transformed": "Who provides the \"electronic patient file (ePA)\" according to \u00a7 341 SGB V? How is access to the medical data it contains regulated?",
     "true_answer": "- provided and managed by the health insurance companies\n- Technical and organizational measures to ensure only authorized access\n- Access rights, role-based access control, documentation of access",
     "num_answers": 2,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {
@@ -132,7 +132,7 @@
     "transformed": "What is IHE and what are its benefits? Explain the relationship between IHE and interoperability standards.",
     "true_answer": "IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care",
     "num_answers": 2,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {
@@ -140,7 +140,7 @@
     "transformed": "What are common standards used in health information systems?",
     "true_answer": "HL7v2\nCDA\nHL7 FHIR\nDICOM\nISO/IEEE 11073\nCCOW (Clinical Context Object Workgroup)\nEDIFACT (Electronic Data Interchange for Administration, Commerce and Transport)\nSNOMED, LOINC\nopenEHR\nCDISC (Clinical Data Interchange Standards Consortium)",
     "num_answers": 11,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {

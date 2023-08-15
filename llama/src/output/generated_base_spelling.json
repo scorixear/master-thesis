@@ -28,7 +28,7 @@
     "true_answer": "The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",
     "num_answers": 1,
     "type": "single",
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": "",
     "true_input": "Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: Explain the taxanomy for hospital information sistems!\nAnswer:"
   },
@@ -39,7 +39,7 @@
     "true_answer": "Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",
     "num_answers": 1,
     "type": "single",
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": "",
     "true_input": "Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: Which storage media gurantee that the data cannot be changed?\nAnswer:"
   },
@@ -50,7 +50,7 @@
     "true_answer": "Laboratory Information System",
     "num_answers": 1,
     "type": "single",
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": "",
     "true_input": "Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: Which application sistem is usually used to dislay a laboratory finding in the University Hospitul?\nAnswer:"
   },
@@ -83,7 +83,7 @@
     "true_answer": "Domain Layer:\n- Patient Admission\n\nLogical Tool Layer:\n- Patient Management System\n- Communication Server\n- CPOE System\n- Medical Documentation System\n- Laboratory Information System\n\n\nCPOE System:\n- Task: Creation/Administration of Medication plans\n\nMedical Documentation System:\n- Task: Administration/Storage of Patientanamnesis\n\nLaboratory Information System:\n- Task: Storage/Processing of Laboratory Requests\n\nObject Type:\n- Patient\n  - Uses: Administration/Storage of Patientanamnesis, Creation/Administration of Medication plans\n  - Processed: Patient Admission",
     "num_answers": 11,
     "type": "multi",
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": "The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.",
     "true_input": "Instruction: You are given a question and a context. Answer the question to your best knowledge.\nQuestion: Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.\n1. The administrative patient admission takes place with the patient managment sistem. The administrative patient data, represented by the object type \"patient\", are send from the patient managment sistem via the comunications server to the CPOE sistem, the medical documentation sistem and the laboratory information sistem. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation sistem.\n2. Add one task each of the CPOE sistem, the medical documentation sistem and the laboratory information sistem (incl. configuration lines).\n3. Add a suitable object type as well as two meaningfull \"updates\" and \"uses\" relationships between object types and tasks.\nContext: The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.\nAnswer:"
   },
@@ -94,7 +94,7 @@
     "true_answer": "- electronic health professional card / institution card\n- Access to telematric infrastructure (such as PC)\n- Insured Person's permission to acces their data",
     "num_answers": 3,
     "type": "multi",
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": "",
     "true_input": "Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: Name 3 things that the GP Ms Meier needs in her practise in order to acess the data of the patient Mr Schulz stored in the telematics infrastructur.\nAnswer:"
   },
@@ -105,7 +105,7 @@
     "true_answer": "Health Level 7 Version 2:\nArea of Use:\n- Communication between Application Systems\n\noperating principle:\n- Message based\n- Event driven\n\nTypes of Interoperability:\n- Syntactic Interoperability\n- Semantic Interoperability",
     "num_answers": 4,
     "type": "multi",
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": "",
     "true_input": "Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: For a healthcare interopebility standard, explan its area of use, operating principle and the types of interopebility suported?\nAnswer:"
   },
@@ -116,7 +116,7 @@
     "true_answer": "- both used to exchange health information between application systems\n- Syntax HL7 v2: proprietay, ASCII-text\n- Syntax HL7 FHIR: XML / JSON  = easier to implement\n- Structure HL7 v2: fixed, hierarchical, fixed amount of segments and codes\n- Structure HL7 FHIR: flexible, modular, resource/element based",
     "num_answers": 3,
     "type": "multi",
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": "",
     "true_input": "Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: Compare HL7 V2 and HL7 FHIR. Explain at least three differences\nAnswer:"
   },
@@ -127,7 +127,7 @@
     "true_answer": "Domain Layer:\n- Administrative Patient Admission\n\nLogical Tool Layer:\n- Patient Management System\n- Communication Server\n- CPOE System\n- Medical Documentation System\n- Radiologoy Information System\n\n\nCPOE System:\n- Task: Creation/Administration of Medication plans\n\nMedical Documentation System:\n- Task: Administration/Storage of Patientanamnesis\n\nRadiology Information System:\n- Task: Archive/Processing of Radiological Images\n\nObject Type:\n- Medication Plan\n  - Uses: Administration/Storage of Patientanamnesis\n  - Processed: Creation/Administration of Medication plans",
     "num_answers": 11,
     "type": "multi",
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": "The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.",
     "true_input": "Instruction: You are given a question and a context. Answer the question to your best knowledge.\nQuestion: Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.\n1. The administrative patient admission takes place with the patient managment sistem. The administrative patient data, represented by the object type \"patient\", are send from the patient managment sistem via the comunications server to the CPOE sistem, the medical documentation sistem and the radiology information sistem. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation sistem.\n2. Add one task each of the CPOE sistem, the medical documentation sistem and the radiology information sistem (incl. configuration lines).\n3. Add a suitable object type as well as two meaningfull \"updates\" and \"uses\" relationships between object types and tasks.\nContext: The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system.\nAnswer:"
   },
@@ -138,7 +138,7 @@
     "true_answer": "- provided and managed by the health insurance companies\n- Technical and organizational measures to ensure only authorized access\n- Access rights, role-based access control, documentation of access",
     "num_answers": 2,
     "type": "multi",
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": "",
     "true_input": "Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: Who provids the \"electronic patiant file (ePA)\" according to \u00a7 341 SGB V? How is acces to the medical data its contains regulatd?\nAnswer:"
   },
@@ -149,7 +149,7 @@
     "true_answer": "IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care",
     "num_answers": 2,
     "type": "multi",
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": "",
     "true_input": "Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: What is IHE and what its benifits? Explain the relationship betwen IHE and interoparability standerds.\nAnswer:"
   },
@@ -237,7 +237,7 @@
     "true_answer": "Preliminary findings brought in on paper replaced by the KIM service, which provides secure, digital transmission.",
     "num_answers": 1,
     "type": "transfer",
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": "The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system.",
     "true_input": "Instruction: You are given a question and a context. Answer the question to your best knowledge.\nQuestion: At which point in the scenario from the contex could the \"KIM\" service from the telematics infrastructur provide a remedy?\nContext: The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system.\nAnswer:"
   },

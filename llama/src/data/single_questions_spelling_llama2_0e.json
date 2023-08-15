@@ -20,7 +20,7 @@
     "transformed": "Explain the taxanomy for hospital information sistems!",
     "true_answer": "The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",
     "num_answers": 1,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {
@@ -28,7 +28,7 @@
     "transformed": "Which storage media gurantee that the data cannot be changed?",
     "true_answer": "Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",
     "num_answers": 1,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {
@@ -36,7 +36,7 @@
     "transformed": "Which application sistem is usually used to dislay a laboratory finding in the University Hospitul?",
     "true_answer": "Laboratory Information System",
     "num_answers": 1,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   }
 ]

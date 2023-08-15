@@ -12,7 +12,7 @@
     "transformed": "What does the hospital information system have to do with a holistic view of the patient?",
     "true_answer": "A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",
     "num_answers": 1,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {
@@ -20,7 +20,7 @@
     "transformed": "What communication takes place immediately after the admission of the patient Alfred Winter?",
     "true_answer": "Admission is divided into administrative, mecial and nursing admission. Via the (possibly existing) communication server the changed/newly added infiroations are then broadcasted to related application components such as the patient managements system.",
     "num_answers": 1,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {
@@ -60,7 +60,7 @@
     "transformed": "At which point in the scenario from the context could the \"KIM\" service from the telematics infrastructure provide a remedy?",
     "true_answer": "Preliminary findings brought in on paper replaced by the KIM service, which provides secure, digital transmission.",
     "num_answers": 1,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": "The administrative patient admission is done with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system. There also exists the CPOE-System, medical documentation system and the laboratory information system."
   },
   {
@@ -68,7 +68,7 @@
     "transformed": "Why is the definition of a hospital information system important?",
     "true_answer": "In most cases, human actors are not included in this definition while being essential for a working HIS.",
     "num_answers": 1,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {

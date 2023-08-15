@@ -4,7 +4,7 @@
     "transformed": "What does the hospitul informashun sistem have to do with a holistik view of the patient?",
     "true_answer": "A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",
     "num_answers": 1,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {

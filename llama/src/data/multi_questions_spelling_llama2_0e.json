@@ -20,7 +20,7 @@
     "transformed": "Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.\n1. The administrative patient admission takes place with the patient managment sistem. The administrative patient data, represented by the object type \"patient\", are send from the patient managment sistem via the comunications server to the CPOE sistem, the medical documentation sistem and the laboratory information sistem. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation sistem.\n2. Add one task each of the CPOE sistem, the medical documentation sistem and the laboratory information sistem (incl. configuration lines).\n3. Add a suitable object type as well as two meaningfull \"updates\" and \"uses\" relationships between object types and tasks.",
     "true_answer": "Domain Layer:\n- Patient Admission\n\nLogical Tool Layer:\n- Patient Management System\n- Communication Server\n- CPOE System\n- Medical Documentation System\n- Laboratory Information System\n\n\nCPOE System:\n- Task: Creation/Administration of Medication plans\n\nMedical Documentation System:\n- Task: Administration/Storage of Patientanamnesis\n\nLaboratory Information System:\n- Task: Storage/Processing of Laboratory Requests\n\nObject Type:\n- Patient\n  - Uses: Administration/Storage of Patientanamnesis, Creation/Administration of Medication plans\n  - Processed: Patient Admission",
     "num_answers": 11,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": "The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the laboratory information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system."
   },
   {
@@ -28,7 +28,7 @@
     "transformed": "Name 3 things that the GP Ms Meier needs in her practise in order to acess the data of the patient Mr Schulz stored in the telematics infrastructur.",
     "true_answer": "- electronic health professional card / institution card\n- Access to telematric infrastructure (such as PC)\n- Insured Person's permission to acces their data",
     "num_answers": 3,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": ""
   },
   {
@@ -36,7 +36,7 @@
     "transformed": "For a healthcare interopebility standard, explan its area of use, operating principle and the types of interopebility suported?",
     "true_answer": "Health Level 7 Version 2:\nArea of Use:\n- Communication between Application Systems\n\noperating principle:\n- Message based\n- Event driven\n\nTypes of Interoperability:\n- Syntactic Interoperability\n- Semantic Interoperability",
     "num_answers": 4,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": ""
   },
   {
@@ -44,7 +44,7 @@
     "transformed": "Compare HL7 V2 and HL7 FHIR. Explain at least three differences",
     "true_answer": "- both used to exchange health information between application systems\n- Syntax HL7 v2: proprietay, ASCII-text\n- Syntax HL7 FHIR: XML / JSON  = easier to implement\n- Structure HL7 v2: fixed, hierarchical, fixed amount of segments and codes\n- Structure HL7 FHIR: flexible, modular, resource/element based",
     "num_answers": 3,
-    "source": "IS_2020_07_18",
+    "source": "IS_2022_07_18",
     "context": ""
   },
   {
@@ -52,7 +52,7 @@
     "transformed": "Describe the functional level and the logical tool level of the following scenario as a 3LGM^2 model.\n1. The administrative patient admission takes place with the patient managment sistem. The administrative patient data, represented by the object type \"patient\", are send from the patient managment sistem via the comunications server to the CPOE sistem, the medical documentation sistem and the radiology information sistem. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation sistem.\n2. Add one task each of the CPOE sistem, the medical documentation sistem and the radiology information sistem (incl. configuration lines).\n3. Add a suitable object type as well as two meaningfull \"updates\" and \"uses\" relationships between object types and tasks.",
     "true_answer": "Domain Layer:\n- Administrative Patient Admission\n\nLogical Tool Layer:\n- Patient Management System\n- Communication Server\n- CPOE System\n- Medical Documentation System\n- Radiologoy Information System\n\n\nCPOE System:\n- Task: Creation/Administration of Medication plans\n\nMedical Documentation System:\n- Task: Administration/Storage of Patientanamnesis\n\nRadiology Information System:\n- Task: Archive/Processing of Radiological Images\n\nObject Type:\n- Medication Plan\n  - Uses: Administration/Storage of Patientanamnesis\n  - Processed: Creation/Administration of Medication plans",
     "num_answers": 11,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": "The administrative patient admission takes place with the patient management system. The administrative patient data, represented by the object type \"patient\", are sent from the patient management system via the communication server to the CPOE system, the medical documentation system and the radiology information system. Preliminary findings brought in on paper are scanned during administrative patient admission and stored in the medical documentation system."
   },
   {
@@ -60,7 +60,7 @@
     "transformed": "Who provids the \"electronic patiant file (ePA)\" according to § 341 SGB V? How is acces to the medical data its contains regulatd?",
     "true_answer": "- provided and managed by the health insurance companies\n- Technical and organizational measures to ensure only authorized access\n- Access rights, role-based access control, documentation of access",
     "num_answers": 2,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {
@@ -68,7 +68,7 @@
     "transformed": "What is IHE and what its benifits? Explain the relationship betwen IHE and interoparability standerds.",
     "true_answer": "IHE stands for Integrating the Healthcare Enterprise. It is an initiative by healthcare professionals and industry to improve the way computer systems in healthcare share information. IHE promotes the coordinated use of established standards such as DICOM and HL7 to address specific clinical needs in support of optimal patient care",
     "num_answers": 2,
-    "source": "IS_2020_09_27",
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {

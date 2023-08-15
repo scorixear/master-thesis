@@ -4,3 +4,112 @@
 
 - Ergebnisse der einzelnen Tests
 - Besseres Ergebnis wenn End of Answer Token trained (Human Reinforcment training)
+
+Fragen beantwortet:
+- GPT 4 deutlich besten Ergebnisse
+- LLaMA untrainiert ungefähr 1/3 der Fragen beantwortet
+- LLaMA 1 Epoche sehr schwach
+- LLaMA 3 Epochen erlernt wieder, kommt nicht ganz an LLaMA untrainiert heran
+
+Stärken von GPT4
+Multi-Fakt Fragen
+
+Schwächen von GPT4
+Transfer und Single-Fakt Fragen
+
+Stärken von LLaMA untrainiert
+Multi-Fakt Fragen
+
+Schwächen von LLaMA untrainiert
+Single Fakt Fragen
+
+Stärken von LLaMA 3 Epochen
+Transfer Fragen
+
+Schwächen von LLaMA 3 Epochen
+Single Fakt Fragen
+
+
+Vergleich LLaMA mit GPT4 durchgängig bessere Ergebnisse bei allen Fragenarten
+Vergleich LLaMA 1 Epoche mit anderen Modellen durchgängig schlechtere Ergebnisse bei allen Fragenarten
+Vergleich LLaMA 3 mit LLaMA 0:
+- Minimale Verbesserung bei Transfer Fragen
+- Wesentlich mehr unbeantwortete Fragen bei Singulär
+- Wesentlich mehr unbeantwortete Fragen bei Multi-Fakt
+
+Analyse der Korrektheit
+- Betrachtung der MakroF1 Werte bestätigt totale Anzahl der Fragen Ergebnisse
+- GPT4 erreicht 0.7 MakroF1, vergleichbar mit ERgebnissen aus GPT4 Paper (Medical Knowledge)
+- LLaMA auch im untrainierten Zustand deutlich unter normaler Leistung
+- MakroF1 auch im Transfer Bereich besser durch traininng (hier klarerer Unterschied)
+- Leichte Verbesserung im Single Bereich zu erkennen
+- Deutlich schlechter in Multi-Fakt Fragen
+
+Begründung der Ergebnisse
+- GPT4 durch Größe unschlagbar
+- hier nur mit LLaMA 7B verglichen, zu erwarten bei größere Modelle deutlich bessere Leistung
+- Verlauf des Trainings einschätzbar: 1 Epoche deutlich zu wenig
+- temporäres Overfitting an Formattierungsarten (Überschriften, Aufzählungen)
+    hier Beispiel von LLaMA 1 einfügen
+- LLaMA 3 Epoche deutlich bessere Leistung als LLaMA 1 Epoche, mögliche Steigerung durch weiteres Training
+- generell sehr wenig Trainigsdaten (600kB), Gefahr des overfittings nach 3 Epochen existent
+- weitertrainieren nicht möglich, beschrieben in Kapitel 5
+- LLaMA 3 erlernt keine falschen Fakten, deutlich mehr Fragen unbeantwortet, während LLaMA 0 mehr Fragen falsch beantwortet
+
+- Tatsächliche Steigerung bei Transfer-Fragen
+Ergebnisse enthalten jedoch gravierende Formattierungs- und Wiederholungsfehler
+
+Modelle im aktuellen Zustand nicht nutzbar
+    hier Beispiel von LLaMA 3 einfügen
+
+
+Analyse Erklärbarkeit
+- GPT 4 auch hier unschlagbar, nahezu jede Antwort enthält Erklärung
+- LLaMA unbeeinflusst, 50\% hier mit Erklärung
+- Verbesserung durch Human Reinforcement Training möglich, um Erklärungen zu belohnen (nicht existent im Trainingsdatensatz)
+
+Analyse Fragenverständnis
+- Fragenverständnis nicht äquivalent zu "Fragen beantwortet"
+- Fragenverständis bei LLaMA 0 deutlich höher als bei LLaMA 3
+- GPT4 versteht so gut wie jede Frage
+
+Analyse Robustheit
+- Rechtschreibfehler führen zu falschen Antworten
+- Multi am wenigsten beeinflusst
+- Single großer Abfall bei LLaMA 3
+- Transfer Leistung halbiert
+
+- Auch GPT4 schwierigkeiten bei Transfer
+- andere Fragenarten nicht beeinflusst
+
+- LLaMA 3 deutlich schlechtere Robustheit insgesammt
+- LLaMA 0 profitiert etwas durch Fehler, erhöhter MakroF1 Wert (vollständigere Antworten)
+
+- Rechtschreibfehler in Fachbegriffen erschweren Faktenwiedergabe, da Tokenization Wörter anders
+unterteilt (teilweise auch in einzelne Buchstaben)
+- schlechtere Leistungen zu erwarten gegenüber ohne Fehler
+- zeigt generelles Verständnis von Fakten unabhängig von Textrepräsentation
+- LLaMA 0 enthaltenes Wissen durch größere Datenmengen fundierter
+- LLaMA 3 durch einzelnens Buch (wenig Daten) erst oberflächliche Wissensaneignung
+- LLaMA 3 scheint teile des LLaMA 0 Wissens ersetzt / versteckt zu haben
+
+Gesamtanalyse
+- LLaMA 3 kommt nicht an Leistungen von GPT4 oder LLaMA 0 heran
+- Zeigt durch Vergleich mit LLaMA1 jedoch Steigende Verbesserung, die möglicherweise fortgesetzt wird durch längeres Training
+- LLaMA 3 zeigt bessere Ergebnisse bei Transfer Fragen und präferiert keine Antwort über einer falschen Antwort
+- Erklärbarkeit und Fragenverständnis sind nur in Teilen gegeben, folgen jedoch ähnlichen Ergebnissen wie LLaMA 0
+    - keine zusätzliche Verbeserung durch Trainingsdaten erreicht
+- Robustheit zeigt, dass Wissen oberflächlich erlernt wurde, jedoch nicht fundiert verankert ist
+    - auch hier Steigerung durch längeres Training zu erwarten
+
+Leistungssteigerung möglich durch:
+- Längeres Training (mehr Epochen)
+    - hier gefahr des overfittings erkennen (bei 3 Epochen noch nicht erreicht)
+- Größere Modelle generelle Verbesserung zu erwarten (LLaMA 13B, 33B)
+- Mehr Trainingsdaten
+    - sinkt Gefahr des overfittings
+    - Wissen wird fundierter erlernt, da in unterschiedlicher Formulierung enthalten
+- Leistungssteigerung durch Human Reinforcement Learning
+    - bessere Erklärbarkeit zu erwarten
+
+
