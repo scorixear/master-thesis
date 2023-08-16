@@ -144,13 +144,13 @@
         "transformed": "How are HL7, DICOM related?",
         "generated": "1. HL7 is a standard for exchanging health information.\n2. DICOM is a standard for exchanging medical images.\n3. HL7 and DICOM are related because they both use XML as their data format.\n4. HL7 and DICOM are related because they both use HTTP as their transport protocol.\n5. HL7 and DICOM are related because they both use TCP as their transport protocol.\n6. HL7 and DICOM are related because they both use UDP as their transport protocol.\n7. HL7 and DICOM are related because they both use FTP as their transport protocol.\n8. HL7 and DICOM are related because they both use SMTP as their transport protocol.\n9. HL7 and DICOM are related because they both use SNMP as their transport protocol.\n10. HL7 and DICOM are related because they both use SOAP as their transport protocol.\n11. HL7 and DICOM are related because they both use XML as their data format.\n12. HL7 and DICOM are related because they both use HTTP as their transport protocol.\n13. HL7 and DICOM are related because they both use TCP as their transport protocol.\n14. HL7 and DICOM are related because they both use UDP as their transport protocol.\n15. HL7 and DICOM are related because they both use FTP as their transport protocol.\n16. HL7 and DICOM are related because they both use SMTP as their transport protocol.\n17. HL7 and DICOM are related because they both use SNMP as their transport protocol.\n18. HL7 and DICOM are related because they both use SOAP as their transport protocol.\n19. HL7 and DICOM are related because they both use XML as their data format.\n20. HL7 and DICOM are related because they both use HTTP as their transport protocol.\n21. HL7 and DICOM are related because they both use TCP as their transport protocol.\n22. HL7 and DICOM are related because they both use UDP as their transport protocol.\n23. HL7 and DICOM are related because they both use",
         "true_answer": "Both are Communication Standards commonly used in a Health Information System",
-        "num_answers": 1,
+        "num_answers": 2,
         "type": "multi",
         "source": "",
         "context": "",
         "true_input": "Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: How are HL7, DICOM related?\nAnswer:",
         "answered": 2,
-        "points": 1,
+        "points": 2,
         "total_answers": 10
     },
     {

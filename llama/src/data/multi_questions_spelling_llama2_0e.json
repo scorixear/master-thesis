@@ -107,7 +107,7 @@
     "question": "Wie hängen HL7, DICOM zusammen",
     "transformed": "How are HL7, DICOM realted?",
     "true_answer": "Both are Communication Standards commonly used in a Health Information System",
-    "num_answers": 1,
+    "num_answers": 2,
     "source": "",
     "context": ""
   },
@@ -115,7 +115,7 @@
     "question": "Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?",
     "transformed": "What is the importence of software developement in a hospitul?",
     "true_answer": "While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.",
-    "num_answers": 1,
+    "num_answers": 2,
     "source": "A_2021",
     "context": ""
   }

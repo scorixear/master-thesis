@@ -590,7 +590,7 @@ Wann ist ein Modell gut?,When is a modle good in the context of health informati
 
 13. **Redundancy and Disaster Recovery**: In the context of health systems, ensuring that there are backup systems and recovery plans in place is critical, as the failure of these systems can impact patient care.
 
-Remember that the ""goodness"" of a model isn't just about its technical capabilities. It's about how well it integrates into the healthcare ecosystem and facilitates better patient outcomes. Always align the model's goals with the broader goals of the healthcare system and patient well-being.","A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Remember that the ""goodness"" of a model isn't just about its technical capabilities. It's about how well it integrates into the healthcare ecosystem and facilitates better patient outcomes. Always align the model's goals with the broader goals of the healthcare system and patient well-being.","A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",3,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: When is a model good in the context of health information systems?
 Answer: "
 Wie kann man dynamische Aspekte von IS modellieren?,How can dynamic aspects of Information Systems be modelled?,"Modeling the dynamic aspects of Information Systems (IS) involves capturing the changes, processes, and interactions that occur over time within the system. Various modeling techniques and tools are available to represent these dynamic behaviors. Some of the common methods include:
@@ -778,61 +778,6 @@ It's worth noting that while these methods can prevent or strongly deter modific
 
 Also, remember that even if data cannot be changed on a particular medium, it can be copied and then altered in the copied version. This is why ensuring the integrity of data often relies not just on the storage medium, but on cryptographic signatures, hashing, and other methods that can detect if data has been tampered with.","Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Which storage media guarantee that the data cannot be changed?
-Answer: "
-Woher kommen die neuen Pflegekräfte für Deutschland?,Where are the new care workers for Germany coming form?,"As of my last update in September 2021, Germany, like many other developed countries, was facing challenges related to an aging population, which led to an increased demand for care workers. Given the shortage of domestic care workers, Germany has been recruiting and sourcing care workers from abroad. Some of the main sources and strategies have included:
-
-1. **Eastern Europe**: Particularly from countries like Poland, Romania, and Bulgaria. Many care workers from these countries have been attracted to Germany due to better wages and working conditions.
-
-2. **Asia**: Germany has signed bilateral agreements with countries like Vietnam, the Philippines, and Bosnia and Herzegovina to facilitate the recruitment of nursing staff. These agreements are designed to ensure a win-win situation where Germany gets skilled nurses and these countries get opportunities for their citizens along with training and knowledge exchange.
-
-3. **Western Balkans**: Germany has been trying to tap into the potential of the Western Balkan countries by offering vocational training and job opportunities in the healthcare sector.
-
-4. **Refugees and Asylum Seekers**: Germany has also looked at integrating refugees and asylum seekers into the labor market, including the healthcare sector. Various programs have been developed to assess and recognize the qualifications of refugees and to provide them with the necessary training.
-
-5. **Training and Education**: To ensure that foreign care workers can effectively integrate and work in the German healthcare system, there are numerous initiatives and programs that offer language courses, cultural orientation, and job-specific training.
-
-6. **EU Blue Card**: This is a work permit allowing highly skilled non-EU citizens to work and live in Germany. While it's primarily designed for professionals like scientists, mathematicians, engineers, and IT specialists, it also can be a way for healthcare professionals to come to Germany if they meet the necessary requirements.
-
-Given the fluid nature of global migration and labor markets, it's important to note that the specific sources of foreign care workers for Germany might evolve over time based on policy changes, economic conditions, and other factors. For the most up-to-date information, it would be best to consult more recent sources or the relevant governmental departments in Germany.","Domestic Workforce, European Union Member States, Non-EU Countries",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
-Question: Where are the new care workers for Germany coming from?
-Answer: "
-Wie ist der Stand der Digitalisierung in der Pflege?,What is the state of digitalization in care?,"As of my last update in September 2021, digitalization in the care sector, which encompasses healthcare, eldercare, and other care services, had been advancing rapidly. However, it's worth noting that while there have been significant strides in some areas, there are still challenges and areas of growth. Here’s a summary of the state of digitalization in care up to 2021:
-
-1. **Electronic Health Records (EHRs)**:
-   - **Pros**: EHRs are becoming standard in many healthcare facilities around the world. They improve data accessibility, reduce paperwork, and can potentially lead to better patient outcomes through evidence-based decision support.
-   - **Cons**: Implementation can be costly, and there are concerns about data breaches and patient privacy. Interoperability between different EHR systems is also a challenge.
-
-2. **Telemedicine**:
-   - **Pros**: The COVID-19 pandemic accelerated the adoption of telemedicine. Patients can consult with healthcare professionals without having to travel, making healthcare more accessible.
-   - **Cons**: Not all medical evaluations can be conducted remotely. There are also concerns about the quality of care, licensing across state or national boundaries, and reimbursement models.
-
-3. **Wearable Health Devices**:
-   - **Pros**: Devices like smartwatches and fitness trackers can monitor vital signs and other health metrics, allowing for continuous patient monitoring and early detection of potential issues.
-   - **Cons**: Data accuracy can vary, and there are privacy concerns. Integration of this data with EHRs and its meaningful use is also a challenge.
-
-4. **Remote Patient Monitoring**:
-   - **Pros**: Devices can send patient data to healthcare providers in real-time, allowing for better chronic disease management and early intervention.
-   - **Cons**: Requires reliable connectivity and can be expensive. Data overload for providers can also be an issue.
-
-5. **AI and Machine Learning**:
-   - **Pros**: These technologies can analyze vast amounts of data quickly, providing diagnostic support, predicting patient deterioration, and personalizing treatments.
-   - **Cons**: There are concerns about the ""black box"" nature of some AI algorithms, meaning the decision-making process is not always transparent.
-
-6. **Digitalization in Eldercare**:
-   - **Pros**: Technologies like smart home devices can assist the elderly in daily tasks, remind them to take medications, and monitor their health.
-   - **Cons**: Elder populations might be resistant to adopting new technologies. There are also concerns about privacy and data security.
-
-7. **Online Training and Education**:
-   - **Pros**: Online platforms have made it easier for healthcare professionals to access training and continuous education resources.
-   - **Cons**: The quality of online courses can vary, and there are concerns about the effectiveness of online training compared to hands-on training.
-
-8. **Challenges**:
-   - **Privacy and Security**: As more health data goes digital, there are growing concerns about data breaches and unauthorized access.
-   - **Infrastructure**: In many parts of the world, especially in low-resource settings, there is a lack of necessary infrastructure for digitalization.
-   - **Regulation**: Regulatory environments may not have caught up with technological advances, leading to uncertainty.
-
-In summary, while digitalization has made significant inroads into the care sector, challenges remain. Still, the potential benefits of enhanced data-driven care, increased accessibility, and improved outcomes are driving continued innovation and adoption. However, given the rapidly evolving nature of technology, it would be a good idea to consult more recent sources for the latest developments post-2021.",gradually progressing but still facing some challenges,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
-Question: What is the state of digitalisation in care?
 Answer: "
 Mit welchem Anwendungssystem wird im UKL ein Laborbefund (finding) angezeigt?,Which application sistem is usually used to dislay a laboratory finding in the University Hospitul?,"The system used to display laboratory findings in a university hospital or any hospital for that matter will typically fall under the category of Laboratory Information Systems (LIS) or Laboratory Information Management Systems (LIMS). 
 
@@ -1934,7 +1879,7 @@ Answer: "
 - A healthcare institution could use 3LGM² to model its information system landscape and then rely on IHE profiles to ensure that the different systems integrate and communicate efficiently and effectively.
 - In a way, 3LGM² provides a holistic view of the infrastructure, whereas IHE provides guidelines and standards to make sure that infrastructure components (especially software systems) can effectively share data.
 
-In summary, while both tools/frameworks are related to health information technology, 3LGM² is more about modeling and visualizing the IT landscape, whereas IHE is about promoting interoperability and data sharing between disparate systems using standardized approaches.","3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.",1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+In summary, while both tools/frameworks are related to health information technology, 3LGM² is more about modeling and visualizing the IT landscape, whereas IHE is about promoting interoperability and data sharing between disparate systems using standardized approaches.","3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.",2,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How are 3LGM^ and IHE related?
 Answer: "
 "Wie hängen HL7, DICOM zusammen","How are HL7, DICOM realted?","HL7 (Health Level Seven International) and DICOM (Digital Imaging and Communications in Medicine) are both standards for exchanging health information, but they serve different purposes within the healthcare domain. Here's how they are related and differentiated:
@@ -1963,7 +1908,7 @@ Answer: "
    - **HL7**: Has introduced FHIR (Fast Healthcare Interoperability Resources), a new standard for exchanging healthcare information electronically, aimed at simplifying integration and promoting API-based interactions.
    - **DICOMweb**: A set of RESTful services defined for DICOM to enable web-friendly access to DICOM objects. It's an attempt to bridge the gap between the web world and DICOM by using common web protocols.
 
-In essence, while both HL7 and DICOM have different primary functions in the healthcare ecosystem, they often intersect when comprehensive care processes require the integration of both textual data (via HL7) and imaging data (via DICOM). It's not uncommon for larger healthcare IT infrastructures to support and integrate both standards to ensure seamless care delivery and information exchange.",Both are Communication Standards commonly used in a Health Information System,1,multi,,,"Instruction: You are given a question. Answer the question to your best knowledge.
+In essence, while both HL7 and DICOM have different primary functions in the healthcare ecosystem, they often intersect when comprehensive care processes require the integration of both textual data (via HL7) and imaging data (via DICOM). It's not uncommon for larger healthcare IT infrastructures to support and integrate both standards to ensure seamless care delivery and information exchange.",Both are Communication Standards commonly used in a Health Information System,2,multi,,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How are HL7, DICOM related?
 Answer: "
 Wie hängen IHE – Objektidentität – tHIS zusammen?,How are IHE - objet identy - tHIS realted?,"It seems there might be a bit of confusion in the phrasing of your question. However, based on the terms you've mentioned, it sounds like you're referring to the relationship between IHE (Integrating the Healthcare Enterprise) and the concept of ""object identity."" Let me clarify:
@@ -1980,7 +1925,7 @@ Wie hängen IHE – Objektidentität – tHIS zusammen?,How are IHE - objet iden
    - Within the context of IHE, ensuring that each piece of data or object (like a patient's record, medical images, or any other healthcare information) has a unique identity is crucial for interoperability. Different healthcare systems need to be able to exchange information and be certain they are referring to the same patient, the same medical device, or the same set of medical images. This is where the concept of object identity becomes critical.
    - Various IHE profiles address the issue of object identity and how to ensure that unique identifiers are used and communicated appropriately among different HIT systems.
 
-If you were referring to different concepts or need more specific information, please provide additional details or clarify your question.",IHE provides standard for Health Information Systems to improve communication between HIS. tHIS describes a System that includes multiple HIS.,1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+If you were referring to different concepts or need more specific information, please provide additional details or clarify your question.",IHE provides standard for Health Information Systems to improve communication between HIS. tHIS describes a System that includes multiple HIS.,2,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How are IHE - object identity - tHIS related?
 Answer: "
 Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?,What is the importence of software developement in a hospitul?,"Software development plays a crucial role in modern hospital management and healthcare provision. The importance of software development in a hospital setting can be understood from multiple perspectives:
@@ -2013,7 +1958,7 @@ Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?,What is the i
 
 14. **Research and Innovation**: In fields like genomics and personalized medicine, software plays a pivotal role in data analysis, helping innovate and tailor treatments.
 
-In conclusion, software development is central to the evolution and efficiency of modern healthcare. It ensures streamlined operations, improved patient outcomes, and the ability to cope with the increasing complexity of medical procedures and knowledge.","While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.",1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+In conclusion, software development is central to the evolution and efficiency of modern healthcare. It ensures streamlined operations, improved patient outcomes, and the ability to cope with the increasing complexity of medical procedures and knowledge.","While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.",2,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is the importance of software development in a hospital?
 Answer: "
 Was ist Transaktionsmanagement? Wie wird das in KIS organisiert?,What is transaction managment? How is it orginised in HIS?,"Transaction management refers to the coordinated processing of transactions in a computing system, especially in the context of databases and distributed systems. The goal is to ensure that data remains consistent across all underlying resources even when multiple transactions are processed concurrently. Key concepts associated with transaction management include:
@@ -2114,7 +2059,7 @@ Designing the physical tool layer of an HIS involves several considerations:
 
 10. **Compliance and Standards**: Ensure that the physical setup complies with local and international standards, especially concerning patient data privacy and safety.
 
-Designing the physical tool layer of an HIS is a collaborative effort, involving IT specialists, medical professionals, administrative staff, and often external consultants specializing in hospital information systems.",Redundancy by mirror servers,1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Designing the physical tool layer of an HIS is a collaborative effort, involving IT specialists, medical professionals, administrative staff, and often external consultants specializing in hospital information systems.",Redundancy by mirror servers,1,single,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How would they design the physical tool layer of a HIS?
 Answer: "
 Wie sorgen Sie für Ausfallsicherheit in einem KIS?,How do you insure fail-safety in a HIS?,"A Health Information System (HIS) is a complex system that manages a plethora of patient data and aids in clinical, administrative, and financial decisions in healthcare settings. Ensuring fail-safety in an HIS is paramount to maintain the quality of patient care, protect patient privacy, and uphold legal and ethical standards. Here are some steps and considerations for ensuring fail-safety in an HIS:
@@ -2217,7 +2162,7 @@ Was hat das Krankenhausinformationssystem mit einer ganzheitlichen Sicht auf den
 
 9. **Facilitation of Holistic Therapies**: With the trend toward more holistic and personalized medicine, HIS can help integrate and track non-traditional therapies, treatments, and interventions, providing a more comprehensive picture of what's working for a patient.
 
-In summary, a Hospital Information System, when optimally utilized, can provide a comprehensive, integrated, and coordinated view of the patient. This aligns well with the holistic health model, which looks at the whole person and considers all factors affecting their health, including physical, emotional, mental, social, and even spiritual factors.","A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",1,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+In summary, a Hospital Information System, when optimally utilized, can provide a comprehensive, integrated, and coordinated view of the patient. This aligns well with the holistic health model, which looks at the whole person and considers all factors affecting their health, including physical, emotional, mental, social, and even spiritual factors.","A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",2,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What does the hospital information system have to do with a holistic view of the patient?
 Answer: "
 "Look at the functions listed in Sect. 3.3.2. Look at the relationships between the functions and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.","Look at the relationchips between funtions to be preformed by health care proffesionals and other staff in health care facilites and the different health care proffesional groups (physicans, nurses, administratve staff, others) working in hospituls and medical offices. Select one health care proffesional group and describe wich funtions are most important for this group.","Certainly, the healthcare environment is a complex ecosystem with multiple professional groups working collaboratively to deliver patient care. Let's first delineate the roles of different healthcare professionals in hospitals and medical offices:
@@ -2258,7 +2203,7 @@ Now, if we select **nurses** as our professional group to delve deeper into, her
 
 9. **Safety**: Ensuring patient safety is paramount. This includes preventing falls, avoiding medication errors, and ensuring that patients don't harm themselves or others.
 
-These functions demonstrate the multifaceted nature of nursing, requiring both clinical expertise and compassionate interpersonal skills.","Physicians: Important functions are medical admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of diagnostic and therapeutic procedures, coding of diagnoses and procedures, and medical discharge and medical discharge summary writing. Nurses: Important functions are nursing admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of nursing procedures, and nursing discharge and nursing discharge summary writing. Administrative staff: Important functions are patient identification, administrative admission, and administrative discharge and billing.",1,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
+These functions demonstrate the multifaceted nature of nursing, requiring both clinical expertise and compassionate interpersonal skills.","Physicians: Important functions are medical admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of diagnostic and therapeutic procedures, coding of diagnoses and procedures, and medical discharge and medical discharge summary writing. Nurses: Important functions are nursing admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of nursing procedures, and nursing discharge and nursing discharge summary writing. Administrative staff: Important functions are patient identification, administrative admission, and administrative discharge and billing.",3,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Look at the relationships between functions to be performed by health care professionals and other staff in health care facilities and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.
 Answer: "
 Read Examples 5.5.1 and determine which methods for collecting data (as described in Sects. 5.4.3 and 5.4.4) have been used.,"Given the Exmple in the Contex, determin which methods for collecting data have been used.","The methods for collecting data used in the example provided are:

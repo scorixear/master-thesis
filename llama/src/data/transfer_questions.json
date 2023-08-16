@@ -3,15 +3,31 @@
     "question": "Look at the functions presented in Sect. 3.3.2. Now imagine a small hospital (e.g., 350 beds) and a large university medical center (e.g., 1500 beds). What are the differences between these hospitals with regard to their functions? Explain your answer.",
     "transformed": "Imagine a small hospital (e.g., 350 beds) and a large university medical center (e.g., 1500 beds). What are the differences between these hospitals with regard to their functions to be performed by health care professionals and other staff in health care facilities? Explain your answer.",
     "true_answer": "A typical hospital needs all functions to function as expected. The functions to be performed by health care professionals are mostly similar in all health care facilities, independent of their size. Only some functions may differ. For example, not all health care facilities are involved in clinical research, thus their information will not need to support the function research and education.",
-    "num_answers": 1,
+    "num_answers": 2,
     "source": "Book",
+    "context": ""
+  },
+  {
+    "question": "Auf einer Hersteller-Webseite hei\u00dft es: \u201ei.s.h.med ist das einzige vollst\u00e4ndig in SAP for Healthcare integrierte Krankenhausinformationssystem\u201c. Welches Begriffsverst\u00e4ndnis liegt hier zugrunde?",
+    "transformed": "On a manufacturer's website it says: \"i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare\". What is the underlying understanding of this term?",
+    "true_answer": "This manufacturer sees the hospital information system as software product, while in reality a HIS includes Software, Hardware and Actors.",
+    "num_answers": 1,
+    "source": "IS_2022_07_18",
+    "context": ""
+  },
+  {
+    "question": "Wann ist ein Modell gut?",
+    "transformed": "When is a model good in the context of health information systems?",
+    "true_answer": "A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",
+    "num_answers": 3,
+    "source": "IS_2022_09_27",
     "context": ""
   },
   {
     "question": "Was hat das Krankenhausinformationssystem mit einer ganzheitlichen Sicht auf den Patienten zu tun?",
     "transformed": "What does the hospital information system have to do with a holistic view of the patient?",
     "true_answer": "A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",
-    "num_answers": 1,
+    "num_answers": 2,
     "source": "IS_2022_09_27",
     "context": ""
   },
@@ -19,7 +35,7 @@
     "question": "Welche Kommunikation erfolgt unmittelbar nach der Aufnahme des Patienten Alfred Winter?",
     "transformed": "What communication takes place immediately after the admission of the patient Alfred Winter?",
     "true_answer": "Admission is divided into administrative, mecial and nursing admission. Via the (possibly existing) communication server the changed/newly added infiroations are then broadcasted to related application components such as the patient managements system.",
-    "num_answers": 1,
+    "num_answers": 3,
     "source": "IS_2022_09_27",
     "context": ""
   },
@@ -27,7 +43,7 @@
     "question": "Look at the functions listed in Sect. 3.3.2. Look at the relationships between the functions and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.",
     "transformed": "Look at the relationships between functions to be performed by health care professionals and other staff in health care facilities and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.",
     "true_answer": "Physicians: Important functions are medical admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of diagnostic and therapeutic procedures, coding of diagnoses and procedures, and medical discharge and medical discharge summary writing. Nurses: Important functions are nursing admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of nursing procedures, and nursing discharge and nursing discharge summary writing. Administrative staff: Important functions are patient identification, administrative admission, and administrative discharge and billing.",
-    "num_answers": 1,
+    "num_answers": 3,
     "source": "Book",
     "context": ""
   },

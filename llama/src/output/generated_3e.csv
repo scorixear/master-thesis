@@ -277,7 +277,7 @@ Definieren Sie den Begriff „Krankenhausinformationssystem“.,"Define the term
 Question: Define the term ""hospital information system"".
 Answer: "
 Auf einer Hersteller-Webseite heißt es: „i.s.h.med ist das einzige vollständig in SAP for Healthcare integrierte Krankenhausinformationssystem“. Welches Begriffsverständnis liegt hier zugrunde?,"On a manufacturer's website it says: ""i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare"". What is the underlying understanding of this term?","
- The “real” Mr. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mr. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mr. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real”","This manufacturer sees the hospital information system as software product, while in reality a HIS includes Software, Hardware and Actors.",1,single,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+ The “real” Mr. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mr. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mr. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real” Mrs. Jakub Russo (e.g., the patient Jakub Russo) is the “real”","This manufacturer sees the hospital information system as software product, while in reality a HIS includes Software, Hardware and Actors.",1,transfer,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: On a manufacturer's website it says: ""i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare"". What is the underlying understanding of this term?
 Answer: "
 Wie erhalten Apotheker:innen Zugriff auf verordnete eRezepte?,How do pharmacists get access to e-prescriptions?,"
@@ -583,7 +583,7 @@ Wann ist ein Modell gut?,When is a model good in the context of health informati
  Health information systems of health care settings can be of very different types.
  Health information systems of health care settings can be of very different types.
  Health information systems of health care settings can be of very different types.
- Health information systems of health care settings can be of","A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+ Health information systems of health care settings can be of","A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",3,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: When is a model good in the context of health information systems?
 Answer: "
 Was ist ARIS?,What is ARIS?,"
@@ -842,7 +842,7 @@ Was ist der Unterschied zwischen dem PVS und dem PDMS?,What is the difference be
 - primary focus on helping health care provides streamline their day-to-day tasks
 
 PDMS:
-- primary focus on capturing mainaining comprehensive and accurate patient medical data.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- primary focus on capturing mainaining comprehensive and accurate patient medical data.",2,multi,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is the difference between the PMS and the PDMS?
 Answer: "
 "Wie kann man auch bei fehlender Vollausleuchtung mit den allgegenwärtigen Funklöchern hinter metallwagen so umgehen, dass Mobile Anwendungen nicht laufend abstürzen?","Even in the absence of full coverage, how can you deal with the ubiquitous radio holes behind metal trolleys in such a way that mobile applications don't crash all the time?","
@@ -917,78 +917,6 @@ Ist „Dokumentation“ eine datenverarbeitende Aufgabe bzw. eine enterprise fun
  Ambulatory nursing organizations are primarily related to the care of persons with physical and mental functional deficits living at home who receive health care as outpatients are persons who receive health care as outpatients in their homes.
  These persons may receive health care as outpatients in hospitals, rehabilitation centers, or rehabil",A data processing task,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Is ""documentation"" a data processing task or an enterprise function?
-Answer: "
-Woher kommen die neuen Pflegekräfte für Deutschland?,Where are the new care workers for Germany coming from?,"
- The new care facility is a state-of-the-art health care facility.
- 
- In addition to providing good health care, the health care facility may offer good support for research and education as well.
- 
- ### 5.3.1 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- 
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3 Requirements of Researchers in Biomedicine
- ### 5.3","Domestic Workforce, European Union Member States, Non-EU Countries",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
-Question: Where are the new care workers for Germany coming from?
-Answer: "
-Wie ist der Stand der Digitalisierung in der Pflege?,What is the state of digitalisation in care?,"
- Digitalization in care: The state of Health Information Systems in the current state of Health Information Systems
- 
- 
- ### 4.3.1.1 Requirements of Researchers in Biomedicine
- ### 4.3.1 Requirements of Researchers in Biomedicine
- 
- ### 4.3.1 Requirements of Researchers in Biomedicine
- 
- ### 4.3.1 Requirements of Researchers in Biomedicine
- 
- ### 4.3.1 Requirements of Researchers in Biomedicine
- 
- ### 4.3.1 Requirements of Researchers in Biomedicine
- 
- ### 4.3.1 Requirements of Researchers in Biomedicine
- 
- ### 4.3 Requirements of Researchers in Biomedicine
- 
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biomedicine
- ### 4.3 Requirements of Researchers in Biom",gradually progressing but still facing some challenges,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
-Question: What is the state of digitalisation in care?
 Answer: "
 Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterstützt?,Which application system is used in the University Hospital to support the request for laboratory services (order entry)?,"
  The application system used in the university medical center is an MDMS. Therefore, the EHRS is an MDMS.
@@ -1092,7 +1020,7 @@ Mit welchem Anwendungssystem wird im UKL ein Laborbefund (finding) angezeigt?,Wh
 Question: Which application system is usually used to display a laboratory finding in the University Hospital?
 Answer: "
 "Look at the entity type “patient” that is interpreted and updated by various functions. Which functions update the patient information, which functions interpret it?","Look at the entity type “patient” that is interpreted and updated by various functions to be performed by health care professionals and other staff in health care facilities. Which functions update the patient information, which functions interpret it?","
- The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function updates the entity type “patient.” The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function updates the entity type “patient.” The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function updates the entity type “patient.” The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function updates the entity type “patient.” The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function updates the entity type “patient.” The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “ob",The entity type “patient” is updated by the function “patient admission.” All other functions that are related to patient care interpret it.,1,multi,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
+ The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function updates the entity type “patient.” The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function updates the entity type “patient.” The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function updates the entity type “patient.” The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function updates the entity type “patient.” The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function updates the entity type “patient.” The function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “obtaining consent for processing of patient data” updates the entity type “patient.” This indicates that the function “ob",The entity type “patient” is updated by the function “patient admission.” All other functions that are related to patient care interpret it.,2,multi,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Look at the entity type “patient” that is interpreted and updated by various functions to be performed by health care professionals and other staff in health care facilities. Which functions update the patient information, which functions interpret it?
 Answer: "
 "Look at the 3LGM^2 example in Sect. 2.15.
@@ -2358,7 +2286,7 @@ Answer: "
  Ambulatory nursing organizations are primarily related to the care of persons with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients.
  
  ### 3.10.1 Characteristics of Ambulatory Nursing Organization
- Ambulatory nursing organizations are primarily related to the care of persons with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients with physical and mental functional def","3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.",1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+ Ambulatory nursing organizations are primarily related to the care of persons with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients with physical and mental functional deficits receive health care as outpatients with physical and mental functional def","3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.",2,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How are 3LGM^ and IHE related?
 Answer: "
 "Wie hängen HL7, DICOM zusammen","How are HL7, DICOM related?","
@@ -2394,7 +2322,7 @@ Answer: "
  In Chap. 6, we will discuss these life situations in more detail with persons in health care facilities.
  
  ### 3.7 Logical Tool Layer:​ Integration Technologies and Tools
- In Chap. 6, we will discuss these life situations in more detail with persons",Both are Communication Standards commonly used in a Health Information System,1,multi,,,"Instruction: You are given a question. Answer the question to your best knowledge.
+ In Chap. 6, we will discuss these life situations in more detail with persons",Both are Communication Standards commonly used in a Health Information System,2,multi,,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How are HL7, DICOM related?
 Answer: "
 Wie hängen IHE – Objektidentität – tHIS zusammen?,How are IHE - object identity - tHIS related?,"
@@ -2423,7 +2351,7 @@ Wie hängen IHE – Objektidentität – tHIS zusammen?,How are IHE - object ide
  
  Object integrity: Condition of an --> object in which --> object integrity is given. Condition of an --> object in which --> object integrity is given. Condition of an --> object in which --> object integrity is given.
  
- Object integrity: Condition of an --> object in which --> object integrity is given. Condition of an",IHE provides standard for Health Information Systems to improve communication between HIS. tHIS describes a System that includes multiple HIS.,1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+ Object integrity: Condition of an --> object in which --> object integrity is given. Condition of an",IHE provides standard for Health Information Systems to improve communication between HIS. tHIS describes a System that includes multiple HIS.,2,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How are IHE - object identity - tHIS related?
 Answer: "
 Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?,What is the importance of software development in a hospital?,"
@@ -2461,7 +2389,7 @@ Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?,What is the i
  Strategic management of information systems must be made available to the stakeholders in adequate and understandable form.
  
  Strategic management of information systems must be made available to the stakeholders in adequate and understandable form.
-","While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.",1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+","While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.",2,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is the importance of software development in a hospital?
 Answer: "
 Was ist Transaktionsmanagement? Wie wird das in KIS organisiert?,What is transaction management? How is it organised in HIS?,"
@@ -2574,7 +2502,7 @@ Wie würden sie die PWE eines KIS gestalten?,How would they design the physical 
  Physical data processing systems need systematic management of information systems.
  
  Physical data processing systems need systematic management of information systems.
- ",Redundancy by mirror servers,1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+ ",Redundancy by mirror servers,1,single,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How would they design the physical tool layer of a HIS?
 Answer: "
 Wie sorgen Sie für Ausfallsicherheit in einem KIS?,How do you ensure fail-safety in a HIS?,"
@@ -2683,7 +2611,7 @@ Answer: "
  
  ### 1.3 Requirements of Researchers in Biomedicine
  
- ### 1.3 Requirements of Researchers in Biomedic","A typical hospital needs all functions to function as expected. The functions to be performed by health care professionals are mostly similar in all health care facilities, independent of their size. Only some functions may differ. For example, not all health care facilities are involved in clinical research, thus their information will not need to support the function research and education.",1,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
+ ### 1.3 Requirements of Researchers in Biomedic","A typical hospital needs all functions to function as expected. The functions to be performed by health care professionals are mostly similar in all health care facilities, independent of their size. Only some functions may differ. For example, not all health care facilities are involved in clinical research, thus their information will not need to support the function research and education.",2,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Imagine a small hospital (e.g., 350 beds) and a large university medical center (e.g., 1500 beds). What are the differences between these hospitals with regard to their functions to be performed by health care professionals and other staff in health care facilities? Explain your answer.
 Answer: "
 Was hat das Krankenhausinformationssystem mit einer ganzheitlichen Sicht auf den Patienten zu tun?,What does the hospital information system have to do with a holistic view of the patient?,"
@@ -2720,7 +2648,7 @@ Was hat das Krankenhausinformationssystem mit einer ganzheitlichen Sicht auf den
  
  Requirements that researchers in Biomedicine need for this purpose can include being supported in doing their research and being able to access and use these data for their research.
  
-","A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",1,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+","A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",2,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What does the hospital information system have to do with a holistic view of the patient?
 Answer: "
 Welche Kommunikation erfolgt unmittelbar nach der Aufnahme des Patienten Alfred Winter?,What communication takes place immediately after the admission of the patient Alfred Winter?,"
@@ -2755,7 +2683,7 @@ Welche Kommunikation erfolgt unmittelbar nach der Aufnahme des Patienten Alfred 
  ### 5.3 Requirements of Researchers in Biomedicine
  Many researchers in biomedicine need patient data for their research.
  
- For this reason, the research","Admission is divided into administrative, mecial and nursing admission. Via the (possibly existing) communication server the changed/newly added infiroations are then broadcasted to related application components such as the patient managements system.",1,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+ For this reason, the research","Admission is divided into administrative, mecial and nursing admission. Via the (possibly existing) communication server the changed/newly added infiroations are then broadcasted to related application components such as the patient managements system.",3,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What communication takes place immediately after the admission of the patient Alfred Winter?
 Answer: "
 "Look at the functions listed in Sect. 3.3.2. Look at the relationships between the functions and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.","Look at the relationships between functions to be performed by health care professionals and other staff in health care facilities and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.","
@@ -2802,7 +2730,7 @@ Answer: "
  
  Requirements that researchers in Biomedicine need for this purpose can be described as follows:
  
-","Physicians: Important functions are medical admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of diagnostic and therapeutic procedures, coding of diagnoses and procedures, and medical discharge and medical discharge summary writing. Nurses: Important functions are nursing admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of nursing procedures, and nursing discharge and nursing discharge summary writing. Administrative staff: Important functions are patient identification, administrative admission, and administrative discharge and billing.",1,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
+","Physicians: Important functions are medical admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of diagnostic and therapeutic procedures, coding of diagnoses and procedures, and medical discharge and medical discharge summary writing. Nurses: Important functions are nursing admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of nursing procedures, and nursing discharge and nursing discharge summary writing. Administrative staff: Important functions are patient identification, administrative admission, and administrative discharge and billing.",3,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Look at the relationships between functions to be performed by health care professionals and other staff in health care facilities and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.
 Answer: "
 Read Examples 5.5.1 and determine which methods for collecting data (as described in Sects. 5.4.3 and 5.4.4) have been used.,"Given the Example in the Context, determine which methods for collecting data have been used.","

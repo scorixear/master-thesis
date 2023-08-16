@@ -503,7 +503,7 @@ Answer: "
 21. HL7 and DICOM are related because they both use TCP/IP to exchange data.
 22. HL7 and DICOM are related because they both use UDP/IP to exchange data.
 23. HL7 and DICOM are related because they both use FTP to exchange data.
-2",Both are Communication Standards commonly used in a Health Information System,1,multi,,,"Instruction: You are given a question. Answer the question to your best knowledge.
+2",Both are Communication Standards commonly used in a Health Information System,2,multi,,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How are HL7, DICOM realted?
 Answer: "
 Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?,What is the importence of software developement in a hospitul?,"1. To provide a better service to the patients.
@@ -543,7 +543,7 @@ Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?,What is the i
 35. To provide a better service to the hospital management.
 36. To provide a better service to the hospital administration.
 37. To provide a better service to the hospital patients.
-38.","While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.",1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+38.","While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.",2,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is the importence of software developement in a hospitul?
 Answer: "
 In which of the health care settings above will the function medical admission need to be supported?,In which health care setings will the function medical admision need to be suported?,"1. Inpatient 2. Outpatient 3. Emergency 4. Ambulatory 5. Home Health 6. Long Term Care 7. Hospice 8. Correctional 9. Other

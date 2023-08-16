@@ -44,10 +44,31 @@ def main():
     
     understood = []
     not_understood = []
+    single_understood = []
+    single_not_understood = []
+    multi_understood = []
+    multi_not_understood = []
+    transfer_understood = []
+    transfer_not_understood = []
     # for each model, get number of understood and not understood questions
-    for model in models.keys():
-        understood.append(len(models[model][0]))
-        not_understood.append(len(models[model][1]))
+    for (name, (understood_q, not_understood_q)) in models.items():
+        understood.append(len(understood_q))
+        not_understood.append(len(not_understood_q))
+        (single_u, multi_u, transfer_u) = count_type_questions(understood_q)
+        (single_n, multi_n, transfer_n) = count_type_questions(not_understood_q)
+        single_understood.append(single_u)
+        single_not_understood.append(single_n)
+        multi_understood.append(multi_u)
+        multi_not_understood.append(multi_n)
+        transfer_understood.append(transfer_u)
+        transfer_not_understood.append(transfer_n)
+    
+    create_plot(list(models.keys()), understood, not_understood, "Verstandene Fragen", os.path.join(args.output, "understood.png"))
+    create_plot(list(models.keys()), single_understood, single_not_understood, "Verstandene Einzel-Fakt Fragen", os.path.join(args.output, "understood_single.png"))
+    create_plot(list(models.keys()), multi_understood, multi_not_understood, "Verstandene Multi-Fakten Fragen", os.path.join(args.output, "understood_multi.png"))
+    create_plot(list(models.keys()), transfer_understood, transfer_not_understood, "Verstandene Transferfragen", os.path.join(args.output, "understood_transfer.png"))
+
+def create_plot(model_names: list[str], understood: list[int], not_understood: list[int], title: str, file_path: str):
     # create dataset for stacked bars
     understood_plot = {
         "Verstanden": np.array(understood),
@@ -58,10 +79,9 @@ def main():
     # subplots() to get axis object
     axis = fig.subplots()
     # bottom array for stacked bars
-    bottom = np.zeros(len(models.keys()))
+    bottom = np.zeros(len(model_names))
     # colors of stacked bars in reverse order
     colors = ["silver", "green"]
-    model_names = list(models.keys())
     # for each label and data in dataset
     for labels, data in understood_plot.items():
         # plot bars
@@ -74,9 +94,22 @@ def main():
     # set y-axis legend
     axis.set_ylabel("Anzahl der Fragen")
     # set title and  padding as bar labels might overlap
-    axis.set_title("Anzahl der Fragen, die verstanden wurden", pad=15)
+    axis.set_title(title, pad=15)
     # and save the figure
-    fig.savefig(os.path.join(args.output, "understood.png"))
+    fig.savefig(file_path)
+
+def count_type_questions(questions: list[Question]) -> tuple[int, int, int]:
+    single = 0
+    multi = 0
+    transfer = 0
+    for question in questions:
+        if question.type == "single":
+            single += 1
+        elif question.type == "multi":
+            multi += 1
+        elif question.type == "transfer":
+            transfer += 1
+    return (single, multi, transfer)
 
 if __name__ == "__main__":
     main()

@@ -80,14 +80,6 @@
     "context": ""
   },
   {
-    "question": "Auf einer Hersteller-Webseite hei\u00dft es: \u201ei.s.h.med ist das einzige vollst\u00e4ndig in SAP for Healthcare integrierte Krankenhausinformationssystem\u201c. Welches Begriffsverst\u00e4ndnis liegt hier zugrunde?",
-    "transformed": "On a manufacturer's website it says: \"i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare\". What is the underlying understanding of this term?",
-    "true_answer": "This manufacturer sees the hospital information system as software product, while in reality a HIS includes Software, Hardware and Actors.",
-    "num_answers": 1,
-    "source": "IS_2022_07_18",
-    "context": ""
-  },
-  {
     "question": "Wie erhalten Apotheker:innen Zugriff auf verordnete eRezepte?",
     "transformed": "How do pharmacists get access to e-prescriptions?",
     "true_answer": "Via the CPOE System within a hospital. Extern via their own pharmacists information system.",
@@ -160,14 +152,6 @@
     "context": ""
   },
   {
-    "question": "Wann ist ein Modell gut?",
-    "transformed": "When is a model good in the context of health information systems?",
-    "true_answer": "A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",
-    "num_answers": 1,
-    "source": "IS_2022_09_27",
-    "context": ""
-  },
-  {
     "question": "Was ist ARIS?",
     "transformed": "What is ARIS?",
     "true_answer": "The Architecture of Integrated Information Systems is a framework for describing business processes. It provides modeling methods and meta-structures that are comprised in information models.",
@@ -232,14 +216,6 @@
     "context": ""
   },
   {
-    "question": "Was ist der Unterschied zwischen dem PVS und dem PDMS?",
-    "transformed": "What is the difference between the PMS and the PDMS?",
-    "true_answer": "PMS:\n- primary focus on helping health care provides streamline their day-to-day tasks\n\nPDMS:\n- primary focus on capturing mainaining comprehensive and accurate patient medical data.",
-    "num_answers": 1,
-    "source": "IS_2022_09_27",
-    "context": ""
-  },
-  {
     "question": "Wie kann man auch bei fehlender Vollausleuchtung mit den allgegenw\u00e4rtigen Funkl\u00f6chern hinter metallwagen so umgehen, dass Mobile Anwendungen nicht laufend abst\u00fcrzen?",
     "transformed": "Even in the absence of full coverage, how can you deal with the ubiquitous radio holes behind metal trolleys in such a way that mobile applications don't crash all the time?",
     "true_answer": "One of this:\n- caching and local storage\n- Offline Mode\n- Background Syncing and Queuing",
@@ -259,22 +235,6 @@
     "question": "Ist \u201eDokumentation\u201c eine datenverarbeitende Aufgabe bzw. eine enterprise function?",
     "transformed": "Is \"documentation\" a data processing task or an enterprise function?",
     "true_answer": "A data processing task",
-    "num_answers": 1,
-    "source": "IS_2022_09_27",
-    "context": ""
-  },
-  {
-    "question": "Woher kommen die neuen Pflegekr\u00e4fte f\u00fcr Deutschland?",
-    "transformed": "Where are the new care workers for Germany coming from?",
-    "true_answer": "Domestic Workforce, European Union Member States, Non-EU Countries",
-    "num_answers": 1,
-    "source": "IS_2022_09_27",
-    "context": ""
-  },
-  {
-    "question": "Wie ist der Stand der Digitalisierung in der Pflege?",
-    "transformed": "What is the state of digitalisation in care?",
-    "true_answer": "gradually progressing but still facing some challenges",
     "num_answers": 1,
     "source": "IS_2022_09_27",
     "context": ""
@@ -301,6 +261,14 @@
     "true_answer": "(COPRA, LIS direkt!)",
     "num_answers": 1,
     "source": "IS_2022_09_27",
+    "context": ""
+  },
+  {
+    "question": "Wie w\u00fcrden sie die PWE eines KIS gestalten?",
+    "transformed": "How would they design the physical tool layer of a HIS?",
+    "true_answer": "Redundancy by mirror servers",
+    "num_answers": 1,
+    "source": "A_2021",
     "context": ""
   }
 ]

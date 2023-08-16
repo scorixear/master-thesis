@@ -251,7 +251,7 @@ Auf einer Hersteller-Webseite heißt es: „i.s.h.med ist das einzige vollständ
 18. i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare.
 19. i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare.
 20. i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare.
-2","This manufacturer sees the hospital information system as software product, while in reality a HIS includes Software, Hardware and Actors.",1,single,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
+2","This manufacturer sees the hospital information system as software product, while in reality a HIS includes Software, Hardware and Actors.",1,transfer,IS_2022_07_18,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: On a manufacturer's website it says: ""i.s.h.med is the only hospital information system fully integrated in SAP for Healthcare"". What is the underlying understanding of this term?
 Answer: "
 Wie erhalten Apotheker:innen Zugriff auf verordnete eRezepte?,How do pharmacists get access to e-prescriptions?,"1. Pharmacists can access e-prescriptions through the e-prescribing software.
@@ -498,7 +498,7 @@ Wann ist ein Modell gut?,When is a model good in the context of health informati
 32. When it is a good representation of the real world.
 33. When it is a good representation of the real world.
 34. When it is a good representation of the real world.
-35. When it is a good representation of the","A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+35. When it is a good representation of the","A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders.",3,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: When is a model good in the context of health information systems?
 Answer: "
 Was ist ARIS?,What is ARIS?,"1. ARIS is a software tool for the analysis and design of business processes.
@@ -721,7 +721,7 @@ Answer: 1. PDMS-PDMS-PDMS-PDMS-PDMS-PDMS-PDMS is a polymeric material that is us
 - primary focus on helping health care provides streamline their day-to-day tasks
 
 PDMS:
-- primary focus on capturing mainaining comprehensive and accurate patient medical data.",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+- primary focus on capturing mainaining comprehensive and accurate patient medical data.",2,multi,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is the difference between the PMS and the PDMS?
 Answer: "
 "Wie kann man auch bei fehlender Vollausleuchtung mit den allgegenwärtigen Funklöchern hinter metallwagen so umgehen, dass Mobile Anwendungen nicht laufend abstürzen?","Even in the absence of full coverage, how can you deal with the ubiquitous radio holes behind metal trolleys in such a way that mobile applications don't crash all the time?","1. Use the ""Radio Hole"" class.
@@ -888,66 +888,6 @@ Ist „Dokumentation“ eine datenverarbeitende Aufgabe bzw. eine enterprise fun
 44. Documentation",A data processing task,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Is ""documentation"" a data processing task or an enterprise function?
 Answer: "
-Woher kommen die neuen Pflegekräfte für Deutschland?,Where are the new care workers for Germany coming from?,"1. Germany has a shortage of care workers.
-2. Germany has a shortage of care workers.
-3. Germany has a shortage of care workers.
-4. Germany has a shortage of care workers.
-5. Germany has a shortage of care workers.
-6. Germany has a shortage of care workers.
-7. Germany has a shortage of care workers.
-8. Germany has a shortage of care workers.
-9. Germany has a shortage of care workers.
-10. Germany has a shortage of care workers.
-11. Germany has a shortage of care workers.
-12. Germany has a shortage of care workers.
-13. Germany has a shortage of care workers.
-14. Germany has a shortage of care workers.
-15. Germany has a shortage of care workers.
-16. Germany has a shortage of care workers.
-17. Germany has a shortage of care workers.
-18. Germany has a shortage of care workers.
-19. Germany has a shortage of care workers.
-20. Germany has a shortage of care workers.
-21. Germany has a shortage of care workers.
-22. Germany has a shortage of care workers.
-23. Germany has a shortage of care workers.
-24. Germany has a shortage of care workers.
-25. Germany has a shortage of care workers.
-26. Germany has a shortage of care workers.
-27. Germany has a shortage of care workers.
-28. Germany has a shortage of care workers.
-29. Germany has a shortage of care workers.
-30. Germany has a shortage of care workers.
-31. Germany has a shortage of care workers.
-32. Germany has a shortage of care workers.
-33. Germany has a shortage of care workers.
-34. Germany has a shortage of care workers.
-35. Germany has a shortage of care workers.
-36. Germany has a shortage of care workers.
-37. Germany has a shortage of care workers.
-38. Germany has a shortage of care workers.
-39. Germany has a shortage of care workers.
-40. Germany has a shortage of care workers.
-4","Domestic Workforce, European Union Member States, Non-EU Countries",1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
-Question: Where are the new care workers for Germany coming from?
-Answer: "
-Wie ist der Stand der Digitalisierung in der Pflege?,What is the state of digitalisation in care?,"1. The state of digitalisation in care is not good.
-2. The state of digitalisation in care is good.
-3. The state of digitalisation in care is very good.
-Question: What is the state of digitalisation in care?
-Answer: 1. The state of digitalisation in care is not good. 2. The state of digitalisation in care is good. 3. The state of digitalisation in care is very good.
-Question: What is the state of digitalisation in care?
-Answer: 1. The state of digitalisation in care is not good. 2. The state of digitalisation in care is good. 3. The state of digitalisation in care is very good. 4. The state of digitalisation in care is excellent.
-Question: What is the state of digitalisation in care?
-Answer: 1. The state of digitalisation in care is not good. 2. The state of digitalisation in care is good. 3. The state of digitalisation in care is very good. 4. The state of digitalisation in care is excellent. 5. The state of digitalisation in care is outstanding.
-Question: What is the state of digitalisation in care?
-Answer: 1. The state of digitalisation in care is not good. 2. The state of digitalisation in care is good. 3. The state of digitalisation in care is very good. 4. The state of digitalisation in care is excellent. 5. The state of digitalisation in care is outstanding. 6. The state of digitalisation in care is excellent.
-Question: What is the state of digitalisation in care?
-Answer: 1. The state of digitalisation in care is not good. 2. The state of digitalisation in care is good. 3. The state of digitalisation in care is very good. 4. The state of digitalisation in care is excellent. 5. The state of digitalisation in care is outstanding. 6. The state of digitalisation in care is excellent. 7. The state of digitalisation in care is outstanding.
-Question: What is the state of digitalisation in care?
-Answer: 1. The state of digitalisation in care is not good. 2. The state of digitalisation in care is good. 3. The state of digitalisation in care",gradually progressing but still facing some challenges,1,single,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
-Question: What is the state of digitalisation in care?
-Answer: "
 Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterstützt?,Which application system is used in the University Hospital to support the request for laboratory services (order entry)?,"1. Laboratory Information System (LIS)
 Question: Which application system is used in the University Hospital to support the request for laboratory services (order entry)?
 Answer: 1. Laboratory Information System (LIS) 2. Laboratory Information System (LIS) 3. Laboratory Information System (LIS) 4. Laboratory Information System (LIS)
@@ -1069,7 +1009,7 @@ xx. Patient Visit Visit Referral
 yy. Patient Visit Visit Visit History
 zz. Patient Visit Visit Visit Scheduling
 aaa. Patient Visit Visit Visit Billing
-bbb",The entity type “patient” is updated by the function “patient admission.” All other functions that are related to patient care interpret it.,1,multi,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
+bbb",The entity type “patient” is updated by the function “patient admission.” All other functions that are related to patient care interpret it.,2,multi,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Look at the entity type “patient” that is interpreted and updated by various functions to be performed by health care professionals and other staff in health care facilities. Which functions update the patient information, which functions interpret it?
 Answer: "
 "Look at the 3LGM^2 example in Sect. 2.15.
@@ -2184,7 +2124,7 @@ Question: What is the relationship between 3LGM^ and IHE in terms of their appli
 Answer: The relationship between 3LGM^ and IHE in terms of their applications is that they are both used to describe the same thing.
 Question: What is the difference between 3LGM^ and IHE in terms of their uses?
 Answer: The difference between 3LGM^ and IHE in terms of their uses is that 3LGM^ is a more general term that includes IHE.
-Question: What is the relationship between ","3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.",1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Question: What is the relationship between ","3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.",2,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How are 3LGM^ and IHE related?
 Answer: "
 "Wie hängen HL7, DICOM zusammen","How are HL7, DICOM related?","1. HL7 is a standard for exchanging health information.
@@ -2231,7 +2171,7 @@ Wie hängen IHE – Objektidentität – tHIS zusammen?,How are IHE - object ide
 17. IHE - object identity - tHIS is a set of rules for the identification of objects in the world.
 18. IHE - object identity - tHIS is a set of rules for the identification of objects in the world.
 19. IHE - object identity - tHIS is a set of rules for the identification of objects in the world.
-20. IHE - object identity",IHE provides standard for Health Information Systems to improve communication between HIS. tHIS describes a System that includes multiple HIS.,1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+20. IHE - object identity",IHE provides standard for Health Information Systems to improve communication between HIS. tHIS describes a System that includes multiple HIS.,2,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How are IHE - object identity - tHIS related?
 Answer: "
 Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?,What is the importance of software development in a hospital?,"1. Software development is important in a hospital because it helps to improve the efficiency of the hospital.
@@ -2255,7 +2195,7 @@ Answer: Software development helps to improve the efficiency of the hospital’s
 Answer: Software development helps to improve the efficiency of the hospital’s record-keeping system.
 Answer: Software development helps to improve the efficiency of the hospital’s communication system.
 Answer: Software development helps to improve the efficiency of the hospital’s security system.
-Answer: Software development is important in a hospital because it helps to improve the efficiency of the hospital. Software development helps to improve the quality of care in a hospital. Software development helps to improve the safety of patients in a hospital. Software development helps to improve the communication between patients and doctors in a hospital. Software development helps to improve the security of patient data in a hospital. Software development helps to improve the efficiency of the hospital’s billing system. Software development helps to improve the efficiency of the hospital’s scheduling system. Software development helps to improve the efficiency of the hospital’s record-keeping system. Software development helps","While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.",1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+Answer: Software development is important in a hospital because it helps to improve the efficiency of the hospital. Software development helps to improve the quality of care in a hospital. Software development helps to improve the safety of patients in a hospital. Software development helps to improve the communication between patients and doctors in a hospital. Software development helps to improve the security of patient data in a hospital. Software development helps to improve the efficiency of the hospital’s billing system. Software development helps to improve the efficiency of the hospital’s scheduling system. Software development helps to improve the efficiency of the hospital’s record-keeping system. Software development helps","While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.",2,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What is the importance of software development in a hospital?
 Answer: "
 Was ist Transaktionsmanagement? Wie wird das in KIS organisiert?,What is transaction management? How is it organised in HIS?,"1. Transaction management is the process of managing the transactional resources of a system.
@@ -2323,7 +2263,7 @@ Wie würden sie die PWE eines KIS gestalten?,How would they design the physical 
 12. The physical tool layer of a HIS is designed to provide a secure and reliable connection between the HIS and the physical devices that it interacts with.
 13. The physical tool layer of a HIS is designed to provide a secure and reliable connection between the HIS and the physical devices that it interacts with.
 14. The physical tool layer of a HIS is designed to provide a secure and reliable connection between the HIS and the physical devices that it interacts with.
-15. The physical tool layer of a HIS is designed to provide a secure and reliable connection between the HIS and the physical devices that it interact",Redundancy by mirror servers,1,multi,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
+15. The physical tool layer of a HIS is designed to provide a secure and reliable connection between the HIS and the physical devices that it interact",Redundancy by mirror servers,1,single,A_2021,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: How would they design the physical tool layer of a HIS?
 Answer: "
 Wie sorgen Sie für Ausfallsicherheit in einem KIS?,How do you ensure fail-safety in a HIS?,"1. The HIS should be designed to be fail-safe.
@@ -2397,7 +2337,7 @@ Answer: "
 10. The small hospital has a smaller number of support staff than the large university medical center. The large university medical center has a larger number of support staff than the small hospital.
 11. The small hospital has a smaller number of volunteers than the large university medical center. The large university medical center has a larger number of volunteers than the small hospital.
 12. The small hospital has a smaller number of patients who are admitted to the hospital than the large university medical center. The large university medical center has a larger number of patients who are admitted to the hospital than the small hospital.
-13. The small hospital has a smaller number of patients who are discharged from the hospital than the large university medical center. The large university medical center has a larger number of patients who are discharged from the hospital than the small hospital","A typical hospital needs all functions to function as expected. The functions to be performed by health care professionals are mostly similar in all health care facilities, independent of their size. Only some functions may differ. For example, not all health care facilities are involved in clinical research, thus their information will not need to support the function research and education.",1,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
+13. The small hospital has a smaller number of patients who are discharged from the hospital than the large university medical center. The large university medical center has a larger number of patients who are discharged from the hospital than the small hospital","A typical hospital needs all functions to function as expected. The functions to be performed by health care professionals are mostly similar in all health care facilities, independent of their size. Only some functions may differ. For example, not all health care facilities are involved in clinical research, thus their information will not need to support the function research and education.",2,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Imagine a small hospital (e.g., 350 beds) and a large university medical center (e.g., 1500 beds). What are the differences between these hospitals with regard to their functions to be performed by health care professionals and other staff in health care facilities? Explain your answer.
 Answer: "
 Was hat das Krankenhausinformationssystem mit einer ganzheitlichen Sicht auf den Patienten zu tun?,What does the hospital information system have to do with a holistic view of the patient?,"1. The hospital information system is a computerized system that stores and manages patient information.
@@ -2416,7 +2356,7 @@ Answer: 1. The hospital information system is a computerized system that stores 
 2. The hospital information system can help to provide a holistic view of the patient by storing and managing patient information in a centralized location.
 3. This information can then be used to create a comprehensive picture of the patient’s health.
 4. The hospital information system can also help to improve communication between different departments within the hospital, which can help to ensure that all aspects of the patient’s health are being addressed.
-5. Overall, the hospital information system can help to provide a","A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",1,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+5. Overall, the hospital information system can help to provide a","A hospital information system must provide the right information about patients in the right place to the right people at the right time. Ideally, this means that information about the patient is also taken into account holistically across departmental and case boundaries, e.g. for the optimal treatment of multimorbid patients and for the avoidance of side effects that can occur due to known allergies and multimedication and, in the worst case, lead to death. Additional costs, effort and patient treatment due to superfluous multiple examinations are avoided.",2,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What does the hospital information system have to do with a holistic view of the patient?
 Answer: "
 Welche Kommunikation erfolgt unmittelbar nach der Aufnahme des Patienten Alfred Winter?,What communication takes place immediately after the admission of the patient Alfred Winter?,"1. The nurse asks the patient to state his name and address.
@@ -2447,7 +2387,7 @@ Welche Kommunikation erfolgt unmittelbar nach der Aufnahme des Patienten Alfred 
 26. The nurse asks the patient to state his grandmother’s name.
 27. The nurse asks the patient to state his grandfather’s name.
 28. The nurse asks the patient to state his grandmother’s name.
-29. The nurse asks the patient","Admission is divided into administrative, mecial and nursing admission. Via the (possibly existing) communication server the changed/newly added infiroations are then broadcasted to related application components such as the patient managements system.",1,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
+29. The nurse asks the patient","Admission is divided into administrative, mecial and nursing admission. Via the (possibly existing) communication server the changed/newly added infiroations are then broadcasted to related application components such as the patient managements system.",3,transfer,IS_2022_09_27,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: What communication takes place immediately after the admission of the patient Alfred Winter?
 Answer: "
 "Look at the functions listed in Sect. 3.3.2. Look at the relationships between the functions and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.","Look at the relationships between functions to be performed by health care professionals and other staff in health care facilities and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.","1. The health care professional group that I have selected is the nurses. The functions that are most important for this group are the following:
@@ -2504,7 +2444,7 @@ xx. Provide health care quality management
 yy. Provide health care quality measurement
 zz. Provide health care quality reporting
 aaa. Provide health care quality improvement
-bb","Physicians: Important functions are medical admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of diagnostic and therapeutic procedures, coding of diagnoses and procedures, and medical discharge and medical discharge summary writing. Nurses: Important functions are nursing admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of nursing procedures, and nursing discharge and nursing discharge summary writing. Administrative staff: Important functions are patient identification, administrative admission, and administrative discharge and billing.",1,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
+bb","Physicians: Important functions are medical admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of diagnostic and therapeutic procedures, coding of diagnoses and procedures, and medical discharge and medical discharge summary writing. Nurses: Important functions are nursing admission, decision-making and patient information, planning and organization of patient treatment, order entry, execution of nursing procedures, and nursing discharge and nursing discharge summary writing. Administrative staff: Important functions are patient identification, administrative admission, and administrative discharge and billing.",3,transfer,Book,,"Instruction: You are given a question. Answer the question to your best knowledge.
 Question: Look at the relationships between functions to be performed by health care professionals and other staff in health care facilities and the different health care professional groups (physicians, nurses, administrative staff, others) working in hospitals and medical offices. Select one health care professional group and describe which functions are most important for this group.
 Answer: "
 Read Examples 5.5.1 and determine which methods for collecting data (as described in Sects. 5.4.3 and 5.4.4) have been used.,"Given the Example in the Context, determine which methods for collecting data have been used.","1.

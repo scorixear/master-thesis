@@ -1,6 +1,11 @@
 question;transformed;true_answer;num_answers;source;context
+Was ist der Unterschied zwischen dem PVS und dem PDMS?;What is the difference between the PMS and the PDMS?;"PMS:
+- primary focus on helping health care provides streamline their day-to-day tasks
+
+PDMS:
+- primary focus on capturing mainaining comprehensive and accurate patient medical data.";2;IS_2022_09_27;
 Look at the entity type “patient” that is interpreted and updated by various functions. Which functions update the patient information, which functions interpret it?;"Look at the entity type “patient” that is interpreted and updated by various functions to be performed by health care professionals and other staff in health care facilities. Which functions update the patient information, which functions interpret it?
-";The entity type “patient” is updated by the function “patient admission.” All other functions that are related to patient care interpret it.;1;Book;
+";The entity type “patient” is updated by the function “patient admission.” All other functions that are related to patient care interpret it.;2;Book;
 "Look at the 3LGM^2 example in Sect. 2.15.
 Use this example to explain the meaning of the following elements: functions, entity types, application systems, non-computer-based application components, physical data processing system, and inter-layer relationships.";Use the provided example to explain the meaning of the following elements: functions, entity types, application systems, non-computer-based application components, physical data processing system, and inter-layer relationships.;"Administrative admission is an enterprise function that is supported by the patient administration system.
 One entity type that is used and updated by this function is “patient.” The paper-based patient data privacy form system is an example of a non-computer-based application component.
@@ -361,12 +366,11 @@ Data integrity means that data are consistent, that object identity is maintaine
 Welche Arten von Integrität haben wir diskutiert?;What types of integrity exist in the context of health information systems?;Object Identity, Referential Integrity, Consistency;3;A_2021;
 Welche Typen der Integration haben wir diskutiert?;What types of integration exist in the context of health information systems?;Data-Integration, Semantic Integration, User-Interface Integration, Context Integration, Functional Integration, Process Integration;6;A_2021;
 Nennen Sie zwei Kommunikationsstandards für KIS?;Name two communication standards for HIS?;HL7, DICOM;2;A_2021;
-Wie hängen 3LGM², IHE zusammen;How are 3LGM^ and IHE related?;3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.;1;A_2021;
-Wie hängen HL7, DICOM zusammen;How are HL7, DICOM related?;Both are Communication Standards commonly used in a Health Information System;1;;
-Wie hängen IHE – Objektidentität – tHIS zusammen?;How are IHE - object identity - tHIS related?;IHE provides standard for Health Information Systems to improve communication between HIS. tHIS describes a System that includes multiple HIS.;1;A_2021;
-Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?;What is the importance of software development in a hospital?;While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.;1;A_2021;
+Wie hängen 3LGM², IHE zusammen;How are 3LGM^ and IHE related?;3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.;2;A_2021;
+Wie hängen HL7, DICOM zusammen;How are HL7, DICOM related?;Both are Communication Standards commonly used in a Health Information System;2;;
+Wie hängen IHE – Objektidentität – tHIS zusammen?;How are IHE - object identity - tHIS related?;IHE provides standard for Health Information Systems to improve communication between HIS. tHIS describes a System that includes multiple HIS.;2;A_2021;
+Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?;What is the importance of software development in a hospital?;While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.;2;A_2021;
 Was ist Transaktionsmanagement? Wie wird das in KIS organisiert?;What is transaction management? How is it organised in HIS?;Trancations management ensures ACID properties during communication. This is managed by the Communication Server. Each data entity is administered by one application component and changes are broadcast to all application components that use it.;2;A_2021;
 Nennen Sie drei Anwendungssysteme und die jeweils unterstützten Aufgaben!;Name three application systems and the tasks each supports!;Patient Administration System, Patient Data Management System, Laboratory Information System, Radiology Information System, etc.;3;A_2021;
-Wie würden sie die PWE eines KIS gestalten?;How would they design the physical tool layer of a HIS?;Redundancy by mirror servers;1;A_2021;
 Wie sorgen Sie für Ausfallsicherheit in einem KIS?;How do you ensure fail-safety in a HIS?;Redundancy across. Multiple Hardware Components that mirror each other. Separated Infrastructure for energy.;3;A_2021;
 "Wie kann man Krankenhausinformationssysteme vergleichen? ";"How can hospital information systems be compared? ";(Referenzmodelle, Taxonomy);2;A_2021;

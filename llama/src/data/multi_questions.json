@@ -1,9 +1,17 @@
 [
   {
+    "question": "Was ist der Unterschied zwischen dem PVS und dem PDMS?",
+    "transformed": "What is the difference between the PMS and the PDMS?",
+    "true_answer": "PMS:\n- primary focus on helping health care provides streamline their day-to-day tasks\n\nPDMS:\n- primary focus on capturing mainaining comprehensive and accurate patient medical data.",
+    "num_answers": 2,
+    "source": "IS_2022_09_27",
+    "context": ""
+  },
+  {
     "question": "Look at the entity type \"patient\" that is interpreted and updated by various functions. Which functions update the patient information, which functions interpret it?",
     "transformed": "Look at the entity type \"patient\" that is interpreted and updated by various functions to be performed by health care professionals and other staff in health care facilities. Which functions update the patient information, which functions interpret it?",
     "true_answer": "The entity type \"patient\" is updated by the function \"patient admission.\" All other functions that are related to patient care interpret it.",
-    "num_answers": 1,
+    "num_answers": 2,
     "source": "Book",
     "context": ""
   },
@@ -235,7 +243,7 @@
     "question": "Wie h\u00e4ngen 3LGM\u00b2, IHE zusammen",
     "transformed": "How are 3LGM^ and IHE related?",
     "true_answer": "3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.",
-    "num_answers": 1,
+    "num_answers": 2,
     "source": "A_2021",
     "context": ""
   },
@@ -243,7 +251,7 @@
     "question": "Wie h\u00e4ngen HL7, DICOM zusammen",
     "transformed": "How are HL7, DICOM related?",
     "true_answer": "Both are Communication Standards commonly used in a Health Information System",
-    "num_answers": 1,
+    "num_answers": 2,
     "source": "",
     "context": ""
   },
@@ -251,7 +259,7 @@
     "question": "Wie h\u00e4ngen IHE \u2013 Objektidentit\u00e4t \u2013 tHIS zusammen?",
     "transformed": "How are IHE - object identity - tHIS related?",
     "true_answer": "IHE provides standard for Health Information Systems to improve communication between HIS. tHIS describes a System that includes multiple HIS.",
-    "num_answers": 1,
+    "num_answers": 2,
     "source": "A_2021",
     "context": ""
   },
@@ -259,7 +267,7 @@
     "question": "Welche Bedeutung hat die Softwareentwicklung in einem Krankenhaus?",
     "transformed": "What is the importance of software development in a hospital?",
     "true_answer": "While software development of fully integrated application components are prohibited by law due to missing certificates, adjusting software to the Needs of each Hospital results in better communication, usage and therefore results during operation.",
-    "num_answers": 1,
+    "num_answers": 2,
     "source": "A_2021",
     "context": ""
   },
@@ -276,14 +284,6 @@
     "transformed": "Name three application systems and the tasks each supports!",
     "true_answer": "Patient Administration System, Patient Data Management System, Laboratory Information System, Radiology Information System, etc.",
     "num_answers": 3,
-    "source": "A_2021",
-    "context": ""
-  },
-  {
-    "question": "Wie w\u00fcrden sie die PWE eines KIS gestalten?",
-    "transformed": "How would they design the physical tool layer of a HIS?",
-    "true_answer": "Redundancy by mirror servers",
-    "num_answers": 1,
     "source": "A_2021",
     "context": ""
   },

@@ -243,7 +243,7 @@ def show_comparison_bars(f1, evalf1, names, title, file_name):
     # for each label and f1 score
     for label, f1_score in f1_scores.items():
         # calculate offset from actual x position
-        offset = width*multiplier
+        offset = width*multiplier + width/2
         # and plot bars at offset
         bars = axis.bar(x_labels+offset, f1_score, width, label=label)
         # add bar labels
