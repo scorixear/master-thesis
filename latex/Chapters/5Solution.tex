@@ -2,35 +2,35 @@
 \chapter{Ausführung der Lösung}\label{ch:solution}
 %*****************************************
 
-Zur Durchführung des Trainings unterteilt sich die Lösung in 6 Schritte.
-Diese werden im Folgenden näher erläutert. Die Verwendung von Techniken und Bibliotheken erfolgt ebenso abgetrennt zu jedem Schritt.
-Eine grobe Abfolge der Schritte ist wie folgt:
+Die Lösung gliedert sich in sechs Schritte, die für die Durchführung des Trainings notwendig sind.
+Im Folgenden werden diese Schritte näher erläutert. Für jeden Schritt sind die verwendeten Techniken und Bibliotheken separat aufgeführt.
+Die Schritte sind wie folgt gegliedert:
 \begin{enumerate}
-    \item Herunterladen des Modells
-    \item Umwandlung des Modells in ein kompatibles Format
-    \item Training des Modells
-    \item Generierung von Antworten auf Evaluierungsdatensatz
-    \item Bewertung der generierten Antworten
-    \item Evaluierung auf Basis der Bewertungen
+    \item Laden des Modells
+    \item Konvertierung des Modells in ein kompatibles Format
+    \item Modelltraining
+    \item Erstellung von Antworten auf dem Evaluierungsdatensatz
+    \item Bewertung der erzeugten Antworten
+    \item Auswertung basierend auf den Bewertungen
 \end{enumerate}
 
 \section{Herunterladen des Modells}
-Die LLaMA Modelle sind im Rahmen einer nicht-kommerziellen Lizenz, welche sich auf Forschung fokusiert, freigegeben. Zugang zu den Modellen wird von Fall zu Fall auf Anfrage gewährt. Diese Anfrage wurde im Rahmen dieser Arbeit gestellt und bestätigt.
-Daraufhin kann ein vorbereitetes Skript der Autoren genutzt werden, um die trainieren Parameter des Modells herunterzuladen.
-Der Skript benötigt eine explizite \ac{url}, die nach einer vorgegebenen Zeit von einer Woche nach Freigabe der Modelle ungültig wird. Aus diesem Grund ist diese \ac{url} nicht im Skript enthalten.
+Die LLaMA-Modelle werden unter einer nicht-kommerziellen Lizenz für Forschungszwecke zur Verfügung gestellt. Der Zugang zu den Modellen wird im Einzelfall auf Anfrage gewährt. Diese Anfrage wurde im Rahmen dieser Arbeit gestellt und bestätigt.
+Anschließend kann ein von den Autoren vorbereitetes Skript verwendet werden, um die trainierten Parameter des Modells herunterzuladen.
+Das Skript benötigt eine explizite \ac{url}, die nach einer vorgegebenen Zeit von einer Woche nach Freigabe der Modelle ungültig wird. Aus diesem Grund ist diese \ac{url} nicht im Skript enthalten.
 
 \section{Umwandlung des Modells in ein kompatibles Format}
 Das Training des Modells basiert auf zwei grundlegenden Bibliotheken: der Transformers Bibliothek von Huggingface und der DeepSpeed Bibliothek von Microsoft.
-Diese Bibliotheken, insbesondere Transformers erleichtern den Entwicklungsprozess enorm und bieten eine große Abstraktion. Jedoch können Sie nur mit Modellen arbeiten, welche in einer für die Transformers-Bibliothek verständlichen Form vorhanden sind.
-Aus diesem Grund wird das heruntergeladene Modell mit Hilfe eines Skriptes von Huggingface in die genannte kompatible Form umgewandelt werden.
-Während dieser Umwandlung muss das Modell vollständig in den \ac{ram} des ausführenden Computers geladen werden. Bei dem LLaMA 7B Modell sind hier also über 14 GB RAM notwendig.
-Die Umwandlung dauerte auf einem Computer mit 32 GB RAM und einem AMD Ryzen 7 5800X Prozessor ca. 30 Minuten.
+Diese Bibliotheken, insbesondere Transformers, erleichtern den Entwicklungsprozess enorm und bieten ein hohes Maß an Abstraktion. Allerdings können Sie nur mit Modellen arbeiten, die in einer für die Transformers-Bibliothek verständlichen Form vorliegen.
+Aus diesem Grund wird das heruntergeladene Modell mit Hilfe eines Huggingface-Skripts in diese kompatible Form umgewandelt.
+Während dieser Konvertierung muss das Modell vollständig in den \ac{ram} des ausführenden Rechners geladen werden. Für das Modell LLaMA 7B sind dafür mehr als 14 GB RAM erforderlich.
+Die Konvertierung dauerte auf einem Rechner mit 32 GB RAM und einem AMD Ryzen 7 5800X Prozessor ca. 30 Minuten.
 
 \section{Training des Modells}
-Um das LLaMA Modell zu trainieren, wird die Bibliothek Transformers von Huggingface genutzt\footnote{\url{https://huggingface.co/docs/transformers/index} abgerufen am 16.8.2023}.
-Der Trainings-Skript, geschrieben in Python, basiert auf dem Beispielskript zum Training von Kausalen Sprachmodellen aus dem Huggingface Github Repository\footnote{\url{https://github.com/huggingface/transformers/blob/main/examples/pytorch/language-modeling/run_clm.py} abgerufen am 16.8.2023} und wurde teilweise auf die Anforderungen des hier duchgeführten Trainings angepasst.
-Die Konfiguration des Trainings unterteilt sich in drei Bereiche: Einstellungen für das Modell, Einstellungen für die Trainingsdaten und Einstellungen zum Training selbst.
-Im folgenden werden diese Einstellungen genauer erläutert.
+Um das LLaMA-Modell zu trainieren, wird die Transformers Bibliothek von Huggingface verwendet\footnote{\url{https://huggingface.co/docs/transformers/index} abgerufen am 16.8.2023}.
+Das in Python geschriebene Trainingsskript basiert auf dem Beispielskript zum Training von kausalen Sprachmodellen aus dem Huggingface Github Repository\footnote{\url{https://github.com/huggingface/transformers/blob/main/examples/pytorch/language-modeling/run_clm.py} abgerufen am 16.8.2023} und wurde teilweise an die Anforderungen des hier durchgeführten Trainings angepasst.
+Die Konfiguration des Trainings gliedert sich in vier Bereiche: Einstellungen für das Modell, Einstellungen für die Trainingsdaten, Einstellungen für das Training selbst und Einstellungen für DeepSpeed.
+Im Folgenden werden diese Einstellungen näher erläutert.
 \subsection{Konfiguration des Modells}
 \begin{table}
     \centering
@@ -49,41 +49,41 @@ Im folgenden werden diese Einstellungen genauer erläutert.
     \end{tabular}
     \caption{Parameter zur Auswahl und Konfiguration des Modells}\label{tab:model-config}
 \end{table}
-Die gneutzten Parameter zur Auswahl und Konfiguration des Modells sind in Tabelle \ref{tab:model-config} aufgeführt.\\
+Die zur Auswahl und Konfiguration des Modells verwendeten Parameter sind in der Tabelle \ref{tab:model-config} aufgelistet.\\
 
-Der Parameter \enquote{model\_name} entspricht einer Auswahl des Modells und kann sowohl einen relativen Pfad zu einem lokalen Modell als auch einen Modellnamen darstellen.
-Der Modellname wurde hier auf das Llama 2 7B Modell gesetzt und zeigt auf das von Huggingface gehostete Modell im kompatiblen Format zu der Transformers Bibliothek.
-Llama 2 wurde im Juli 2018 von Meta AI veröffentlicht, und stellt eine generelle Verbesserung der ursprünglichen LLaMA 1 Modelle dar.
-Neben der nun vergrößerten Kontext-Länge auf 4096 Tokens stellt Meta AI auch Llama 2 in der Chat-Version zur Verfügung.
-Die Chat-Version wurde zusätzlich mit Hilfe von Reinforcement Learning von menschlichem Feedback trainiert und ermöglicht somit eine einfachere Nutzung der vortrainierten Modelle im Kontext eines Chatbots.
-Diese Chat-Modelle wurden jedoch nicht zum Training genutzt, da davon ausgegangen wird, dass dieses zusätzliche Training durch das hier durchgeführte Continual Pretraining überschrieben wird.
-Auch ermöglicht Huggingface nun die Nutzung der Llama 2 Modelle ohne eigenes Herunterladen und Konvertieren, weshalb die ersten beiden Schritte damit entfallen.
-Die Llama 2 Modelle wurden unter anderen im Artikel von \citet{llama2} vorgestellt.\\
+Der Parameter \enquote{model\_name} entspricht einer Modellauswahl und kann entweder ein relativer Pfad zu einem lokalen Modell oder ein Modellname sein.
+Der Modellname wurde hier auf das Modell Llama 2 7B gesetzt und verweist auf das von Huggingface gehostete Modell in einem mit der Transformers-Bibliothek kompatiblen Format.
+Llama 2 wurde im Juli 2023 von Meta AI veröffentlicht und stellt eine generelle Verbesserung der ursprünglichen LLaMA 1 Modelle dar.
+Neben der nun auf 4096 Tokens erweiterten Kontextlänge stellt Meta AI Llama 2 auch in einer Chat-Version zur Verfügung.
+Die Chat-Version wurde zusätzlich mit Hilfe von Reinforcement Learning aus menschlichem Feedback trainiert und ermöglicht so eine einfachere Nutzung der vortrainierten Modelle im Kontext eines Chatbots.
+Diese Chat-Modelle wurden jedoch nicht zum Training verwendet, da davon ausgegangen wird, dass dieses zusätzliche Training durch das hier durchgeführte Continual Pretraining überschrieben wird.
+Außerdem ermöglicht Huggingface nun die Nutzung der Llama 2 Modelle ohne Download und Konvertierung, so dass die ersten beiden Schritte entfallen.
+Die Llama 2 Modelle wurden unter anderem im Artikel von \citet{llama2} vorgestellt.\\
 
-Der Parameter \enquote{cache\_dir} beschreibt den Speicherpfad des heruntergeladenen Modells.
-Dies ermöglicht wiederholtes Training des Modells ohne erneuten Datenverbrauch.
-Die heruntergeladenen Modelle werden dabei nicht durch das Training überschrieben und stellen somit den Basiszustand des Modells dar (im Folgenden auch als Llama2-0e für \enquote{0 Epochen trainiert} bezeichnet).\\
+Der Parameter \enquote{cache\_dir} beschreibt den Speicherort des heruntergeladenen Modells.
+Dies ermöglicht ein wiederholtes Trainieren des Modells ohne erneuten Download.
+Die heruntergeladenen Modelle werden durch das Training nicht überschrieben und stellen somit den Grundzustand des Modells dar (im Folgenden auch als Llama2-0e für \enquote{0 Epochen trainiert} bezeichnet).\\
 
-\enquote{use\_fast\_tokenizer} konfiguriert die Nutzung einer schnelleren Version des Tokenizers um Datensätze umzuwandeln.
-Diese Auswahl ist optional und wurde hier nicht genutzt.\\
+\enquote{use\_fast\_tokenizer} konfiguriert die Verwendung einer schnelleren Version des Tokenizers zur Konvertierung der Datensätze.
+Diese Option ist optional und wurde hier nicht verwendet.\\
 
-\enquote{model\_revision} beschreibt die Version des Modells, welche genutzt werden soll.
-Hier wurde die aktuellste Version genutzt, welche durch den Wert \enquote{main} dargestellt ist.\\
+\enquote{model\_revision} beschreibt die zu verwendende Version des Modells.
+Hier wurde die aktuellste Version verwendet, die durch den Wert \enquote{main} repräsentiert wird.\\
 
-\enquote{use\_auth\_token} und \enquote{hugging\_token} beschreiben die Nutzung eines Authentifizierungstokens um Modelle von Huggingface herunterzuladen.
-Diese Authentifizierung ist notwendig, da auch die Llama 2 Modelle unter der selben Lizenz wie LLaMA 1 stehen und nur auf Anfrage zur Verfügung gestellt werden.
-Um Modelle mit limitierten Zugriff herunterzuladen, wurde ein Huggingface-Konto erstellt, die Anfrage an Meta AI zur Nutzung der Llama 2 Modelle gestellt und bestägigt und ein Authentifizierungtoken generiert.\\
+\enquote{use\_auth\_token} und \enquote{hugging\_token} beschreiben die Verwendung eines Authentifizierungs-Tokens, um Modelle von Huggingface herunterzuladen.
+Diese Authentifizierung ist notwendig, da auch die Llama 2 Modelle unter der gleichen Lizenz wie LLaMA 1 stehen und nur auf Anfrage zur Verfügung gestellt werden.
+Um die Modelle mit beschränktem Zugang herunterzuladen, wurde ein Huggingface-Account erstellt, die Anfrage an Meta AI zur Nutzung der Llama 2 Modelle gestellt und bestätigt und ein Authentifizierungstoken generiert.\\
 
-Der Parameter \enquote{torch\_dtype} beschreibt den genutzten Datentyp für die Darstellung der Parameter des Modells.
-Hier stehen sowohl Float32, Float16 und BFloat16 zur Verfügung.
-Vortrainierte Modelle wurden initial mit einem Datentyp erstellt und müssen in einen anderen Datentyp umgewandelt werden, sollte der \enquote{torch\_dtype} nicht übereinstimmen.
-Diese Umwandlung benötigt Rechenleistung und kann dazu führen, das Modelle fehlerhaft trainiert werden oder mehr Leistung während der Inferenz und des Trainings nutzen.
-Aus diesem Grund wurde hier der Parameter \enquote{auto} genutzt, welcher den Datentyp des Modells automatisch erkennt und diesen nutzt.\\
+Der Parameter \enquote{torch\_dtype} beschreibt den Datentyp, der für die Darstellung der Modellparameter verwendet wird.
+Hier stehen Float32, Float16 und BFloat16 zur Verfügung.
+Vorgefertigte Modelle wurden ursprünglich mit einem Datentyp erstellt und müssen in einen anderen Datentyp konvertiert werden, wenn der \enquote{torch\_dtype} nicht übereinstimmt.
+Diese Konvertierung ist rechenintensiv und kann dazu führen, dass Modelle fehlerhaft trainiert werden oder mehr Rechenleistung während der Inferenz und des Trainings benötigen.
+Aus diesem Grund wurde hier der Parameter \enquote{auto} verwendet, der den Datentyp des Modells automatisch erkennt und benutzt.\\
 
-\enquote{low\_cpu\_mem\_usage} beschreibt einen Prozess der Transformers Bibliothek zum Laden von großen Modellen auf Systemen mit wenig Arbeitsspeicher.
-Hierzu werden Modelle in Etappen in den Arbeitspeicher geladen und dann auf den \ac{gpu}-Speicher übertragen.
-Dieser Prozess verringert die benötigte Menge an Arbeitsspeicher, erhöht jedoch die benötigte Zeit zum Laden des Modells.
-Da hier genügend Arbeitsspeicher zur Verfügung stand, wurde dieser Prozess nicht genutzt.\\
+\enquote{low\_cpu\_mem\_usage} beschreibt ein Verfahren der Bibliothek Transformers zum Laden großer Modelle auf Systemen mit wenig Arbeitsspeicher.
+Dabei werden die Modelle in mehreren Schritten in den Arbeitsspeicher geladen und anschließend in den \ac{gpu}-Speicher übertragen.
+Dieses Verfahren reduziert die Menge des notwendigen Arbeitsspeichers, erhöht aber die Zeit, die zum Laden des Modells benötigt wird.
+Da im vorliegenden Fall genügend Arbeitsspeicher zur Verfügung stand, wurde auf dieses Verfahren verzichtet.
 
 \subsection{Konfiguration der Trainingsdaten}
 \begin{table}
@@ -103,44 +103,44 @@ Da hier genügend Arbeitsspeicher zur Verfügung stand, wurde dieser Prozess nic
     \end{tabular}
     \caption{Parameter zur Auswahl und Konfiguration der Trainingsdaten}\label{tab:data-config}
 \end{table}
-Zum Training des Llama 2 Modells wurde das Buch \enquote{Health Information Systems} von \citet{bb} im Epub-Format in ein Markdown-Format umgewandelt.
-Die notwendigen Änderungen am Text sind in \cref{sec:datenkuration} beschrieben.
-Um diese Markdown-Datei in ein für das Modell verständliche Form umzuwandeln, wird die Bibliothek datasets\footnote{\url{https://huggingface.co/docs/datasets/index} abgerufen am 16.8.2023} von Huggingface genutzt.
-Sie ermöglicht das Laden der Textdatei, die Umwandlung in Tokens und das Unterteilen in Blöcke.
-Die Parameter zur Auswahl und Konfiguration der Trainingsdaten sind in Tabelle \ref{tab:data-config} aufgeführt.\\
+Für das Training des Modells Llama 2 wurde das Buch \enquote{Health Information Systems} von \citet{bb} im epub-Format in das Markdown-Format konvertiert.
+Die notwendigen Änderungen am Text sind in \cref{sec: datenkuration} beschrieben.
+Um diese Markdown-Datei in eine für das Modell verständliche Form umzuwandeln, wird die Bibliothek datasets\footnote{\url{https://huggingface.co/docs/datasets/index} abgerufen am 16.8.2023} von Huggingface verwendet.
+Sie ermöglicht das Laden der Textdatei, die Umwandlung in Tokens und die Aufteilung in Blöcke.
+Die Parameter zur Auswahl und Konfiguration der Trainingsdaten sind in der Tabelle \ref{tab:data-config} aufgelistet.\\
 
 Der Parameter \enquote{train\_file} beschreibt den Pfad zur Trainingsdatei.
-Diese Trainingsdatei wird einmal eingelesen und mehrfach wiederholt verwendet, abhängig von der Anzahl der Epochen, welche unter \cref{subsec:config-training} beschrieben ist.\\
+Diese Trainingsdatei wird einmal eingelesen und je nach Anzahl der unter \cref{subsec:config-training} beschriebenen Epochen mehrfach verwendet.\\
 
-\enquote{max\_train\_samples} beschreibt die maximale Anzahl an Blöcken, welche aus der Trainingsdatei gelesen werden sollen.
-Zu Testzwecken kann hier eine geringere Anzahl an Blöcken genutzt werden, um die Konfiguration des Modells zu testen.
-Im finalen Training wurde dieser Parameter auf \enquote{None} gesetzt, um alle Blöcke zu nutzen.\\
+\enquote{max\_train\_samples} beschreibt die maximale Anzahl von Blöcken, die aus der Trainingsdatei gelesen werden sollen.
+Zu Testzwecken kann hier eine geringere Anzahl an Blöcken verwendet werden, um die Konfiguration des Modells zu testen.
+Im finalen Training wurde dieser Parameter auf \enquote{None} gesetzt, um alle Blöcke zu verwenden.\\
 
 Der Parameter \enquote{overwrite\_cache} beschreibt, ob der Text erneut in Tokens umgewandelt werden soll.
-Sollte sich der Text geändert haben, kann der Skript hier die nun tokenized Textdatei überschreiben.\\
+Wenn sich der Text geändert hat, kann das Skript hier die nun tokenisierte Textdatei überschreiben.\\
 
-Wie bereits genannt wird der Text in Blöcke unterteilt.
-Jeder Block wird von dem Modell vollständig und gleichzeitig eingelesen.
+Wie bereits erwähnt, wird der Text in Blöcke aufgeteilt.
+Jeder Block wird vom Modell vollständig und gleichzeitig gelesen.
 Die maximale Größe eines Blocks ist durch das Modell begrenzt und liegt bei Llama 2 bei 4096 Tokens.
-Standardmäßig verwenden jedoch Modelle eine Blockgröße von 1024 Tokens, weshalb hier diese Größe ohne weitere Angaben genutzt wird.
-Größere Blöcke führen zu schnellerer Verarbeitung des Textes und können zu besserem Verständnis von Zusammenhängen führen, da ein größerer Kontext betrachtet wird.
-Jedoch steigt mit der Größe der Blöcke auch die Fehleranfälligkeit, weshalb in Teilen auch kleinere Blöcke genutzt werden müssen, um ein Training erfolgreich durchzuführen.
-Probleme während des Trainings sind in \cref{sec:problem-training} beschrieben.
-Die Größe eines Blocks kann mit dem Parameter \enquote{block\_size} angepasst werden.\\
+Standardmäßig verwenden Modelle jedoch eine Blockgröße von 1024 Tokens, weshalb hier diese Größe angenommen wird, wenn keine weiteren Angaben gemacht werden.
+Größere Blöcke führen zu einer schnelleren Verarbeitung des Textes und können zu einem besseren Verständnis der Zusammenhänge führen, da ein größerer Kontext betrachtet wird.
+Allerdings steigt mit der Größe der Blöcke auch die Fehleranfälligkeit, so dass teilweise auch kleinere Blöcke verwendet werden müssen, um ein Training erfolgreich durchzuführen.
+Probleme beim Training sind unter \cref{sec: problem-training} beschrieben.
+Die Blockgröße kann mit dem Parameter \enquote{block\_size} angepasst werden.\\
 
-Der Parameter \enquote{validation\_split\_percentage} beschreibt den Anteil der Daten, welche für die Validierung genutzt werden soll.
-Hier werden \SI{5}{\percent} der Daten für die Validierung genutzt.
-Die Validierung gibt während des Trainings Auskunft über die tatsächliche Leistung des Modells gegenüber ungesehenem Text und dient dazu, den Fortschritt des Modell zu messen.\\
+Der Parameter \enquote{validation\_split\_percentage} beschreibt den Anteil der Daten, der für die Validierung genutzt werden soll.
+Hier werden \SI{5}{\percent} der Daten für die Validierung verwendet.
+Die Validierung liefert während des Trainings Informationen über die tatsächliche Leistung des Modells im Vergleich zum ungesehenen Text und dient dazu, den Fortschritt des Modells zu messen.\\
 
-\enquote{preprocessing\_num\_workers} beschreibt die Anzahl der Prozesse, welche für die Umwandlung der Textdatei in Tokens genutzt werden sollen.
-Bei sehr großen Datenmengen gestaltet sich die Umwandlung von Textdateien in Tokens als eine sehr umfangreiche Aufgabe.
-Um diesen Ablauf zu beschleunigen, können mehrere Prozesse parallel Textdateien übersetzen.
-In diesem Fall ist die Datenmenge jedoch klein genug, um mit nur einem Prozess die Aufgabe durchzuführen.\\
+\enquote{preprocessing\_num\_workers} beschreibt die Anzahl der Prozesse, die für die Umwandlung der Textdatei in Tokens verwendet werden sollen.
+Bei sehr großen Datenmengen ist die Umwandlung von Textdateien in Tokens eine sehr umfangreiche Aufgabe.
+Um diesen Vorgang zu beschleunigen, können mehrere Prozesse die Textdateien parallel übersetzen.
+In diesem Fall ist die Datenmenge jedoch klein genug, um die Aufgabe mit nur einem Prozess zu erledigen.\\
 
 Der Parameter \enquote{keep\_linebreaks} beschreibt, ob Zeilenumbrüche in der Textdatei erhalten bleiben sollen.
-In einigen Fällen können Textdateien viele Leerstellen enthalten, die zur Formatierung des Textes gedacht sind, dem Modell jedoch keine Informationen bieten oder dazu animieren, diese Leerstellen zu imitieren.
+In einigen Fällen können Textdateien viele Zeilenumbrüche enthalten, die der Formatierung des Textes dienen, aber dem Modell keine Informationen liefern oder es dazu veranlassen, diese Zeilenumbrüche zu imitieren.
 Aus diesem Grund können Zeilenumbrüche optional entfernt werden.
-Durch die vorher durchgeführte Datenkuration ist dies jedoch nicht notwendig, weshalb dieser Parameter auf \enquote{true} gesetzt wird.\\
+Aufgrund der zuvor durchgeführten Datenkuration ist dies jedoch nicht notwendig, weshalb dieser Parameter auf \enquote{true} gesetzt wird.\\
 
 \subsection{Konfiguration des Trainings}\label{subsec:config-training}
 \begin{table}
@@ -330,9 +330,56 @@ Wichtig bei der Nutzung von DeepSpeed mit Transformers ist eine identische Konfi
 
 Die DeepSpeed Konfiguration ist in \cref{tab:deepspeed-config} dargestellt.
 Die hier genutzten Parameter beschreiben ein Training mit Hilfe der ZeRO Stage 2 Optimierung und zusätzlichem CPU Offloading.
-Die ZeRO Stage 2 Optimierung beschreibt einen Algorithmus zur Reduktion des Speicherbedarfs während des Trainings. Dieser Algorithmus wird in \citet{deepspeed} genauer beschrieben.
-Zusätzlich zu dieser Optimierung werden Teile der Berechnungen auf die \ac{cpu} ausgelagert um den Speicherbedarf weiter zu reduzieren.\\
+Die ZeRO Stage 2 Optimierung beschreibt einen Algorithmus zur Reduktion des Speicherbedarfs während des Trainings.
+Dieser Algorithmus wird in \citet{deepspeed} genauer beschrieben.
+Zusätzlich zu dieser Optimierung werden Teile der Berechnungen auf die \ac{cpu} ausgelagert um den Speicherbedarf pro \ac{gpu} weiter zu reduzieren.\\
 
+Die Rubrik \enquote{fp16} beschreibt den Umgang mit Float16 Werten während des Trainings.
+Hierbei handelt es sich um eine dynamische Skalierung der Fehlerwerte (engl. \enquote{Dynamic Loss Scaling}).
+Die Skalierung von Fehlerwerten ist notwendig, da durch die geringere Genauigkeit von Float16 Werten kleinere Größen der Fehlerwerte abgerundet werden und verloren gehen.
+Aus diesem Grund werden Fehlerwerte um mehrere Potenzen während der Berechnung skaliert.
+Diese Skalierung kann ebenso zum Überlauf über den Wertebereich des Float16 Datentyps führen.
+Hier verwendet DeepSpeed eine automatische, dynamische Skalierung der Fehlerwerte, ohne einen Überlauf zu verursachen.
+Eine genauere Erklärung der Skalierung von Fehlerwerten lässt sich in dem Artikel von \citet{lossscale} finden.
+Der Parameter \enquote{loss\_scale} beschreibt die konstante Skalierung der Fehlerwerte.
+Ist er auf $0$ gesetzt, wird eine dynamische Skalierung genutzt.
+Der \enquote{loss\_scale\_window} Parameter beschreibt das Werteintervall in dem die dynamische Skalierung stattfindet.
+Der Parameter \enquote{initial\_scale\_power} beschreibt die Größe der initialen Skalierung der Fehlerwerte.
+Die tatsächliche Skalierung der Fehlerwerte entspricht $2^{initial\_scale\_power}$.
+Der Parameter \enquote{hysteresis} beschreibt die minimale Anzahl an Schritten, in denen die Skalierung nicht verändert werden kann.
+Der Parameter \enquote{min\_loss\_scale} beschreibt die minimale Skalierung der Fehlerwerte.
+Hier entspricht der Wert $1$ keiner Skalierung.\\
+
+Die Rubrik \enquote{optimizer} beschreibt die Parameter des Optimierungsalgorithmus. Wie bereits in den Trainingsparametern beschrieben wird der AdamW Optimierer genutzt.
+Die Parameter \enquote{lr}, \enquote{betas}, \enquote{eps} und \enquote{weight\_decay} müssen mit den in den Trainingsparametern gesetzten Werten übereinstimmen.
+Aus diesem Grund werden diese Parameter auf \enquote{auto} gesetzt und durch die Transformers Bibliothek vor dem Beginn des Trainings ergänzt.\\
+
+Die Rubrik \enquote{scheduler} beschreibt die Parameter des Lernratenplaners. Der Lernratenplaner ist für die Anpassung der Lernrate während des Trainings verantwortlich.
+Er dient in diesem Fall zur Umsetzung der Aufwärmphase. Die Aufwärmphase ist in den Trainingsargumenten deaktiviert, die Bibliothek wird dementsprechend auch diese Phase in der DeepSpeed Konfiguration deaktivieren.\\
+
+Die Rubrik \enquote{zero\_optimizations} beschreibt die Parameter der ZeRO Stage 2 Optimierung.
+Die ZeRO Optimierung wird in \citet{deepspeed} genauer beschrieben.
+Der Parameter \enquote{contiguous\_gradients} beschreibt die Übertragung der Gradienten in einen kontinuierlichen Speicherbereich, während ihrer Berechnung.
+Diese Übertragung verhindert Speicherfragmentierung während der Backpropagation.
+Mit Hilfe des Parameters \enquote{overlap\_comm} wird versucht, die Reduzierung der Gradienten während der Berechnung der Backpropagation durchzuführen, um eine schneller Gesamtberechnung zu ermöglichen.
+\enquote{reduce\_scatter} beschreibt die Benutzung einer speziellen Reduzierungsmethode \enquote{Reduce Scatter} um Gradienten zu mitteln.
+In Kombination mit den Parametern \enquote{reduce\_bucket\_size} und \enquote{allgather\_bucket\_size} wird die maximale Anzahl an Gradienten festgelegt, die in einem Schritt reduziert werden.
+Diese Option reduziert die notwendige Menge an Speicher während des Trainings deutlich.
+Mit Hilfe der Rubrik \enquote{offload\_optimizer} wird der Zustand  und die Berechnung des Optimierers auf die CPU ausgelagert.
+Optional kann dies für sehr große Modelle ebenso auf eine NVMe SSD geschehen.
+Mit Hilfe der Einstellung \enquote{pin\_memory} wird der notwendige Speicher für Berechnung auf der CPU reserviert.
+Dies führt zu besserer Leistung, jedoch zusätzlicher Speicheranforderung.\\
+
+Wie bereits in den Trainingsargumenten durch den Parameter \enquote{max\_grad\_norm} beschrieben, wird die maximale Größe des Gradienten durch den Parameter \enquote{gradient\_clipping} festgelegt.
+Eine Automatische Übertragung der Konfiguration der Trainingsargumente ist in diesem Fall nicht möglich.
+Die Werte müssen dennoch übereinstimmen.\\
+
+Die Parameter \enquote{steps\_per\_print} und \enquote{wall\_clock\_breakdown} beschreiben die Ausgabe von Informationen während des Trainings.
+Zusätzlich zu der Ausgabe der Transformers Bibliothek werden hier weitere Informationen der DeepSpeed Bibliothek alle 500 Iterationen ausgegeben.
+Mit Hilfe des Parameters \enquote{wall\_clock\_breakdown} wird zusätzlich die Messung der verlaufenen Zeit für jede Phase einer Iteration ausgegeben.\\
+
+Der Parameter \enquote{train\_micro\_batch\_size\_per\_gpu} beschreibt die Anzahl der Batches pro GPU.
+Dieser Wert wird von den Trainingsargumenten übernommen.\\
 
 \subsection{Probleme während des Trainings}\label{sec:problem-training}
 
