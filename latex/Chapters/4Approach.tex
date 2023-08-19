@@ -301,8 +301,8 @@ Dies hat zur Folge, dass weniger \ac{gpu}s gleichzeitig reserviert werden müsse
 
 Die Trainingsprogramme müssen auch in der Lage sein, mit der Multi-\ac{gpu}-Architektur umzugehen.
 Dazu wird die Bibliothek DeepSpeed \citep{deepspeed} in Kombination mit der Bibliothek Transformers verwendet.
-DeepSpeed erlaubt verschiedene Arten der Parallelisierung, der Fokus liegt hier auf ZeRO 2 \citep{ZeRO}.
-Die ZeRO Parallelisierung erlaubt eine verteilte parallele Datenverarbeitung, bei der das Modell auf mehrere \ac{gpu}s aufgeteilt wird.
+DeepSpeed erlaubt verschiedene Arten der Parallelisierung, der Fokus liegt hier auf \ac{zero} 2 \citep{deepspeed}.
+Die \ac{zero} Parallelisierung erlaubt eine verteilte parallele Datenverarbeitung, bei der das Modell auf mehrere \ac{gpu}s aufgeteilt wird.
 Ohne diese Option ist ein Training nicht möglich, da, wie oben beschrieben, einzelne Modelle nicht vollständig auf eine \ac{gpu} passen.
 Genauere Erläuterungen zur Konfiguration von DeepSpeed und zur Verwendung der Transformer-Bibliothek sind in \cref{ch:solution} beschrieben.
 % TODO: Kapitel Solutions reminder
