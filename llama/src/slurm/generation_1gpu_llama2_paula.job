@@ -19,9 +19,9 @@ srun pip install typing-extensions
 srun pip install torch
 srun pip install accelerate
 srun pip install sentencepiece
-
+srun pip install bitsandbytes
 
 MODEL_DIR=./trained/7B-10
 OUTPUT_PATH=./output/generated_10e.csv
 
-srun python 04_predict_llama2.py --model-dir $MODEL_DIR --output-path $OUTPUT_PATH
+srun python 04_predict_llama2_4bit.py --model-dir $MODEL_DIR --output-path $OUTPUT_PATH
