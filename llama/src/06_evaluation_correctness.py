@@ -23,14 +23,12 @@ def main():
     
     # read in evaluated questions
     unsorted_models: dict[str, list[Question]] = {}
-    models: list[list[Question]] = []
-    model_names = []
     for file in os.listdir(args.data):
         # only read json files
         if file.endswith(".json"):
             # remove .json to get model name
             name = get_model_name(file[:-5])
-            unsorted_models[file[:-5]] = Question.read_json(os.path.join(args.data, file))
+            unsorted_models[name] = Question.read_json(os.path.join(args.data, file))
     model_names = sorted(unsorted_models.keys(), key=get_model_key)
     models: list[list[Question]] = [unsorted_models[name] for name in model_names]
     
@@ -171,20 +169,6 @@ def main():
         num_wrong = np.array(df[f"Num_Wrong_{source}"].tolist())
         num_unanswered = np.array(df[f"Num_Unanswered_{source}"].tolist())
         show_answer_bars(num_correct, num_wrong, num_unanswered, model_names, f"Richtig, Falsch und Unbeantwortete Fragen ({source})", args.output+f"/answers_{source}.png")
-    
-    # num_single_correct = np.array(df["Num_Correct_Single"].tolist())
-    # num_single_wrong = np.array(df["Num_Wrong_Single"].tolist())
-    # num_single_unanswered = np.array(df["Num_Unanswered_Single"].tolist())
-    # show_answer_bars(num_single_correct, num_single_wrong, num_single_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen (Single)", args.output+"/answers_single.png")
-    # num_multi_correct = np.array(df["Num_Correct_Multi"].tolist())
-    # num_multi_wrong = np.array(df["Num_Wrong_Multi"].tolist())
-    # num_multi_unanswered = np.array(df["Num_Unanswered_Multi"].tolist())
-    # show_answer_bars(num_multi_correct, num_multi_wrong, num_multi_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen (Multi)", args.output+"/answers_multi.png")
-    # num_transfer_correct = np.array(df["Num_Correct_Transfer"].tolist())
-    # num_transfer_wrong = np.array(df["Num_Wrong_Transfer"].tolist())
-    # num_transfer_unanswered = np.array(df["Num_Unanswered_Transfer"].tolist())
-    # show_answer_bars(num_transfer_correct, num_transfer_wrong, num_transfer_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen (Transfer)", args.output+"/answers_transfer.png")
-    
     # bar plots with macro f1 scores
     
     show_makrof1_bars(df["MacroF1"].tolist(), model_names, "Makro F1", args.output+"/makro_total.png")
@@ -192,9 +176,6 @@ def main():
         show_makrof1_bars(df[f"MacroF1_{type}"].tolist(), model_names, f"Makro F1 ({type})", args.output+f"/makro_{type}.png")
     for source in QuestionSource:
         show_makrof1_bars(df[f"MacroF1_{source}"].tolist(), model_names, f"Makro F1 ({source})", args.output+f"/makro_{source}.png")
-    # show_makrof1_bars(df["MacroF1_Single"].tolist(), model_names, "Makro F1 (Single)", args.output+"/makro_single.png")
-    # show_makrof1_bars(df["MacroF1_Multi"].tolist(), model_names, "Makro F1 (Multi)", args.output+"/makro_multi.png")
-    # show_makrof1_bars(df["MacroF1_Transfer"].tolist(), model_names, "Makro F1 (Transfer)", args.output+"/makro_transfer.png")
 
 def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     # create figure of 20, 10 size
