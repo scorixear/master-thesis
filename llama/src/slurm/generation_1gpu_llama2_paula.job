@@ -21,7 +21,7 @@ srun pip install accelerate
 srun pip install sentencepiece
 srun pip install bitsandbytes
 
-MODEL_DIR=./trained/7B-10
-OUTPUT_PATH=./output/generated_10e.csv
+MODEL_DIR=./trained/7B-1-paula
+OUTPUT_PATH=./output/generated_1e_paula.csv
 
 srun python 04_predict_llama2_4bit.py --model-dir $MODEL_DIR --output-path $OUTPUT_PATH

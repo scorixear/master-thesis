@@ -241,7 +241,7 @@
   },
   {
     "question": "Wie h\u00e4ngen 3LGM\u00b2, IHE zusammen",
-    "transformed": "How are 3LGM^ and IHE related?",
+    "transformed": "How are 3LGM^2 and IHE related?",
     "true_answer": "3LGM^2 is used to model Health Information Systems, while IHE describes Standards for Health Information Systems.",
     "num_answers": 2,
     "source": "A_2021",
@@ -252,7 +252,7 @@
     "transformed": "How are HL7, DICOM related?",
     "true_answer": "Both are Communication Standards commonly used in a Health Information System",
     "num_answers": 2,
-    "source": "",
+    "source": "A_2021",
     "context": ""
   },
   {

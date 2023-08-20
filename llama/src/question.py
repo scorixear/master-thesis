@@ -1,5 +1,6 @@
 import json_fix
 import json
+from strenum import StrEnum
 
 class Question:
     def __init__(self, question, transformed, generated, true_answer, num_answers, type, source, context, true_input, answered, points, total_answers):
@@ -23,3 +24,13 @@ class Question:
         with open(file_name, "r", encoding="utf-8") as json_file:
             data = json.load(json_file, object_hook=lambda d: Question(**d))
         return data
+
+class QuestionType(StrEnum):
+    Single="single",
+    Multi="multi",
+    Transfer="transfer"
+class QuestionSource(StrEnum):
+    Book="Book",
+    IS_2022_07_18="IS_2022_07_18",
+    IS_2022_09_27="IS_2022_09_27",
+    A_2021="A_2021",

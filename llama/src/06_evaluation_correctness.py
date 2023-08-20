@@ -4,9 +4,10 @@ import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 
-from question import Question
+from question import Question, QuestionSource, QuestionType
 
 from pandas import DataFrame
+from model_helper import get_model_key, get_model_name
 
 
 
@@ -21,18 +22,31 @@ def main():
     args = parser.parse_args()
     
     # read in evaluated questions
+    unsorted_models: dict[str, list[Question]] = {}
     models: list[list[Question]] = []
     model_names = []
     for file in os.listdir(args.data):
         # only read json files
         if file.endswith(".json"):
             # remove .json to get model name
-            model_names.append(file[:-5])
-            models.append(Question.read_json(os.path.join(args.data, file)))
+            name = get_model_name(file[:-5])
+            unsorted_models[file[:-5]] = Question.read_json(os.path.join(args.data, file))
+    model_names = sorted(unsorted_models.keys(), key=get_model_key)
+    models: list[list[Question]] = [unsorted_models[name] for name in model_names]
     
     # initialize pandas dataframe
-    df = DataFrame(columns=["Model", "Num_Correct", "Num_Wrong", "Num_Unanswered", "Num_Questions", "MacroF1", "Num_Correct_Single", "Num_Wrong_Single", "Num_Unanswered_Single", "Num_Questions_Single", "MacroF1_Single", "Num_Correct_Multi", "Num_Wrong_Multi", "Num_Unanswered_Multi", "Num_Questions_Multi", "MacroF1_Multi", "Num_Correct_Transfer", "Num_Wrong_Transfer", "Num_Unanswered_Transfer", "Num_Questions_Transfer", "MacroF1_Transfer"])
-    
+    dataframe_columns = ["Model", "Num_Correct", "Num_Wrong", "Num_Unanswered", "Num_Questions", "MacroF1"]
+    dataframe_columns.extend([f"Num_Correct_{qtype}" for qtype in QuestionType])
+    dataframe_columns.extend([f"Num_Wrong_{qtype}" for qtype in QuestionType])
+    dataframe_columns.extend([f"Num_Unanswered_{qtype}" for qtype in QuestionType])
+    dataframe_columns.extend([f"Num_Questions_{qtype}" for qtype in QuestionType])
+    dataframe_columns.extend([f"MacroF1_{qtype}" for qtype in QuestionType])
+    dataframe_columns.extend([f"Num_Correct_{source}" for source in QuestionSource])
+    dataframe_columns.extend([f"Num_Wrong_{source}" for source in QuestionSource])
+    dataframe_columns.extend([f"Num_Unanswered_{source}" for source in QuestionSource])
+    dataframe_columns.extend([f"Num_Questions_{source}" for source in QuestionSource])
+    dataframe_columns.extend([f"MacroF1_{source}" for source in QuestionSource])
+    df = DataFrame(columns=dataframe_columns)
     # for each model
     for index, model in enumerate(models):
         # get model name
@@ -41,20 +55,26 @@ def main():
         num_correct = 0
         num_wrong = 0
         num_unanswered = 0
-        num_single_correct = 0
-        num_single_wrong = 0
-        num_single_unanswered = 0
-        num_multi_correct = 0
-        num_multi_wrong = 0
-        num_multi_unanswered = 0
-        num_transfer_correct = 0
-        num_transfer_wrong = 0
-        num_transfer_unanswered = 0
+        type_num_correct: dict[QuestionType, int] = {}
+        type_num_wrong: dict[QuestionType, int] = {}
+        type_num_unanswered: dict[QuestionType, int] = {}
+        source_num_correct: dict[QuestionSource, int] = {}
+        source_num_wrong: dict[QuestionSource, int] = {}
+        source_num_unanswered: dict[QuestionSource, int] = {}
         # initialize f1 scores
         f1_scores = []
-        single_f1_scores = []
-        multi_f1_scores = []
-        transfer_f1_scores = []
+        type_f1_scores: dict[QuestionType, list[float]] = {}
+        source_f1_scores: dict[QuestionSource, list[float]] = {}
+        for type in QuestionType:
+            type_f1_scores[type] = []
+            type_num_correct[type] = 0
+            type_num_wrong[type] = 0
+            type_num_unanswered[type] = 0
+        for source in QuestionSource:
+            source_f1_scores[source] = []
+            source_num_correct[source] = 0
+            source_num_wrong[source] = 0
+            source_num_unanswered[source] = 0
         # for each question of one model evaluation
         for question in model:
             # get correct answers (C)
@@ -81,50 +101,53 @@ def main():
                     f1 = 2 * (prec * recall) / (prec + recall)
             # and append to f1 scores
             f1_scores.append(f1)
+            type_f1_scores[QuestionType(question.type)].append(f1) # type: ignore
+            source_f1_scores[QuestionSource(question.source)].append(f1) # type: ignore
             # increase counters depending on question type
             # and if question was answered correctly, wrong or not at all
             if(question.answered == 0):
                 num_unanswered += 1
+                type_num_unanswered[QuestionType(question.type)] += 1 # type: ignore
+                source_num_unanswered[QuestionSource(question.source)] += 1 # type: ignore
             elif(question.answered == 1):
                 num_wrong += 1
+                type_num_wrong[QuestionType(question.type)] += 1 # type: ignore
+                source_num_wrong[QuestionSource(question.source)] += 1 # type: ignore
             elif(question.answered == 2):
                 num_correct += 1
-            if(question.type == "single"):
-                if question.answered == 0:
-                    num_single_unanswered += 1
-                elif question.answered == 1:
-                    num_single_wrong += 1
-                elif question.answered == 2:
-                    num_single_correct += 1
-                single_f1_scores.append(f1)
-            elif(question.type == "multi"):
-                if question.answered == 0:
-                    num_multi_unanswered += 1
-                elif question.answered == 1:
-                    num_multi_wrong += 1
-                elif question.answered == 2:
-                    num_multi_correct += 1
-                multi_f1_scores.append(f1)
-            elif(question.type == "transfer"):
-                if question.answered == 0:
-                    num_transfer_unanswered += 1
-                elif question.answered == 1:
-                    num_transfer_wrong += 1
-                elif question.answered == 2:
-                    num_transfer_correct += 1
-                transfer_f1_scores.append(f1)
+                type_num_correct[QuestionType(question.type)] += 1 # type: ignore
+                source_num_correct[QuestionSource(question.source)] += 1 # type: ignore
+        
         # calcualte macro f1 scores
         macro_f1 = sum(f1_scores) / len(f1_scores)
-        single_macro_f1 = sum(single_f1_scores) / len(single_f1_scores)
-        multi_macro_f1 = sum(multi_f1_scores) / len(multi_f1_scores)
-        transfer_macro_f1 = sum(transfer_f1_scores) / len(transfer_f1_scores)
+        type_macro_f1: dict[QuestionType, float] = {}
+        source_macro_f1: dict[QuestionSource, float] = {}
+        for type in QuestionType:
+            type_macro_f1[type] = sum(type_f1_scores[type]) / len(type_f1_scores[type])
+        for source in QuestionSource:
+            source_macro_f1[source] = sum(source_f1_scores[source]) / len(source_f1_scores[source])
+
         # and the total amount of questions per type
         questions = num_correct + num_wrong + num_unanswered
-        single_questions = num_single_correct + num_single_wrong + num_single_unanswered
-        multi_questions = num_multi_correct + num_multi_wrong + num_multi_unanswered
-        transfer_questions = num_transfer_correct + num_transfer_wrong + num_transfer_unanswered
+        type_questions: dict[QuestionType, int] = {}
+        source_questions: dict[QuestionSource, int] = {}
+        for type in QuestionType:
+            type_questions[type] = type_num_correct[type] + type_num_wrong[type] + type_num_unanswered[type]
+        for source in QuestionSource:
+            source_questions[source] = source_num_correct[source] + source_num_wrong[source] + source_num_unanswered[source]
         # add to dataframe
-        df.loc[len(df)] = [name, num_correct, num_wrong, num_unanswered, questions, macro_f1, num_single_correct, num_single_wrong, num_single_unanswered, single_questions, single_macro_f1, num_multi_correct, num_multi_wrong, num_multi_unanswered, multi_questions, multi_macro_f1, num_transfer_correct, num_transfer_wrong, num_transfer_unanswered, transfer_questions, transfer_macro_f1]
+        final_results = [name, num_correct, num_wrong, num_unanswered, questions, macro_f1]
+        final_results.extend([type_num_correct[type] for type in QuestionType])
+        final_results.extend([type_num_wrong[type] for type in QuestionType])
+        final_results.extend([type_num_unanswered[type] for type in QuestionType])
+        final_results.extend([type_questions[type] for type in QuestionType])
+        final_results.extend([type_macro_f1[type] for type in QuestionType])
+        final_results.extend([source_num_correct[source] for source in QuestionSource])
+        final_results.extend([source_num_wrong[source] for source in QuestionSource])
+        final_results.extend([source_num_unanswered[source] for source in QuestionSource])
+        final_results.extend([source_questions[source] for source in QuestionSource])
+        final_results.extend([source_macro_f1[source] for source in QuestionSource])
+        df.loc[len(df)] = final_results # type: ignore
     
     # save data to csv
     df.to_csv(args.output + "/evaluation.csv", index=False)
@@ -137,24 +160,41 @@ def main():
     num_wrong = np.array(df["Num_Wrong"].tolist())
     num_unanswered = np.array(df["Num_Unanswered"].tolist())
     show_answer_bars(num_correct, num_wrong, num_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen", args.output+"/answers_total.png")
-    num_single_correct = np.array(df["Num_Correct_Single"].tolist())
-    num_single_wrong = np.array(df["Num_Wrong_Single"].tolist())
-    num_single_unanswered = np.array(df["Num_Unanswered_Single"].tolist())
-    show_answer_bars(num_single_correct, num_single_wrong, num_single_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen (Single)", args.output+"/answers_single.png")
-    num_multi_correct = np.array(df["Num_Correct_Multi"].tolist())
-    num_multi_wrong = np.array(df["Num_Wrong_Multi"].tolist())
-    num_multi_unanswered = np.array(df["Num_Unanswered_Multi"].tolist())
-    show_answer_bars(num_multi_correct, num_multi_wrong, num_multi_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen (Multi)", args.output+"/answers_multi.png")
-    num_transfer_correct = np.array(df["Num_Correct_Transfer"].tolist())
-    num_transfer_wrong = np.array(df["Num_Wrong_Transfer"].tolist())
-    num_transfer_unanswered = np.array(df["Num_Unanswered_Transfer"].tolist())
-    show_answer_bars(num_transfer_correct, num_transfer_wrong, num_transfer_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen (Transfer)", args.output+"/answers_transfer.png")
+    
+    for type in QuestionType:
+        num_correct = np.array(df[f"Num_Correct_{type}"].tolist())
+        num_wrong = np.array(df[f"Num_Wrong_{type}"].tolist())
+        num_unanswered = np.array(df[f"Num_Unanswered_{type}"].tolist())
+        show_answer_bars(num_correct, num_wrong, num_unanswered, model_names, f"Richtig, Falsch und Unbeantwortete Fragen ({type})", args.output+f"/answers_{type}.png")
+    for source in QuestionSource:
+        num_correct = np.array(df[f"Num_Correct_{source}"].tolist())
+        num_wrong = np.array(df[f"Num_Wrong_{source}"].tolist())
+        num_unanswered = np.array(df[f"Num_Unanswered_{source}"].tolist())
+        show_answer_bars(num_correct, num_wrong, num_unanswered, model_names, f"Richtig, Falsch und Unbeantwortete Fragen ({source})", args.output+f"/answers_{source}.png")
+    
+    # num_single_correct = np.array(df["Num_Correct_Single"].tolist())
+    # num_single_wrong = np.array(df["Num_Wrong_Single"].tolist())
+    # num_single_unanswered = np.array(df["Num_Unanswered_Single"].tolist())
+    # show_answer_bars(num_single_correct, num_single_wrong, num_single_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen (Single)", args.output+"/answers_single.png")
+    # num_multi_correct = np.array(df["Num_Correct_Multi"].tolist())
+    # num_multi_wrong = np.array(df["Num_Wrong_Multi"].tolist())
+    # num_multi_unanswered = np.array(df["Num_Unanswered_Multi"].tolist())
+    # show_answer_bars(num_multi_correct, num_multi_wrong, num_multi_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen (Multi)", args.output+"/answers_multi.png")
+    # num_transfer_correct = np.array(df["Num_Correct_Transfer"].tolist())
+    # num_transfer_wrong = np.array(df["Num_Wrong_Transfer"].tolist())
+    # num_transfer_unanswered = np.array(df["Num_Unanswered_Transfer"].tolist())
+    # show_answer_bars(num_transfer_correct, num_transfer_wrong, num_transfer_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen (Transfer)", args.output+"/answers_transfer.png")
     
     # bar plots with macro f1 scores
+    
     show_makrof1_bars(df["MacroF1"].tolist(), model_names, "Makro F1", args.output+"/makro_total.png")
-    show_makrof1_bars(df["MacroF1_Single"].tolist(), model_names, "Makro F1 (Single)", args.output+"/makro_single.png")
-    show_makrof1_bars(df["MacroF1_Multi"].tolist(), model_names, "Makro F1 (Multi)", args.output+"/makro_multi.png")
-    show_makrof1_bars(df["MacroF1_Transfer"].tolist(), model_names, "Makro F1 (Transfer)", args.output+"/makro_transfer.png")
+    for type in QuestionType:
+        show_makrof1_bars(df[f"MacroF1_{type}"].tolist(), model_names, f"Makro F1 ({type})", args.output+f"/makro_{type}.png")
+    for source in QuestionSource:
+        show_makrof1_bars(df[f"MacroF1_{source}"].tolist(), model_names, f"Makro F1 ({source})", args.output+f"/makro_{source}.png")
+    # show_makrof1_bars(df["MacroF1_Single"].tolist(), model_names, "Makro F1 (Single)", args.output+"/makro_single.png")
+    # show_makrof1_bars(df["MacroF1_Multi"].tolist(), model_names, "Makro F1 (Multi)", args.output+"/makro_multi.png")
+    # show_makrof1_bars(df["MacroF1_Transfer"].tolist(), model_names, "Makro F1 (Transfer)", args.output+"/makro_transfer.png")
 
 def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     # create figure of 20, 10 size

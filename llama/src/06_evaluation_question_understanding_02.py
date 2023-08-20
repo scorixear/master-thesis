@@ -5,6 +5,8 @@ import json_fix # this import is needed for def __json__(self) although not used
 import matplotlib.pyplot as plt
 import numpy as np
 
+from model_helper import get_model_key, get_model_name
+
 def main():
     # parse arguments
     parser = argparse.ArgumentParser(description="Evaluation of the generated questions")
@@ -15,32 +17,31 @@ def main():
     parser.add_argument("-o", "--output", type=str, help="Path to the output directory", default="evaluation/criterias/question_understanding")
     args = parser.parse_args()
     
-    
+    unsorted_models: dict[str, tuple[list[Question], list[Question]]] = {}
     models: dict[str, tuple[list[Question], list[Question]]] = {}
     # for each file in data directory
     for file in os.listdir(args.data):
         # only read json files
         if file.endswith(".json"):
+            name = get_model_name(file[:-5])
             # if file contains question not understood
             if(file.endswith("_not_understood.json")):
-                # remove _not_understood.json to get model name
-                name = file[:-20]
                 # if model name not in models, add model name and questions not understood
-                if(name not in models):
-                    models[name] = ([], Question.read_json(os.path.join(args.data, file)))
+                if(name not in unsorted_models):
+                    unsorted_models[name] = ([], Question.read_json(os.path.join(args.data, file)))
                 # otherwise add questions not understood to model
                 else:
-                    models[name] = (models[name][0],Question.read_json(os.path.join(args.data, file)))
+                    unsorted_models[name] = (unsorted_models[name][0],Question.read_json(os.path.join(args.data, file)))
             # if file ends with _understood.json
             else:
-                # remove _understood.json to get model name
-                name = file[:-16]
                 # if model name not in models, add model name and questions understood
-                if name not in models:
-                    models[name] = (Question.read_json(os.path.join(args.data, file)), [])
+                if name not in unsorted_models:
+                    unsorted_models[name] = (Question.read_json(os.path.join(args.data, file)), [])
                 # otherwise add questions understood to model
                 else:
-                    models[name] = (Question.read_json(os.path.join(args.data, file)), models[name][1])
+                    unsorted_models[name] = (Question.read_json(os.path.join(args.data, file)), unsorted_models[name][1])
+    for key in sorted(unsorted_models.keys(), key=get_model_key):
+        models[key] = unsorted_models[key]
     
     understood = []
     not_understood = []

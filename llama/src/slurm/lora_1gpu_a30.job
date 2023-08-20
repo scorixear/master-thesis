@@ -3,10 +3,10 @@
 #SBATCH --nodes=1                           # nodes
 #SBATCH --ntasks-per-node=1                 # crucial - only 1 task per dist per node!
 #SBATCH --cpus-per-task=2
-#SBATCH --partition=clara
+#SBATCH --partition=paula
 #SBATCH --mem=64GB
 #SBATCH --time=2-00:00:00                     # time limit hrs:min:sec
-#SBATCH --gres=gpu:v100:1                   # number of gpus
+#SBATCH --gres=gpu:a30:1                   # number of gpus
 #SBATCH --output=logs/%x-%j.out                  # output file name
 #SBATCH --mail-type=ALL
 
@@ -17,7 +17,5 @@ source .env/bin/activate
 srun pip install bitsandbytes datasets accelerate loralib torch
 srun pip install git+https://github.com/huggingface/transformers.git@main git+https://github.com/huggingface/peft.git
 srun pip install sentencepiece
-
-srun nvidia-smi
 
 srun python 03_train_lora.py
