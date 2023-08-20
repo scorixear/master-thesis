@@ -1,0 +1,27 @@
+#!/bin/bash
+#SBATCH --job-name=gen_llama2_1gpu        # name
+#SBATCH --nodes=1                           # nodes
+#SBATCH --ntasks-per-node=1                 # crucial - only 1 task per dist per node!
+#SBATCH --cpus-per-task=8
+#SBATCH --partition=paula
+#SBATCH --mem=128G
+#SBATCH --time=2-00:00:00                     # time limit hrs:min:sec
+#SBATCH --gres=gpu:a30:1                   # number of gpus
+#SBATCH --output=logs/%x-%j.out                  # output file name
+#SBATCH --mail-type=ALL
+
+module load Python
+module load PyTorch
+source .env/bin/activate
+
+srun pip install git+https://github.com/huggingface/transformers
+srun pip install typing-extensions
+srun pip install torch
+srun pip install accelerate
+srun pip install sentencepiece
+srun pip install bitsandbytes
+
+MODEL_DIR=./trained/7B-lora-5
+OUTPUT_PATH=./output/generated_5e_lora.csv
+
+srun python 04_predict_llama2_lora.py --model-dir $MODEL_DIR --output-path $OUTPUT_PATH

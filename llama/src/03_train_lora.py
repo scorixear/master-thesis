@@ -144,8 +144,8 @@ trainer = transformers.Trainer(
         learning_rate=2e-4,
         fp16=True,
         logging_steps=1,
-        num_train_epochs=3,
-        output_dir="./trained/7B-lora-3"
+        num_train_epochs=1,
+        output_dir="./trained/7B-lora-1"
     ),
     data_collator=transformers.DataCollatorForLanguageModeling(tokenizer, mlm=False)
 )

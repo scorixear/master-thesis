@@ -1,0 +1,30 @@
+[
+    {
+        "question": "- Initiating projects from the strategic project portfolio,",
+        "transformed": "How would you discribe the scope an tasks of the following activites of manageing information system: from the startegic project portfollio Initiating project?",
+        "generated": "",
+        "true_answer": "Initiating projects from the strategic project portfolio: strategic directing",
+        "num_answers": 1,
+        "type": "single",
+        "source": "Book",
+        "context": "",
+        "true_input": "",
+        "answered": -1,
+        "points": -1,
+        "total_answers": -1
+    },
+    {
+        "question": "Was ist ein Modell?",
+        "transformed": "What is a modle in the context of health information sistems?",
+        "generated": "",
+        "true_answer": "A model is a representatiuon of a system or process that is used to help understand and predict the behavor of the system or process. Health information systems models can be used to help design and evaluate health information systems. They can also beused to help identify areas for improvement in health information systems.",
+        "num_answers": 1,
+        "type": "single",
+        "source": "IS_2022_09_27",
+        "context": "",
+        "true_input": "",
+        "answered": -1,
+        "points": -1,
+        "total_answers": -1
+    }
+]

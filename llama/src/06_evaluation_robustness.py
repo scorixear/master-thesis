@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from question import Question
+from model_helper import get_model_key, get_model_name
 from pandas import DataFrame
 import pandas as pd
 
@@ -20,17 +21,20 @@ def main():
     parser.add_argument("-o", "--output", type=str, help="Path to the output directory", default="evaluation/criterias/robustness")
     args = parser.parse_args()
     
-    models: list[list[Question]] = []
-    model_names = []
+    unsorted_models: dict[str, list[Question]] = {}
     # read in all json files in directory
     for file in os.listdir(args.data):
         # only read json files
         if file.endswith(".json"):
-            # remove .json to get model name
-            model_names.append(file[:-5])
-            # and parse questions
-            models.append(Question.read_json(os.path.join(args.data, file)))
+            name = get_model_name(file[:-5])
+            unsorted_models[name] = Question.read_json(os.path.join(args.data, file))
+    # remove .json to get model name
+    model_names = sorted(unsorted_models.keys(), key=get_model_key)
+    models: list[list[Question]] = [unsorted_models[name] for name in model_names]
+    
     # initialize pandas dataframe
+    dataframe_columns = ["Model"]
+    # TODO: hier weiter
     df = DataFrame(columns=["Model", "Num_Correct", "Num_Wrong", "Num_Unanswered", "Num_Questions", "MacroF1", "Num_Correct_Single", "Num_Wrong_Single", "Num_Unanswered_Single", "Num_Questions_Single", "MacroF1_Single", "Num_Correct_Multi", "Num_Wrong_Multi", "Num_Unanswered_Multi", "Num_Questions_Multi", "MacroF1_Multi", "Num_Correct_Transfer", "Num_Wrong_Transfer", "Num_Unanswered_Transfer", "Num_Questions_Transfer", "MacroF1_Transfer"])
     
     # read in correctness evaluation

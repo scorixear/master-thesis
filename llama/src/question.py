@@ -3,7 +3,7 @@ import json
 from strenum import StrEnum
 
 class Question:
-    def __init__(self, question, transformed, generated, true_answer, num_answers, type, source, context, true_input, answered, points, total_answers):
+    def __init__(self, question="", transformed="", generated="", true_answer="", num_answers=-1, type="", source="", context="", true_input="", answered=-1, points=-1, total_answers=-1):
         self.question: str = question
         self.transformed: str = transformed
         self.generated: str = generated
