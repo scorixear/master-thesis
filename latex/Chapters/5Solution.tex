@@ -522,7 +522,7 @@ Wie in \cref{sec:deepspeed-config} beschrieben, werden die berechneten Fehlerwer
 Diese Skalierung führte zu einem Überlauf über den Maximalwert des Datentyps Float16.
 Da in der DeepSpeed-Konfiguration eine dynamische Fehlerskalierung eingestellt war, wurde die Skalierung anschließend um eine Potenz verringert.
 Dieser Vorgang wiederholte sich in unregelmäßigen Abständen und führte schließlich zum Erreichen des minimalen Skalierungsfaktors 1, der keiner Skalierung entspricht.
-Ist dieser Wert erreicht und eine Skalierung ist dennoch notwendig, wird das Training abgebrochen.
+Ist dieser Wert erreicht und eine Skalierung ist dennoch notwendig, wird das Training abgebrochen.\\
 
 Der Grund für die auftretenden Skalierungsfehler ist nicht bekannt.
 Eine mögliche Ursache ist die Verwendung von Llama-Modellen mit dem Datentyp Float16.

@@ -79,7 +79,7 @@ def generate_for_single_csv(tokenizer: transformers.PreTrainedTokenizer | transf
         with torch.cuda.amp.autocast():
             output = model.generate(**batch, temperature=0.9, max_new_tokens=512)
         # decode the output
-        generated = tokenizer.decode(output[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
+        generated = tokenizer.decode(output[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
         generated = generated[len(prompt):]
         print(f"Generated: {generated}")
         # and save to dataframe

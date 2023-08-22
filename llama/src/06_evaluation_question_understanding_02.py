@@ -1,7 +1,6 @@
 import os
-from question import Question
+from question import Question, QuestionType, QuestionSource
 import argparse
-import json_fix # this import is needed for def __json__(self) although not used
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -43,31 +42,30 @@ def main():
     for key in sorted(unsorted_models.keys(), key=get_model_key):
         models[key] = unsorted_models[key]
     
-    understood = []
-    not_understood = []
-    single_understood = []
-    single_not_understood = []
-    multi_understood = []
-    multi_not_understood = []
-    transfer_understood = []
-    transfer_not_understood = []
+    understood: list[tuple[int, int]] = []
+    type_understood: dict[QuestionType, list[tuple[int, int]]] = {}
+    source_understood: dict[QuestionSource, list[tuple[int, int]]] = {}
+    
+    for type in QuestionType:
+        type_understood[type] = []
+    for source in QuestionSource:
+        source_understood[source] = []
+
     # for each model, get number of understood and not understood questions
     for (name, (understood_q, not_understood_q)) in models.items():
-        understood.append(len(understood_q))
-        not_understood.append(len(not_understood_q))
-        (single_u, multi_u, transfer_u) = count_type_questions(understood_q)
-        (single_n, multi_n, transfer_n) = count_type_questions(not_understood_q)
-        single_understood.append(single_u)
-        single_not_understood.append(single_n)
-        multi_understood.append(multi_u)
-        multi_not_understood.append(multi_n)
-        transfer_understood.append(transfer_u)
-        transfer_not_understood.append(transfer_n)
+        understood.append((len(understood_q), len(not_understood_q)))
+        (type_u, source_u) = count_questions(understood_q)
+        (type_n, source_n) = count_questions(not_understood_q)
+        for type in QuestionType:
+            type_understood[type].append((type_u[type], type_n[type]))
+        for source in QuestionSource:
+            source_understood[source].append((source_u[source], source_n[source]))
     
-    create_plot(list(models.keys()), understood, not_understood, "Verstandene Fragen", os.path.join(args.output, "understood.png"))
-    create_plot(list(models.keys()), single_understood, single_not_understood, "Verstandene Einzel-Fakt Fragen", os.path.join(args.output, "understood_single.png"))
-    create_plot(list(models.keys()), multi_understood, multi_not_understood, "Verstandene Multi-Fakten Fragen", os.path.join(args.output, "understood_multi.png"))
-    create_plot(list(models.keys()), transfer_understood, transfer_not_understood, "Verstandene Transferfragen", os.path.join(args.output, "understood_transfer.png"))
+    create_plot(list(models.keys()), [data[0] for data in understood], [data[1] for data in understood], "Verstandene Fragen", os.path.join(args.output, "understood.png"))
+    for type in QuestionType:
+        create_plot(list(models.keys()), [data[0] for data in type_understood[type]], [data[1] for data in type_understood[type]], f"Verstandene Fragen ({type.value})", os.path.join(args.output, f"understood_{type.value}.png"))
+    for source in QuestionSource:
+        create_plot(list(models.keys()), [data[0] for data in source_understood[source]], [data[1] for data in source_understood[source]], f"Verstandene Fragen ({source.value})", os.path.join(args.output, f"understood_{source.value}.png"))
 
 def create_plot(model_names: list[str], understood: list[int], not_understood: list[int], title: str, file_path: str):
     # create dataset for stacked bars
@@ -99,18 +97,24 @@ def create_plot(model_names: list[str], understood: list[int], not_understood: l
     # and save the figure
     fig.savefig(file_path)
 
-def count_type_questions(questions: list[Question]) -> tuple[int, int, int]:
-    single = 0
-    multi = 0
-    transfer = 0
+def count_questions(questions: list[Question]) -> tuple[dict[QuestionType, int], dict[QuestionSource, int]]:
+    results: tuple[dict[QuestionType, int], dict[QuestionSource, int]] = ({}, {})
     for question in questions:
-        if question.type == "single":
-            single += 1
-        elif question.type == "multi":
-            multi += 1
-        elif question.type == "transfer":
-            transfer += 1
-    return (single, multi, transfer)
+        if QuestionType(question.type) not in results[0]:
+            results[0][QuestionType(question.type)] = 1
+        else:
+            results[0][QuestionType(question.type)] += 1
+        if QuestionSource(question.source) not in results[1]:
+            results[1][QuestionSource(question.source)] = 1
+        else:
+            results[1][QuestionSource(question.source)] += 1
+    for type in QuestionType:
+        if type not in results[0]:
+            results[0][type] = 0
+    for source in QuestionSource:
+        if source not in results[1]:
+            results[1][source] = 0
+    return results
 
 if __name__ == "__main__":
     main()

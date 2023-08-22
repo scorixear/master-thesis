@@ -2,114 +2,266 @@
 \chapter{Ergebnisse}\label{ch:results}
 %*****************************************
 
-- Ergebnisse der einzelnen Tests
-- Besseres Ergebnis wenn End of Answer Token trained (Human Reinforcment training)
+% - Ergebnisse der einzelnen Tests
+% - Besseres Ergebnis wenn End of Answer Token trained (Human Reinforcment training)
 
-Fragen beantwortet:
-- GPT 4 deutlich besten Ergebnisse
-- LLaMA untrainiert ungefähr 1/3 der Fragen beantwortet
-- LLaMA 1 Epoche sehr schwach
-- LLaMA 3 Epochen erlernt wieder, kommt nicht ganz an LLaMA untrainiert heran
+% Fragen beantwortet:
+% - GPT 4 deutlich besten Ergebnisse
+% - LLaMA untrainiert ungefähr 1/3 der Fragen beantwortet, liefert Antwort zu Großteil der Fragen
+% - LLaMA 1_v100: sehr schwach, so gut wie kein Verständis
+% - LLaMA 1_a30: vergleichbar mit 0e, beantwortet leicht weniger Fragen
+% - LLaMA 3_v100:  erlernt wieder, kommt nicht ganz an LLaMA untrainiert heran, vergleichbar mit LLaMA 1_a30
+% - LLaMA 3_a30:  deutliche Leistungssteigerung über 0e und anderen Modellen,
+% beantwotet fast gleich viele Fragen wie 0e, beantwortet 1/3 Fragen mehr als llama 0e richtig
+% - LLaMA 5e_a30: keine Leistungssteigerung, Entwicklung in Richtung keine Antwort gegenüber falscher Antwort
+% - LLaMA 10e_a30: Resultate scheinen finales Ergebnis erreicht zu haben, keine Leistungssteigerung, Entwicklung in Richtung keine Antwort gegenüber falscher Antwort
 
-Stärken von GPT4
-Multi-Fakt Fragen
+% Stärken von GPT4
+% Keine Präferenz in Fragentyp
+% Kann Fragen des Buches deutlich besser beantworten 93%
 
-Schwächen von GPT4
-Transfer und Single-Fakt Fragen
+% Schwächen von GPT4
+% keine eindeutige Schwäche bei Fragentyp
+% IS_2022_07_18: 55% (wenig fragen)
+% IS_2022_09_27: 70% (wenig fragen)
 
-Stärken von LLaMA untrainiert
-Multi-Fakt Fragen
+% Stärken von LLaMA untrainiert
+% Multi-Fakt Fragen (2x mehr als andere Typen, 39\%)
+% IS 2022_07_18 55% richtig, aber wenig Fragen - keine genauen Angaben möglich
+% A_2021: 27%
 
-Schwächen von LLaMA untrainiert
-Single Fakt Fragen
+% Schwächen von LLaMA untrainiert
+% Single  20\%  & Transfer 21% -richtig beantwortet
+% Andere Sources:
+% IS_2022_09_27: 25%
+% Book_ 24%
 
-Stärken von LLaMA 3 Epochen
-Transfer Fragen
+% Stärken von LLaMA v100 1 Epochen
+% generell Schlecht
 
-Schwächen von LLaMA 3 Epochen
-Single Fakt Fragen
+% Schwächen von LLaMA v100 1 Epochen
+% ---
 
+% Stärken von LLaMA a30 1 Epochen
+% Multi 36%
+% A2021: 40%
 
-Vergleich LLaMA mit GPT4 durchgängig bessere Ergebnisse bei allen Fragenarten
-Vergleich LLaMA 1 Epoche mit anderen Modellen durchgängig schlechtere Ergebnisse bei allen Fragenarten
-Vergleich LLaMA 3 mit LLaMA 0:
-- Minimale Verbesserung bei Transfer Fragen
-- Wesentlich mehr unbeantwortete Fragen bei Singulär
-- Wesentlich mehr unbeantwortete Fragen bei Multi-Fakt
-
-Analyse der Korrektheit
-- Betrachtung der MakroF1 Werte bestätigt totale Anzahl der Fragen Ergebnisse
-- GPT4 erreicht 0.7 MakroF1, vergleichbar mit ERgebnissen aus GPT4 Paper (Medical Knowledge)
-- LLaMA auch im untrainierten Zustand deutlich unter normaler Leistung
-- MakroF1 auch im Transfer Bereich besser durch traininng (hier klarerer Unterschied)
-- Leichte Verbesserung im Single Bereich zu erkennen
-- Deutlich schlechter in Multi-Fakt Fragen
-
-Begründung der Ergebnisse
-- GPT4 durch Größe unschlagbar
-- hier nur mit LLaMA 7B verglichen, zu erwarten bei größere Modelle deutlich bessere Leistung
-- Verlauf des Trainings einschätzbar: 1 Epoche deutlich zu wenig
-- temporäres Overfitting an Formattierungsarten (Überschriften, Aufzählungen)
-    hier Beispiel von LLaMA 1 einfügen
-- LLaMA 3 Epoche deutlich bessere Leistung als LLaMA 1 Epoche, mögliche Steigerung durch weiteres Training
-- generell sehr wenig Trainigsdaten (600kB), Gefahr des overfittings nach 3 Epochen existent
-- weitertrainieren nicht möglich, beschrieben in Kapitel 5
-- LLaMA 3 erlernt keine falschen Fakten, deutlich mehr Fragen unbeantwortet, während LLaMA 0 mehr Fragen falsch beantwortet
-
-- Tatsächliche Steigerung bei Transfer-Fragen
-Ergebnisse enthalten jedoch gravierende Formattierungs- und Wiederholungsfehler
-
-Modelle im aktuellen Zustand nicht nutzbar
-    hier Beispiel von LLaMA 3 einfügen
+% Schwächen von LLaMA a30 1 Epochen
+% Single: 5%
+% IS_2022_09_27: 12%
 
 
-Analyse Erklärbarkeit
-- GPT 4 auch hier unschlagbar, nahezu jede Antwort enthält Erklärung
-- LLaMA unbeeinflusst, 50\% hier mit Erklärung
-- Verbesserung durch Human Reinforcement Training möglich, um Erklärungen zu belohnen (nicht existent im Trainingsdatensatz)
+% Stärken von LLaMA v100 3 Epochen
+% Transfer Fragen: 26%
+% IS_2022_09_27: 22%
 
-Analyse Fragenverständnis
-- Fragenverständnis nicht äquivalent zu "Fragen beantwortet"
-- Fragenverständis bei LLaMA 0 deutlich höher als bei LLaMA 3
-- GPT4 versteht so gut wie jede Frage
+% Schwächen von LLaMA v100 3 Epochen
+% Single Fakt Fragen: 17%
+% A_2021: 13%
 
-Analyse Robustheit
-- Rechtschreibfehler führen zu falschen Antworten
-- Multi am wenigsten beeinflusst
-- Single großer Abfall bei LLaMA 3
-- Transfer Leistung halbiert
+% Stärken von LLaMA a30 3 Epochen
+% Transfer: 52%
+% A_2021: 54%
 
-- Auch GPT4 schwierigkeiten bei Transfer
-- andere Fragenarten nicht beeinflusst
+% Schwächen von LLaMA a30 3 Epochen
+% Single: 32%
+% IS_2022_09_27: 32%
 
-- LLaMA 3 deutlich schlechtere Robustheit insgesammt
-- LLaMA 0 profitiert etwas durch Fehler, erhöhter MakroF1 Wert (vollständigere Antworten)
+% Stärken von LLaMA a30 5 Epochen
+% Multi: 52%
+% Book: 63%
 
-- Rechtschreibfehler in Fachbegriffen erschweren Faktenwiedergabe, da Tokenization Wörter anders
-unterteilt (teilweise auch in einzelne Buchstaben)
-- schlechtere Leistungen zu erwarten gegenüber ohne Fehler
-- zeigt generelles Verständnis von Fakten unabhängig von Textrepräsentation
-- LLaMA 0 enthaltenes Wissen durch größere Datenmengen fundierter
-- LLaMA 3 durch einzelnens Buch (wenig Daten) erst oberflächliche Wissensaneignung
-- LLaMA 3 scheint teile des LLaMA 0 Wissens ersetzt / versteckt zu haben
+% Schwächen von LLaMA a30 5 Epochen
+% Single: 26%
+% IS_2022_09_27: 19%
 
-Gesamtanalyse
-- LLaMA 3 kommt nicht an Leistungen von GPT4 oder LLaMA 0 heran
-- Zeigt durch Vergleich mit LLaMA1 jedoch Steigende Verbesserung, die möglicherweise fortgesetzt wird durch längeres Training
-- LLaMA 3 zeigt bessere Ergebnisse bei Transfer Fragen und präferiert keine Antwort über einer falschen Antwort
-- Erklärbarkeit und Fragenverständnis sind nur in Teilen gegeben, folgen jedoch ähnlichen Ergebnissen wie LLaMA 0
-    - keine zusätzliche Verbeserung durch Trainingsdaten erreicht
-- Robustheit zeigt, dass Wissen oberflächlich erlernt wurde, jedoch nicht fundiert verankert ist
-    - auch hier Steigerung durch längeres Training zu erwarten
+% Stärken von LLaMA a30 10 Epochen
+% Multi: 47%
+% Book: 60%
 
-Leistungssteigerung möglich durch:
-- Längeres Training (mehr Epochen)
-    - hier gefahr des overfittings erkennen (bei 3 Epochen noch nicht erreicht)
-- Größere Modelle generelle Verbesserung zu erwarten (LLaMA 13B, 33B)
-- Mehr Trainingsdaten
-    - sinkt Gefahr des overfittings
-    - Wissen wird fundierter erlernt, da in unterschiedlicher Formulierung enthalten
-- Leistungssteigerung durch Human Reinforcement Learning
-    - bessere Erklärbarkeit zu erwarten
+% Schwächen von LLaMA a30 10 Epochen
+% Transfer: 26%
+% IS_2022_09_27: 25% (IS_2022_07_18: 22% (wenig fragen))
+
+% Vergleich LLaMA mit GPT4 durchgängig bessere Ergebnisse bei allen Fragenarten
+% Vergleich LLaMA v100 1 Epoche mit anderen Modellen durchgängig schlechtere Ergebnisse bei allen Fragenarten
+% Vergleich LLaMA a30 1 mit LLaMA 0:
+% - minimal Verbesserung transfer
+% - Vergleichbar Multi
+% - Schlechter Single
+% - generell mehr Fragen unbeantwortet
+% - Besser bei A_2021
+% - Schlechter bei IS_2022_09_27, IS_2022_07_18 und Book
+% - Deutlich mehr unbeantwortet bei IS_2022_09_27 und IS_2022_07_18
+
+% Vergleich LLaMA v100 3 mit LLaMA 0:
+% - Minimale Verbesserung bei Transfer Fragen
+% - Wesentlich mehr unbeantwortete Fragen bei Singulär
+% - Wesentlich mehr unbeantwortete Fragen bei Multi-Fakt
+% - Vergleichbar bei IS_2022_09_27 und Book
+% - Schlechter bei A_2021 und IS_2022_07_18
+% - A2021, IS_2022_09_27 wesentlich mehr unbeantwortet
+
+% Vergleich LLaMA a30 3 mit LLaMA 0:
+% - Verbesserung bei Transfer und Single
+% - kleine Verbesserung bei Multi
+% - Alle Fragen bei transfer verstanden
+% - Leicht weniger Fragen beantwotet bei single und Multi
+% - Verbesserung Book und A2021
+% - Leichte Verbesserung bei IS_2022_09_27
+% - Verschlechterung bei IS_2022_07_18
+% - Mehr beantwortet bei Book
+% - Weniger beantwortet bei A_2021
+
+% Vergleich a30 3 mit a30 1:
+% - Verbesserung bei allen Typen
+% - Verbesserung bei allen Sources außer IS_2022_07_18
+% - mehr Fragen beantwotet bei allen Typen
+% - Mehr fragen beantwotet bei allen Sources außer A_2021
+
+% Vergleich a30 3 mit v100 3:
+% - Verbesserung bei allen Typen
+% - mehr Fragen beantwortet bei allen Typen
+% - Verbesserung bei allen Sources
+% - Mehr Fragen beantwortet bei allen Sources außer IS_2022_07_18
+
+% Vergleich a30 5 mit Llama 0:
+% - Verbesserung bei allen Typen
+% - Weniger Fragen Beantwotet bei allen Typen
+% - Verbesserung bei A_2021 und Book
+% - Verschlechterung bei IS_2022_09_27 und IS_2022_07_18
+% - Mehr fragen beantwortet bei Book
+% - Weniger Fragen beantwortet bei allen Sources außer Book
+
+% Vergleich a30 5 mit a30 3:
+% - Verbesserung bei Multi
+% - Verschlechterung bei Single, Transfer
+% - Weniger Fragen beantwortet bei allen Typen
+% - Verbesserung bei Book
+% - Verschlechterung bei allen Sources außer Book
+% - Weniger Fragen beantwotet bei allen Sources außer Book
+
+% Vergleich a30 10 mit Llama 0:
+% - Verbesserung bei allen Typen
+% - Weniger Fragen beantwortet bei allen Typen
+% - Verbesserung bei A_2021 und Book
+% - Verschlechterung bei IS_2022_07_18
+% - Weniger Fragen beantwortet bei allen Sources
+
+% Vergleich a30 10 mit a30 3:
+% - Vergleichbar bei allen Typen
+% - Mehr Fragen beantwortet bei Multi
+% - Weniger Fragen beantwortet bei Transfer
+% - Besser bei Book
+% - Schlechter bei IS_2022_09_27, IS_2022_07_18
+% - Weniger Fragen beantwortet bei allen Sources außer A_2021
+
+% Vergleich a30 10 mit a30 5:
+% - Besser bei single
+% - Mehr bei Multi
+% - Weniger bei Transfer, Single
+% - Besser bei IS_2022_09_27
+% - Mehr bei A2021
+% - Weniger bei allen außer A2021
+
+% Ranking - Richtig Beantwortet:
+% - GPT4 immer besser
+% - 10e, 5e, 3e a30 besten Ergebnisse
+% - v100 1e schlechteste Ergebnisse
+
+% Ranking Beantwortet:
+% - GPT4, llama0, llama 3e
+% - v100 1e schlechteste Ergebnisse
+
+% Ranking MakroF1:
+% - GPT4 besstes
+% - A30 3e, 10e und 5e sehr gut
+% - 5e und 10e durch Book
+% - v100 1e schlechteste Ergebnisse
+
+
+% Analyse der Korrektheit
+% - Betrachtung der MakroF1 Werte bestätigt totale Anzahl der Fragen Ergebnisse
+% - GPT4 erreicht 0.7 MakroF1, vergleichbar mit ERgebnissen aus GPT4 Paper (Medical Knowledge)
+% - LLaMA auch im untrainierten Zustand deutlich unter normaler Leistung
+% - Doppelte Leistung von untrainiert durch 5e, 10e und 3e erreicht
+% - 1e vergleichbar mit 0e
+% - insbesondere Transfer-Fragen besser
+% - synthetische gute Ergebnisse bei 5e, 10e durch overfitting auf Buchfragen
+% - 3e erreicht gute Ergebnisse bei A2021 -> kann dadurch mithalten
+
+% Begründung der Ergebnisse
+% - GPT4 durch Größe unschlagbar
+% - hier nur mit LLaMA 7B verglichen, zu erwarten bei größere Modelle deutlich bessere Leistung
+% - Verlauf des Trainings einschätzbar: 1 Epoche deutlich zu wenig, so gut wie keine Leistungssteigerung
+% - temporäres Overfitting an Formattierungsarten (Überschriften, Aufzählungen)
+%     hier Beispiel von LLaMA 1 einfügen
+% - Overfitting durch identische Antwortimitierung bei 5e und 10e
+%     hier Beispiel 10e einfügen
+% - Maximale Leistung bei 3e/5e erreicht, 10e keine Verbesserung
+% - generell sehr wenig Trainigsdaten (600kB), Gefahr des overfittings nach 3 Epochen existent
+% - weitertrainieren von v100 nicht möglich, beschrieben in Kapitel 5
+% - V100 FP16 training führt zu deutlich schlechteren Leistungen
+% - LLaMA erlernt keine falschen Fakten, deutlich mehr Fragen unbeantwortet, während LLaMA 0 mehr Fragen falsch beantwortet
+%     - steigert sich mit steigender Epoche -> anzeichen für Overfitting
+
+% - Tatsächliche Steigerung bei Transfer-Fragen
+% Ergebnisse enthalten jedoch gravierende Formattierungs- und Wiederholungsfehler
+
+% Modelle im aktuellen Zustand nicht nutzbar, da kein Endtoken für Antworten vorhanden
+%     hier Beispiel von LLaMA 5e einfügen
+
+
+% Analyse Erklärbarkeit
+% - GPT 4 auch hier unschlagbar, nahezu jede Antwort enthält Erklärung, 97%
+% - LLaMA 0, V100 3, a30 1 unbeeinflusst bei 50% der Fragen
+% - LLama 3e, 5e, 10e deutlich besser 85% der Fragen
+% - Ergebnisse unabhängig von Source oder Type
+% - Verbesserung durch Human Reinforcement Training möglich, um Erklärungen zu belohnen (nicht existent im Trainingsdatensatz)
+
+% Analyse Fragenverständnis
+% - Fragenverständnis nicht äquivalent zu "Fragen beantwortet"
+% - Fragenverständis bei LLaMA 0 nur durch a30 3 geschlagen (64%, 72%)
+% - Ansonsten starker abfall, V100 3 nur noch bei 40%
+% - GPT4 versteht so gut wie jede Frage (97%)
+% - Multi Fragen bessere Leistung von Llama0 (81%), Andere Modelle bei 63%, begründet durch Leistungsabfall bei A_2021 Fragen
+% - IS Fragen zeigen deutliche Leistungssteigerung und abnahme (zu wenig vs zu viel trainiert)
+
+
+% Analyse Robustheit
+% - Rechtschreibfehler führen zu falschen Antworten
+% - LLaMA 0 profitiert etwas durch Fehler, erhöhter MakroF1 Wert (vollständigere Antworten)
+% - Auch GPT4 schwierigkeiten bei Transfer
+% - Andere Modelle Leistungsabfall um ungefähr 50%
+
+% - Rechtschreibfehler in Fachbegriffen erschweren Faktenwiedergabe, da Tokenization Wörter anders
+% unterteilt (teilweise auch in einzelne Buchstaben)
+% - schlechtere Leistungen zu erwarten gegenüber ohne Fehler
+% - zeigt generelles Verständnis von Fakten unabhängig von Textrepräsentation
+% - LLaMA 0 enthaltenes Wissen durch größere Datenmengen fundierter
+% - LLaMA 3e, 5e, 10e durch einzelnens Buch (wenig Daten) erst oberflächliche Wissensaneignung
+% - scheint teile des LLaMA 0 Wissens ersetzt / versteckt zu haben
+
+% Gesamtanalyse
+% - LLaMA kommt nicht an Leistungen von GPT4
+% - Trainingsart entscheident (v100 schlechter als Llama 0)
+% - Beste Leistungen zwischen a30 3 Epochen und a30 5 Epochen
+% - Ab 5 Epochen Overfitting Status -> Überaus gut bei Buchfragen, andere Fragen schlechter
+% - Präferenz von Keiner Antwort gegenüber einer Antwort wird mit steigender Epoche deutlicher
+
+% - Erklärbarkeit und Fragenverständnis ebenso unter GPT4-
+%     - deutliche Verbesserung ab a30 3 Epochen erreicht
+%     - zeigt wahre Leistung von 3 Epochen gegenüber 5 und 10 Epochen
+% - Robustheit zeigt, dass Wissen oberflächlich erlernt wurde, jedoch nicht fundiert verankert ist
+%     - Wird nicht besser mit längerem Training
+%     - Overfitting wirkt entgegen Robustheit
+
+% Leistungssteigerung möglich durch:
+% - Größere Modelle generelle Verbesserung zu erwarten (LLaMA 13B, 33B)
+% - Mehr Trainingsdaten
+%     - sinkt Gefahr des overfittings
+%     - Wissen wird fundierter erlernt, da in unterschiedlicher Formulierung enthalten
+% - Leistungssteigerung durch Human Reinforcement Learning
+%     - bessere Erklärbarkeit zu erwarten
 
 
