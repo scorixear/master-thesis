@@ -78,7 +78,7 @@ def read_json(file):
     # and dump into dataframe
     df = pd.DataFrame(columns=["question", "transformed", "true_answer", "num_answers", "source", "context"])
     for item in data:
-        df.loc[len(df)] = [item["question"], item["transformed"], item["true_answer"], item["num_answers"], item["source"], item["context"]]
+        df.loc[len(df)] = [item["question"], item["transformed"], item["true_answer"], item["num_answers"], item["source"], item["context"]] # type: ignore
     return df
 
 def generate_for_single_csv(tokenizer: transformers.PreTrainedTokenizer | transformers.PreTrainedTokenizerFast, model, csv_df: pd.DataFrame, csv_type: str, output_df: pd.DataFrame):
@@ -112,7 +112,7 @@ def generate_for_single_csv(tokenizer: transformers.PreTrainedTokenizer | transf
         generated = generated[len(prompt):]
         print(f"Generated: {generated}")
         # and save to dataframe
-        output_df.loc[len(output_df)] = [question, transformed_question, generated, true_answer, num_answers, csv_type, source, context, prompt]
+        output_df.loc[len(output_df)] = [question, transformed_question, generated, true_answer, num_answers, csv_type, source, context, prompt] # type: ignore
 
 if __name__ == "__main__":
     main()

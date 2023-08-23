@@ -9,7 +9,7 @@ Die Schritte sind wie folgt gegliedert:
     \item Laden des Modells
     \item Konvertierung des Modells in ein kompatibles Format
     \item Modelltraining
-    \item Erstellung von Antworten auf dem Evaluierungsdatensatz
+    \item Generierung von Antworten auf dem Evaluierungsdatensatz
     \item Bewertung der erzeugten Antworten
     \item Auswertung basierend auf den Bewertungen
 \end{enumerate}
@@ -494,79 +494,162 @@ Die Ausführung der Skripte erfolgt mit Hilfe der Software \enquote{Slurm Worklo
 Diese ermöglicht eine umfangreiche Reservierung von Ressourcen und bietet eine Bash-Schnittstelle zur Konfiguration und Ausführung der Skripte.
 Mit Hilfe von Slurm-Bash-Dateien konnte das Training der Modelle auf dem Cluster durchgeführt werden.\\
 
+Während des Trainings wurde durchschnittlich alle 12 Sekunden eine Iteration des Modells berechnet.
+Eine Iteration entspricht einer vollständigen Berechnung der Ausgaben über einen Batch und einer vollständigen Anpassung aller Gewichte (engl. \enquote{Forwards- und Backwardspass}).
+Eingeschlossen sind auch alle Kommunikationen, die zwischen den GPUs durchgeführt werden, um ihren aktuellen Zustand untereinander abzustimmen.
+Diese Geschwindigkeit ist unabhängig von der Blockgröße.
+Allerdings hängt die Länge des Trainings von der Anzahl der Iterationen ab, daher von der Anzahl der Blöcke und somit von der Blockgröße.
+Der kurierte Datensatz, der das Buch \citet{bb} repräsentiert, umfasst ca. 34.500 Tokens.
+Dementsprechend wird eine Epoche bei einer Standardblockgröße von 1024 Tokens in 34 Schritten beziehungsweise 6:14 Minuten berechnet.
+Eine größere Blockgröße war aufgrund von Speicherfehlern nicht möglich.\\
+
+Bei der Ausführung des Trainings auf Nvidia v100 GPUs traten in unregelmäßigen Abständen Fehler auf, die in \cref{sec:problem-training} genauer beschrieben sind.
+Diese konnten durch eine Reduzierung der Blockgröße auf 256 Token minimiert werden. Eine Epoche bestand somit aus 134 Schritten und dauerte 24:34 Minuten.\\
+
+Insgesammt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
+Folgende Modelle wurden trainiert:
+\begin{itemize}
+    \item Llama 2 7B mit 1 Epoche auf Nvidia V100 Grafikkarten: \enquote{Llama\_1e\_v100}
+    \item Llama 2 7B mit 1 Epoche auf Nvidia A30 Grafikkarten: \enquote{Llama\_1e\_a30}
+    \item Llama 2 7B mit 3 Epochen auf Nvidia V100 Grafikkarten: \enquote{Llama\_3e\_v100}
+    \item Llama 2 7B mit 3 Eopchen auf Nvidia A30 Grafikkarten: \enquote{Llama\_3e\_a30}
+    \item Llama 2 7B mit 5 Epochen auf Nvidia A30 Grafikkarten: \enquote{Llama\_5e\_a30}
+    \item Llama 2 7B mit 10 Epochen auf Nvidia A30 Grafikkarten: \enquote{Llama\_10e\_a30}
+\end{itemize}
+
+Zusätzlich evaluiert wurden die Modelle:
+\begin{itemize}
+    \item GPT4 Modell: \enquote{GPT4}
+    \item Llama 2 7B untrainiert: \enquote{Llama\_0e}
+\end{itemize}
+
 \subsection{Probleme während des Trainings}\label{sec:problem-training}
 Die Durchführung des Trainings verlief nicht ohne Probleme.
-Ideal wäre es, mehrere Modelle mit unterschiedlicher Epochenzahl und unterschiedlichen Größen zu trainieren.
-Neben dem Modell Llama 2 7B verspricht ein größeres Modell wie das Modell 13B, 33B oder 65B deutlich bessere Leistungen sowohl in der Textnachahmung als auch im Wissensverständnis und damit in den Ergebnissen der Evaluation.
-Das Training ist auf 4 \ac{gpu}s pro Knoten mit jeweils \SI{32}{\giga\byte} \ac{gpu}-\ac{ram} beziehungsweise \SI{24}{\giga\byte}, wie bereits in \cref{sec:training-cluster} erwähnt.
+Ideal wäre es, mehrere Modelle mit unterschiedlicher Epochenzahl und Größe zu trainieren.
+Neben dem Modell Llama 2 7B verspricht ein größeres Modell wie die Modelle 13B, 33B oder 65B deutlich bessere Leistungen sowohl in der Textnachahmung als auch im Wissensverständnis und damit in den Ergebnissen der Evaluation.
+Das Training wurde auf 4 \ac{gpu}s pro Knoten mit jeweils \SI{32}{\giga\byte} \ac{gpu}-\ac{ram} bzw. \SI{24}{\giga\byte} durchgeführt, wie bereits unter \cref{sec:training-cluster} erwähnt.
 Um größere Modelle zu trainieren, muss diese Anzahl erhöht werden.
 Die Trainingsparameter erlauben hier eine einfache Erweiterung auf zusätzliche Grafikkarten.
 Die Trainingsskripte müssen dafür nicht angepasst werden.\\
 
 Das Training auf mehreren Knoten mit mehr Grafikkarten wurde testweise durchgeführt.
-Dazu wurde ein Testskript von Huggingface, das die Kommunikation zwischen Grafikkarten und Knoten sicherstellt, sowie das Trainingsskript verwendet.
-Beide Skripte schlugen in dieser Konfiguration fehl.
+Dazu wurde ein Testskript von Huggingface, das die Kommunikation zwischen Grafikkarten und Knoten sicherstellt, und das Trainingsskript verwendet.
+Beide Skripte sind in dieser Konfiguration fehlgeschlagen.
 Der Grund dafür ist ein Kommunikationsfehler zwischen den Knoten.
 Die Kommunikation während des Trainings wird vollständig von den Bibliotheken Transformers und DeepSpeed übernommen.
-Dazu wird ein verwendeter Knoten als Main-Knoten bestimmt, der das Nachrichten-Routing und das Daten-Routing übernimmt.
-Andere Knoten übernehmen die Rolle der Client-Knoten.
+Dazu wird ein verwendeter Knoten als Main-Knoten definiert, der das Nachrichten- und Daten-Routing übernimmt.
+Andere Knoten übernehmen die Rolle von Client-Knoten.
 Auf dem Main-Knoten wird ein Server gestartet, mit dem sich die Client-Knoten über IPv4 oder IPv6 verbinden können.
-Diese Verbindung scheiterte in allen Einstellungen.
-Es konnte keine Lösung für dieses Problem gefunden werden.
+Diese Verbindung schlug in allen Einstellungen fehl.
+Eine Lösung für dieses Problem konnte nicht gefunden werden.
 Aus diesem Grund wurde das Training auf einen Knoten und damit 4 \ac{gpu}s beschränkt.\\
 
 Größere Modelle wie das 33B oder das 65B Modell können mit dem aktuellen Setup nicht trainiert werden.
-Aus diesem Grund und aus Gründen der Ressourcenschonung wurde das Training mit dem Modell Llama 2 7B begonnen.
+Aus diesem Grund und um Ressourcen zu sparen, wurde das Training mit dem Modell Llama 2 7B begonnen.
 Bei der Ausführung auf Nvidia V100 Grafikkarten traten in unregelmäßigen Abständen Überlauffehler auf.
-Wie in \cref{sec:deepspeed-config} beschrieben, werden die berechneten Fehlerwerte der Fehlerrückführungsfunktion während der Berechnung skaliert, um eine höhere Genauigkeit zu erreichen und einen Unterlauf zu vermeiden.
+Wie in \cref{sec:deepspeed-config} beschrieben, werden die berechneten Fehlerwerte der Fehlerrückkopplungsfunktion während der Berechnung skaliert, um eine höhere Genauigkeit zu erreichen und einen Unterlauf zu vermeiden.
 Diese Skalierung führte zu einem Überlauf über den Maximalwert des Datentyps Float16.
-Da in der DeepSpeed-Konfiguration eine dynamische Fehlerskalierung eingestellt war, wurde die Skalierung anschließend um eine Potenz verringert.
+Da in der DeepSpeed-Konfiguration eine dynamische Fehlerskalierung eingestellt war, wurde die Skalierung anschließend um eine Potenz reduziert.
 Dieser Vorgang wiederholte sich in unregelmäßigen Abständen und führte schließlich zum Erreichen des minimalen Skalierungsfaktors 1, der keiner Skalierung entspricht.
-Ist dieser Wert erreicht und eine Skalierung ist dennoch notwendig, wird das Training abgebrochen.\\
+Ist dieser Wert erreicht und eine Skalierung dennoch erforderlich, wird das Training abgebrochen.\\
 
-Der Grund für die auftretenden Skalierungsfehler ist nicht bekannt.
-Eine mögliche Ursache ist die Verwendung von Llama-Modellen mit dem Datentyp Float16.
-Ursprünglich wurden diese Modelle mit dem Datentyp BFloat16 trainiert.
-Von einer Transformation in Float16-Werte wird auch seitens Huggingface abgeraten.
-Ebenso wird ein Fehler in der Implementierung von DeepSpeed vermutet, der das Laden von Modellen im Float16 Format nicht korrekt umsetzt.
+Die Gründe für die aufgetretenen Skalierungsfehler sind nicht bekannt.
+Eine mögliche Ursache ist die Verwendung des Llama-Modells mit dem Datentyp Float16.
+Dieses Modell wurde ursprünglich mit dem Datentyp BFloat16 trainiert.
+Eine Transformation in Float16-Werte wird auch von Huggingface nicht empfohlen.
+Ebenso wird ein Fehler in der Implementierung von DeepSpeed vermutet, der das Laden von Modellen im Float16-Format nicht korrekt umsetzt.
 Im offiziellen GitHub Repository von DeepSpeed wurde bereits eine Lösung vorgeschlagen, die jedoch noch nicht in DeepSpeed übernommen wurde.
 Die Verwendung von BFloat16 Werten ist nur auf dem Cluster \enquote{Paula} mit Nvidia Tesla A30 Grafikkarten möglich.
 BFloat16 Werte können nur von Grafikkarten umgesetzt werden, die die AMP (Automatic Mixed Precision) Architektur unterstützen.
-Diese Architektur wird von den Grafikkarten der Nvidia A100 Serie unterstützt, die für das initiale Training der Llama-Modelle verwendet wurden.
+Diese Architektur wird von den Grafikkarten der Nvidia A100 Serie unterstützt, die für das initiale Training der Llama Modelle verwendet wurden.
 Im Rechenzentrum stehen jedoch nur Grafikkarten der Serien Nvidia Tesla V100, Nvidia GeForce RTX 2080 Ti und Nvidia Tesla A30 zur Verfügung.
 Sowohl die V100- als auch die RTX2080-Serie unterstützen die Verwendung von BFloat16-Werten nicht.
-Die A30 Serie unterstützt BFloat16, bietet aber nur \SI{24}{\giga\byte} \ac{ram}, weshalb hier eine \ac{zero} Stufe 3 Optimierung gewählt wurde.
-Bei der Verwendung von A30-Grafikkarten traten bei einem Training bis zu 10 Epochen keine Skalierungsfehler auf.\\
+Die A30-Serie unterstützt zwar BFloat16, bietet aber nur \SI{24}{\giga\byte} \ac{ram}, weshalb hier eine \ac{zero} Stufe 3 Optimierung gewählt wurde.
+Bei der Verwendung von A30-Grafikkarten traten bei einem Training von bis zu 10 Epochen keine Skalierungsfehler auf.\\
 
-Anfangs verhinderte der Skalierungsfehler das Training der Modelle auf V100 Grafikkarten vollständig.
-Durch Anpassung der Blockgröße in \cref{subsec:config-training} auf kleinere Werte konnte die Häufigkeit der Skalierungsfehler minimiert werden, so dass mit dieser Einstellung ein Training bis 3 Epochen möglich war.\\
+Anfangs verhinderte der Skalierungsfehler das Training der Modelle auf V100-Grafikkarten vollständig.
+Durch Anpassung der Blockgröße in \cref{subsec:config-training} auf kleinere Werte konnte die Häufigkeit der Skalierungsfehler minimiert werden, so dass mit dieser Einstellung ein Training von bis zu 3 Epochen möglich war.\\
 
-Während des Trainings traten mehrfach Speicherfehler auf, die anzeigten, dass der gesamte Speicher der Grafikkarte belegt war, jedoch mehr benötigt wurde.
+Während des Trainings traten immer wieder Speicherfehler auf, die anzeigten, dass der gesamte Speicher der Grafikkarte belegt war, jedoch mehr benötigt wurde.
 Diese Fehler waren unabhängig vom Grafikkartentyp und der Konfiguration des Trainings.
-Erst die Minimierung der Batchgröße auf 1 pro \ac{gpu}, die Aktivierung des CPU-Offloads und die Nutzung von \SI{256}{\giga\byte} CPU \ac{ram} ermöglichten ein erfolgreiches Training des Modells Llama 2 7B.
+Erst die Minimierung der Batchgröße auf 1 pro \ac{gpu}, die Aktivierung des CPU-Offloads und die Nutzung von \SI{256}{\giga\byte} CPU \ac{ram} ermöglichte ein erfolgreiches Training des Modells Llama 2 7B.
 Dieser Speicherbedarf ist unerwartet hoch und kann nicht durch die Größe des Modells erklärt werden.
 Für das Training auf V100 Grafikkarten wurde die \ac{zero} Stufe 2 Optimierung mit zusätzlichem CPU Offloading verwendet.
-Für das Training auf A30 Grafikkarten musste die \ac{zero} Stufe 3 Optimierung mit CPU Offloading gewählt werden.\\
+Die \ac{zero} Stufe 3 Optimierung mit CPU Offloading musste für das Training auf A30 Grafikkarten gewählt werden.\\
 
-% - genertierter Text ohne Stopzeichen: Stopzeichen händisch nach NewLine (double Newline?)
-% - Kleinere Block\_size für Loss Scaling
-% - BF16 nur auf AMP \ac{gpu} Architektur möglich (hier nicht)
-% - Stage2/3 ohne CPU Offloading führt zu OOM
-% - Deutlich mehr RAM erforderlich (180GB?)
-% - Multi-Node Training versursacht Kommunikationsfehler
+\section{Generierung von Antworten}\label{sec:generierung}
+Die Generierung von Antworten zum erstellen Evaluierungsdatensatz erfolgte in drei verschiedenen Formen.
+Zur Generierung von Text durch das GPT4 Modell wurde die offizielle Webseite der OpenAI Foundation\footnote{\url{https://chat.openai.com/} abgerufen am 19.8.2023} verwendet.
+Die Nutzung des untrainierten Llama Modells als auch den trainierten Modellen mit V100 Grafikkarten erfolgte mit Hilfe eines eigens erstellen Skriptes.
+Diser Skript wurde größtenteils für die Nutzung der Modelle trainiert mit A30 Grafikkarten genutzt, musste jedoch abgewandelt werden, da die Generierung ausschließlich auf einer \ac{gpu} erfolgt, die A30 Grafikkarten mit \SI{24}{\giga\byte} \ac{ram} jedoch das Modell nicht vollständig halten konnten.
 
+\subsection{Erstellung des Evaluierungsdatensatz}\label{subsec:eval-dataset}
+Vor der Generierung der Antworten mussten die gestellten Fragen der gegebenen Klausuren aus \cref{sec:approach:questions} umgewandelt werden.
+Hierzu wurden die genannten Fragen mit erforderlichem Kontext ergänzt, wenn dieser in der Frage referenziert wurde oder auf Ergebnissen der vorherigen Fragen aufbaut.
+Zusätzlich wurden alle Fragen in die englische Sprache übersetzt, da das Llama Modell nahezu ausschließlich auf englischem Text trainiert wurde und das verwendeted Buch \citet{bb} ebenfalls in englischer Sprache verfasst ist.
+Jede Frage erhielt 6 zugewiesene Eigenschaften.
+\begin{enumerate}
+    \item \textbf{question}: Die Originalfrage aus der Quelle
+    \item \textbf{transformed}: Die umformulierte und potentiell übersetzte Frage
+    \item \textbf{true\_answer}: Die zu erwartende korrekte Antwort
+    \item \textbf{num\_answers}: Die enthaltenen Antworten der zu erwartenenden korrekten Antwort
+    \item \textbf{source}: Eine Abkürzung für die Quelle der Frage
+    \item \textbf{context}: Ein optionaler Kontext, welcher zur Beantwortung der Frage benötigt wird
+\end{enumerate}
 
+Mit Hilfe dieser Struktur wurden die Fragen in eine weitere explizite Frageform umgewandelt.
+Wie bereits in \cref{sec:approach:questions} beschrieben, ist das Llama Modell nicht mit Hilfe von Reinforcement Training auf die Beantwortung von Fragen trainiert.
+Aus diesem Grund wurde Anweisung, Frage und Kontext in einen Textblock zusammengefasst.
+Die Struktur ist in \cref{fig:llama-input} dargestellt.
+Der verwendete Evaluierungsdatensatz ist im Anhang enthalten.\\
 
-%
-% - requirements txt erstellen
-% - DeepSpeed Config mit https://www.deepspeed.ai/docs/config-json/#batch-size-related-parameters+
-% - Nutzung von ZeRO Stage2 optimization
-% - llama2 7b genutzt
-% - dataclasses um Datensatz einzulesen
-% - Leistungen bei 11s/it von 3600 Iteration = 11h Training
-% - Evaluation aller 50 Iterations, Saves aller 100 Iterations
-% - 3 Epochen = 14s/it 1800 = 7h Training (256 Block\_size)
-% - Deepspeed Launcher mit 3 \ac{gpu}s (32GB v100, 1 Maschine)
-% - Weitere Hyperparameter aus Llama 2 Modell
-% - Nutzung von Epub anstelle Word Datei da bessere Konvertierung
-% - keine nutung von chat Version (verlernt Human Reinforcment)
+\begin{figure}
+    \begin{verbbox}
+        Instruction: You are given a question and a context. Answer the question to your best knowledge.
+        Question: <transformed>
+        Context: <context>
+        Answer: 
+    \end{verbbox}
+    \resizebox{1.2\textwidth}{!}{\theverbbox}
+    \caption{Struktur einer Eingabe für das Llama Modell}\label{fig:llama-input}
+\end{figure}
+
+Die generierten Fragen wurden vor der Benutzung in die drei \enquote{Single}, \enquote{multi} und \enquote{transfer} Fragearten in Dateien aufgeteilt.
+Zusätzlich wurden alle Fragen in einen zweiten Datensatz kopiert, wobei die \enquote{transformed} Fragen mit kleineren gramatikalischen und Rechtschreibfehlern versehen wurden.
+Dieser zweite Datensatz wird im gleichen Sinne im folgenden Schritt unter \cref{sec:answer-rating} verwendet, um in der Evaluation das Kriterium \enquote{Robustheit} zu bewerten.
+
+\section{Bewertung generierter Antworten}\label{sec:answer-rating}
+Die Bewertung der generierten Antworten erfolgte per Hand.
+Die von den Modellen generierten Ausgaben wurden im gleichen Sinne wie in \cref{subsec:eval-dataset} strukturiert, erhielten jedoch drei zusätzliche Eigenschaften.
+\begin{enumerate}
+    \item \textbf{generated}: Repräsentiert die generierte Antwort des Modells
+    \item \textbf{type}: Zeigt den Typ der Frage an
+    \item \textbf{true\_input}: Enthält die tatsächliche genutzte Eingabe
+\end{enumerate}
+
+Bei der Bewertung wurde zu erst eingeschätzt, ob die generierte Antwort inhaltlichen Bezug zur Frage hat.
+Sollte dies nicht der Fall sein, wird diese Frage als \enquote{unbeantwortet} gewertet und enthält ebenso keine Antworten.
+Sollte die Antwort inhaltlichen Bezug zur Frage haben, wird die Antwort auf ihre Korrektheit bewertet.
+Hierzu gibt die Bewertung eine Anzahl an richtigen Antworten in der generierten Antwort an, welche zwischen 0 und der erwarteten Anzahl richtiger Antworten liegt.
+Abschließend wird die Anzahl gegebener Antworten in der generierten Antwort angegeben.\\
+
+Während der Evaluation stellte sich schnell heraus, dass eine Bewertung der Llama Modelle schwieriger als des GPT4 Modells ist.
+Grund hierfür ist das fehlende Training auf ein Stopp-Zeichen.
+Die Llama-Modelle enthalten kein Finetuning auf die Beantwortung von Fragen und generieren einer zuvor gegebene Anzahl an Tokens.
+Diese Anzahl wurde auf 512 Tokens gesetzt.
+Größtenteils wurde die Frage jedoch in einer kleineren Länge beantwortet.
+Überbleibende Tokens enthielten Wiederholung bereits generiertem, Formatierungsfehler (wie nicht existente Überschriften), der Beginn neuer Themen oder eine Imitierung neuer Fragestellungen.
+Da diese zusätzlichen Tokens eine Ursache des nicht vorhandenen Finetunings ist und nicht zur inhaltlichen Wiedergabe des Modells gehört, wurde die Antwort nur bis zu den genannten Stellen gewertet.
+Keine der generierten Antworten benötigte eine größere Länge als 512 Tokens, weshalb einer Verlängerung hier nicht nachgegangen wurde.\\
+
+Sowohl die Antwort-Dateien der Modelle als auch die Bewertungsdateien folgen dem selben Schema der Eingabedatei aus \cref{subsec:eval-dataset}. Durch die Einführung der Eigenschaft \enquote{type} ist eine Unterteilung der Dateien in Fragetypen nicht notwendig, weshalb pro Modell 4 Dateien existieren.
+Zwei Dateien, welche die generierten Antworten der Fragen enthalten (für jeden Datensatz, wobei der zweite Datensatz die selben Fragen mit Rechtschreibfehler repräsentiert) und zwei Dateien, welche die Bewertung der generierten Antworten enthalten.
+Die Bewertungen erhielten 3 weitere Eigenschaften:
+
+\begin{itemize}
+    \item \textbf{answered}: Gibt an, ob die Frage richtig, falsch oder nicht beantwortet wurde
+    \item \textbf{points}: Gibt die Anzahl richtiger Antworten in der generierten Antwort an
+    \item \textbf{total\_answers}: Gibt die Anzahl gegebener Antworten in der generierten Antwort an
+\end{itemize}
+
+\section{Evaluation der Modelle}\label{sec:evaluation}
