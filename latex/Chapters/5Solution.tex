@@ -2,7 +2,7 @@
 \chapter{Ausführung der Lösung}\label{ch:solution}
 %*****************************************
 
-Die Lösung gliedert sich in sechs Schritte, die für die Durchführung des Trainings notwendig sind.
+Die Lösung gliedert sich in sechs Schritte, die für die Durchführung des Trainings und die Bewertung der Ergebnisse notwendig sind.
 Im Folgenden werden diese Schritte näher erläutert. Für jeden Schritt sind die verwendeten Techniken und Bibliotheken separat aufgeführt.
 Die Schritte sind wie folgt gegliedert:
 \begin{enumerate}
@@ -16,7 +16,7 @@ Die Schritte sind wie folgt gegliedert:
 
 \section{Herunterladen des Modells}
 Die LLaMA-Modelle werden unter einer nicht-kommerziellen Lizenz für Forschungszwecke zur Verfügung gestellt. Der Zugang zu den Modellen wird im Einzelfall auf Anfrage gewährt. Diese Anfrage wurde im Rahmen dieser Arbeit gestellt und bestätigt.
-Anschließend kann ein von den Autoren vorbereitetes Skript verwendet werden, um die trainierten Parameter des Modells herunterzuladen.
+Anschließend kann ein von den Autoren vorbereitetes Skript verwendet werden, um die trainierten Gewichte des Modells herunterzuladen.
 Das Skript benötigt eine explizite \ac{url}, die nach einer vorgegebenen Zeit von einer Woche nach Freigabe der Modelle ungültig wird. Aus diesem Grund ist diese \ac{url} nicht im Skript enthalten.
 
 \section{Umwandlung des Modells in ein kompatibles Format}
@@ -39,7 +39,7 @@ Im Folgenden werden diese Einstellungen näher erläutert.
         \textbf{Parameter} & \textbf{Wert} \\
         \midrule
         model\_name & meta-llama/Llama-2-7b-hf \\
-        cache\_dir & \./cache \\
+        cache\_dir & ./cache \\
         use\_fast\_tokenizer & false \\
         model\_revision & main \\
         use\_auth\_token & true \\
@@ -62,7 +62,7 @@ Die Llama 2 Modelle wurden unter anderem im Artikel von \citet{llama2} vorgestel
 
 Der Parameter \enquote{cache\_dir} beschreibt den Speicherort des heruntergeladenen Modells.
 Dies ermöglicht ein wiederholtes Trainieren des Modells ohne erneuten Download.
-Die heruntergeladenen Modelle werden durch das Training nicht überschrieben und stellen somit den Grundzustand des Modells dar (im Folgenden auch als Llama2-0e für \enquote{0 Epochen trainiert} bezeichnet).\\
+Die heruntergeladenen Modelle werden durch das Training nicht überschrieben und stellen somit den Grundzustand des Modells dar (im Folgenden auch als Llama2-$0$e für \enquote{$0$ Epochen trainiert} bezeichnet).\\
 
 \enquote{use\_fast\_tokenizer} konfiguriert die Verwendung einer schnelleren Version des Tokenizers zur Konvertierung der Datensätze.
 Diese Option ist optional und wurde hier nicht verwendet.\\
@@ -184,7 +184,7 @@ Aufgrund der zuvor durchgeführten Datenkuration ist dies jedoch nicht notwendig
 
 Die Konfiguration des Trainings orientiert sich an den \enquote{TrainingArguments}, die ein Teil der Transformers-Bibliothek sind.
 Nicht alle Parameter aus der Bibliothek müssen verwendet werden, weshalb hier nur abweichende Parameter vom Standard beschrieben werden.
-Eine vollständige Liste der Parameter ist im Anhang unter \cref{app:sec:trainingpaameter} zu finden. Die beschriebenen Parameter sind in \cref{tab:training-config} aufgeführt.\\
+Eine vollständige Liste der Parameter ist im \cref{app:sec:trainingparameter} zu finden. Die beschriebenen Parameter sind in \cref{tab:training-config} aufgeführt.\\
 
 Der Parameter \enquote{output\_dir} definiert den Speicherpfad für die Ergebnisse des Trainings.
 Diese umfassen die trainierten Gewichte des Modells, eine abschließende Auswertung der Validierung, den Status des Trainers sowie gegebenenfalls während des Trainings erstellte Kontrollpunkte.\\
@@ -236,7 +236,7 @@ In dieser Arbeit wurde das Modell Llama 2 7B mit einer, drei, fünf und zehn Epo
 Bei der Verwendung von Nvidia V100 Grafikkarten traten während des Trainings Probleme auf, die in \cref{sec:problem-training} genauer beschrieben sind.\\
 
 Durch die Anwendung der Parameter \enquote{lr\_scheduler} und \enquote{warmup\_steps} kann eine Aufwärmphase des Trainings realisiert werden.
-Die Aufwärmphase bezeichnet den Start des Trainings, in dem die Lernrate der \enquote{lr\_scheduler}-Funktion innerhalb der ersten \enquote{warmup\_steps} Iterationen schrittweise von 0 auf den gewünschten Wert erhöht wird.
+Die Aufwärmphase bezeichnet den Start des Trainings, in dem die Lernrate der \enquote{lr\_scheduler}-Funktion innerhalb der ersten \enquote{warmup\_steps} Iterationen schrittweise von $0$ auf den gewünschten Wert erhöht wird.
 Dieser Ansatz verhindert eine zu schnelle Anpassung der Modellgewichte an spezielle Details der Trainingsdaten.
 Vor allem bei untrainierten Modellen werden während des Trainings diese erlernten Fehler wieder korrigiert. Dies führt jedoch ohne eine Aufwärmphase zu längeren Trainingszeiten und schlechteren Ergebnissen.
 In diesem Fall kann die Aufwärmphase übersprungen werden, da ein bereits vortrainiertes Modell genutzt wird.\\
@@ -272,7 +272,7 @@ Dieser Datentyp ist nur auf bestimmten \ac{gpu}-Architekturen verfügbar.
 Ein Datum im BFloat16-Format hat eine kleinere Mantisse (7 Bits) als ein Float16-Datum (10 Bits Mantisse). Dies führt zu einer geringeren Genauigkeit, verkürzt jedoch die Zeit, die für die Konvergenz des Modells benötigt wird.
 Die verwendeten V100 Grafikkarten haben nicht die notwendige Architektur, um BFloat16 Werte zu unterstützen, daher wurde das Llama 2 Modell hier in ein Float16 Format konvertiert.
 Dies führt zu Problemen beim Training und beschränkt die maximale Anzahl der Epochen auf 3. Eine genauere Erklärung der Probleme ist in \cref{sec:problem-training} beschrieben.
-Bei der Verwendung von A30-Grafikkarten ist die Nutzung von BFloat16-Werten möglich. Mit diesem Datentyp wurden die Modelle zusätzlich auf 5 und 10 Epochen trainiert.\\
+Bei der Verwendung von A30-Grafikkarten ist die Nutzung von BFloat16-Werten möglich. Mit diesem Datentyp wurde das Modell zusätzlich auf 5 und 10 Epochen trainiert.\\
 
 Die Parameter \enquote{half\_precision\_backend} und \enquote{ddp\_backend} beschreiben Architekturen für die Ausführung des Trainings mit Hilfe der Bibliothek Transformers.
 Während \enquote{half\_precision\_backend} die Architektur für die Ausführung von Trainingsschritten mit Float16-Werten festlegt, beschreibt \enquote{ddp\_backend} die Kommunikationsarchitektur für den Datenaustausch zwischen \ac{gpu}s.
@@ -291,11 +291,11 @@ Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Ko
         \midrule
         \multicolumn{2}{c}{fp16}\\
         enabled&auto\\
-        loss\_scale&0\\
-        loss\_scale\_window&1000\\
-        initial\_scale\_power&16\\
-        hysteresis&2\\
-        min\_loss\_scale&1\\
+        loss\_scale&$0$\\
+        loss\_scale\_window&$1000$\\
+        initial\_scale\_power&$16$\\
+        hysteresis&$2$\\
+        min\_loss\_scale&$1$\\
         \midrule
         \multicolumn{2}{c}{bf16}\\
         enabled&true|false\\
@@ -314,19 +314,19 @@ Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Ko
         warmup\_num\_steps&auto\\
         \midrule
         \multicolumn{2}{c}{zero\_optimizations}\\
-        stage&2\\
+        stage&$2$\\
         contiguous\_gradients&true\\
         overlap\_comm&true\\
         reduce\_scatter&true\\
-        reduce\_bucket\_size&2e8\\
-        allgather\_bucket\_size&2e8\\
+        reduce\_bucket\_size&\num{2e8}\\
+        allgather\_bucket\_size&\num{2e8}\\
         \midrule
         \multicolumn{2}{c}{offload\_optimizer}\\
         device&cpu\\
         pin\_memory&true\\
         \midrule
-        gradient\_clipping&1\\
-        steps\_per\_print&500\\
+        gradient\_clipping&$1$\\
+        steps\_per\_print&$500$\\
         wall\_clock\_breakdown&false\\
         train\_micro\_batch\_size\_per\_gpu&auto\\
     \end{tabular}
@@ -335,19 +335,19 @@ Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Ko
 
 \begin{table}
     \centering
-    \begin{tabular}{cc}
+    \begin{tabular}{ll}
         \toprule
         \textbf{Parameter}&\textbf{Wert}\\
         \midrule
         \multicolumn{2}{c}{zero\_optimization}\\
-        stage&3\\
+        stage&$3$\\
         contiguous\_gradients&true\\
-        stage3\_max\_live\_parameter&1e9\\
-        stage3\_max\_resuse\_distance&1e9\\
-        stage3\_prefetch\_bucket\_size&1e7\\
-        stage3\_param\_persistence\_threshold&1e5\\
-        reduce\_bucket\_size&1e7\\
-        sub\_group\_size&1e9\\
+        stage3\_max\_live\_parameter&\num{1e9}\\
+        stage3\_max\_resuse\_distance&\num{1e9}\\
+        stage3\_prefetch\_bucket\_size&\num{1e7}\\
+        stage3\_param\_persistence\_threshold&\num{1e5}\\
+        reduce\_bucket\_size&\num{1e7}\\
+        sub\_group\_size&\num{1e9}\\
         \midrule
         \multicolumn{2}{c}{offload\_param}\\
         device&cpu\\
@@ -390,7 +390,7 @@ Im Falle des Trainings mit A30 Grafikkarten und einer \ac{zero} Stufe 3 Optimier
 
 Der Abschnitt \enquote{optimizer} beschreibt die Parameter des Optimierungsalgorithmus. Wie bereits bei den Trainingsparametern beschrieben, wird der AdamW-Optimierer verwendet.
 Die Parameter \enquote{lr}, \enquote{betas}, \enquote{eps} und \enquote{weight\_decay} müssen mit den in den Trainingsparametern eingestellten Werten übereinstimmen.
-Aus diesem Grund werden diese Parameter vor Beginn des Trainings auf \enquote{auto} gesetzt und durch die Transformer-Bibliothek ergänzt.\\
+Aus diesem Grund werden diese Parameter vor Beginn des Trainings auf \enquote{auto} gesetzt und durch die Transformers-Bibliothek ergänzt.\\
 
 Der Abschnitt \enquote{scheduler} beschreibt die Parameter des Lernratenplaners. Der Lernratenplaner ist für die Anpassung der Lernrate während des Trainings verantwortlich.
 Er dient in diesem Fall zur Durchführung der Aufwärmphase. Ist die Aufwärmphase in den Trainingsargumenten deaktiviert, so wird die Bibliothek diese Phase auch in der DeepSpeed-Konfiguration deaktivieren.\\
@@ -410,7 +410,7 @@ Dies führt zu einer besseren Performance, aber auch zu zusätzlichem Speicherbe
 
 Wie bereits bei den Trainingsargumenten durch den Parameter \enquote{max\_grad\_norm} beschrieben, wird die maximale Größe des Gradienten durch den Parameter \enquote{gradient\_clipping} festgelegt.
 Eine automatische Übernahme der Konfiguration der Trainingsargumente ist in diesem Fall nicht möglich.
-Die Werte müssen jedoch übereinstimmen.\\
+Die Werte müssen dennoch übereinstimmen.\\
 
 Die Parameter \enquote{steps\_per\_print} und \enquote{wall\_clock\_breakdown} beschreiben die Ausgabe von Informationen während des Trainings.
 Zusätzlich zur Ausgabe der Transformers-Bibliothek werden alle 500 Iterationen weitere Informationen der DeepSpeed-Bibliothek ausgegeben.
@@ -464,14 +464,13 @@ Sie stammt von Huggingface\footnote{\url{https://huggingface.co/docs/evaluate/in
 Die Bibliothek \enquote{PyTorch} bildet die Grundlage für die Berechnung der neuronalen Netze.
 Sie ermöglicht neben der eigentlichen Berechnung aller Trainingsphasen auch die Verwendung von \ac{gpu}s. Die Bibliothek stammt von PyTorch selbst\footnote{\url{https://pytorch.org/} abgerufen am 19.8.2023}.\\
 
-Die Bibliothek \enquote{sentencepiece} wird für die Tokenisierung der Texte verwendet.
+Die Bibliothek \enquote{sentencepiece} wird für die Tokenisierung der Texte genutzt.
 Sie wird im Skript nicht explizit verwendet, ist hier aber als zusätzliche Voraussetzung für die Verwendung des Tokenizers des Llama-Modells aufgeführt.
-Diese Bibliothek wurde auch im Artikel von \citet{llama} verwendet.
-Sie wurde von Google veröffentlicht\footnote{\url{https://github.com/google/sentencepiece} abgerufen am 19.8.2023}.\\
+Diese Bibliothek wurde auch im Artikel von \citet{llama} verwendet und wurde von Google veröffentlicht\footnote{\url{https://github.com/google/sentencepiece} abgerufen am 19.8.2023}.\\
 
 Die Bibliothek \enquote{Transformers} wird für die Verwaltung der Modelle und die Berechnung der neuronalen Netze verwendet.
 Sie ermöglicht die Verwendung vortrainierter Modelle und bietet einen abstrakten Trainer, der die verschiedenen Phasen des Trainings steuert.
-Außerdem erlaubt es die Verwendung der Bibliothek \enquote{DeepSpeed} ohne zusätzliche Anpassung.
+Außerdem erlaubt sie die Verwendung der Bibliothek \enquote{DeepSpeed} ohne zusätzliche Anpassung.
 Die Bibliothek stammt von Huggingface\footnote{\url{https://huggingface.co/docs/transformers/index} abgerufen am 19.8.2023}.\\
 
 \subsection{Training auf einem GPU Computing Cluster}\label{sec:training-cluster}
@@ -490,12 +489,12 @@ Jeder Knoten ist ausgestattet mit einer AMD(R) EPYC(R) 7551P CPU mit 32 Kernen u
 Alle Knoten innerhalb eines Clusters sind über ein \SI{100}{\giga\bit\per\second} Infiniband-Netzwerk miteinander verbunden.
 Die Verbindung zum Internet erfolgt über eine \SI{25}{\giga\bit\per\second} Ethernet-Verbindung.\\
 
-Die Ausführung der Skripte erfolgt mit Hilfe der Software \enquote{Slurm Workload Manager}.
+Die Ausführung der Skripte erfolgt mit Hilfe der Software \enquote{Slurm Workload Manager}\footnote{\url{https://slurm.schedmd.com/documentation.html} abgerufen am  24.8.2023}.
 Diese ermöglicht eine umfangreiche Reservierung von Ressourcen und bietet eine Bash-Schnittstelle zur Konfiguration und Ausführung der Skripte.
 Mit Hilfe von Slurm-Bash-Dateien konnte das Training der Modelle auf dem Cluster durchgeführt werden.\\
 
 Während des Trainings wurde durchschnittlich alle 12 Sekunden eine Iteration des Modells berechnet.
-Eine Iteration entspricht einer vollständigen Berechnung der Ausgaben über einen Batch und einer vollständigen Anpassung aller Gewichte (engl. \enquote{Forwards- und Backwardspass}).
+Eine Iteration entspricht einer vollständigen Berechnung der Ausgaben über einen Batch und einer vollständigen Anpassung aller Gewichte (engl. \enquote{Forwards-} und \enquote{Backwardspass}).
 Eingeschlossen sind auch alle Kommunikationen, die zwischen den GPUs durchgeführt werden, um ihren aktuellen Zustand untereinander abzustimmen.
 Diese Geschwindigkeit ist unabhängig von der Blockgröße.
 Allerdings hängt die Länge des Trainings von der Anzahl der Iterationen ab, daher von der Anzahl der Blöcke und somit von der Blockgröße.
@@ -504,23 +503,23 @@ Dementsprechend wird eine Epoche bei einer Standardblockgröße von 1024 Tokens 
 Eine größere Blockgröße war aufgrund von Speicherfehlern nicht möglich.\\
 
 Bei der Ausführung des Trainings auf Nvidia v100 GPUs traten in unregelmäßigen Abständen Fehler auf, die in \cref{sec:problem-training} genauer beschrieben sind.
-Diese konnten durch eine Reduzierung der Blockgröße auf 256 Token minimiert werden. Eine Epoche bestand somit aus 134 Schritten und dauerte 24:34 Minuten.\\
+Diese konnten durch eine Reduzierung der Blockgröße auf 256 Tokens minimiert werden. Eine Epoche bestand somit aus 134 Schritten und dauerte 24:34 Minuten.\\
 
 Insgesammt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
 Folgende Modelle wurden trainiert:
 \begin{itemize}
-    \item Llama 2 7B mit 1 Epoche auf Nvidia V100 Grafikkarten: \enquote{Llama\_1e\_v100}
-    \item Llama 2 7B mit 1 Epoche auf Nvidia A30 Grafikkarten: \enquote{Llama\_1e\_a30}
-    \item Llama 2 7B mit 3 Epochen auf Nvidia V100 Grafikkarten: \enquote{Llama\_3e\_v100}
-    \item Llama 2 7B mit 3 Eopchen auf Nvidia A30 Grafikkarten: \enquote{Llama\_3e\_a30}
-    \item Llama 2 7B mit 5 Epochen auf Nvidia A30 Grafikkarten: \enquote{Llama\_5e\_a30}
-    \item Llama 2 7B mit 10 Epochen auf Nvidia A30 Grafikkarten: \enquote{Llama\_10e\_a30}
+    \item Llama 2 7B mit 1 Epoche auf Nvidia V100 Grafikkarten: \enquote{Llama\_$1$e\_v$100$}
+    \item Llama 2 7B mit 1 Epoche auf Nvidia A30 Grafikkarten: \enquote{Llama\_$1$e\_a$30$}
+    \item Llama 2 7B mit 3 Epochen auf Nvidia V100 Grafikkarten: \enquote{Llama\_$3$e\_v$100$}
+    \item Llama 2 7B mit 3 Epochen auf Nvidia A30 Grafikkarten: \enquote{Llama\_$3$e\_a$30$}
+    \item Llama 2 7B mit 5 Epochen auf Nvidia A30 Grafikkarten: \enquote{Llama\_$5$e\_a$30$}
+    \item Llama 2 7B mit 10 Epochen auf Nvidia A30 Grafikkarten: \enquote{Llama\_$10$e\_a$30$}
 \end{itemize}
 
 Zusätzlich evaluiert wurden die Modelle:
 \begin{itemize}
     \item GPT4 Modell: \enquote{GPT4}
-    \item Llama 2 7B untrainiert: \enquote{Llama\_0e}
+    \item Llama 2 7B untrainiert: \enquote{Llama\_$0$e}
 \end{itemize}
 
 \subsection{Probleme während des Trainings}\label{sec:problem-training}
@@ -574,8 +573,6 @@ Während des Trainings traten immer wieder Speicherfehler auf, die anzeigten, da
 Diese Fehler waren unabhängig vom Grafikkartentyp und der Konfiguration des Trainings.
 Erst die Minimierung der Batchgröße auf 1 pro \ac{gpu}, die Aktivierung des CPU-Offloads und die Nutzung von \SI{256}{\giga\byte} CPU \ac{ram} ermöglichte ein erfolgreiches Training des Modells Llama 2 7B.
 Dieser Speicherbedarf ist unerwartet hoch und kann nicht durch die Größe des Modells erklärt werden.
-Für das Training auf V100 Grafikkarten wurde die \ac{zero} Stufe 2 Optimierung mit zusätzlichem CPU Offloading verwendet.
-Die \ac{zero} Stufe 3 Optimierung mit CPU Offloading musste für das Training auf A30 Grafikkarten gewählt werden.\\
 
 \section{Generierung von Antworten}\label{sec:generierung}
 Die Generierung von Antworten auf die erstellten Evaluationsdaten erfolgte auf drei verschiedene Arten.
@@ -636,12 +633,12 @@ Schließlich wird die Anzahl der gegebenen Antworten in der generierten Antwort 
 
 Bei der Evaluation stellte sich schnell heraus, dass die Beurteilung der Llama-Modelle schwieriger ist als die des GPT4-Modells.
 Der Grund dafür ist das fehlende Training auf ein Stoppzeichen.
-Die Llama-Modelle enthalten kein Finetuning für die Beantwortung von Fragen und erzeugen eine vorgegebene Anzahl von Token.
+Die Llama-Modelle enthalten kein Finetuning für die Beantwortung von Fragen und erzeugen eine vorgegebene Anzahl von Tokens.
 Diese Anzahl wurde auf 512 festgelegt.
 In den meisten Fällen wurde die Frage jedoch mit einer kürzeren Länge beantwortet.
-Die verbleibenden Token enthielten Wiederholungen bereits generierter Token, Formatierungsfehler (wie nicht vorhandene Überschriften), den Beginn neuer Themen oder die Imitation neuer Fragen.
+Die verbleibenden Tokens enthielten Wiederholungen bereits generierter Tokens, Formatierungsfehler (wie nicht vorhandene Überschriften), den Beginn neuer Themen oder die Imitation neuer Fragen.
 Da die Ursache in einem fehlenden Finetuning und nicht in der inhaltlichen Wiedergabe des Modells lag, wurde die Antwort nur bis zu diesen Stellen gewertet.
-Keine der generierten Antworten benötigte eine Länge von mehr als 512 Token, weshalb eine Verlängerung hier nicht weiter verfolgt wurde.\\
+Keine der generierten Antworten benötigte eine Länge von mehr als 512 Tokens, weshalb eine Verlängerung hier nicht weiter verfolgt wurde.\\
 
 Sowohl die Antwortdateien der Modelle als auch die Bewertungsdateien folgen dem gleichen Schema wie die Eingabedatei aus \cref{subsec:eval-dataset}. Durch die Einführung der Eigenschaft \enquote{type} ist eine Unterteilung der Dateien in Fragetypen nicht mehr notwendig, daher gibt es 4 Dateien pro Modell.
 Zwei Dateien, die die generierten Antworten auf die Fragen enthalten (für jeden Datensatz, wobei der zweite Datensatz die selben Fragen mit Rechtschreibfehlern repräsentiert) und zwei Dateien, die die Bewertungen der generierten Antworten enthalten.
@@ -662,13 +659,13 @@ Dieses ist unter anderem auf den eingebauten Parameter \enquote{temperature} bei
 Die Temperatur beschreibt die Varianz der Ausgabewerte.
 Je höher die Temperatur, desto größer ist die Varianz der Ausgabevektoren.
 Eine höhere Varianz führt zu einer größeren Vielfalt des generierten Textes und zu weniger sich wiederholenden Textpassagen.
-Dieser Temperaturwert wurde für die Generierung auf $0.9$ gesetzt.
+Dieser Temperaturwert wurde für die Generierung auf $0,9$ gesetzt.
 Das beschriebene nicht-deterministische Verhalten konnte bei der Textgenerierung mit den Llama-Modellen nicht beobachtet werden.
 Mehrfache identische Eingaben führten bei allen Modellen zu identischen Ausgaben.
-Da sich somit ein konstanter Wert von $1.0$ für den Determinismus ergibt, wurde dieser hier nicht weiter ausgewertet.
+Da sich somit ein konstanter Wert von $1,0$ für den Determinismus ergibt, wurde dieser hier nicht weiter ausgewertet.
 Zusätzlich zu den Kriterien wurden Ranglisten der Modelle für verschiedene Parameter erstellt.
 Diese Parameter waren MakroF1, Anzahl der richtig beantworteten Fragen und Anzahl der beantworteten Fragen.
-Alle Kriterien wurden zusätzlich für jeden Fragentyp und jede Fragenquelle ausgewertet.
+Alle Kriterien wurden zusätzlich für jeden Fragentyp und jede Fragequelle ausgewertet.
 Die Ergebnisse dieser Auswertung sind in \cref{ch:results} beschrieben.\\
 
 \subsection{Kriterium: Korrektheit}
