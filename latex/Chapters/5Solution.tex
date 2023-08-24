@@ -578,30 +578,31 @@ Für das Training auf V100 Grafikkarten wurde die \ac{zero} Stufe 2 Optimierung 
 Die \ac{zero} Stufe 3 Optimierung mit CPU Offloading musste für das Training auf A30 Grafikkarten gewählt werden.\\
 
 \section{Generierung von Antworten}\label{sec:generierung}
-Die Generierung von Antworten zum erstellen Evaluierungsdatensatz erfolgte in drei verschiedenen Formen.
-Zur Generierung von Text durch das GPT4 Modell wurde die offizielle Webseite der OpenAI Foundation\footnote{\url{https://chat.openai.com/} abgerufen am 19.8.2023} verwendet.
-Die Nutzung des untrainierten Llama Modells als auch den trainierten Modellen mit V100 Grafikkarten erfolgte mit Hilfe eines eigens erstellen Skriptes.
-Diser Skript wurde größtenteils für die Nutzung der Modelle trainiert mit A30 Grafikkarten genutzt, musste jedoch abgewandelt werden, da die Generierung ausschließlich auf einer \ac{gpu} erfolgt, die A30 Grafikkarten mit \SI{24}{\giga\byte} \ac{ram} jedoch das Modell nicht vollständig halten konnten.
+Die Generierung von Antworten auf die erstellten Evaluationsdaten erfolgte auf drei verschiedene Arten.
+Für die Textgenerierung durch das GPT4-Modell wurde die offizielle Webseite der OpenAI Foundation verwendet\footnote{\url{https://chat.openai.com/} abgerufen am 19.8.2023}.
+Die Verwendung des untrainierten Llama-Modells sowie der trainierten Modelle mit V100-Grafikkarten erfolgte mit Hilfe eines eigens erstellten Skripts.
+Dieses Skript wurde größtenteils für die Nutzung der mit A30-Grafikkarten trainierten Modelle verwendet, musste jedoch modifiziert werden, da die Generierung ausschließlich auf einer \ac{gpu} erfolgt, die A30-Grafikkarten jedoch mit \SI{24}{\giga\byte} \ac{ram} das Modell nicht vollständig unterstützen konnten.
+Aus diesem Grund wurde das Modell im 8-Bit-Modus geladen. Dieser spezielle Modus reduziert alle Gewichte des Modells auf 8-Bit-Werte, was zu einer geringeren Genauigkeit, aber auch zu einem geringeren Speicherbedarf führt.\\
 
 \subsection{Erstellung des Evaluierungsdatensatz}\label{subsec:eval-dataset}
-Vor der Generierung der Antworten mussten die gestellten Fragen der gegebenen Klausuren aus \cref{sec:approach:questions} umgewandelt werden.
-Hierzu wurden die genannten Fragen mit erforderlichem Kontext ergänzt, wenn dieser in der Frage referenziert wurde oder auf Ergebnissen der vorherigen Fragen aufbaut.
-Zusätzlich wurden alle Fragen in die englische Sprache übersetzt, da das Llama Modell nahezu ausschließlich auf englischem Text trainiert wurde und das verwendeted Buch \citet{bb} ebenfalls in englischer Sprache verfasst ist.
-Jede Frage erhielt 6 zugewiesene Eigenschaften.
-\begin{enumerate}
-    \item \textbf{question}: Die Originalfrage aus der Quelle
-    \item \textbf{transformed}: Die umformulierte und potentiell übersetzte Frage
-    \item \textbf{true\_answer}: Die zu erwartende korrekte Antwort
-    \item \textbf{num\_answers}: Die enthaltenen Antworten der zu erwartenenden korrekten Antwort
-    \item \textbf{source}: Eine Abkürzung für die Quelle der Frage
-    \item \textbf{context}: Ein optionaler Kontext, welcher zur Beantwortung der Frage benötigt wird
-\end{enumerate}
+Vor der Generierung der Antworten mussten die in den jeweiligen Klausuren gestellten Fragen aus \cref{sec:approach:questions} transformiert werden.
+Dazu wurden diese Fragen um notwendigen Kontext ergänzt, wenn dieser in der Frage angesprochen wurde oder auf den Ergebnissen vorhergehender Fragen aufbaute.
+Zusätzlich wurden alle Fragen ins Englische übersetzt, da das Llama-Modell fast ausschließlich auf englischen Texten trainiert wurde und das verwendete Buch \citet{bb} ebenfalls in englischer Sprache verfasst ist.
+Jeder Frage wurden 6 Eigenschaften zugeordnet.
+\begin{itemize}
+    \item \textbf{question}: Die ursprüngliche Frage aus der Quelle
+    \item \textbf{transformed}: Die umformulierte und eventuell übersetzte Frage
+    \item \textbf{true\_answer}: Die erwartete richtige Antwort
+    \item \textbf{num\_answers}: Die Anzahl der in der erwarteten richtigen Antwort enthaltenen Antworten
+    \item \textbf{source}: Abkürzung für die Quelle der Frage
+    \item \textbf{context}: Ein optionaler Kontext, der zur Beantwortung der Frage benötigt wird.
+\end{itemize}
 
 Mit Hilfe dieser Struktur wurden die Fragen in eine weitere explizite Frageform umgewandelt.
-Wie bereits in \cref{sec:approach:questions} beschrieben, ist das Llama Modell nicht mit Hilfe von Reinforcement Training auf die Beantwortung von Fragen trainiert.
-Aus diesem Grund wurde Anweisung, Frage und Kontext in einen Textblock zusammengefasst.
+Wie bereits unter \cref{sec:approach:questions} beschrieben, wird das Llama-Modell nicht mittels Reinforcement Training auf die Beantwortung von Fragen trainiert.
+Aus diesem Grund wurden Anweisung, Frage und Kontext in einem Textblock zusammengefasst.
 Die Struktur ist in \cref{fig:llama-input} dargestellt.
-Der verwendete Evaluierungsdatensatz ist im Anhang enthalten.\\
+Der verwendete Evaluationsdatensatz befindet sich im Anhang.\\
 
 \begin{figure}
     \begin{verbbox}
@@ -611,45 +612,88 @@ Der verwendete Evaluierungsdatensatz ist im Anhang enthalten.\\
         Answer: 
     \end{verbbox}
     \resizebox{1.2\textwidth}{!}{\theverbbox}
-    \caption{Struktur einer Eingabe für das Llama Modell}\label{fig:llama-input}
+    \caption{Struktur einer Eingabe für das Llama-Modell}\label{fig:llama-input}
 \end{figure}
 
-Die generierten Fragen wurden vor der Benutzung in die drei \enquote{Single}, \enquote{multi} und \enquote{transfer} Fragearten in Dateien aufgeteilt.
-Zusätzlich wurden alle Fragen in einen zweiten Datensatz kopiert, wobei die \enquote{transformed} Fragen mit kleineren gramatikalischen und Rechtschreibfehlern versehen wurden.
-Dieser zweite Datensatz wird im gleichen Sinne im folgenden Schritt unter \cref{sec:answer-rating} verwendet, um in der Evaluation das Kriterium \enquote{Robustheit} zu bewerten.
+Die generierten Fragen wurden vor der Verwendung in Dateien in die drei Fragetypen \enquote{single}, \enquote{multi} und \enquote{transfer} unterteilt.
+Zusätzlich wurden alle Fragen in einen zweiten Datensatz kopiert, wobei die \enquote{transformed} Fragen mit kleineren Grammatik- und Rechtschreibfehlern versehen wurden.
+Dieser zweite Datensatz wird in gleicher Weise im folgenden Schritt unter \cref{sec:answer-rating} zur Bewertung des Kriteriums \enquote{Robustheit} in der Auswertung verwendet.
 
-\section{Bewertung generierter Antworten}\label{sec:answer-rating}
-Die Bewertung der generierten Antworten erfolgte per Hand.
-Die von den Modellen generierten Ausgaben wurden im gleichen Sinne wie in \cref{subsec:eval-dataset} strukturiert, erhielten jedoch drei zusätzliche Eigenschaften.
-\begin{enumerate}
-    \item \textbf{generated}: Repräsentiert die generierte Antwort des Modells
-    \item \textbf{type}: Zeigt den Typ der Frage an
-    \item \textbf{true\_input}: Enthält die tatsächliche genutzte Eingabe
-\end{enumerate}
+\section{Bewertung der generierten Antworten}\label{sec:answer-rating}
+Die Bewertung der generierten Antworten erfolgte manuell.
+Die von den Modellen generierten Ausgaben wurden wie in \cref{subsec:eval-dataset} strukturiert. Drei zusätzliche Eigenschaften wurden hinzugefügt.
+\begin{itemize}
+    \item \textbf{generated}: Stellt die generierte Antwort des Modells dar.
+    \item \textbf{type}: Gibt den Typ der Frage an
+    \item \textbf{true\_input}: Enthält die tatsächlich verwendete Eingabe
+\end{itemize}
 
-Bei der Bewertung wurde zu erst eingeschätzt, ob die generierte Antwort inhaltlichen Bezug zur Frage hat.
-Sollte dies nicht der Fall sein, wird diese Frage als \enquote{unbeantwortet} gewertet und enthält ebenso keine Antworten.
-Sollte die Antwort inhaltlichen Bezug zur Frage haben, wird die Antwort auf ihre Korrektheit bewertet.
-Hierzu gibt die Bewertung eine Anzahl an richtigen Antworten in der generierten Antwort an, welche zwischen 0 und der erwarteten Anzahl richtiger Antworten liegt.
-Abschließend wird die Anzahl gegebener Antworten in der generierten Antwort angegeben.\\
+Bei der Auswertung wird zunächst beurteilt, ob die generierte Antwort einen inhaltlichen Bezug zur Frage hat.
+Ist dies nicht der Fall, wird diese Frage als \enquote{unbeantwortet} gewertet und enthält auch keine Antwort.
+Wenn die Antwort einen inhaltlichen Bezug zur Frage hat, wird die Antwort hinsichtlich ihrer Korrektheit bewertet.
+Dazu gibt die Bewertung eine Anzahl richtiger Antworten in der generierten Antwort an, die zwischen 0 und der erwarteten Anzahl richtiger Antworten liegt.
+Schließlich wird die Anzahl der gegebenen Antworten in der generierten Antwort angegeben.\\
 
-Während der Evaluation stellte sich schnell heraus, dass eine Bewertung der Llama Modelle schwieriger als des GPT4 Modells ist.
-Grund hierfür ist das fehlende Training auf ein Stopp-Zeichen.
-Die Llama-Modelle enthalten kein Finetuning auf die Beantwortung von Fragen und generieren einer zuvor gegebene Anzahl an Tokens.
-Diese Anzahl wurde auf 512 Tokens gesetzt.
-Größtenteils wurde die Frage jedoch in einer kleineren Länge beantwortet.
-Überbleibende Tokens enthielten Wiederholung bereits generiertem, Formatierungsfehler (wie nicht existente Überschriften), der Beginn neuer Themen oder eine Imitierung neuer Fragestellungen.
-Da diese zusätzlichen Tokens eine Ursache des nicht vorhandenen Finetunings ist und nicht zur inhaltlichen Wiedergabe des Modells gehört, wurde die Antwort nur bis zu den genannten Stellen gewertet.
-Keine der generierten Antworten benötigte eine größere Länge als 512 Tokens, weshalb einer Verlängerung hier nicht nachgegangen wurde.\\
+Bei der Evaluation stellte sich schnell heraus, dass die Beurteilung der Llama-Modelle schwieriger ist als die des GPT4-Modells.
+Der Grund dafür ist das fehlende Training auf ein Stoppzeichen.
+Die Llama-Modelle enthalten kein Finetuning für die Beantwortung von Fragen und erzeugen eine vorgegebene Anzahl von Token.
+Diese Anzahl wurde auf 512 festgelegt.
+In den meisten Fällen wurde die Frage jedoch mit einer kürzeren Länge beantwortet.
+Die verbleibenden Token enthielten Wiederholungen bereits generierter Token, Formatierungsfehler (wie nicht vorhandene Überschriften), den Beginn neuer Themen oder die Imitation neuer Fragen.
+Da die Ursache in einem fehlenden Finetuning und nicht in der inhaltlichen Wiedergabe des Modells lag, wurde die Antwort nur bis zu diesen Stellen gewertet.
+Keine der generierten Antworten benötigte eine Länge von mehr als 512 Token, weshalb eine Verlängerung hier nicht weiter verfolgt wurde.\\
 
-Sowohl die Antwort-Dateien der Modelle als auch die Bewertungsdateien folgen dem selben Schema der Eingabedatei aus \cref{subsec:eval-dataset}. Durch die Einführung der Eigenschaft \enquote{type} ist eine Unterteilung der Dateien in Fragetypen nicht notwendig, weshalb pro Modell 4 Dateien existieren.
-Zwei Dateien, welche die generierten Antworten der Fragen enthalten (für jeden Datensatz, wobei der zweite Datensatz die selben Fragen mit Rechtschreibfehler repräsentiert) und zwei Dateien, welche die Bewertung der generierten Antworten enthalten.
-Die Bewertungen erhielten 3 weitere Eigenschaften:
+Sowohl die Antwortdateien der Modelle als auch die Bewertungsdateien folgen dem gleichen Schema wie die Eingabedatei aus \cref{subsec:eval-dataset}. Durch die Einführung der Eigenschaft \enquote{type} ist eine Unterteilung der Dateien in Fragetypen nicht mehr notwendig, daher gibt es 4 Dateien pro Modell.
+Zwei Dateien, die die generierten Antworten auf die Fragen enthalten (für jeden Datensatz, wobei der zweite Datensatz die selben Fragen mit Rechtschreibfehlern repräsentiert) und zwei Dateien, die die Bewertungen der generierten Antworten enthalten.
+Die Bewertungen wurden mit 3 zusätzlichen Eigenschaften versehen:
 
 \begin{itemize}
-    \item \textbf{answered}: Gibt an, ob die Frage richtig, falsch oder nicht beantwortet wurde
-    \item \textbf{points}: Gibt die Anzahl richtiger Antworten in der generierten Antwort an
-    \item \textbf{total\_answers}: Gibt die Anzahl gegebener Antworten in der generierten Antwort an
+    \item \textbf{answered}: Zeigt an, ob die Frage richtig, falsch oder gar nicht beantwortet wurde.
+\item \textbf{points}: Gibt die Anzahl der richtigen Antworten in der generierten Antwort an
+    \item \textbf{total\_answers}: Zeigt die Anzahl der gegebenen Antworten in der generierten Antwort an
 \end{itemize}
 
 \section{Evaluation der Modelle}\label{sec:evaluation}
+Die Evaluierung der Modelle wurde für jedes ausgewählte Kriterium aus \cref{sec:approach:comparison} durchgeführt.
+Für jedes Kriterium wurde ein Skript geschrieben, welcher die Bewertungsdateien der Modelle einliest und die Ergebnisse grafisch darstellt.
+Das Kriterium \enquote{Determinismus} wurde nicht bewertet.
+Die Autoren des Artikels \citet{chatgpt_qas} beschreiben ein inhärentes, nicht-deterministisches Verhalten bei der Verwendung von ChatGPT.
+Dieses ist unter anderem auf den eingebauten Parameter \enquote{temperature} bei der Textgenerierung zurückzuführen.
+Die Temperatur beschreibt die Varianz der Ausgabewerte.
+Je höher die Temperatur, desto größer ist die Varianz der Ausgabevektoren.
+Eine höhere Varianz führt zu einer größeren Vielfalt des generierten Textes und zu weniger sich wiederholenden Textpassagen.
+Dieser Temperaturwert wurde für die Generierung auf $0.9$ gesetzt.
+Das beschriebene nicht-deterministische Verhalten konnte bei der Textgenerierung mit den Llama-Modellen nicht beobachtet werden.
+Mehrfache identische Eingaben führten bei allen Modellen zu identischen Ausgaben.
+Da sich somit ein konstanter Wert von $1.0$ für den Determinismus ergibt, wurde dieser hier nicht weiter ausgewertet.
+Zusätzlich zu den Kriterien wurden Ranglisten der Modelle für verschiedene Parameter erstellt.
+Diese Parameter waren MakroF1, Anzahl der richtig beantworteten Fragen und Anzahl der beantworteten Fragen.
+Alle Kriterien wurden zusätzlich für jeden Fragentyp und jede Fragenquelle ausgewertet.
+Die Ergebnisse dieser Auswertung sind in \cref{ch:results} beschrieben.\\
+
+\subsection{Kriterium: Korrektheit}
+Für die Analyse der Korrektheit wurden alle Bewertungen der Fragen pro Modell, Fragentyp und Fragequelle gezählt.
+Mit diesen Werten wurde dann der MakroF1-Wert nach den Formeln aus \cref{sec:approach:comparison} berechnet.
+Die Ergebnisse sind als Balkendiagramme dargestellt, wobei jeder Balken ein Modell repräsentiert.\\
+
+\subsection{Kriterium: Erklärbarkeit}
+Eine Antwort eines Modells auf eine Frage gilt als erklärt, wenn sie inhaltlich mit der Frage zusammenhängt und eine Erklärung oder nähere Beschreibung enthält.
+Alle Ausgaben der Modelle wurden erneut manuell auf das Vorhandensein einer Erklärung im Rahmen dieses Kriteriums bewertet.
+Die Ergebnisse sind als Balkendiagramme dargestellt, wobei jeder Balken ein Modell repräsentiert.\\
+
+\subsection{Kriterium: Fragenverständnis}
+Das Kriterium Fragenverständnis bezieht sich auf die Fähigkeit eines Modells, die gestellten Fragen zu verstehen.
+Eine Frage gilt als verstanden, wenn sich die generierte Antwort inhaltlich auf die Frage bezieht und darüber hinaus alle Aspekte der Frage adressiert.
+Die Bewertung des Fragenverständnisses erfolgte analog zur Bewertung der Erklärbarkeit.
+Die Ergebnisse sind als Balkendiagramme dargestellt, wobei jeder Balken ein Modell repräsentiert.\\
+
+\subsection{Kriterium: Robustheit}
+Die Robustheit eines Modells beschreibt die Fähigkeit, auch bei fehlerhaften Eingaben eine korrekte Antwort zu generieren.
+Zu diesem Zweck wurde, wie bereits erwähnt, während der Generierung der Ausgaben ein zusätzlicher Datensatz ausgewertet, der die selben Fragen wie der ursprüngliche Datensatz enthielt, jedoch mit kleineren Rechtschreib- und Grammatikfehlern versehen war.
+Da sich die Robustheitsbewertung auf richtig beantwortete Fragen bezieht, die auch bei falscher Eingabe richtig beantwortet werden, wurde dieser Datensatz für jedes Modell reduziert und enthielt nur Fragen, die das Modell zuvor mit mindestens einer richtigen Antwort beantwortet hatte.
+Die Berechnung der Ergebnisse erfolgt analog zur Berechnung des Kriteriums Korrektheit, wobei hier nicht die Anzahl der im Robustheitsdatensatz enthaltenen Fragen, sondern die Anzahl aller vorhandenen Fragen für die Berechnung von MakroF1 verwendet wurde.
+Die Ergebnisse sind als Balkendiagramme dargestellt, wobei jeder Balken ein Modell repräsentiert.\\
+
+\subsection{Kriterium: Rangordnung}
+Neben den oben genannten Kriterien werden in einem zusätzlichen Skript die Parameter \enquote{Anzahl richtig beantworteter Fragen}, \enquote{Anzahl beantworteter Fragen} und \enquote{MakroF1} für jedes Modell in einer Rangliste dargestellt, wobei das beste Modell hier den Rang 1 erhält.
+Diese Rangfolge ermöglicht einen schnellen Überblick über die Leistungsfähigkeit der Modelle.\\
