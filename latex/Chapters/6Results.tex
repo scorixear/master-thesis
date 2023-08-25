@@ -15,38 +15,46 @@ Llama 2 7B auf 5 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichn
 Llama 2 7B auf 10 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$10$e\_a$30$}).
 
 \section{Analyse Korrektheit}\label{sec:results:correctness}
+\subsection{Vergleich totaler Zahlen}
 \begin{figure}
     \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{results/answers_total.png}}
     \caption{Vergleich verschiedener Modelle und ihren totalen Leistungen bei der Beantwortung von Fragen.}
     \label{fig:results:answers_total}
 \end{figure}
+\cref{fig:results:answers_total} zeigt die Aufteilung der korrekt, falsch und unbeantworteten Fragen der evaluierten Modelle.
+Alle Modelle erhielten die selben $95$ Fragen mit identischem Kontext. Diese absoluten Zahlen zeigen eine grobe Tendenz der Leistungen, widerspiegeln jedoch die wahren Leistungen nicht.
+Eine Frage gilt als richtig beantwortet, wenn mindestens eine richtige Antwort gegeben wurde. Dies führt zu missverständlich guten Ergebnissen.
+Dennoch ist klar zu erkennen, dass GPT4 einen deutlichen Vorsprung gegenüber den Llama Modellen hat.
+Das untrainierte Llama Modell beantwortete \SI{28}{\percent} der Fragen mit mindestens einer korrekten Antwort, konnte jedoch ebenso einen Großteil der Fragen beanworten und liefert bei \SI{11}{\percent} keine Antwort.\\
+
+Das Llama Modell, welches auf 1 Epoche mit 4 Nvidia Tesla V100 Grafikkarten trainiert wurde, liefert mit \SI{2}{\percent} die wenigsten korrekten Antworten und zeigt ein generelles Verlernen grundlegender sprachlicher Fähigkeiten.
+Im Gegenzug zeigt das Modell auf 1 Epoche mit 4 Nvidia Tesla A30 Grafikkarten trainiert eine vergleichbare, wen auch etwas schlechtere Leistung als das untrainierte Modell.\\
+
+Mit dem Modell, welches auf 3 Epochen mit 4 Nvidia Tesla V100 Grafikkarten trainiert wurde, konnte eine deutliche Leistungssteigerung gegenüber einer Epoche erreicht werden, jedoch ist die Gesamtleistung bleibend schlechter als das untrainierte Modell. Das Modell, welches auf 3 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert wurde, übertraf dafür erstmalig die Leistungen des untrainierten Modells und beantwortete \SI{43}{\percent} der Fragen mit mindestens einer korrekten Antwort.\\
+
+Folgende Modelle wurden außschließlich auf A30 Grafikkarten trainiert und zeigten keine weitere Leistungssteigerung, beantworteten jedoch stetig weniger Fragen. Hier ist eine Präferenz von keiner Antwort gegenüber einer falschen Antwort zu erkennen.\\
+
+\subsection{Stärken und Schwächen der Modelle}
+Zusätzlich zur Gesamtleistung der Modelle fand auch eine Unterteilung in Fragetypen und Fragequellen statt.
+Ähnliche Grafiken wie aus \cref{fig:results:answers_total} sind im Anhang enthalten.
+Unterschiedene Fragetypen sind Singulär-Fakt Fragen (bezeichnet als \enquote{single}), Multi-Fakten Fragen (bezeichnet als \enquote{multi}) und Transfer-Fragen (bezeichnet als \enquote{transfer}). Unterschiedene Fragequellen sind das Buch \enquote{Health Information Systems} von \citet{bb} (bezeichnet als \enquote{book}), mündliche Klausurfragen aus dem Modul \enquote{Architektur von Informationssystemen im Gesundheitswesen} vom Jahr 2021 (bezeichnet als \enquote{A\_2021}), schriftliche Klausurfragen aus dem Modul \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022 (bezeichnet als \enquote{IS\_2022\_07\_18}) und schriftliche Klausurfragen aus der Nachholklausur des Moduls \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022 (bezeichnet als \enquote{IS\_2022\_09\_27}).\\
+
+Das GPT4 Modell besitzt keine Präferenz gegenüber Fragetypen, beantwortete jedoch Fragen aus dem Buch deutlich besser mit \SI{93}{\percent} korrekten Antworten.
+Vergleichsweise wenige Antworten wurden bei beiden schriftliche Klausuren gegeben, wobei die Klausur \enquote{IS\_2022\_07\_18} besonders wenig Fragen enthielt und daher keine genauen Angaben möglich sind.\\
+
+Das untrainierte Llama Modell zeigte eine eindeutige Stärke bei Multi-Fakten Fragen mit \SI{39}{\percent} richtigen Antworten und konnte \SI{27}{\percent} der mündlichen Klausurfragen beanworten. 
+\subsection{Verbesserungen durch Training}
+\subsection{Vergleich MakroF1}
 \begin{figure}
     \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{results/makro_total.png}}
     \caption{Vergleich verschiedener Modelle und Makro F1 Werten bei der Beantwortung von Fragen.}
     \label{fig:results:makro_total}
 \end{figure}
-\subsection{Vergleich totaler Zahlen}
-\subsection{Stärken und Schwächen der Modelle}
-\subsection{Verbesserungen durch Training}
-\subsection{Vergleich MakroF1}
 \subsection{Zusammenfassung}
 \section{Analyse Erklärbarkeit}\label{sec:results:explainability}
 \section{Analyse Fragenverständnis}\label{sec:results:questionunderstanding}
 \section{Analyse Robustheit}\label{sec:results:robustness}
 \section{Zusammenfassung}\label{sec:results:summary}
-% - Ergebnisse der einzelnen Tests
-% - Besseres Ergebnis wenn End of Answer Token trained (Human Reinforcment training)
-
-% Fragen beantwortet:
-% - GPT 4 deutlich besten Ergebnisse
-% - LLaMA untrainiert ungefähr 1/3 der Fragen beantwortet, liefert Antwort zu Großteil der Fragen
-% - LLaMA 1_v100: sehr schwach, so gut wie kein Verständis
-% - LLaMA 1_a30: vergleichbar mit 0e, beantwortet leicht weniger Fragen
-% - LLaMA 3_v100:  erlernt wieder, kommt nicht ganz an LLaMA untrainiert heran, vergleichbar mit LLaMA 1_a30
-% - LLaMA 3_a30:  deutliche Leistungssteigerung über 0e und anderen Modellen,
-% beantwotet fast gleich viele Fragen wie 0e, beantwortet 1/3 Fragen mehr als llama 0e richtig
-% - LLaMA 5e_a30: keine Leistungssteigerung, Entwicklung in Richtung keine Antwort gegenüber falscher Antwort
-% - LLaMA 10e_a30: Resultate scheinen finales Ergebnis erreicht zu haben, keine Leistungssteigerung, Entwicklung in Richtung keine Antwort gegenüber falscher Antwort
 
 % Stärken von GPT4
 % Keine Präferenz in Fragentyp
