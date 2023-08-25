@@ -18,6 +18,7 @@ Die Schritte sind wie folgt gegliedert:
 Die LLaMA-Modelle werden unter einer nicht-kommerziellen Lizenz für Forschungszwecke zur Verfügung gestellt. Der Zugang zu den Modellen wird im Einzelfall auf Anfrage gewährt. Diese Anfrage wurde im Rahmen dieser Arbeit gestellt und bestätigt.
 Anschließend kann ein von den Autoren vorbereitetes Skript verwendet werden, um die trainierten Gewichte des Modells herunterzuladen.
 Das Skript benötigt eine explizite \ac{url}, die nach einer vorgegebenen Zeit von einer Woche nach Freigabe der Modelle ungültig wird. Aus diesem Grund ist diese \ac{url} nicht im Skript enthalten.
+\todo{llama 2 kann man problemlos von huggingface herunterladen ohne Lizenzanfrage}
 
 \section{Umwandlung des Modells in ein kompatibles Format}
 Das Training des Modells basiert auf zwei grundlegenden Bibliotheken: der Transformers Bibliothek von Huggingface und der DeepSpeed Bibliothek von Microsoft.
@@ -26,8 +27,11 @@ Aus diesem Grund wird das heruntergeladene Modell mit Hilfe eines Huggingface-Sk
 Während dieser Konvertierung muss das Modell vollständig in den \ac{ram} des ausführenden Rechners geladen werden. Für das Modell LLaMA 7B sind dafür mehr als \SI{14}{\giga\byte} \ac{ram} erforderlich.
 Die Konvertierung dauerte auf einem Rechner mit \SI{32}{\giga\byte} \ac{ram} und einem AMD Ryzen 7 5800X Prozessor ca. 30 Minuten.
 
+\todo{bist du sicher, dass llama 2 nicht bereits in einem verwendbaren Format von huggingface herunterladbar ist?}
+
 \section{Training des Modells}
 Um das LLaMA-Modell zu trainieren, wird die Transformers Bibliothek von Huggingface verwendet\footnote{\url{https://huggingface.co/docs/transformers/index} abgerufen am 16.8.2023}.
+\todo{main branch link + abrufdatum macht für git Dateien nicht so viel Sinn, du kannst ja auch direkt einen festen commit verlinken}
 Das in Python geschriebene Trainingsskript basiert auf dem Beispielskript zum Training von kausalen Sprachmodellen aus dem Huggingface Github Repository\footnote{\url{https://github.com/huggingface/transformers/blob/main/examples/pytorch/language-modeling/run_clm.py} abgerufen am 16.8.2023} und wurde teilweise an die Anforderungen des hier durchgeführten Trainings angepasst.
 Die Konfiguration des Trainings gliedert sich in vier Bereiche: Einstellungen für das Modell, Einstellungen für die Trainingsdaten, Einstellungen für das Training selbst und Einstellungen für DeepSpeed.
 Im Folgenden werden diese Einstellungen näher erläutert.
@@ -53,11 +57,17 @@ Die zur Auswahl und Konfiguration des Modells verwendeten Parameter sind in der 
 
 Der Parameter \enquote{model\_name} entspricht einer Modellauswahl und kann entweder ein relativer Pfad zu einem lokalen Modell oder ein Modellname sein.
 Der Modellname wurde hier auf das Modell Llama 2 7B gesetzt und verweist auf das von Huggingface gehostete Modell in einem mit der Transformers-Bibliothek kompatiblen Format.
+\todo{an der stelle würde ich das zugehörige paper zitieren}
 Llama 2 wurde im Juli 2023 von Meta AI veröffentlicht und stellt eine generelle Verbesserung der ursprünglichen LLaMA 1 Modelle dar.
+\todo{vielleicht noch dazuschreiben wieviele tokens es vorher waren und was das für deinen Ansatz bedeutet (eventuell auch auf diskussion verweisen :-).
+Meine naive Annahme ist, dass für den verbreiteten Ansatz, separate Embeddings zu verwenden (wie bei localGPT und so) ein größerer Kontext sehr wichtig für die Beantwortung von komplexen Fragen ist.
+Aber bei deinem Ansatz mit dem erweiterten Finetuning bin ich nicht sicher, ob ein größerer Kontext uns überhaupt etwas bringt}
 Neben der nun auf 4096 Tokens erweiterten Kontextlänge stellt Meta AI Llama 2 auch in einer Chat-Version zur Verfügung.
 Die Chat-Version wurde zusätzlich mit Hilfe von Reinforcement Learning aus menschlichem Feedback trainiert und ermöglicht so eine einfachere Nutzung der vortrainierten Modelle im Kontext eines Chatbots.
 Diese Chat-Modelle wurden jedoch nicht zum Training verwendet, da davon ausgegangen wird, dass dieses zusätzliche Training durch das hier durchgeführte Continual Pretraining überschrieben wird.
-Außerdem ermöglicht Huggingface nun die Nutzung der Llama 2 Modelle ohne Download und Konvertierung, so dass die ersten beiden Schritte entfallen.
+\todo{das finde ich etwas ungünstig zu lesen, dass erst schritte eingeführt und dann wieder verworfen werden, nimm mindestens schritt 2 doch ganz raus}
+Außerdem ermöglicht Huggingface nun die Nutzung der Llama\todo{consistent capitalization} 2 Modelle ohne Download und Konvertierung, so dass die ersten beiden Schritte entfallen.
+\todo{ich würde an deiner stelle mal (kann auch am Ende sein) mit einem Spellchecker wie aspell durchgehen, obwohl der Llama vielleicht gar nicht anmerkt da das Tier so geschrieben wird, obwohl im Deutschen darf man es glaube ich nicht mit 2 L schreiben}
 Die Llama 2 Modelle wurden unter anderem im Artikel von \citet{llama2} vorgestellt.\\
 
 Der Parameter \enquote{cache\_dir} beschreibt den Speicherort des heruntergeladenen Modells.
@@ -69,7 +79,7 @@ Diese Option ist optional und wurde hier nicht verwendet.\\
 
 \enquote{model\_revision} beschreibt die zu verwendende Version des Modells.
 Hier wurde die aktuellste Version verwendet, die durch den Wert \enquote{main} repräsentiert wird.\\
-
+\todo{ich hatte die von thebloke benutzt und glaube ich brauchte da keinen auth token}
 \enquote{use\_auth\_token} und \enquote{hugging\_token} beschreiben die Verwendung eines Authentifizierungs-Tokens, um Modelle von Huggingface herunterzuladen.
 Diese Authentifizierung ist notwendig, da auch die Llama 2 Modelle unter der gleichen Lizenz wie LLaMA 1 stehen und nur auf Anfrage zur Verfügung gestellt werden.
 Um die Modelle mit beschränktem Zugang herunterzuladen, wurde ein Huggingface-Account erstellt, die Anfrage an Meta AI zur Nutzung der Llama 2 Modelle gestellt und bestätigt und ein Authentifizierungstoken generiert.\\
@@ -80,6 +90,7 @@ Vorgefertigte Modelle wurden ursprünglich mit einem Datentyp erstellt und müss
 Diese Konvertierung ist rechenintensiv und kann dazu führen, dass Modelle fehlerhaft trainiert werden oder mehr Rechenleistung während der Inferenz und des Trainings benötigen.
 Aus diesem Grund wurde hier der Parameter \enquote{auto} verwendet, der den Datentyp des Modells automatisch erkennt und benutzt.\\
 
+\todo{ist ne stilfrage aber ich finde texttt für solche Paramameternamen und ähnliches schöner als Anführungszeichen}
 \enquote{low\_cpu\_mem\_usage} beschreibt ein Verfahren der Bibliothek Transformers zum Laden großer Modelle auf Systemen mit wenig Arbeitsspeicher.
 Dabei werden die Modelle in mehreren Schritten in den Arbeitsspeicher geladen und anschließend in den \ac{gpu}-Speicher übertragen.
 Dieses Verfahren reduziert die Menge des notwendigen Arbeitsspeichers, erhöht aber die Zeit, die zum Laden des Modells benötigt wird.
@@ -105,6 +116,7 @@ Da im vorliegenden Fall genügend Arbeitsspeicher zur Verfügung stand, wurde au
 \end{table}
 Für das Training des Modells Llama 2 wurde das Buch \enquote{Health Information Systems} von \citet{bb} im epub-Format in das Markdown-Format konvertiert.
 Die notwendigen Änderungen am Text sind in \cref{sec:datenkuration} beschrieben.
+\todo{eine Webseite zu zitieren ist hier nicht optimal. unten auf https://pypi.org/project/datasets/ steht doch wie man das in bibtex am besten zitiert}
 Um diese Markdown-Datei in eine für das Modell verständliche Form umzuwandeln, wird die Bibliothek datasets\footnote{\url{https://huggingface.co/docs/datasets/index} abgerufen am 16.8.2023} von Huggingface verwendet.
 Sie ermöglicht das Laden der Textdatei, die Umwandlung in Tokens und die Aufteilung in Blöcke.
 Die Parameter zur Auswahl und Konfiguration der Trainingsdaten sind in der Tabelle \ref{tab:data-config} aufgelistet.\\
@@ -131,6 +143,7 @@ Die Blockgröße kann mit dem Parameter \enquote{block\_size} angepasst werden.\
 Der Parameter \enquote{validation\_split\_percentage} beschreibt den Anteil der Daten, der für die Validierung genutzt werden soll.
 Hier werden \SI{5}{\percent} der Daten für die Validierung verwendet.
 Die Validierung liefert während des Trainings Informationen über die tatsächliche Leistung des Modells im Vergleich zum ungesehenen Text und dient dazu, den Fortschritt des Modells zu messen.\\
+\todo{hierzu war doch noch die frage, ob das bei einem Buch überhaupt so aussagekräftig ist, wenn keine Wiederholungen drin sind}
 
 \enquote{preprocessing\_num\_workers} beschreibt die Anzahl der Prozesse, die für die Umwandlung der Textdatei in Tokens verwendet werden sollen.
 Bei sehr großen Datenmengen ist die Umwandlung von Textdateien in Tokens eine sehr umfangreiche Aufgabe.
@@ -143,6 +156,9 @@ Aus diesem Grund können Zeilenumbrüche optional entfernt werden.
 Aufgrund der zuvor durchgeführten Datenkuration ist dies jedoch nicht notwendig, weshalb dieser Parameter auf \enquote{true} gesetzt wird.\\
 
 \subsection{Konfiguration des Trainings}\label{subsec:config-training}
+\todo{Die Zehnerpotenzen in der Tabelle training-config würde ich so \num{1e-10} setzen. und dann die Zeile wo output-exponent-marker als e gesetzt wird löschen in der Konfiguration wenn du lieber die ausführliche Schreibweise willst. Aber kannst es auch so lassen.
+Und eventuell mehr beschreibenden Text zu den Parametern aus dem Fließtext raus und in die Tabellencaption rein (shortcaption aber definieren für die Verzeichnisse). Die Tabelle nimmt sowieso ne ganze Seite in Anspruch. Das fände ich etwas aufgeräumter.
+Das mit dem "true | false" und "false | true" zu erklären würde zb gut in die caption passen.}
 \begin{table}
     \centering
     \begin{tabular}{ll}
@@ -181,7 +197,7 @@ Aufgrund der zuvor durchgeführten Datenkuration ist dies jedoch nicht notwendig
     \end{tabular}
     \caption{Parameter zur Konfiguration des Trainings}\label{tab:training-config}
 \end{table}
-
+\todo{ich würde dir echt raten, jede Dezimalzahl in deiner Arbeit mit dem num Macro von siunitx zu setzen. Jedesmal wenn ich in die Arbeit oder einen Vortrag sehe, sehe ich sowohl Zahlen mit Komma als auch mit Punkt als Trenner. Auch die Abstände und Striche dürften dann konsistent sein.}
 Die Konfiguration des Trainings orientiert sich an den \enquote{TrainingArguments}, die ein Teil der Transformers-Bibliothek sind.
 Nicht alle Parameter aus der Bibliothek müssen verwendet werden, weshalb hier nur abweichende Parameter vom Standard beschrieben werden.
 Eine vollständige Liste der Parameter ist im \cref{app:sec:trainingparameter} zu finden. Die beschriebenen Parameter sind in \cref{tab:training-config} aufgeführt.\\
@@ -227,6 +243,7 @@ Er begrenzt die Größe des Gradienten, der in großen neuronalen Netzen explosi
 Zu große Gradienten führen zu schlechteren Trainingsergebnissen und zu einer zu starken Anpassung der Gewichte, was wiederum zu einer Oszillation um ein Minimum führt.
 Um die Gradienten zu begrenzen, wird die L2-Norm des Gradienten berechnet.
 Wenn diese Norm den angegebenen Maximalwert überschreitet, wird der Gradient herunterskaliert, bis er die Maximalnorm nicht mehr überschreitet.\\
+\todo{Da wir keine Mathematiker sind, würde ich in einer Klammer oder Fußnote kurz klarstellen, was eine L2-Norm ist. Heißt die überhaupt auf Deutsch so? Ist der Gradient der Vektor und das ist dann die euklidische Norm, also der Betrag?}
 
 Der Parameter \enquote{num\_train\_epochs} gibt die Anzahl der zu trainierenden Epochen an.
 Eine Epoche umfasst einen vollständigen Durchlauf des Trainingsdatensatzes.
