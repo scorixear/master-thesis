@@ -1,7 +1,39 @@
 %*****************************************
 \chapter{Ergebnisse}\label{ch:results}
 %*****************************************
+In dieser Arbeit wurde die Konzeptionierung und Durchführung eines Continual Pretraining von Llama Modellen beschrieben.
+Diese Modelle wurden anschließend nach den in \cref{sec:approach:comparison} genannten Kriterien Korrektheit, Erklärbarkeit, Fragenverständnis und Robustheit verglichen.
+Die Durchführung dieses Vergleichs ist in \cref{sec:evaluation} gezeigt.
+In diesem Kapitel werden die Ergebnisse vorgestellt und analysiert, wobei auch hier eine Unterteilung nach den Kriterien vorgenommen wird.
+Zu vergleichende Modelle sind GPT4,
+Llama 2 7B untrainiert (in den Grafiken als \enquote{llama$2$\_$0$e} bezeichnet),
+Llama 2 7B auf 1 Epoche mit 4 Nvidia Tesla V100 Grafikkarten trainiert (in den Grafiken als \enquote{llama$2$\_$1$e\_v$100$} bezeichnet),
+Llama 2 7B auf 1 Epoche mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$1$e\_a$30$}),
+Llama 2 7B auf 3 Epochen mit 4 Nvidia Tesla V100 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$3$e\_v$100$}),
+Llama 2 7B auf 3 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$3$e\_a$30$}),
+Llama 2 7B auf 5 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$5$e\_a$30$}) und
+Llama 2 7B auf 10 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$10$e\_a$30$}).
 
+\section{Analyse Korrektheit}\label{sec:results:correctness}
+\begin{figure}
+    \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{results/answers_total.png}}
+    \caption{Vergleich verschiedener Modelle und ihren totalen Leistungen bei der Beantwortung von Fragen.}
+    \label{fig:results:answers_total}
+\end{figure}
+\begin{figure}
+    \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{results/makro_total.png}}
+    \caption{Vergleich verschiedener Modelle und Makro F1 Werten bei der Beantwortung von Fragen.}
+    \label{fig:results:makro_total}
+\end{figure}
+\subsection{Vergleich totaler Zahlen}
+\subsection{Stärken und Schwächen der Modelle}
+\subsection{Verbesserungen durch Training}
+\subsection{Vergleich MakroF1}
+\subsection{Zusammenfassung}
+\section{Analyse Erklärbarkeit}\label{sec:results:explainability}
+\section{Analyse Fragenverständnis}\label{sec:results:questionunderstanding}
+\section{Analyse Robustheit}\label{sec:results:robustness}
+\section{Zusammenfassung}\label{sec:results:summary}
 % - Ergebnisse der einzelnen Tests
 % - Besseres Ergebnis wenn End of Answer Token trained (Human Reinforcment training)
 

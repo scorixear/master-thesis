@@ -7,6 +7,7 @@ import numpy as np
 from question import Question, QuestionSource, QuestionType
 
 from pandas import DataFrame
+import pandas as pd
 from model_helper import get_model_key, get_model_name
 
 
@@ -19,8 +20,43 @@ def main():
                         default="evaluation/input")
     # path to output directory
     parser.add_argument("-o", "--output", type=str, help="Path to the output directory", default="evaluation/criterias/correctness")
+    parser.add_argument("-s", "--skip", type=bool, help="Skip recalculation of statistics", default=False)
     args = parser.parse_args()
     
+    if not args.skip:
+        df = calculate_correctness(args)
+    else:
+        df = pd.read_csv(args.output + "/evaluation.csv")
+    
+
+    # get model names for plots
+    model_names = df["Model"].tolist()
+    
+    # bar plots with correct, wrong and unanswered questions
+    num_correct = np.array(df["Num_Correct"].tolist())
+    num_wrong = np.array(df["Num_Wrong"].tolist())
+    num_unanswered = np.array(df["Num_Unanswered"].tolist())
+    show_answer_bars(num_correct, num_wrong, num_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen", args.output+"/answers_total.png")
+    
+    for type in QuestionType:
+        num_correct = np.array(df[f"Num_Correct_{type}"].tolist())
+        num_wrong = np.array(df[f"Num_Wrong_{type}"].tolist())
+        num_unanswered = np.array(df[f"Num_Unanswered_{type}"].tolist())
+        show_answer_bars(num_correct, num_wrong, num_unanswered, model_names, f"Richtig, Falsch und Unbeantwortete Fragen ({type})", args.output+f"/answers_{type}.png")
+    for source in QuestionSource:
+        num_correct = np.array(df[f"Num_Correct_{source}"].tolist())
+        num_wrong = np.array(df[f"Num_Wrong_{source}"].tolist())
+        num_unanswered = np.array(df[f"Num_Unanswered_{source}"].tolist())
+        show_answer_bars(num_correct, num_wrong, num_unanswered, model_names, f"Richtig, Falsch und Unbeantwortete Fragen ({source})", args.output+f"/answers_{source}.png")
+    # bar plots with macro f1 scores
+    
+    show_makrof1_bars(df["MacroF1"].tolist(), model_names, "Makro F1", args.output+"/makro_total.png")
+    for type in QuestionType:
+        show_makrof1_bars(df[f"MacroF1_{type}"].tolist(), model_names, f"Makro F1 ({type})", args.output+f"/makro_{type}.png")
+    for source in QuestionSource:
+        show_makrof1_bars(df[f"MacroF1_{source}"].tolist(), model_names, f"Makro F1 ({source})", args.output+f"/makro_{source}.png")
+
+def calculate_correctness(args):
     # read in evaluated questions
     unsorted_models: dict[str, list[Question]] = {}
     for file in os.listdir(args.data):
@@ -149,37 +185,11 @@ def main():
     
     # save data to csv
     df.to_csv(args.output + "/evaluation.csv", index=False)
-
-    # get model names for plots
-    model_names = df["Model"].tolist()
-    
-    # bar plots with correct, wrong and unanswered questions
-    num_correct = np.array(df["Num_Correct"].tolist())
-    num_wrong = np.array(df["Num_Wrong"].tolist())
-    num_unanswered = np.array(df["Num_Unanswered"].tolist())
-    show_answer_bars(num_correct, num_wrong, num_unanswered, model_names, "Richtig, Falsch und Unbeantwortete Fragen", args.output+"/answers_total.png")
-    
-    for type in QuestionType:
-        num_correct = np.array(df[f"Num_Correct_{type}"].tolist())
-        num_wrong = np.array(df[f"Num_Wrong_{type}"].tolist())
-        num_unanswered = np.array(df[f"Num_Unanswered_{type}"].tolist())
-        show_answer_bars(num_correct, num_wrong, num_unanswered, model_names, f"Richtig, Falsch und Unbeantwortete Fragen ({type})", args.output+f"/answers_{type}.png")
-    for source in QuestionSource:
-        num_correct = np.array(df[f"Num_Correct_{source}"].tolist())
-        num_wrong = np.array(df[f"Num_Wrong_{source}"].tolist())
-        num_unanswered = np.array(df[f"Num_Unanswered_{source}"].tolist())
-        show_answer_bars(num_correct, num_wrong, num_unanswered, model_names, f"Richtig, Falsch und Unbeantwortete Fragen ({source})", args.output+f"/answers_{source}.png")
-    # bar plots with macro f1 scores
-    
-    show_makrof1_bars(df["MacroF1"].tolist(), model_names, "Makro F1", args.output+"/makro_total.png")
-    for type in QuestionType:
-        show_makrof1_bars(df[f"MacroF1_{type}"].tolist(), model_names, f"Makro F1 ({type})", args.output+f"/makro_{type}.png")
-    for source in QuestionSource:
-        show_makrof1_bars(df[f"MacroF1_{source}"].tolist(), model_names, f"Makro F1 ({source})", args.output+f"/makro_{source}.png")
+    return df
 
 def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     # create figure of 20, 10 size
-    fig = plt.figure(figsize=(20,10))
+    fig = plt.figure(figsize=(8,6))
     # subplots() to get axis object
     axis = fig.subplots()
     # create stacked bars dataset
@@ -200,6 +210,8 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
         bottom += answer
         # enable labeling of bars
         axis.bar_label(bars)
+    x_ticks = axis.get_xticks()
+    axis.set_xticks(x_ticks, labels=names, rotation=45)
     # add legend
     axis.legend()
     # y axis legend
@@ -207,15 +219,18 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     # title with padding because bar labels might overlap
     axis.set_title(title, pad=15)
     # save figure
+    fig.tight_layout()
     fig.savefig(file_name)
 
 def show_makrof1_bars(f1, names, title, file_name):
     # create figure of size 20, 10
-    fig = plt.figure(figsize=(20,10))
+    fig = plt.figure(figsize=(8,6))
     # subplots to get axis object
     axis = fig.subplots()
     # create bars
     bars = axis.bar(names, f1, width=0.5)
+    x_ticks = axis.get_xticks()
+    axis.set_xticks(x_ticks, labels=names, rotation=45)
     # label bars
     axis.bar_label(bars)
     # set y axis label
@@ -223,6 +238,7 @@ def show_makrof1_bars(f1, names, title, file_name):
     # set title and padding as bar labels might overlap
     axis.set_title(title, pad=15)
     # and save the figure
+    fig.tight_layout()
     fig.savefig(file_name)
 
 if __name__ == "__main__":
