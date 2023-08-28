@@ -19,9 +19,9 @@ def main():
     parser = argparse.ArgumentParser()
     # for trained model as files
     parser.add_argument("-m", "--model-dir", type=str, default="./trained/7B", help="Path to the model directory")
-    # file path for generated answers 
+    # file path for generated answers
     parser.add_argument("-o", "--output-path", type=str, default="./output/generated.csv", help="Path to the output file")
-    
+
     args = parser.parse_args()
     # setup logging
     logging.basicConfig(
@@ -29,44 +29,44 @@ def main():
         datefmt="%Y/%m/%d %H:%M:%S",
         handlers=[logging.StreamHandler(sys.stdout)],
     )
-    
+
     # set logging verbosity to info
     transformers.utils.logging.set_verbosity_info()
-    
+
     log_level = logging.INFO
     logger.setLevel(log_level)
     transformers.utils.logging.set_verbosity(log_level)
     transformers.utils.logging.enable_default_handler()
     transformers.utils.logging.enable_explicit_format()
-    
+
     # read in questions from json files
     single_question_dataset = read_json("data/single_questions.json")
     multi_question_dataset = read_json("data/multi_questions.json")
     transfer_question_dataset = read_json("data/transfer_questions.json")
-    
+
     # setup datafram for output
     dataframe = pd.DataFrame(columns=["question", "transformed", "generated", "true_answer", "num_answers", "type", "source", "context", "true_input"])
-    
+
     model_dir = args.model_dir
     output_file = args.output_path
-    
+
     print("Loading Model from", model_dir)
     print("Saving output to", output_file)
-    
+
     # load in model and port to device
     model = AutoModelForCausalLM.from_pretrained(model_dir, device_map="auto", load_in_4bit=True)
     tokenizer = AutoTokenizer.from_pretrained(model_dir)
-    
+
     # introduce special tokens
     tokenizer.pad_token_id = 0
     tokenizer.bos_token_id = 1
     tokenizer.eos_token_id = 2
-    
+
     # generate answers per question file
     generate_for_single_csv(tokenizer, model, single_question_dataset, "single", dataframe)
     generate_for_single_csv(tokenizer, model, multi_question_dataset, "multi", dataframe)
     generate_for_single_csv(tokenizer, model, transfer_question_dataset, "transfer", dataframe)
-    
+
     # and save the results
     dataframe.to_csv(output_file, index=False)
 
@@ -93,13 +93,13 @@ def generate_for_single_csv(tokenizer: transformers.PreTrainedTokenizer | transf
         num_answers = row["num_answers"]
         source = row["source"]
         context = row["context"]
-        
+
         # generate prompt depending on whether context is given
         if context != "":
             prompt = f"Instruction: You are given a question and a context. Answer the question to your best knowledge.\nQuestion: {transformed_question}\nContext: {context}\nAnswer: "
         else:
             prompt = f"Instruction: You are given a question. Answer the question to your best knowledge.\nQuestion: {transformed_question}\nAnswer: "
-        
+
         print(prompt)
         # tokenize the prompt and port to device
         inputs = tokenizer(prompt, return_tensors="pt")

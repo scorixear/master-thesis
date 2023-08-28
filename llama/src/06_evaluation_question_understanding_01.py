@@ -1,8 +1,7 @@
 from os import system, name
-from question import Question
 import argparse
-import json_fix # this import is needed for def __json__(self) although not used
 import json
+from helper.question import Question
 
 
 def main():
@@ -12,24 +11,30 @@ def main():
     parser.add_argument("-d", "--data", type=str, help="Path to the evaluated questions",
                         default="evaluation/input/llama2_0e.json")
     # path to json output file, _understood.json and _not_understood.json will be appended
-    parser.add_argument("-o", "--output", type=str, help="Path to the output file", default="evaluation/criterias/question_understanding/llama2_0e")
+    parser.add_argument("-o", "--output", type=str, help="Path to the output file",
+                        default="evaluation/criterias/question_understanding/llama2_0e")
     args = parser.parse_args()
-    
+
     # get model name
     model_name = args.data.split("/")[-1][:-5]
     # and read in evaluated questions
     model = Question.read_json(args.data)
-    
+
     # print user prompt
-    print("=====================================================================================================")
+    print("=================================================\
+        ====================================================")
     print("Evaluation of the generated questions - Question Understanding")
-    print("=====================================================================================================")
-    print(" You are given a question, a context, the generated answer and the true answer.\n The answers are wrong or correct. Decide if the model understood the question.\n Input 1 if the question is understood, 0 otherwise.")
+    print("==================================================\
+        ===================================================")
+    print("You are given a question, a context, the generated answer and the true answer.\n\
+            The answers are wrong or correct. Decide if the model understood the question.\n\
+            Input 1 if the question is understood, 0 otherwise.")
     print(f"Loaded {len(model)} Questions")
     print(f"Model: {model_name}")
-    print("=====================================================================================================")
+    print("==================================================\
+        ===================================================")
     input("Press Enter to continue...")
-    
+
     # clear the screen
     clear()
     understood = []
@@ -76,6 +81,6 @@ def clear():
     # for mac and linux(here, os.name is 'posix')
     else:
         _ = system('clear')
-        
+
 if __name__ == "__main__":
     main()

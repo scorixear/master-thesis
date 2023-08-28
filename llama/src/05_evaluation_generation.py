@@ -53,7 +53,7 @@ def main():
     input_file = args.data
     with open(input_file, "r", encoding="utf-8") as json_file:
         generated_questions = json.load(json_file)
-    
+
     # prompt for user
     print("=====================================================================================================")
     print("Evaluation of the generated questions")
@@ -62,7 +62,7 @@ def main():
     print(f"Loaded {len(generated_questions)} questions")
     print("=====================================================================================================")
     input("Press Enter to continue...")
-    
+
     questions = []
     # for each question
     for index, item in enumerate(generated_questions):
@@ -80,7 +80,7 @@ def main():
         source = item["source"]
         context = item["context"]
         true_input = item["true_input"]
-        
+
         # create question object
         current_question = Question(question, transformed, generated, true_answer, number_of_answers, q_type, source, context, true_input)
         questions.append(current_question)
@@ -134,7 +134,7 @@ def main():
 def save_questions(questions, output_file):
     with open(output_file, "w", encoding="utf-8") as json_file:
         json.dump(questions, json_file, indent=4, ensure_ascii=False)
-        
+
 def clear():
     """Clears terminal screen
     """
@@ -144,6 +144,6 @@ def clear():
     # for mac and linux(here, os.name is 'posix')
     else:
         _ = system('clear')
-    
+
 if __name__ == "__main__":
     main()

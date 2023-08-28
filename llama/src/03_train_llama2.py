@@ -50,12 +50,12 @@ class ModelArguments:
     use_fast_tokenizer: bool = field(
         default=True, metadata={"help": "Whether to use one of the fast tokenizer (backed by the tokenizers library) or not."}
     )
-    
+
     model_revision: str = field(
         default="main",
         metadata={"help": "The specific model version to use (can be a branch name, tag name or commit id)."},
     )
-    
+
     use_auth_token: bool = field(
         default=False,
         metadata={
@@ -65,12 +65,12 @@ class ModelArguments:
             )
         },
     )
-    
+
     hugging_token: str = field(
         default="",
         metadata={"help": "The token to login to the HuggingFace Hub (neccessary to use lambda2)."},
     )
-    
+
     torch_dtype: Optional[str] = field(
         default=None,
         metadata={
@@ -143,7 +143,7 @@ class DataTrainingArguments:
     keep_linebreaks: bool = field(
         default=True, metadata={"help": "Whether to keep line breaks when using TXT files or not."}
     )
-    
+
 
 def main():
     # load in script arguments
@@ -155,7 +155,7 @@ def main():
     # otherwise parse into dataclasses
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
-    
+
     # load deepspeed
     ds_config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), training_args.deepspeed)
     with open(ds_config_path, "r", encoding="UTF-8") as f:
@@ -163,10 +163,10 @@ def main():
     # sometimes deepspeed gets not correctly loaded by HFArgumentParser
     # so we do it manually here
     training_args.deepspeed = ds_config
-    
+
     # login to huggingface.co
     huggingface_hub.login(token=model_args.hugging_token)
-    
+
     # setup logging
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s -   %(message)s",
@@ -177,21 +177,21 @@ def main():
     # set verbosity of logging to info
     if training_args.should_log:
         transformers.utils.logging.set_verbosity_info()
-    
+
     log_level = training_args.get_process_log_level()
     logger.setLevel(log_level)
     transformers.utils.logging.set_verbosity(log_level)
     transformers.utils.logging.enable_default_handler()
     transformers.utils.logging.enable_explicit_format()
-    
-    
+
+
     # Log on each process the small summary:
     logger.warning(
         f"Process rank: {training_args.local_rank}, device: {training_args.device}, n_gpu: {training_args.n_gpu}"
         + f" distributed training: {training_args.parallel_mode.value == 'distributed'}, 16-bits training: {training_args.fp16}"
     )
     logger.info(f"Training/evaluation parameters {training_args}")
-    
+
     # Detecting last checkpoint.
     logger.info("******************\nDetecting last checkpoint\n******************")
     last_checkpoint = None
@@ -212,11 +212,11 @@ def main():
                 f"Checkpoint detected, resuming training at {last_checkpoint}. To avoid this behavior, change "
                 "the `--output_dir` or add `--overwrite_output_dir` to train from scratch."
             )
-            
+
     # set seed before initializing model
     set_seed(training_args.seed)
-    
-    
+
+
     # load dataset
     # load_dataset() ensures only one process can concurrently load the dataset
     logger.info("******************\nLoading dataset\n******************")
@@ -245,7 +245,7 @@ def main():
         split=f"train[{data_args.validation_split_percentage}%:]",
         **dataset_args,
     )
-    
+
     # load pretrained model and tokenizer
     # .from_pretrained ensures only one process can concurrently load the model & vocab
     logger.info("******************\nLoading model and tokenizer\n******************")
@@ -254,12 +254,12 @@ def main():
         "revision": model_args.model_revision,
         "use_auth_token": True if model_args.use_auth_token else None,
     }
-    
+
     if model_args.config_name:
         config = AutoConfig.from_pretrained(model_args.config_name, **config_kwargs)
     else:
         config = AutoConfig.from_pretrained(model_args.model_name, **config_kwargs)
-    
+
     tokenizer_kwargs = {
         "cache_dir": model_args.cache_dir,
         "use_fast": model_args.use_fast_tokenizer,
@@ -270,7 +270,7 @@ def main():
         tokenizer = AutoTokenizer.from_pretrained(model_args.tokenizer_name, **tokenizer_kwargs)
     else:
         tokenizer = AutoTokenizer.from_pretrained(model_args.model_name, **tokenizer_kwargs)
-    
+
     # detect defined dtype
     # for llama2 this is fp16
     torch_dtype = (
@@ -278,7 +278,7 @@ def main():
         if model_args.torch_dtype in ["auto", None]
         else getattr(torch, model_args.torch_dtype)
     )
-    
+
     # and load the model
     model = AutoModelForCausalLM.from_pretrained(
         model_args.model_name,
@@ -289,12 +289,12 @@ def main():
         torch_dtype=torch_dtype,
         low_cpu_mem_usage=model_args.low_cpu_mem_usage,
     )
-    
+
     # resize embeddings if necessary to avoid index errors
     embedding_size = model.get_input_embeddings().weight.shape[0]
     if len(tokenizer) > embedding_size:
         model.resize_token_embeddings(len(tokenizer))
-    
+
     # preprocess dataset
     logger.info("******************\nPreprocessing dataset\n******************")
     # if we train, extract the features
@@ -305,10 +305,10 @@ def main():
         column_names = list(raw_datasets["validation"].features)
     # if the column names contain "text", use this as text column name
     text_column_name = "text" if "text" in column_names else column_names[0]
-    
+
     # get tokenizer logging
     tok_logger = transformers.utils.logging.get_logger("transformers.tokenization_utils_base")
-    
+
     # define inner function for tokenization
     def tokenize_function(examples):
         # and add capturelogger to catch warnings
@@ -356,7 +356,7 @@ def main():
                 f"({tokenizer.model_max_length}). Using block_size={tokenizer.model_max_length}."
             )
         block_size = min(data_args.block_size, tokenizer.model_max_length)
-    
+
     # Main data processing function that will concatenate all texts from our dataset and generate chunks of block_size.
     def group_texts(examples):
         # concatenate all texts
@@ -382,7 +382,7 @@ def main():
             load_from_cache_file=not data_args.overwrite_cache,
             desc=f"Grouping texts in chunks of {block_size}",
         )
-    
+
     logger.info("******************\nDataset Limiting\n******************")
     # if we train, get the train dataset
     if training_args.do_train:
@@ -429,7 +429,7 @@ def main():
         if training_args.do_eval and not is_torch_tpu_available()
         else None,
     )
-    
+
     # Training
     if training_args.do_train:
         logger.info("******************\nTraining\n******************")
@@ -443,7 +443,7 @@ def main():
         train_result = trainer.train(resume_from_checkpoint=checkpoint)
         # and save to location specified in training_args
         trainer.save_model()
-        
+
         logger.info("******************\nTraining Metrics\n******************")
         # calculate metrics
         metrics = train_result.metrics
@@ -456,8 +456,8 @@ def main():
         trainer.save_metrics("train", metrics)
         # save the trainer state for future resume
         trainer.save_state()
-        
-    # Evaluation    
+
+    # Evaluation
     if training_args.do_eval:
         logger.info("******************\nEvaluation\n******************")
         metrics = trainer.evaluate()
@@ -468,7 +468,7 @@ def main():
         except OverflowError:
             perplexity = float("inf")
         metrics["perplexity"] = perplexity
-        
+
         trainer.log_metrics("eval", metrics)
         trainer.save_metrics("eval", metrics)
     huggingface_hub.logout()

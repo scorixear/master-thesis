@@ -27,7 +27,7 @@ def main():
     # parse arguments
     parser = argparse.ArgumentParser(description="Evaluation of the generated questions")
     # path to evaluated question json file
-    parser.add_argument("-d", "--data", type=str, help="Path to the evaluated questions", 
+    parser.add_argument("-d", "--data", type=str, help="Path to the evaluated questions",
                         default="output/evaluated.json")
     # path to json output file
     parser.add_argument("-o", "--output", type=str, help="Path to the output file", default="output/evaluated.json")
@@ -63,11 +63,11 @@ def main():
         true_input= item["true_input"]
         answered= item["answered"]
         points= item["points"]
-        
+
         # create question object
         current_question = Question(question, transformed, generated, true_answer, num_answers, q_type, source, context, true_input, answered, points)
         questions.append(current_question)
-        
+
         # if the question could not be answered by model, skip it
         if(answered == 0):
             current_question.total_answers = 0
@@ -121,8 +121,8 @@ def clear():
 
 if __name__ == "__main__":
     main()
-    
 
-        
-        
+
+
+
         
