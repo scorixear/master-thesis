@@ -92,14 +92,14 @@ def main():
                 os.path.join(args.output, "understood.png"))
     show_heatmap(heatmap.get_avgvalue_heatmap_total_by_model("avg"),
                  "Fragequelle", "Fragetyp", "Durschnittlich Verstande Fragen",
-                 os.path.join(args.output, "avg_total_model.png"))
+                 os.path.join(args.output, "question_understanding_total_model.png"))
     for model in models:
         show_heatmap(heatmap.get_heatmap_by_model(model, "avg"),
                      "Fragequelle", "Fragetyp", f"Durschnittlich Verstande Fragen ({model})",
-                     os.path.join(args.output, f"avg_{model}.png"))
+                     os.path.join(args.output, f"question_understanding_{model}.png"))
     show_heatmap(heatmap.get_avgvalue_heatmap_total_by_type("avg"),
                  "Fragequelle", "Modell", "Durschnittlich Verstande Fragen",
-                 os.path.join(args.output, "avg_total_type.png"))
+                 os.path.join(args.output, "question_understanding_total_type.png"))
     for q_type in QuestionType:
         create_plot(list(models.keys()), [data[0] for data in type_understood[q_type]],
                     [data[1] for data in type_understood[q_type]],
@@ -107,10 +107,10 @@ def main():
                     os.path.join(args.output, f"understood_{q_type.value}.png"))
         show_heatmap(heatmap.get_heatmap_by_type(str(q_type), "avg"),
                      "Fragequelle", "Modell", f"Durschnittlich Verstande Fragen ({q_type.value})",
-                     os.path.join(args.output, f"avg_{q_type}.png"))
+                     os.path.join(args.output, f"question_understanding_{q_type}.png"))
     show_heatmap(heatmap.get_avgvalue_heatmap_total_by_source("avg"),
                  "Fragetyp", "Modell", "Durschnittlich Verstande Fragen",
-                 os.path.join(args.output, "avg_total_source.png"))
+                 os.path.join(args.output, "question_understanding_total_source.png"))
     for source in QuestionSource:
         create_plot(list(models.keys()), [data[0] for data in source_understood[source]],
                     [data[1] for data in source_understood[source]],
@@ -118,7 +118,7 @@ def main():
                     os.path.join(args.output, f"understood_{source.value}.png"))
         show_heatmap(heatmap.get_heatmap_by_source(str(source), "avg"),
                      "Fragetyp", "Modell", f"Durschnittlich Verstande Fragen ({source.value})",
-                     os.path.join(args.output, f"avg_{source}.png"))
+                     os.path.join(args.output, f"question_understanding_{source}.png"))
 
 def create_plot(model_names: list[str], understood: list[int],
                 not_understood: list[int], title: str, file_path: str):
@@ -141,16 +141,19 @@ def create_plot(model_names: list[str], understood: list[int],
         bars = axis.bar(model_names, data, width=0.5, label=labels, bottom=bottom,
                         color=colors.pop())
         # set bar labels
-        axis.bar_label(bars)
+        axis.bar_label(bars, fontsize=PlotParams.font_size)
         # and stack next bar on top
         bottom += data
     x_ticks = axis.get_xticks()
     axis.set_xticks(x_ticks, labels=model_names, rotation=45, fontsize=PlotParams.font_size)
-    axis.legend()
+    axis.tick_params(axis="y", labelsize=PlotParams.font_size)
+    axis.legend(loc=(1.01, 0.85), fontsize=PlotParams.font_size)
+    axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
     # set y-axis legend
     axis.set_ylabel("Anzahl der Fragen", fontsize=PlotParams.font_size)
     # set title and  padding as bar labels might overlap
     axis.set_title(title, pad=PlotParams.title_padding, fontsize=PlotParams.title_font_size)
+    fig.tight_layout()
     # and save the figure
     fig.savefig(file_path)
 

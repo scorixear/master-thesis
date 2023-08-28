@@ -253,14 +253,17 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
         # stack next plot ontop
         bottom += answer
         # and add bar labels
-        axis.bar_label(bars)
+        axis.bar_label(bars, fontsize=PlotParams.font_size)
     x_ticks=axis.get_xticks()
     axis.set_xticks(x_ticks, labels=names, rotation=45, fontsize=PlotParams.font_size)
-    axis.legend()
+    axis.tick_params(axis="y", labelsize=PlotParams.font_size)
+    axis.legend(fontsize=PlotParams.font_size)
+    axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
     # set y-axis label
     axis.set_ylabel("Anzahl der Antworten", fontsize=PlotParams.font_size)
     # set title, with padding as bar_labels might overlap
     axis.set_title(title, pad=PlotParams.title_padding, fontsize=PlotParams.title_font_size)
+    fig.tight_layout()
     # and save figure
     fig.savefig(file_name)
 
@@ -271,15 +274,19 @@ def show_makrof1_bars(f1, names, title, file_name):
     axis = fig.subplots()
 
     # create bar plot
+    f1 = [round(score, 2) for score in f1]
     bars = axis.bar(names, f1, width=0.5)
     x_ticks = axis.get_xticks()
     axis.set_xticks(x_ticks, labels=names, rotation=45, fontsize=PlotParams.font_size)
+    axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     # and add bar labels
-    axis.bar_label(bars)
+    axis.bar_label(bars, fontsize=PlotParams.font_size)
+    axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
     # set y-axis label
     axis.set_ylabel("Makro F1", fontsize=PlotParams.font_size)
      # set title, with padding as bar_labels might overlap
     axis.set_title(title, pad=PlotParams.title_padding, fontsize=PlotParams.title_font_size)
+    fig.tight_layout()
     # and save figure
     fig.savefig(file_name)
 
@@ -287,7 +294,7 @@ def show_comparison_bars(f1, evalf1, names, title, file_name):
     # create new x labels as we stack bars now horizontally
     x_labels = np.arange(len(names))
     # with defined width of each bar
-    width = 0.25
+    width = 0.4
     # counter for offsetting bars
     multiplier = 0
 
@@ -303,23 +310,28 @@ def show_comparison_bars(f1, evalf1, names, title, file_name):
     for label, f1_score in f1_scores.items():
         # calculate offset from actual x position
         offset = width*multiplier + width/2
+        f1_score = [round(score, 2) for score in f1_score]
         # and plot bars at offset
         bars = axis.bar(x_labels+offset, f1_score, width, label=label)
         # add bar labels
-        axis.bar_label(bars, padding=3)
+        axis.bar_label(bars, padding=3, fontsize=PlotParams.font_size)
         # and increase multiplier
         multiplier += 1
 
+    axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
     # y-axis label
     axis.set_ylabel("Makro F1", fontsize=PlotParams.font_size)
     # title with padding, as bar_labels might overlap
     # reset x-axis labels to correct position and value
     axis.set_xticks(x_labels+width, names, rotation=45, fontsize=PlotParams.font_size)
+    axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     # and add legend
-    axis.legend(loc="upper left")
+    axis.legend(fontsize=PlotParams.font_size)
     # limit y axis to 0-1 as f1 only goes from 0-1
     axis.set_ylim(0, 1)
     axis.set_title(title, pad=PlotParams.title_padding, fontsize=PlotParams.title_font_size)
+    
+    fig.tight_layout()
     # and save the figure
     fig.savefig(file_name)
 

@@ -1,18 +1,28 @@
 %*****************************************
 \chapter{Ergebnisse}\label{ch:results}
 %*****************************************
+\newcommand{\lo}{\enquote{llama$2$\_$0$e}}
+\newcommand{\liv}{\enquote{llama$2$\_$1$e\_v$100$}}
+\newcommand{\lia}{\enquote{llama$2$\_$1$e\_a$30$}}
+\newcommand{\lev}{\enquote{llama$2$\_$3$e\_v$100$}}
+\newcommand{\lea}{\enquote{llama$2$\_$3$e\_a$30$}}
+\newcommand{\lsa}{\enquote{llama$2$\_$5$e\_a$30$}}
+\newcommand{\lioa}{\enquote{llama$2$\_$10$e\_a$30$}}
+
 In dieser Arbeit wurde die Konzeptionierung und Durchführung eines Continual Pretraining von Llama Modellen beschrieben.
 Diese Modelle wurden anschließend nach den in \cref{sec:approach:comparison} genannten Kriterien Korrektheit, Erklärbarkeit, Fragenverständnis und Robustheit verglichen.
 Die Durchführung dieses Vergleichs ist in \cref{sec:evaluation} gezeigt.
 In diesem Kapitel werden die Ergebnisse vorgestellt und analysiert, wobei auch hier eine Unterteilung nach den Kriterien vorgenommen wird.
 Zu vergleichende Modelle sind GPT4,
-Llama 2 7B untrainiert (in den Grafiken als \enquote{llama$2$\_$0$e} bezeichnet),
-Llama 2 7B auf 1 Epoche mit 4 Nvidia Tesla V100 Grafikkarten trainiert (in den Grafiken als \enquote{llama$2$\_$1$e\_v$100$} bezeichnet),
-Llama 2 7B auf 1 Epoche mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$1$e\_a$30$}),
-Llama 2 7B auf 3 Epochen mit 4 Nvidia Tesla V100 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$3$e\_v$100$}),
-Llama 2 7B auf 3 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$3$e\_a$30$}),
-Llama 2 7B auf 5 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$5$e\_a$30$}) und
-Llama 2 7B auf 10 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \enquote{llama$2$\_$10$e\_a$30$}).
+Llama 2 7B untrainiert (in den Grafiken als \lo bezeichnet),
+Llama 2 7B auf 1 Epoche mit 4 Nvidia Tesla V100 Grafikkarten trainiert (in den Grafiken als \liv bezeichnet),
+Llama 2 7B auf 1 Epoche mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \lia),
+Llama 2 7B auf 3 Epochen mit 4 Nvidia Tesla V100 Grafikkarten trainiert (bezeichnet als \lev),
+Llama 2 7B auf 3 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \lea),
+Llama 2 7B auf 5 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \lsa) und
+Llama 2 7B auf 10 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \lioa).
+
+
 
 \section{Analyse Korrektheit}\label{sec:results:correctness}
 \subsection{Vergleich totaler Zahlen}
@@ -22,17 +32,21 @@ Llama 2 7B auf 10 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeich
     \label{fig:results:answers_total}
 \end{figure}
 \cref{fig:results:answers_total} zeigt die Aufteilung der korrekt, falsch und unbeantworteten Fragen der evaluierten Modelle.
-Alle Modelle erhielten die selben $95$ Fragen mit identischem Kontext. Diese absoluten Zahlen zeigen eine grobe Tendenz der Leistungen, widerspiegeln jedoch die wahren Leistungen nicht.
-Eine Frage gilt als richtig beantwortet, wenn mindestens eine richtige Antwort gegeben wurde. Dies führt zu missverständlich guten Ergebnissen.
+Alle Modelle erhielten die selben $95$ Fragen mit identischem Kontext.
+Diese absoluten Zahlen zeigen eine grobe Tendenz der Leistungen, widerspiegeln jedoch die wahren Leistungen nicht.
+Eine Frage gilt als richtig beantwortet, wenn mindestens eine richtige Antwort gegeben wurde.
+Dies führt zu missverständlich guten Ergebnissen.
 Dennoch ist klar zu erkennen, dass GPT4 einen deutlichen Vorsprung gegenüber den Llama Modellen hat.
 Das untrainierte Llama Modell beantwortete \SI{28}{\percent} der Fragen mit mindestens einer korrekten Antwort, konnte jedoch ebenso einen Großteil der Fragen beanworten und liefert bei \SI{11}{\percent} keine Antwort.\\
 
-Das Llama Modell, welches auf 1 Epoche mit 4 Nvidia Tesla V100 Grafikkarten trainiert wurde, liefert mit \SI{2}{\percent} die wenigsten korrekten Antworten und zeigt ein generelles Verlernen grundlegender sprachlicher Fähigkeiten.
-Im Gegenzug zeigt das Modell auf 1 Epoche mit 4 Nvidia Tesla A30 Grafikkarten trainiert eine vergleichbare, wen auch etwas schlechtere Leistung als das untrainierte Modell.\\
+Das \liv-Modell liefert mit \SI{2}{\percent} die wenigsten korrekten Antworten und zeigt ein generelles Verlernen grundlegender sprachlicher Fähigkeiten.
+Im Gegenzug zeigt das \lia-Modell eine vergleichbare, wen auch etwas schlechtere Leistung als das untrainierte Modell.\\
 
-Mit dem Modell, welches auf 3 Epochen mit 4 Nvidia Tesla V100 Grafikkarten trainiert wurde, konnte eine deutliche Leistungssteigerung gegenüber einer Epoche erreicht werden, jedoch ist die Gesamtleistung bleibend schlechter als das untrainierte Modell. Das Modell, welches auf 3 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert wurde, übertraf dafür erstmalig die Leistungen des untrainierten Modells und beantwortete \SI{43}{\percent} der Fragen mit mindestens einer korrekten Antwort.\\
+Mit dem \lev-Modell konnte eine deutliche Leistungssteigerung gegenüber einer Epoche erreicht werden, jedoch ist die Gesamtleistung bleibend schlechter als das untrainierte Modell.
+Das \lea-Modell übertraf dafür erstmalig die Leistungen des untrainierten Modells und beantwortete \SI{43}{\percent} der Fragen mit mindestens einer korrekten Antwort.\\
 
-Folgende Modelle wurden außschließlich auf A30 Grafikkarten trainiert und zeigten keine weitere Leistungssteigerung, beantworteten jedoch stetig weniger Fragen. Hier ist eine Präferenz von keiner Antwort gegenüber einer falschen Antwort zu erkennen.\\
+Modelle mit höherer Epoche wurden außschließlich auf A30 Grafikkarten trainiert und zeigten keine weitere Leistungssteigerung, beantworteten jedoch stetig weniger Fragen.
+Hier ist eine Präferenz von keiner Antwort gegenüber einer falschen Antwort zu erkennen.\\
 
 \subsection{Stärken und Schwächen der Modelle}
 Zusätzlich zur Gesamtleistung der Modelle fand auch eine Unterteilung in Fragetypen und Fragequellen statt.

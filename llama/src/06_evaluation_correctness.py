@@ -258,15 +258,17 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     # for each label in answers dataset
     for labels, answer in answers.items():
         # create the bars for each model
-        bars = axis.bar(names, answer, width=0.5, label=labels, bottom=bottom, color=colors.pop())
+        bars = axis.bar(names, answer, width=0.8, label=labels, bottom=bottom, color=colors.pop())
         # stack next bars on top
         bottom += answer
         # enable labeling of bars
-        axis.bar_label(bars)
+        axis.bar_label(bars, fontsize=PlotParams.font_size)
     x_ticks = axis.get_xticks()
     axis.set_xticks(x_ticks, labels=names, rotation=45, fontsize=PlotParams.font_size)
+    axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     # add legend
-    axis.legend()
+    axis.legend(loc=(1.01, 0.8), fontsize=PlotParams.font_size)
+    axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
     # y axis legend
     axis.set_ylabel("Anzahl der Fragen", fontsize=PlotParams.font_size)
     # title with padding because bar labels might overlap
@@ -281,11 +283,14 @@ def show_makrof1_bars(f1, names, title, file_name):
     # subplots to get axis object
     axis = fig.subplots()
     # create bars
-    bars = axis.bar(names, f1, width=0.5)
+    f1 = [round(x, 2) for x in f1]
+    bars = axis.bar(names, f1, width=0.8)
     x_ticks = axis.get_xticks()
     axis.set_xticks(x_ticks, labels=names, rotation=45, fontsize=PlotParams.font_size)
+    axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     # label bars
-    axis.bar_label(bars)
+    axis.bar_label(bars, fontsize=PlotParams.font_size)
+    axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
     # set y axis label
     axis.set_ylabel("Makro F1", fontsize=PlotParams.font_size)
     # set title and padding as bar labels might overlap

@@ -1,6 +1,6 @@
 import json
 from typing import Any
-
+from helper.plot_helper import PlotParams
 
 def show_heatmap(heatmap_data: tuple[list[str], list[str], list[list[float]]], x_label: str, y_label: str, title: str, file_name: str):
     import numpy as np
@@ -9,14 +9,20 @@ def show_heatmap(heatmap_data: tuple[list[str], list[str], list[list[float]]], x
     
     y_labels = heatmap_data[0]
     x_labels = heatmap_data[1]
+    if len(x_labels) < 4:
+        fig_size = PlotParams.small_heatmap
+    else:
+        fig_size = PlotParams.big_heatmap
     values = np.array(heatmap_data[2])
-    fig = plt.figure(figsize=(8,6))
+    fig = plt.figure(figsize=fig_size)
     axis = fig.subplots()
     
     seaborn.heatmap(values, xticklabels=x_labels, yticklabels=y_labels, ax=axis, vmin=1, vmax=0)
-    axis.set_xlabel(x_label)
-    axis.set_ylabel(y_label)
-    axis.set_title(title, pad=15)
+    axis.tick_params(axis='both', labelsize=PlotParams.font_size)
+    axis.collections[0].colorbar.ax.tick_params(labelsize=PlotParams.font_size)
+    axis.set_xlabel(x_label, fontsize=PlotParams.font_size)
+    axis.set_ylabel(y_label, fontsize=PlotParams.font_size)
+    axis.set_title(title, pad=PlotParams.title_padding, fontsize=PlotParams.title_font_size)
     fig.tight_layout()
     fig.savefig(file_name)
         

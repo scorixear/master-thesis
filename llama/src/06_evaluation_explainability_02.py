@@ -90,15 +90,15 @@ def main():
                 os.path.join(args.output, "explained.png"))
     show_heatmap(heatmap.get_avgvalue_heatmap_total_by_model("avg"),
                  "Fragequelle", "Fragetyp", "Durchschnittliche Erklärbarkeit der Fragen",
-                 os.path.join(args.output, "avg_total_model.png"))
+                 os.path.join(args.output, "explainability_total_model.png"))
     for model in models:
         show_heatmap(heatmap.get_heatmap_by_model(model, "avg"),
                      "Fragequelle", "Fragetyp",
                      f"Durchschnittliche Erklärbarkeit der Fragen für {model}",
-                     os.path.join(args.output, f"avg_{model}.png"))
+                     os.path.join(args.output, f"explainability_{model}.png"))
     show_heatmap(heatmap.get_avgvalue_heatmap_total_by_type("avg"),
                  "Fragequelle", "Modell", "Durchschnittliche Erklärbarkeit der Fragen",
-                 os.path.join(args.output, "avg_total_type.png"))
+                 os.path.join(args.output, "explainability_total_type.png"))
     for q_type in QuestionType:
         create_plot(list(models.keys()), [data[0] for data in type_explained[q_type]],
                     [data[1] for data in type_explained[q_type]],
@@ -110,7 +110,7 @@ def main():
                      os.path.join(args.output, f"avg_{q_type}.png"))
     show_heatmap(heatmap.get_avgvalue_heatmap_total_by_source("avg"),
                  "Fragetyp", "Modell", "Durchschnittliche Erklärbarkeit der Fragen",
-                 os.path.join(args.output, "avg_total_source.png"))
+                 os.path.join(args.output, "explainability_total_source.png"))
     for source in QuestionSource:
         create_plot(list(models.keys()), [data[0] for data in source_explained[source]],
                     [data[1] for data in source_explained[source]],
@@ -118,7 +118,7 @@ def main():
                     os.path.join(args.output, f"explained_{source}.png"))
         show_heatmap(heatmap.get_heatmap_by_source(str(source), "avg"),
                      "Fragetyp", "Modell", f"Durchschnittliche Erklärbarkeit der {source} Fragen",
-                     os.path.join(args.output, f"avg_{source}.png"))
+                     os.path.join(args.output, f"explainability_{source}.png"))
 
 def create_plot(model_names: list[str], explained: list[int],
                 not_explained: list[int], title: str, file_path: str):
@@ -143,16 +143,19 @@ def create_plot(model_names: list[str], explained: list[int],
         bars = axis.bar(model_names, data, width=0.5, label=labels, bottom=bottom,
                         color=colors.pop())
         # set bar labels
-        axis.bar_label(bars)
+        axis.bar_label(bars, fontsize=PlotParams.font_size)
         # and stack next bars on top
         bottom += data
     x_ticks = axis.get_xticks()
     axis.set_xticks(x_ticks, labels=model_names, rotation=45, fontsize=PlotParams.font_size)
-    axis.legend()
+    axis.tick_params(axis="y", labelsize=PlotParams.font_size)
+    axis.legend(fontsize=PlotParams.font_size)
+    axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
     # set y-axis legend
     axis.set_ylabel("Anzahl der Antworten", fontsize=PlotParams.font_size)
     # set title with padding, ad bar_labels might overlap
     axis.set_title(title, pad=PlotParams.title_padding, fontsize=PlotParams.title_font_size)
+    fig.tight_layout()
     # and save figure
     fig.savefig(file_path)
 
