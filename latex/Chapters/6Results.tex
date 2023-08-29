@@ -1,28 +1,39 @@
 %*****************************************
 \chapter{Ergebnisse}\label{ch:results}
 %*****************************************
-\newcommand{\lo}{\enquote{llama$2$\_$0$e}}
-\newcommand{\liv}{\enquote{llama$2$\_$1$e\_v$100$}}
-\newcommand{\lia}{\enquote{llama$2$\_$1$e\_a$30$}}
-\newcommand{\lev}{\enquote{llama$2$\_$3$e\_v$100$}}
-\newcommand{\lea}{\enquote{llama$2$\_$3$e\_a$30$}}
-\newcommand{\lsa}{\enquote{llama$2$\_$5$e\_a$30$}}
-\newcommand{\lioa}{\enquote{llama$2$\_$10$e\_a$30$}}
+\newcommand{\gpt}{\texttt{gpt$4$}}
+\newcommand{\lo}{\texttt{llama$2$\_$0$e}}
+\newcommand{\liv}{\texttt{llama$2$\_$1$e\_v$100$}}
+\newcommand{\lia}{\texttt{llama$2$\_$1$e\_a$30$}}
+\newcommand{\lev}{\texttt{llama$2$\_$3$e\_v$100$}}
+\newcommand{\lea}{\texttt{llama$2$\_$3$e\_a$30$}}
+\newcommand{\lsa}{\texttt{llama$2$\_$5$e\_a$30$}}
+\newcommand{\lioa}{\texttt{llama$2$\_$10$e\_a$30$}}
 
 In dieser Arbeit wurde die Konzeptionierung und Durchführung eines Continual Pretraining von Llama Modellen beschrieben.
 Diese Modelle wurden anschließend nach den in \cref{sec:approach:comparison} genannten Kriterien Korrektheit, Erklärbarkeit, Fragenverständnis und Robustheit verglichen.
 Die Durchführung dieses Vergleichs ist in \cref{sec:evaluation} gezeigt.
 In diesem Kapitel werden die Ergebnisse vorgestellt und analysiert, wobei auch hier eine Unterteilung nach den Kriterien vorgenommen wird.
-Zu vergleichende Modelle sind GPT4,
-Llama 2 7B untrainiert (in den Grafiken als \lo bezeichnet),
-Llama 2 7B auf 1 Epoche mit 4 Nvidia Tesla V100 Grafikkarten trainiert (in den Grafiken als \liv bezeichnet),
-Llama 2 7B auf 1 Epoche mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \lia),
-Llama 2 7B auf 3 Epochen mit 4 Nvidia Tesla V100 Grafikkarten trainiert (bezeichnet als \lev),
-Llama 2 7B auf 3 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \lea),
-Llama 2 7B auf 5 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \lsa) und
-Llama 2 7B auf 10 Epochen mit 4 Nvidia Tesla A30 Grafikkarten trainiert (bezeichnet als \lioa).
+Zu vergleichende Modelle sind in \cref{tab:eval-models} gezeigt.
 
-
+\begin{table}
+    \centering
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Modell} & \textbf{Epochen} & \textbf{Grafikkarten} & \textbf{Bezeichnung} \\
+        \midrule
+        GPT4            & -                & -                     & \gpt                 \\
+        Llama 2 7B      & 0                & Nvidia Tesla A100     & \lo                  \\
+                        & 1                & Nvidia Tesla V100     & \liv                 \\
+                        & 1                & Nvidia Tesla A30      & \lia                 \\
+                        & 3                & Nvidia Tesla V100     & \lev                 \\
+                        & 3                & Nvidia Tesla A30      & \lea                 \\
+                        & 5                & Nvidia Tesla A30      & \lsa                 \\
+                        & 10               & Nvidia Tesla A30      & \lioa                \\
+        \bottomrule
+    \end{tabular}
+    \caption[Evaluierte Modelle]{Evaluierte Modelle, deren Anzahl an Epochen, genutzte Grafikkarten und Bezeichnungen in den Grafiken.}\label{tab:eval-models}
+\end{table}
 
 \section{Analyse Korrektheit}\label{sec:results:correctness}
 \subsection{Vergleich totaler Zahlen}
@@ -40,26 +51,35 @@ Dennoch ist klar zu erkennen, dass GPT4 einen deutlichen Vorsprung gegenüber de
 Das untrainierte Llama Modell beantwortete \SI{28}{\percent} der Fragen mit mindestens einer korrekten Antwort, konnte jedoch ebenso einen Großteil der Fragen beanworten und liefert bei \SI{11}{\percent} keine Antwort.\\
 
 Das \liv-Modell liefert mit \SI{2}{\percent} die wenigsten korrekten Antworten und zeigt ein generelles Verlernen grundlegender sprachlicher Fähigkeiten.
-Im Gegenzug zeigt das \lia-Modell eine vergleichbare, wen auch etwas schlechtere Leistung als das untrainierte Modell.\\
+Im Gegenzug zeigt das \lia-Modell eine vergleichbare, wenn auch etwas schlechtere Leistung als das untrainierte Modell.\\
 
 Mit dem \lev-Modell konnte eine deutliche Leistungssteigerung gegenüber einer Epoche erreicht werden, jedoch ist die Gesamtleistung bleibend schlechter als das untrainierte Modell.
 Das \lea-Modell übertraf dafür erstmalig die Leistungen des untrainierten Modells und beantwortete \SI{43}{\percent} der Fragen mit mindestens einer korrekten Antwort.\\
 
-Modelle mit höherer Epoche wurden außschließlich auf A30 Grafikkarten trainiert und zeigten keine weitere Leistungssteigerung, beantworteten jedoch stetig weniger Fragen.
+Modelle mit höherer Epoche wurden ausschließlich auf A30 Grafikkarten trainiert und zeigten keine weitere Leistungssteigerung, beantworteten jedoch stetig weniger Fragen.
 Hier ist eine Präferenz von keiner Antwort gegenüber einer falschen Antwort zu erkennen.\\
 
 \subsection{Stärken und Schwächen der Modelle}
 Zusätzlich zur Gesamtleistung der Modelle fand auch eine Unterteilung in Fragetypen und Fragequellen statt.
 Ähnliche Grafiken wie aus \cref{fig:results:answers_total} sind im Anhang enthalten.
-Unterschiedene Fragetypen sind Singulär-Fakt Fragen (bezeichnet als \enquote{single}), Multi-Fakten Fragen (bezeichnet als \enquote{multi}) und Transfer-Fragen (bezeichnet als \enquote{transfer}). Unterschiedene Fragequellen sind das Buch \enquote{Health Information Systems} von \citet{bb} (bezeichnet als \enquote{book}), mündliche Klausurfragen aus dem Modul \enquote{Architektur von Informationssystemen im Gesundheitswesen} vom Jahr 2021 (bezeichnet als \enquote{A\_2021}), schriftliche Klausurfragen aus dem Modul \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022 (bezeichnet als \enquote{IS\_2022\_07\_18}) und schriftliche Klausurfragen aus der Nachholklausur des Moduls \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022 (bezeichnet als \enquote{IS\_2022\_09\_27}).\\
+Unterschiedene Fragetypen sind Singulär-Fakt Fragen (bezeichnet als \enquote{single}), Multi-Fakten Fragen (bezeichnet als \enquote{multi}) und Transfer-Fragen (bezeichnet als \enquote{transfer}).
+Unterschiedene Fragequellen sind das Buch \enquote{Health Information Systems} von \citet{bb} (bezeichnet als \enquote{book}),
+mündliche Klausurfragen aus dem Modul \enquote{Architektur von Informationssystemen im Gesundheitswesen} vom Jahr 2021 (bezeichnet als \enquote{A\_2021}),
+schriftliche Klausurfragen aus dem Modul \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022 (bezeichnet als \enquote{IS\_2022\_07\_18})
+und schriftliche Klausurfragen aus der Nachholklausur des Moduls \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022 (bezeichnet als \enquote{IS\_2022\_09\_27}).\\
 
 Das GPT4 Modell besitzt keine Präferenz gegenüber Fragetypen, beantwortete jedoch Fragen aus dem Buch deutlich besser mit \SI{93}{\percent} korrekten Antworten.
 Vergleichsweise wenige Antworten wurden bei beiden schriftliche Klausuren gegeben, wobei die Klausur \enquote{IS\_2022\_07\_18} besonders wenig Fragen enthielt und daher keine genauen Angaben möglich sind.\\
 
-Das untrainierte Llama Modell zeigte eine eindeutige Stärke bei Multi-Fakten Fragen mit \SI{39}{\percent} richtigen Antworten und konnte \SI{27}{\percent} der mündlichen Klausurfragen beanworten. 
+Das untrainierte Llama Modell zeigte eine eindeutige Stärke bei Multi-Fakten Fragen mit \SI{39}{\percent} richtigen Antworten und konnte \SI{27}{\percent} der mündlichen Klausurfragen beantworten.
+Die schlechteste Kategorien zeigten sich als Singulär-Fakt Fragen mit \SI{20}{\percent} und Fragen aus dem Buch mit \SI{24}{\percent} korrekten Antworten.\\
+
+Während das \liv-Modell grundlegend schlechte Ergebnisse erzielte mit nur 2 korrekt beantworteten Fragen, zeigte das \lia-Modell eine deutlich bessere Leistung bei Multi-Fakten Fragen mit \SI{36}{\percent} und Fragen der mündlichen Klausur mit \SI{40}{\percent} korrekt beantworteter Fragen. Dafür verlor dieses Modell deutlich bei Singulär-Fakt Fragen mit \SI{5}{\percent} und schriftlichen Klausurfragen mit nur korrekten \SI{12}{\percent} korrekten Antworten.\\
+
+
+
 \subsection{Verbesserungen durch Training}
 \subsection{Vergleich MakroF1}
-\todo{results/makro\_total.png fehlt im Repo}
 \begin{figure}
     \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{results/makro_total.png}}
     \caption{Vergleich verschiedener Modelle und Makro F1 Werten bei der Beantwortung von Fragen.}
@@ -70,27 +90,6 @@ Das untrainierte Llama Modell zeigte eine eindeutige Stärke bei Multi-Fakten Fr
 \section{Analyse Fragenverständnis}\label{sec:results:questionunderstanding}
 \section{Analyse Robustheit}\label{sec:results:robustness}
 \section{Zusammenfassung}\label{sec:results:summary}
-
-% Stärken von GPT4
-% Keine Präferenz in Fragentyp
-% Kann Fragen des Buches deutlich besser beantworten 93%
-
-% Schwächen von GPT4
-% keine eindeutige Schwäche bei Fragentyp
-% IS_2022_07_18: 55% (wenig fragen)
-% IS_2022_09_27: 70% (wenig fragen)
-
-% Stärken von LLaMA untrainiert
-% Multi-Fakt Fragen (2x mehr als andere Typen, 39\%)
-% IS 2022_07_18 55% richtig, aber wenig Fragen - keine genauen Angaben möglich
-% A_2021: 27%
-
-% Schwächen von LLaMA untrainiert
-% Single  20\%  & Transfer 21% -richtig beantwortet
-% Andere Sources:
-% IS_2022_09_27: 25%
-% Book_ 24%
-
 % Stärken von LLaMA v100 1 Epochen
 % generell Schlecht
 

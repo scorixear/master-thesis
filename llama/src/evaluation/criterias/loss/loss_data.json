@@ -1,0 +1,48 @@
+[
+    {
+        "name": "v_100",
+        "data": [
+            {
+                "name": "llama_1e_v100",
+                "epochs": 1,
+                "training_loss": 3.21,
+                "validation_loss": 1.69
+            },
+            {
+                "name": "llama_3e_v100",
+                "epochs": 3,
+                "training_loss": 2.07,
+                "validation_loss": 2.56
+            }
+        ]
+    },
+    {
+        "name": "a_30",
+        "data": [
+            {
+                "name": "llama_1e_a30",
+                "epochs": 1,
+                "training_loss": 2.31,
+                "validation_loss": 1.79
+            },
+            {
+                "name": "llama_3e_a30",
+                "epochs": 3,
+                "training_loss": 1.41,
+                "validation_loss": 2.01
+            },
+            {
+                "name": "llama_5e_a30",
+                "epochs": 5,
+                "training_loss": 0.99,
+                "validation_loss": 2.20
+            },
+            {
+                "name": "llama_10e_a30",
+                "epochs": 10,
+                "training_loss": 0.58,
+                "validation_loss": 2.33
+            }
+        ]
+    }
+]
