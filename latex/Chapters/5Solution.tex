@@ -7,7 +7,6 @@ Im Folgenden werden diese Schritte näher erläutert. Für jeden Schritt sind di
 Die Schritte sind wie folgt gegliedert:
 \begin{enumerate}
     \item Laden des Modells
-    \item Konvertierung des Modells in ein kompatibles Format
     \item Modelltraining
     \item Generierung von Antworten auf dem Evaluierungsdatensatz
     \item Bewertung der erzeugten Antworten
@@ -16,23 +15,13 @@ Die Schritte sind wie folgt gegliedert:
 
 \section{Herunterladen des Modells}
 Die LLaMA-Modelle werden unter einer nicht-kommerziellen Lizenz für Forschungszwecke zur Verfügung gestellt. Der Zugang zu den Modellen wird im Einzelfall auf Anfrage gewährt. Diese Anfrage wurde im Rahmen dieser Arbeit gestellt und bestätigt.
-Anschließend kann ein von den Autoren vorbereitetes Skript verwendet werden, um die trainierten Gewichte des Modells herunterzuladen.
+Anschließend kann ein von den Autoren vorbereitetes Skript oder die \ac{api} von Huggingface mit zugehörigem Authentifizierungs-Token verwendet werden, um die trainierten Gewichte des Modells herunterzuladen.
 Das Skript benötigt eine explizite \ac{url}, die nach einer vorgegebenen Zeit von einer Woche nach Freigabe der Modelle ungültig wird. Aus diesem Grund ist diese \ac{url} nicht im Skript enthalten.
 \todo{llama 2 kann man problemlos von huggingface herunterladen ohne Lizenzanfrage}
 
-\section{Umwandlung des Modells in ein kompatibles Format}
-Das Training des Modells basiert auf zwei grundlegenden Bibliotheken: der Transformers Bibliothek von Huggingface und der DeepSpeed Bibliothek von Microsoft.
-Diese Bibliotheken, insbesondere Transformers, erleichtern den Entwicklungsprozess enorm und bieten ein hohes Maß an Abstraktion. Allerdings können Sie nur mit Modellen arbeiten, die in einer für die Transformers-Bibliothek verständlichen Form vorliegen.
-Aus diesem Grund wird das heruntergeladene Modell mit Hilfe eines Huggingface-Skripts in diese kompatible Form umgewandelt.
-Während dieser Konvertierung muss das Modell vollständig in den \ac{ram} des ausführenden Rechners geladen werden. Für das Modell LLaMA 7B sind dafür mehr als \SI{14}{\giga\byte} \ac{ram} erforderlich.
-Die Konvertierung dauerte auf einem Rechner mit \SI{32}{\giga\byte} \ac{ram} und einem AMD Ryzen 7 5800X Prozessor ca. 30 Minuten.
-
-\todo{bist du sicher, dass llama 2 nicht bereits in einem verwendbaren Format von huggingface herunterladbar ist?}
-
 \section{Training des Modells}
 Um das LLaMA-Modell zu trainieren, wird die Transformers Bibliothek von Huggingface verwendet\footnote{\url{https://huggingface.co/docs/transformers/index} abgerufen am 16.8.2023}.
-\todo{main branch link + abrufdatum macht für git Dateien nicht so viel Sinn, du kannst ja auch direkt einen festen commit verlinken}
-Das in Python geschriebene Trainingsskript basiert auf dem Beispielskript zum Training von kausalen Sprachmodellen aus dem Huggingface Github Repository\footnote{\url{https://github.com/huggingface/transformers/blob/main/examples/pytorch/language-modeling/run_clm.py} abgerufen am 16.8.2023} und wurde teilweise an die Anforderungen des hier durchgeführten Trainings angepasst.
+Das in Python geschriebene Trainingsskript basiert auf dem Beispielskript zum Training von kausalen Sprachmodellen aus dem Huggingface Github Repository\footnote{\url{https://github.com/huggingface/transformers/blob/v4.31.0/examples/pytorch/language-modeling/run_clm.py} abgerufen am 16.8.2023} und wurde teilweise an die Anforderungen des hier durchgeführten Trainings angepasst.
 Die Konfiguration des Trainings gliedert sich in vier Bereiche: Einstellungen für das Modell, Einstellungen für die Trainingsdaten, Einstellungen für das Training selbst und Einstellungen für DeepSpeed.
 Im Folgenden werden diese Einstellungen näher erläutert.
 \subsection{Konfiguration des Modells}
@@ -40,58 +29,50 @@ Im Folgenden werden diese Einstellungen näher erläutert.
     \centering
     \begin{tabular}{ll}
         \toprule
-        \textbf{Parameter} & \textbf{Wert} \\
+        \textbf{Parameter}   & \textbf{Wert}              \\
         \midrule
-        model\_name & meta-llama/Llama-2-7b-hf \\
-        cache\_dir & ./cache \\
-        use\_fast\_tokenizer & false \\
-        model\_revision & main \\
-        use\_auth\_token & true \\
-        hugging\_token & \textit{Huggingface Token} \\
-        torch\_dtype & auto \\
-        low\_cpu\_mem\_usage & false \\
+        model\_name          & meta-llama/Llama-2-7b-hf   \\
+        cache\_dir           & ./cache                    \\
+        use\_fast\_tokenizer & false                      \\
+        model\_revision      & main                       \\
+        use\_auth\_token     & true                       \\
+        hugging\_token       & \textit{Huggingface Token} \\
+        torch\_dtype         & auto                       \\
+        low\_cpu\_mem\_usage & false                      \\
     \end{tabular}
     \caption{Parameter zur Auswahl und Konfiguration des Modells}\label{tab:model-config}
 \end{table}
 Die zur Auswahl und Konfiguration des Modells verwendeten Parameter sind in der Tabelle \ref{tab:model-config} aufgelistet.\\
 
-Der Parameter \enquote{model\_name} entspricht einer Modellauswahl und kann entweder ein relativer Pfad zu einem lokalen Modell oder ein Modellname sein.
+Der Parameter \texttt{model\_name} entspricht einer Modellauswahl und kann entweder ein relativer Pfad zu einem lokalen Modell oder ein Modellname sein.
 Der Modellname wurde hier auf das Modell Llama 2 7B gesetzt und verweist auf das von Huggingface gehostete Modell in einem mit der Transformers-Bibliothek kompatiblen Format.
-\todo{an der stelle würde ich das zugehörige paper zitieren}
-Llama 2 wurde im Juli 2023 von Meta AI veröffentlicht und stellt eine generelle Verbesserung der ursprünglichen LLaMA 1 Modelle dar.
-\todo{vielleicht noch dazuschreiben wieviele tokens es vorher waren und was das für deinen Ansatz bedeutet (eventuell auch auf diskussion verweisen :-).
-Meine naive Annahme ist, dass für den verbreiteten Ansatz, separate Embeddings zu verwenden (wie bei localGPT und so) ein größerer Kontext sehr wichtig für die Beantwortung von komplexen Fragen ist.
-Aber bei deinem Ansatz mit dem erweiterten Finetuning bin ich nicht sicher, ob ein größerer Kontext uns überhaupt etwas bringt}
-Neben der nun auf 4096 Tokens erweiterten Kontextlänge stellt Meta AI Llama 2 auch in einer Chat-Version zur Verfügung.
+Llama 2 wurde im Juli 2023 von Meta AI veröffentlicht und stellt eine generelle Verbesserung der ursprünglichen LLaMA 1 Modelle dar \citep{llama2}.
+Neben der nun auf 4096 Tokens erweiterten Kontextlänge (die ursprüngliche Kontextlänge von LLaMA 1 lag bei 2048 Tokens) stellt Meta AI Llama 2 auch in einer Chat-Version zur Verfügung.
 Die Chat-Version wurde zusätzlich mit Hilfe von Reinforcement Learning aus menschlichem Feedback trainiert und ermöglicht so eine einfachere Nutzung der vortrainierten Modelle im Kontext eines Chatbots.
 Diese Chat-Modelle wurden jedoch nicht zum Training verwendet, da davon ausgegangen wird, dass dieses zusätzliche Training durch das hier durchgeführte Continual Pretraining überschrieben wird.
-\todo{das finde ich etwas ungünstig zu lesen, dass erst schritte eingeführt und dann wieder verworfen werden, nimm mindestens schritt 2 doch ganz raus}
 Außerdem ermöglicht Huggingface nun die Nutzung der Llama\todo{consistent capitalization} 2 Modelle ohne Download und Konvertierung, so dass die ersten beiden Schritte entfallen.
-\todo{ich würde an deiner stelle mal (kann auch am Ende sein) mit einem Spellchecker wie aspell durchgehen, obwohl der Llama vielleicht gar nicht anmerkt da das Tier so geschrieben wird, obwohl im Deutschen darf man es glaube ich nicht mit 2 L schreiben}
 Die Llama 2 Modelle wurden unter anderem im Artikel von \citet{llama2} vorgestellt.\\
 
-Der Parameter \enquote{cache\_dir} beschreibt den Speicherort des heruntergeladenen Modells.
+Der Parameter \texttt{cache\_dir} beschreibt den Speicherort des heruntergeladenen Modells.
 Dies ermöglicht ein wiederholtes Trainieren des Modells ohne erneuten Download.
 Die heruntergeladenen Modelle werden durch das Training nicht überschrieben und stellen somit den Grundzustand des Modells dar (im Folgenden auch als Llama2-$0$e für \enquote{$0$ Epochen trainiert} bezeichnet).\\
 
-\enquote{use\_fast\_tokenizer} konfiguriert die Verwendung einer schnelleren Version des Tokenizers zur Konvertierung der Datensätze.
+\texttt{use\_fast\_tokenizer} konfiguriert die Verwendung einer schnelleren Version des Tokenizers zur Konvertierung der Datensätze.
 Diese Option ist optional und wurde hier nicht verwendet.\\
 
-\enquote{model\_revision} beschreibt die zu verwendende Version des Modells.
+\texttt{model\_revision} beschreibt die zu verwendende Version des Modells.
 Hier wurde die aktuellste Version verwendet, die durch den Wert \enquote{main} repräsentiert wird.\\
-\todo{ich hatte die von thebloke benutzt und glaube ich brauchte da keinen auth token}
-\enquote{use\_auth\_token} und \enquote{hugging\_token} beschreiben die Verwendung eines Authentifizierungs-Tokens, um Modelle von Huggingface herunterzuladen.
+\texttt{use\_auth\_token} und \texttt{hugging\_token} beschreiben die Verwendung eines Authentifizierungs-Tokens, um Modelle von Huggingface herunterzuladen.
 Diese Authentifizierung ist notwendig, da auch die Llama 2 Modelle unter der gleichen Lizenz wie LLaMA 1 stehen und nur auf Anfrage zur Verfügung gestellt werden.
 Um die Modelle mit beschränktem Zugang herunterzuladen, wurde ein Huggingface-Account erstellt, die Anfrage an Meta AI zur Nutzung der Llama 2 Modelle gestellt und bestätigt und ein Authentifizierungstoken generiert.\\
 
-Der Parameter \enquote{torch\_dtype} beschreibt den Datentyp, der für die Darstellung der Modellparameter verwendet wird.
+Der Parameter \texttt{torch\_dtype} beschreibt den Datentyp, der für die Darstellung der Modellparameter verwendet wird.
 Hier stehen Float32, Float16 und BFloat16 zur Verfügung.
-Vorgefertigte Modelle wurden ursprünglich mit einem Datentyp erstellt und müssen in einen anderen Datentyp konvertiert werden, wenn der \enquote{torch\_dtype} nicht übereinstimmt.
+Vorgefertigte Modelle wurden ursprünglich mit einem Datentyp erstellt und müssen in einen anderen Datentyp konvertiert werden, wenn der \texttt{torch\_dtype} nicht übereinstimmt.
 Diese Konvertierung ist rechenintensiv und kann dazu führen, dass Modelle fehlerhaft trainiert werden oder mehr Rechenleistung während der Inferenz und des Trainings benötigen.
 Aus diesem Grund wurde hier der Parameter \enquote{auto} verwendet, der den Datentyp des Modells automatisch erkennt und benutzt.\\
 
-\todo{ist ne stilfrage aber ich finde texttt für solche Paramameternamen und ähnliches schöner als Anführungszeichen}
-\enquote{low\_cpu\_mem\_usage} beschreibt ein Verfahren der Bibliothek Transformers zum Laden großer Modelle auf Systemen mit wenig Arbeitsspeicher.
+\texttt{low\_cpu\_mem\_usage} beschreibt ein Verfahren der Bibliothek Transformers zum Laden großer Modelle auf Systemen mit wenig Arbeitsspeicher.
 Dabei werden die Modelle in mehreren Schritten in den Arbeitsspeicher geladen und anschließend in den \ac{gpu}-Speicher übertragen.
 Dieses Verfahren reduziert die Menge des notwendigen Arbeitsspeichers, erhöht aber die Zeit, die zum Laden des Modells benötigt wird.
 Da im vorliegenden Fall genügend Arbeitsspeicher zur Verfügung stand, wurde auf dieses Verfahren verzichtet.
@@ -101,34 +82,33 @@ Da im vorliegenden Fall genügend Arbeitsspeicher zur Verfügung stand, wurde au
     \centering
     \begin{tabular}{ll}
         \toprule
-        \textbf{Parameter} & \textbf{Wert} \\
+        \textbf{Parameter}            & \textbf{Wert}                                 \\
         \midrule
-        train\_file & ./input/health\_information\_systems\_epub.md \\
-        max\_train\_samples & None \\
-        overwrite\_cache & false \\
-        block\_size & 1024 \\
-        validation\_split\_percentage & 5 \\
-        preprocessing\_num\_workers & 1 \\
-        keep\_linebreaks & true \\
+        train\_file                   & ./input/health\_information\_systems\_epub.md \\
+        max\_train\_samples           & None                                          \\
+        overwrite\_cache              & false                                         \\
+        block\_size                   & 1024                                          \\
+        validation\_split\_percentage & 5                                             \\
+        preprocessing\_num\_workers   & 1                                             \\
+        keep\_linebreaks              & true                                          \\
         \bottomrule
     \end{tabular}
     \caption{Parameter zur Auswahl und Konfiguration der Trainingsdaten}\label{tab:data-config}
 \end{table}
 Für das Training des Modells Llama 2 wurde das Buch \enquote{Health Information Systems} von \citet{bb} im epub-Format in das Markdown-Format konvertiert.
 Die notwendigen Änderungen am Text sind in \cref{sec:datenkuration} beschrieben.
-\todo{eine Webseite zu zitieren ist hier nicht optimal. unten auf https://pypi.org/project/datasets/ steht doch wie man das in bibtex am besten zitiert}
-Um diese Markdown-Datei in eine für das Modell verständliche Form umzuwandeln, wird die Bibliothek datasets\footnote{\url{https://huggingface.co/docs/datasets/index} abgerufen am 16.8.2023} von Huggingface verwendet.
+Um diese Markdown-Datei in eine für das Modell verständliche Form umzuwandeln, wird die Bibliothek datasets \citep{datasets} von Huggingface verwendet.
 Sie ermöglicht das Laden der Textdatei, die Umwandlung in Tokens und die Aufteilung in Blöcke.
 Die Parameter zur Auswahl und Konfiguration der Trainingsdaten sind in der Tabelle \ref{tab:data-config} aufgelistet.\\
 
-Der Parameter \enquote{train\_file} beschreibt den Pfad zur Trainingsdatei.
+Der Parameter \texttt{train\_file} beschreibt den Pfad zur Trainingsdatei.
 Diese Trainingsdatei wird einmal eingelesen und je nach Anzahl der unter \cref{subsec:config-training} beschriebenen Epochen mehrfach verwendet.\\
 
-\enquote{max\_train\_samples} beschreibt die maximale Anzahl von Blöcken, die aus der Trainingsdatei gelesen werden sollen.
+\texttt{max\_train\_samples} beschreibt die maximale Anzahl von Blöcken, die aus der Trainingsdatei gelesen werden sollen.
 Zu Testzwecken kann hier eine geringere Anzahl an Blöcken verwendet werden, um die Konfiguration des Modells zu testen.
 Im finalen Training wurde dieser Parameter auf \enquote{None} gesetzt, um alle Blöcke zu verwenden.\\
 
-Der Parameter \enquote{overwrite\_cache} beschreibt, ob der Text erneut in Tokens umgewandelt werden soll.
+Der Parameter \texttt{overwrite\_cache} beschreibt, ob der Text erneut in Tokens umgewandelt werden soll.
 Wenn sich der Text geändert hat, kann das Skript hier die nun tokenisierte Textdatei überschreiben.\\
 
 Wie bereits erwähnt, wird der Text in Blöcke aufgeteilt.
@@ -138,127 +118,123 @@ Standardmäßig verwenden Modelle jedoch eine Blockgröße von 1024 Tokens, wesh
 Größere Blöcke führen zu einer schnelleren Verarbeitung des Textes und können zu einem besseren Verständnis der Zusammenhänge führen, da ein größerer Kontext betrachtet wird.
 Allerdings steigt mit der Größe der Blöcke auch die Fehleranfälligkeit, so dass teilweise auch kleinere Blöcke verwendet werden müssen, um ein Training erfolgreich durchzuführen.
 Probleme beim Training sind unter \cref{sec:problem-training} beschrieben.
-Die Blockgröße kann mit dem Parameter \enquote{block\_size} angepasst werden.\\
+Die Blockgröße kann mit dem Parameter \texttt{block\_size} angepasst werden.\\
 
-Der Parameter \enquote{validation\_split\_percentage} beschreibt den Anteil der Daten, der für die Validierung genutzt werden soll.
+Der Parameter \texttt{validation\_split\_percentage} beschreibt den Anteil der Daten, der für die Validierung genutzt werden soll.
 Hier werden \SI{5}{\percent} der Daten für die Validierung verwendet.
 Die Validierung liefert während des Trainings Informationen über die tatsächliche Leistung des Modells im Vergleich zum ungesehenen Text und dient dazu, den Fortschritt des Modells zu messen.\\
 \todo{hierzu war doch noch die frage, ob das bei einem Buch überhaupt so aussagekräftig ist, wenn keine Wiederholungen drin sind}
 
-\enquote{preprocessing\_num\_workers} beschreibt die Anzahl der Prozesse, die für die Umwandlung der Textdatei in Tokens verwendet werden sollen.
+\texttt{preprocessing\_num\_workers} beschreibt die Anzahl der Prozesse, die für die Umwandlung der Textdatei in Tokens verwendet werden sollen.
 Bei sehr großen Datenmengen ist die Umwandlung von Textdateien in Tokens eine sehr umfangreiche Aufgabe.
 Um diesen Vorgang zu beschleunigen, können mehrere Prozesse die Textdateien parallel übersetzen.
 In diesem Fall ist die Datenmenge jedoch klein genug, um die Aufgabe mit nur einem Prozess zu erledigen.\\
 
-Der Parameter \enquote{keep\_linebreaks} beschreibt, ob Zeilenumbrüche in der Textdatei erhalten bleiben sollen.
+Der Parameter \texttt{keep\_linebreaks} beschreibt, ob Zeilenumbrüche in der Textdatei erhalten bleiben sollen.
 In einigen Fällen können Textdateien viele Zeilenumbrüche enthalten, die der Formatierung des Textes dienen, aber dem Modell keine Informationen liefern oder es dazu veranlassen, diese Zeilenumbrüche zu imitieren.
 Aus diesem Grund können Zeilenumbrüche optional entfernt werden.
 Aufgrund der zuvor durchgeführten Datenkuration ist dies jedoch nicht notwendig, weshalb dieser Parameter auf \enquote{true} gesetzt wird.\\
 
 \subsection{Konfiguration des Trainings}\label{subsec:config-training}
-\todo{Die Zehnerpotenzen in der Tabelle training-config würde ich so \num{1e-10} setzen. und dann die Zeile wo output-exponent-marker als e gesetzt wird löschen in der Konfiguration wenn du lieber die ausführliche Schreibweise willst. Aber kannst es auch so lassen.
-Und eventuell mehr beschreibenden Text zu den Parametern aus dem Fließtext raus und in die Tabellencaption rein (shortcaption aber definieren für die Verzeichnisse). Die Tabelle nimmt sowieso ne ganze Seite in Anspruch. Das fände ich etwas aufgeräumter.
-Das mit dem "true | false" und "false | true" zu erklären würde zb gut in die caption passen.}
 \begin{table}
     \centering
     \begin{tabular}{ll}
         \toprule
-        \textbf{Parameter} & \textbf{Wert} \\
+        \textbf{Parameter}              & \textbf{Wert}                      \\
         \midrule
-        output\_dir & ./trained/7B-3 \\
-        overwrite\_output\_dir & true \\
-        do\_train & true \\
-        do\_eval & true \\
-        per\_device\_train\_batch\_size & 1 \\
-        per\_device\_eval\_batch\_size & 1 \\
-        evaluation\_strategy & steps \\
-        eval\_steps & 50 \\
-        learning\_rate & 3e-4 \\
-        weight\_decay & 0.1 \\
-        optim & adamw\_torch \\
-        adam\_beta1 & 0.9 \\
-        adam\_beta2 & 0.95 \\
-        adam\_epsilon & 1e-5 \\
-        max\_grad\_norm & 1.0 \\
-        num\_train\_epochs & 3 \\
-        lr\_scheduler\_type & cosine \\
-        warmup\_steps & 0 \\
-        save\_strategy & steps \\
-        save\_steps & 100 \\
-        save\_total\_limit & 1 \\
-        no\_cuda & false \\
-        seed & 42 \\
-        fp16 & true | false \\
-        bf16 & false | true \\
-        half\_precision\_backend & auto \\
-        ddp\_backend & nccl \\
-        deepspeed & ./ds\_configs/stage2\_offload.json \\
+        output\_dir                     & ./trained/7B-3                     \\
+        overwrite\_output\_dir          & true                               \\
+        do\_train                       & true                               \\
+        do\_eval                        & true                               \\
+        per\_device\_train\_batch\_size & 1                                  \\
+        per\_device\_eval\_batch\_size  & 1                                  \\
+        evaluation\_strategy            & steps                              \\
+        eval\_steps                     & 50                                 \\
+        learning\_rate                  & \num{3e-4}                         \\
+        weight\_decay                   & \SI{0.1}{}                         \\
+        optim                           & adamw\_torch                       \\
+        adam\_beta1                     & \SI{0.9}{}                         \\
+        adam\_beta2                     & \SI{0.95}{}                        \\
+        adam\_epsilon                   & \num{1e-5}                         \\
+        max\_grad\_norm                 & \SI{1.0}{}                         \\
+        num\_train\_epochs              & 3                                  \\
+        lr\_scheduler\_type             & cosine                             \\
+        warmup\_steps                   & 0                                  \\
+        save\_strategy                  & steps                              \\
+        save\_steps                     & 100                                \\
+        save\_total\_limit              & 1                                  \\
+        no\_cuda                        & false                              \\
+        seed                            & 42                                 \\
+        fp16                            & true | false                       \\
+        bf16                            & false | true                       \\
+        half\_precision\_backend        & auto                               \\
+        ddp\_backend                    & nccl                               \\
+        deepspeed                       & ./ds\_configs/stage2\_offload.json \\
         \bottomrule
     \end{tabular}
-    \caption{Parameter zur Konfiguration des Trainings}\label{tab:training-config}
+    \caption[Parameter zur Konfiguration des Trainings]{Parameter zur Konfiguration des Trainings.
+        Die Parameter \texttt{fp16} und \texttt{bf16} können entweder \texttt{true} und \texttt{false} sein, wenn ein Training im \enquote{FP16}-Datenformat bei der Benutzung von Nvidia Tesla V100 Grafikkarten gewählt wird, oder als \texttt{false} und \texttt{true} gewählt werden für ein Training im \enquote{BF16} Format bei der Benutzung von Nvidia Tesla A30 Grafikkarten.}\label{tab:training-config}
 \end{table}
-\todo{ich würde dir echt raten, jede Dezimalzahl in deiner Arbeit mit dem num Macro von siunitx zu setzen. Jedesmal wenn ich in die Arbeit oder einen Vortrag sehe, sehe ich sowohl Zahlen mit Komma als auch mit Punkt als Trenner. Auch die Abstände und Striche dürften dann konsistent sein.}
 Die Konfiguration des Trainings orientiert sich an den \enquote{TrainingArguments}, die ein Teil der Transformers-Bibliothek sind.
 Nicht alle Parameter aus der Bibliothek müssen verwendet werden, weshalb hier nur abweichende Parameter vom Standard beschrieben werden.
 Eine vollständige Liste der Parameter ist im \cref{app:sec:trainingparameter} zu finden. Die beschriebenen Parameter sind in \cref{tab:training-config} aufgeführt.\\
 
-Der Parameter \enquote{output\_dir} definiert den Speicherpfad für die Ergebnisse des Trainings.
+Der Parameter \texttt{output\_dir} definiert den Speicherpfad für die Ergebnisse des Trainings.
 Diese umfassen die trainierten Gewichte des Modells, eine abschließende Auswertung der Validierung, den Status des Trainers sowie gegebenenfalls während des Trainings erstellte Kontrollpunkte.\\
 
-Der Parameter \enquote{overwrite\_output\_dir} legt fest, ob der Ergebnis-Ordner überschrieben werden soll, wenn er bereits existiert.
+Der Parameter \texttt{overwrite\_output\_dir} legt fest, ob der Ergebnis-Ordner überschrieben werden soll, wenn er bereits existiert.
 Diese Option bestimmt auch, ob das Training von einem zuvor erstellten Kontrollpunkt aus fortgesetzt werden soll.
 Wenn der Ergebnis-Ordner überschrieben wird, kann von keinem Kontrollpunkt aus fortgefahren werden.\\
 
-Die Parameter \enquote{do\_train} und \enquote{do\_eval} geben an, ob das Training und die Validierung durchgeführt werden sollen.
+Die Parameter \texttt{do\_train} und \texttt{do\_eval} geben an, ob das Training und die Validierung durchgeführt werden sollen.
 Falls keine Validierung durchgeführt wird, wird der Trainingsdatensatz dennoch in Trainings- und Validierungsdatensatz aufgeteilt.\\
 
 Während des Trainings und der Validierung werden die Fehlerfunktionen von mehreren Blöcken berechnet und danach gemittelt.
 Daraufhin wird ein Gradient basierend auf dieser kumulativen Fehlerfunktion berechnet, welcher die Gewichte des Modells anpasst.
 Eine detailiertere Beschreibung des Ablaufs findet sich in \cref{subsec:backpropagation}.
-Die Anzahl der Blöcke pro \enquote{Batch} (siehe \cref{def:batch}) wird durch die Parameter \enquote{per\_device\_train\_batch\_size} und \enquote{per\_device\_eval\_batch\_size} festgelegt.
+Die Anzahl der Blöcke pro \enquote{Batch} (siehe \cref{def:batch}) wird durch die Parameter \texttt{per\_device\_train\_batch\_size} und \texttt{per\_device\_eval\_batch\_size} festgelegt.
 Wenn man eine Batch-Größe von 1 und 3 \ac{gpu}s verwendet, erhält man somit 3 Blöcke pro Gradientenberechnung.
 Während höhere Batch-Größen die Berechnungszeit reduzieren können, führen sie auch zu ungenaueren Gradienten und erfordern mehr Speicher auf der \ac{gpu}.
 Die Batch-Größe ist in diesem Fall auf 1 gesetzt, da die verwendeten Nvidia V100-\ac{gpu}s als auch Nvidia A30-\ac{gpu}s nur genug Speicher für eine Batch-Größe von 1 hatten.\\
 
-Die Parameter \enquote{evaluation\_strategy} und \enquote{eval\_steps} legen fest, in welchen Intervallen die Validierung durchgeführt werden soll.
+Die Parameter \texttt{evaluation\_strategy} und \texttt{eval\_steps} legen fest, in welchen Intervallen die Validierung durchgeführt werden soll.
 In diesem Szenario wird die Validierung alle 50 Iterationen durchgeführt.
 Eine Iteration bezieht sich auf die Berechnung eines Gradienten.\\
 
-Die Lernrate des Modells wird durch den Parameter \enquote{learning\_rate} beschrieben.
+Die Lernrate des Modells wird durch den Parameter \texttt{learning\_rate} beschrieben.
 Dieser Parameter bestimmt, in welchem Ausmaß die Gewichte des Modells angepasst werden.
 Eine sehr hohe Lernrate kann dazu führen, dass das Modell nicht konvergiert, während eine sehr niedrige Lernrate zu langen Trainingszeiten führt.
 Die Lernrate wurde aus dem Artikel über LLaMA-Modelle von \citet{llama} übernommen.\\
 
-In dem Artikel zu den LLaMA-Modellen von \citet{llama} wird ebenfalls ein Gewichtsabnahme-Wert von $0,1$ verwendet, der auch bei diesem Training mithilfe des Parameters \enquote{weight\_decay} eingestellt wurde.
+In dem Artikel zu den LLaMA-Modellen von \citet{llama} wird ebenfalls ein Gewichtsabnahme-Wert von $0,1$ verwendet, der auch bei diesem Training mithilfe des Parameters \texttt{weight\_decay} eingestellt wurde.
 Die Gewichtsverminderung führt zu einer kontinuierlichen Verringerung der Gewichte des Modells. Dadurch soll verhindert werden, dass es sich zu stark an einzelne Trainingsdaten anpasst.\\
 
-Die Parameter \enquote{adam\_beta1}, \enquote{adam\_beta2} und \enquote{adam\_epsilon} beschreiben die Parameter des verwendeten AdamW-Optimierers, der im Parameter \enquote{optim} eingestellt ist.
+Die Parameter \texttt{adam\_beta1}, \texttt{adam\_beta2} und \texttt{adam\_epsilon} beschreiben die Parameter des verwendeten AdamW-Optimierers, der im Parameter \texttt{optim} eingestellt ist.
 Diese Werte entsprechen ebenfalls den Werten, die im Artikel zu den LLaMA-Modellen von \citet{llama} angegeben sind.
 AdamW ist in verschiedenen Implementierungen verfügbar. Hier wurde die neueste Implementierung der PyTorch-Bibliothek verwendet.
 Die Funktionsweise des AdamW-Optimierers ist im Artikel von \citet{adamw} genauer beschrieben.\\
 
-Der Parameter \enquote{max\_grad\_norm} beschreibt die maximale Norm des Gradienten, die durch die Gewichte des Modells nicht überschritten werden darf. 
-Eine weitere Bezeichnung, die in der Bibliothek DeepSpeed oder in Artikeln zu LLaMA-Modellen genutzt wird, ist \enquote{gradient clipping}.
+Der Parameter \texttt{max\_grad\_norm} beschreibt die maximale Norm des Gradienten, die durch die Gewichte des Modells nicht überschritten werden darf.
+Eine weitere Bezeichnung, die in der Bibliothek DeepSpeed oder in Artikeln zu LLaMA-Modellen genutzt wird, ist \texttt{gradient clipping}.
 Er begrenzt die Größe des Gradienten, der in großen neuronalen Netzen explosionsartig ansteigen kann.
 Zu große Gradienten führen zu schlechteren Trainingsergebnissen und zu einer zu starken Anpassung der Gewichte, was wiederum zu einer Oszillation um ein Minimum führt.
-Um die Gradienten zu begrenzen, wird die L2-Norm des Gradienten berechnet.
+Um die Gradienten zu begrenzen, wird die L2-Norm des Gradienten berechnet\footnote{Die L2-Norm, auch bezeichnet als euklidische Norm, entspricht der pythagoreischen Länge eines Vektors vom Ursprung. Gegeben eines Vektors $(a,b,c)$ entspräche die L2-Norm $\sqrt{a^2+b^2+c^2}$}.
 Wenn diese Norm den angegebenen Maximalwert überschreitet, wird der Gradient herunterskaliert, bis er die Maximalnorm nicht mehr überschreitet.\\
-\todo{Da wir keine Mathematiker sind, würde ich in einer Klammer oder Fußnote kurz klarstellen, was eine L2-Norm ist. Heißt die überhaupt auf Deutsch so? Ist der Gradient der Vektor und das ist dann die euklidische Norm, also der Betrag?}
 
-Der Parameter \enquote{num\_train\_epochs} gibt die Anzahl der zu trainierenden Epochen an.
+Der Parameter \texttt{num\_train\_epochs} gibt die Anzahl der zu trainierenden Epochen an.
 Eine Epoche umfasst einen vollständigen Durchlauf des Trainingsdatensatzes.
 Mehr Epochen können insbesondere bei kleineren Datensätzen zu besseren Ergebnissen führen, da sich das Modell besser an die Trainingsdaten anpassen kann.
 Zu viele Epochen führen zu einer Überanpassung.
 In dieser Arbeit wurde das Modell Llama 2 7B mit einer, drei, fünf und zehn Epochen trainiert.
 Bei der Verwendung von Nvidia V100 Grafikkarten traten während des Trainings Probleme auf, die in \cref{sec:problem-training} genauer beschrieben sind.\\
 
-Durch die Anwendung der Parameter \enquote{lr\_scheduler} und \enquote{warmup\_steps} kann eine Aufwärmphase des Trainings realisiert werden.
-Die Aufwärmphase bezeichnet den Start des Trainings, in dem die Lernrate der \enquote{lr\_scheduler}-Funktion innerhalb der ersten \enquote{warmup\_steps} Iterationen schrittweise von $0$ auf den gewünschten Wert erhöht wird.
+Durch die Anwendung der Parameter \texttt{lr\_scheduler} und \texttt{warmup\_steps} kann eine Aufwärmphase des Trainings realisiert werden.
+Die Aufwärmphase bezeichnet den Start des Trainings, in dem die Lernrate der \texttt{lr\_scheduler}-Funktion innerhalb der ersten \texttt{warmup\_steps} Iterationen schrittweise von $0$ auf den gewünschten Wert erhöht wird.
 Dieser Ansatz verhindert eine zu schnelle Anpassung der Modellgewichte an spezielle Details der Trainingsdaten.
 Vor allem bei untrainierten Modellen werden während des Trainings diese erlernten Fehler wieder korrigiert. Dies führt jedoch ohne eine Aufwärmphase zu längeren Trainingszeiten und schlechteren Ergebnissen.
 In diesem Fall kann die Aufwärmphase übersprungen werden, da ein bereits vortrainiertes Modell genutzt wird.\\
 
-Die Parameter \enquote{save\_strategy}, \enquote{save\_steps} und \enquote{save\_total\_limit} beschreiben, wie oft und in welchem Abstand Modelle während des Trainings gespeichert werden sollen.
+Die Parameter \texttt{save\_strategy}, \texttt{save\_steps} und \texttt{save\_total\_limit} beschreiben, wie oft und in welchem Abstand Modelle während des Trainings gespeichert werden sollen.
 Hier wird alle 100 Iterationen das Modell gespeichert, wobei maximal 1 Kontrollpunkt gleichzeitig existiert.
 Kontrollpunkte ermöglichen es, abgebrochene oder fehlgeschlagene Trainingsläufe wieder aufzunehmen.
 Bei längerem Training kann die maximale Laufzeit der Skripte erreicht werden.
@@ -270,17 +246,17 @@ Durch die regelmäßige Unterbrechung von Skripten können andere Skripte in der
 Zusammen mit der Begrenzung ergibt sich im Allgemeinen eine Wartezeit von maximal 2 Tagen.
 Durch die Einführung von Kontrollpunkten im Training führt eine Unterbrechung nicht zu einem Rückschlag im Fortschritt.\\
 
-Der Begriff \enquote{no\_cuda} beschreibt die Durchführung des Trainings ohne die Verwendung einer \ac{gpu}.
+Der Begriff \texttt{no\_cuda} beschreibt die Durchführung des Trainings ohne die Verwendung einer \ac{gpu}.
 Diese Einstellung wird für Testzwecke verwendet, damit Testskripte auf Systemen ausgeführt werden können, die nicht über die erforderliche Anzahl von \ac{gpu}s verfügen.\\
 
-Die Verwendung des Parameters \enquote{seed} beeinflusst die Zufälligkeit des Trainingsprozesses.
+Die Verwendung des Parameters \texttt{seed} beeinflusst die Zufälligkeit des Trainingsprozesses.
 Während des Trainingsprozesses werden einige Zufallsvariablen verwendet, um Werte zu initialisieren.
 Jedoch ist die Auswirkung im Kontext des Fortführenden Trainings irrelevant.
 Es wird jedoch ein fester Wert gesetzt, da das Trainingsskript auch für untrainierte Modelle genutzt werden kann.
 Mit Hilfe eines Seeds erstellen Zufallszahlengeneratoren zufällig verteilte, jedoch reproduzierbare Zahlenfolgen.
 Daher sind Modelle mit gleichem Seed und Datensatz identisch.\\
 
-Zur Konfiguration der verwendeten Datentypen stehen neben dem oben genannten \enquote{torch\_dtype} die beiden Parameter \enquote{fp16} und \enquote{bf16} zur Verfügung. Während \enquote{torch\_dtype} die Initialisierung des Modells beschreibt, beeinflussen diese Parameter die Datentypen während des Trainings.
+Zur Konfiguration der verwendeten Datentypen stehen neben dem oben genannten \texttt{torch\_dtype} die beiden Parameter \texttt{fp16} und \texttt{bf16} zur Verfügung. Während \texttt{torch\_dtype} die Initialisierung des Modells beschreibt, beeinflussen diese Parameter die Datentypen während des Trainings.
 Es kann nur eine der beiden Optionen verwendet werden. Im Falle des Trainings mit Nvidia V100 Grafikkarten und der \ac{zero} Stufe 2 Optimierung wurde FP16 aufgrund von Architekturanforderungen verwendet. Beim Training mit Nvidia A30 Grafikkarten und \ac{zero} Stufe 3 Optimierung wurde BF16 verwendet.
 Die Zahl 16 steht hier für die Anzahl der Bits pro Wert, was wiederum einen großen Einfluss auf den Speicherbedarf und die Genauigkeit des Modells hat.
 Datentypen sollten nicht geändert werden, wenn ein vortrainiertes Modell weiter trainiert wird, da eine Änderung schnell zu Fehlverhalten führen kann.
@@ -291,84 +267,84 @@ Die verwendeten V100 Grafikkarten haben nicht die notwendige Architektur, um BFl
 Dies führt zu Problemen beim Training und beschränkt die maximale Anzahl der Epochen auf 3. Eine genauere Erklärung der Probleme ist in \cref{sec:problem-training} beschrieben.
 Bei der Verwendung von A30-Grafikkarten ist die Nutzung von BFloat16-Werten möglich. Mit diesem Datentyp wurde das Modell zusätzlich auf 5 und 10 Epochen trainiert.\\
 
-Die Parameter \enquote{half\_precision\_backend} und \enquote{ddp\_backend} beschreiben Architekturen für die Ausführung des Trainings mit Hilfe der Bibliothek Transformers.
-Während \enquote{half\_precision\_backend} die Architektur für die Ausführung von Trainingsschritten mit Float16-Werten festlegt, beschreibt \enquote{ddp\_backend} die Kommunikationsarchitektur für den Datenaustausch zwischen \ac{gpu}s.
+Die Parameter \texttt{half\_precision\_backend} und \texttt{ddp\_backend} beschreiben Architekturen für die Ausführung des Trainings mit Hilfe der Bibliothek Transformers.
+Während \texttt{half\_precision\_backend} die Architektur für die Ausführung von Trainingsschritten mit Float16-Werten festlegt, beschreibt \texttt{ddp\_backend} die Kommunikationsarchitektur für den Datenaustausch zwischen \ac{gpu}s.
 Die DeepSpeed Bibliothek verwendet die \enquote{NCCL} Architektur, daher wird diese hier eingestellt.\\
 
 Die DeepSpeed Konfiguration wird separat in einer JSON Datei gespeichert.
-Durch Setzen des Parameters \enquote{deepspeed} verwendet die Transformers Bibliothek die DeepSpeed Bibliothek\footnote{\url{https://www.microsoft.com/en-us/research/project/deepspeed/} abgerufen am 17.8.2023} zur Ausführung des Trainings.
-Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Konfiguration der Trainingsparameter, wie zum Beispiel \enquote{batch\_size}, \enquote{gradient\_accumulation\_steps} und \enquote{learning\_rate}.\\
+Durch Setzen des Parameters \texttt{deepspeed} verwendet die Transformers Bibliothek \citep{transformers} die DeepSpeed Bibliothek \citep{deepspeed} zur Ausführung des Trainings.
+Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Konfiguration der Trainingsparameter, wie zum Beispiel \texttt{batch\_size}, \texttt{gradient\_accumulation\_steps} und \texttt{learning\_rate}.\\
 
 \subsection{Konfiguration des DeepSpeed Trainings}\label{sec:deepspeed-config}
 \begin{table}
     \centering
     \begin{tabular}{ll}
         \toprule
-        \textbf{Parameter}&\textbf{Wert}\\
+        \textbf{Parameter}                  & \textbf{Wert} \\
         \midrule
-        \multicolumn{2}{c}{fp16}\\
-        enabled&auto\\
-        loss\_scale&$0$\\
-        loss\_scale\_window&$1000$\\
-        initial\_scale\_power&$16$\\
-        hysteresis&$2$\\
-        min\_loss\_scale&$1$\\
+        \multicolumn{2}{c}{fp16}                            \\
+        enabled                             & auto          \\
+        loss\_scale                         & $0$           \\
+        loss\_scale\_window                 & $1000$        \\
+        initial\_scale\_power               & $16$          \\
+        hysteresis                          & $2$           \\
+        min\_loss\_scale                    & $1$           \\
         \midrule
-        \multicolumn{2}{c}{bf16}\\
-        enabled&true|false\\
+        \multicolumn{2}{c}{bf16}                            \\
+        enabled                             & true|false    \\
         \midrule
-        \multicolumn{2}{c}{optimizer}\\
-        type&AdamW\\
-        lr&auto\\
-        betas&auto\\
-        eps&auto\\
-        weight\_decay&auto\\
+        \multicolumn{2}{c}{optimizer}                       \\
+        type                                & AdamW         \\
+        lr                                  & auto          \\
+        betas                               & auto          \\
+        eps                                 & auto          \\
+        weight\_decay                       & auto          \\
         \midrule
-        \multicolumn{2}{c}{scheduler}\\
-        type&WarmupLR\\
-        warmup\_min\_lr&auto\\
-        warmup\_max\_lr&auto\\
-        warmup\_num\_steps&auto\\
+        \multicolumn{2}{c}{scheduler}                       \\
+        type                                & WarmupLR      \\
+        warmup\_min\_lr                     & auto          \\
+        warmup\_max\_lr                     & auto          \\
+        warmup\_num\_steps                  & auto          \\
         \midrule
-        \multicolumn{2}{c}{zero\_optimizations}\\
-        stage&$2$\\
-        contiguous\_gradients&true\\
-        overlap\_comm&true\\
-        reduce\_scatter&true\\
-        reduce\_bucket\_size&\num{2e8}\\
-        allgather\_bucket\_size&\num{2e8}\\
+        \multicolumn{2}{c}{zero\_optimizations}             \\
+        stage                               & $2$           \\
+        contiguous\_gradients               & true          \\
+        overlap\_comm                       & true          \\
+        reduce\_scatter                     & true          \\
+        reduce\_bucket\_size                & \num{2e8}     \\
+        allgather\_bucket\_size             & \num{2e8}     \\
         \midrule
-        \multicolumn{2}{c}{offload\_optimizer}\\
-        device&cpu\\
-        pin\_memory&true\\
+        \multicolumn{2}{c}{offload\_optimizer}              \\
+        device                              & cpu           \\
+        pin\_memory                         & true          \\
         \midrule
-        gradient\_clipping&$1$\\
-        steps\_per\_print&$500$\\
-        wall\_clock\_breakdown&false\\
-        train\_micro\_batch\_size\_per\_gpu&auto\\
+        gradient\_clipping                  & $1$           \\
+        steps\_per\_print                   & $500$         \\
+        wall\_clock\_breakdown              & false         \\
+        train\_micro\_batch\_size\_per\_gpu & auto          \\
     \end{tabular}
-    \caption{DeepSpeed Konfiguration}\label{tab:deepspeed-config}
+    \caption[DeepSpeed Konfiguration]{DeepSpeed Konfiguration mit Benutzung der \ac{zero} Stufe 2 Optimierung. Für diese Stufe wurde der Parameter \texttt{enabled} unter der Rubrik \texttt{bf16} auf \enquote{false} gesetzt. Für die Nutzung der \ac{zero} Stufe 3 Optimierung ist dieser Wert auf \enquote{true} gesetzt.}\label{tab:deepspeed-config}
 \end{table}
 
 \begin{table}
     \centering
     \begin{tabular}{ll}
         \toprule
-        \textbf{Parameter}&\textbf{Wert}\\
+        \textbf{Parameter}                    & \textbf{Wert} \\
         \midrule
-        \multicolumn{2}{c}{zero\_optimization}\\
-        stage&$3$\\
-        contiguous\_gradients&true\\
-        stage3\_max\_live\_parameter&\num{1e9}\\
-        stage3\_max\_resuse\_distance&\num{1e9}\\
-        stage3\_prefetch\_bucket\_size&\num{1e7}\\
-        stage3\_param\_persistence\_threshold&\num{1e5}\\
-        reduce\_bucket\_size&\num{1e7}\\
-        sub\_group\_size&\num{1e9}\\
+        \multicolumn{2}{c}{zero\_optimization}                \\
+        stage                                 & $3$           \\
+        contiguous\_gradients                 & true          \\
+        stage3\_max\_live\_parameter          & \num{1e9}     \\
+        stage3\_max\_resuse\_distance         & \num{1e9}     \\
+        stage3\_prefetch\_bucket\_size        & \num{1e7}     \\
+        stage3\_param\_persistence\_threshold & \num{1e5}     \\
+        reduce\_bucket\_size                  & \num{1e7}     \\
+        sub\_group\_size                      & \num{1e9}     \\
         \midrule
-        \multicolumn{2}{c}{offload\_param}\\
-        device&cpu\\
-        pin\_memory&true\\
+        \multicolumn{2}{c}{offload\_param}                    \\
+        device                                & cpu           \\
+        pin\_memory                           & true          \\
     \end{tabular}
     \caption{DeepSpeed \ac{zero} Stufe 3 Konfiguration}\label{tab:deepspeed-config-stage3}
 \end{table}
@@ -379,116 +355,129 @@ Die \ac{zero} Stufe 2 Optimierung beschreibt einen Algorithmus zur Reduzierung d
 Dieser Algorithmus wird in \citet{deepspeed} genauer beschrieben.
 Zusätzlich zu dieser Optimierung werden Teile der Berechnungen auf die \ac{cpu} ausgelagert, um den Speicherbedarf pro \ac{gpu} weiter zu reduzieren.
 Diese Konfiguration wurde beim Training der Modelle mit Nvidia Tesla V100 Grafikkarten verwendet.
-\cref{tab:deepspeed-config-stage3} beschreibt zusätzlich eine Konfiguration des \enquote{zero\_optimization} Abschnitts bei Verwendung der \ac{zero} Stufe 3 Optimierung.
-Hier werden zusätzlich Parameter der Modelle auf die CPU ausgelagert. 
+\cref{tab:deepspeed-config-stage3} beschreibt zusätzlich eine Konfiguration des \texttt{zero\_optimization} Abschnitts bei Verwendung der \ac{zero} Stufe 3 Optimierung.
+Hier werden zusätzlich Parameter der Modelle auf die CPU ausgelagert.
 Diese Konfiguration wurde beim Training der Modelle mit Nvidia Tesla A30 Grafikkarten verwendet.\\\
 
-Der Abschnitt \enquote{fp16} beschreibt den Umgang mit Float16-Werten während des Trainings.
+Der Abschnitt \texttt{fp16} beschreibt den Umgang mit Float16-Werten während des Trainings.
 Dabei handelt es sich um eine dynamische Skalierung der Fehlerwerte (engl. \enquote{Dynamic Loss Scaling}).
 Die Skalierung der Fehlerwerte ist notwendig, da aufgrund der geringeren Genauigkeit von Float16-Werten kleinere Werte der Fehlerwerte gerundet werden und verloren gehen.
 Aus diesem Grund werden die Fehlerwerte bei der Berechnung um mehrere Potenzen skaliert.
 Diese Skalierung kann auch zu einem Überlauf über den Wertebereich des Float16 Datentyps führen.
 DeepSpeed verwendet hier eine automatische, dynamische Skalierung der Fehlerwerte, ohne einen Überlauf zu verursachen.
 Eine genauere Erklärung der Skalierung von Fehlerwerten findet sich im Artikel von \citet{lossscale}.
-Der Parameter \enquote{loss\_scale} beschreibt die konstante Skalierung der Fehlerwerte.
+Der Parameter \texttt{loss\_scale} beschreibt die konstante Skalierung der Fehlerwerte.
 Ist er auf $0$ gesetzt, wird eine dynamische Skalierung verwendet.
-Der Parameter \enquote{loss\_scale\_window} beschreibt das Werteintervall, in dem die dynamische Skalierung erfolgt.
-Der Parameter \enquote{initial\_scale\_power} beschreibt die Größe der initialen Skalierung der Fehlerwerte.
+Der Parameter \texttt{loss\_scale\_window} beschreibt das Werteintervall, in dem die dynamische Skalierung erfolgt.
+Der Parameter \texttt{initial\_scale\_power} beschreibt die Größe der initialen Skalierung der Fehlerwerte.
 Die tatsächliche Skalierung der Fehlerwerte entspricht $2^{initial\_scale\_power}$.
-Der Parameter \enquote{hysteresis} beschreibt die minimale Anzahl von Schritten, in denen die Skalierung nicht verändert werden kann.
-Der Parameter \enquote{min\_loss\_scale} beschreibt die minimale Skalierung der Fehlerwerte.
+Der Parameter \texttt{hysteresis} beschreibt die minimale Anzahl von Schritten, in denen die Skalierung nicht verändert werden kann.
+Der Parameter \texttt{min\_loss\_scale} beschreibt die minimale Skalierung der Fehlerwerte.
 Hier entspricht der Wert $1$ keiner Skalierung.\\
 
-Der Abschnitt \enquote{bf16} beschreibt die Verwendung des binären Datentyps Float16 während des Trainings.
-Ist er auf \enquote{true} gesetzt, so werden die Berechnungen mit dem Datentyp BFloat16 durchgeführt.
-Ist er auf \enquote{false} gesetzt, so werden die Berechnungen mit dem Datentyp Float16 durchgeführt.
+Der Abschnitt \texttt{bf16} beschreibt die Verwendung des binären Datentyps Float16 während des Trainings.
+Ist er auf \texttt{true} gesetzt, so werden die Berechnungen mit dem Datentyp BFloat16 durchgeführt.
+Ist er auf \texttt{false} gesetzt, so werden die Berechnungen mit dem Datentyp Float16 durchgeführt.
 Bei einem Training mit V100 Grafikkarten und \ac{zero} Stufe 2 Optimierung ist dieser Parameter auf \enquote{false} gesetzt.
 Im Falle des Trainings mit A30 Grafikkarten und einer \ac{zero} Stufe 3 Optimierung ist dieser Parameter auf \enquote{true} gesetzt.\\
 
-Der Abschnitt \enquote{optimizer} beschreibt die Parameter des Optimierungsalgorithmus. Wie bereits bei den Trainingsparametern beschrieben, wird der AdamW-Optimierer verwendet.
-Die Parameter \enquote{lr}, \enquote{betas}, \enquote{eps} und \enquote{weight\_decay} müssen mit den in den Trainingsparametern eingestellten Werten übereinstimmen.
+Der Abschnitt \texttt{optimizer} beschreibt die Parameter des Optimierungsalgorithmus. Wie bereits bei den Trainingsparametern beschrieben, wird der AdamW-Optimierer verwendet.
+Die Parameter \texttt{lr}, \texttt{betas}, \texttt{eps} und \texttt{weight\_decay} müssen mit den in den Trainingsparametern eingestellten Werten übereinstimmen.
 Aus diesem Grund werden diese Parameter vor Beginn des Trainings auf \enquote{auto} gesetzt und durch die Transformers-Bibliothek ergänzt.\\
 
-Der Abschnitt \enquote{scheduler} beschreibt die Parameter des Lernratenplaners. Der Lernratenplaner ist für die Anpassung der Lernrate während des Trainings verantwortlich.
+Der Abschnitt \texttt{scheduler} beschreibt die Parameter des Lernratenplaners. Der Lernratenplaner ist für die Anpassung der Lernrate während des Trainings verantwortlich.
 Er dient in diesem Fall zur Durchführung der Aufwärmphase. Ist die Aufwärmphase in den Trainingsargumenten deaktiviert, so wird die Bibliothek diese Phase auch in der DeepSpeed-Konfiguration deaktivieren.\\
 
-Der Abschnitt \enquote{zero\_optimizations} beschreibt die Parameter der \ac{zero} Stufe 2 Optimierung.
+Der Abschnitt \texttt{zero\_optimizations} beschreibt die Parameter der \ac{zero} Stufe 2 Optimierung.
 Die \ac{zero} Optimierung wird unter \citet{deepspeed} genauer beschrieben.
-Der Parameter \enquote{contiguous\_gradients} beschreibt die Auslagerung der Gradienten in einen zusammenhängenden Speicherbereich während der Berechnung.
+Der Parameter \texttt{contiguous\_gradients} beschreibt die Auslagerung der Gradienten in einen zusammenhängenden Speicherbereich während der Berechnung.
 Dadurch wird eine Fragmentierung des Speichers während der Backpropagation vermieden.
-Mit Hilfe des Parameters \enquote{overlap\_comm} wird versucht, die Gradienten während der Berechnung der Backpropagation zu reduzieren, um eine schnellere Gesamtberechnung zu ermöglichen.
-\enquote{reduce\_scatter} beschreibt die Verwendung einer speziellen Reduktionsmethode \enquote{Reduce Scatter} zur Mittelung von Gradienten.
-In Kombination mit den Parametern \enquote{reduce\_bucket\_size} und \enquote{allgather\_bucket\_size} wird die maximale Anzahl der in einem Schritt zu reduzierenden Gradienten festgelegt.
+Mit Hilfe des Parameters \texttt{overlap\_comm} wird versucht, die Gradienten während der Berechnung der Backpropagation zu reduzieren, um eine schnellere Gesamtberechnung zu ermöglichen.
+\texttt{reduce\_scatter} beschreibt die Verwendung einer speziellen Reduktionsmethode \enquote{Reduce Scatter} zur Mittelung von Gradienten.
+In Kombination mit den Parametern \texttt{reduce\_bucket\_size} und \texttt{allgather\_bucket\_size} wird die maximale Anzahl der in einem Schritt zu reduzierenden Gradienten festgelegt.
 Diese Option reduziert den Speicherbedarf während des Trainings erheblich.
-Mit Hilfe der Option \enquote{offload\_optimizer} wird der Zustand und die Berechnung des Optimierers auf die CPU ausgelagert.
+Mit Hilfe der Option \texttt{offload\_optimizer} wird der Zustand und die Berechnung des Optimierers auf die CPU ausgelagert.
 Optional kann dies für sehr große Modelle auch auf eine NVMe SSD erfolgen.
-Mit Hilfe der Einstellung \enquote{pin\_memory} wird der für die Berechnung benötigte Speicher auf der CPU reserviert.
+Mit Hilfe der Einstellung \texttt{pin\_memory} wird der für die Berechnung benötigte Speicher auf der CPU reserviert.
 Dies führt zu einer besseren Performance, aber auch zu zusätzlichem Speicherbedarf.\\
 
-Wie bereits bei den Trainingsargumenten durch den Parameter \enquote{max\_grad\_norm} beschrieben, wird die maximale Größe des Gradienten durch den Parameter \enquote{gradient\_clipping} festgelegt.
+Wie bereits bei den Trainingsargumenten durch den Parameter \texttt{max\_grad\_norm} beschrieben, wird die maximale Größe des Gradienten durch den Parameter \texttt{gradient\_clipping} festgelegt.
 Eine automatische Übernahme der Konfiguration der Trainingsargumente ist in diesem Fall nicht möglich.
 Die Werte müssen dennoch übereinstimmen.\\
 
-Die Parameter \enquote{steps\_per\_print} und \enquote{wall\_clock\_breakdown} beschreiben die Ausgabe von Informationen während des Trainings.
+Die Parameter \texttt{steps\_per\_print} und \texttt{wall\_clock\_breakdown} beschreiben die Ausgabe von Informationen während des Trainings.
 Zusätzlich zur Ausgabe der Transformers-Bibliothek werden alle 500 Iterationen weitere Informationen der DeepSpeed-Bibliothek ausgegeben.
-Mit Hilfe des Parameters \enquote{wall\_clock\_breakdown} wird zusätzlich die Messung der verstrichenen Zeit für jede Phase einer Iteration ausgegeben.\\
+Mit Hilfe des Parameters \texttt{wall\_clock\_breakdown} wird zusätzlich die Messung der verstrichenen Zeit für jede Phase einer Iteration ausgegeben.\\
 
-Der Parameter \enquote{train\_micro\_batch\_size\_per\_gpu} beschreibt die Anzahl der Batches pro GPU.
+Der Parameter \texttt{train\_micro\_batch\_size\_per\_gpu} beschreibt die Anzahl der Batches pro GPU.
 Dieser Wert wird aus den Trainingsargumenten übernommen.\\
 
-Für die Ausführung des Trainings mit der \ac{zero} Stufe 3 Optimierung auf Nvidia Tesla A30 Grafikkarten wurde der Abschnitt \enquote{zero\_optimization} in \cref{tab:deepspeed-config} durch die in \cref{tab:deepspeed-config-stage3} gezeigten Parameter ersetzt. Weggefallen sind hier die Parameter \enquote{overlap\_comm}, \enquote{reduce\_scatter} und \enquote{allgather\_bucket\_size}.
-Zusätzliche Parameter sind hier \enquote{stage3\_max\_live\_params}, \enquote{stage3\_max\_reuse\_distance}, \enquote{stage3\_prefetch\_bucket\_size}, \enquote{stage3\_param\_persistence\_threshold} und \enquote{sub\_group\_size} sowie der Abschnitt \enquote{offload\_param}.
-Der Parameter \enquote{stage3\_max\_live\_params} beschreibt die maximale Anzahl von Gewichten, die während des Trainings in den Speicher der \ac{gpu} geladen werden. Kleinere Werte führen zu weniger Speicherverbrauch, aber auch zu mehr Kommunikation.
-Der Parameter \enquote{stage3\_max\_reuse\_distance} beschreibt, dass ein Gewicht nicht freigegeben werden kann, wenn es innerhalb dieser Anzahl von Gewichten erneut zur Berechnung verwendet wird. Auch hier gilt, dass kleinere Werte zu einer geringeren Speicherbelegung, aber auch zu einer erhöhten Kommunikation führen.
-Der Parameter \enquote{stage3\_prefetch\_bucket\_size} beschreibt die Anzahl der Gewichte, die während des Trainings im Voraus geladen werden.
-Der Parameter \enquote{stage3\_param\_persistence\_threshold} verhindert die Partitionierung von Gewichten, die kleiner als dieser Wert sind.
-Der Parameter \enquote{sub\_group\_size} beschreibt die maximale Anzahl von Parametern, die gleichzeitig für die Berechnung verwendet werden.
+Für die Ausführung des Trainings mit der \ac{zero} Stufe 3 Optimierung auf Nvidia Tesla A30 Grafikkarten wurde der Abschnitt \texttt{zero\_optimization} in \cref{tab:deepspeed-config} durch die in \cref{tab:deepspeed-config-stage3} gezeigten Parameter ersetzt.
+Weggefallene Parameter sind:
+\begin{itemize}
+    \item \texttt{overlap\_comm}
+    \item \texttt{reduce\_scatter}
+    \item \texttt{allgather\_bucket\_size}
+\end{itemize}
+
+Zusätzlich hinzugekommene Parameter sind:
+\begin{itemize}
+    \item \texttt{stage3\_max\_live\_params}
+    \item \texttt{stage3\_max\_reuse\_distance}
+    \item \texttt{stage3\_prefetch\_bucket\_size}
+    \item \texttt{stage3\_param\_persistence\_threshold}
+    \item \texttt{sub\_group\_size}
+\end{itemize}
+sowie der Abschnitt \texttt{offload\_param}.
+Der Parameter \texttt{stage3\_max\_live\_params} beschreibt die maximale Anzahl von Gewichten, die während des Trainings in den Speicher der \ac{gpu} geladen werden. Kleinere Werte führen zu weniger Speicherverbrauch, aber auch zu mehr Kommunikation.
+Der Parameter \texttt{stage3\_max\_reuse\_distance} beschreibt, dass ein Gewicht nicht freigegeben werden kann, wenn es innerhalb dieser Anzahl von Gewichten erneut zur Berechnung verwendet wird. Auch hier gilt, dass kleinere Werte zu einer geringeren Speicherbelegung, aber auch zu einer erhöhten Kommunikation führen.
+Der Parameter \texttt{stage3\_prefetch\_bucket\_size} beschreibt die Anzahl der Gewichte, die während des Trainings im Voraus geladen werden.
+Der Parameter \texttt{stage3\_param\_persistence\_threshold} verhindert die Partitionierung von Gewichten, die kleiner als dieser Wert sind.
+Der Parameter \texttt{sub\_group\_size} beschreibt die maximale Anzahl von Parametern, die gleichzeitig für die Berechnung verwendet werden.
 
 \subsection{Verwendete Bibliotheken zum Training}
 \begin{table}
     \centering
-    \begin{tabular}{cc}
+    \begin{tabular}{ll}
         \toprule
         \textbf{Bibliothek} & \textbf{Version} \\
         \midrule
-        datasets & 2.13.1 \\
-        DeepSpeed & 0.10.0 \\
-        evaluate & 0.4.0 \\
-        PyTorch & 2.0.1 \\
-        sentencepiece & 0.1.96 \\
-        Transformers & 4.31.0 \\
+        datasets            & 2.13.1           \\
+        DeepSpeed           & 0.10.0           \\
+        evaluate            & 0.4.0            \\
+        PyTorch             & 2.0.1            \\
+        sentencepiece       & 0.1.96           \\
+        Transformers        & 4.31.0           \\
         \bottomrule
     \end{tabular}
     \caption{Verwendete Bibliotheken zum Training}
     \label{tab:training-libraries}
 \end{table}
 Die für das Training verwendeten Bibliotheken sind in \cref{tab:training-libraries} aufgelistet.
-Einige der hier aufgeführten Pakete benötigen weitere Abhängigkeiten, die über die verwendete Paketverwaltung \ac{pip}\footnote{\url{https://pip.pypa.io/en/stable/} abgerufen am 19.8.2023} installiert werden.\\
+Einige der hier aufgeführten Pakete benötigen weitere Abhängigkeiten, die über die verwendete Paketverwaltung \ac{pip}\footnote{\url{https://github.com/pypa/pip} abgerufen am 19.8.2023} installiert werden.\\
 
-Zur Verwaltung der Datensätze wird die Bibliothek \enquote{datasets} verwendet.
+Zur Verwaltung der Datensätze wird die Bibliothek \enquote{datasets} verwendet \citep{datasets}.
 Mit Hilfe dieser Bibliothek können Textdateien während des Trainings geladen, in Tokens umgewandelt und in Blöcke gruppiert werden.
 Über eine Schnittstelle zu den Bibliotheken Transformers und DeepSpeed ermöglicht \enquote{datasets} auch die geordnete Zuordnung von Blöcken zu verschiedenen \ac{gpu}s.
-Die Bibliothek stammt von Huggingface\footnote{\url{https://huggingface.co/docs/datasets/index} abgerufen am 19.8.2023}.\\
 
 Die \enquote{DeepSpeed}-Bibliothek wird verwendet, um das Training und die Ausführung auf mehreren \ac{gpu}s zu beschleunigen.
 Sie ermöglicht die Nutzung der \ac{zero}-Optimierung, die es erlaubt, Teile des Trainings und des Modells auf mehrere GPUs, die CPU und lokale NVMe SSDs auszulagern.
-Der Prozess dieser Optimierung wird in \citet{deepspeed} genauer beschrieben.
-Die Bibliothek stammt von Microsoft\footnote{\url{https://www.microsoft.com/en-us/research/project/deepspeed/} abgerufen am 19.8.2023}.\\
+Der Prozess dieser Optimierung und die Vorstellung dieser Bibliothek wird in \citet{deepspeed} genauer beschrieben.
 
 Die Bibliothek \enquote{evaluate} wird zur Berechnung der Modellgenauigkeit verwendet.
-Sie stammt von Huggingface\footnote{\url{https://huggingface.co/docs/evaluate/index} abgerufen am 19.8.2023}.\\
+Sie stammt von Huggingface\footnote{\url{https://github.com/huggingface/evaluate} abgerufen am 19.8.2023}.\\
 
 Die Bibliothek \enquote{PyTorch} bildet die Grundlage für die Berechnung der neuronalen Netze.
-Sie ermöglicht neben der eigentlichen Berechnung aller Trainingsphasen auch die Verwendung von \ac{gpu}s. Die Bibliothek stammt von PyTorch selbst\footnote{\url{https://pytorch.org/} abgerufen am 19.8.2023}.\\
+Sie ermöglicht neben der eigentlichen Berechnung aller Trainingsphasen auch die Verwendung von \ac{gpu}s\citep{pytorch}.\\
 
 Die Bibliothek \enquote{sentencepiece} wird für die Tokenisierung der Texte genutzt.
 Sie wird im Skript nicht explizit verwendet, ist hier aber als zusätzliche Voraussetzung für die Verwendung des Tokenizers des Llama-Modells aufgeführt.
-Diese Bibliothek wurde auch im Artikel von \citet{llama} verwendet und wurde von Google veröffentlicht\footnote{\url{https://github.com/google/sentencepiece} abgerufen am 19.8.2023}.\\
+Diese Bibliothek wurde auch im Artikel von \citet{llama} verwendet und wurde von Google veröffentlicht\citep{sentencepiece}.\\
 
 Die Bibliothek \enquote{Transformers} wird für die Verwaltung der Modelle und die Berechnung der neuronalen Netze verwendet.
 Sie ermöglicht die Verwendung vortrainierter Modelle und bietet einen abstrakten Trainer, der die verschiedenen Phasen des Trainings steuert.
 Außerdem erlaubt sie die Verwendung der Bibliothek \enquote{DeepSpeed} ohne zusätzliche Anpassung.
-Die Bibliothek stammt von Huggingface\footnote{\url{https://huggingface.co/docs/transformers/index} abgerufen am 19.8.2023}.\\
+Die Bibliothek wurde in \citet{transformers} vorgestellt.\\
 
 \subsection{Training auf einem GPU Computing Cluster}\label{sec:training-cluster}
 Das Trainieren der Modelle ist wesentlich rechenintensiver als deren Anwendung.
@@ -525,18 +514,18 @@ Diese konnten durch eine Reduzierung der Blockgröße auf 256 Tokens minimiert w
 Insgesammt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
 Folgende Modelle wurden trainiert:
 \begin{itemize}
-    \item Llama 2 7B mit 1 Epoche auf Nvidia V100 Grafikkarten: \enquote{Llama\_$1$e\_v$100$}
-    \item Llama 2 7B mit 1 Epoche auf Nvidia A30 Grafikkarten: \enquote{Llama\_$1$e\_a$30$}
-    \item Llama 2 7B mit 3 Epochen auf Nvidia V100 Grafikkarten: \enquote{Llama\_$3$e\_v$100$}
-    \item Llama 2 7B mit 3 Epochen auf Nvidia A30 Grafikkarten: \enquote{Llama\_$3$e\_a$30$}
-    \item Llama 2 7B mit 5 Epochen auf Nvidia A30 Grafikkarten: \enquote{Llama\_$5$e\_a$30$}
-    \item Llama 2 7B mit 10 Epochen auf Nvidia A30 Grafikkarten: \enquote{Llama\_$10$e\_a$30$}
+    \item Llama 2 7B mit 1 Epoche auf Nvidia V100 Grafikkarten: \enquote{llama\_$1$e\_v$100$}
+    \item Llama 2 7B mit 1 Epoche auf Nvidia A30 Grafikkarten: \enquote{llama\_$1$e\_a$30$}
+    \item Llama 2 7B mit 3 Epochen auf Nvidia V100 Grafikkarten: \enquote{llama\_$3$e\_v$100$}
+    \item Llama 2 7B mit 3 Epochen auf Nvidia A30 Grafikkarten: \enquote{llama\_$3$e\_a$30$}
+    \item Llama 2 7B mit 5 Epochen auf Nvidia A30 Grafikkarten: \enquote{llama\_$5$e\_a$30$}
+    \item Llama 2 7B mit 10 Epochen auf Nvidia A30 Grafikkarten: \enquote{llama\_$10$e\_a$30$}
 \end{itemize}
 
 Zusätzlich evaluiert wurden die Modelle:
 \begin{itemize}
-    \item GPT4 Modell: \enquote{GPT4}
-    \item Llama 2 7B untrainiert: \enquote{Llama\_$0$e}
+    \item GPT4 Modell: \enquote{gpt4}
+    \item Llama 2 7B untrainiert: \enquote{llama\_$0$e}
 \end{itemize}
 
 \subsection{Probleme während des Trainings}\label{sec:problem-training}
@@ -623,7 +612,7 @@ Der verwendete Evaluationsdatensatz befindet sich im Anhang.\\
         Instruction: You are given a question and a context. Answer the question to your best knowledge.
         Question: <transformed>
         Context: <context>
-        Answer: 
+        Answer:
     \end{verbbox}
     \resizebox{1.2\textwidth}{!}{\theverbbox}
     \caption{Struktur einer Eingabe für das Llama-Modell}\label{fig:llama-input}
@@ -663,7 +652,7 @@ Die Bewertungen wurden mit 3 zusätzlichen Eigenschaften versehen:
 
 \begin{itemize}
     \item \textbf{answered}: Zeigt an, ob die Frage richtig, falsch oder gar nicht beantwortet wurde.
-\item \textbf{points}: Gibt die Anzahl der richtigen Antworten in der generierten Antwort an
+    \item \textbf{points}: Gibt die Anzahl der richtigen Antworten in der generierten Antwort an
     \item \textbf{total\_answers}: Zeigt die Anzahl der gegebenen Antworten in der generierten Antwort an
 \end{itemize}
 
