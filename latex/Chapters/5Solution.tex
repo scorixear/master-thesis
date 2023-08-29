@@ -200,6 +200,7 @@ Das mit dem "true | false" und "false | true" zu erklären würde zb gut in die 
 \todo{ich würde dir echt raten, jede Dezimalzahl in deiner Arbeit mit dem num Macro von siunitx zu setzen. Jedesmal wenn ich in die Arbeit oder einen Vortrag sehe, sehe ich sowohl Zahlen mit Komma als auch mit Punkt als Trenner. Auch die Abstände und Striche dürften dann konsistent sein.}
 Die Konfiguration des Trainings orientiert sich an den \enquote{TrainingArguments}, die ein Teil der Transformers-Bibliothek sind.
 Nicht alle Parameter aus der Bibliothek müssen verwendet werden, weshalb hier nur abweichende Parameter vom Standard beschrieben werden.
+\todo{anhang wird bei mir als .1 angezeigt}
 Eine vollständige Liste der Parameter ist im \cref{app:sec:trainingparameter} zu finden. Die beschriebenen Parameter sind in \cref{tab:training-config} aufgeführt.\\
 
 Der Parameter \enquote{output\_dir} definiert den Speicherpfad für die Ergebnisse des Trainings.
@@ -244,6 +245,8 @@ Zu große Gradienten führen zu schlechteren Trainingsergebnissen und zu einer z
 Um die Gradienten zu begrenzen, wird die L2-Norm des Gradienten berechnet.
 Wenn diese Norm den angegebenen Maximalwert überschreitet, wird der Gradient herunterskaliert, bis er die Maximalnorm nicht mehr überschreitet.\\
 \todo{Da wir keine Mathematiker sind, würde ich in einer Klammer oder Fußnote kurz klarstellen, was eine L2-Norm ist. Heißt die überhaupt auf Deutsch so? Ist der Gradient der Vektor und das ist dann die euklidische Norm, also der Betrag?}
+\todo{Das liest sich alles ziemlich trocken, ab und zu mal ein Bild würde es um einiges auflockern. Zum Beispiel ein Gradient lässt sich doch sicher gut als Bild darstellen, kann ja auch ein bereits existierendes Bild mit Quelle sein.
+Bei Gradient und generell in diesem Kapitel könnte man auch gut auf das Grundlagenkapitel verweisen.}
 
 Der Parameter \enquote{num\_train\_epochs} gibt die Anzahl der zu trainierenden Epochen an.
 Eine Epoche umfasst einen vollständigen Durchlauf des Trainingsdatensatzes.
@@ -495,6 +498,7 @@ Das Trainieren der Modelle ist wesentlich rechenintensiver als deren Anwendung.
 Aus diesem Grund kann ein normaler Computer dafür nicht verwendet werden.
 Stattdessen wurde ein GPU Computing Cluster des Rechenzentrums der Universität Leipzig verwendet.\\
 
+\todo{als textblock unübersichtlich. eine tabelle wäre besser}
 Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit den Namen \enquote{Paula} und \enquote{Clara} zur Verfügung.
 Das Cluster \enquote{Paula} verfügt über 12 Knoten, die jeweils mit 8 Nvidia Tesla A30 \ac{gpu}s ausgestattet sind.
 Eine A30 \ac{gpu} verfügt über \SI{24}{\giga\byte} \ac{gpu} \ac{ram}.
@@ -522,7 +526,9 @@ Eine größere Blockgröße war aufgrund von Speicherfehlern nicht möglich.\\
 Bei der Ausführung des Trainings auf Nvidia v100 GPUs traten in unregelmäßigen Abständen Fehler auf, die in \cref{sec:problem-training} genauer beschrieben sind.
 Diese konnten durch eine Reduzierung der Blockgröße auf 256 Tokens minimiert werden. Eine Epoche bestand somit aus 134 Schritten und dauerte 24:34 Minuten.\\
 
+\todo{spellchecker wie aspell mal durchlaufen lassen}
 Insgesammt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
+\todo{eventuell tabelle besser}
 Folgende Modelle wurden trainiert:
 \begin{itemize}
     \item Llama 2 7B mit 1 Epoche auf Nvidia V100 Grafikkarten: \enquote{Llama\_$1$e\_v$100$}
@@ -542,6 +548,7 @@ Zusätzlich evaluiert wurden die Modelle:
 \subsection{Probleme während des Trainings}\label{sec:problem-training}
 Die Durchführung des Trainings verlief nicht ohne Probleme.
 Ideal wäre es, mehrere Modelle mit unterschiedlicher Epochenzahl und Größe zu trainieren.
+\todo{ich dachte llama 2 33b gibt es nicht, oder kam das nun raus}
 Neben dem Modell Llama 2 7B verspricht ein größeres Modell wie die Modelle 13B, 33B oder 65B deutlich bessere Leistungen sowohl in der Textnachahmung als auch im Wissensverständnis und damit in den Ergebnissen der Evaluation.
 Das Training wurde auf 4 \ac{gpu}s pro Knoten mit jeweils \SI{32}{\giga\byte} \ac{gpu}-\ac{ram} bzw. \SI{24}{\giga\byte} durchgeführt, wie bereits unter \cref{sec:training-cluster} erwähnt.
 Um größere Modelle zu trainieren, muss diese Anzahl erhöht werden.
@@ -596,6 +603,7 @@ Die Generierung von Antworten auf die erstellten Evaluationsdaten erfolgte auf d
 Für die Textgenerierung durch das GPT4-Modell wurde die offizielle Webseite der OpenAI Foundation verwendet\footnote{\url{https://chat.openai.com/} abgerufen am 19.8.2023}.
 Die Verwendung des untrainierten Llama-Modells sowie der trainierten Modelle mit V100-Grafikkarten erfolgte mit Hilfe eines eigens erstellten Skripts.
 Dieses Skript wurde größtenteils für die Nutzung der mit A30-Grafikkarten trainierten Modelle verwendet, musste jedoch modifiziert werden, da die Generierung ausschließlich auf einer \ac{gpu} erfolgt, die A30-Grafikkarten jedoch mit \SI{24}{\giga\byte} \ac{ram} das Modell nicht vollständig unterstützen konnten.
+\todo{ist das dann 8bit float oder integer oder was für ein datentyp?}
 Aus diesem Grund wurde das Modell im 8-Bit-Modus geladen. Dieser spezielle Modus reduziert alle Gewichte des Modells auf 8-Bit-Werte, was zu einer geringeren Genauigkeit, aber auch zu einem geringeren Speicherbedarf führt.\\
 
 \subsection{Erstellung des Evaluierungsdatensatz}\label{subsec:eval-dataset}
