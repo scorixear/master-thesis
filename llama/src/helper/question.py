@@ -2,8 +2,23 @@ import json_fix
 import json
 from strenum import StrEnum
 
+
 class Question:
-    def __init__(self, question="", transformed="", generated="", true_answer="", num_answers=-1, type="", source="", context="", true_input="", answered=-1, points=-1, total_answers=-1):
+    def __init__(
+        self,
+        question="",
+        transformed="",
+        generated="",
+        true_answer="",
+        num_answers=-1,
+        type="",
+        source="",
+        context="",
+        true_input="",
+        answered=-1,
+        points=-1,
+        total_answers=-1,
+    ):
         self.question: str = question
         self.transformed: str = transformed
         self.generated: str = generated
@@ -16,21 +31,25 @@ class Question:
         self.answered: int = answered
         self.points: int = points
         self.total_answers: int = total_answers
+
     def __json__(self):
         return self.__dict__
-    
+
     @staticmethod
     def read_json(file_name) -> list["Question"]:
         with open(file_name, "r", encoding="utf-8") as json_file:
             data = json.load(json_file, object_hook=lambda d: Question(**d))
         return data
 
+
 class QuestionType(StrEnum):
-    Single="single",
-    Multi="multi",
-    Transfer="transfer"
+    Single = ("single",)
+    Multi = ("multi",)
+    Transfer = "transfer"
+
+
 class QuestionSource(StrEnum):
-    Book="Book",
-    IS_2022_07_18="IS_2022_07_18",
-    IS_2022_09_27="IS_2022_09_27",
-    A_2021="A_2021",
+    Book = ("Book",)
+    IS_2022_07_18 = ("IS_2022_07_18",)
+    IS_2022_09_27 = ("IS_2022_09_27",)
+    A_2021 = ("A_2021",)

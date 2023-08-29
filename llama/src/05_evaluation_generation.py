@@ -1,5 +1,5 @@
 import json
-import json_fix # this import is needed for def __json__(self) although not used
+import json_fix  # this import is needed for def __json__(self) although not used
 import enum
 import argparse
 
@@ -16,17 +16,30 @@ class AnswerType(enum.Enum):
     Returns:
         int: 0 = Not_Answered, 1 = Wrong_Answer, 2 = Correct_Answer
     """
+
     Not_Answered = 0
     Wrong_Answer = 1
     Correct_Answer = 2
+
     def __json__(self):
         return self.value
 
 
 class Question:
-    """Represent one question and their data
-    """
-    def __init__(self, question, transformed, generated, true_answer, num_answers, q_type, source, context, true_input):
+    """Represent one question and their data"""
+
+    def __init__(
+        self,
+        question,
+        transformed,
+        generated,
+        true_answer,
+        num_answers,
+        q_type,
+        source,
+        context,
+        true_input,
+    ):
         self.question = question
         self.transformed = transformed
         self.generated = generated
@@ -38,16 +51,32 @@ class Question:
         self.true_input = true_input
         self.answered = AnswerType.Not_Answered
         self.points: int = 0
+
     def __json__(self):
         return self.__dict__
 
+
 def main():
     # parse arguments
-    parser = argparse.ArgumentParser(description="Evaluation of the generated questions")
+    parser = argparse.ArgumentParser(
+        description="Evaluation of the generated questions"
+    )
     # path to generated question json file
-    parser.add_argument("-d", "--data", type=str, help="Path to the generated questions", default="output/generated.json")
+    parser.add_argument(
+        "-d",
+        "--data",
+        type=str,
+        help="Path to the generated questions",
+        default="output/generated.json",
+    )
     # path to json output file
-    parser.add_argument("-o", "--output", type=str, help="Path to the output file", default="output/evaluated.json")
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        help="Path to the output file",
+        default="output/evaluated.json",
+    )
     args = parser.parse_args()
     # read in generated questions
     input_file = args.data
@@ -55,12 +84,20 @@ def main():
         generated_questions = json.load(json_file)
 
     # prompt for user
-    print("=====================================================================================================")
+    print(
+        "====================================================================================================="
+    )
     print("Evaluation of the generated questions")
-    print("=====================================================================================================")
-    print(" You are given a question, a context, the generated answer and the true answer.\n Compare the generated answer to the true answer.\n First you will be asked if the generated answer is in correlation to the question. Input 0 if no, 1 if yes.\n If you said 1 you will be asked if the answer is correct and how much.\n Each question has a number of answer associated. Input the number of correct answers / facts the generated answer contains.")
+    print(
+        "====================================================================================================="
+    )
+    print(
+        " You are given a question, a context, the generated answer and the true answer.\n Compare the generated answer to the true answer.\n First you will be asked if the generated answer is in correlation to the question. Input 0 if no, 1 if yes.\n If you said 1 you will be asked if the answer is correct and how much.\n Each question has a number of answer associated. Input the number of correct answers / facts the generated answer contains."
+    )
     print(f"Loaded {len(generated_questions)} questions")
-    print("=====================================================================================================")
+    print(
+        "====================================================================================================="
+    )
     input("Press Enter to continue...")
 
     questions = []
@@ -82,22 +119,46 @@ def main():
         true_input = item["true_input"]
 
         # create question object
-        current_question = Question(question, transformed, generated, true_answer, number_of_answers, q_type, source, context, true_input)
+        current_question = Question(
+            question,
+            transformed,
+            generated,
+            true_answer,
+            number_of_answers,
+            q_type,
+            source,
+            context,
+            true_input,
+        )
         questions.append(current_question)
         # print question data
-        print("=====================================================================================================")
+        print(
+            "====================================================================================================="
+        )
         print(f"Question:\n{transformed}")
-        print("=====================================================================================================")
+        print(
+            "====================================================================================================="
+        )
         print(f"Context:\n{context}")
-        print("=====================================================================================================")
+        print(
+            "====================================================================================================="
+        )
         print(f"True Answer:\n{true_answer}")
-        print("=====================================================================================================")
+        print(
+            "====================================================================================================="
+        )
         print(f"Number of Answers:\n{number_of_answers}")
-        print("=====================================================================================================")
+        print(
+            "====================================================================================================="
+        )
         print(f"Generated Answer:\n{generated}")
-        print("=====================================================================================================")
+        print(
+            "====================================================================================================="
+        )
         # ask if answer is correlated to question
-        in_correlation = input("Is this answer in correlation to the question? (Type 0 for no, 1 for yes)\n")
+        in_correlation = input(
+            "Is this answer in correlation to the question? (Type 0 for no, 1 for yes)\n"
+        )
         # if not correlated, set answer type to not answered and points to 0
         if in_correlation != "1":
             current_question.answered = AnswerType.Not_Answered
@@ -106,7 +167,9 @@ def main():
         # if correlated
         while True:
             # ask for points
-            points_str = input(f"How many points would you give this answer? (0 = wrong answered, 1-{number_of_answers} points possible)\n")
+            points_str = input(
+                f"How many points would you give this answer? (0 = wrong answered, 1-{number_of_answers} points possible)\n"
+            )
             # if 0 points, set answer type to wrong answer and points to 0
             if points_str == "0":
                 current_question.answered = AnswerType.Wrong_Answer
@@ -128,22 +191,27 @@ def main():
             else:
                 print("Please input a number")
                 continue
-        print("=====================================================================================================\n\n")
+        print(
+            "=====================================================================================================\n\n"
+        )
     # save the questions
     save_questions(questions, args.output)
+
+
 def save_questions(questions, output_file):
     with open(output_file, "w", encoding="utf-8") as json_file:
         json.dump(questions, json_file, indent=4, ensure_ascii=False)
 
+
 def clear():
-    """Clears terminal screen
-    """
+    """Clears terminal screen"""
     # for windows
-    if name == 'nt':
-        _ = system('cls')
+    if name == "nt":
+        _ = system("cls")
     # for mac and linux(here, os.name is 'posix')
     else:
-        _ = system('clear')
+        _ = system("clear")
+
 
 if __name__ == "__main__":
     main()

@@ -10,10 +10,11 @@ import torch
 import huggingface_hub
 
 # generate on CUDA / GPU if available
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # setup logging
 logger = logging.getLogger(__name__)
+
 
 def main():
     # parse arguments
@@ -21,9 +22,21 @@ def main():
     # used for downloading llama2 model from huggingface hub
     parser.add_argument("-t", "--token", type=str, default="", help="Huggingface token")
     # path to the model directory / model name
-    parser.add_argument("-m", "--model-dir", type=str, default="./trained/7B", help="Path to the model directory")
+    parser.add_argument(
+        "-m",
+        "--model-dir",
+        type=str,
+        default="./trained/7B",
+        help="Path to the model directory",
+    )
     # path to the output file
-    parser.add_argument("-o", "--output-path", type=str, default="./output/generated.csv", help="Path to the output file")
+    parser.add_argument(
+        "-o",
+        "--output-path",
+        type=str,
+        default="./output/generated.csv",
+        help="Path to the output file",
+    )
 
     args = parser.parse_args()
     huggingface_hub.login(token=args.token)
@@ -48,7 +61,19 @@ def main():
     transfer_question_dataset = read_json("data/transfer_questions.json")
 
     # prepare dataframe for output
-    dataframe = pd.DataFrame(columns=["question", "transformed", "generated", "true_answer", "num_answers", "type", "source", "context", "true_input"])
+    dataframe = pd.DataFrame(
+        columns=[
+            "question",
+            "transformed",
+            "generated",
+            "true_answer",
+            "num_answers",
+            "type",
+            "source",
+            "context",
+            "true_input",
+        ]
+    )
 
     model_dir = args.model_dir
     output_file = args.output_path
@@ -67,24 +92,54 @@ def main():
     tokenizer.eos_token_id = 2
 
     # and generate answers to each question file
-    generate_for_single_csv(tokenizer, model, single_question_dataset, "single", dataframe)
-    generate_for_single_csv(tokenizer, model, multi_question_dataset, "multi", dataframe)
-    generate_for_single_csv(tokenizer, model, transfer_question_dataset, "transfer", dataframe)
+    generate_for_single_csv(
+        tokenizer, model, single_question_dataset, "single", dataframe
+    )
+    generate_for_single_csv(
+        tokenizer, model, multi_question_dataset, "multi", dataframe
+    )
+    generate_for_single_csv(
+        tokenizer, model, transfer_question_dataset, "transfer", dataframe
+    )
 
     # save the results
     dataframe.to_csv(output_file, index=False)
+
 
 def read_json(file):
     # read in json
     with open(file, "r", encoding="utf-8") as f:
         data = json.load(f)
     # and dump into pandas dataframe
-    df = pd.DataFrame(columns=["question", "transformed", "true_answer", "num_answers", "source", "context"])
+    df = pd.DataFrame(
+        columns=[
+            "question",
+            "transformed",
+            "true_answer",
+            "num_answers",
+            "source",
+            "context",
+        ]
+    )
     for item in data:
-        df.loc[len(df)] = [item["question"], item["transformed"], item["true_answer"], item["num_answers"], item["source"], item["context"]]
+        df.loc[len(df)] = [
+            item["question"],
+            item["transformed"],
+            item["true_answer"],
+            item["num_answers"],
+            item["source"],
+            item["context"],
+        ]
     return df
 
-def generate_for_single_csv(tokenizer: transformers.PreTrainedTokenizer | transformers.PreTrainedTokenizerFast, model, csv_df: pd.DataFrame, csv_type: str, output_df: pd.DataFrame):
+
+def generate_for_single_csv(
+    tokenizer: transformers.PreTrainedTokenizer | transformers.PreTrainedTokenizerFast,
+    model,
+    csv_df: pd.DataFrame,
+    csv_type: str,
+    output_df: pd.DataFrame,
+):
     # for each row in the dataframe of questions
     for index, row in csv_df.iterrows():
         # print progress
@@ -110,11 +165,24 @@ def generate_for_single_csv(tokenizer: transformers.PreTrainedTokenizer | transf
         # generate answers (temperature is doing nothing here?)
         output = model.generate(inputs.input_ids, temperature=0.9, max_new_tokens=512)
         # decode the output
-        generated = tokenizer.batch_decode(output, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
-        generated = generated[len(prompt):]
+        generated = tokenizer.batch_decode(
+            output, skip_special_tokens=True, clean_up_tokenization_spaces=False
+        )[0]
+        generated = generated[len(prompt) :]
         print(f"Generated: {generated}")
         # and save the output
-        output_df.loc[len(output_df)] = [question, transformed_question, generated, true_answer, num_answers, csv_type, source, context, prompt]
+        output_df.loc[len(output_df)] = [
+            question,
+            transformed_question,
+            generated,
+            true_answer,
+            num_answers,
+            csv_type,
+            source,
+            context,
+            prompt,
+        ]
+
 
 if __name__ == "__main__":
     main()

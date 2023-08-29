@@ -2,15 +2,19 @@ import os
 from peft.tuners.lora import LoraConfig
 from peft.mapping import get_peft_model
 from peft.utils.other import prepare_model_for_kbit_training
-#from peft.utils.other import prepare_model_for_int8_training
-from transformers import  AutoModelForCausalLM, LlamaTokenizer, BitsAndBytesConfig
+
+# from peft.utils.other import prepare_model_for_int8_training
+from transformers import AutoModelForCausalLM, LlamaTokenizer, BitsAndBytesConfig
+
 # from transformers import AutoTokenizer, AutoConfig
 import torch
-#import torch.nn as nn
+
+# import torch.nn as nn
 import transformers
 from datasets import load_dataset
 import huggingface_hub
-#import bitsandbytes as bnb
+
+# import bitsandbytes as bnb
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
@@ -22,35 +26,34 @@ bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_use_double_quant=True,
     bnb_4bit_quant_type="nf4",
-    bnb_4bit_compute_dtype=torch.bfloat16
+    bnb_4bit_compute_dtype=torch.bfloat16,
 )
 
 # log into huggingface hub
-huggingface_hub.login(token=token) 
+huggingface_hub.login(token=token)
 
 # load the llama2 model with 8bit
 model = AutoModelForCausalLM.from_pretrained(
-    model_name,
-    load_in_8bit=True,
-    device_map="auto"
+    model_name, load_in_8bit=True, device_map="auto"
 )
 
 print(f"Setting special tokens for LLaMA model {model_name}...")
 # set special tokens for padding, begin of sequence and end of sequence
-model.config.pad_token_id=0
-model.config.bos_token_id=1
-model.config.eos_token_id=2
+model.config.pad_token_id = 0
+model.config.bos_token_id = 1
+model.config.eos_token_id = 2
 
 print(f"Loaded model {model_name}")
 tokenizer = LlamaTokenizer.from_pretrained(model_name)
 print(f"Setting special tokens for LLaMA tokenizer {model_name}...")
 # and apply same tokens to tokenizer
-tokenizer.pad_token_id=0
-tokenizer.bos_token_id=1
-tokenizer.eos_token_id=2
+tokenizer.pad_token_id = 0
+tokenizer.bos_token_id = 1
+tokenizer.eos_token_id = 2
 tokenizer.padding_side = "left"
 
 print(f"Loaded tokenizer {model_name}")
+
 
 # prints number of parameters that will be trained
 def print_trainable_parameters(model):
@@ -63,7 +66,8 @@ def print_trainable_parameters(model):
     print(
         f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param}"
     )
-    
+
+
 # define lora configuration
 config = LoraConfig(
     r=16,
@@ -71,7 +75,7 @@ config = LoraConfig(
     target_modules=["q_proj", "v_proj"],
     lora_dropout=0.05,
     bias="none",
-    task_type="CAUSAL_LM"
+    task_type="CAUSAL_LM",
 )
 
 # prepare the model for kbit training
@@ -83,33 +87,33 @@ print_trainable_parameters(model)
 # and load in dataset (no evaluation done here)
 data_files = {}
 dataset_args = {}
-data_files["train"] =  "./input/health_information_systems_epub.md"
+data_files["train"] = "./input/health_information_systems_epub.md"
 extension = "text"
 dataset_args["keep_linebreaks"] = True
 
-raw_dataset = load_dataset(
-    extension,
-    data_files=data_files,
-    **dataset_args
-)
+raw_dataset = load_dataset(extension, data_files=data_files, **dataset_args)
 
 # extract features from dataset
 column_names = list(raw_dataset["train"].features)
 text_column_name = "text" if "text" in column_names else column_names[0]
 
+
 # tokenize the dataset
 def tokenizer_function(examples):
     return tokenizer(examples[text_column_name])
+
+
 tokenized_datasets = raw_dataset.map(
     tokenizer_function,
     batched=True,
     num_proc=1,
     remove_columns=column_names,
     load_from_cache_file=True,
-    desc="Running tokenizer on dataset"
+    desc="Running tokenizer on dataset",
 )
 # limit blocksize to 1024 tokens
 block_size = min(1024, tokenizer.model_max_length)
+
 
 # group the text into block size chunks
 def group_texts(examples):
@@ -122,12 +126,14 @@ def group_texts(examples):
     }
     result["labels"] = result["input_ids"].copy()
     return result
+
+
 lm_datasets = tokenized_datasets.map(
     group_texts,
     batched=True,
     num_proc=1,
     load_from_cache_file=True,
-    desc=f"Grouping texts in chunks of {block_size} tokens"
+    desc=f"Grouping texts in chunks of {block_size} tokens",
 )
 
 train_dataset = lm_datasets["train"]
@@ -145,9 +151,9 @@ trainer = transformers.Trainer(
         fp16=True,
         logging_steps=1,
         num_train_epochs=1,
-        output_dir="./trained/7B-lora-1"
+        output_dir="./trained/7B-lora-1",
     ),
-    data_collator=transformers.DataCollatorForLanguageModeling(tokenizer, mlm=False)
+    data_collator=transformers.DataCollatorForLanguageModeling(tokenizer, mlm=False),
 )
 # adjust model special tokens
 print(f"Setting special tokens for LLaMA model {model_name}...")

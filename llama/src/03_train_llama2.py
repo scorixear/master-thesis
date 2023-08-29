@@ -12,8 +12,19 @@ from datasets import load_dataset
 import evaluate
 
 import transformers
-from transformers import Trainer, TrainingArguments, default_data_collator, is_torch_tpu_available
-from transformers import AutoTokenizer, AutoModelForCausalLM, AutoConfig, HfArgumentParser, set_seed
+from transformers import (
+    Trainer,
+    TrainingArguments,
+    default_data_collator,
+    is_torch_tpu_available,
+)
+from transformers import (
+    AutoTokenizer,
+    AutoModelForCausalLM,
+    AutoConfig,
+    HfArgumentParser,
+    set_seed,
+)
 from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version
 from transformers.testing_utils import CaptureLogger
@@ -23,10 +34,14 @@ import huggingface_hub
 # check if version is on or after 4.32.0.dev0
 check_min_version("4.32.0.dev0")
 # check if datasets version is on or after 1.8.0
-require_version("datasets>=1.8.0", "To fix: pip install -r examples/pytorch/language-modeling/requirements.txt")
+require_version(
+    "datasets>=1.8.0",
+    "To fix: pip install -r examples/pytorch/language-modeling/requirements.txt",
+)
 
 # initialize logger
 logger = logging.getLogger(__name__)
+
 
 # define arguments for this script
 @dataclass
@@ -34,26 +49,34 @@ class ModelArguments:
     """
     Arguments pertaining to which model/config/tokenizer we are going to train from.
     """
-    model_name: str = field(
-        metadata={"help": "Name of the model"}
-    )
+
+    model_name: str = field(metadata={"help": "Name of the model"})
     config_name: Optional[str] = field(
-        default=None, metadata={"help": "Pretrained config path if not the same as model_name"}
+        default=None,
+        metadata={"help": "Pretrained config path if not the same as model_name"},
     )
     tokenizer_name: Optional[str] = field(
-        default=None, metadata={"help": "Pretrained tokenizer path if not the same as model_name"}
+        default=None,
+        metadata={"help": "Pretrained tokenizer path if not the same as model_name"},
     )
     cache_dir: Optional[str] = field(
         default=None,
-        metadata={"help": "Where do you want to store the pretrained models downloaded from huggingface.co"}
+        metadata={
+            "help": "Where do you want to store the pretrained models downloaded from huggingface.co"
+        },
     )
     use_fast_tokenizer: bool = field(
-        default=True, metadata={"help": "Whether to use one of the fast tokenizer (backed by the tokenizers library) or not."}
+        default=True,
+        metadata={
+            "help": "Whether to use one of the fast tokenizer (backed by the tokenizers library) or not."
+        },
     )
 
     model_revision: str = field(
         default="main",
-        metadata={"help": "The specific model version to use (can be a branch name, tag name or commit id)."},
+        metadata={
+            "help": "The specific model version to use (can be a branch name, tag name or commit id)."
+        },
     )
 
     use_auth_token: bool = field(
@@ -68,7 +91,9 @@ class ModelArguments:
 
     hugging_token: str = field(
         default="",
-        metadata={"help": "The token to login to the HuggingFace Hub (neccessary to use lambda2)."},
+        metadata={
+            "help": "The token to login to the HuggingFace Hub (neccessary to use lambda2)."
+        },
     )
 
     torch_dtype: Optional[str] = field(
@@ -91,14 +116,14 @@ class ModelArguments:
         },
     )
 
+
 @dataclass
 class DataTrainingArguments:
     """
     Arguments pertaining to what data we are going to input our model for training and eval.
     """
-    train_file: str = field(
-        metadata={"help": "Path for training file"}
-    )
+
+    train_file: str = field(metadata={"help": "Path for training file"})
     max_train_samples: Optional[int] = field(
         default=None,
         metadata={
@@ -128,7 +153,8 @@ class DataTrainingArguments:
         },
     )
     overwrite_cache: bool = field(
-        default=False, metadata={"help": "Overwrite the cached training and evaluation sets"}
+        default=False,
+        metadata={"help": "Overwrite the cached training and evaluation sets"},
     )
     validation_split_percentage: Optional[int] = field(
         default=5,
@@ -141,23 +167,28 @@ class DataTrainingArguments:
         metadata={"help": "The number of processes to use for the preprocessing."},
     )
     keep_linebreaks: bool = field(
-        default=True, metadata={"help": "Whether to keep line breaks when using TXT files or not."}
+        default=True,
+        metadata={"help": "Whether to keep line breaks when using TXT files or not."},
     )
 
 
 def main():
     # load in script arguments
-    parser = HfArgumentParser((ModelArguments, DataTrainingArguments, TrainingArguments)) # type: ignore
+    parser = HfArgumentParser((ModelArguments, DataTrainingArguments, TrainingArguments))  # type: ignore
     # If we pass only one argument to the script and it's the path to a json file,
     # let's parse it to get our arguments.
     if len(sys.argv) == 2 and sys.argv[1].endswith(".json"):
-        model_args, data_args, training_args = parser.parse_json_file(json_file=os.path.abspath(sys.argv[1]))
+        model_args, data_args, training_args = parser.parse_json_file(
+            json_file=os.path.abspath(sys.argv[1])
+        )
     # otherwise parse into dataclasses
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
     # load deepspeed
-    ds_config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), training_args.deepspeed)
+    ds_config_path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), training_args.deepspeed
+    )
     with open(ds_config_path, "r", encoding="UTF-8") as f:
         ds_config = json.load(f)
     # sometimes deepspeed gets not correctly loaded by HFArgumentParser
@@ -184,7 +215,6 @@ def main():
     transformers.utils.logging.enable_default_handler()
     transformers.utils.logging.enable_explicit_format()
 
-
     # Log on each process the small summary:
     logger.warning(
         f"Process rank: {training_args.local_rank}, device: {training_args.device}, n_gpu: {training_args.n_gpu}"
@@ -197,7 +227,11 @@ def main():
     last_checkpoint = None
     # if output dir is already existent
     # and we do train and not overwrite the output dir
-    if os.path.isdir(training_args.output_dir) and training_args.do_train and not training_args.overwrite_output_dir:
+    if (
+        os.path.isdir(training_args.output_dir)
+        and training_args.do_train
+        and not training_args.overwrite_output_dir
+    ):
         # get the last checkpoint
         last_checkpoint = get_last_checkpoint(training_args.output_dir)
         # if checkpoint cannot be loaded, but something is in the output dir
@@ -215,7 +249,6 @@ def main():
 
     # set seed before initializing model
     set_seed(training_args.seed)
-
 
     # load dataset
     # load_dataset() ensures only one process can concurrently load the dataset
@@ -267,9 +300,13 @@ def main():
         "use_auth_token": True if model_args.use_auth_token else None,
     }
     if model_args.tokenizer_name:
-        tokenizer = AutoTokenizer.from_pretrained(model_args.tokenizer_name, **tokenizer_kwargs)
+        tokenizer = AutoTokenizer.from_pretrained(
+            model_args.tokenizer_name, **tokenizer_kwargs
+        )
     else:
-        tokenizer = AutoTokenizer.from_pretrained(model_args.model_name, **tokenizer_kwargs)
+        tokenizer = AutoTokenizer.from_pretrained(
+            model_args.model_name, **tokenizer_kwargs
+        )
 
     # detect defined dtype
     # for llama2 this is fp16
@@ -307,7 +344,9 @@ def main():
     text_column_name = "text" if "text" in column_names else column_names[0]
 
     # get tokenizer logging
-    tok_logger = transformers.utils.logging.get_logger("transformers.tokenization_utils_base")
+    tok_logger = transformers.utils.logging.get_logger(
+        "transformers.tokenization_utils_base"
+    )
 
     # define inner function for tokenization
     def tokenize_function(examples):
@@ -322,6 +361,7 @@ def main():
                 " before being passed to the model."
             )
         return output
+
     # tokenize the datasets
     with training_args.main_process_first(desc="dataset map tokenization"):
         tokenized_datasets = raw_datasets.map(
@@ -351,7 +391,7 @@ def main():
         # if block_size is larger than the maximum block_size for the model
         # we limit it
         if data_args.block_size > tokenizer.model_max_length:
-             logger.warning(
+            logger.warning(
                 f"The block_size passed ({data_args.block_size}) is larger than the maximum length for the model"
                 f"({tokenizer.model_max_length}). Using block_size={tokenizer.model_max_length}."
             )
@@ -402,6 +442,7 @@ def main():
         if data_args.max_eval_samples is not None:
             max_eval_samples = min(len(eval_dataset), data_args.max_eval_samples)
             eval_dataset = eval_dataset.select(range(max_eval_samples))
+
         # and define logits and metrics functions for evaluation
         def preprocess_logits_for_metrics(logits, labels):
             if isinstance(logits, tuple):
@@ -409,6 +450,7 @@ def main():
             return logits.argmax(dim=-1)
 
         metric = evaluate.load("accuracy")
+
         def compute_metrics(eval_preds):
             preds, labels = eval_preds
             labels = labels[:, 1:].reshape(-1)
@@ -424,7 +466,9 @@ def main():
         eval_dataset=eval_dataset if training_args.do_eval else None,
         tokenizer=tokenizer,
         data_collator=default_data_collator,
-        compute_metrics=compute_metrics if training_args.do_eval and not is_torch_tpu_available() else None,
+        compute_metrics=compute_metrics
+        if training_args.do_eval and not is_torch_tpu_available()
+        else None,
         preprocess_logits_for_metrics=preprocess_logits_for_metrics
         if training_args.do_eval and not is_torch_tpu_available()
         else None,
@@ -448,7 +492,9 @@ def main():
         # calculate metrics
         metrics = train_result.metrics
         max_train_samples = (
-            data_args.max_train_samples if data_args.max_train_samples is not None else len(train_dataset)
+            data_args.max_train_samples
+            if data_args.max_train_samples is not None
+            else len(train_dataset)
         )
         metrics["train_samples"] = min(max_train_samples, len(train_dataset))
         # and log them as well as save them
@@ -461,7 +507,11 @@ def main():
     if training_args.do_eval:
         logger.info("******************\nEvaluation\n******************")
         metrics = trainer.evaluate()
-        max_eval_samples = data_args.max_eval_samples if data_args.max_eval_samples is not None else len(eval_dataset)
+        max_eval_samples = (
+            data_args.max_eval_samples
+            if data_args.max_eval_samples is not None
+            else len(eval_dataset)
+        )
         metrics["eval_samples"] = min(max_eval_samples, len(eval_dataset))
         try:
             perplexity = math.exp(metrics["eval_loss"])
@@ -473,9 +523,11 @@ def main():
         trainer.save_metrics("eval", metrics)
     huggingface_hub.logout()
 
+
 # used by xla_spawn when training on TPUs
 def _mp_fn(index):
     main()
+
 
 if __name__ == "__main__":
     main()
