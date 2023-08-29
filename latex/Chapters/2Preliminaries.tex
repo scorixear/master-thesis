@@ -1,46 +1,6 @@
 %*****************************************
 \chapter{Grundlagen}\label{ch:preliminaries}
 %*****************************************
-% \section*{Inhalte des Kapitels}
-% - Taxonomie von Ammus (\citet{ammus}) % DONE
-% - Transformer Architektur (\citet{attention}) % DONE
-
-% - Neuronales Netz (https://katalog.ub.uni-leipzig.de/Record/0-1066754535) % DONE
-% - Activation Functions (https://katalog.ub.uni-leipzig.de/Record/0-1066754535) % DONE
-% - Backpropagation (https://katalog.ub.uni-leipzig.de/Record/0-1066754535)% DONE
-% - Training eines Modells % DONE
-%     - Batching % DONE
-%     - Optimizer % DONE
-%     - Learning Rate % DONE
-
-% - Feed-Forward Netze
-% - Multi-Head Attention
-% - Encoder und Decoder
-
-% - Input embeddings = Embeddings
-% - Positional Embeddings
-% - Tokenization % DONE
-%     - Byte Pair Encoding % DONE
-
-
-% Sprachmodell Definition (Was ist das)
-
-% - Autoregressive Modelle % DONE
-%     - Self-supervised Learning % DONE
-%     - Pretraining
-%     - continual Pretraining
-%     - Decoder-Based % DONE
-%     - ZeroShot / FewShot
-
-% - Weiterentwicklungen
-%     - Deep Residual Connections % DONE
-%     - DropOut   % DONE
-
-% Wissen, Information, Daten (Winter)
-% FScore, Precision, Recall, Micro und MacroF1 (QUALD9)
-% Question Answering (Aggregation, erst FScore für Frage, dann Durchschnitt, oder andersrum)
-% API, Overfitting
-%************ Sprachmodelle
 Zum Verständnis der in \cref{sec:zielsetzung} genannten Ziele und Ausführungen dieser Arbeit werden in diesem Kapitel Grundlagen zu den verwendeten Begriffen und Konzepten geschaffen.
 Das Kapitel gliedert sich in eine allgemeine Definition von Sprachmodellen in \cref{sec:sprachmodelle} mit einer genaueren Erläuterung der Transformer-spezifischen Architektur.
 Danach folgt eine kurze Einführung in das Thema Neuronale Netze, in der die Funktionsweise von Neuronalen Netzen näher erläutert wird.
@@ -49,7 +9,7 @@ Abschließend werden einige Begriffe aus der Medizinischen Informatik und der Da
 \section{Sprachmodelle}\label{sec:sprachmodelle}
 
 \begin{definition}\label{def:sprachmodell}
-   \textbf{Sprachmodelle} sind neuronale Netze, welche menschliche Sprache verstehen und darauf reagieren.
+    \textbf{Sprachmodelle} sind neuronale Netze, welche menschliche Sprache verstehen und darauf reagieren.
 \end{definition}
 Sprachmodelle basieren auf künstlicher Intelligenz und werden in der Regel durch maschinelles Lernen trainiert.
 Sie werden in einer Vielzahl von Anwendungen eingesetzt, wie z.B. in der Übersetzung,
@@ -108,7 +68,7 @@ Dies setzte eine praktische Grenze für die Tiefe von \ac{nn}s und verhinderte s
 Die Einführung von Dropouts ist die zweite wichtige Änderung zur Weiterentwicklung der Transformer-Architektur.
 \begin{definition}\label{def:dropout}
     \textbf{Dropout} ist eine Methode, die die Trainingszeit von \ac{nn}s verkürzt und die Generalisierung verbessert.
-    \citet{dropout} beschreiben die Methode als das zufällige Aussetzen von Neuronen unabhängig von der Eingabe in einem \ac{nn} während des Trainings. 
+    \citet{dropout} beschreiben die Methode als das zufällige Aussetzen von Neuronen unabhängig von der Eingabe in einem \ac{nn} während des Trainings.
 \end{definition}
 Durch das Aussetzen von Neuronen wird das \ac{nn} gezwungen, sich nicht auf andere Neuronen zu verlassen und somit eine bessere Generalisierung zu erreichen.
 Das Aussetzen erfolgt nur während des Trainings und nicht während der Inferenz.
@@ -124,7 +84,7 @@ Basierend auf der eingeführten Transformer-Architektur wurden verschiedene Mode
 \end{definition}
 Die zentrale Komponente eines Encoder-basierten Modells ist der Encoder.
 Er empfängt die Eingabesequenz und lernt schrittweise, die strukturellen und semantischen Informationen zu erfassen.
-Die so erzeugte Repräsentation des Encoders kann von anderen Modulen oder Schichten des Modells verwendet werden, um verschiedene Aufgaben 
+Die so erzeugte Repräsentation des Encoders kann von anderen Modulen oder Schichten des Modells verwendet werden, um verschiedene Aufgaben
 wie z.B. die Klassifikation zu lösen.
 Encoder-basierte Modelle haben in der Regel keine Decoder-Schicht.\\
 

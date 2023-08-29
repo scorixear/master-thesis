@@ -22,7 +22,7 @@ Das Skript benötigt eine explizite \ac{url}, die nach einer vorgegebenen Zeit v
 \section{Training des Modells}
 Um das Llama-Modell zu trainieren, wird die Transformers Bibliothek von Huggingface verwendet\footnote{\url{https://huggingface.co/docs/transformers/index} abgerufen am 16.8.2023}.
 Das in Python geschriebene Trainingsskript basiert auf dem Beispielskript zum Training von kausalen Sprachmodellen
-aus dem Huggingface Github Repository\footnote{\url{https://github.com/huggingface/transformers/blob/v4.31.0/examples/pytorch/language-modeling/run_clm.py} abgerufen am 16.8.2023}
+aus dem Huggingface GitHub Repository\footnote{\url{https://github.com/huggingface/transformers/blob/v4.31.0/examples/pytorch/language-modeling/run_clm.py} abgerufen am 16.8.2023}
 und wurde teilweise an die Anforderungen des hier durchgeführten Trainings angepasst.
 Die Konfiguration des Trainings gliedert sich in vier Bereiche: Einstellungen für das Modell, Einstellungen für die Trainingsdaten, Einstellungen für das Training selbst und Einstellungen für DeepSpeed.
 Im Folgenden werden diese Einstellungen näher erläutert.
@@ -52,7 +52,7 @@ Llama 2 wurde im Juli 2023 von Meta AI veröffentlicht und stellt eine generelle
 Neben der nun auf 4096 Tokens erweiterten Kontextlänge (die ursprüngliche Kontextlänge von Llama 1 lag bei 2048 Tokens) stellt Meta AI Llama 2 auch in einer Chat-Version zur Verfügung.
 Die Chat-Version wurde zusätzlich mit Hilfe von Reinforcement Learning aus menschlichem Feedback trainiert und ermöglicht so eine einfachere Nutzung der vortrainierten Modelle im Kontext eines Chatbots.
 Diese Chat-Modelle wurden jedoch nicht zum Training verwendet, da davon ausgegangen wird, dass dieses zusätzliche Training durch das hier durchgeführte Continual Pretraining überschrieben wird.
-Außerdem ermöglicht Huggingface nun die Nutzung der Llama\todo{consistent capitalization} 2 Modelle ohne Download und Konvertierung, so dass die ersten beiden Schritte entfallen.
+Außerdem ermöglicht Huggingface nun die Nutzung der Llama 2 Modelle ohne Download und Konvertierung, so dass die ersten beiden Schritte entfallen.
 Die Llama 2 Modelle wurden unter anderem im Artikel von \citet{llama2} vorgestellt.\\
 
 Der Parameter \texttt{cache\_dir} beschreibt den Speicherort des heruntergeladenen Modells.
@@ -193,7 +193,7 @@ Falls keine Validierung durchgeführt wird, wird der Trainingsdatensatz dennoch 
 
 Während des Trainings und der Validierung werden die Fehlerfunktionen von mehreren Blöcken berechnet und danach gemittelt.
 Daraufhin wird ein Gradient basierend auf dieser kumulativen Fehlerfunktion berechnet, welcher die Gewichte des Modells anpasst.
-Eine detailiertere Beschreibung des Ablaufs findet sich in \cref{subsec:backpropagation}.
+Eine detailliertere Beschreibung des Ablaufs findet sich in \cref{subsec:backpropagation}.
 Die Anzahl der Blöcke pro \enquote{Batch} (siehe \cref{def:batch}) wird durch die Parameter \texttt{per\_device\_train\_batch\_size} und \texttt{per\_device\_eval\_batch\_size} festgelegt.
 Wenn man eine Batch-Größe von 1 und 3 \ac{gpu}s verwendet, erhält man somit 3 Blöcke pro Gradientenberechnung.
 Während höhere Batch-Größen die Berechnungszeit reduzieren können, führen sie auch zu ungenaueren Gradienten und erfordern mehr Speicher auf der \ac{gpu}.
@@ -216,14 +216,12 @@ Diese Werte entsprechen ebenfalls den Werten, die im Artikel zu den Llama-Modell
 AdamW ist in verschiedenen Implementierungen verfügbar. Hier wurde die neueste Implementierung der PyTorch-Bibliothek verwendet.
 Die Funktionsweise des AdamW-Optimierers ist im Artikel von \citet{adamw} genauer beschrieben.\\
 
-Der Parameter \texttt{max\_grad\_norm} beschreibt die maximale Norm des Gradienten, die durch die Gewichte des Modells nicht überschritten werden darf.
+Der Parameter \texttt{max\_grad\_norm} beschreibt die maximale Norm des Gradienten (siehe \cref{subsec:backpropagation}), die durch die Gewichte des Modells nicht überschritten werden darf.
 Eine weitere Bezeichnung, die in der Bibliothek DeepSpeed oder in Artikeln zu Llama-Modellen genutzt wird, ist \texttt{gradient clipping}.
 Er begrenzt die Größe des Gradienten, der in großen neuronalen Netzen explosionsartig ansteigen kann.
 Zu große Gradienten führen zu schlechteren Trainingsergebnissen und zu einer zu starken Anpassung der Gewichte, was wiederum zu einer Oszillation um ein Minimum führt.
 Um die Gradienten zu begrenzen, wird die L2-Norm des Gradienten berechnet\footnote{Die L2-Norm, auch bezeichnet als euklidische Norm, entspricht der pythagoreischen Länge eines Vektors vom Ursprung. Gegeben eines Vektors $(a,b,c)$ entspräche die L2-Norm $\sqrt{a^2+b^2+c^2}$}.
-Wenn diese Norm den angegebenen Maximalwert überschreitet, wird der Gradient herunterskaliert, bis er die Maximalnorm nicht mehr überschreitet.\\
-\todo{Das liest sich alles ziemlich trocken, ab und zu mal ein Bild würde es um einiges auflockern. Zum Beispiel ein Gradient lässt sich doch sicher gut als Bild darstellen, kann ja auch ein bereits existierendes Bild mit Quelle sein.
-    Bei Gradient und generell in diesem Kapitel könnte man auch gut auf das Grundlagenkapitel verweisen.}
+Wenn diese Norm den angegebenen Maximalwert überschreitet, wird der Gradient herunter skaliert, bis er die Maximalnorm nicht mehr überschreitet.\\
 
 Der Parameter \texttt{num\_train\_epochs} gibt die Anzahl der zu trainierenden Epochen an.
 Eine Epoche umfasst einen vollständigen Durchlauf des Trainingsdatensatzes.
@@ -488,11 +486,10 @@ Das Trainieren der Modelle ist wesentlich rechenintensiver als deren Anwendung.
 Aus diesem Grund kann ein normaler Computer dafür nicht verwendet werden.
 Stattdessen wurde ein GPU Computing Cluster des Rechenzentrums der Universität Leipzig verwendet.\\
 
-\todo{als textblock unübersichtlich. eine tabelle wäre besser}
 Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit den Namen \enquote{Paula} und \enquote{Clara} zur Verfügung.
 \begin{table}
     \centering
-    \begin{tabular}[llll]
+    \begin{tabular}{llll}
         \toprule
         \textbf{Cluster} & \textbf{Knoten} & \textbf{Grafikkarten}        & \textbf{GPU-RAM}    \\
         \midrule
@@ -501,11 +498,11 @@ Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit
         Clara            & 23              & 8 Nvidia GeForce RTX 2080 Ti & \SI{11}{\giga\byte} \\
         \bottomrule
     \end{tabular}
-    \caption{ GPU Werte des \ac{gpu} Computing Clusters des Rechenzentrums der Universität Leipzig}\label{tab:gpu-cluster}
+    \caption{ \ac{gpu} Werte des des Rechenzentrums der Universität Leipzig}\label{tab:gpu-cluster}
 \end{table}
 \begin{table}
     \centering
-    \begin{tabular}[llll]
+    \begin{tabular}{llll}
         \toprule
         \textbf{Cluster} & \textbf{CPU}           & \textbf{RAM}         \\
         \midrule
@@ -513,7 +510,7 @@ Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit
         Clara            & 1 AMD(R) EPYC(R) 7551P & \SI{512}{\giga\byte} \\
         \bottomrule
     \end{tabular}
-    \caption{ CPU Werte des \ac{gpu} Computing Clusters des Rechenzentrums der Universität Leipzig}\label{tab:cpu-cluster}
+    \caption{ \ac{cpu} Werte des Rechenzentrums der Universität Leipzig}\label{tab:cpu-cluster}
 \end{table}
 Die technischen Daten der beiden Cluster sind in \cref{tab:gpu-cluster} und \cref{tab:cpu-cluster} aufgelistet.
 Das \enquote{Clara}-Cluster ist hierbei zweigeteilt, da einige Knoten mit Nvidia Tesla V100 Grafikkarten und andere mit Nvidia GeForce RTX 2080 Ti Grafikkarten ausgestattet sind.
@@ -540,7 +537,7 @@ Insgesamt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
 \cref{tab:trained-models} zeigt die in dieser Arbeit trainierten Modelle.
 \begin{table}
     \centering
-    \begin{tabular}[lll]
+    \begin{tabular}{lll}
         \toprule
         \textbf{Epoche} & \textbf{Grafikkarten} & \textbf{Bezeichnung} \\
         \midrule
@@ -704,11 +701,11 @@ Mehrfache identische Eingaben führten bei allen Modellen zu identischen Ausgabe
 Da sich somit ein konstanter Wert von $1,0$ für den Determinismus ergibt, wurde dieser hier nicht weiter ausgewertet.
 Zusätzlich zu den Kriterien wurden Ranglisten der Modelle für verschiedene Parameter erstellt.
 Diese Parameter waren MakroF1, Anzahl der richtig beantworteten Fragen und Anzahl der beantworteten Fragen.
-Alle Kriterien wurden zusätzlich für jeden Fragentyp und jede Fragequelle ausgewertet.
+Alle Kriterien wurden zusätzlich für jeden Fragetyp und jede Fragequelle ausgewertet.
 Die Ergebnisse dieser Auswertung sind in \cref{ch:results} beschrieben.\\
 
 \subsection{Kriterium: Korrektheit}
-Für die Analyse der Korrektheit wurden alle Bewertungen der Fragen pro Modell, Fragentyp und Fragequelle gezählt.
+Für die Analyse der Korrektheit wurden alle Bewertungen der Fragen pro Modell, Fragetyp und Fragequelle gezählt.
 Mit diesen Werten wurde dann der MakroF1-Wert nach den Formeln aus \cref{sec:approach:comparison} berechnet.
 Die Ergebnisse sind als Balkendiagramme dargestellt, wobei jeder Balken ein Modell repräsentiert.\\
 
