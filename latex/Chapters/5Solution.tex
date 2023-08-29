@@ -14,14 +14,16 @@ Die Schritte sind wie folgt gegliedert:
 \end{enumerate}
 
 \section{Herunterladen des Modells}
-Die LLaMA-Modelle werden unter einer nicht-kommerziellen Lizenz für Forschungszwecke zur Verfügung gestellt. Der Zugang zu den Modellen wird im Einzelfall auf Anfrage gewährt. Diese Anfrage wurde im Rahmen dieser Arbeit gestellt und bestätigt.
+Die Llama-Modelle werden unter einer nicht-kommerziellen Lizenz für Forschungszwecke zur Verfügung gestellt. Der Zugang zu den Modellen wird im Einzelfall auf Anfrage gewährt. Diese Anfrage wurde im Rahmen dieser Arbeit gestellt und bestätigt.
 Anschließend kann ein von den Autoren vorbereitetes Skript oder die \ac{api} von Huggingface mit zugehörigem Authentifizierungs-Token verwendet werden, um die trainierten Gewichte des Modells herunterzuladen.
 Das Skript benötigt eine explizite \ac{url}, die nach einer vorgegebenen Zeit von einer Woche nach Freigabe der Modelle ungültig wird. Aus diesem Grund ist diese \ac{url} nicht im Skript enthalten.
 \todo{llama 2 kann man problemlos von huggingface herunterladen ohne Lizenzanfrage}
 
 \section{Training des Modells}
-Um das LLaMA-Modell zu trainieren, wird die Transformers Bibliothek von Huggingface verwendet\footnote{\url{https://huggingface.co/docs/transformers/index} abgerufen am 16.8.2023}.
-Das in Python geschriebene Trainingsskript basiert auf dem Beispielskript zum Training von kausalen Sprachmodellen aus dem Huggingface Github Repository\footnote{\url{https://github.com/huggingface/transformers/blob/v4.31.0/examples/pytorch/language-modeling/run_clm.py} abgerufen am 16.8.2023} und wurde teilweise an die Anforderungen des hier durchgeführten Trainings angepasst.
+Um das Llama-Modell zu trainieren, wird die Transformers Bibliothek von Huggingface verwendet\footnote{\url{https://huggingface.co/docs/transformers/index} abgerufen am 16.8.2023}.
+Das in Python geschriebene Trainingsskript basiert auf dem Beispielskript zum Training von kausalen Sprachmodellen
+aus dem Huggingface Github Repository\footnote{\url{https://github.com/huggingface/transformers/blob/v4.31.0/examples/pytorch/language-modeling/run_clm.py} abgerufen am 16.8.2023}
+und wurde teilweise an die Anforderungen des hier durchgeführten Trainings angepasst.
 Die Konfiguration des Trainings gliedert sich in vier Bereiche: Einstellungen für das Modell, Einstellungen für die Trainingsdaten, Einstellungen für das Training selbst und Einstellungen für DeepSpeed.
 Im Folgenden werden diese Einstellungen näher erläutert.
 \subsection{Konfiguration des Modells}
@@ -46,8 +48,8 @@ Die zur Auswahl und Konfiguration des Modells verwendeten Parameter sind in der 
 
 Der Parameter \texttt{model\_name} entspricht einer Modellauswahl und kann entweder ein relativer Pfad zu einem lokalen Modell oder ein Modellname sein.
 Der Modellname wurde hier auf das Modell Llama 2 7B gesetzt und verweist auf das von Huggingface gehostete Modell in einem mit der Transformers-Bibliothek kompatiblen Format.
-Llama 2 wurde im Juli 2023 von Meta AI veröffentlicht und stellt eine generelle Verbesserung der ursprünglichen LLaMA 1 Modelle dar \citep{llama2}.
-Neben der nun auf 4096 Tokens erweiterten Kontextlänge (die ursprüngliche Kontextlänge von LLaMA 1 lag bei 2048 Tokens) stellt Meta AI Llama 2 auch in einer Chat-Version zur Verfügung.
+Llama 2 wurde im Juli 2023 von Meta AI veröffentlicht und stellt eine generelle Verbesserung der ursprünglichen Llama 1 Modelle dar \citep{llama2}.
+Neben der nun auf 4096 Tokens erweiterten Kontextlänge (die ursprüngliche Kontextlänge von Llama 1 lag bei 2048 Tokens) stellt Meta AI Llama 2 auch in einer Chat-Version zur Verfügung.
 Die Chat-Version wurde zusätzlich mit Hilfe von Reinforcement Learning aus menschlichem Feedback trainiert und ermöglicht so eine einfachere Nutzung der vortrainierten Modelle im Kontext eines Chatbots.
 Diese Chat-Modelle wurden jedoch nicht zum Training verwendet, da davon ausgegangen wird, dass dieses zusätzliche Training durch das hier durchgeführte Continual Pretraining überschrieben wird.
 Außerdem ermöglicht Huggingface nun die Nutzung der Llama\todo{consistent capitalization} 2 Modelle ohne Download und Konvertierung, so dass die ersten beiden Schritte entfallen.
@@ -63,7 +65,7 @@ Diese Option ist optional und wurde hier nicht verwendet.\\
 \texttt{model\_revision} beschreibt die zu verwendende Version des Modells.
 Hier wurde die aktuellste Version verwendet, die durch den Wert \enquote{main} repräsentiert wird.\\
 \texttt{use\_auth\_token} und \texttt{hugging\_token} beschreiben die Verwendung eines Authentifizierungs-Tokens, um Modelle von Huggingface herunterzuladen.
-Diese Authentifizierung ist notwendig, da auch die Llama 2 Modelle unter der gleichen Lizenz wie LLaMA 1 stehen und nur auf Anfrage zur Verfügung gestellt werden.
+Diese Authentifizierung ist notwendig, da auch die Llama 2 Modelle unter der gleichen Lizenz wie Llama 1 stehen und nur auf Anfrage zur Verfügung gestellt werden.
 Um die Modelle mit beschränktem Zugang herunterzuladen, wurde ein Huggingface-Account erstellt, die Anfrage an Meta AI zur Nutzung der Llama 2 Modelle gestellt und bestätigt und ein Authentifizierungstoken generiert.\\
 
 Der Parameter \texttt{torch\_dtype} beschreibt den Datentyp, der für die Darstellung der Modellparameter verwendet wird.
@@ -204,22 +206,24 @@ Eine Iteration bezieht sich auf die Berechnung eines Gradienten.\\
 Die Lernrate des Modells wird durch den Parameter \texttt{learning\_rate} beschrieben.
 Dieser Parameter bestimmt, in welchem Ausmaß die Gewichte des Modells angepasst werden.
 Eine sehr hohe Lernrate kann dazu führen, dass das Modell nicht konvergiert, während eine sehr niedrige Lernrate zu langen Trainingszeiten führt.
-Die Lernrate wurde aus dem Artikel über LLaMA-Modelle von \citet{llama} übernommen.\\
+Die Lernrate wurde aus dem Artikel über Llama-Modelle von \citet{llama} übernommen.\\
 
-In dem Artikel zu den LLaMA-Modellen von \citet{llama} wird ebenfalls ein Gewichtsabnahme-Wert von $0,1$ verwendet, der auch bei diesem Training mithilfe des Parameters \texttt{weight\_decay} eingestellt wurde.
+In dem Artikel zu den Llama-Modellen von \citet{llama} wird ebenfalls ein Gewichtsabnahme-Wert von $0,1$ verwendet, der auch bei diesem Training mithilfe des Parameters \texttt{weight\_decay} eingestellt wurde.
 Die Gewichtsverminderung führt zu einer kontinuierlichen Verringerung der Gewichte des Modells. Dadurch soll verhindert werden, dass es sich zu stark an einzelne Trainingsdaten anpasst.\\
 
 Die Parameter \texttt{adam\_beta1}, \texttt{adam\_beta2} und \texttt{adam\_epsilon} beschreiben die Parameter des verwendeten AdamW-Optimierers, der im Parameter \texttt{optim} eingestellt ist.
-Diese Werte entsprechen ebenfalls den Werten, die im Artikel zu den LLaMA-Modellen von \citet{llama} angegeben sind.
+Diese Werte entsprechen ebenfalls den Werten, die im Artikel zu den Llama-Modellen von \citet{llama} angegeben sind.
 AdamW ist in verschiedenen Implementierungen verfügbar. Hier wurde die neueste Implementierung der PyTorch-Bibliothek verwendet.
 Die Funktionsweise des AdamW-Optimierers ist im Artikel von \citet{adamw} genauer beschrieben.\\
 
 Der Parameter \texttt{max\_grad\_norm} beschreibt die maximale Norm des Gradienten, die durch die Gewichte des Modells nicht überschritten werden darf.
-Eine weitere Bezeichnung, die in der Bibliothek DeepSpeed oder in Artikeln zu LLaMA-Modellen genutzt wird, ist \texttt{gradient clipping}.
+Eine weitere Bezeichnung, die in der Bibliothek DeepSpeed oder in Artikeln zu Llama-Modellen genutzt wird, ist \texttt{gradient clipping}.
 Er begrenzt die Größe des Gradienten, der in großen neuronalen Netzen explosionsartig ansteigen kann.
 Zu große Gradienten führen zu schlechteren Trainingsergebnissen und zu einer zu starken Anpassung der Gewichte, was wiederum zu einer Oszillation um ein Minimum führt.
 Um die Gradienten zu begrenzen, wird die L2-Norm des Gradienten berechnet\footnote{Die L2-Norm, auch bezeichnet als euklidische Norm, entspricht der pythagoreischen Länge eines Vektors vom Ursprung. Gegeben eines Vektors $(a,b,c)$ entspräche die L2-Norm $\sqrt{a^2+b^2+c^2}$}.
 Wenn diese Norm den angegebenen Maximalwert überschreitet, wird der Gradient herunterskaliert, bis er die Maximalnorm nicht mehr überschreitet.\\
+\todo{Das liest sich alles ziemlich trocken, ab und zu mal ein Bild würde es um einiges auflockern. Zum Beispiel ein Gradient lässt sich doch sicher gut als Bild darstellen, kann ja auch ein bereits existierendes Bild mit Quelle sein.
+    Bei Gradient und generell in diesem Kapitel könnte man auch gut auf das Grundlagenkapitel verweisen.}
 
 Der Parameter \texttt{num\_train\_epochs} gibt die Anzahl der zu trainierenden Epochen an.
 Eine Epoche umfasst einen vollständigen Durchlauf des Trainingsdatensatzes.
@@ -484,14 +488,35 @@ Das Trainieren der Modelle ist wesentlich rechenintensiver als deren Anwendung.
 Aus diesem Grund kann ein normaler Computer dafür nicht verwendet werden.
 Stattdessen wurde ein GPU Computing Cluster des Rechenzentrums der Universität Leipzig verwendet.\\
 
+\todo{als textblock unübersichtlich. eine tabelle wäre besser}
 Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit den Namen \enquote{Paula} und \enquote{Clara} zur Verfügung.
-Das Cluster \enquote{Paula} verfügt über 12 Knoten, die jeweils mit 8 Nvidia Tesla A30 \ac{gpu}s ausgestattet sind.
-Eine A30 \ac{gpu} verfügt über \SI{24}{\giga\byte} \ac{gpu} \ac{ram}.
-Ebenso besitzt ein Knoten 2 AMD(R) EPYC(R) 7713 CPU Prozessoren mit jeweils 64 Kernen und \SI{1}{\tera\byte} \ac{ram}.
-Das Cluster \enquote{Clara} ist zweigeteilt.
-Teil 1 besteht aus 8 Knoten, die jeweils mit 4 Nvidia Tesla V100 \ac{gpu}s ausgestattet sind. Eine V100 \ac{gpu} verfügt über \SI{32}{\giga\byte} \ac{gpu} \ac{ram}.
-Teil 2 besteht aus 23 Knoten mit jeweils 8 Nvidia GeForce RTX 2080 Ti \ac{gpu}s. Eine RTX 2080 Ti \ac{gpu} verfügt über \SI{11}{\giga\byte} \ac{gpu} \ac{ram}.
-Jeder Knoten ist ausgestattet mit einer AMD(R) EPYC(R) 7551P CPU mit 32 Kernen und \SI{512}{\giga\byte} \ac{ram}.
+\begin{table}
+    \centering
+    \begin{tabular}[llll]
+        \toprule
+        \textbf{Cluster} & \textbf{Knoten} & \textbf{Grafikkarten}        & \textbf{GPU-RAM}    \\
+        \midrule
+        Paula            & 12              & 8 Nvidia Tesla A30           & \SI{24}{\giga\byte} \\
+        Clara            & 8               & 4 Nvidia Tesla V100          & \SI{32}{\giga\byte} \\
+        Clara            & 23              & 8 Nvidia GeForce RTX 2080 Ti & \SI{11}{\giga\byte} \\
+        \bottomrule
+    \end{tabular}
+    \caption{ GPU Werte des \ac{gpu} Computing Clusters des Rechenzentrums der Universität Leipzig}\label{tab:gpu-cluster}
+\end{table}
+\begin{table}
+    \centering
+    \begin{tabular}[llll]
+        \toprule
+        \textbf{Cluster} & \textbf{CPU}           & \textbf{RAM}         \\
+        \midrule
+        Paula            & 2 AMD(R) EPYC(R) 7713  & \SI{1}{\tera\byte}   \\
+        Clara            & 1 AMD(R) EPYC(R) 7551P & \SI{512}{\giga\byte} \\
+        \bottomrule
+    \end{tabular}
+    \caption{ CPU Werte des \ac{gpu} Computing Clusters des Rechenzentrums der Universität Leipzig}\label{tab:cpu-cluster}
+\end{table}
+Die technischen Daten der beiden Cluster sind in \cref{tab:gpu-cluster} und \cref{tab:cpu-cluster} aufgelistet.
+Das \enquote{Clara}-Cluster ist hierbei zweigeteilt, da einige Knoten mit Nvidia Tesla V100 Grafikkarten und andere mit Nvidia GeForce RTX 2080 Ti Grafikkarten ausgestattet sind.
 Alle Knoten innerhalb eines Clusters sind über ein \SI{100}{\giga\bit\per\second} Infiniband-Netzwerk miteinander verbunden.
 Die Verbindung zum Internet erfolgt über eine \SI{25}{\giga\bit\per\second} Ethernet-Verbindung.\\
 
@@ -511,16 +536,24 @@ Eine größere Blockgröße war aufgrund von Speicherfehlern nicht möglich.\\
 Bei der Ausführung des Trainings auf Nvidia v100 GPUs traten in unregelmäßigen Abständen Fehler auf, die in \cref{sec:problem-training} genauer beschrieben sind.
 Diese konnten durch eine Reduzierung der Blockgröße auf 256 Tokens minimiert werden. Eine Epoche bestand somit aus 134 Schritten und dauerte 24:34 Minuten.\\
 
-Insgesammt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
-Folgende Modelle wurden trainiert:
-\begin{itemize}
-    \item Llama 2 7B mit 1 Epoche auf Nvidia V100 Grafikkarten: \enquote{llama\_$1$e\_v$100$}
-    \item Llama 2 7B mit 1 Epoche auf Nvidia A30 Grafikkarten: \enquote{llama\_$1$e\_a$30$}
-    \item Llama 2 7B mit 3 Epochen auf Nvidia V100 Grafikkarten: \enquote{llama\_$3$e\_v$100$}
-    \item Llama 2 7B mit 3 Epochen auf Nvidia A30 Grafikkarten: \enquote{llama\_$3$e\_a$30$}
-    \item Llama 2 7B mit 5 Epochen auf Nvidia A30 Grafikkarten: \enquote{llama\_$5$e\_a$30$}
-    \item Llama 2 7B mit 10 Epochen auf Nvidia A30 Grafikkarten: \enquote{llama\_$10$e\_a$30$}
-\end{itemize}
+Insgesamt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
+\cref{tab:trained-models} zeigt die in dieser Arbeit trainierten Modelle.
+\begin{table}
+    \centering
+    \begin{tabular}[lll]
+        \toprule
+        \textbf{Epoche} & \textbf{Grafikkarten} & \textbf{Bezeichnung} \\
+        \midrule
+        1               & 4 Nvidia Tesla V100   & llama\_1e\_v100      \\
+        1               & 4 Nvidia Tesla A30    & llama\_1e\_a30       \\
+        3               & 4 Nvidia Tesla V100   & llama\_3e\_v100      \\
+        3               & 4 Nvidia Tesla A30    & llama\_3e\_a30       \\
+        5               & 4 Nvidia Tesla A30    & llama\_5e\_a30       \\
+        10              & 4 Nvidia Tesla A30    & llama\_10e\_a30      \\
+        \bottomrule
+    \end{tabular}
+    \caption[Trainierte Llama 2 7B Modelle]{Trainierte Llama 2 7B Modelle. Das Training wurde von dem vortrainierten Llama 2 7B Huggingface Modell begonnen.}\label{tab:trained-models}
+\end{table}
 
 Zusätzlich evaluiert wurden die Modelle:
 \begin{itemize}
@@ -531,7 +564,7 @@ Zusätzlich evaluiert wurden die Modelle:
 \subsection{Probleme während des Trainings}\label{sec:problem-training}
 Die Durchführung des Trainings verlief nicht ohne Probleme.
 Ideal wäre es, mehrere Modelle mit unterschiedlicher Epochenzahl und Größe zu trainieren.
-Neben dem Modell Llama 2 7B verspricht ein größeres Modell wie die Modelle 13B, 33B oder 65B deutlich bessere Leistungen sowohl in der Textnachahmung als auch im Wissensverständnis und damit in den Ergebnissen der Evaluation.
+Neben dem Modell Llama 2 7B verspricht ein größeres Modell wie die Modelle 13B oder 70B deutlich bessere Leistungen sowohl in der Textnachahmung als auch im Wissensverständnis und damit in den Ergebnissen der Evaluation.
 Das Training wurde auf 4 \ac{gpu}s pro Knoten mit jeweils \SI{32}{\giga\byte} \ac{gpu}-\ac{ram} bzw. \SI{24}{\giga\byte} durchgeführt, wie bereits unter \cref{sec:training-cluster} erwähnt.
 Um größere Modelle zu trainieren, muss diese Anzahl erhöht werden.
 Die Trainingsparameter erlauben hier eine einfache Erweiterung auf zusätzliche Grafikkarten.
@@ -585,7 +618,7 @@ Die Generierung von Antworten auf die erstellten Evaluationsdaten erfolgte auf d
 Für die Textgenerierung durch das GPT4-Modell wurde die offizielle Webseite der OpenAI Foundation verwendet\footnote{\url{https://chat.openai.com/} abgerufen am 19.8.2023}.
 Die Verwendung des untrainierten Llama-Modells sowie der trainierten Modelle mit V100-Grafikkarten erfolgte mit Hilfe eines eigens erstellten Skripts.
 Dieses Skript wurde größtenteils für die Nutzung der mit A30-Grafikkarten trainierten Modelle verwendet, musste jedoch modifiziert werden, da die Generierung ausschließlich auf einer \ac{gpu} erfolgt, die A30-Grafikkarten jedoch mit \SI{24}{\giga\byte} \ac{ram} das Modell nicht vollständig unterstützen konnten.
-Aus diesem Grund wurde das Modell im 8-Bit-Modus geladen. Dieser spezielle Modus reduziert alle Gewichte des Modells auf 8-Bit-Werte, was zu einer geringeren Genauigkeit, aber auch zu einem geringeren Speicherbedarf führt.\\
+Aus diesem Grund wurde das Modell im 8-Bit-Modus geladen. Dieser spezielle Modus reduziert alle Gewichte des Modells auf 8-Bit-Floatwerte, was zu einer geringeren Genauigkeit, aber auch zu einem geringeren Speicherbedarf führt.\\
 
 \subsection{Erstellung des Evaluierungsdatensatz}\label{subsec:eval-dataset}
 Vor der Generierung der Antworten mussten die in den jeweiligen Klausuren gestellten Fragen aus \cref{sec:approach:questions} transformiert werden.
