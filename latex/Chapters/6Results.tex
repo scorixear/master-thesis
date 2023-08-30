@@ -10,6 +10,14 @@
 \newcommand{\lsa}{\texttt{llama$2$\_$5$e\_a$30$}}
 \newcommand{\lioa}{\texttt{llama$2$\_$10$e\_a$30$}}
 
+\newcommand{\pic}[4][1]{
+    \begin{figure}
+        \makebox[\textwidth][c]{\includegraphics[width=#1\textwidth]{#2}}
+        \caption{#3}
+        \label{#4}
+    \end{figure}
+}
+
 In dieser Arbeit wurde die Konzeptionierung und Durchführung eines Continual Pretraining von Llama Modellen beschrieben.
 Diese Modelle wurden anschließend nach den in \cref{sec:approach:comparison} genannten Kriterien Korrektheit, Erklärbarkeit, Fragenverständnis und Robustheit verglichen.
 Die Durchführung dieses Vergleichs ist in \cref{sec:evaluation} gezeigt.
@@ -37,11 +45,8 @@ Zu vergleichende Modelle sind in \cref{tab:eval-models} gezeigt.
 
 \section{Analyse Korrektheit}\label{sec:results:correctness}
 \subsection{Vergleich totaler Zahlen}
-\begin{figure}
-    \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{results/answers_total.png}}
-    \caption{Vergleich verschiedener Modelle und ihren totalen Leistungen bei der Beantwortung von Fragen.}
-    \label{fig:results:answers_total}
-\end{figure}
+\pic{results/answers_total.png}{Vergleich evaluierter Modelle und ihren totalen Leistungen bei der Beantwortung von Fragen.}{fig:results:answers_total}
+
 \cref{fig:results:answers_total} zeigt die Aufteilung der korrekt, falsch und unbeantworteten Fragen der evaluierten Modelle.
 Alle Modelle erhielten die selben $95$ Fragen mit identischem Kontext.
 Diese absoluten Zahlen zeigen eine grobe Tendenz der Leistungen, widerspiegeln jedoch die wahren Leistungen nicht.
@@ -61,7 +66,7 @@ Hier ist eine Präferenz von keiner Antwort gegenüber einer falschen Antwort zu
 
 \subsection{Stärken und Schwächen der Modelle}
 Zusätzlich zur Gesamtleistung der Modelle fand auch eine Unterteilung in Fragetypen und Fragequellen statt.
-Ähnliche Grafiken wie aus \cref{fig:results:answers_total} sind im Anhang enthalten.
+Ähnliche Grafiken wie aus \cref{fig:results:answers_total} sind im zusätzlichen Material zu dieser Arbeit enthalten.
 Unterschiedene Fragetypen sind Singulär-Fakt Fragen (bezeichnet als \enquote{single}), Multi-Fakten Fragen (bezeichnet als \enquote{multi}) und Transfer-Fragen (bezeichnet als \enquote{transfer}).
 Unterschiedene Fragequellen sind das Buch \enquote{Health Information Systems} von \citet{bb} (bezeichnet als \enquote{book}),
 mündliche Klausurfragen aus dem Modul \enquote{Architektur von Informationssystemen im Gesundheitswesen} vom Jahr 2021 (bezeichnet als \enquote{A\_2021}),
@@ -74,68 +79,58 @@ Vergleichsweise wenige Antworten wurden bei beiden schriftliche Klausuren gegebe
 Das untrainierte Llama Modell zeigte eine eindeutige Stärke bei Multi-Fakten Fragen mit \SI{39}{\percent} richtigen Antworten und konnte \SI{27}{\percent} der mündlichen Klausurfragen beantworten.
 Die schlechteste Kategorien zeigten sich als Singulär-Fakt Fragen mit \SI{20}{\percent} und Fragen aus dem Buch mit \SI{24}{\percent} korrekten Antworten.\\
 
-Während das \liv-Modell grundlegend schlechte Ergebnisse erzielte mit nur 2 korrekt beantworteten Fragen, zeigte das \lia-Modell eine deutlich bessere Leistung bei Multi-Fakten Fragen mit \SI{36}{\percent} und Fragen der mündlichen Klausur mit \SI{40}{\percent} korrekt beantworteter Fragen. Dafür verlor dieses Modell deutlich bei Singulär-Fakt Fragen mit \SI{5}{\percent} und schriftlichen Klausurfragen mit nur korrekten \SI{12}{\percent} korrekten Antworten.\\
+Während das \liv-Modell grundlegend schlechte Ergebnisse erzielte mit nur 2 korrekt beantworteten Fragen,
+zeigte das \lia-Modell eine deutlich bessere Leistung bei Multi-Fakten Fragen mit \SI{36}{\percent}
+und Fragen der mündlichen Klausur mit \SI{40}{\percent} korrekt beantworteter Fragen.
+Dafür verlor dieses Modell deutlich bei Singulär-Fakt Fragen mit \SI{5}{\percent} und schriftlichen Klausurfragen mit nur korrekten \SI{12}{\percent} korrekten Antworten.\\
 
+Modelle trainiert auf 3 Epochen zeigen einen deutlichen Leistungssprung gegenüber einer Epoche.
+Sowohl das \lev-Modell als auch das \lea-Modell verbessern ihre Leistung in Fragetyp und Fragequelle, die zuvor als schwach erkannt wurden.
+Im Falle des \lea-Modells bedeutet dies eine Verdoppelung richtig beantworteter Transfer-Fragen als auch eine Verdoppelung richtig beantworteter Fragen aus dem Buch.
+Diese Leistungssteigerung ist auch in den MakroF1 Werten zu erkennen.\\
 
+Epoche 5 und Epoche 10 enthalten nur Modelle, die mit Hilfe von Nvidia A30 Grafikkarten trainiert wurde.
+Die gezeigten Leistungen verändern sich kaum gegenüber dem \lea-Modell und beinhalten nur minimale Leistungsschwankungen.
+Jedoch verschiebt sich die Aufteilung korrekt beantworteter Fragen in Richtung Fragen aus dem Buch.
+Andere Fragequellen können von den Modellen mit steigender Epoche zunehmend schlechter beantwortet werden, während Fragen aus dem Buch zunehmend besser beantwortet werden.
+Diese Verschiebung deutet auf ein Overfitting hin, da die Fragen aus dem Buch ebenso in den Trainingsdaten enthalten sind.\\
 
 \subsection{Verbesserungen durch Training}
+\pic{results/loss.png}{Vergleich evaluierter Modelle und ihrer Fehlerwerte des Trainingsdatensatzes.}{fig:results:loss}
+\pic{results/validation_loss.png}{Vergleich evaluierter Modelle und ihrer Fehlerwerte des Validierungsdatensatzes.}{fig:results:validation_loss}
+Während der Trainingsphase wurden Modelle mit Hilfe eines Valdierungsdatensatzes evaluiert.
+Diese zusätzliche Evaluation berechnete den Fehlerwert des Modells auf einem gegebenen Datensatz.
+\cref{fig:results:loss} zeigt die Fehlerwerte der Trainingsdaten und \cref{fig:results:validation_loss} die Fehlerwerte der Validierungsdaten für jedes Modell.
+Fehlerwerte beschreiben nicht konkret die Leistung eines Modells, sondern sind ein Indiz über deren Leistungssteigerung und Beginn des Overfittings.
+Ein sinkender Fehlerwert des Trainingsdatensatzes bedeutet, dass das Modell besser den Trainingsdatensatz imitieren kann, während ein sinkender Validierungsdatensatz zeigt, dass das Modell diese Imitation generalisierend auf ungesehenen Text anwenden kann.\\
+
+Beginnt der Fehlerwert des Validierungsdatensatzes zu steigen, so ist dies ein Indiz für ein Overfitting.
+Das Modell verliert demnach die Fähigkeit, ungesehenen Text zu imitieren und beginnt stattdessen den Trainingsdatensatz auswendig zu lernen.
+Dieses Phänomen ist bereits ab Epoche 3 bei beiden Modellarten zu erkennen und setzt sich konstant bis Epoche 10 fort.\\
+
+Zur Beantwortung von Fragen ist das Auswendiglernen des Buches jedoch zu einem gewissen Grad vorteilhaft, da Definitionen von Begriffen oder Aufzählungen von Fakten so besser von dem Modell zitiert werden können.
+Dies ist auch in den Ergebnissen zu erkennen.
+Modelle der Epoche 3 können Fragen aus allen Fragequellen und Fragetypen besser beantworten, da hier die Zitierfähigkeit des Modells gesteigert wird.
+Ein zu hoher Grad des Overfittings führt jedoch zu anderen Problemen.
+Kommen ungesehene Formulierungen, wie zum Beispiel Rechtschreibfehler, vor, so kann das Modell diese nicht mehr korrekt beantworten.
+Diese Problematik steigert sich mit steigender Epoche, weshalb Modelle ab Epoche 5 in ihrer Leistung sinken.\\
+
 \subsection{Vergleich MakroF1}
-\begin{figure}
-    \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{results/makro_total.png}}
-    \caption{Vergleich verschiedener Modelle und Makro F1 Werten bei der Beantwortung von Fragen.}
-    \label{fig:results:makro_total}
-\end{figure}
+\pic{results/makro_total.png}{Vergleich evaluierter Modelle und Makro F1 Werten bei der Beantwortung von Fragen.}{fig:results:makro_total}
+\pic{results/makrof1_total_type_heat.png}{Heatmap der Makro F1 Werte der evaluierten Modelle unterteilt nach Fragetypen.}{fig:results:makrof1_total_type_heat}
+\pic{results/makrof1_total_source_heat.png}{Heatmap der Makro F1 Werte der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:makrof1_total_source_heat}
 \subsection{Zusammenfassung}
 \section{Analyse Erklärbarkeit}\label{sec:results:explainability}
+\pic{results/explained.png}{Vergleich evaluierter Modelle und ihrer Anzahl an Antworten, welche Erklärungen enthalten.}{fig:results:explained}
+\pic{results/explainability_total_type.png}{Heatmap der Erklärbarkeit der evaluierten Modelle unterteilt nach Fragetypen.}{fig:results:explainability_total_type}
+\pic{results/explainability_total_source.png}{Heatmap der Erklärbarkeit der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:explainability_total_source}
 \section{Analyse Fragenverständnis}\label{sec:results:questionunderstanding}
+\pic{results/understood.png}{Vergleich evaluierter Modelle und ihrer Anzahl an verstandenen Fragen.}{fig:results:understood}
+\pic{results/question_understanding_total_type.png}{Heatmap des Fragenverständnisses der evaluierten Modelle unterteilt nach Fragetypen.}{fig:results:question_understanding_total_type}
+\pic{results/question_understanding_total_source.png}{Heatmap des Fragenverständnisses der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:question_understanding_total_source}
 \section{Analyse Robustheit}\label{sec:results:robustness}
+\pic{results/makro_comparison.png}{Vergleich evaluierter Modelle und ihrere MakroF1 Werte nach der Einführung von Rechtschreibfehlern.}{fig:results:makro_comparison}
 \section{Zusammenfassung}\label{sec:results:summary}
-% Stärken von LLaMA v100 1 Epochen
-% generell Schlecht
-
-% Schwächen von LLaMA v100 1 Epochen
-% ---
-
-% Stärken von LLaMA a30 1 Epochen
-% Multi 36%
-% A2021: 40%
-
-% Schwächen von LLaMA a30 1 Epochen
-% Single: 5%
-% IS_2022_09_27: 12%
-
-
-% Stärken von LLaMA v100 3 Epochen
-% Transfer Fragen: 26%
-% IS_2022_09_27: 22%
-
-% Schwächen von LLaMA v100 3 Epochen
-% Single Fakt Fragen: 17%
-% A_2021: 13%
-
-% Stärken von LLaMA a30 3 Epochen
-% Transfer: 52%
-% A_2021: 54%
-
-% Schwächen von LLaMA a30 3 Epochen
-% Single: 32%
-% IS_2022_09_27: 32%
-
-% Stärken von LLaMA a30 5 Epochen
-% Multi: 52%
-% Book: 63%
-
-% Schwächen von LLaMA a30 5 Epochen
-% Single: 26%
-% IS_2022_09_27: 19%
-
-% Stärken von LLaMA a30 10 Epochen
-% Multi: 47%
-% Book: 60%
-
-% Schwächen von LLaMA a30 10 Epochen
-% Transfer: 26%
-% IS_2022_09_27: 25% (IS_2022_07_18: 22% (wenig fragen))
 
 % Vergleich LLaMA mit GPT4 durchgängig bessere Ergebnisse bei allen Fragenarten
 % Vergleich LLaMA v100 1 Epoche mit anderen Modellen durchgängig schlechtere Ergebnisse bei allen Fragenarten

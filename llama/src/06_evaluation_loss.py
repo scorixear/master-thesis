@@ -2,8 +2,13 @@ import os
 import argparse
 import json
 import matplotlib.pyplot as plt
+import locale
 
 from helper.plot_helper import PlotParams
+
+locale.setlocale(locale.LC_NUMERIC, "de_DE")
+plt.rcdefaults()
+plt.rcParams["axes.formatter.use_locale"] = True
 
 
 def main():
@@ -59,13 +64,13 @@ def main():
     axis1.set_ylim(bottom=0)
     axis2.set_ylim(bottom=0)
     axis1.set_xlabel("Epochen", fontsize=PlotParams.font_size)
-    axis1.set_ylabel("Validierung Fehler", fontsize=PlotParams.font_size)
-    axis1.set_title("Validierung Fehler", fontsize=PlotParams.title_font_size)
+    axis1.set_ylabel("Fehlerwert", fontsize=PlotParams.font_size)
+    axis1.set_title("Validierung Fehlerwert", fontsize=PlotParams.title_font_size)
     axis1.legend(fontsize=PlotParams.font_size)
 
     axis2.set_xlabel("Epochen", fontsize=PlotParams.font_size)
-    axis2.set_ylabel("Training Fehler", fontsize=PlotParams.font_size)
-    axis2.set_title("Training Fehler", fontsize=PlotParams.title_font_size)
+    axis2.set_ylabel("Fehlerwert", fontsize=PlotParams.font_size)
+    axis2.set_title("Training Fehlerwert", fontsize=PlotParams.title_font_size)
     axis2.legend(fontsize=PlotParams.font_size)
 
     fig1.savefig(os.path.join(args.output, "validation_loss.png"))

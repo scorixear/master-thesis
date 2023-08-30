@@ -1,7 +1,9 @@
 import os
 import argparse
+import locale
 
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 import numpy as np
 from pandas import DataFrame
 import pandas as pd
@@ -10,6 +12,10 @@ from helper.question import Question, QuestionSource, QuestionType
 from helper.model_helper import get_model_key, get_model_name
 from helper.heatmap import ModelHeatMap, show_heatmap
 from helper.plot_helper import PlotParams
+
+locale.setlocale(locale.LC_NUMERIC, "de_DE")
+plt.rcdefaults()
+plt.rcParams["axes.formatter.use_locale"] = True
 
 
 def main():
@@ -345,7 +351,7 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
     # create figure of 20, 10 size
     fig = plt.figure(figsize=PlotParams.fig_size)
     # subplots() to get axis object
-    axis = fig.subplots()
+    axis: plt.Axes = fig.subplots()
     # create stacked bars dataset
     answers = {"Korrekt": correct, "Falsch": wrong, "Unbeantwortet": unanswered}
     # create bottom array with 0
@@ -364,6 +370,7 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
         axis.bar_label(bars, fontsize=PlotParams.font_size)
     x_ticks = axis.get_xticks()
     axis.set_xticks(x_ticks, labels=names, rotation=45, fontsize=PlotParams.font_size)
+    axis.yaxis.set_major_locator(MaxNLocator(integer=True))
     axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     # add legend
     axis.legend(loc=(1.01, 0.78), fontsize=PlotParams.font_size)
@@ -391,7 +398,9 @@ def show_makrof1_bars(f1, names, title, file_name):
     axis.set_xticks(x_ticks, labels=names, rotation=45, fontsize=PlotParams.font_size)
     axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     # label bars
-    axis.bar_label(bars, fontsize=PlotParams.font_size)
+    axis.bar_label(
+        bars, labels=["{:n}".format(f) for f in f1], fontsize=PlotParams.font_size
+    )
     axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
     # set y axis label
     axis.set_ylabel("Makro F1", fontsize=PlotParams.font_size)

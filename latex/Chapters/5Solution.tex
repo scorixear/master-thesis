@@ -44,7 +44,7 @@ Im Folgenden werden diese Einstellungen näher erläutert.
     \end{tabular}
     \caption{Parameter zur Auswahl und Konfiguration des Modells}\label{tab:model-config}
 \end{table}
-Die zur Auswahl und Konfiguration des Modells verwendeten Parameter sind in der Tabelle \ref{tab:model-config} aufgelistet.\\
+Die zur Auswahl und Konfiguration des Modells verwendeten Parameter sind in \cref{tab:model-config} aufgelistet.\\
 
 Der Parameter \texttt{model\_name} entspricht einer Modellauswahl und kann entweder ein relativer Pfad zu einem lokalen Modell oder ein Modellname sein.
 Der Modellname wurde hier auf das Modell Llama 2 7B gesetzt und verweist auf das von Huggingface gehostete Modell in einem mit der Transformers-Bibliothek kompatiblen Format.
@@ -101,7 +101,7 @@ Für das Training des Modells Llama 2 wurde das Buch \enquote{Health Information
 Die notwendigen Änderungen am Text sind in \cref{sec:datenkuration} beschrieben.
 Um diese Markdown-Datei in eine für das Modell verständliche Form umzuwandeln, wird die Bibliothek datasets \citep{datasets} von Huggingface verwendet.
 Sie ermöglicht das Laden der Textdatei, die Umwandlung in Tokens und die Aufteilung in Blöcke.
-Die Parameter zur Auswahl und Konfiguration der Trainingsdaten sind in der Tabelle \ref{tab:data-config} aufgelistet.\\
+Die Parameter zur Auswahl und Konfiguration der Trainingsdaten sind in \cref{tab:data-config} aufgelistet.\\
 
 Der Parameter \texttt{train\_file} beschreibt den Pfad zur Trainingsdatei.
 Diese Trainingsdatei wird einmal eingelesen und je nach Anzahl der unter \cref{subsec:config-training} beschriebenen Epochen mehrfach verwendet.\\
@@ -124,8 +124,10 @@ Die Blockgröße kann mit dem Parameter \texttt{block\_size} angepasst werden.\\
 
 Der Parameter \texttt{validation\_split\_percentage} beschreibt den Anteil der Daten, der für die Validierung genutzt werden soll.
 Hier werden \SI{5}{\percent} der Daten für die Validierung verwendet.
-Die Validierung liefert während des Trainings Informationen über die tatsächliche Leistung des Modells im Vergleich zum ungesehenen Text und dient dazu, den Fortschritt des Modells zu messen.\\
-\todo{hierzu war doch noch die frage, ob das bei einem Buch überhaupt so aussagekräftig ist, wenn keine Wiederholungen drin sind}
+Die Validierung liefert während des Trainings Informationen über die tatsächliche Leistung des Modells im Vergleich zum ungesehenen Text und dient dazu, den Fortschritt des Modells zu messen.
+Steigt der errechnete Fehlerwert des Validierungsdatensatz über einen größeren Zeitraum, ist davon auszugehen, dass das Modell beginnt den Status Overfitting zu erreichen.
+Ein Modell, welches einen sehr hohen Fehlerwert des Validierungsdatensatzes, aber einen sehr niedrigen Fehlerwert des Trainingsdatensatzes hat, kann keine ungesehenen Texte mehr verstehen und lediglich den Trainingsdatensatz zitieren.
+Die Analyse der Fehlerwerte über mehrere Epochen ist in \cref{ch:results} aufgeführt.\\
 
 \texttt{preprocessing\_num\_workers} beschreibt die Anzahl der Prozesse, die für die Umwandlung der Textdatei in Tokens verwendet werden sollen.
 Bei sehr großen Datenmengen ist die Umwandlung von Textdateien in Tokens eine sehr umfangreiche Aufgabe.
@@ -179,7 +181,7 @@ Aufgrund der zuvor durchgeführten Datenkuration ist dies jedoch nicht notwendig
 \end{table}
 Die Konfiguration des Trainings orientiert sich an den \enquote{TrainingArguments}, die ein Teil der Transformers-Bibliothek sind.
 Nicht alle Parameter aus der Bibliothek müssen verwendet werden, weshalb hier nur abweichende Parameter vom Standard beschrieben werden.
-Eine vollständige Liste der Parameter ist im \cref{app:sec:trainingparameter} zu finden. Die beschriebenen Parameter sind in \cref{tab:training-config} aufgeführt.\\
+Die beschriebenen Parameter sind in \cref{tab:training-config} aufgeführt.\\
 
 Der Parameter \texttt{output\_dir} definiert den Speicherpfad für die Ergebnisse des Trainings.
 Diese umfassen die trainierten Gewichte des Modells, eine abschließende Auswertung der Validierung, den Status des Trainers sowie gegebenenfalls während des Trainings erstellte Kontrollpunkte.\\
@@ -278,53 +280,55 @@ Durch Setzen des Parameters \texttt{deepspeed} verwendet die Transformers Biblio
 Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Konfiguration der Trainingsparameter, wie zum Beispiel \texttt{batch\_size}, \texttt{gradient\_accumulation\_steps} und \texttt{learning\_rate}.\\
 
 \subsection{Konfiguration des DeepSpeed Trainings}\label{sec:deepspeed-config}
+
 \begin{table}
     \centering
-    \begin{tabular}{ll}
-        \toprule
-        \textbf{Parameter}                  & \textbf{Wert} \\
-        \midrule
-        \multicolumn{2}{c}{fp16}                            \\
-        enabled                             & auto          \\
-        loss\_scale                         & $0$           \\
-        loss\_scale\_window                 & $1000$        \\
-        initial\_scale\_power               & $16$          \\
-        hysteresis                          & $2$           \\
-        min\_loss\_scale                    & $1$           \\
-        \midrule
-        \multicolumn{2}{c}{bf16}                            \\
-        enabled                             & true|false    \\
-        \midrule
-        \multicolumn{2}{c}{optimizer}                       \\
-        type                                & AdamW         \\
-        lr                                  & auto          \\
-        betas                               & auto          \\
-        eps                                 & auto          \\
-        weight\_decay                       & auto          \\
-        \midrule
-        \multicolumn{2}{c}{scheduler}                       \\
-        type                                & WarmupLR      \\
-        warmup\_min\_lr                     & auto          \\
-        warmup\_max\_lr                     & auto          \\
-        warmup\_num\_steps                  & auto          \\
-        \midrule
-        \multicolumn{2}{c}{zero\_optimizations}             \\
-        stage                               & $2$           \\
-        contiguous\_gradients               & true          \\
-        overlap\_comm                       & true          \\
-        reduce\_scatter                     & true          \\
-        reduce\_bucket\_size                & \num{2e8}     \\
-        allgather\_bucket\_size             & \num{2e8}     \\
-        \midrule
-        \multicolumn{2}{c}{offload\_optimizer}              \\
-        device                              & cpu           \\
-        pin\_memory                         & true          \\
-        \midrule
-        gradient\_clipping                  & $1$           \\
-        steps\_per\_print                   & $500$         \\
-        wall\_clock\_breakdown              & false         \\
-        train\_micro\_batch\_size\_per\_gpu & auto          \\
-    \end{tabular}
+    \resizebox{!}{0.35\paperheight}{%
+        \begin{tabular}{ll}
+            \toprule
+            \textbf{Parameter}                  & \textbf{Wert} \\
+            \midrule
+            \multicolumn{2}{c}{fp16}                            \\
+            enabled                             & auto          \\
+            loss\_scale                         & $0$           \\
+            loss\_scale\_window                 & $1000$        \\
+            initial\_scale\_power               & $16$          \\
+            hysteresis                          & $2$           \\
+            min\_loss\_scale                    & $1$           \\
+            \midrule
+            \multicolumn{2}{c}{bf16}                            \\
+            enabled                             & true|false    \\
+            \midrule
+            \multicolumn{2}{c}{optimizer}                       \\
+            type                                & AdamW         \\
+            lr                                  & auto          \\
+            betas                               & auto          \\
+            eps                                 & auto          \\
+            weight\_decay                       & auto          \\
+            \midrule
+            \multicolumn{2}{c}{scheduler}                       \\
+            type                                & WarmupLR      \\
+            warmup\_min\_lr                     & auto          \\
+            warmup\_max\_lr                     & auto          \\
+            warmup\_num\_steps                  & auto          \\
+            \midrule
+            \multicolumn{2}{c}{zero\_optimizations}             \\
+            stage                               & $2$           \\
+            contiguous\_gradients               & true          \\
+            overlap\_comm                       & true          \\
+            reduce\_scatter                     & true          \\
+            reduce\_bucket\_size                & \num{2e8}     \\
+            allgather\_bucket\_size             & \num{2e8}     \\
+            \midrule
+            \multicolumn{2}{c}{offload\_optimizer}              \\
+            device                              & cpu           \\
+            pin\_memory                         & true          \\
+            \midrule
+            gradient\_clipping                  & $1$           \\
+            steps\_per\_print                   & $500$         \\
+            wall\_clock\_breakdown              & false         \\
+            train\_micro\_batch\_size\_per\_gpu & auto          \\
+        \end{tabular}}
     \caption[DeepSpeed Konfiguration]{DeepSpeed Konfiguration mit Benutzung der \ac{zero} Stufe 2 Optimierung. Für diese Stufe wurde der Parameter \texttt{enabled} unter der Rubrik \texttt{bf16} auf \enquote{false} gesetzt. Für die Nutzung der \ac{zero} Stufe 3 Optimierung ist dieser Wert auf \enquote{true} gesetzt.}\label{tab:deepspeed-config}
 \end{table}
 

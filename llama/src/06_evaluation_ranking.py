@@ -1,8 +1,14 @@
 import argparse
+import locale
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 from helper.question import QuestionType, QuestionSource
 from helper.plot_helper import PlotParams
+
+locale.setlocale(locale.LC_NUMERIC, "de_DE")
+plt.rcdefaults()
+plt.rcParams["axes.formatter.use_locale"] = True
 
 
 def main():
@@ -87,6 +93,7 @@ def main():
         "Makro F1",
         "Makro F1",
         f"{args.output}/macrof1.png",
+        False,
     )
     for q_type in QuestionType:
         draw_ranking(
@@ -109,6 +116,7 @@ def main():
             "Makro F1",
             f"Makro F1 ({q_type})",
             f"{args.output}/macrof1_{q_type}.png",
+            False,
         )
     for source in QuestionSource:
         draw_ranking(
@@ -131,11 +139,17 @@ def main():
             "Makro F1",
             f"Makro F1 ({source})",
             f"{args.output}/macrof1_{source}.png",
+            False,
         )
 
 
 def draw_ranking(
-    data: list[int], labels: list[str], y_value: str, title: str, file_name: str
+    data: list[int],
+    labels: list[str],
+    y_value: str,
+    title: str,
+    file_name: str,
+    use_integer_yaxis=True,
 ):
     fig = plt.figure(figsize=PlotParams.fig_size)
     axis = fig.subplots()
@@ -143,6 +157,8 @@ def draw_ranking(
     axis.plot(labels, data, marker="o")
     x_ticks = axis.get_xticks()
     axis.set_xticks(x_ticks, labels=labels, rotation=45, fontsize=PlotParams.font_size)
+    if use_integer_yaxis:
+        axis.yaxis.set_major_locator(MaxNLocator(integer=True))
     axis.tick_params(axis="both", labelsize=PlotParams.font_size)
     axis.set_xlabel("Model", fontsize=PlotParams.font_size)
     axis.set_ylabel(y_value, fontsize=PlotParams.font_size)

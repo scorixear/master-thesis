@@ -1,6 +1,8 @@
 import os
 import argparse
+import locale
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 import numpy as np
 from pandas import DataFrame
 import pandas as pd
@@ -8,6 +10,10 @@ import pandas as pd
 from helper.question import Question, QuestionType, QuestionSource
 from helper.model_helper import get_model_key, get_model_name
 from helper.plot_helper import PlotParams
+
+locale.setlocale(locale.LC_NUMERIC, "de_DE")
+plt.rcdefaults()
+plt.rcParams["axes.formatter.use_locale"] = True
 
 
 def main():
@@ -339,6 +345,7 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
         axis.bar_label(bars, fontsize=PlotParams.font_size)
     x_ticks = axis.get_xticks()
     axis.set_xticks(x_ticks, labels=names, rotation=45, fontsize=PlotParams.font_size)
+    axis.yaxis.set_major_locator(MaxNLocator(integer=True))
     axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     axis.legend(fontsize=PlotParams.font_size)
     axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
@@ -366,7 +373,9 @@ def show_makrof1_bars(f1, names, title, file_name):
     axis.set_xticks(x_ticks, labels=names, rotation=45, fontsize=PlotParams.font_size)
     axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     # and add bar labels
-    axis.bar_label(bars, fontsize=PlotParams.font_size)
+    axis.bar_label(
+        bars, labels=["{:n}".format(f) for f in f1], fontsize=PlotParams.font_size
+    )
     axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
     # set y-axis label
     axis.set_ylabel("Makro F1", fontsize=PlotParams.font_size)
@@ -400,7 +409,12 @@ def show_comparison_bars(f1, evalf1, names, title, file_name):
         # and plot bars at offset
         bars = axis.bar(x_labels + offset, f1_score, width, label=label)
         # add bar labels
-        axis.bar_label(bars, padding=3, fontsize=PlotParams.font_size)
+        axis.bar_label(
+            bars,
+            labels=["{:n}".format(f) for f in f1_score],
+            padding=3,
+            fontsize=PlotParams.font_size,
+        )
         # and increase multiplier
         multiplier += 1
 

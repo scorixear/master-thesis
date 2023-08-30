@@ -1,12 +1,18 @@
 import os
 import argparse
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 import numpy as np
+import locale
 
 from helper.model_helper import get_model_key, get_model_name
 from helper.heatmap import ModelHeatMap, show_heatmap
 from helper.question import Question, QuestionSource, QuestionType
 from helper.plot_helper import PlotParams
+
+locale.setlocale(locale.LC_NUMERIC, "de_DE")
+plt.rcdefaults()
+plt.rcParams["axes.formatter.use_locale"] = True
 
 
 def main():
@@ -223,6 +229,7 @@ def create_plot(
     axis.set_xticks(
         x_ticks, labels=model_names, rotation=45, fontsize=PlotParams.font_size
     )
+    axis.yaxis.set_major_locator(MaxNLocator(integer=True))
     axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     axis.legend(fontsize=PlotParams.font_size)
     axis.set_xlabel("Modell", fontsize=PlotParams.font_size)
