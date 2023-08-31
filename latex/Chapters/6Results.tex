@@ -13,23 +13,21 @@
 \newcommand{\pic}[4][1]{
     \begin{figure}
         \makebox[\textwidth][c]{\includegraphics[width=#1\textwidth]{#2}}
-        \caption{#3}
-        \label{#4}
+        \caption{#3}\label{#4}
     \end{figure}
 }
 \newcommand{\pich}[4][1]{
     \begin{figure}[H]
         \makebox[\textwidth][c]{\includegraphics[width=#1\textwidth]{#2}}
-        \caption{#3}
-        \label{#4}
+        \caption{#3}\label{#4}
     \end{figure}
 }
 
-In dieser Arbeit wurde die Konzeptionierung und Durchführung eines Continual Pretraining von Llama Modellen beschrieben.
+In dieser Arbeit wurde die Konzeption und Implementierung eines kontinuierlichen Pre-Trainings von Llama-Modellen beschrieben.
 Diese Modelle wurden anschließend nach den in \cref{sec:approach:comparison} genannten Kriterien Korrektheit, Erklärbarkeit, Fragenverständnis und Robustheit verglichen.
-Die Durchführung dieses Vergleichs ist in \cref{sec:evaluation} gezeigt.
-In diesem Kapitel werden die Ergebnisse vorgestellt und analysiert, wobei auch hier eine Unterteilung nach den Kriterien vorgenommen wird.
-Zu vergleichende Modelle sind in \cref{tab:eval-models} gezeigt.
+Die Durchführung dieses Vergleichs ist in \cref{sec:evaluation} beschrieben.
+In diesem Kapitel werden die Ergebnisse dargestellt und analysiert, wobei auch hier eine Unterteilung nach den Kriterien erfolgt.
+Die zu vergleichenden Modelle sind in \cref{tab:eval-models} aufgeführt.
 
 \begin{table}
     \centering
@@ -37,14 +35,14 @@ Zu vergleichende Modelle sind in \cref{tab:eval-models} gezeigt.
         \toprule
         \textbf{Modell} & \textbf{Epochen} & \textbf{Grafikkarten} & \textbf{Bezeichnung} \\
         \midrule
-        GPT4            & -                & -                     & \gpt                 \\
-        Llama 2 7B      & 0                & Nvidia Tesla A100     & \lo                  \\
-                        & 1                & Nvidia Tesla V100     & \liv                 \\
-                        & 1                & Nvidia Tesla A30      & \lia                 \\
-                        & 3                & Nvidia Tesla V100     & \lev                 \\
-                        & 3                & Nvidia Tesla A30      & \lea                 \\
-                        & 5                & Nvidia Tesla A30      & \lsa                 \\
-                        & 10               & Nvidia Tesla A30      & \lioa                \\
+        GPT4            & -                & -                     & \gpt{}               \\
+        Llama 2 7B      & 0                & Nvidia Tesla A100     & \lo{}                \\
+                        & 1                & Nvidia Tesla V100     & \liv{}               \\
+                        & 1                & Nvidia Tesla A30      & \lia{}               \\
+                        & 3                & Nvidia Tesla V100     & \lev{}               \\
+                        & 3                & Nvidia Tesla A30      & \lea{}               \\
+                        & 5                & Nvidia Tesla A30      & \lsa{}               \\
+                        & 10               & Nvidia Tesla A30      & \lioa{}              \\
         \bottomrule
     \end{tabular}
     \caption[Evaluierte Modelle]{Evaluierte Modelle, deren Anzahl an Epochen, genutzte Grafikkarten und Bezeichnungen in den Grafiken.}\label{tab:eval-models}
@@ -54,26 +52,27 @@ Zu vergleichende Modelle sind in \cref{tab:eval-models} gezeigt.
 \subsection{Vergleich totaler Zahlen}
 \pich{results/answers_total.png}{Vergleich evaluierter Modelle und ihren totalen Leistungen bei der Beantwortung von Fragen.}{fig:results:answers_total}
 
-\cref{fig:results:answers_total} zeigt die Aufteilung der korrekt, falsch und unbeantworteten Fragen der evaluierten Modelle.
-Alle Modelle erhielten die selben $95$ Fragen mit identischem Kontext.
-Diese absoluten Zahlen zeigen eine grobe Tendenz der Leistungen, widerspiegeln jedoch die wahren Leistungen nicht.
+\cref{fig:results:answers_total} zeigt die Verteilung der richtigen, falschen und unbeantworteten Fragen der evaluierten Modelle.
+Allen Modellen wurden dieselben $95$ Fragen mit identischem Kontext vorgelegt.
+Diese absoluten Zahlen zeigen eine grobe Tendenz der Ergebnisse, spiegeln aber nicht die tatsächlichen Leistungen wider.
 Eine Frage gilt als richtig beantwortet, wenn mindestens eine richtige Antwort gegeben wurde.
-Dies führt zu missverständlich guten Ergebnissen.
-Dennoch ist klar zu erkennen, dass GPT4 einen deutlichen Vorsprung gegenüber den Llama Modellen hat.
-Das untrainierte Llama Modell beantwortete \SI{28}{\percent} der Fragen mit mindestens einer korrekten Antwort, konnte jedoch ebenso einen Großteil der Fragen beanworten und liefert bei \SI{11}{\percent} keine Antwort.\\
+Dies führt zu irreführend guten Ergebnissen.
+Dennoch ist deutlich zu erkennen, dass GPT4 den Llama-Modellen deutlich überlegen ist.
+Das untrainierte Llama-Modell beantwortete \SI{28}{\percent} der Fragen mit mindestens einer richtigen Antwort, konnte aber auch einen Großteil der Fragen beantworten und lieferte bei \SI{11}{\percent} keine Antwort. \\
 
 Das \liv-Modell liefert mit \SI{2}{\percent} die wenigsten korrekten Antworten und zeigt ein generelles Verlernen grundlegender sprachlicher Fähigkeiten.
-Im Gegenzug zeigt das \lia-Modell eine vergleichbare, wenn auch etwas schlechtere Leistung als das untrainierte Modell.\\
+Im Gegensatz dazu zeigt das \lia-Modell eine vergleichbare, wenn auch etwas schlechtere Leistung als das untrainierte Modell.\\
 
-Mit dem \lev-Modell konnte eine deutliche Leistungssteigerung gegenüber einer Epoche erreicht werden, jedoch ist die Gesamtleistung bleibend schlechter als das untrainierte Modell.
-Das \lea-Modell übertraf dafür erstmalig die Leistungen des untrainierten Modells und beantwortete \SI{43}{\percent} der Fragen mit mindestens einer korrekten Antwort.\\
+Mit dem \lev-Modell konnte eine signifikante Leistungssteigerung im Vergleich zu einer Epoche erzielt werden, die Gesamtleistung ist jedoch dauerhaft schlechter als beim untrainierten Modell.
+Das \lea-Modell hingegen übertraf erstmals die Leistung des untrainierten Modells und beantwortete \SI{43}{\percent} der Fragen mit mindestens einer richtigen Antwort.\\
 
-Modelle mit höherer Epoche wurden ausschließlich auf A30 Grafikkarten trainiert und zeigten keine weitere Leistungssteigerung, beantworteten jedoch stetig weniger Fragen.
-Hier ist eine Präferenz von keiner Antwort gegenüber einer falschen Antwort zu erkennen.\\
+Modelle mit höherer Epoche wurden ausschließlich auf A30-Grafikkarten trainiert und zeigten keine weitere Leistungssteigerung, beantworteten aber kontinuierlich weniger Fragen.
+Hier zeigt sich eine Präferenz für keine Antwort gegenüber einer falschen Antwort.\\
 
 \subsection{Stärken und Schwächen der Modelle}\label{subsec:results:correctness:strengths}
-Zusätzlich zur Gesamtleistung der Modelle fand auch eine Unterteilung in Fragetypen und Fragequellen statt.
-Ähnliche Grafiken wie aus \cref{fig:results:answers_total} sind im zusätzlichen Material zu dieser Arbeit enthalten.
+Neben der Gesamtleistung der Modelle wurde auch eine Unterteilung nach Fragetypen und Fragequellen vorgenommen.
+Ähnliche Grafiken wie in \cref{fig:results:answers_total} sind in den ergänzenden Materialien zu dieser Arbeit enthalten.
+
 \begin{table}
     \centering
     \begin{tabular}{lll}
@@ -89,8 +88,8 @@ Zusätzlich zur Gesamtleistung der Modelle fand auch eine Unterteilung in Fraget
 \end{table}
 
 
-Unterschiedene Fragetypen sind in \cref{tab:eval-question-types} aufgelistet.
-In folgenden Grafiken werden die zugehörigen Bezeichnungen zur Beschriftung der Achsen genutzt.
+Die verschiedenen Fragetypen sind in \cref{tab:eval-question-types} aufgelistet.
+In den folgenden Grafiken werden die entsprechenden Bezeichnungen zur Beschriftung der Achsen verwendet.
 \begin{table}
     \centering
     \begin{tabularx}{\textwidth}{Xll}
@@ -109,51 +108,56 @@ In folgenden Grafiken werden die zugehörigen Bezeichnungen zur Beschriftung der
     \caption{Fragequellen die im Evaluierungsdatensatz enthalten sind.}\label{tab:eval-question-sources}
 \end{table}
 
-Unterschiedene Fragequellen sind in \cref{tab:eval-question-sources} gezeigt.
-Da die Quelle \enquote{IS\_2022\_07\_18} nur 9 Fragen enthielt, ist eine Auswertung der Leistung in dieser Rubrik ungenau und anfällig für kleine Änderungen.
-Aus diesem Grund wird der Vergleich von Modellleistungen unabhängig von dieser Fragequelle durchgeführt.\\
 
-Das GPT4 Modell besitzt keine Präferenz gegenüber Fragetypen, beantwortete jedoch Fragen aus dem Buch deutlich besser mit \SI{93}{\percent} korrekten Antworten.
-Vergleichsweise wenige Antworten wurden bei beiden schriftliche Klausuren gegeben.\\
+Unterschiedliche Fragequellen sind in \cref{tab:eval-question-sources} aufgelistet.
+Da die Quelle \enquote{IS\_2022\_07\_18} nur 9 Fragen enthält, ist eine Bewertung der Leistung in dieser Rubrik ungenau und anfällig für kleine Änderungen.
+Aus diesem Grund erfolgt der Vergleich der Modellleistungen unabhängig von dieser Fragenquelle.\\
 
-Das untrainierte Llama Modell zeigte eine eindeutige Stärke bei Multi-Fakten Fragen mit \SI{39}{\percent} richtigen Antworten und konnte \SI{27}{\percent} der mündlichen Klausurfragen beantworten.
-Die schlechteste Kategorien zeigten sich als Singulär-Fakt Fragen mit \SI{20}{\percent} und Fragen aus dem Buch mit \SI{24}{\percent} korrekten Antworten.\\
 
-Während das \liv-Modell grundlegend schlechte Ergebnisse erzielte mit nur 2 korrekt beantworteten Fragen,
-zeigte das \lia-Modell eine deutlich bessere Leistung bei Multi-Fakten Fragen mit \SI{36}{\percent}
-und Fragen der mündlichen Klausur mit \SI{40}{\percent} korrekt beantworteter Fragen.
-Dafür verlor dieses Modell deutlich bei Singulär-Fakt Fragen mit \SI{5}{\percent} und schriftlichen Klausurfragen mit nur \SI{12}{\percent} korrekten Antworten.\\
+Das GPT4-Modell hat keine Präferenz für bestimmte Fragetypen, beantwortete aber die Fragen aus dem Buch mit \SI{93}{\percent} korrekten Antworten signifikant besser.
+Vergleichsweise wenige Antworten wurden bei den beiden schriftlichen Prüfungen gegeben.\\
 
-Modelle trainiert auf 3 Epochen zeigen einen deutlichen Leistungssprung gegenüber einer Epoche.
-Sowohl das \lev-Modell als auch das \lea-Modell verbessern ihre Leistung in Fragetyp und Fragequelle, die zuvor als schwach erkannt wurden.
-Im Falle des \lea-Modells bedeutet dies eine Verdoppelung richtig beantworteter Transfer-Fragen als auch eine Verdoppelung richtig beantworteter Fragen aus dem Buch.
-Diese Leistungssteigerung ist auch in den MakroF1 Werten zu erkennen.\\
 
-Epoche 5 und Epoche 10 enthalten nur Modelle, die mit Hilfe von Nvidia A30 Grafikkarten trainiert wurde.
-Die gezeigten Leistungen verändern sich kaum gegenüber dem \lea-Modell und beinhalten nur minimale Leistungsschwankungen.
-Jedoch verschiebt sich die Aufteilung korrekt beantworteter Fragen in Richtung Fragen aus dem Buch.
-Andere Fragequellen können von den Modellen mit steigender Epoche zunehmend schlechter beantwortet werden, während Fragen aus dem Buch zunehmend besser beantwortet werden.
-Diese Verschiebung deutet auf ein Overfitting hin, da die Fragen aus dem Buch ebenso in den Trainingsdaten enthalten sind.\\
+Das untrainierte Llama-Modell zeigte mit \SI{39}{\percent} richtigen Antworten eine deutliche Stärke bei Multi-Fakten-Fragen und konnte \SI{27}{\percent} der mündlichen Klausurfragen beantworten.
+Die schlechtesten Kategorien ergaben sich bei den Ein-Fakten-Fragen mit \SI{20}{\percent} und den Fragen aus dem Buch mit \SI{24}{\percent} richtigen Antworten.\\
+
+
+Während das \liv-Modell mit nur 2 richtig beantworteten Fragen grundsätzlich schlecht abschnitt,
+zeigte das \lia-Modell mit \SI{36}{\percent} eine deutlich bessere Leistung bei Fragen mit mehreren Fakten
+und bei der mündlichen Prüfung mit \SI{40}{\percent} richtig beantworteten Fragen.
+Dagegen verlor dieses Modell deutlich bei Ein-Fakten-Fragen mit \SI{5}{\percent} und Klausurfragen mit nur \SI{12}{\percent} richtigen Antworten.\\\
+
+
+Modelle, die auf 3 Epochen trainiert wurden, zeigen einen deutlichen Leistungssprung gegenüber einer Epoche.
+Sowohl das \lev-Modell als auch das \lea-Modell verbessern ihre Leistung in den zuvor als schwach identifizierten Fragetypen und Fragequellen.
+Im Falle des \lea-Modells bedeutet dies eine Verdoppelung der richtig beantworteten Transferfragen sowie eine Verdoppelung der richtig beantworteten Fragen aus dem Buch.
+Diese Leistungssteigerung zeigt sich auch in den MakroF1-Werten.\\
+
+Epoche 5 und Epoche 10 enthalten nur Modelle, die mit Nvidia A30 Grafikkarten trainiert wurden.
+Die gezeigten Leistungen unterscheiden sich kaum von denen des \lea-Modells und weisen nur minimale Leistungsschwankungen auf.
+Allerdings verschiebt sich die Verteilung der richtig beantworteten Fragen hin zu Fragen aus dem Buch.
+Die anderen Fragequellen werden von den Modellen mit zunehmender Epoche immer schlechter beantwortet, während die Fragen aus dem Buch immer besser beantwortet werden.
+Diese Verschiebung deutet auf eine Überanpassung hin, da die Fragen aus dem Buch auch in den Trainingsdaten enthalten sind.\\
 
 \subsection{Verbesserungen durch Training}
 \pic{results/loss.png}{Vergleich evaluierter Modelle und ihrer Fehlerwerte des Trainingsdatensatzes.}{fig:results:loss}
 \pic{results/validation_loss.png}{Vergleich evaluierter Modelle und ihrer Fehlerwerte des Validierungsdatensatzes.}{fig:results:validation_loss}
-Während der Trainingsphase wurden Modelle mit Hilfe eines Valdierungsdatensatzes evaluiert.
-Diese zusätzliche Evaluation berechnete den Fehlerwert des Modells auf einem gegebenen Datensatz.
+Während der Trainingsphase wurden die Modelle mit Hilfe eines Validierungsdatensatzes evaluiert.
+Diese zusätzliche Evaluierung berechnete den Fehlerwert des Modells auf einem gegebenen Datensatz.
 \cref{fig:results:loss} zeigt die Fehlerwerte der Trainingsdaten und \cref{fig:results:validation_loss} die Fehlerwerte der Validierungsdaten für jedes Modell.
-Fehlerwerte beschreiben nicht konkret die Leistung eines Modells, sondern sind ein Indiz über deren Leistungssteigerung und Beginn des Overfittings.
-Ein sinkender Fehlerwert des Trainingsdatensatzes bedeutet, dass das Modell besser den Trainingsdatensatz imitieren kann, während ein sinkender Validierungsdatensatz zeigt, dass das Modell diese Imitation generalisierend auf ungesehenen Text anwenden kann.\\
+Fehlerwerte beschreiben nicht konkret die Leistung eines Modells, sondern sind ein Indikator für die Verbesserung der Leistung und den Beginn der Überanpassung.
+Ein abnehmender Fehlerwert des Trainingsdatensatzes bedeutet, dass das Modell den Trainingsdatensatz besser nachahmen kann, während ein abnehmender Fehlerwert des Validierungsdatensatzes zeigt, dass das Modell diese Nachahmung generalisierend auf ungesehenen Text anwenden kann.
 
-Beginnt der Fehlerwert des Validierungsdatensatzes zu steigen, so ist dies ein Indiz für ein Overfitting.
-Das Modell verliert demnach die Fähigkeit, ungesehenen Text zu imitieren und beginnt stattdessen den Trainingsdatensatz auswendig zu lernen.
-Dieses Phänomen ist bereits ab Epoche 3 bei beiden Modellarten zu erkennen und setzt sich konstant bis Epoche 10 fort.\\
+Wenn der Fehlerwert des Validierungsdatensatzes zu steigen beginnt, deutet dies auf eine Überanpassung hin.
+Das Modell verliert dann die Fähigkeit, ungesehenen Text zu imitieren und beginnt stattdessen, den Trainingsdatensatz auswendig zu lernen.
+Dieses Phänomen ist bei beiden Modelltypen bereits ab Epoche 3 zu beobachten und setzt sich konstant bis Epoche 10 fort.\\
 
-Zur Beantwortung von Fragen ist das Auswendiglernen des Buches jedoch zu einem gewissen Grad vorteilhaft, da Definitionen von Begriffen oder Aufzählungen von Fakten so besser von dem Modell zitiert werden können.
-Dies ist auch in den Ergebnissen zu erkennen.
-Modelle der Epoche 3 können Fragen aus allen Fragequellen und Fragetypen besser beantworten, da hier die Zitierfähigkeit des Modells gesteigert wird.
-Ein zu hoher Grad des Overfittings führt jedoch zu anderen Problemen.
-Kommen ungesehene Formulierungen, wie zum Beispiel Rechtschreibfehler, vor, so kann das Modell diese nicht mehr korrekt beantworten.
-Diese Problematik steigert sich mit steigender Epoche, weshalb Modelle ab Epoche 5 in ihrer Leistung sinken.\\
+Für die Beantwortung der Fragen ist das Auswendiglernen jedoch in gewissem Maße vorteilhaft, da Definitionen von Begriffen oder Aufzählungen von Fakten vom Modell besser zitiert werden können.
+Dies spiegelt sich auch in den Ergebnissen wider.
+Modelle der Epoche 3 können Fragen aus allen Fragequellen und Fragetypen besser beantworten, da hier die Zitierfähigkeit des Modells erhöht wird.
+Ein zu hoher Grad an Überanpassung führt jedoch zu anderen Problemen.
+Treten unbekannte Formulierungen wie z.B. Rechtschreibfehler auf, kann das Modell diese nicht mehr korrekt beantworten.
+Diese Problematik nimmt mit steigender Epoche zu, weshalb Modelle ab Epoche 5 in ihrer Leistungsfähigkeit nachlassen.\\
 
 \subsection{Vergleich MakroF1}
 \pic{results/makro_total.png}{Vergleich evaluierter Modelle und Makro F1 Werten bei der Beantwortung von Fragen.}{fig:results:makro_total}
@@ -225,7 +229,7 @@ Jedoch begründet sich diese Tendenz durch die Überanpassung an den Trainingsda
     \begin{tabularx}{\textwidth}{lX}
         \toprule
         Frage              & Definieren Sie den Begriff \enquote{Krankenhausinformationssystem}.                                                                                                                                                                                                    \\
-        Übersetzt          & Define the term "hospital information system".                                                                                                                                                                                                                         \\
+        Übersetzt          & Define the term ``hospital information system''.                                                                                                                                                                                                                       \\
         Erwartete Antwort  & A Hospital Information system is the socio-technical subsystem of hospitals. It comprimises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. \\
         Generierte Antwort & \#\#\# 2.2.2.2.2.2.1.1.1.1.1.1.2.1.1.2.1.2.1.2.1.2.1.2.1. $[\dots]$                                                                                                                                                                                                    \\
         \bottomrule                                                                                                                                                                                                                                                                                 \\
@@ -328,26 +332,21 @@ Dadurch kann das Modell zwar initial mehr Wissen wiedergeben, verliert jedoch di
     \caption[Zusammenfassung der Ergebnisse der Evaluierung]{Zusammenfassung der Ergebnisse der Evaluierung. Fett markierte Werte repräsentieren die beste Leistung in dem Kriterium. Unterteilt sind die Zeilen nach nur evaluierte Modelle und trainiert und evaluierte Modelle. }\label{tab:results:summary}
 \end{table}
 
-% Gesamtanalyse
-% - LLaMA kommt nicht an Leistungen von GPT4
-% - Trainingsart entscheident (v100 schlechter als Llama 0)
-% - Beste Leistungen zwischen a30 3 Epochen und a30 5 Epochen
-% - Ab 5 Epochen Overfitting Status -> Überaus gut bei Buchfragen, andere Fragen schlechter
-% - Präferenz von Keiner Antwort gegenüber einer Antwort wird mit steigender Epoche deutlicher
+\cref{tab:results:summary} zeigt eine Zusammenfassung der Ergebnisse der Evaluierung.
+Hierbei sind die Modelle in die Gruppe \enquote{nur evaluiert} und \enquote{trainiert und evaluiert} unterteilt.
+Generell übertrifft GPT4 in allen Kriterien die Llama-Modelle außer im Leistungsverlust bei dem Kriterium Robustheit.
+Von den Llama-Modellen erreicht \lsa{} die besten MakroF1-Leistungen, \lioa{} den kleinsten Leistungsverlust im Kriterium Robustheit und \lea{} die besten Leistungen in den Kriterien Erklärbarkeit und Fragenverständnis.
+Unabhängig von dem Robustheitskriterium scheint ein optimales Modell mit 3 bis 5 Epochen trainiert zu sein.
+Aus den aktuell trainierten Modellen ist bei genauerer Betrachtung der Kriterien das \lea-Modell am besten geeignet, um Fragen zu beantworten, da ab 5 Epochen die Überanpassung der Modelle zu starken Einfluss hat.\\
 
-% - Erklärbarkeit und Fragenverständnis ebenso unter GPT4-
-%     - deutliche Verbesserung ab a30 3 Epochen erreicht
-%     - zeigt wahre Leistung von 3 Epochen gegenüber 5 und 10 Epochen
-% - Robustheit zeigt, dass Wissen oberflächlich erlernt wurde, jedoch nicht fundiert verankert ist
-%     - Wird nicht besser mit längerem Training
-%     - Overfitting wirkt entgegen Robustheit
+Im Bezug auf Erklärbarkeit und Fragenveständnis lässt sich eine deutliche Verbesserung ab Epoche 3 zeigen.
+Der Leistungsverlust durch Rechtschreibfehler zeigt jedoch, dass das Wissen nicht fundiert erlernt wurde und die Modelle anfällig für andere Formulierungen sind.\\
 
-% Leistungssteigerung möglich durch:
-% - Größere Modelle generelle Verbesserung zu erwarten (LLaMA 13B, 33B)
-% - Mehr Trainingsdaten
-%     - sinkt Gefahr des overfittings
-%     - Wissen wird fundierter erlernt, da in unterschiedlicher Formulierung enthalten
-% - Leistungssteigerung durch Human Reinforcement Learning
-%     - bessere Erklärbarkeit zu erwarten
-
-
+Mögliche Leistungssteigerungen können durch größere Modelle erreicht werden.
+Die Llama2 Modelle sind zusätzlich mit 13 Milliarden und 70 Milliarden Parametern verfügbar.
+Größere Modelle können komplexes Wissen besser erlernen und besser generalisierend anwenden.
+Dies könnte dazu führen, dass ein längeres Training ohne eine Überanpassung möglich ist.
+Zusätzlich hilft ein größerer Datensatz insbesondere um die Überanpassung zu verhindern, Informationen in verschiedenen Formulierungen darzustellen und somit die Robustheit zu verbessern.
+Ebenso ist eine generelle Steigerung der Ergebnisse im Kriterium Korrektheit zu erwarten.
+Als letzte Möglichkeit kann ein Training mit Hilfe von Human Reinforcement Learning durchgeführt werden.
+Dieses ermöglicht das Belohnen von Erklärungen und dem Verständnis von Fragen und steigert somit auch diese beiden Kriterien.
