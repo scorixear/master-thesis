@@ -703,34 +703,24 @@ Dieser Temperaturwert wurde für die Generierung auf $0,9$ gesetzt.
 Das beschriebene nicht-deterministische Verhalten konnte bei der Textgenerierung mit den Llama-Modellen nicht beobachtet werden.
 Mehrfache identische Eingaben führten bei allen Modellen zu identischen Ausgaben.
 Da sich somit ein konstanter Wert von $1,0$ für den Determinismus ergibt, wurde dieser hier nicht weiter ausgewertet.
-Zusätzlich zu den Kriterien wurden Ranglisten der Modelle für verschiedene Parameter erstellt.
-Diese Parameter waren MakroF1, Anzahl der richtig beantworteten Fragen und Anzahl der beantworteten Fragen.
 Alle Kriterien wurden zusätzlich für jeden Fragetyp und jede Fragequelle ausgewertet.
 Die Ergebnisse dieser Auswertung sind in \cref{ch:results} beschrieben.\\
 
 \subsection{Kriterium: Korrektheit}
 Für die Analyse der Korrektheit wurden alle Bewertungen der Fragen pro Modell, Fragetyp und Fragequelle gezählt.
 Mit diesen Werten wurde dann der MakroF1-Wert nach den Formeln aus \cref{sec:approach:comparison} berechnet.
-Die Ergebnisse sind als Balkendiagramme dargestellt, wobei jeder Balken ein Modell repräsentiert.\\
 
 \subsection{Kriterium: Erklärbarkeit}
 Eine Antwort eines Modells auf eine Frage gilt als erklärt, wenn sie inhaltlich mit der Frage zusammenhängt und eine Erklärung oder nähere Beschreibung enthält.
 Alle Ausgaben der Modelle wurden erneut manuell auf das Vorhandensein einer Erklärung im Rahmen dieses Kriteriums bewertet.
-Die Ergebnisse sind als Balkendiagramme dargestellt, wobei jeder Balken ein Modell repräsentiert.\\
 
 \subsection{Kriterium: Fragenverständnis}
 Das Kriterium Fragenverständnis bezieht sich auf die Fähigkeit eines Modells, die gestellten Fragen zu verstehen.
 Eine Frage gilt als verstanden, wenn sich die generierte Antwort inhaltlich auf die Frage bezieht und darüber hinaus alle Aspekte der Frage adressiert.
 Die Bewertung des Fragenverständnisses erfolgte analog zur Bewertung der Erklärbarkeit.
-Die Ergebnisse sind als Balkendiagramme dargestellt, wobei jeder Balken ein Modell repräsentiert.\\
 
 \subsection{Kriterium: Robustheit}
 Die Robustheit eines Modells beschreibt die Fähigkeit, auch bei fehlerhaften Eingaben eine korrekte Antwort zu generieren.
 Zu diesem Zweck wurde, wie bereits erwähnt, während der Generierung der Ausgaben ein zusätzlicher Datensatz ausgewertet, der die selben Fragen wie der ursprüngliche Datensatz enthielt, jedoch mit kleineren Rechtschreib- und Grammatikfehlern versehen war.
 Da sich die Robustheitsbewertung auf richtig beantwortete Fragen bezieht, die auch bei falscher Eingabe richtig beantwortet werden, wurde dieser Datensatz für jedes Modell reduziert und enthielt nur Fragen, die das Modell zuvor mit mindestens einer richtigen Antwort beantwortet hatte.
 Die Berechnung der Ergebnisse erfolgt analog zur Berechnung des Kriteriums Korrektheit, wobei hier nicht die Anzahl der im Robustheitsdatensatz enthaltenen Fragen, sondern die Anzahl aller vorhandenen Fragen für die Berechnung von MakroF1 verwendet wurde.
-Die Ergebnisse sind als Balkendiagramme dargestellt, wobei jeder Balken ein Modell repräsentiert.\\
-
-\subsection{Kriterium: Rangordnung}
-Neben den oben genannten Kriterien werden in einem zusätzlichen Skript die Parameter \enquote{Anzahl richtig beantworteter Fragen}, \enquote{Anzahl beantworteter Fragen} und \enquote{MakroF1} für jedes Modell in einer Rangliste dargestellt, wobei das beste Modell hier den Rang 1 erhält.
-Diese Rangfolge ermöglicht einen schnellen Überblick über die Leistungsfähigkeit der Modelle.\\

@@ -17,6 +17,13 @@
         \label{#4}
     \end{figure}
 }
+\newcommand{\pich}[4][1]{
+    \begin{figure}[H]
+        \makebox[\textwidth][c]{\includegraphics[width=#1\textwidth]{#2}}
+        \caption{#3}
+        \label{#4}
+    \end{figure}
+}
 
 In dieser Arbeit wurde die Konzeptionierung und Durchführung eines Continual Pretraining von Llama Modellen beschrieben.
 Diese Modelle wurden anschließend nach den in \cref{sec:approach:comparison} genannten Kriterien Korrektheit, Erklärbarkeit, Fragenverständnis und Robustheit verglichen.
@@ -45,7 +52,7 @@ Zu vergleichende Modelle sind in \cref{tab:eval-models} gezeigt.
 
 \section{Analyse Korrektheit}\label{sec:results:correctness}
 \subsection{Vergleich totaler Zahlen}
-\pic{results/answers_total.png}{Vergleich evaluierter Modelle und ihren totalen Leistungen bei der Beantwortung von Fragen.}{fig:results:answers_total}
+\pich{results/answers_total.png}{Vergleich evaluierter Modelle und ihren totalen Leistungen bei der Beantwortung von Fragen.}{fig:results:answers_total}
 
 \cref{fig:results:answers_total} zeigt die Aufteilung der korrekt, falsch und unbeantworteten Fragen der evaluierten Modelle.
 Alle Modelle erhielten die selben $95$ Fragen mit identischem Kontext.
@@ -64,17 +71,50 @@ Das \lea-Modell übertraf dafür erstmalig die Leistungen des untrainierten Mode
 Modelle mit höherer Epoche wurden ausschließlich auf A30 Grafikkarten trainiert und zeigten keine weitere Leistungssteigerung, beantworteten jedoch stetig weniger Fragen.
 Hier ist eine Präferenz von keiner Antwort gegenüber einer falschen Antwort zu erkennen.\\
 
-\subsection{Stärken und Schwächen der Modelle}
+\subsection{Stärken und Schwächen der Modelle}\label{subsec:results:correctness:strengths}
 Zusätzlich zur Gesamtleistung der Modelle fand auch eine Unterteilung in Fragetypen und Fragequellen statt.
 Ähnliche Grafiken wie aus \cref{fig:results:answers_total} sind im zusätzlichen Material zu dieser Arbeit enthalten.
-Unterschiedene Fragetypen sind Singulär-Fakt Fragen (bezeichnet als \enquote{single}), Multi-Fakten Fragen (bezeichnet als \enquote{multi}) und Transfer-Fragen (bezeichnet als \enquote{transfer}).
-Unterschiedene Fragequellen sind das Buch \enquote{Health Information Systems} von \citet{bb} (bezeichnet als \enquote{book}),
-mündliche Klausurfragen aus dem Modul \enquote{Architektur von Informationssystemen im Gesundheitswesen} vom Jahr 2021 (bezeichnet als \enquote{A\_2021}),
-schriftliche Klausurfragen aus dem Modul \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022 (bezeichnet als \enquote{IS\_2022\_07\_18})
-und schriftliche Klausurfragen aus der Nachholklausur des Moduls \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022 (bezeichnet als \enquote{IS\_2022\_09\_27}).\\
+\begin{table}
+    \centering
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{Fragetyp} & \textbf{Anzahl der Fragen} & \textbf{Bezeichnung} \\
+        \midrule
+        Singulär-Fakt     & 34                         & \enquote{single}     \\
+        Multi-Fakten      & 38                         & \enquote{multi}      \\
+        Transfer          & 23                         & \enquote{transfer}   \\
+        \bottomrule
+    \end{tabular}
+    \caption{Fragetypen die im Evaluierungsdatensatz enthalten sind.}\label{tab:eval-question-types}
+\end{table}
+
+
+Unterschiedene Fragetypen sind in \cref{tab:eval-question-types} aufgelistet.
+In folgenden Grafiken werden die zugehörigen Bezeichnungen zur Beschriftung der Achsen genutzt.
+\begin{table}
+    \centering
+    \begin{tabularx}{\textwidth}{Xll}
+        \toprule
+        \textbf{Fragequelle}                                                                                                                               & \textbf{Anzahl der Fragen} & \textbf{Bezeichnung}       \\
+        \midrule
+        \enquote{Health Information Systems} von \citet{bb}                                                                                                & 33                         & \enquote{book}             \\
+        \midrule
+        Mündliche Klausurfragen aus dem Modul \enquote{Architektur von Informationssystemen im Gesundheitswesen} vom Jahr 2021                             & 22                         & \enquote{A\_2021}          \\
+        \midrule
+        Schriftliche Klausurfragen aus dem Modul \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022                     & 9                          & \enquote{IS\_2022\_07\_18} \\
+        \midrule
+        Schriftliche Klausurfragen aus der Nachholklausur des Moduls \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022 & 31                         & \enquote{IS\_2022\_09\_27} \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Fragequellen die im Evaluierungsdatensatz enthalten sind.}\label{tab:eval-question-sources}
+\end{table}
+
+Unterschiedene Fragequellen sind in \cref{tab:eval-question-sources} gezeigt.
+Da die Quelle \enquote{IS\_2022\_07\_18} nur 9 Fragen enthielt, ist eine Auswertung der Leistung in dieser Rubrik ungenau und anfällig für kleine Änderungen.
+Aus diesem Grund wird der Vergleich von Modellleistungen unabhängig von dieser Fragequelle durchgeführt.\\
 
 Das GPT4 Modell besitzt keine Präferenz gegenüber Fragetypen, beantwortete jedoch Fragen aus dem Buch deutlich besser mit \SI{93}{\percent} korrekten Antworten.
-Vergleichsweise wenige Antworten wurden bei beiden schriftliche Klausuren gegeben, wobei die Klausur \enquote{IS\_2022\_07\_18} besonders wenig Fragen enthielt und daher keine genauen Angaben möglich sind.\\
+Vergleichsweise wenige Antworten wurden bei beiden schriftliche Klausuren gegeben.\\
 
 Das untrainierte Llama Modell zeigte eine eindeutige Stärke bei Multi-Fakten Fragen mit \SI{39}{\percent} richtigen Antworten und konnte \SI{27}{\percent} der mündlichen Klausurfragen beantworten.
 Die schlechteste Kategorien zeigten sich als Singulär-Fakt Fragen mit \SI{20}{\percent} und Fragen aus dem Buch mit \SI{24}{\percent} korrekten Antworten.\\
@@ -82,7 +122,7 @@ Die schlechteste Kategorien zeigten sich als Singulär-Fakt Fragen mit \SI{20}{\
 Während das \liv-Modell grundlegend schlechte Ergebnisse erzielte mit nur 2 korrekt beantworteten Fragen,
 zeigte das \lia-Modell eine deutlich bessere Leistung bei Multi-Fakten Fragen mit \SI{36}{\percent}
 und Fragen der mündlichen Klausur mit \SI{40}{\percent} korrekt beantworteter Fragen.
-Dafür verlor dieses Modell deutlich bei Singulär-Fakt Fragen mit \SI{5}{\percent} und schriftlichen Klausurfragen mit nur korrekten \SI{12}{\percent} korrekten Antworten.\\
+Dafür verlor dieses Modell deutlich bei Singulär-Fakt Fragen mit \SI{5}{\percent} und schriftlichen Klausurfragen mit nur \SI{12}{\percent} korrekten Antworten.\\
 
 Modelle trainiert auf 3 Epochen zeigen einen deutlichen Leistungssprung gegenüber einer Epoche.
 Sowohl das \lev-Modell als auch das \lea-Modell verbessern ihre Leistung in Fragetyp und Fragequelle, die zuvor als schwach erkannt wurden.
@@ -117,179 +157,176 @@ Diese Problematik steigert sich mit steigender Epoche, weshalb Modelle ab Epoche
 
 \subsection{Vergleich MakroF1}
 \pic{results/makro_total.png}{Vergleich evaluierter Modelle und Makro F1 Werten bei der Beantwortung von Fragen.}{fig:results:makro_total}
-\pic{results/makrof1_total_type_heat.png}{Heatmap der Makro F1 Werte der evaluierten Modelle unterteilt nach Fragetypen.}{fig:results:makrof1_total_type_heat}
+
+\cref{fig:results:makro_total} zeigt die MakroF1 Werte der evaluierten Modelle.
+Auch hier sind die Tendenzen aus \cref{subsec:results:correctness:strengths} zu erkennen.
+GPT4 erreicht einen MakroF1 Wert von \num{0.7} und ist damit deutlich besser als die Llama Modelle.
+Während Modelle trainiert auf 1 Epoche noch unter der Leistung des untrainierten Llama-Modells liegen, verdoppeln sich die MakroF1 Werte der Modell ab 3 Epochen.
+Fortführend bleiben die MakroF1 Werte der Modelle mit 5 und 10 Epochen konstant.\\
+
+Der MakroF1 Wert hat einen Wertebereich von \numrange{0}{1} und repräsentiert besser die tatsächliche Leistung des Modells.
+Modelle die Fragen zwar richtig beantwortet haben, jedoch auch falsche Antworten geben oder unvollständig antworten, erhalten hier einen geringeren F1-Wert.
+Ein Modell mit einem MakroF1 Wert von \num{0} beantwortet keine Fragen richtig, während ein Modell mit einem Wert von \num{1} alle Fragen richtig und vollständig beantwortet.
+Somit beantwortet das GPT4-Modell im Durchschnitt eine Frage zu \SI{70}{\percent} korrekt, während das \lea-Modell im Durchschnitt eine Frage zu \SI{30}{\percent} korrekt beantwortet.\\
+
+\pic[0.7]{results/makrof1_total_type_heat.png}{Heatmap der Makro F1 Werte der evaluierten Modelle unterteilt nach Fragetypen.}{fig:results:makrof1_total_type_heat}
+
+Eine genauere Aufteilung der MakroF1 Werte nach Fragetyp  ist in \cref{fig:results:makrof1_total_type_heat} zu sehen.
+Hier sieht man die Leistungssteigerung in allen Fragetypen ab 3 Epochen.
+Nicht intuitiv beantworten die Modelle Transfer-Fragen besser als Singulär-Fakt Fragen, obwohl diese Fragen deutlich einfacher für den Menschen sind.
+Grund hierfür könnte eine begünstigte Grundstruktur der Modelle sein.
+Durch den inhärenten Aufbau mit Hilfe einer Aufmerksamkeitsmaske sind Transformermodelle darauf spezialisiert, Texte und Token miteinander zu korrelieren und könnten daher besser verschiedene Textstellen aus dem Buch und Fakten miteinander verknüpfen.
+Diese Beobachtung lässt sich jedoch nicht auf das GPT4 Modell übertragen.
+Da der technische Hintergrund des GPT4 Modells nicht bekannt ist, lässt sich diese Beobachtung nicht weiter begründen.
+Das GPT4 Modell wurde nach normalem Training durch viel Finetuning mit menschlichem Feedback auf die Beantwortung von Fragen angepasst, wodurch die Leistung bei der Beantwortung von einfachen Singulär-Fakt Fragen hier durchaus gesteigert werden könnte.\\
+
 \pic{results/makrof1_total_source_heat.png}{Heatmap der Makro F1 Werte der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:makrof1_total_source_heat}
+
+\cref{fig:results:makrof1_total_source_heat} zeigt die MakroF1 Werte der Modelle unterteilt nach Fragequellen.
+Hier lässt sich die Entwicklung der Modelle von einem Untrainierten Zustand über einen wissenden Zustand zu einem überangepassten Zustand gut zeigen.
+Da die Fragequelle \enquote{IS\_2022\_07\_18} nur aus \num{9} Fragen besteht, ist eine generelle Aussage hier nicht möglich.
+Kleinere Fluktuationen wie zum Beispiel das korrekte Beantworten eine Frage führen zu zu hohen Ausschlägen, welche missverständlich als eine sehr gute Leistung interpretiert werden könnten.\\
+
+Bis Epoche 3 ist eine konstante Leistungssteigerung in allen Fragequellen zu erkennen, wobei Fragen aus der Quelle \enquote{A\_2021} am meisten davon profitieren.
+Dies ist zu erwarten, da das dahinter stehende Modul inhaltlich sehr nah an dem Buch \enquote{Health Information Systems} ist.
+Ab Epoche 5 ist eine Verschiebung in Richtung der Fragequelle \enquote{book} zu erkennen, was auf ein Overfitting hinweist.
+Die Modelle können ab diesem Punkt Fragen aus dem Buch durch zitieren der enthaltenen Antworten besser beantworten, während andere Formulierungen des selben Wissens zu Unverständnis führt.
+Trotzdem ist auch diese gesteigerte Leistung ein guter Fortschritt und zeigt die Stärken der Informationsextraktion von Transformermodellen aus Text.
+Die im Buch gegebenen Fragen werden nicht unmittelbar nach der gestellten Frage beantwortet, sondern erst am Ende des Buches.
+Das bedeutet, das die Transformermodelle hier eine klare Verknüpfung zwischen Frage und Antwort herstellen konnten, trotz einem großen Abstand.\\
+
 \subsection{Zusammenfassung}
+Die MakroF1 Werte bestätigen zuvor gemachte Aussagen der totalen Anzahl der Fragen über die Leistung der Modelle.
+GPT4 erreicht hier mit \num{0.7} den höchsten MakroF1 wert, welches vergleichbar mit Ergebnissen aus \citet{gpt4} zum Thema \enquote{Medical Knowledge} ist.
+Das Llama 2 7B startet im untrainierten Zustand deutlich unter normaler Leistung.
+Seine Leistung kann durch ein Continual Pretraining ab Epoche 3 um das doppelte gesteigert werden.
+Eine Epoche, also das einmalige Lesen des Buches, scheint nicht auszureichen, um eine bessere Leistung zu erreichen.
+Dies ist durchaus auch durch die Größe des Trainingsdatensatzes begründet.
+Da dieser im Verhältnis klein ist, kann das Modell seine Gewichte nicht schnell genug anpassen, um die enthaltenen Informationen zu replizieren.
+Eine größere Lernrate würde ein schnelleres Anpassen der Modell an gesehen Text verbessern, jedoch steigt dadurch die Gefahr
+dass das Modell sich zu sehr an Formulierungen und Formatierungen anpasst und somit nicht nutzbar wird.\\
+
+Ab Epoche 5 verliert das Modell an Leistung, obwohl die gezeigten MakroF1 Werte konstant bleiben.
+Das Modell beginnt ab diesem Punkt, Generalisierung zu verlernen und kann nur gesehene Fragen aus dem Buch mit zitierten Antworten richtig beantworten.
+Aus diesem Grund scheint das Modell seine besten Leistungen ab Epoche 3 erreicht zu haben.
+Hier erhält das Modell besonders gute MakroF1-Werte
+durch eine übermäßig gute Leistung in Fragen aus der Fragequelle \enquote{A\_2021}.\\
+
+GPT4 ist durch seine Größe und die dahinter stehende Menge an Training unschlagbar.
+Das dieses Modell die Leistungen einen 7-Milliarden Parameter Modells übertrifft ist zu erwarten.
+Doch die Leistungssteigerung des Llama-Modells zeigt eine Tendenz, die durch größere Modelle durchaus noch weiter gesteigert werden könnte.
+Zu diesem Zeitpunkt sind jedoch die trainierten Modelle aus dieser Arbeit nicht nutzbar.
+Besonders in Epoche 1 enthalten Antworten grundlegende Fehler in der Ausgabe durch Imitation von Formatierungen (siehe \cref{fig:formatting-errors}).
+Weitertrainierte Modelle zeigen eine Präferenz von keiner Antwort gegenüber einer falschen Antwort,
+welches durchaus vorteilhaft bei der Benutzung des Modells sein kann.
+Jedoch begründet sich diese Tendenz durch die Überanpassung an den Trainingsdatensatz.\\
+
+\begin{figure}
+    \begin{tabularx}{\textwidth}{lX}
+        \toprule
+        Frage              & Definieren Sie den Begriff \enquote{Krankenhausinformationssystem}.                                                                                                                                                                                                    \\
+        Übersetzt          & Define the term "hospital information system".                                                                                                                                                                                                                         \\
+        Erwartete Antwort  & A Hospital Information system is the socio-technical subsystem of hospitals. It comprimises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. \\
+        Generierte Antwort & \#\#\# 2.2.2.2.2.2.1.1.1.1.1.1.2.1.1.2.1.2.1.2.1.2.1.2.1. $[\dots]$                                                                                                                                                                                                    \\
+        \bottomrule                                                                                                                                                                                                                                                                                 \\
+    \end{tabularx}
+    \caption{Beispiel für Formatierungsfehler in der Ausgabe des Llama 2 7B Modells trainiert auf 1 Epoche}\label{fig:formatting-errors}
+\end{figure}
+
+Modelle die mit Hilfe von V100 Grafikkarten trainiert wurden zeigen eine sehr große Verschlechterung der Leistung.
+Begründet ist diese durch das notwendige Training im FP16-Datenformat gegenüber dem ursprünglich genutzten BF16-Datenformat.
+Wie auch von Huggingface beschrieben, sollten vortrainierte Modelle weiter im vorgesehenen Datenformat trainiert werden.
+Diese Beobachtung bestätigt sich auch in den Ergebnissen dieser Arbeit.\\
+
+
 \section{Analyse Erklärbarkeit}\label{sec:results:explainability}
 \pic{results/explained.png}{Vergleich evaluierter Modelle und ihrer Anzahl an Antworten, welche Erklärungen enthalten.}{fig:results:explained}
-\pic{results/explainability_total_type.png}{Heatmap der Erklärbarkeit der evaluierten Modelle unterteilt nach Fragetypen.}{fig:results:explainability_total_type}
+Die hier evaluierten Modelle verfügen über eine hohe Fähigkeit, zu den generierten Antworten auch Erklärungen zu geben.
+Insbeondere GPT4 schafft es, richtig beantwortete Fragen zu \SI{97}{\percent} mit einer Erklärung zu versehen.
+\cref{fig:results:explained} zeigt hier die totale Anzahl an Antworten, welche Erklärungen enthalten.
+Betrachtet wurden dabei nur Fragen, die das jeweilige Modelle zuvor mit mindestens einer richtigen Antwort beantwortet hat.
+Das untrainierte Modell als auch Modelle trainiert auf einer Epoche können hierbei nur zur Hälfte der Fragen eine Erklärung liefern.
+Ab Epoche 3 steigt diese Leistung ebenso deutlich auf \SI{85}{\percent} an.\\
+
+\pich[0.7]{results/explainability_total_type.png}{Heatmap der Erklärbarkeit der evaluierten Modelle unterteilt nach Fragetypen.}{fig:results:explainability_total_type}
 \pic{results/explainability_total_source.png}{Heatmap der Erklärbarkeit der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:explainability_total_source}
+
+\cref{fig:results:explainability_total_type} und \cref{fig:results:explainability_total_source} zeigen die Unterteilung dieser Leistung nach Fragetypen und Fragequellen.
+Initial ist hier keine klare Entwicklung der Verbesserung in diesen Unterteilungen zu erkennen.
+Inbesondere wenig Erklärungen enthalten Fragen aus dem Fragetyp \enquote{Transfer} während Fragen aus dem Fragetyp \enquote{Multi-Fakten} am meisten Erklärungen enthalten.
+Die zuvor gut erscheinenden Leistungen bei Fragen aus der Fragequelle \enquote{A\_2021} zeigen hier, dass die generierten Antworten zwar korrekt sind, jedoch größtenteils keine Erklärungen enthalten.
+Herausstechend sind die grundlegend guten Leistungen von GPT4, welche durchaus durch das genutzt Finetuning mit Menschlicher Bewertung (engl.
+\enquote{Human Reinforcement Learning}) begründet werden können.
+Mit Hilfe dieser Trainingsmethode könnte auch das Llama-Modell belohnt werden, wenn es Erklärungen zu seinen Antworten gibt.\\
+
+
 \section{Analyse Fragenverständnis}\label{sec:results:questionunderstanding}
 \pic{results/understood.png}{Vergleich evaluierter Modelle und ihrer Anzahl an verstandenen Fragen.}{fig:results:understood}
-\pic{results/question_understanding_total_type.png}{Heatmap des Fragenverständnisses der evaluierten Modelle unterteilt nach Fragetypen.}{fig:results:question_understanding_total_type}
+Das Kriterium Fragenverständnis ist nicht äquivalent zu der Anzahl beantworteter Fragen aus dem Kriterium Korrektheit.
+Eine Frage gilt nicht als verstanden, wenn sie beantwortet wurde, da falsche Antworten zwar falsche Fakten enthalten können, jedoch die Frage nicht vollständig beantwortet wurde und somit als nicht verstanden gezählt wird.
+Ebenso kann eine unbeantwortete Frage auch als verstanden gezählt werden.
+So zum Beispiel generierte GPT4 in einigen Antwort, in der erklärt wurde, warum das Modell die Frage nicht beantworten konnte, hatte damit jedoch die Frage eindeutig verstanden.\\
+
+\cref{fig:results:understood} zeigt die totalen Zahl der verstandenen Fragen der evaluierten Modelle.
+Anders als bei dem Kriterium Erklärbarkeit wurden hier alle vorhanden Fragen zusätzlich auf das Fragenverständnis geprüft.
+Auch hier ist GPT4 mit \SI{97}{\percent} verstandenen Fragen deutlich besser als die Llama-Modelle.
+Alleinig das \lea-Modell erreichte eine etwas bessere Leistung von \SI{72}{\percent} verstanden Fragen gegenüber dem untrainierten Modell mit \SI{64}{\percent}.
+Insbesondere Modelle mit höherer Epoche verlieren die Fähigkeit Fragen zu verstehen.
+Diese Beobachtung belegt damit auch die steigende Anzahl unbeantworteter Fragen aus dem Kriterium Korrektheit, da zunehmend mehr Fragen nicht verstanden werden.
+Grund hierfür ist die steigende Überanpassung der Modelle, welche es den Modellen erschwert, andere Formulierung gleichen Wissens zu verstehen.\\
+
+\pic[0.7]{results/question_understanding_total_type.png}{Heatmap des Fragenverständnisses der evaluierten Modelle unterteilt nach Fragetypen.}{fig:results:question_understanding_total_type}
 \pic{results/question_understanding_total_source.png}{Heatmap des Fragenverständnisses der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:question_understanding_total_source}
+
+\cref{fig:results:question_understanding_total_type} und \cref{fig:results:question_understanding_total_source} zeigen die Unterteilung dieser Statistik nach Fragetypen und Fragequellen.
+Auch hier ist deutlich eine Verschlechterung der Leistung ab Epoche 5 zu erkennen, insbesondere bei dem Fragetyp \enquote{transfer}. Das \lea-Modell zeigt hier die besten Leistungen von allen Llama-Modellen, wobei es dennoch in der Kategorie \enquote{multi} schlechter als das untrainierte Modell ausgefallen ist.
+Bei der Unterteilung in Fragequellen bestätigen sich diese Beobachtungen, wobei die Quelle \enquote{IS\_2022\_09\_27} besonders beeinflusst durch die Überanpassung der Modelle ab Epoche 5 ist.
+Fragen dieser Quelle scheinen grundlegend andere Formulierungen gegenüber dem Buch zu benutzen und müssen daher vermehrt durch generalisiertes Wissen beantwortet werden.
+
 \section{Analyse Robustheit}\label{sec:results:robustness}
 \pic{results/makro_comparison.png}{Vergleich evaluierter Modelle und ihrere MakroF1 Werte nach der Einführung von Rechtschreibfehlern.}{fig:results:makro_comparison}
+\cref{fig:results:makro_comparison} zeigt die MakroF1 Werte der Modelle nach der Einführung von Rechtschreibfehlern.
+Hierfür wurden alle richtig beantworteten Fragen der Modelle mit zusätzlichen Rechtschreibfehlern versehen und erneut evaluiert.
+Rechtschreibfehler in Fachbegriffen erschweren die Faktenwiedergabe, da Tokenisierung die Wörter anders unterteilt.
+Werden Fakten direkt mit einer bestimmten Tokenisierung verknüpft, kann das Modell diese Fakten bei einer anderen Unterteilung nicht mehr wiedergeben.
+Aus diesem Grund ist eine schlechtere Leistung der Modelle zu erwarten und zeigt die Fähigkeit zur Generalisierung des gelesenen Wissens.\\
+
+Das GPT4 Modell gibt auch hier die besten Leistungen mit einem MakroF1 Wert von \num{0.59} gegenüber ursprünglichem \num{0.7} ab.
+Dies ist äquivalent zu einer Leistungsminimierung von \SI{16}{\percent}. Trainierte Modelle zeigen deutlich höhere Leistungsminimierungen von rund \SI{50}{\percent}.
+Diese großen Unterschiede deuten auf eine oberflächliche Wissensaneignung mit Fokus auf korrekt geschriebenen Fachbegriffen hin.
+Durch wenig Trainingsdaten können die Modelle das dort enthalte Wissen nur grob erlernen.
+Die Leistung kann hier durchaus verbessert werden, in dem der Trainingsdatensatz erweitert wird, um mehr Formulierungsarten des Wissens zu enthalten.
+Dies würde die Generalisierung der Modelle verbessern und somit auch die Leistung in diesem Kriterium.\\
+
+Das untrainierte Llama-Modell erreicht leicht bessere Ergebnisse mit eingebauten Rechtschreibfehlern.
+Diese Verbesserung wird auf Grund der kleinen Änderung als zufällig angesehen und bedeutet nicht, dass das Modell bessere Ergebnisse liefert, wenn Fehler enthalten sind.
+Besser erklärt sind hier ungefähr gleiche Werte.
+Die Llama-Modelle wurden initial auf sehr großen Datensätzen trainiert welche auch die Größe der Datensätze für GPT4 übersteigen.
+Das erlernte Wissen dahinter ist daher fundierter und kann deutlich besser generalisiert auf verschiedene Formulierungen angewendet werden.
+Durch das hier durchgeführte Continual Pretraining werden diese fundierten Wissensknoten überschrieben und durch oberflächliche Wissensaneignung ersetzt.
+Dadurch kann das Modell zwar initial mehr Wissen wiedergeben, verliert jedoch die Fähigkeit, dieses Wissen mit unterschiedlichen Formulierungen zu verbinden.\\
+
 \section{Zusammenfassung}\label{sec:results:summary}
 
-% Vergleich LLaMA mit GPT4 durchgängig bessere Ergebnisse bei allen Fragenarten
-% Vergleich LLaMA v100 1 Epoche mit anderen Modellen durchgängig schlechtere Ergebnisse bei allen Fragenarten
-% Vergleich LLaMA a30 1 mit LLaMA 0:
-% - minimal Verbesserung transfer
-% - Vergleichbar Multi
-% - Schlechter Single
-% - generell mehr Fragen unbeantwortet
-% - Besser bei A_2021
-% - Schlechter bei IS_2022_09_27, IS_2022_07_18 und Book
-% - Deutlich mehr unbeantwortet bei IS_2022_09_27 und IS_2022_07_18
-
-% Vergleich LLaMA v100 3 mit LLaMA 0:
-% - Minimale Verbesserung bei Transfer Fragen
-% - Wesentlich mehr unbeantwortete Fragen bei Singulär
-% - Wesentlich mehr unbeantwortete Fragen bei Multi-Fakt
-% - Vergleichbar bei IS_2022_09_27 und Book
-% - Schlechter bei A_2021 und IS_2022_07_18
-% - A2021, IS_2022_09_27 wesentlich mehr unbeantwortet
-
-% Vergleich LLaMA a30 3 mit LLaMA 0:
-% - Verbesserung bei Transfer und Single
-% - kleine Verbesserung bei Multi
-% - Alle Fragen bei transfer verstanden
-% - Leicht weniger Fragen beantwotet bei single und Multi
-% - Verbesserung Book und A2021
-% - Leichte Verbesserung bei IS_2022_09_27
-% - Verschlechterung bei IS_2022_07_18
-% - Mehr beantwortet bei Book
-% - Weniger beantwortet bei A_2021
-
-% Vergleich a30 3 mit a30 1:
-% - Verbesserung bei allen Typen
-% - Verbesserung bei allen Sources außer IS_2022_07_18
-% - mehr Fragen beantwotet bei allen Typen
-% - Mehr fragen beantwotet bei allen Sources außer A_2021
-
-% Vergleich a30 3 mit v100 3:
-% - Verbesserung bei allen Typen
-% - mehr Fragen beantwortet bei allen Typen
-% - Verbesserung bei allen Sources
-% - Mehr Fragen beantwortet bei allen Sources außer IS_2022_07_18
-
-% Vergleich a30 5 mit Llama 0:
-% - Verbesserung bei allen Typen
-% - Weniger Fragen Beantwotet bei allen Typen
-% - Verbesserung bei A_2021 und Book
-% - Verschlechterung bei IS_2022_09_27 und IS_2022_07_18
-% - Mehr fragen beantwortet bei Book
-% - Weniger Fragen beantwortet bei allen Sources außer Book
-
-% Vergleich a30 5 mit a30 3:
-% - Verbesserung bei Multi
-% - Verschlechterung bei Single, Transfer
-% - Weniger Fragen beantwortet bei allen Typen
-% - Verbesserung bei Book
-% - Verschlechterung bei allen Sources außer Book
-% - Weniger Fragen beantwotet bei allen Sources außer Book
-
-% Vergleich a30 10 mit Llama 0:
-% - Verbesserung bei allen Typen
-% - Weniger Fragen beantwortet bei allen Typen
-% - Verbesserung bei A_2021 und Book
-% - Verschlechterung bei IS_2022_07_18
-% - Weniger Fragen beantwortet bei allen Sources
-
-% Vergleich a30 10 mit a30 3:
-% - Vergleichbar bei allen Typen
-% - Mehr Fragen beantwortet bei Multi
-% - Weniger Fragen beantwortet bei Transfer
-% - Besser bei Book
-% - Schlechter bei IS_2022_09_27, IS_2022_07_18
-% - Weniger Fragen beantwortet bei allen Sources außer A_2021
-
-% Vergleich a30 10 mit a30 5:
-% - Besser bei single
-% - Mehr bei Multi
-% - Weniger bei Transfer, Single
-% - Besser bei IS_2022_09_27
-% - Mehr bei A2021
-% - Weniger bei allen außer A2021
-
-% Ranking - Richtig Beantwortet:
-% - GPT4 immer besser
-% - 10e, 5e, 3e a30 besten Ergebnisse
-% - v100 1e schlechteste Ergebnisse
-
-% Ranking Beantwortet:
-% - GPT4, llama0, llama 3e
-% - v100 1e schlechteste Ergebnisse
-
-% Ranking MakroF1:
-% - GPT4 besstes
-% - A30 3e, 10e und 5e sehr gut
-% - 5e und 10e durch Book
-% - v100 1e schlechteste Ergebnisse
-
-
-% Analyse der Korrektheit
-% - Betrachtung der MakroF1 Werte bestätigt totale Anzahl der Fragen Ergebnisse
-% - GPT4 erreicht 0.7 MakroF1, vergleichbar mit ERgebnissen aus GPT4 Paper (Medical Knowledge)
-% - LLaMA auch im untrainierten Zustand deutlich unter normaler Leistung
-% - Doppelte Leistung von untrainiert durch 5e, 10e und 3e erreicht
-% - 1e vergleichbar mit 0e
-% - insbesondere Transfer-Fragen besser
-% - synthetische gute Ergebnisse bei 5e, 10e durch overfitting auf Buchfragen
-% - 3e erreicht gute Ergebnisse bei A2021 -> kann dadurch mithalten
-
-% Begründung der Ergebnisse
-% - GPT4 durch Größe unschlagbar
-% - hier nur mit LLaMA 7B verglichen, zu erwarten bei größere Modelle deutlich bessere Leistung
-% - Verlauf des Trainings einschätzbar: 1 Epoche deutlich zu wenig, so gut wie keine Leistungssteigerung
-% - temporäres Overfitting an Formattierungsarten (Überschriften, Aufzählungen)
-%     hier Beispiel von LLaMA 1 einfügen
-% - Overfitting durch identische Antwortimitierung bei 5e und 10e
-%     hier Beispiel 10e einfügen
-% - Maximale Leistung bei 3e/5e erreicht, 10e keine Verbesserung
-% - generell sehr wenig Trainigsdaten (600kB), Gefahr des overfittings nach 3 Epochen existent
-% - weitertrainieren von v100 nicht möglich, beschrieben in Kapitel 5
-% - V100 FP16 training führt zu deutlich schlechteren Leistungen
-% - LLaMA erlernt keine falschen Fakten, deutlich mehr Fragen unbeantwortet, während LLaMA 0 mehr Fragen falsch beantwortet
-%     - steigert sich mit steigender Epoche -> anzeichen für Overfitting
-
-% - Tatsächliche Steigerung bei Transfer-Fragen
-% Ergebnisse enthalten jedoch gravierende Formattierungs- und Wiederholungsfehler
-
-% Modelle im aktuellen Zustand nicht nutzbar, da kein Endtoken für Antworten vorhanden
-%     hier Beispiel von LLaMA 5e einfügen
-
-
-% Analyse Erklärbarkeit
-% - GPT 4 auch hier unschlagbar, nahezu jede Antwort enthält Erklärung, 97%
-% - LLaMA 0, V100 3, a30 1 unbeeinflusst bei 50% der Fragen
-% - LLama 3e, 5e, 10e deutlich besser 85% der Fragen
-% - Ergebnisse unabhängig von Source oder Type
-% - Verbesserung durch Human Reinforcement Training möglich, um Erklärungen zu belohnen (nicht existent im Trainingsdatensatz)
-
-% Analyse Fragenverständnis
-% - Fragenverständnis nicht äquivalent zu "Fragen beantwortet"
-% - Fragenverständis bei LLaMA 0 nur durch a30 3 geschlagen (64%, 72%)
-% - Ansonsten starker abfall, V100 3 nur noch bei 40%
-% - GPT4 versteht so gut wie jede Frage (97%)
-% - Multi Fragen bessere Leistung von Llama0 (81%), Andere Modelle bei 63%, begründet durch Leistungsabfall bei A_2021 Fragen
-% - IS Fragen zeigen deutliche Leistungssteigerung und abnahme (zu wenig vs zu viel trainiert)
-
-
-% Analyse Robustheit
-% - Rechtschreibfehler führen zu falschen Antworten
-% - LLaMA 0 profitiert etwas durch Fehler, erhöhter MakroF1 Wert (vollständigere Antworten)
-% - Auch GPT4 schwierigkeiten bei Transfer
-% - Andere Modelle Leistungsabfall um ungefähr 50%
-
-% - Rechtschreibfehler in Fachbegriffen erschweren Faktenwiedergabe, da Tokenization Wörter anders
-% unterteilt (teilweise auch in einzelne Buchstaben)
-% - schlechtere Leistungen zu erwarten gegenüber ohne Fehler
-% - zeigt generelles Verständnis von Fakten unabhängig von Textrepräsentation
-% - LLaMA 0 enthaltenes Wissen durch größere Datenmengen fundierter
-% - LLaMA 3e, 5e, 10e durch einzelnens Buch (wenig Daten) erst oberflächliche Wissensaneignung
-% - scheint teile des LLaMA 0 Wissens ersetzt / versteckt zu haben
+\begin{table}
+    \centering
+    \resizebox{1.2\textwidth}{!}{
+        \begin{tabular}{lllll}
+            \toprule
+            \textbf{Modell} & \textbf{MakroF1}                   & \textbf{Erklärbarkeit}                      & \textbf{Fragenverständnis}                  & \textbf{Robustheit (Leistungsverlust)}       \\
+            \midrule
+            GPT4            & \textbf{\num[detect-weight]{0.7}}  & \textbf{\SI[detect-weight]{97.3}{\percent}} & \textbf{\SI[detect-weight]{97.9}{\percent}} & \SI{15.7}{\percent}                          \\
+            \lo{}           & \num{0.13}                         & \SI{48.1}{\percent}                         & \SI{64.2}{\percent}                         & \textbf{\SI[detect-weight]{-0.23}{\percent}} \\
+            \midrule
+            \liv{}          & \num{0.01}                         & \SI{0}{\percent}                            & \SI{2.1}{\percent}                          & \SI{100}{\percent}                           \\
+            \lia{}          & \num{0.11}                         & \SI{50}{\percent}                           & \SI{54.7}{\percent}                         & \SI{54.5}{\percent}                          \\
+            \lev{}          & \num{0.1}                          & \SI{47.4}{\percent}                         & \SI{40}{\percent}                           & \SI{60}{\percent}                            \\
+            \lea{}          & \num{0.3}                          & \textbf{\SI[detect-weight]{85.4}{\percent}} & \textbf{\SI[detect-weight]{72.6}{\percent}} & \SI{46.7}{\percent}                          \\
+            \lsa{}          & \textbf{\num[detect-weight]{0.33}} & \SI{82.5}{\percent}                         & \SI{0.6}{\percent}                          & \SI{60.6}{\percent}                          \\
+            \lioa{}         & \num{0.32}                         & \SI{81}{\percent}                           & \SI{55.8}{\percent}                         & \textbf{\SI[detect-weight]{43.8}{\percent}}  \\
+        \end{tabular}}
+    \caption[Zusammenfassung der Ergebnisse der Evaluierung]{Zusammenfassung der Ergebnisse der Evaluierung. Fett markierte Werte repräsentieren die beste Leistung in dem Kriterium. Unterteilt sind die Zeilen nach nur evaluierte Modelle und trainiert und evaluierte Modelle. }\label{tab:results:summary}
+\end{table}
 
 % Gesamtanalyse
 % - LLaMA kommt nicht an Leistungen von GPT4
