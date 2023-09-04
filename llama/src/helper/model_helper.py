@@ -1,4 +1,12 @@
 def get_model_key(name: str) -> int:
+    """Returns the model key for a given model name. Sorting is as follows: Model without Epoch < Model with Epoch but without Gpu < Model with Epoch and Gpu
+
+    Args:
+        name (str): The name of the model
+
+    Returns:
+        int: The model key
+    """
     if name == "gpt4":
         return 0
     else:
@@ -16,6 +24,14 @@ def get_model_key(name: str) -> int:
 
 
 def get_model_name(file_name: str) -> str:
+    """Returns the model name for a given file name
+
+    Args:
+        file_name (str): The file name
+
+    Returns:
+        str: The model name
+    """
     if file_name.startswith("gpt4"):
         return "gpt4"
     else:

@@ -4,6 +4,8 @@ from strenum import StrEnum
 
 
 class Question:
+    """Represents a single Question of the evaluation dataset and their attributes.
+    """
     def __init__(
         self,
         question="",
@@ -19,6 +21,22 @@ class Question:
         points=-1,
         total_answers=-1,
     ):
+        """Initializes a Question object.
+
+        Args:
+            question (str, optional): The actual question from the source. Defaults to "".
+            transformed (str, optional): The translated and transformed question. Defaults to "".
+            generated (str, optional): The generated answer by a model. Defaults to "".
+            true_answer (str, optional): The expected answer for this question. Defaults to "".
+            num_answers (int, optional): The number of answers in the true_answer. Defaults to -1.
+            type (str, optional): The type of the question. Must be of type "QuestionType". Defaults to "".
+            source (str, optional): The source of the question. Must be of type "QuestionSource". Defaults to "".
+            context (str, optional): The context needed to answer this question. Defaults to "".
+            true_input (str, optional): The actual input used to generate the answer. Defaults to "".
+            answered (1, optional): Denotes if question was not answered (0), wrong answered (1) or correct answered (2). Defaults to -1.
+            points (int, optional): Number of correct answers in the generated answer. Defaults to -1.
+            total_answers (int, optional): Number of total answers in the generated answer. Defaults to -1.
+        """
         self.question: str = question
         self.transformed: str = transformed
         self.generated: str = generated

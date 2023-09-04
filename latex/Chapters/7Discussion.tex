@@ -2,6 +2,78 @@
 \chapter{Diskussion}\label{ch:discussion}
 %*****************************************
 
+Die Ergebnisse dieser Arbeit zeigen, dass Continual Pretraining die Leistung eines Modells zur Beantwortung von Fragen steigern kann.
+Dennoch erreichte das hier trainierte Modell eine maximale Leistung von \num{0.3} MakroF1, welche nicht vergleichbar mit aktuell verfügbaren Modellen
+wie GPT4 ist.
+Um diese Leistungen zu erreichen, werden hier einige Ansätze vorgestellt, die in zukünftigen Arbeiten untersucht werden können.
+
+\section{Modellvergrößerung}
+Die intuitivste Lösung ist die Vergrößerung der genutzten Modelle.
+Von dem genutzten Llama 2 Modell existieren ebenso Modelle mit 13 Milliarden und 70 Milliarden Parametern.
+Bereits in dem Artikel \citet{llama} zu Llama 1 Modellen erreicht alleinig das größte Modell vergleichbare Leistung wie ChatGPT, es ist also davon auszugehen, dass
+auch hier größere Modelle bessere Leistung erzielen können.
+\citet{scaling_laws} zeigten, dass die Leistung eines Modells neben der Größe des Datensatzes und der Länge des Trainings auch von der Größe des Modells abhängt.
+Dies unterstützt die hier vorgestellte These.\\
+
+Eine Vergrößerung des Modells bringt allerdings auch Nachteile und Probleme mit sich.
+Größere Modelle benötigen mehr Rechenleistung und \ac{gpu}-\ac{ram} während des Trainings und der Inferenz.
+Dies führt zu höheren Kosten und einer längeren Trainingszeit
+und schränkt die Nutzbarkeit der Modelle nach dem Training deutlich ein.
+In dem hier verwendeten Aufbau konnte eine Erweiterung der Anzahl der genutzten \acp{gpu} nicht erzielt werden,
+weshalb ein Training von größeren Modellen nicht möglich war.\\
+
+Größere Modelle tendieren schneller, einen Zustand der Überanpassung zu erreichen, weshalb das Training mit deutlich geringerer Lernrate durchgeführt wird, was die Trainingszeit
+weiter erhöht.\\
+
+\subsection{Training mit Hilfe von Quantisierung}
+Um große Modelle zu trainieren und zu nutzen, ist eine Nutzung der \ac{zero}-Optimierung ein erster Schritt, vorgestellt in \citet{zero}
+Mit Hilfe von \ac{zero}-Stufe 3 Optimierung können Optimierungs- und Parameterzustände auf \ac{cpu}s und Festplatten ausgelagert werden, während die Berechnungen weiterhin auf \ac{gpu}s durchgeführt werden.
+Zusätzlich dazu ermöglicht eine Quantisierung der Modelle in kleinere Datentypen eine Reduktion des benötigten \ac{gpu}-\ac{ram}s deutlich.
+\citet{4bit} untersuchten die Ausmaße der Quantisierung auf die Leistung von Modellen und zeigten, dass eine Quantisierung auf 4 Bit die Leistung von Modellen nur geringfügig beeinflusst.\\
+
+Zusätzlich ist es möglich, Modelle während der Inferenz in einem 8-Bit Modus zu konvertieren um Ressourcen zu sparen.
+\citet{8bit-inference} zeigten, dass bei der Anwendung von 8-Bit Matrix Multiplikationen keine signifikanten Leistungseinbußen zu erwarten sind.
+Der 8-Bit Inferenzmodus wurde ebenso in dieser Arbeit angewendet, um die trainierte Modelle auf einer Nvidia Tesla A30 GPU mit \SI{24}{\giga\byte} \ac{ram} nutzen zu können.\\
+
+\section{Human Reinforcement Learning}
+Nach dem erfolgreichen Training eines Modells kann deren Ausgabe deutlich verbessert werden, in dem Menschen die Ausgabe bewerten und das Modell entsprechend angepasst wird.
+Dieser Schritt wurde ebenso auf GPT4 angewendet und ist ein Grund für die hohe Leistung des Modells.
+Mit Hilfe von dem so genannten Human Reinforcement Learning können Modelle darauf trainiert werden, Erklärungen zu ihren Antworten zu geben, unbeantwortete Fragen zu kennzeichnen mit zum Beispiel der generierten Antwort \enquote{Ich weiß es nicht}, auf schädliche Inhalte nicht zu reagieren oder die Antwort zu verweigern und Texte klarer und freundlicher zu formulieren.
+Dieser Trainingsschritt benötigt allerdings hohen Aufwand und ist nicht vollständig automatisierbar.\\
+
+Llama 2 verfügt über Versionen, die dieses Human Reinforcement Learning bereits durchlaufen haben.
+In dieser Arbeit wurde davon ausgegangen, dass dieses zusätzlich erlernte Wissen verloren geht, sobald ein Continual Pretraining durchgeführt wird.
+Diese Annahme stützt sich darauf, dass alle vorhandenen Modelle den Human Reinforcement Learning Schritt als letzten Schritt des Trainings durchlaufen haben.
+Eine Bestätigung oder Widerlegung dieser Annahme könnte potentiell auch die Leistung der Modelle verbessern.\\
+
+\section{Datensatzvergrößerung}
+Eine große Limitierung der hier trainierten Modelle ist die Größe des Trainingsdatensatzes.
+Mit circa \num{34500} Tokens ist dieser Datensatz nicht vergleichbar mit den zum ursprünglichen Training verwendeten Datensätzen und erreichte nur eine Größe von \SI{600}{\kilo\byte}. Kleine Datensätze führen zu schnellerer Überanpassung, da der Datensatz mehrfach verwendet werden muss, bevor eine Anpassung des Modells an diesen stattfinden kann.
+Dies ist ebenso in den Ergebnissen zu sehen, da hier eine Überanpassung bereit nach 3 Epochen zu erkennen war.
+Größere Datensätze führen zu weniger Epochen und dementsprechend weniger Überanpassung.
+Zusätzlich enthalten größere Datensätze potentiell gleiche Informationen in unterschiedlicher Formulierung, welches wiederum die Generalisierbarkeit des Modells verbessert.
+Insbesondere die Kriterien Robustheit und Fragenverständnis profitieren von größeren Datensätzen.\\
+
+Zur Verwendung von größeren Datensätzen wäre eine Nutzung weiterer Bücher über das Thema Informationssysteme im Gesundheitswesen optimal.
+Wichtig ist hier der gleiche Wissensinhalt, so dass sich Aussagen zwischen den Büchern nicht widersprechen.
+
+\section{Domänenspezifische Modelle}
+Das Llama 2 Modell wurde ohne speziellen Fokus auf Domäne, inbesondere die Domäne der Medizin, trainiert.
+Allgemein trainierte Modelle können einen breiteren Anwendungsfall abdecken, enthalten jedoch auch weniger Verständnis einzelner Domäne gegenüber domänenspezifischer Modelle.
+Die Nutzung von Modellen mit größerem Fokus auf die Domäne der Medizin oder wissenschaftlichem Inhalt könnte die Grundleistung des Modells verbessern und dadurch auch die Endleistung der hier trainierten Modelle.\\
+
+Leider existieren zum Zeitpunkt dieser Arbeit keine domänenspezifische Modelle in der Größenordnung wie Llama 2, da hier entweder die Größe der Modelle oder die Größe des Datensatzes geringer ist.
+Auch können domänenspezifische Modelle Informationen enthalten, die widersprüchlich gegenüber dem verwendeten Trainingsdatensatz sind, jedoch fundierter erlernt wurden, da dazu mehr Informationen im ursprünglichen Datensatz vorhanden waren. Das bewusste Verlernen dieses falschen Wissens ist nicht trivial und kann die Leistung des Modells negativ beeinflussen.
+Eine Möglichkeit zur Anpassung der Modelle stellen \citet{knowledge_neurons} vor, um bestimmte Wissensneuronen aus einem Modell zu entfernen.\\
+
+\section{Adapterbasiertes Training}
+
+\section{Textextraktion aus Kontext}
+
+\section{Bewertung von Fragen anhand Klausurpunkten}
+
+
+
 * LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale https://arxiv.org/abs/2208.07339
 * The case for 4-bit precision: k-bit Inference Scaling Laws https://arxiv.org/abs/2212.09720
 
