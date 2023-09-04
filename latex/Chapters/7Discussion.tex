@@ -2,99 +2,116 @@
 \chapter{Diskussion}\label{ch:discussion}
 %*****************************************
 
-Die Ergebnisse dieser Arbeit zeigen, dass Continual Pretraining die Leistung eines Modells zur Beantwortung von Fragen steigern kann.
-Dennoch erreichte das hier trainierte Modell eine maximale Leistung von \num{0.3} MakroF1, welche nicht vergleichbar mit aktuell verfügbaren Modellen
-wie GPT4 ist.
-Um diese Leistungen zu erreichen, werden hier einige Ansätze vorgestellt, die in zukünftigen Arbeiten untersucht werden können.
+Die Ergebnisse dieser Arbeit zeigen, dass ein Continual Pretraining die Leistung eines Modells bei der Beantwortung von Fragen verbessern kann.
+Dennoch erreichte das hier trainierte Modell eine maximale Leistung von \num{0.3} MakroF1, was nicht mit derzeit verfügbaren Modellen wie GPT4 vergleichbar ist.
+Um diese Leistung zu erreichen, werden hier einige Ansätze vorgestellt, die in zukünftigen Arbeiten untersucht werden können.
 
+\section{Grenzen der Modelle}
+Die hier vorgestellten Modelle stellen eine Momentaufnahme in einer bestimmten Umgebung dar, können aber keine generelle Aussage über die zu erwartende Leistung von Continual Pretraining machen.
+Das Training der Modelle ist durch die Ressourcenanforderungen begrenzt und stellt auch nicht die optimale Leistung dar, die ein Llama 2 Modell erreichen kann.\\
+
+Während des Trainings wurde ein Zustand der Überanpassung erreicht, wobei der genaue Zeitpunkt nicht bestimmt werden konnte.
+Bereits nach 3 Epochen ist ein deutlicher Anstieg der Fehlerwerte gegenüber dem Validierungsdatensatz zu erkennen, so dass davon auszugehen ist, dass dies bereits vorher begonnen hat.
+Zudem wurde die Unterteilung des Fortschritts nur in 1, 3, 5 und 10 Epochen vorgenommen, weshalb nicht ausgeschlossen werden kann, dass z.B. bei 4 Epochen bessere Ergebnisse erzielt werden können.\\
+
+Auch die geringe Datenmenge für das Training reduziert die mögliche Leistung in allen Kriterien.
+Kleine Datenmengen führen zu Überanpassung und stellen Informationen in zu wenig unterschiedlichen Ausprägungen dar, was die Generalisierbarkeit des Modells verringert.\\
+
+Zur Evaluierung des Modells erfolgte anhand von \num{95} Fragen.
+Auch dieser Fragenkatalog ist kleiner als erwartet und enthält meist ähnliche Wissensfragen in nur einer Formulierung.
+Insbesondere die Fragen aus der schriftlichen Prüfung des Moduls \enquote{Informationssysteme im Gesundheitswesen} umfassen insgesamt nur 9 Fragen und unterliegen damit sehr starken Schwankungen.\\
+
+Die Ergebnisse der Evaluation zeigen eine Tendenz zur Verbesserung, die trainierten Modelle selbst sind in diesem Zustand jedoch nicht verwendbar.
+Dies liegt zum einen an dem fehlenden Finetuning, welches die Gefährlichkeit des Modells deutlich erhöht, da es schädliche und falsche Antworten generieren kann, zum anderen an der allgemeinen Formulierung der Antworten.
+Wie bereits in \cref{ch:results} gezeigt, beenden Modelle ihre Antwort nicht eindeutig mit einem Token, sondern generieren fortlaufend Text.
+Daher enthalten alle generierten Antworten zumeist am Ende zitierte Textpassagen, die keinen Bezug zur Frage haben.
+Dies erschwert die Verwendung dieses Modells erheblich.
+Abhilfe schafft hier das bereits erwähnte Finetuning, bei dem einem Modell abschließende Token beigebracht werden, nach denen die Generierung gestoppt werden kann.
 \section{Modellvergrößerung}
-Die intuitivste Lösung ist die Vergrößerung der genutzten Modelle.
-Von dem genutzten Llama 2 Modell existieren ebenso Modelle mit 13 Milliarden und 70 Milliarden Parametern.
-Bereits in dem Artikel \citet{llama} zu Llama 1 Modellen erreicht alleinig das größte Modell vergleichbare Leistung wie ChatGPT, es ist also davon auszugehen, dass
-auch hier größere Modelle bessere Leistung erzielen können.
-\citet{scaling_laws} zeigten, dass die Leistung eines Modells neben der Größe des Datensatzes und der Länge des Trainings auch von der Größe des Modells abhängt.
+Die intuitivste Lösung ist die Vergrößerung der verwendeten Modelle.
+Von dem verwendeten Llama 2 Modell gibt es auch Modelle mit 13 Milliarden und 70 Milliarden Parametern.
+Bereits im Artikel \citet{llama} über Llama 1 Modelle erreicht nur das größte Modell eine vergleichbare Leistung wie ChatGPT, es ist also davon auszugehen, dass auch hier größere Modelle eine bessere Leistung erzielen können.
+\citet{scaling_laws} haben gezeigt, dass die Leistung eines Modells neben der Größe des Datensatzes und der Länge des Trainings auch von der Größe des Modells abhängt.
 Dies unterstützt die hier vorgestellte These.\\
 
-Eine Vergrößerung des Modells bringt allerdings auch Nachteile und Probleme mit sich.
+Allerdings bringt eine Vergrößerung des Modells auch Nachteile und Probleme mit sich.
 Größere Modelle benötigen mehr Rechenleistung und \ac{gpu}-\ac{ram} während des Trainings und der Inferenz.
-Dies führt zu höheren Kosten und einer längeren Trainingszeit
-und schränkt die Nutzbarkeit der Modelle nach dem Training deutlich ein.
-In dem hier verwendeten Aufbau konnte eine Erweiterung der Anzahl der genutzten \acp{gpu} nicht erzielt werden,
-weshalb ein Training von größeren Modellen nicht möglich war.\\
+Dies führt zu höheren Kosten und längeren Trainingszeiten
+und schränkt die Verwendbarkeit der Modelle nach dem Training deutlich ein.
+In der hier verwendeten Konfiguration konnte die Anzahl der verwendeten \acp{gpu} nicht erhöht werden,
+daher war ein Training größerer Modelle nicht möglich.\\
 
-Größere Modelle tendieren schneller, einen Zustand der Überanpassung zu erreichen, weshalb das Training mit deutlich geringerer Lernrate durchgeführt wird, was die Trainingszeit
-weiter erhöht.\\
+Größere Modelle neigen schneller dazu, einen Zustand der Überanpassung zu erreichen, weshalb das Training mit einer deutlich geringeren Lernrate durchgeführt wird, was die Trainingszeit weiter erhöht.\\
 
-\subsection{Training mit Hilfe von Quantisierung}
-Um große Modelle zu trainieren und zu nutzen, ist eine Nutzung der \ac{zero}-Optimierung ein erster Schritt, vorgestellt in \citet{zero}
-Mit Hilfe von \ac{zero}-Stufe 3 Optimierung können Optimierungs- und Parameterzustände auf \ac{cpu}s und Festplatten ausgelagert werden, während die Berechnungen weiterhin auf \ac{gpu}s durchgeführt werden.
-Zusätzlich dazu ermöglicht eine Quantisierung der Modelle in kleinere Datentypen eine Reduktion des benötigten \ac{gpu}-\ac{ram}s deutlich.
-\citet{4bit} untersuchten die Ausmaße der Quantisierung auf die Leistung von Modellen und zeigten, dass eine Quantisierung auf 4 Bit die Leistung von Modellen nur geringfügig beeinflusst.\\
+\subsection{Training durch Quantisierung}
+Um große Modelle zu trainieren und zu nutzen, ist der Einsatz der \ac{zero}-Optimierung ein erster Schritt, der in \citet{deepspeed} vorgestellt wird.
+Mit Hilfe der \ac{zero}-Stufe 3 Optimierung können Optimierungs- und Parameterzustände auf \ac{cpu}s und Festplatten ausgelagert werden, während die Berechnungen weiterhin auf \ac{gpu}s durchgeführt werden.
+Zusätzlich kann durch eine Quantisierung der Modelle in kleinere Datentypen die Anzahl der benötigten \ac{gpu}-\ac{ram}s deutlich reduziert werden.
+\citet{4bit} untersuchte den Einfluss der Quantisierung auf die Performance der Modelle und zeigte, dass eine Quantisierung auf 4 Bit die Leistung der Modelle nur geringfügig beeinflusst.\\
 
-Zusätzlich ist es möglich, Modelle während der Inferenz in einem 8-Bit Modus zu konvertieren um Ressourcen zu sparen.
-\citet{8bit-inference} zeigten, dass bei der Anwendung von 8-Bit Matrix Multiplikationen keine signifikanten Leistungseinbußen zu erwarten sind.
-Der 8-Bit Inferenzmodus wurde ebenso in dieser Arbeit angewendet, um die trainierte Modelle auf einer Nvidia Tesla A30 GPU mit \SI{24}{\giga\byte} \ac{ram} nutzen zu können.\\
+Zusätzlich ist es möglich, Modelle während der Inferenz in einen 8-Bit-Modus zu konvertieren, um Ressourcen zu sparen.
+\citet{8bit-inference} haben gezeigt, dass bei der Verwendung von 8-Bit-Matrix-Multiplikationen keine signifikanten Leistungseinbußen zu erwarten sind.
+Der 8-Bit Inferenzmodus wurde auch in dieser Arbeit verwendet, um die trainierten Modelle auf einer Nvidia Tesla A30 GPU mit \SI{24}{\giga\byte} \ac{ram} nutzen zu können.\\
 
 \section{Human Reinforcement Learning}
-Nach dem erfolgreichen Training eines Modells kann deren Ausgabe deutlich verbessert werden, in dem Menschen die Ausgabe bewerten und das Modell entsprechend angepasst wird.
-Dieser Schritt wurde ebenso auf GPT4 angewendet und ist ein Grund für die hohe Leistung des Modells.
-Mit Hilfe von dem so genannten Human Reinforcement Learning können Modelle darauf trainiert werden, Erklärungen zu ihren Antworten zu geben, unbeantwortete Fragen zu kennzeichnen mit zum Beispiel der generierten Antwort \enquote{Ich weiß es nicht}, auf schädliche Inhalte nicht zu reagieren oder die Antwort zu verweigern und Texte klarer und freundlicher zu formulieren.
-Dieser Trainingsschritt benötigt allerdings hohen Aufwand und ist nicht vollständig automatisierbar.\\
+Nach erfolgreichem Training eines Modells kann dessen Ausgabe wesentlich verbessert werden, indem Menschen die Ausgabe bewerten und das Modell entsprechend anpassen.
+Dieser Schritt wurde auch bei GPT4 durchgeführt und ist einer der Gründe für die hohe Leistungsfähigkeit des Modells.
+Mit Hilfe des so genannten Human Reinforcement Learning können Modelle darauf trainiert werden, Erklärungen zu ihren Antworten zu geben, unbeantwortete Fragen mit z.B. der generierten Antwort \enquote{Ich weiß es nicht} zu markieren, auf schädliche Inhalte nicht zu reagieren oder die Antwort zu verweigern und Texte klarer und freundlicher zu formulieren.
+Dieser Trainingsschritt ist jedoch sehr aufwendig und kann nicht vollständig automatisiert werden.\\
 
 Llama 2 verfügt über Versionen, die dieses Human Reinforcement Learning bereits durchlaufen haben.
-In dieser Arbeit wurde davon ausgegangen, dass dieses zusätzlich erlernte Wissen verloren geht, sobald ein Continual Pretraining durchgeführt wird.
-Diese Annahme stützt sich darauf, dass alle vorhandenen Modelle den Human Reinforcement Learning Schritt als letzten Schritt des Trainings durchlaufen haben.
-Eine Bestätigung oder Widerlegung dieser Annahme könnte potentiell auch die Leistung der Modelle verbessern.\\
+In dieser Arbeit wird davon ausgegangen, dass dieses zusätzlich erlernte Wissen verloren geht, sobald ein Continual Pretraining durchgeführt wird.
+Diese Annahme basiert auf der Tatsache, dass alle existierenden Modelle das Human Reinforcement Learning als letzten Trainingsschritt durchlaufen haben.
+Eine Widerlegung dieser Hypothese könnte potenziell auch die Leistung der Modelle verbessern.
 
 \section{Datensatzvergrößerung}
-Eine große Limitierung der hier trainierten Modelle ist die Größe des Trainingsdatensatzes.
-Mit circa \num{34500} Tokens ist dieser Datensatz nicht vergleichbar mit den zum ursprünglichen Training verwendeten Datensätzen und erreichte nur eine Größe von \SI{600}{\kilo\byte}. Kleine Datensätze führen zu schnellerer Überanpassung, da der Datensatz mehrfach verwendet werden muss, bevor eine Anpassung des Modells an diesen stattfinden kann.
-Dies ist ebenso in den Ergebnissen zu sehen, da hier eine Überanpassung bereit nach 3 Epochen zu erkennen war.
-Größere Datensätze führen zu weniger Epochen und dementsprechend weniger Überanpassung.
-Zusätzlich enthalten größere Datensätze potentiell gleiche Informationen in unterschiedlicher Formulierung, welches wiederum die Generalisierbarkeit des Modells verbessert.
+Eine wesentliche Einschränkung der hier trainierten Modelle ist die Größe des Trainingsdatensatzes.
+Mit etwa \num{34500} Tokens ist dieser Datensatz nicht mit den für das ursprüngliche Training verwendeten Datensätzen vergleichbar und erreicht nur eine Größe von \SI{600}{\kilo\byte}. Kleine Datensätze führen zu einer schnelleren Überanpassung, da der Datensatz mehrfach verwendet werden muss, bevor eine Anpassung des Modells an diesen erfolgen kann.
+Dies zeigt sich auch in den Ergebnissen, da bereits nach 3 Epochen eine Überanpassung zu erkennen ist.
+Größere Datensätze führen zu weniger Epochen und damit zu weniger Überanpassung.
+Zudem enthalten größere Datensätze potentiell gleiche Informationen in unterschiedlicher Formulierung, was wiederum die Generalisierbarkeit des Modells verbessert.
 Insbesondere die Kriterien Robustheit und Fragenverständnis profitieren von größeren Datensätzen.\\
 
-Zur Verwendung von größeren Datensätzen wäre eine Nutzung weiterer Bücher über das Thema Informationssysteme im Gesundheitswesen optimal.
-Wichtig ist hier der gleiche Wissensinhalt, so dass sich Aussagen zwischen den Büchern nicht widersprechen.
+Für die Verwendung größerer Datensätze wäre es optimal, weitere Literatur zum Thema Informationssysteme im Gesundheitswesen heranzuziehen.
+Wichtig ist dabei, dass die Wissensinhalte identisch sind, so dass sich die Aussagen zwischen den Büchern nicht widersprechen.
 
 \section{Domänenspezifische Modelle}
-Das Llama 2 Modell wurde ohne speziellen Fokus auf Domäne, inbesondere die Domäne der Medizin, trainiert.
-Allgemein trainierte Modelle können einen breiteren Anwendungsfall abdecken, enthalten jedoch auch weniger Verständnis einzelner Domäne gegenüber domänenspezifischer Modelle.
-Die Nutzung von Modellen mit größerem Fokus auf die Domäne der Medizin oder wissenschaftlichem Inhalt könnte die Grundleistung des Modells verbessern und dadurch auch die Endleistung der hier trainierten Modelle.\\
+Das Llama 2 Modell wurde ohne speziellen Fokus auf eine Domäne, insbesondere die Domäne Medizin, trainiert.
+Allgemein trainierte Modelle können einen breiteren Anwendungsbereich abdecken, enthalten aber auch weniger Verständnis einzelner Domänen als domänenspezifische Modelle.
+Die Verwendung von Modellen, die stärker auf die Domäne der Medizin oder auf wissenschaftliche Inhalte fokussiert sind, könnte die Basisleistung des Modells und damit auch die Endleistung der hier trainierten Modelle verbessern.\\
 
-Leider existieren zum Zeitpunkt dieser Arbeit keine domänenspezifische Modelle in der Größenordnung wie Llama 2, da hier entweder die Größe der Modelle oder die Größe des Datensatzes geringer ist.
-Auch können domänenspezifische Modelle Informationen enthalten, die widersprüchlich gegenüber dem verwendeten Trainingsdatensatz sind, jedoch fundierter erlernt wurden, da dazu mehr Informationen im ursprünglichen Datensatz vorhanden waren. Das bewusste Verlernen dieses falschen Wissens ist nicht trivial und kann die Leistung des Modells negativ beeinflussen.
-Eine Möglichkeit zur Anpassung der Modelle stellen \citet{knowledge_neurons} vor, um bestimmte Wissensneuronen aus einem Modell zu entfernen.\\
+Leider gibt es zum Zeitpunkt dieser Arbeit keine domänenspezifischen Modelle in der Größe von Llama 2, da entweder die Größe der Modelle oder die Größe des Datensatzes geringer ist.
+Domänenspezifische Modelle können auch Informationen enthalten, die im Widerspruch zum verwendeten Trainingsdatensatz stehen, aber besser gelernt wurden, weil mehr Informationen im ursprünglichen Datensatz vorhanden waren.
+Das bewusste Verlernen dieses falschen Wissens ist nicht trivial und kann die Leistung des Modells negativ beeinflussen.
+Eine Möglichkeit der Modellanpassung wurde von \citet{knowledge_neurons} vorgestellt, um bestimmte Wissensneuronen aus einem Modell zu entfernen.
 
-\section{Adapterbasiertes Training}
+\section{Adapter-basiertes Training}
+Wie bereits in \cref{ch:relatedWork} erwähnt, ist neben den klassischen Trainingsmethoden auch das Training mit Hilfe von Adaptern möglich.
+\citet{adapterhub} stellt eine Plattform zur Verfügung, die es erlaubt, kleinere Neuronale Netze zwischen die Modellschichten einzufügen und diese zu trainieren.
+Dies minimiert die benötigten Ressourcen, verkürzt die Trainingszeit und verhindert das Verlernen von Wissen.
+Adapter müssen speziell für Modelltypen entwickelt werden und sind zum Zeitpunkt dieser Arbeit nicht für Llama-Modelle verfügbar.
+Eine eigene Implementierung für die Llama Modelle könnte die endgültige Performance der Modelle verbessern.
+
+Neben dem Einfügen von Adaptern ist auch die Verwendung von \ac{lora}, eingeführt in \citet{lora}, möglich.
+\ac{lora} erlaubt das Einfügen von trainierbaren Matrizen in jede Schicht und hat ähnliche Vorteile wie Adapter.
+Die Verwendung von \ac{lora} wurde im Rahmen dieser Arbeit untersucht, jedoch nicht in die endgültige Auswertung übernommen, da eine Inferenz nicht möglich war.
 
 \section{Textextraktion aus Kontext}
+Diese Arbeit konzentriert sich primär auf die Verwendung von Decoder-basierten Modellen zur Generierung von Antworten auf Fragen.
+Grund dafür ist die potentiell höhere Generalisierbarkeit auf Formulierungen um besser generierten Text zu erhalten.
+Neben der Generierung von Text ist auch die Extraktion von Text aus einem gegebenen Kontext eine mögliche Lösung.
+Mit Hilfe von Encoder-basierten Modellen wie z.B. \ac{bert} ist es möglich, Textpassagen, die Antworten auf gegebene Fragen enthalten, aus einem Kontext zu extrahieren.
+Dieser Ansatz könnte zu einer besseren Korrektheit der Fragen führen, allerdings könnten andere Kriterien wie Robustheit und Erklärbarkeit darunter leiden.\\
 
-\section{Bewertung von Fragen anhand Klausurpunkten}
+Man könnte auch ganz auf das Training von Decoder-basierten Modellen verzichten, bei denen das Modell die Frage nur mit Hilfe eines gegebenen Kontextes beantworten soll.
+Dieser Ansatz verspricht die besten Ergebnisse, da Modelle wie GPT4 bereits sehr gute Leistungen bei der Extraktion von Informationen aus Kontexten zeigen.
+\citet{context-extract} hat dieses Verhalten an großen Sprachmodellen untersucht und gezeigt, dass Modelle in der Lage sind, Informationen aus Anfang und Ende eines Kontextes weitgehend korrekt zu extrahieren.
+Eine Kombination aus einem Encoder-basierten Modell zur Bestimmung der Textstelle und einem Decoder-basierten Modell zur Generierung einer Antwort mit Hilfe der extrahierten Textstelle wäre hier durchaus denkbar.\\
 
+\section{Bewertung der Fragen mit Prüfungspunkten}
+Zur Berechnung des Kriteriums Korrektheit wurden jeder Frage drei Werte zugeordnet: die Anzahl der korrekten Antworten des Modells, die Anzahl der Antworten des Modells im Allgemeinen und die Anzahl der erwarteten Antworten für diese Frage.
+Anhand dieser Werte wurden die F1- und MakroF1-Werte der Modelle berechnet.\\
 
-
-* LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale https://arxiv.org/abs/2208.07339
-* The case for 4-bit precision: k-bit Inference Scaling Laws https://arxiv.org/abs/2212.09720
-
-Inferenz nur möglich, verringert RAM Footprint
-
-- Größere Modelle möglicherweise bessere Leistung
-- Chat Modelle nicht möglich - verlernt eher Chat Funktion (Quelle im Stand der Forschung)
-- Einsatz Adapter als Alternative zur Kontexterweiterung
-    - Lora Adapter Training auf 1 GPU möglich, verspricht gute Leistung aber
-    deutlich höherer Trainingsaufwand bei der Programmierung
-    - Limittierter Einsatz von Adaptern da Llama nicht für Adapter gemacht --> Modellumbau notwendig
-- Bessere Ergebnisse, wenn auf Domäne trainiert wird, nicht auf einzelnes Buch
-- Domänspezifische Modelle als Grundlage anstelle General Models (Galatica, BioBert)
-
-- Nutzung von Modellen mit Kontext anstelle von Continual Pretraining
-- Nutzung von BERT Based Modellen um Textpassagen aus Kontext zu extrahieren
-
-- Bewertung von Fragen anhand Klausurpunkten
-
-
-https://news.ycombinator.com/item?id=36832572
-Warum Retrieval Augmented Generation nicht gut ist 
-https://arxiv.org/abs/2307.03172
-
+Da der Evaluationsdatensatz jedoch ausschließlich aus Prüfungsfragen besteht, wäre hier auch eine Auswertung der Fragen nach den Original-Prüfungspunkten möglich.
+Dadurch würden schwierigere Fragen bzw. Fragen mit mehr Antworten stärker gewichtet und hätten somit einen größeren Einfluss auf die Leistung der Modelle.
+Diese Art der Auswertung könnte die Modellleistung in den Kontext der menschlichen Leistung stellen und die Aussagen über die Modellleistung nachvollziehbarer machen.
