@@ -54,7 +54,7 @@ Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht mög
     \caption{Übersicht über die zur Auswahl stehenden Modelle.\label{tab:approach:models}}
 \end{table}
 
-Hier zur Auswahl stehendene Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMA, gezeigt in \cref{tab:approach:models}.
+Hier zur Auswahl stehende Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMA, gezeigt in \cref{tab:approach:models}.
 Die angegebenen Speichergrößen beziehen sich hier auf die notwendige Speichermenge zum Training des Modells und der Inferenz.
 Berechnet wird die Speicheranforderung zum Training mit der \cref{eq:speicher}.
 \begin{equation}\label{eq:speicher}
@@ -155,7 +155,7 @@ In dieser Arbeit wird zunächst das Modell LLaMA 7B ausgewählt, da es eine sehr
 Eine Auswahl dieser Modellgröße begründet sich daher, dass eine Nutzung der Modelle ab 33 Milliarden Parameter auf einzelnen GPUs nicht möglich ist, und dadurch die Nutzbarkeit eingeschränkt wird.
 Ebenso übersteigen die technischen Speicheranforderungen größerer Modelle die Kapazitäten einzelner Knoten im genutzten GPU-Computing Cluster, weshalb dadurch die technische Umsetzung des Trainings drastisch in ihrer Komplexität zunimmt.
 Einzelne Tests der Knoten-übergreifenden Kommunikation zeigten grundlegende Probleme und sollten deshalb vermieden werden.
-Auf weitere Einzelheiten über den Aufbau der verwendenten GPU-Computing Clusters wird in \cref{sec:approach:training} eingegangen.\\
+Auf weitere Einzelheiten über den Aufbau der verwendeten GPU-Computing Clusters wird in \cref{sec:approach:training} eingegangen.\\
 
 \section{Datenkuration}\label{sec:datenkuration}
 Um die Literatur optimal nutzen zu können, muss eine Datenkuration durchgeführt werden.

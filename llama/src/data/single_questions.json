@@ -18,7 +18,7 @@
   {
     "question": "- Collection and analysis of data from user surveys on their general satisfaction with the health information system,",
     "transformed": "How would you describe the scope and tasks of the following activities of managing information systems: Collection and analysis of data from user surveys on their general satisfaction with the health information system",
-    "true_answer": "Collecting and analyzing data from user surveys on their general health information system\u2019s satisfaction: strategic monitoring",
+    "true_answer": "Collecting and analyzing data from user surveys on their general health information system's satisfaction: strategic monitoring",
     "num_answers": 1,
     "source": "Book",
     "context": ""
@@ -72,7 +72,7 @@
     "context": ""
   },
   {
-    "question": "Definieren Sie den Begriff \u201eKrankenhausinformationssystem\u201c.",
+    "question": "Definieren Sie den Begriff \"Krankenhausinformationssystem\".",
     "transformed": "Define the term \"hospital information system\".",
     "true_answer": "A Hospital Information system is the socio-technical subsystem of for hospitals. It comprimises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles.",
     "num_answers": 1,
@@ -88,7 +88,7 @@
     "context": ""
   },
   {
-    "question": "Definieren Sie den Begriff \u201etransinstitutionelles Gesundheitsinformationssystem\u201c. Verwenden Sie dabei den Begriff des \u201eSettings\u201c.",
+    "question": "Definieren Sie den Begriff \"transinstitutionelles Gesundheitsinformationssystem\". Verwenden Sie dabei den Begriff des \"Settings\".",
     "transformed": "Define the term \"trans-institutional health information system\". Use the term \"setting\" for this purpose.",
     "true_answer": "A transinstitutional health information system is the socio-technical subsystem which comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. It cdescribes the information system of a health care network, in which multiple Settings are present. Each setting is a context this information system is used in, for example in the stationary or ambulant care, but also rehabilitation or care of the elder.",
     "num_answers": 1,
@@ -136,7 +136,7 @@
     "context": ""
   },
   {
-    "question": "K\u00f6nnte man mit Hilfe von openEHR eine (DB1, ACn, Vn)-Architektur realisieren?",
+    "question": "Könnte man mit Hilfe von openEHR eine (DB1, ACn, Vn)-Architektur realisieren?",
     "transformed": "Could one realise a DB^1, AC^n, V^n architecture with the help of openEHR?",
     "true_answer": "Yes",
     "num_answers": 1,
@@ -200,7 +200,7 @@
     "context": ""
   },
   {
-    "question": "Erl\u00e4utern Sie die Taxonomy f\u00fcr Krankenhausinformationssysteme!",
+    "question": "Erläutern Sie die Taxonomy für Krankenhausinformationssysteme!",
     "transformed": "Explain the taxonomy for hospital information systems!",
     "true_answer": "The taxonomy for HIS is a classification system that is used to categorize different types of HIS based on their functionality and purpose. The taxonomy can be used to help healthcare organizations select the right HIS for their needs. There are several different taxonomies for HIS, but they generally include categories such as clinical information systems, administrative information systems, and decision support systems",
     "num_answers": 1,
@@ -216,7 +216,7 @@
     "context": ""
   },
   {
-    "question": "Wie kann man auch bei fehlender Vollausleuchtung mit den allgegenw\u00e4rtigen Funkl\u00f6chern hinter metallwagen so umgehen, dass Mobile Anwendungen nicht laufend abst\u00fcrzen?",
+    "question": "Wie kann man auch bei fehlender Vollausleuchtung mit den allgegenwärtigen Funklöchern hinter metallwagen so umgehen, dass Mobile Anwendungen nicht laufend abstürzen?",
     "transformed": "Even in the absence of full coverage, how can you deal with the ubiquitous radio holes behind metal trolleys in such a way that mobile applications don't crash all the time?",
     "true_answer": "One of this:\n- caching and local storage\n- Offline Mode\n- Background Syncing and Queuing",
     "num_answers": 1,
@@ -224,7 +224,7 @@
     "context": ""
   },
   {
-    "question": "Welche Speichermedien gew\u00e4hrleisten eine Unver\u00e4nderbarkeit der Daten?",
+    "question": "Welche Speichermedien gewährleisten eine Unveränderbarkeit der Daten?",
     "transformed": "Which storage media guarantee that the data cannot be changed?",
     "true_answer": "Write once read many (WORM) data such as Optical Discs, Tape Drives, Solid State Drives or Memory cards",
     "num_answers": 1,
@@ -232,7 +232,7 @@
     "context": ""
   },
   {
-    "question": "Ist \u201eDokumentation\u201c eine datenverarbeitende Aufgabe bzw. eine enterprise function?",
+    "question": "Ist \"Dokumentation\" eine datenverarbeitende Aufgabe bzw. eine enterprise function?",
     "transformed": "Is \"documentation\" a data processing task or an enterprise function?",
     "true_answer": "A data processing task",
     "num_answers": 1,
@@ -240,7 +240,7 @@
     "context": ""
   },
   {
-    "question": "Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterst\u00fctzt?",
+    "question": "Mit welchem Anwendungssystem wird im UKL die Anforderung von Laborleistungen  (order entry) unterstützt?",
     "transformed": "Which application system is used in the University Hospital to support the request for laboratory services (order entry)?",
     "true_answer": "Laboratory Information System",
     "num_answers": 1,
@@ -264,7 +264,7 @@
     "context": ""
   },
   {
-    "question": "Wie w\u00fcrden sie die PWE eines KIS gestalten?",
+    "question": "Wie würden sie die PWE eines KIS gestalten?",
     "transformed": "How would they design the physical tool layer of a HIS?",
     "true_answer": "Redundancy by mirror servers",
     "num_answers": 1,

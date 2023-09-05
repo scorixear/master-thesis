@@ -53,18 +53,18 @@ eine Ontologie des Instituts für Medizinische Informatik, Statistik und Epidemi
 Auf Basis dieser Ontologie wurden bereits verschiedene Methoden zur Wissensextraktion untersucht.\\
 Die \ac{bell} mit dem Titel \enquote{Question Answering on \ac{snik}} \citep{hannesbell} erweiterte den Zugang zu diesem Netz durch die Verwendung natürlicher englischer Sprache.
 Die Ergebnisse der \ac{bell} wurden in einem \ac{qas} QAnswer \citep{qanswer} umgesetzt, zeigen aber Defizite in der Erklärbarkeit und Verständlichkeit komplexerer Fragen.
-Im Gegensatz dazu untersuchte \citet{chatgpt_qas} auf einem anderen Datensatz die Leistung einer Konversations-KI (in diesem Fall ChatGPT) im Vergleich zu einer herkömmlichen, auf einem Wissensgraphen basierenden \ac{qas} (verwendet wurde $KGQA_N$).
+Im Gegensatz dazu untersuchte \citet{chatgpt_qas} auf einem anderen Datensatz die Leistung eines Sprachmodells (in diesem Fall ChatGPT) im Vergleich zu einer herkömmlichen, auf einem Wissensgraphen basierenden \ac{qas} (verwendet wurde $KGQA_N$).
 Die Ergebnisse zeigten, dass ChatGPT im Vergleich zum verwendeten $KGQA_N$ erstaunlich stabile und verständliche Antworten lieferte, jedoch bei der Ausgabe korrekter Antworten deutlich schlechter abschnitt. Hier steht zu erwarten, dass durch ein besseres Training die Anzahl der falschen Antworten deutlich reduziert werden kann.\\
 
-Es ist daher notwendig zu untersuchen, ob der Einsatz einer Konversations-KI die Anwendungsschwierigkeiten in QAnswer beheben kann und ob die Wiedergabe mit niedrigem Wahrheitswert durch zusätzliches Training verbessert werden kann.
+Es ist daher notwendig zu untersuchen, ob der Einsatz eines Sprachmodells die Anwendungsschwierigkeiten in QAnswer beheben kann und ob die Wiedergabe mit niedrigem Wahrheitswert durch zusätzliches Training verbessert werden kann.
 
 \section{Zielsetzung}\label{sec:zielsetzung}
 
 Dem in~\cref{sec:problemstellung} gezeigten Problem werden folgende Ziele dieser Arbeit zugeordnet.
 \begin{itemize}
   \item Ziel Z1: Beantwortung von Fragen zu Informationssystemen im Gesundheitswesen in natürlicher Sprache durch eine Konversation-KI mit Hilfe von \citet{bb}
-  \item Ziel Z2: Lösung einer Beispielklausur des Moduls \enquote{Architektur von Informationssystemen im Gesundheitswesen}\footnote{\raggedright{}einem Modul des Masterstudiengangs Medizinische Informatik an der Universität Leipzig, das inhaltlich auf \citet{bb} aufbaut} mit Hilfe einer Konversations-KI.\@
-  Das Ziel ist kein produktives System, sondern soll lediglich die Machbarkeit der Beantwortung von Fragen mit Hilfe einer Konversations-KI aufzeigen.
+  \item Ziel Z2: Lösung einer Beispielklausur des Moduls \enquote{Architektur von Informationssystemen im Gesundheitswesen}\footnote{\raggedright{}einem Modul des Masterstudiengangs Medizinische Informatik an der Universität Leipzig, das inhaltlich auf \citet{bb} aufbaut} mit Hilfe eines Sprachmodells.\@
+  Das Ziel ist kein produktives System, sondern soll lediglich die Machbarkeit der Beantwortung von Fragen mit Hilfe eines Sprachmodells aufzeigen.
 \end{itemize}
 
 \section{Bezug zu ethischen Leitlinien der GMDS}\label{sec:gmds_ethik}
@@ -72,7 +72,7 @@ Dem in~\cref{sec:problemstellung} gezeigten Problem werden folgende Ziele dieser
 Die ethischen Leitlinien der \ac{gmds} \citep{gmds_eth} geben \enquote{sowohl den tragenenden Gesellschaften als Institution als auch dem einzelnen Mitglied eine Orientierung,
 welche ethischen Forderungen in ihrem bzw.\ seinem jeweiligen Aufgaben- und Verantwortungsbereich relevant sein können} \citep{gmds_eth}.
 Aufgeteilt in 16 Artikel werden hier verschiedene Kompetenzen und Verantwortlichkeiten definiert, unter die auch das hier beschriebene System fällt.
-Da die zu entwickelnde Konversations-KI Wissen über medizinisches Wissen, insbesondere über Informationssysteme im Gesundheitswesen, bereitstellt,
+Da das zu entwickelnde Sprachmodell Wissen über medizinisches Wissen, insbesondere über Informationssysteme im Gesundheitswesen, bereitstellt,
 unterliegt sie in ihrer Existenz als \enquote{Wissensbasis} einer Vielzahl von Artikeln.
 Sie wirkt unterstützend in den Artikeln 1 \enquote{Auftrag}, 2 \enquote{Fachkompetenz}, 3 \enquote{Kommunikative Kompetenz},
 kann aber durch unsachgemäßen Gebrauch und ihr zugrundeliegendes Wesen entgegen den Artikeln 1 \enquote{Auftrag}, 2 \enquote{Fachkompetenz}, 3 \enquote{Kommunikative Kompetenz},
@@ -84,41 +84,41 @@ Dazu gehört insbesondere die \enquote{Allgemeine Erklärung der Menschenrechte}
 in der das \enquote{Verbot der Diskriminierung z.B. nach Geschlecht oder [aus rassistischen Gründen] (Art. 2, 7)}
 verankert ist und
 der \enquote{Schutz des (geistigen) Eigentums (Art. 17, 27)} und die \enquote{Gedanken-, Gewissens-, Religions- und Meinungsfreiheit (Art. 18, 19)} beschrieben werden.
-Die von der Konversations-KI zu generierenden Antworten ergeben sich aus einer Vielzahl von zuvor genutzten Datensätzen aus dem Internet, die nicht notwendigerweise diesen ethischen Leitlinien folgen.
+Die von dem Sprachmodell zu generierenden Antworten ergeben sich aus einer Vielzahl von zuvor genutzten Datensätzen aus dem Internet, die nicht notwendigerweise diesen ethischen Leitlinien folgen.
 Eine inhaltliche Garantie für die Einhaltung dieser Leitlinien ist daher ohne zusätzliche Filterung der Antworten zu gestellten Fragen nicht möglich.
 Durch eine optimale Filterung können Antworten, die den Leitlinien widersprechen, ausgeschlossen werden.
 Diese Filterung ist jedoch aufgrund ihrer Komplexität sowohl in zeitlicher als auch in finanzieller Hinsicht nicht Bestandteil dieser Arbeit.
 Es muss daher davon ausgegangen werden, dass es durchaus Antworten geben kann, die gegen die Leitlinien verstoßen.\\
 
-Artikel 1 wird durch die Konversations-KI gefördert, in dem sie Medizinische Versorgungseinrichtungen durch effiziente und schnelle Wissensbeschaffung in ihren Fähigkeiten unterstützt,
+Artikel 1 wird durch das Sprachmodell gefördert, in dem sie Medizinische Versorgungseinrichtungen durch effiziente und schnelle Wissensbeschaffung in ihren Fähigkeiten unterstützt,
 \enquote{ihre Leistungen qualitativ und quantitativ nachweisen, überwachen und sicherstellen [zu] können} \citep{gmds_eth}.\\
 
 Artikel 2 \enquote{Fachkompetenz} definiert, dass das Mitglied seine \enquote{Fachkompetenz nach dem Stand der Wissenschaft und Technik erwirbt [$\dots$]} und \enquote{Maßnahmen zur Fehlervermeidung ergreift} \citep{gmds_eth}.
-Dies ist teilweise durch die Konversations-KI gegeben, da das extrahierte Wissen auf dem Stand des zugrundeliegenden Buches \citet{bb} sind.
+Dies ist teilweise durch das Sprachmodell gegeben, da das extrahierte Wissen auf dem Stand des zugrundeliegenden Buches \citet{bb} aufbaut.
 Eine Fehlervermeidung ist hier jedoch nicht vorgesehen.
 Wie in \citet{chatgpt_qas} gezeigt, weist ChatGPT als \ac{gpt}-Modell eine geringe Wahrheitsquote auf.
-Da es sich bei der zu entwickelnden Konversations-KI um ein \ac{gpt}-Modell handelt, wird die fehlerfreie Beantwortung von Fragen zwar angestrebt, kann aber nicht garantiert werden.\\
+Da es sich bei dem zu entwickelnden Sprachmodell um ein ähnliches Modell handelt, wird die fehlerfreie Beantwortung von Fragen zwar angestrebt, kann aber nicht garantiert werden.\\
 
 Artikel 3 \enquote{Kommunikative Kompetenz} beschreibt die Fähigkeit
 \enquote{Recht, Interessen [und] Konventionen der verschiedenen von [dem Mitglied] seiner Arbeit Betroffenen zu verstehen und zu berücksichtigen [$\dots$]} und
-\enquote{Wissenschaftliche Erkentnisse in verständlicher Form der Öffentlichkeit zugänglich [$\dots$]} \citep{gmds_eth} zu machen.
-Die Konversations-KI unterstützt dabei Fragende durch eine Antwort in möglicherweise verständlicherer Form der wissenschaftlichen Erkenntnisse in \citet{bb},
+\enquote{Wissenschaftliche Erkenntnisse in verständlicher Form der Öffentlichkeit zugänglich [$\dots$]} \citep{gmds_eth} zu machen.
+Das Sprachmodell unterstützt dabei Fragende durch eine Antwort in möglicherweise verständlicherer Form der wissenschaftlichen Erkenntnisse in \citet{bb},
 jedoch ist hier nicht gegeben, dass die Betroffenen in der Antwort berücksichtigt oder verstanden wurden.\\
 
 Artikel 4 \enquote{Medizinethische Kompetenz} legt fest, dass das Mitglied
 \enquote{ethische Prinzipien der Medizin [$\dots$] bei seinem beruflichen Handeln beachtet} \citep{gmds_eth}.
-Zu den ethischen Prinzipien \citep{gmds_eth} gehören auch die \enquote{Achtung vor dem Menschen zu wahren} und die \enquote{Würde des Invidiums zu schützen}.
-Beides kann nicht allein durch die Konversations-KI gewährleistet werden und muss durch mögliche Filter ergänzt werden.\\
+Zu den ethischen Prinzipien \citep{gmds_eth} gehören auch die \enquote{Achtung vor dem Menschen zu wahren} und die \enquote{Würde des Individuums zu schützen}.
+Beides kann nicht allein durch das Sprachmodell gewährleistet werden und muss durch mögliche Filter ergänzt werden.\\
 
 Artikel 6 \enquote{Soziale Verantwortung} definiert die Verantwortungen des Mitglied
 \enquote{gesellschaftliche Auswirkungen [zu] berücksichtigen [$\dots$]} und die
 \enquote{Allgemeine Erklärung der Menschenrechte und ethische[n] Prinzipien der Medizin} \citep{gmds_eth}zu beachten.
-Wie bereits zu den Artikeln 1 und 4 ausgeführt, ist es der Konversations-KI aufgrund der Datengrundlage nicht möglich, diesen Artikel, insbesondere die hier genannten Punkte, in ihrer Antwort zu berücksichtigen.\\
+Wie bereits zu den Artikeln 1 und 4 ausgeführt, ist es dem Sprachmodell aufgrund der Datengrundlage nicht möglich, diesen Artikel, insbesondere die hier genannten Punkte, in ihrer Antwort zu berücksichtigen.\\
 
-Artikel 13 \enquote{Forschung} definiert, dass das Mitglied \enquote{gute Wissenschaftliche Arbeit, inbesondere Offenheit und Transparenz [und] Akzeptanz von Kritik} \citep{gmds_eth} einhalten soll.
+Artikel 13 \enquote{Forschung} definiert, dass das Mitglied \enquote{gute Wissenschaftliche Arbeit, insbesondere Offenheit und Transparenz [und] Akzeptanz von Kritik} \citep{gmds_eth} einhalten soll.
 Gute wissenschaftliche Arbeit wird weiter definiert als
 \enquote{die strikte Ehrlichkeit im Hinblick auf die Beiträge von Partnern, Konkurenten, Vorgängern zu wahren} und \enquote{weder Fälschung oder Plagiate [zu] benutzen} \citep{gmds_eth}.
-Da die Konversations-KI auf dem Inhalt eines Buches trainiert wird, in ihrer Datenbasis aber bereits eine Vielzahl von Texten, darunter auch Plagiate und Fälschungen, gelernt hat,
+Da das Sprachmodell auf dem Inhalt eines Buches trainiert wird, in ihrer Datenbasis aber bereits eine Vielzahl von Texten, darunter auch Plagiate und Fälschungen, gelernt hat,
 ist es nicht möglich, die Antworten als wissenschaftliche Quelle zu verwenden, da sowohl Plagiate als auch Fälschungen ohne Annotation vorhanden sein können.
 Die Antworten sollten als reine Wissensextraktion und nicht als Quelle für wissenschaftliche Arbeiten betrachtet werden.
 
@@ -133,23 +133,23 @@ Die in~\cref{sec:zielsetzung} genannten Ziele $Z_i$ werden durch die hier aufgef
     \ac{gpt}-Modelle basieren auf großen Datenmengen und enthalten mehrere Milliarden Parameter.
     Ein eigenes Training eines Modells würde sowohl den zeitlichen als auch den finanziellen Rahmen übersteigen, weshalb auf ein vortrainiertes Modell zurückgegriffen werden muss.
     Dazu muss das Modell frei verfügbar sein und unter einer Open-Source-Lizenz stehen. Außerdem muss das Modell am Rechenzentrum der Universität Leipzig geladen und trainiert werden können. Aufgrund der großen Anzahl an Parametern sind auch hier Grenzen des Arbeitsspeichers und damit der Größe des Modells gesetzt.
-    \item Aufgabe A1.2: Für ein effizientes und erfolgreiches Training der Konversations-KI ist eine Datenkuration von \citet{bb} notwendig.
+    \item Aufgabe A1.2: Für ein effizientes und erfolgreiches Training des Sprachmodells ist eine Datenkuration von \citet{bb} notwendig.
     Abschnitte wie das Literaturverzeichnis, Aufzählungen oder Grafiken und deren Beschriftung müssen vor der Verwendung des Textes entfernt oder umgeschrieben werden.
-    \item Aufgabe A1.3: Die trainierte Konversations-KI wird dann zur Beantwortung von Fragen zu \citet{bb} verwendet.
+    \item Aufgabe A1.3: Das trainierte Sprachmodell wird dann zur Beantwortung von Fragen zu \citet{bb} verwendet.
     Dabei wird während des Trainings der in \citet{gpt3} beschriebene \enquote{Zero-Shot}-Ansatz verfolgt.
     Dies bedeutet, dass das Verständnis der Fragestellung und die Bewertung wichtigen Wissens allein durch das Modell erfolgt und nicht durch vordefinierte Fragen im Datensatz dem Modell beigebracht wird.
   \end{itemize}
   \item Aufgabe zu Ziel Z2
   \begin{itemize}
-    \item Aufgabe A2.1: Die in dieser Arbeit erstellte Konversations-KI wird vor und nach dem Training hinsichtlich ihrer Fähigkeit, Fragen korrekt zu beantworten, evaluiert.
-    Dies ermöglicht eine Aussage über die Effektivität des Trainings und die Leistungssteigerung der Konversations-KI.\@
+    \item Aufgabe A2.1: Das in dieser Arbeit gewählte Sprachmodell wird vor und nach dem Training hinsichtlich ihrer Fähigkeit, Fragen korrekt zu beantworten, evaluiert.
+    Dies ermöglicht eine Aussage über die Effektivität des Trainings und die Leistungssteigerung des Sprachmodells.\@
     Ebenso wird ein Vergleich mit dem aktuellen GPT-4 Modell \citep{gpt4} durchgeführt, um die Notwendigkeit eines Trainings zu ermitteln.
     \item Aufgabe A2.2: Bewertung der Antwortoptionen von Klausurfragen nach gleichen Kriterien wie in \citet{chatgpt_qas}
   \end{itemize}
 \end{itemize}
 
 \section{Aufbau der Arbeit}
-Kapitel 1 beschreibt das grundlegende Umfeld dieser Arbeit, formuliert exitierende Probleme und Anforderungen, bietet Ziele zur Lösung dieser Probleme an und gibt Aufgaben, zur Umsetzung dieser Ziele.
+Kapitel 1 beschreibt das grundlegende Umfeld dieser Arbeit, formuliert existierende Probleme und Anforderungen, bietet Ziele zur Lösung dieser Probleme an und gibt Aufgaben, zur Umsetzung dieser Ziele.
 In Kapitel 2 werden Grundlagen gelegt zum Verständnis der in dieser Arbeit verwendeten Technologie, während in Kapitel 3 der aktuelle Stand der Forschung zusammengefasst wird.
 Kapitel 4 umfasst Lösungsstrategien des in~\cref{sec:problemstellung} formulierten Problem mit einer anschließenden Beschreibung der Umsetzung dieser Lösungen in Kapitel 5.
 Die Ergebnisse dieser Arbeit werden in Kapitel 6 präsentiert und in Kapitel 7 zusammengefasst diskutiert.

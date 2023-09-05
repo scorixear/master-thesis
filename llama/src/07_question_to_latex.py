@@ -1,6 +1,9 @@
 import argparse
 import json
 
+def replace_special_chars(text: str):
+    return text.replace("&", "\\&").replace("^","\\^").replace("%","\\%").replace("$","\\$").replace("#","\\#").replace("_","\\_").replace("{","\\{").replace("}","\\}").replace("~","\\~").replace("<","\\textless").replace(">","\\textgreater").replace("|","\\textbar")
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--input', type=str, default="data/single_questions.json")
@@ -10,17 +13,23 @@ def main():
     data = json.load(open(args.input, "r"))
     output_lines = []
     for question in data:
-        original = question['question']
-        transformed = question['transformed']
-        true_answer = question['true_answer']
+        original = replace_special_chars(question['question'])
+        output_lines.append(f"Frage & {original} \\\\")
+        transformed = replace_special_chars(question['transformed'])
+        output_lines.append(f"Umformuliert & {transformed} \\\\")
+        context = replace_special_chars(question['context'])
+        if context != "":
+            output_lines.append(f"Kontext & {context} \\\\")
+        true_answer = replace_special_chars(question['true_answer'])
+        output_lines.append(f"Antwort & {true_answer} \\\\")
+        source = replace_special_chars(question['source'])
+        output_lines.append(f"Quelle & {source} \\\\")
         num_answers = question['num_answers']
-        source = question['source']
-        context = question['context']
+        output_lines.append(f"Anz. Antw. & {num_answers} \\\\")
         
-        if context == "":
-            context = "-"
-        output_lines.append(f"{original} & {source} & {num_answers} & {transformed} & {context} & {true_answer} \\\\")
-    with open(args.output, 'w', encoding="UTF-8") as f:
+        
+        output_lines.append("\\midrule")
+    with open(args.output, 'w') as f:
         f.write("\n".join(output_lines))
 if __name__ == '__main__':
     main()
