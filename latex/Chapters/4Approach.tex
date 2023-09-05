@@ -53,17 +53,20 @@ Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht mög
     \end{tabular}}
     \caption{Übersicht über die zur Auswahl stehenden Modelle.\label{tab:approach:models}}
 \end{table}
-
+\todo{tabelle 4.1: llama 2 fehlt, bei inferenz würde ich auch noch eine spalte für 4 bit hinzufügen. Mrd. Parameter kann in die caption zum Platz sparen. und GB auch. bei gpt-4 würde ich statt --- ? schreiben}
 Hier zur Auswahl stehende Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMA, gezeigt in \cref{tab:approach:models}.
 Die angegebenen Speichergrößen beziehen sich hier auf die notwendige Speichermenge zum Training des Modells und der Inferenz.
 Berechnet wird die Speicheranforderung zum Training mit der \cref{eq:speicher}.
 \begin{equation}\label{eq:speicher}
     \text{Training Speicherbedarf}=\text{Anzahl Parameter} \cdot \frac{\text{Parameterformat}}{8} \cdot 4
 \end{equation}
-Sprachmodelle benutzen die Parameterformate FP16 oder FP32, welche 2 bzw. 4 Byte pro Parameter benötigen. Zusätzlich muss das Modell während des Trainings circa 4 mal in den Speicher geladen werden, um die Backpropagation durchzuführen. 
+Sprachmodelle benutzen die Parameterformate FP16 oder FP32, welche 2 bzw. 4 Byte pro Parameter benötigen.
+\todo{gibt ja auch noch 8 bit und weniger quantisiert}
+Zusätzlich muss das Modell während des Trainings circa 4 mal in den Speicher geladen werden, um die Backpropagation durchzuführen. 
 Zur Inferenz der Modelle ist dementsprechend ein Speicherbedarf von $\frac{1}{4}$ der Trainingswerte notwendig.
 Modelle, die sehr populär geworden sind, aber nicht zur Auswahl stehen, sind BERT, RoBERTa, DistillBERT, BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5.
 Wenn die Aufgabe des Question Answering gelöst werden soll, ist ein BERT-basiertes Modell die erste Wahl.\\
+\todo{finde ich etwas verwirrend, oben ist BERT erste wahl für qa, dann wird es gleich unten ausgeschlossen}
 
 Modelle wie BERT, RoBERTa und DistillBERT besitzen aufgrund ihrer Encoder-Architektur optimale Eigenschaften für die Informationsextraktion aus Text.
 Dieser Ansatz ist jedoch in zwei Punkten eingeschränkt.
@@ -147,6 +150,7 @@ Für das Training werden \SI{264}{\giga\byte} \ac{gpu} RAM benötigt, was 4 A100
 Das Modell mit 65 Milliarden Parametern benötigt 7 A100 \ac{gpu}s für das Training und 2 A100 \ac{gpu}s für den Betrieb.
 Die Modelle sind jedoch nicht öffentlich verfügbar, sondern werden nur zu Forschungszwecken über einen Antrag weitergegeben.
 Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
+\todo{llama2 hinzufügen}
 
 Eine Alternative zu den LLaMA-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}.
 Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMA-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar. Da hier jedoch keine Publikation über den Prozess der Erstellung dieser Modelle vorhanden ist, wird von der Verwendung dieser Modelle vorerst abgesehen.\\
