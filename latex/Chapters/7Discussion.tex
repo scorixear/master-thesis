@@ -49,13 +49,13 @@ Mit Hilfe der \ac{zero}-Stufe 3 Optimierung können Optimierungs- und Parameterz
 Zusätzlich kann durch eine Quantisierung der Modelle in kleinere Datentypen die Anzahl der benötigten \ac{gpu}-\ac{ram}s deutlich reduziert werden.
 \citet{4bit} untersuchte den Einfluss der Quantisierung auf die Performance der Modelle und zeigte, dass eine Quantisierung auf 4 Bit die Leistung der Modelle nur geringfügig beeinflusst.\\
 \todo{Bin mir nicht sicher ob man das wirklich so sagen kann. In dem Paper sind bei allen Grafiken die total model bits auf der x Achse.
-Das finde ich irreführend, weil man ja in der Praxis oft z.B. LLama 7b 16 bit mit LLama 7b 8 bit vergleicht.
-Das lässt sich aber aus den Plots schlecht ablesen weil bei 16 bit ja die models bits doppelt so viele sind.
-dazu ist die x achse noch logarithmisch.
-wäre vielleicht gut hier ein bild davon zu bringen aber wo auf der x achse nicht die bits sind sondern die parameter.
-daraus ließe sich so eine aussage besser begründen.
-aber wenn das zu viel aufwand ist muss das auch nicht sein.
-was gut wäre: bit zahl runter aber gleichzeitig parameterzahl hoch.
+    Das finde ich irreführend, weil man ja in der Praxis oft z.B. LLama 7b 16 bit mit LLama 7b 8 bit vergleicht.
+    Das lässt sich aber aus den Plots schlecht ablesen weil bei 16 bit ja die models bits doppelt so viele sind.
+    dazu ist die x achse noch logarithmisch.
+    wäre vielleicht gut hier ein bild davon zu bringen aber wo auf der x achse nicht die bits sind sondern die parameter.
+    daraus ließe sich so eine aussage besser begründen.
+    aber wenn das zu viel aufwand ist muss das auch nicht sein.
+    was gut wäre: bit zahl runter aber gleichzeitig parameterzahl hoch.
 }
 
 Zusätzlich ist es möglich, Modelle während der Inferenz in einen 8-Bit-Modus zu konvertieren, um Ressourcen zu sparen.
@@ -83,7 +83,7 @@ Insbesondere die Kriterien Robustheit und Fragenverständnis profitieren von gr�
 
 Für die Verwendung größerer Datensätze wäre es optimal, weitere Literatur zum Thema Informationssysteme im Gesundheitswesen heranzuziehen.
 Wichtig ist dabei, dass die Wissensinhalte identisch sind, so dass sich die Aussagen zwischen den Büchern nicht widersprechen.
-\todo{das ist leider bei der Literatur über Krankenhausinformationssysteme nicht der Fall, die Bücher haben alle unterschiedliche Perspektiven und teilweise abweichende Definitionen. das war ja auch einer der gründe für snik.}
+Auch eine Zusammenstellung einzelner Kapitel aus verschiedenen Quellen mit gleichem Inhalt könnte die Größe des Datensatzes erhöhen und damit die Leistung der Modelle verbessern.\\
 
 \section{Domänenspezifische Modelle}
 Das Llama 2 Modell wurde ohne speziellen Fokus auf eine Domäne, insbesondere die Domäne Medizin, trainiert.

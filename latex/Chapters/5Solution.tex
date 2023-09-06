@@ -26,7 +26,6 @@ und wurde teilweise an die Anforderungen des hier durchgeführten Trainings ange
 Die Konfiguration des Trainings gliedert sich in vier Bereiche: Einstellungen für das Modell, Einstellungen für die Trainingsdaten, Einstellungen für das Training selbst und Einstellungen für DeepSpeed.
 Im Folgenden werden diese Einstellungen näher erläutert.
 \subsection{Konfiguration des Modells}
-\todo{parametertabelle 5.2 train file Zeile weglassen wegen overfull hbox oder alternativ tabulary mit lL für Umbruch }
 \begin{table}
     \centering
     \begin{tabular}{ll}
@@ -84,15 +83,14 @@ Da im vorliegenden Fall genügend Arbeitsspeicher zur Verfügung stand, wurde au
     \centering
     \begin{tabular}{ll}
         \toprule
-        \textbf{Parameter}            & \textbf{Wert}                                 \\
+        \textbf{Parameter}            & \textbf{Wert} \\
         \midrule
-        train\_file                   & ./input/health\_information\_systems\_epub.md \\
-        max\_train\_samples           & None                                          \\
-        overwrite\_cache              & false                                         \\
-        block\_size                   & 1024                                          \\
-        validation\_split\_percentage & 5                                             \\
-        preprocessing\_num\_workers   & 1                                             \\
-        keep\_linebreaks              & true                                          \\
+        max\_train\_samples           & None          \\
+        overwrite\_cache              & false         \\
+        block\_size                   & 1024          \\
+        validation\_split\_percentage & 5             \\
+        preprocessing\_num\_workers   & 1             \\
+        keep\_linebreaks              & true          \\
         \bottomrule
     \end{tabular}
     \caption{Parameter zur Auswahl und Konfiguration der Trainingsdaten}\label{tab:data-config}
@@ -103,7 +101,7 @@ Um diese Markdown-Datei in eine für das Modell verständliche Form umzuwandeln,
 Sie ermöglicht das Laden der Textdatei, die Umwandlung in Tokens und die Aufteilung in Blöcke.
 Die Parameter zur Auswahl und Konfiguration der Trainingsdaten sind in \cref{tab:data-config} aufgelistet.\\
 
-Der Parameter \texttt{train\_file} beschreibt den Pfad zur Trainingsdatei.
+Der Parameter \texttt{train\_file} ist nicht in der Tabelle dargestellt, beschreibt jedoch den Pfad zur genutzten Trainingsdatei.
 Diese Trainingsdatei wird einmal eingelesen und je nach Anzahl der unter \cref{subsec:config-training} beschriebenen Epochen mehrfach verwendet.\\
 
 \texttt{max\_train\_samples} beschreibt die maximale Anzahl von Blöcken, die aus der Trainingsdatei gelesen werden sollen.
@@ -491,7 +489,6 @@ Aus diesem Grund kann ein normaler Computer dafür nicht verwendet werden.
 Stattdessen wurde ein GPU Computing Cluster des Rechenzentrums der Universität Leipzig verwendet.\\
 
 Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit den Namen \enquote{Paula} und \enquote{Clara} zur Verfügung.
-\todo{tabelle: hat nvidia den Namen Tesla nicht abgelegt für die neuen Produkte?}
 \begin{table}
     \centering
     \begin{tabular}{llll}
@@ -620,8 +617,7 @@ Die Generierung von Antworten auf die erstellten Evaluationsdaten erfolgte auf d
 Für die Textgenerierung durch das GPT4-Modell wurde die offizielle Webseite der OpenAI Foundation verwendet\footnote{\url{https://chat.openai.com/} abgerufen am 19.8.2023}.
 Die Verwendung des untrainierten Llama-Modells sowie der trainierten Modelle mit V100-Grafikkarten erfolgte mit Hilfe eines eigens erstellten Skripts.
 Dieses Skript wurde größtenteils für die Nutzung der mit A30-Grafikkarten trainierten Modelle verwendet, musste jedoch modifiziert werden, da die Generierung ausschließlich auf einer \ac{gpu} erfolgt, die A30-Grafikkarten jedoch mit \SI{24}{\giga\byte} \ac{ram} das Modell nicht vollständig unterstützen konnten.
-Aus diesem Grund wurde das Modell im 8-Bit-Modus geladen. Dieser spezielle Modus reduziert alle Gewichte des Modells auf 8-Bit-Floatwerte, was zu einer geringeren Genauigkeit, aber auch zu einem geringeren Speicherbedarf führt.\\
-\todo{ich dachte das 7b Modell braucht 14GB im 16 Bit Modus? Wieso passt das nicht auf eine 24 GB GPU?}
+Aus diesem Grund wurde das Modell im 8-Bit-Modus geladen. Dieser spezielle Modus reduziert alle Gewichte des Modells auf 8-Bit-Floatwerte, was zu einer geringeren Genauigkeit, aber auch zu einem geringeren Speicherbedarf führt. Eigentlich sollte das 7B Modell mit \SI{14}{\giga\byte} Speicherbedarf ohne Datentyptransformierung mit einer A30-Grafikkarte genutzt werden können, jedoch wurde in diesem Aufbau das Speicherlimit der Grafikkarte erreicht. Ein Grund dafür ist nicht bekannt.\\
 
 \subsection{Erstellung des Evaluierungsdatensatz}\label{subsec:eval-dataset}
 Vor der Generierung der Antworten mussten die in den jeweiligen Klausuren gestellten Fragen aus \cref{sec:approach:questions} transformiert werden.
@@ -675,13 +671,14 @@ Schließlich wird die Anzahl der gegebenen Antworten in der generierten Antwort 
 
 Bei der Evaluation stellte sich schnell heraus, dass die Beurteilung der Llama-Modelle schwieriger ist als die des GPT4-Modells.
 Der Grund dafür ist das fehlende Training auf ein Stoppzeichen.
-\todo{gibts da nicht verschiedene versionen? llama 2 chat, llama 2 instruct und so? vielleicht ist das llama 2 instruct auf sowas trainiert? oder verwechsle ich da was?}
-Die Llama-Modelle enthalten kein Finetuning für die Beantwortung von Fragen und erzeugen eine vorgegebene Anzahl von Tokens.
-Diese Anzahl wurde auf 512 festgelegt.
+Die Llama-Modelle enthalten kein Finetuning für die Beantwortung der Fragen und erzeugen eine vorgegebene Anzahl von Tokens.
+Diese Anzahl wurde auf 512 gesetzt.
 In den meisten Fällen wurde die Frage jedoch mit einer kürzeren Länge beantwortet.
-Die verbleibenden Tokens enthielten Wiederholungen bereits generierter Tokens, Formatierungsfehler (wie nicht vorhandene Überschriften), den Beginn neuer Themen oder die Imitation neuer Fragen.
+Die verbleibenden Tokens enthielten Wiederholungen bereits generierter Tokens, Formatierungsfehler (z. B. nicht vorhandene Überschriften), den Beginn neuer Themen oder die Imitation neuer Fragen.
 Da die Ursache in einem fehlenden Finetuning und nicht in der inhaltlichen Wiedergabe des Modells lag, wurde die Antwort nur bis zu diesen Stellen gewertet.
-Keine der generierten Antworten benötigte eine Länge von mehr als 512 Tokens, weshalb eine Verlängerung hier nicht weiter verfolgt wurde.\\
+Keine der generierten Antworten benötigte eine Länge von mehr als 512 Tokens, weshalb eine Erweiterung hier nicht weiter verfolgt wurde.
+Die Chat-Version des Modells Llama 2 enthält ein solches Finetuning und würde dieses Problem beheben.
+Auf den Einsatz der Chat-Version wurde in dieser Arbeit jedoch verzichtet, da das mit Hilfe des Finetunings zusätzlich erlernte Wissen durch das hier durchgeführte Continual Pretraining wieder verlernt werden würde.\\
 
 Sowohl die Antwortdateien der Modelle als auch die Bewertungsdateien folgen dem gleichen Schema wie die Eingabedatei aus \cref{subsec:eval-dataset}. Durch die Einführung der Eigenschaft \enquote{type} ist eine Unterteilung der Dateien in Fragetypen nicht mehr notwendig, daher gibt es 4 Dateien pro Modell.
 Zwei Dateien, die die generierten Antworten auf die Fragen enthalten (für jeden Datensatz, wobei der zweite Datensatz die selben Fragen mit Rechtschreibfehlern repräsentiert) und zwei Dateien, die die Bewertungen der generierten Antworten enthalten.

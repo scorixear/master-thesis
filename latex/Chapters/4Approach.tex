@@ -35,39 +35,42 @@ Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht mög
     \centering
     \setlength{\tabcolsep}{5pt}
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{lllrrr}
-        \toprule
-        Modell      & Verfügbarkeit     & ZeroShot  & Größe                    & Training & Inferenz\\
-        \midrule
-        GPT-2       & frei              & schlecht  & \SI{1,5}{Mrd.~Parameter} & \SI{24}{\giga\byte}    & \SI{6}{\giga\byte}\\
-        GPT-3       & nur Inferenz      & gut       & \SI{175}{Mrd.~Parameter} & \SI{1,4}{\tera\byte}   & \SI{350}{\giga\byte}\\
-        GPT-4       & nur Inferenz      & sehr gut  & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{---} \\
-        GPT-J       & frei              & gut       & \SI{6,7}{Mrd.~Parameter} & \SI{104}{\giga\byte}   & \SI{26}{\giga\byte}\\
-        GPT-NeoX    & frei              & gut       & \SI{20}{Mrd.~Parameter}  & \SI{160}{\giga\byte}   & \SI{40}{\giga\byte}\\
-        \multirow{4}{*}{LLaMA}
-                    & limitiert         & gut       & \SI{7}{Mrd.~Parameter}   & \SI{56}{\giga\byte}    & \SI{14}{\giga\byte}\\
-                    & limitiert         & gut       & \SI{13}{Mrd.~Parameter}  & \SI{104}{\giga\byte}   & \SI{23}{\giga\byte}\\
-                    & limitiert         & sehr gut  & \SI{33}{Mrd.~Parameter}  & \SI{264}{\giga\byte}   & \SI{66}{\giga\byte}\\
-                    & limitiert         & sehr gut  & \SI{65}{Mrd.~Parameter}  & \SI{520}{\giga\byte}   & \SI{130}{\giga\byte}\\
-        \bottomrule
-    \end{tabular}}
-    \caption{Übersicht über die zur Auswahl stehenden Modelle.\label{tab:approach:models}}
+        \begin{tabular}{llllrrr}
+            \toprule
+            Modell   & Verfügbarkeit & ZeroShot & Größe     & Training              & Inferenz              & Inferenz (4Bit)       \\
+            \midrule
+            GPT-2    & frei          & schlecht & \num{1,5} & \SI{24}{\giga\byte}   & \SI{6}{\giga\byte}    & \SI{750}{\mega\byte}  \\
+            GPT-3    & nur Inferenz  & gut      & \num{175} & \SI{1,4}{\tera\byte}  & \SI{350}{\giga\byte}  & \SI{43,8}{\giga\byte} \\
+            GPT-4    & nur Inferenz  & sehr gut & ?         & \multicolumn{1}{c}{?} & \multicolumn{1}{c}{?} & \multicolumn{1}{c}{?} \\
+            GPT-J    & frei          & gut      & \num{6,7} & \SI{104}{\giga\byte}  & \SI{26}{\giga\byte}   & \SI{3,4}{\giga\byte}  \\
+            GPT-NeoX & frei          & gut      & \num{20}  & \SI{160}{\giga\byte}  & \SI{40}{\giga\byte}   & \SI{10}{\giga\byte}   \\
+
+            LLaMA    & limitiert     & gut      & \num{7}   & \SI{56}{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
+                     & limitiert     & gut      & \num{13}  & \SI{104}{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
+                     & limitiert     & sehr gut & \num{33}  & \SI{264}{\giga\byte}  & \SI{66}{\giga\byte}   & \SI{16,5}{\giga\byte} \\
+                     & limitiert     & sehr gut & \num{65}  & \SI{520}{\giga\byte}  & \SI{130}{\giga\byte}  & \SI{32,5}{\giga\byte} \\
+
+            Llama 2  & limitiert     & gut      & \num{7}   & \SI{56}{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
+                     & limitiert     & gut      & \num{13}  & \SI{104}{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
+                     & limitiert     & gut      & \num{70}  & \SI{560}{\giga\byte}  & \SI{140}{\giga\byte}  & \SI{35}{\giga\byte}   \\
+            \bottomrule
+        \end{tabular}}
+    \caption[Übersicht über die zur Auswahl stehenden Modelle]{Übersicht über die zur Auswahl stehenden Modelle. Größe ist in Milliarden Parameter angegeben.}\label{tab:approach:models}
 \end{table}
-\todo{tabelle 4.1: llama 2 fehlt, bei inferenz würde ich auch noch eine spalte für 4 bit hinzufügen. Mrd. Parameter kann in die caption zum Platz sparen. und GB auch. bei gpt-4 würde ich statt --- ? schreiben}
-Hier zur Auswahl stehende Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX und LLaMA, gezeigt in \cref{tab:approach:models}.
+
+Hier zur Auswahl stehende Modelle sind GPT-2, GPT-3, GPT-4, GPT-J, GPT-NeoX, LLaMA und Llama 2 gezeigt in \cref{tab:approach:models}.
 Die angegebenen Speichergrößen beziehen sich hier auf die notwendige Speichermenge zum Training des Modells und der Inferenz.
 Berechnet wird die Speicheranforderung zum Training mit der \cref{eq:speicher}.
 \begin{equation}\label{eq:speicher}
     \text{Training Speicherbedarf}=\text{Anzahl Parameter} \cdot \frac{\text{Parameterformat}}{8} \cdot 4
 \end{equation}
 Sprachmodelle benutzen die Parameterformate FP16 oder FP32, welche 2 bzw. 4 Byte pro Parameter benötigen.
-\todo{gibt ja auch noch 8 bit und weniger quantisiert}
-Zusätzlich muss das Modell während des Trainings circa 4 mal in den Speicher geladen werden, um die Backpropagation durchzuführen. 
-Zur Inferenz der Modelle ist dementsprechend ein Speicherbedarf von $\frac{1}{4}$ der Trainingswerte notwendig.
-Modelle, die sehr populär geworden sind, aber nicht zur Auswahl stehen, sind BERT, RoBERTa, DistillBERT, BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5.
-Wenn die Aufgabe des Question Answering gelöst werden soll, ist ein BERT-basiertes Modell die erste Wahl.\\
-\todo{finde ich etwas verwirrend, oben ist BERT erste wahl für qa, dann wird es gleich unten ausgeschlossen}
+Zur Interferenz können optional diese Parameterformate durch Quantifizierung weiter verringert werden auf FP8 oder FP4 mit 1 Byte or \num{0.5} Byte pro Parameter.
+Zusätzlich muss das Modell während des Trainings circa 4 mal in den Speicher geladen werden, um die Backpropagation durchzuführen.
+Zur Inferenz der Modelle ist dementsprechend ein Speicherbedarf von $\frac{1}{4}$ der Trainingswerte bei Beibehaltung des Parameterformates notwendig.
+Modelle, die sehr populär geworden sind, aber nicht zur Auswahl stehen, sind BERT, RoBERTa, DistillBERT, BART, T5, Opus, Pegasus, DialoGPT, Blenderbot und Flan-T5.\\
 
+Wenn die Aufgabe des Question Answering gelöst werden soll, ist ein BERT-basiertes Modell die erste Wahl.
 Modelle wie BERT, RoBERTa und DistillBERT besitzen aufgrund ihrer Encoder-Architektur optimale Eigenschaften für die Informationsextraktion aus Text.
 Dieser Ansatz ist jedoch in zwei Punkten eingeschränkt.
 Die Modelle lernen nicht Fakten und können auf Basis einer Frage neue Antworten formulieren, sondern finden Textstellen in einem Kontext, die die Frage beantworten.
@@ -117,28 +120,28 @@ Die Modelle unterscheiden sich sowohl in der Größe als auch proportional in de
     \centering
     \setlength{\tabcolsep}{5pt}
     \resizebox{\textwidth}{!}{
-    \begin{tabular}{lrccccccccc}
-    \toprule
-    & & BoolQ & PIQA & SIQA & \hspace{-0.3cm} HellaSwag \hspace{-0.2cm} & \hspace{-0.2cm} WinoGrande \hspace{-0.3cm} & ARC-e & ARC-c & OBQA \\
-    \midrule
-    GPT-3        & 175B & \SI{60,5}{} & \SI{81,0}{} & -    & \SI{78,9}{} & \SI{70,2}{} & \SI{68,8}{} & \SI{51,4}{} & \SI{57,6}{} \\
-    Gopher       & 280B & \SI{79,3}{} & \SI{81,8}{} & \SI{50,6}{} & \SI{79,2}{} & \SI{70,1}{} & -    & -    & -    \\
-    Chinchilla   & 70B  & \SI{83,7}{} & \SI{81,8}{} & \SI{51,3}{} & \SI{80,8}{} & \SI{74,9}{} & -    & -    & -    \\
-    PaLM         & 62B  & \SI{84,8}{} & \SI{80,5}{} & -    & \SI{79,7}{} & \SI{77,0}{} & \SI{75,2}{} & \SI{52,5}{} & \SI{50,4}{} \\
-    PaLM-cont    & 62B  & \SI{83,9}{} & \SI{81,4}{} & -    & \SI{80,6}{} & \SI{77,0}{} & -    & -    & -    \\
-    PaLM         & 540B & \textbf{88,0} & \SI{82,3}{} & - & \SI{83,4}{} & \textbf{81,1} & \SI{76,6}{} & \SI{53,0}{} & \SI{53,4}{} \\
-    \midrule
-    \multirow{4}{*}{LLaMA}
-       & 7B   & \SI{76,5}{} & \SI{79,8}{} & \SI{48,9}{} & \SI{76,1}{} & \SI{70,1}{} & \SI{72,8}{}          & \SI{47,6}{}          & \SI{57,2}{} \\
-       & 13B  & \SI{78,1}{} & \SI{80,1}{} & \SI{50,4}{} & \SI{79,2}{} & \SI{73,0}{} & \SI{74,8}{}          & \SI{52,7}{}          & \SI{56,4}{} \\
-       & 33B  & \SI{83,1}{} & \SI{82,3}{} & \SI{50,4}{} & \SI{82,8}{} & \SI{76,0}{} & \textbf{80,0} & \textbf{57,8} & \SI{58,6}{} \\
-       & 65B  & \SI{85,3}{} & \textbf{82,8} & \textbf{52,3} & \textbf{84,2} & \SI{77,0}{} & \SI{78,9}{} & \SI{56,0}{} & \textbf{60,2} \\
-  \bottomrule
-    \end{tabular}}
-\caption{
-Zero-Shot Leistung verschiedener Modelle in Begründungsaufgaben für gesunden Menschenverstand.
-Veröffentlicht in \citet{llama}\label{tab:llama_naturalquestion}
-}
+        \begin{tabular}{lrccccccccc}
+            \toprule
+                       &      & BoolQ         & PIQA          & SIQA          & \hspace{-0.3cm} HellaSwag \hspace{-0.2cm} & \hspace{-0.2cm} WinoGrande \hspace{-0.3cm} & ARC-e         & ARC-c         & OBQA          \\
+            \midrule
+            GPT-3      & 175B & \SI{60,5}{}   & \SI{81,0}{}   & -             & \SI{78,9}{}                               & \SI{70,2}{}                                & \SI{68,8}{}   & \SI{51,4}{}   & \SI{57,6}{}   \\
+            Gopher     & 280B & \SI{79,3}{}   & \SI{81,8}{}   & \SI{50,6}{}   & \SI{79,2}{}                               & \SI{70,1}{}                                & -             & -             & -             \\
+            Chinchilla & 70B  & \SI{83,7}{}   & \SI{81,8}{}   & \SI{51,3}{}   & \SI{80,8}{}                               & \SI{74,9}{}                                & -             & -             & -             \\
+            PaLM       & 62B  & \SI{84,8}{}   & \SI{80,5}{}   & -             & \SI{79,7}{}                               & \SI{77,0}{}                                & \SI{75,2}{}   & \SI{52,5}{}   & \SI{50,4}{}   \\
+            PaLM-cont  & 62B  & \SI{83,9}{}   & \SI{81,4}{}   & -             & \SI{80,6}{}                               & \SI{77,0}{}                                & -             & -             & -             \\
+            PaLM       & 540B & \textbf{88,0} & \SI{82,3}{}   & -             & \SI{83,4}{}                               & \textbf{81,1}                              & \SI{76,6}{}   & \SI{53,0}{}   & \SI{53,4}{}   \\
+            \midrule
+            \multirow{4}{*}{LLaMA}
+                       & 7B   & \SI{76,5}{}   & \SI{79,8}{}   & \SI{48,9}{}   & \SI{76,1}{}                               & \SI{70,1}{}                                & \SI{72,8}{}   & \SI{47,6}{}   & \SI{57,2}{}   \\
+                       & 13B  & \SI{78,1}{}   & \SI{80,1}{}   & \SI{50,4}{}   & \SI{79,2}{}                               & \SI{73,0}{}                                & \SI{74,8}{}   & \SI{52,7}{}   & \SI{56,4}{}   \\
+                       & 33B  & \SI{83,1}{}   & \SI{82,3}{}   & \SI{50,4}{}   & \SI{82,8}{}                               & \SI{76,0}{}                                & \textbf{80,0} & \textbf{57,8} & \SI{58,6}{}   \\
+                       & 65B  & \SI{85,3}{}   & \textbf{82,8} & \textbf{52,3} & \textbf{84,2}                             & \SI{77,0}{}                                & \SI{78,9}{}   & \SI{56,0}{}   & \textbf{60,2} \\
+            \bottomrule
+        \end{tabular}}
+    \caption{
+        Zero-Shot Leistung verschiedener Modelle in Begründungsaufgaben für gesunden Menschenverstand.
+        Veröffentlicht in \citet{llama}\label{tab:llama_naturalquestion}
+    }
 \end{table}
 
 Die \cref{tab:llama_naturalquestion} zeigt die Leistungsfähigkeit der Modelle im Vergleich zu anderen Modellen und bei verschiedenen Einstellungen (ZeroShot bis 64Shot).
@@ -150,13 +153,15 @@ Für das Training werden \SI{264}{\giga\byte} \ac{gpu} RAM benötigt, was 4 A100
 Das Modell mit 65 Milliarden Parametern benötigt 7 A100 \ac{gpu}s für das Training und 2 A100 \ac{gpu}s für den Betrieb.
 Die Modelle sind jedoch nicht öffentlich verfügbar, sondern werden nur zu Forschungszwecken über einen Antrag weitergegeben.
 Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
-\todo{llama2 hinzufügen}
 
 Eine Alternative zu den LLaMA-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}.
 Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMA-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar. Da hier jedoch keine Publikation über den Prozess der Erstellung dieser Modelle vorhanden ist, wird von der Verwendung dieser Modelle vorerst abgesehen.\\
 
-In dieser Arbeit wird zunächst das Modell LLaMA 7B ausgewählt, da es eine sehr gute Leistung mit minimalen Ressourcenanforderungen bietet.
-Eine Auswahl dieser Modellgröße begründet sich daher, dass eine Nutzung der Modelle ab 33 Milliarden Parameter auf einzelnen GPUs nicht möglich ist, und dadurch die Nutzbarkeit eingeschränkt wird.
+Zuletzt veröffentliche MetaAI die Llama 2 Modelle, welche auf der Architektur und Trainingsart von den LLaMA Modellen basieren, jedoch in allen Bereichen eine bessere Leistung durch mehr Training und größere Datensätze erzielen. Die Llama 2 Modelle sind unter \citet{llama2} veröffentlicht und stehen ebenso unter eine Lizenz die nur zu Forschungszwecken freigegeben wird.
+Llama 2 ist in den Größen 7 Milliarden, 13 Milliarden und 70 Milliarden Parametern verfügbar.\\
+
+In dieser Arbeit wird zunächst das Modell Llama 2 7B ausgewählt, da es eine sehr gute Leistung mit minimalen Ressourcenanforderungen bietet und bessere Leistungen als die Vorgänger Version der LLaMA Modelle erzielt.
+Eine Auswahl dieser Modellgröße begründet sich daher, dass eine Nutzung der Modelle über 13 Milliarden Parameter auf einzelnen GPUs nicht möglich ist, und dadurch die Nutzbarkeit eingeschränkt wird.
 Ebenso übersteigen die technischen Speicheranforderungen größerer Modelle die Kapazitäten einzelner Knoten im genutzten GPU-Computing Cluster, weshalb dadurch die technische Umsetzung des Trainings drastisch in ihrer Komplexität zunimmt.
 Einzelne Tests der Knoten-übergreifenden Kommunikation zeigten grundlegende Probleme und sollten deshalb vermieden werden.
 Auf weitere Einzelheiten über den Aufbau der verwendeten GPU-Computing Clusters wird in \cref{sec:approach:training} eingegangen.\\
@@ -190,7 +195,7 @@ Da eine Textextraktion aus PDF-Dateien jedoch zu gravierenden Problemen in der T
 \subsection{Optionale Textentfernungen}
 Es soll geprüft werden, ob das Weglassen von Literaturverweisen, Überschriften und Tabellen zu einer besseren Leistung führt.
 Literaturverzeichnisse beziehen sich auf das vorhergehende Kapitel, haben aber ein schwieriges Format.
-Insbesondere \ac{url}s müssen vom Modell in Tokens zerlegt werden, die nicht den Inhalt der \ac{url}s widerspiegeln. 
+Insbesondere \ac{url}s müssen vom Modell in Tokens zerlegt werden, die nicht den Inhalt der \ac{url}s widerspiegeln.
 Überschriften haben im Vergleich zum Text nur einen minimalen Anteil an der Gesamtzahl der Tokens, wodurch das in ihnen enthaltene Wissen verloren geht.
 Die menschenlesbare Formatierung einer Überschrift hat keinen Einfluss auf die Bewertung durch das Modell.
 Tabellen liegen in einem Format vor, das vom Modell nicht nativ verarbeitet werden kann.
@@ -247,15 +252,15 @@ Diese Parameter sind in der \cref{tab:training:parameter} aufgelistet und folgen
     \centering
     \begin{tabular}{ll}
         \toprule
-        \textbf{Parameter} & \textbf{Wert} \\
+        \textbf{Parameter}    & \textbf{Wert} \\
         \midrule
-        Lernrate & $3e^{-4}$\\
-        AdamW $\beta_1$ & \SI{0,9}{}\\
-        AdamW $\beta_2$ & \SI{0,95}{}\\
-        Gewichtsreduktion & \SI{0,1}{}\\
-        Gradientenlimitierung & \SI{1,0}{}\\
-        Aufwärmphase & \SI{0}{}\\
-        Epochen & \SI{2}{}\\
+        Lernrate              & $3e^{-4}$     \\
+        AdamW $\beta_1$       & \SI{0,9}{}    \\
+        AdamW $\beta_2$       & \SI{0,95}{}   \\
+        Gewichtsreduktion     & \SI{0,1}{}    \\
+        Gradientenlimitierung & \SI{1,0}{}    \\
+        Aufwärmphase          & \SI{0}{}      \\
+        Epochen               & \SI{2}{}      \\
         \bottomrule
     \end{tabular}
     \caption{Parameter für das Training des LLaMA 7B-Modells}\label{tab:training:parameter}
@@ -355,12 +360,12 @@ Die Lösungen werden ebenfalls in drei Kategorien eingeteilt:
 Die Modelle werden mit Hilfe der Makro-F1 Bewertung verglichen.
 Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
 \begin{ceqn}
-\begin{align}
-    C &= S \cap G \\
-    prec &= \frac{|C_{q}|}{|S_{q}|} \\
-    recall &= \frac{|C_{q}|}{|G_{q}|} \\
-    F1 &= 2\frac{prec \cdot recall}{prec + recall}
-\end{align}
+    \begin{align}
+        C      & = S \cap G                                 \\
+        prec   & = \frac{|C_{q}|}{|S_{q}|}                  \\
+        recall & = \frac{|C_{q}|}{|G_{q}|}                  \\
+        F1     & = 2\frac{prec \cdot recall}{prec + recall}
+    \end{align}
 \end{ceqn}
 Dabei ist $S_q$ die Menge der für die Fragen $q$ generierten Antworten, $G_q$ die Menge der richtigen Antworten aus dem Buch \citet{bb} und $C_q$ die Menge der richtigen Antworten, die sowohl in $S_q$ als auch in $G_q$ enthalten sind.
 $prec$ ist die Präzision, $recall$ der Recall und $F1$ der F1-Wert pro Frage.

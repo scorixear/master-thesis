@@ -6,7 +6,7 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "python.formatting.provider": "none",
   "cSpell.words": [
     "adam",
@@ -31,6 +31,7 @@
     "criterias",
     "CUDA",
     "Datenkuration",
+    "Datentyptransformierung",
     "Dialo",
     "DICOM",
     "EDIFACT",
@@ -43,6 +44,7 @@
     "ERPS",
     "FHIR",
     "Finetuning",
+    "Finetunings",
     "Floatwerte",
     "Fragenverständnis",
     "Fragenverständnisses",
