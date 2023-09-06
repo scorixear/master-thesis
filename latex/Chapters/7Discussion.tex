@@ -1,9 +1,18 @@
 %*****************************************
 \chapter{Diskussion}\label{ch:discussion}
 %*****************************************
-
+\todo{kann man auch aufsplitten in discussion und future work}
+\todo{mir fehlt in der diskussion noch die problematik, (siehe mail letztens), dass im kontext des buches bestimmte begriffe anders definiert werden als im allgemeinen sprachgebrauch.
+bzw. dass das modell fragen aus seinem vorwissen beantwortet und nicht aus dem buch.
+für AW ist das ein wichtiges kriterium.
+typische beispiele: daten, information, wissen, informationssystem (schließt menschen mit ein), softwareprodukt vs anwendungssystem.
+typische fangfrage: Ist i.s.h.med ein Anwendungssystem? Antwort: Nein, ein Softwareprodukt.
+kam das problem bei deiner evaluation nicht vor?
+vielleicht bräuchte man da eine spezielle fragenkategorie um genau das zu prüfen. das sprengt dann wohl den rahmen deiner arbeit aber du könntest es bei future work erwähnen.
+}
 Die Ergebnisse dieser Arbeit zeigen, dass ein Continual Pretraining die Leistung eines Modells bei der Beantwortung von Fragen verbessern kann.
 Dennoch erreichte das hier trainierte Modell eine maximale Leistung von \num{0.3} MakroF1, was nicht mit derzeit verfügbaren Modellen wie GPT4 vergleichbar ist.
+\todo{finde ich sehr gut, dass du die probleme nicht wie manch andere unter den teppich kehrst sondern hervorhebst. 0,3 ist ja auch schon ein beachtliches ergebnis und eine gute ansatzstelle für zukünftige forschung.}
 Um diese Leistung zu erreichen, werden hier einige Ansätze vorgestellt, die in zukünftigen Arbeiten untersucht werden können.
 
 \section{Grenzen der Modelle}
@@ -49,13 +58,14 @@ Mit Hilfe der \ac{zero}-Stufe 3 Optimierung können Optimierungs- und Parameterz
 Zusätzlich kann durch eine Quantisierung der Modelle in kleinere Datentypen die Anzahl der benötigten \ac{gpu}-\ac{ram}s deutlich reduziert werden.
 \citet{4bit} untersuchte den Einfluss der Quantisierung auf die Performance der Modelle und zeigte, dass eine Quantisierung auf 4 Bit die Leistung der Modelle nur geringfügig beeinflusst.\\
 \todo{Bin mir nicht sicher ob man das wirklich so sagen kann. In dem Paper sind bei allen Grafiken die total model bits auf der x Achse.
-    Das finde ich irreführend, weil man ja in der Praxis oft z.B. LLama 7b 16 bit mit LLama 7b 8 bit vergleicht.
-    Das lässt sich aber aus den Plots schlecht ablesen weil bei 16 bit ja die models bits doppelt so viele sind.
-    dazu ist die x achse noch logarithmisch.
-    wäre vielleicht gut hier ein bild davon zu bringen aber wo auf der x achse nicht die bits sind sondern die parameter.
-    daraus ließe sich so eine aussage besser begründen.
-    aber wenn das zu viel aufwand ist muss das auch nicht sein.
-    was gut wäre: bit zahl runter aber gleichzeitig parameterzahl hoch.
+Das finde ich irreführend, weil man ja in der Praxis oft z.B. LLama 7b 16 bit mit LLama 7b 8 bit vergleicht.
+Das lässt sich aber aus den Plots schlecht ablesen weil bei 16 bit ja die models bits doppelt so viele sind.
+dazu ist die x achse noch logarithmisch.
+wäre vielleicht gut hier ein bild davon zu bringen aber wo auf der x achse nicht die bits sind sondern die parameter.
+daraus ließe sich so eine aussage besser begründen.
+aber wenn das zu viel aufwand ist muss das auch nicht sein.
+was gut wäre: bit zahl runter aber gleichzeitig parameterzahl hoch.
+aber das ist wohl zu aufwändig, würde dann einfach ein existierendes bild aus dem paper hier mit quellenangabe reinnehmen, so grob kann man es ja trotzdem sehen, vor allem die hauptaussage, dass bei gegebener Größe in bits des Modells 4 bit Parameter am besten abgeschnitten haben .
 }
 
 Zusätzlich ist es möglich, Modelle während der Inferenz in einen 8-Bit-Modus zu konvertieren, um Ressourcen zu sparen.
@@ -86,7 +96,7 @@ Wichtig ist dabei, dass die Wissensinhalte identisch sind, so dass sich die Auss
 Auch eine Zusammenstellung einzelner Kapitel aus verschiedenen Quellen mit gleichem Inhalt könnte die Größe des Datensatzes erhöhen und damit die Leistung der Modelle verbessern.\\
 
 \section{Domänenspezifische Modelle}
-Das Llama 2 Modell wurde ohne speziellen Fokus auf eine Domäne, insbesondere die Domäne Medizin, trainiert.
+Das Llama 2 Modell wurde ohne speziellen Fokus auf eine Domäne, insbesondere die Domäne Medizin, trainiert.\todo{medizininformatik. ein medizin modell würde ja noch mal ganz andere sachen lernen.}
 Allgemein trainierte Modelle können einen breiteren Anwendungsbereich abdecken, enthalten aber auch weniger Verständnis einzelner Domänen als domänenspezifische Modelle.
 Die Verwendung von Modellen, die stärker auf die Domäne der Medizin oder auf wissenschaftliche Inhalte fokussiert sind, könnte die Basisleistung des Modells und damit auch die Endleistung der hier trainierten Modelle verbessern.\\
 
@@ -113,10 +123,20 @@ Neben der Generierung von Text ist auch die Extraktion von Text aus einem gegebe
 Mit Hilfe von Encoder-basierten Modellen wie z.B. \ac{bert} ist es möglich, Textpassagen, die Antworten auf gegebene Fragen enthalten, aus einem Kontext zu extrahieren.
 Dieser Ansatz könnte zu einer besseren Korrektheit der Fragen führen, allerdings könnten andere Kriterien wie Robustheit und Erklärbarkeit darunter leiden.\\
 
+\todo{würde hierfür einen separaten abschnitt einführen, weil es ja ab hier nicht um pure extraktion geht}
 Man könnte auch ganz auf das Training von Decoder-basierten Modellen verzichten, bei denen das Modell die Frage nur mit Hilfe eines gegebenen Kontextes beantworten soll.
 Dieser Ansatz verspricht die besten Ergebnisse, da Modelle wie GPT4 bereits sehr gute Leistungen bei der Extraktion von Informationen aus Kontexten zeigen.
+\todo{wenn dieer ansatz die besten ergebnisse verspricht, sollte das meiner meinung nach auch an anderer stelle nochmal erwähnt werden zb bei der zusammenfassung.
+gut wäre auch eine kleine future work tabelle mit 3 spalten: ansatz (die section titel hier), aufwand und erfolgseinschätzung}
 \citet{context-extract} hat dieses Verhalten an großen Sprachmodellen untersucht und gezeigt, dass Modelle in der Lage sind, Informationen aus Anfang und Ende eines Kontextes weitgehend korrekt zu extrahieren.
 Eine Kombination aus einem Encoder-basierten Modell zur Bestimmung der Textstelle und einem Decoder-basierten Modell zur Generierung einer Antwort mit Hilfe der extrahierten Textstelle wäre hier durchaus denkbar.\\
+\todo{durchaus denkbar finde ich untertrieben da das ja ein weit verbreiteter ansatz ist, da können ruhig noch ein paar mehr quellen dazu rein}
+\todo{langchain erwähnen? oder ist das zu speziell?}
+\todo{du kannst gerne mal den prototyp dieses ansatzes unter https://github.com/konradHoeffner/localgpt ausprobieren}
+\todo{ist vielleicht erwähnenswert dass man mit diesem ansatz auch ressourcen sparen kann, da man für training mehr RAM braucht, das heißt falls man keine separate hardware für training und inferenz zur verfügung hat, dann kann man eventuell ein leistungsfähigeres modell einsetzen.}
+\todo{als weiteren ansatz könnte ich mir vorstellen, das komplette buch als kontext für die frage vorzugeben. dafür müsste man eventuell das buch kürzen und ein modell mit sehr großer kontext size nehmen. allerdings erwähnst du ja bereits dass dann eher anfang und ende erinnert werden aber die mitte oft vergessen wird.}
+\todo{https://huggingface.co/papers/2306.15595 zitieren?}
+\todo{praktisch bei diesem ansatz ist, dass das instruct modell wesentlich kleiner sein kann als das hauptmodell, und das man ein multilinguales instruct modell benutzen kann, was für uns sehr relevant ist, da viele fragen auch in deutsch formuliert sind}
 
 \section{Bewertung der Fragen mit Prüfungspunkten}
 Zur Berechnung des Kriteriums Korrektheit wurden jeder Frage drei Werte zugeordnet: die Anzahl der korrekten Antworten des Modells, die Anzahl der Antworten des Modells im Allgemeinen und die Anzahl der erwarteten Antworten für diese Frage.
