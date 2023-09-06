@@ -262,7 +262,7 @@ Zur Konfiguration der verwendeten Datentypen stehen neben dem oben genannten \te
 Es kann nur eine der beiden Optionen verwendet werden. Im Falle des Trainings mit Nvidia V100 Grafikkarten und der \ac{zero} Stufe 2 Optimierung wurde FP16 aufgrund von Architekturanforderungen verwendet. Beim Training mit Nvidia A30 Grafikkarten und \ac{zero} Stufe 3 Optimierung wurde BF16 verwendet.
 Die Zahl 16 steht hier für die Anzahl der Bits pro Wert, was wiederum einen großen Einfluss auf den Speicherbedarf und die Genauigkeit des Modells hat.
 Datentypen sollten nicht geändert werden, wenn ein vortrainiertes Modell weiter trainiert wird, da eine Änderung schnell zu Fehlverhalten führen kann.
-Die Llama 2 Modelle wurden mit dem Datentyp \enquote{bf16} (ausgeschrieben BFloat16) trainiert.
+Die Llama 2 Modelle wurden mit dem Datentyp \enquote{bf16} (ausgeschrieben BrainFloat 16) trainiert.
 Dieser Datentyp ist nur auf bestimmten \ac{gpu}-Architekturen verfügbar.
 Ein Datum im BFloat16-Format hat eine kleinere Mantisse (7 Bits) als ein Float16-Datum (10 Bits Mantisse). Dies führt zu einer geringeren Genauigkeit, verkürzt jedoch die Zeit, die für die Konvergenz des Modells benötigt wird.
 Die verwendeten V100 Grafikkarten haben nicht die notwendige Architektur, um BFloat16 Werte zu unterstützen, daher wurde das Llama 2 Modell hier in ein Float16 Format konvertiert.
@@ -379,7 +379,7 @@ Der Parameter \texttt{hysteresis} beschreibt die minimale Anzahl von Schritten, 
 Der Parameter \texttt{min\_loss\_scale} beschreibt die minimale Skalierung der Fehlerwerte.
 Hier entspricht der Wert $1$ keiner Skalierung.\\
 
-Der Abschnitt \texttt{bf16} beschreibt die Verwendung des binären Datentyps Float16 während des Trainings.
+Der Abschnitt \texttt{bf16} beschreibt die Verwendung des binären Datentyps BF16 (ausgeschrieben BrainFloat 16) während des Trainings.
 Ist er auf \texttt{true} gesetzt, so werden die Berechnungen mit dem Datentyp BFloat16 durchgeführt.
 Ist er auf \texttt{false} gesetzt, so werden die Berechnungen mit dem Datentyp Float16 durchgeführt.
 Bei einem Training mit V100 Grafikkarten und \ac{zero} Stufe 2 Optimierung ist dieser Parameter auf \enquote{false} gesetzt.
