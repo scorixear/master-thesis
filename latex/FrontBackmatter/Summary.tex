@@ -17,15 +17,14 @@
 %\end{enumerate}
 %Für wissenschaftliche Abschlussarbeiten sind etwa 200 bis 250 Wörter ausreichend.
 
-Die Wissensbeschaffung in der Medizin ist ein komplexer und wichtiger Bestandteil der medizinischen Forschung, Lehre und Praxis.
-\todo{Medizin ist zu allgemein, würde mindestens auf medizinische informatik einschränken.}
+Die Wissensbeschaffung in der Medizininformatik ist ein komplexer und wichtiger Bestandteil von Forschung, Lehre und Praxis.
 Umso wichtiger ist die Effizienz und Qualität der Wissensbeschaffung.
-Informationssysteme stellen dabei eine grundlegende Architektur zur Unterstützung dieser Wissensbeschaffung dar.\todo{informationssysteme sind hier eher gegenstand und nicht zur wissensbeschaffung da}
+Informationssysteme stellen dabei eine grundlegende Architektur in diesem Bereich dar.
 Das Buch \enquote{Health Information Systems} von \citet{bb} enthält eine umfassende Einführung in die Thematik der Informationssysteme in der Medizin.
 Die Extraktion von Informationen und Wissen aus dem Buch erweist sich jedoch als schwierig.
-In dieser Arbeit wurde ein vortrainiertes Sprachmodell verwendet, um den Inhalt des Buches effizienter und einfacher zugänglich zu machen.
+In dieser Arbeit wurde ein vortrainiertes Sprachmodell verwendet, um den Inhalt des Buches effizienter und leichter zugänglich zu machen.
 Ziel ist es, Wissen aus dem Buch zu extrahieren.
-Dieses Ziel wurde anhand von Prüfungsfragen aus dem Buch und Modulen der Universität Leipzig, die inhaltlich auf dem Buch aufbauen, evaluiert.
+Dieses Ziel wurde anhand von Prüfungsfragen aus dem Buch und Modulen der Universität Leipzig, die inhaltlich auf dem Buch aufbauen, evaluiert.\\
 
 Um diese Ziele zu erreichen, wurden verschiedene Sprachmodelle auf ihre Eignung evaluiert.
 Die Wahl fiel auf das Sprachmodell Llama von MetaAI \citep{llama2}.
@@ -33,7 +32,7 @@ Dieses vortrainierte Sprachmodell wurde mit Hilfe des Continual Pretrainings wei
 Während des Trainings wurde die Qualität des Modells zu verschiedenen Zeitpunkten evaluiert.
 Diese Bewertung basierte auf den Kriterien Korrektheit, Erklärbarkeit, Fragenverständnis und Robustheit.
 Abschließend wurde ein Vergleich zwischen den Trainingszeitpunkten, dem nicht weiter trainierten Modell und dem \ac{sota} Modell GPT4 durchgeführt.\\
-\todo{schöne zusammenfassung, einfache sätze}
+
 Die Ergebnisse zeigen, dass Modelle mit Hilfe von Continual Pretraining auf ein spezifisches Buch trainiert werden können und in fast allen Kriterien bessere Ergebnisse erzielen als das nicht weiter trainierte Modell.
 Aufgrund des Größenunterschieds zwischen GPT4 und dem hier verwendeten Modell Llama 2 7B wird die Leistung von GPT4 jedoch nicht erreicht.
 Das nicht weiter trainierte Modell erreichte nur einen MakroF1-Wert von \num{0.1} und konnte durch das hier durchgeführte Training auf \num{0.33} gesteigert werden.
@@ -41,8 +40,9 @@ Dies zeigt das Potential dieser Methode.
 Allerdings sind die Modelle noch nicht mit dem \ac{sota} Modell GPT4 vergleichbar, das einen MakroF1-Wert von \num{0.7} erreichte.
 Die hier trainierten Modelle stellen keinen für die Praxis nutzbaren Zustand dar, lösen aber die gestellte Zielstellung \enquote{Machbarkeit der Beantwortung von Fragen mit Hilfe von Sprachmodellen}.\\
 
-Um die Leistungsfähigkeit von Sprachmodellen zu erhöhen, können die Modellgröße und die Größe des Datensatzes erhöht werden.
-Auch neue Entwicklungen im Bereich der Adapter (\cref{sec:adapter-training}) zeigen vielversprechende und ressourceneffiziente Ansätze, um die Performanz von Sprachmodellen zu steigern.\\
+Um die Leistungsfähigkeit von Sprachmodellen zu erhöhen, können sowohl die Modellgröße als auch die Größe des Datensatzes erhöht werden.
+Auch neue Entwicklungen im Bereich der Adapter (\cref{sec:adapter-training}) zeigen vielversprechende und ressourceneffiziente Ansätze, um die Performanz von Sprachmodellen zu steigern.
+Insbesondere der Einsatz von Retrieval-Augmented Generation bieten vielversprechende Erweiterungsmöglichkeiten.\\
 
 Zusammenfassend kann gesagt werden, dass die Leistung von Sprachmodellen für die Beantwortung von Klausurfragen durch Continual Pretraining gesteigert werden kann, auch wenn die Endleistung noch keinen praxistauglichen Zustand erreicht.\\
 

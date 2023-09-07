@@ -51,10 +51,7 @@ erschweren eine schnelle Wissensbeschaffung, insbesondere für Studierende, die 
 Eine Strukturierung von Wissen zum Management von Krankenhausinformationssystemen ist bereits Bestandteil des Projekts \ac{snik} \citep{semantischesnetz, domaene},
 eine Ontologie des Instituts für Medizinische Informatik, Statistik und Epidemiologie der Universität Leipzig.
 Auf Basis dieser Ontologie wurden bereits verschiedene Methoden zur Wissensextraktion untersucht.\\
-Die \ac{bell} mit dem Titel \enquote{Question Answering on \ac{snik}} \citep{hannesbell} erweiterte den Zugang zu diesem Netz durch die Verwendung natürlicher englischer Sprache.
-\todo{zu der bell bitte auch das SKILL paper zitieren, konferenzband ist aber wohl erst ende september fertig.
-kannst aber auch jetzt schon den bibtex eintrag erstellen wenn auch ohne DOI.
-Hannes R. Brunsch: Question Answering auf SNIK (Wilhelm-Ostwald-Schule, Universität Leipzig. SKILL 2018-Studentenkonferenz Informatik (2018).}
+Die \ac{bell} mit dem Titel \enquote{Question Answering on \ac{snik}} \citep{hannesbell, hannesbell_skill} erweiterte den Zugang zu diesem Netz durch die Verwendung natürlicher englischer Sprache.
 Die Ergebnisse der \ac{bell} wurden in einem \ac{qas} QAnswer \citep{qanswer} umgesetzt, zeigen aber Defizite in der Erklärbarkeit und Verständlichkeit komplexerer Fragen.
 Im Gegensatz dazu untersuchte \citet{chatgpt_qas} auf einem anderen Datensatz die Leistung eines Sprachmodells (in diesem Fall ChatGPT) im Vergleich zu einer herkömmlichen, auf einem Wissensgraphen basierenden \ac{qas} (verwendet wurde $KGQA_N$).
 Die Ergebnisse zeigten, dass ChatGPT im Vergleich zum verwendeten $KGQA_N$ erstaunlich stabile und verständliche Antworten lieferte, jedoch bei der Ausgabe korrekter Antworten deutlich schlechter abschnitt. Hier steht zu erwarten, dass durch ein besseres Training die Anzahl der falschen Antworten deutlich reduziert werden kann.\\
@@ -67,13 +64,13 @@ Dem in~\cref{sec:problemstellung} gezeigten Problem werden folgende Ziele dieser
 \begin{itemize}
   \item Ziel Z1: Beantwortung von Fragen zu Informationssystemen im Gesundheitswesen in natürlicher Sprache durch ein Sprachmodell mit Hilfe von \citet{bb}
   \item Ziel Z2: Lösung einer Beispielklausur des Moduls \enquote{Architektur von Informationssystemen im Gesundheitswesen}\footnote{\raggedright{}einem Modul des Masterstudiengangs Medizinische Informatik an der Universität Leipzig, das inhaltlich auf \citet{bb} aufbaut} mit Hilfe eines Sprachmodells.\@
-  Das Ziel ist kein produktives System, sondern soll lediglich die Machbarkeit der Beantwortung von Fragen mit Hilfe eines Sprachmodells aufzeigen.
+        Das Ziel ist kein produktives System, sondern soll lediglich die Machbarkeit der Beantwortung von Fragen mit Hilfe eines Sprachmodells aufzeigen.
 \end{itemize}
 
 \section{Bezug zu ethischen Leitlinien der GMDS}\label{sec:gmds_ethik}
 
 Die ethischen Leitlinien der \ac{gmds} \citep{gmds_eth} geben \enquote{sowohl den tragenenden Gesellschaften als Institution als auch dem einzelnen Mitglied eine Orientierung,
-welche ethischen Forderungen in ihrem bzw.\ seinem jeweiligen Aufgaben- und Verantwortungsbereich relevant sein können} \citep{gmds_eth}.
+  welche ethischen Forderungen in ihrem bzw.\ seinem jeweiligen Aufgaben- und Verantwortungsbereich relevant sein können} \citep{gmds_eth}.
 Aufgeteilt in 16 Artikel werden hier verschiedene Kompetenzen und Verantwortlichkeiten definiert, unter die auch das hier beschriebene System fällt.
 Da das zu entwickelnde Sprachmodell Wissen über medizinisches Wissen, insbesondere über Informationssysteme im Gesundheitswesen, bereitstellt,
 unterliegt sie in ihrer Existenz als \enquote{Wissensbasis} einer Vielzahl von Artikeln.
@@ -131,24 +128,24 @@ Die in~\cref{sec:zielsetzung} genannten Ziele $Z_i$ werden durch die hier aufgef
 
 \begin{itemize}
   \item Aufgabe zu Ziel Z1
-  \begin{itemize}
-    \item Aufgabe A1.1: Es sollen aktuelle Sprachmodelle verglichen werden. Dabei sind die Einschränkungen der Verfügbarkeit und Verwendbarkeit zu berücksichtigen.
-    \ac{gpt}-Modelle basieren auf großen Datenmengen und enthalten mehrere Milliarden Parameter.
-    Ein eigenes Training eines Modells würde sowohl den zeitlichen als auch den finanziellen Rahmen übersteigen, weshalb auf ein vortrainiertes Modell zurückgegriffen werden muss.
-    Dazu muss das Modell frei verfügbar sein und unter einer Open-Source-Lizenz stehen. Außerdem muss das Modell am Rechenzentrum der Universität Leipzig geladen und trainiert werden können. Aufgrund der großen Anzahl an Parametern sind auch hier Grenzen des Arbeitsspeichers und damit der Größe des Modells gesetzt.
-    \item Aufgabe A1.2: Für ein effizientes und erfolgreiches Training des Sprachmodells ist eine Datenkuration von \citet{bb} notwendig.
-    Abschnitte wie das Literaturverzeichnis, Aufzählungen oder Grafiken und deren Beschriftung müssen vor der Verwendung des Textes entfernt oder umgeschrieben werden.
-    \item Aufgabe A1.3: Das trainierte Sprachmodell wird dann zur Beantwortung von Fragen zu \citet{bb} verwendet.
-    Dabei wird während des Trainings der in \citet{gpt3} beschriebene \enquote{Zero-Shot}-Ansatz verfolgt.
-    Dies bedeutet, dass das Verständnis der Fragestellung und die Bewertung wichtigen Wissens allein durch das Modell erfolgt und nicht durch vordefinierte Fragen im Datensatz dem Modell beigebracht wird.
-  \end{itemize}
+        \begin{itemize}
+          \item Aufgabe A1.1: Es sollen aktuelle Sprachmodelle verglichen werden. Dabei sind die Einschränkungen der Verfügbarkeit und Verwendbarkeit zu berücksichtigen.
+                \ac{gpt}-Modelle basieren auf großen Datenmengen und enthalten mehrere Milliarden Parameter.
+                Ein eigenes Training eines Modells würde sowohl den zeitlichen als auch den finanziellen Rahmen übersteigen, weshalb auf ein vortrainiertes Modell zurückgegriffen werden muss.
+                Dazu muss das Modell frei verfügbar sein und unter einer Open-Source-Lizenz stehen. Außerdem muss das Modell am Rechenzentrum der Universität Leipzig geladen und trainiert werden können. Aufgrund der großen Anzahl an Parametern sind auch hier Grenzen des Arbeitsspeichers und damit der Größe des Modells gesetzt.
+          \item Aufgabe A1.2: Für ein effizientes und erfolgreiches Training des Sprachmodells ist eine Datenkuration von \citet{bb} notwendig.
+                Abschnitte wie das Literaturverzeichnis, Aufzählungen oder Grafiken und deren Beschriftung müssen vor der Verwendung des Textes entfernt oder umgeschrieben werden.
+          \item Aufgabe A1.3: Das trainierte Sprachmodell wird dann zur Beantwortung von Fragen zu \citet{bb} verwendet.
+                Dabei wird während des Trainings der in \citet{gpt3} beschriebene \enquote{Zero-Shot}-Ansatz verfolgt.
+                Dies bedeutet, dass das Verständnis der Fragestellung und die Bewertung wichtigen Wissens allein durch das Modell erfolgt und nicht durch vordefinierte Fragen im Datensatz dem Modell beigebracht wird.
+        \end{itemize}
   \item Aufgabe zu Ziel Z2
-  \begin{itemize}
-    \item Aufgabe A2.1: Das in dieser Arbeit gewählte Sprachmodell wird vor und nach dem Training hinsichtlich ihrer Fähigkeit, Fragen korrekt zu beantworten, evaluiert.
-    Dies ermöglicht eine Aussage über die Effektivität des Trainings und die Leistungssteigerung des Sprachmodells.\@
-    Ebenso wird ein Vergleich mit dem aktuellen GPT-4 Modell \citep{gpt4} durchgeführt, um die Notwendigkeit eines Trainings zu ermitteln.
-    \item Aufgabe A2.2: Bewertung der Antwortoptionen von Klausurfragen nach gleichen Kriterien wie in \citet{chatgpt_qas}
-  \end{itemize}
+        \begin{itemize}
+          \item Aufgabe A2.1: Das in dieser Arbeit gewählte Sprachmodell wird vor und nach dem Training hinsichtlich ihrer Fähigkeit, Fragen korrekt zu beantworten, evaluiert.
+                Dies ermöglicht eine Aussage über die Effektivität des Trainings und die Leistungssteigerung des Sprachmodells.\@
+                Ebenso wird ein Vergleich mit dem aktuellen GPT-4 Modell \citep{gpt4} durchgeführt, um die Notwendigkeit eines Trainings zu ermitteln.
+          \item Aufgabe A2.2: Bewertung der Antwortoptionen von Klausurfragen nach gleichen Kriterien wie in \citet{chatgpt_qas}
+        \end{itemize}
 \end{itemize}
 
 \section{Aufbau der Arbeit}
