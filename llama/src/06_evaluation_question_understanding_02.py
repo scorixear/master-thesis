@@ -146,7 +146,7 @@ def main():
         )
     show_heatmap(
         heatmap.get_avgvalue_heatmap_total_by_type("avg"),
-        "Fragequelle",
+        "Fragetyp",
         "Modell",
         "Durschnittlich Verstandene Fragen",
         os.path.join(args.output, "question_understanding_total_type.png"),
@@ -168,7 +168,7 @@ def main():
         )
     show_heatmap(
         heatmap.get_avgvalue_heatmap_total_by_source("avg"),
-        "Fragetyp",
+        "Fragequelle",
         "Modell",
         "Durschnittlich Verstandene Fragen",
         os.path.join(args.output, "question_understanding_total_source.png"),

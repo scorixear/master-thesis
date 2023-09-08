@@ -89,7 +89,7 @@ def main():
 
     show_heatmap(
         heatmap_data.get_makrof1_heatmap_total_by_type(),
-        "Fragequelle",
+        "Fragetyp",
         "Modell",
         "Makro F1",
         args.output + "/makrof1_total_type_heat.png",
@@ -115,7 +115,7 @@ def main():
         )
     show_heatmap(
         heatmap_data.get_makrof1_heatmap_total_by_source(),
-        "Fragetyp",
+        "Fragequelle",
         "Modell",
         "Makro F1",
         args.output + "/makrof1_total_source_heat.png",

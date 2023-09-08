@@ -150,7 +150,7 @@ def main():
         )
     show_heatmap(
         heatmap.get_avgvalue_heatmap_total_by_type("avg"),
-        "Fragequelle",
+        "Fragetyp",
         "Modell",
         "Durchschnittliche Erklärbarkeit der Fragen",
         os.path.join(args.output, "explainability_total_type.png"),
@@ -172,7 +172,7 @@ def main():
         )
     show_heatmap(
         heatmap.get_avgvalue_heatmap_total_by_source("avg"),
-        "Fragetyp",
+        "Fragequelle",
         "Modell",
         "Durchschnittliche Erklärbarkeit der Fragen",
         os.path.join(args.output, "explainability_total_source.png"),
