@@ -95,12 +95,14 @@ def main():
             type_understood[q_type].append((type_u[q_type], type_n[q_type]))
         for source in QuestionSource:
             source_understood[source].append((source_u[source], source_n[source]))
+        # update heatmap counters
         for question in understood_q:
             heatmap.update_value(name, question.type, question.source, "understood", 1)
         for question in not_understood_q:
             heatmap.update_value(
                 name, question.type, question.source, "not_understood", 1
             )
+        # calculate avg
         for q_type in QuestionType:
             for source in QuestionSource:
                 understood_h = heatmap.get_value(

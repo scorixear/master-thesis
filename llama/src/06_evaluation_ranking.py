@@ -31,9 +31,11 @@ def main():
     )
 
     args = parser.parse_args()
+    # remove trailing slash
     if args.output.endswith("/") or args.output.endswith("\\"):
         args.output = args.output[:-1]
 
+    # read in evaluation data from correctness
     evaluated = pd.read_csv(args.data)
 
     ranking_variables = ["Num_Correct", "MacroF1"]
@@ -55,6 +57,7 @@ def main():
 
     ranked_results: dict[str, list[tuple[str, int]]] = {}
 
+    # sort the values
     for value in ranking_variables:
         unsorted_values: list[tuple[str, int]] = []
         for model in model_names:
@@ -72,7 +75,7 @@ def main():
         sorted_values = sorted(unsorted_values, key=lambda x: x[1])
         ranked_results[value] = sorted_values
 
-    # num correct
+    # draw ranking plots
     draw_ranking(
         [x[1] for x in ranked_results["Num_Correct"]],
         [x[0] for x in ranked_results["Num_Correct"]],

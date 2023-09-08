@@ -10,9 +10,13 @@ def main():
     parser.add_argument('--output', type=str, default="data/single_questions.tex")
     args = parser.parse_args()
     
+    # load in question json file
     data = json.load(open(args.input, "r"))
     output_lines = []
+    # for each question
     for question in data:
+        # replace special characters
+        # and append to output
         original = replace_special_chars(question['question'])
         output_lines.append(f"Frage & {original} \\\\")
         transformed = replace_special_chars(question['transformed'])
@@ -29,6 +33,7 @@ def main():
         
         
         output_lines.append("\\midrule")
+    # then write to output file
     with open(args.output, 'w') as f:
         f.write("\n".join(output_lines))
 if __name__ == '__main__':

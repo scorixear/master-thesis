@@ -44,12 +44,15 @@ def main():
     )
     args = parser.parse_args()
 
+    # if calculation is not skipped
     if not args.skip:
         df, heatmap_data = calculate_correctness(args)
     else:
+        # otherwise read in data
         df = pd.read_csv(args.output + "/evaluation.csv")
         heatmap_data = ModelHeatMap.read_json(args.output + "/heatmap.json")
 
+    # set gpt4 at the end of the heatmap
     heatmap_data.reorder("gpt4", -1)
 
     # get model names for plots
@@ -67,6 +70,7 @@ def main():
         "Richtig, Falsch und Unbeantwortete Fragen",
         args.output + "/answers_total.png",
     )
+    # and heatmaps of makrof1 scores
     show_heatmap(
         heatmap_data.get_makrof1_heatmap_total_by_model(),
         "Fragequelle",
@@ -171,6 +175,7 @@ def calculate_correctness(args):
     model_names = sorted(unsorted_models.keys(), key=get_model_key)
     models: list[list[Question]] = [unsorted_models[name] for name in model_names]
 
+    # init heatmap
     heatmap_data: ModelHeatMap = ModelHeatMap()
     for model in model_names:
         for q_type in QuestionType:
@@ -257,6 +262,7 @@ def calculate_correctness(args):
             f1_scores.append(f1)
             type_f1_scores[QuestionType(question.type)].append(f1)  # type: ignore
             source_f1_scores[QuestionSource(question.source)].append(f1)  # type: ignore
+            # this will be used later to calculate makrof1 per type and source
             heatmap_data.append_value(name, question.type, question.source, "f1", f1)
             # increase counters depending on question type
             # and if question was answered correctly, wrong or not at all
@@ -290,6 +296,7 @@ def calculate_correctness(args):
             type_macro_f1[q_type] = sum(type_f1_scores[q_type]) / len(
                 type_f1_scores[q_type]
             )
+            # for each source per type, calculate makrof1
             for source in QuestionSource:
                 type_f1: list[int] = heatmap_data.get_value(
                     name, q_type, source, "f1"
@@ -343,6 +350,7 @@ def calculate_correctness(args):
 
     # save data to csv
     df.to_csv(args.output + "/evaluation.csv", index=False)
+    # and heatmap to json
     heatmap_data.save_json(args.output + "/heatmap.json")
     return df, heatmap_data
 
@@ -368,8 +376,10 @@ def show_answer_bars(correct, wrong, unanswered, names, title, file_name):
         bottom += answer
         # enable labeling of bars
         axis.bar_label(bars, fontsize=PlotParams.font_size)
+    # this rotates and updates fontsizes of the x axis labels
     x_ticks = axis.get_xticks()
     axis.set_xticks(x_ticks, labels=names, rotation=45, fontsize=PlotParams.font_size)
+    # transforms y axis to be only integers
     axis.yaxis.set_major_locator(MaxNLocator(integer=True))
     axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     # add legend
@@ -394,8 +404,10 @@ def show_makrof1_bars(f1, names, title, file_name):
     # create bars
     f1 = [round(x, 2) for x in f1]
     bars = axis.bar(names, f1, width=0.8)
+    # rotate xaxis and set fontsize
     x_ticks = axis.get_xticks()
     axis.set_xticks(x_ticks, labels=names, rotation=45, fontsize=PlotParams.font_size)
+    # makrof1 can have decimal y axis
     axis.tick_params(axis="y", labelsize=PlotParams.font_size)
     # label bars
     axis.bar_label(

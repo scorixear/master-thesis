@@ -76,6 +76,7 @@ def main():
     for key in sorted(unsorted_models.keys(), key=get_model_key):
         models[key] = unsorted_models[key]
 
+    # init heatmap and explained lists
     heatmap = ModelHeatMap()
     explained: list[tuple[int, int]] = []
     type_explained: dict[QuestionType, list[tuple[int, int]]] = {}
@@ -96,12 +97,14 @@ def main():
             source_explained[source].append(
                 (source_exp[source], source_not_exp[source])
             )
+        # update counters of heatmap
         for question in explained_q:
             heatmap.update_value(name, question.type, question.source, "explained", 1)
         for question in not_explained_q:
             heatmap.update_value(
                 name, question.type, question.source, "not_explained", 1
             )
+        # and update avg values
         for q_type in QuestionType:
             for source in QuestionSource:
                 explained_h = heatmap.get_value(
@@ -119,8 +122,10 @@ def main():
                 else:
                     avg = explained_h / (explained_h + not_explained_h)
                 heatmap.set_value(name, str(q_type), str(source), "avg", avg)
+    # set gpt4 at the end of heatmap
     heatmap.reorder("gpt4", -1)
 
+    # and create plots and heatmaps
     create_plot(
         list(models.keys()),
         [data[0] for data in explained],
