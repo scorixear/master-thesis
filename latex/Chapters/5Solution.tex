@@ -194,7 +194,7 @@ Falls keine Validierung durchgeführt wird, wird der Trainingsdatensatz dennoch 
 Während des Trainings und der Validierung werden die Fehlerfunktionen von mehreren Blöcken berechnet und danach gemittelt.
 Daraufhin wird ein Gradient basierend auf dieser kumulativen Fehlerfunktion berechnet, welcher die Gewichte des Modells anpasst.
 Eine detailliertere Beschreibung des Ablaufs findet sich in \cref{subsec:backpropagation}.
-Die Anzahl der Blöcke pro \enquote{Batch} (siehe \cref{def:batch}) wird durch die Parameter \texttt{per\_device\_train\_batch\_size} und \texttt{per\_device\_eval\_batch\_size} festgelegt.
+Die Anzahl der Blöcke pro \enquote{Batch} (siehe \cref{def:batch}) wird durch die Parameter \texttt{per\_device\_train\_batch\_size} und \texttt{per\_device\_eval\allowbreak\_batch\_size} festgelegt.
 Wenn man eine Batch-Größe von 1 und 3 \ac{gpu}s verwendet, erhält man somit 3 Blöcke pro Gradientenberechnung.
 Während höhere Batch-Größen die Berechnungszeit reduzieren können, führen sie auch zu ungenaueren Gradienten und erfordern mehr Speicher auf der \ac{gpu}.
 Die Batch-Größe ist in diesem Fall auf 1 gesetzt, da die verwendeten Nvidia V100-\ac{gpu}s als auch Nvidia A30-\ac{gpu}s nur genug Speicher für eine Batch-Größe von 1 hatten.\\
