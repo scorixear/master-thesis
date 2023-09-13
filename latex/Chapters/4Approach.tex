@@ -52,7 +52,7 @@ Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht mög
 
             Llama 2  & limitiert     & gut      & \num{7}   & \SI{56}{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
                      & limitiert     & gut      & \num{13}  & \SI{104}{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
-                     & limitiert     & gut      & \num{70}  & \SI{560}{\giga\byte}  & \SI{140}{\giga\byte}  & \SI{35}{\giga\byte}   \\
+                     & limitiert     & sehr gut      & \num{70}  & \SI{560}{\giga\byte}  & \SI{140}{\giga\byte}  & \SI{35}{\giga\byte}   \\
             \bottomrule
         \end{tabular}}
     \caption[Übersicht über die zur Auswahl stehenden Modelle]{Übersicht über die zur Auswahl stehenden Modelle. Größe ist in Milliarden Parameter angegeben.}\label{tab:approach:models}
@@ -94,14 +94,14 @@ Damit scheidet das Modell bereits aus.
 Ein weiteres Problem ist die Größe des Modells.
 Bei ca. 175 Milliarden Parametern ist eine Nutzung des Modells erst mit 8 A100 \ac{gpu}s möglich (eine Nvidia A100 \ac{gpu} besitzt \SI{80}{\giga\byte} VRAM).
 Das Training benötigt zusätzlich etwa den 4-fache Speicher.
-Diesen Speicher kann zwar vom Rechenzentrum der Universität Leipzig zur Verfügung gestellt werden, verhindert aber den Einsatz des Modells in einer längerfristigen Umgebung.\\
+Dieser Speicher kann zwar vom Rechenzentrum der Universität Leipzig zur Verfügung gestellt werden, verhindert aber den Einsatz des Modells in einer längerfristigen Umgebung.\\
 
 GPT-4 ist das mächtigste Modell von OpenAI und wurde in \citet{gpt4} vorgestellt.
 Auch dieses Modell ist nicht frei verfügbar und kann nur über eine \ac{api} verwendet werden.
 Die Leistungsfähigkeit von GPT-4 ist jedoch deutlich höher als die von GPT-3, weshalb die Untersuchung dieses Modells als Ersatz für ein speziell trainiertes Modell geplant ist.
 Die Größe des Modells wurde von OpenAI nicht veröffentlicht, ist aber definitiv größer als GPT-3, weshalb eine Verwendung hier allein aufgrund der Größe ausscheidet.\\
 
-GPT-J erreicht mit \SI{6,7}{} Milliarden Parametern die Größe des kleinsten Modells der GPT-3 Serie, zeigt aber eine deutlich bessere Performance als GPT-2.
+GPT-J erreicht mit \SI{6,7}{} Milliarden Parametern die Größe der kleinsten Modellversion der GPT-3 Serie, zeigt aber eine deutlich bessere Performance als GPT-2.
 Das Modell ist unter \citet{gptj} veröffentlicht und frei verfügbar.
 Die Leistungsfähigkeit des Modells ist im Vergleich zu den anderen Modellen in der Auswahl geringer und wird daher ausgeschlossen.\\
 
@@ -168,12 +168,12 @@ Auf weitere Einzelheiten über den Aufbau der verwendeten GPU-Computing Clusters
 
 \section{Datenkuration}\label{sec:datenkuration}
 Um die Literatur optimal nutzen zu können, muss eine Datenkuration durchgeführt werden.
-Die Daten liegen im Word-Format vor, können aber in diesem Format nicht verarbeitet werden, da das Modell nur Text verarbeiten kann.
+Die Daten liegen im Epub-Format vor, können aber in diesem Format nicht verarbeitet werden, da das Modell nur Text verarbeiten kann.
 Die Datenkuration umfasst mehrere Schritte, die im Folgenden beschrieben werden.\\
 
 \subsection{Extraktion des Textes}
 Die Extraktion des Textes wird händisch durchgeführt.
-Dazu wird das Word-Dokument geöffnet und der Text kopiert.
+Dazu wird das Epub-Dokument geöffnet und der Text kopiert.
 Der Text wird in einem Texteditor eingefügt und als \texttt{.md} Datei gespeichert.
 \texttt{.md}-Dateien folgen dem Markdown-Format\footnote{\url{https://markdown.de/} (abgerufen am 28.6.2023)} und haben die besondere Eigenschaft, mit Hilfe von Text-Symbolen Formatierungen wie Überschriften, Aufzählungen und Tabellen darzustellen.
 
@@ -186,14 +186,11 @@ Die Bildunterschriften als auch Referenzen auf Bilder stehen somit ohne Kontext 
 \subsection{Textpassagen ohne Wissen oder Kontext}
 Teile des Dokuments enthalten kein Wissen, stehen in keinem Zusammenhang oder sind für das Modell unverständlich formatiert.
 Die Titelseite wird auf den Buchtitel reduziert, das Vorwort wird weggelassen, da es kein Wissen zum Thema enthält, Tabellen- und Abbildungsverzeichnisse werden ebenfalls entfernt.
-Bild- und Tabellenverzeichnisse enthalten zwar Wissen, können aber nicht in Kontext gesetzt werden, da die verwendeten Attention-Mechanismen des Modells diese Verzeichnisse nicht mit Texten in späteren Kapiteln verknüpfen können, da der Kontext zu groß ist.
+Bild- und Tabellenverzeichnisse enthalten zwar Wissen, können aber nicht in Kontext gesetzt werden, da die verwendeten Aufmerksamkeitsmechanismen des Modells diese Verzeichnisse nicht mit Texten in späteren Kapiteln verknüpfen können, da der Kontext zu groß ist.
 Auch die Vorstellung der Autoren enthält kein Wissen zum Thema und wird daher entfernt.
-Zusätzlich werden fehlerhafte Textpassagen wie fehlende Verweise entfernt.
-Diese Textstellen existieren nur in der Word-Version des Buches, nicht aber in der endgültigen PDF-Version.
-Da eine Textextraktion aus PDF-Dateien jedoch zu gravierenden Problemen in der Textformatierung führt, wird darauf verzichtet.
 
 \subsection{Optionale Textentfernungen}
-Es soll geprüft werden, ob das Weglassen von Literaturverweisen, Überschriften und Tabellen zu einer besseren Leistung führt.
+Fortführend kann geprüft werden, ob das Weglassen von Literaturverweisen, Überschriften und Tabellen zu einer besseren Leistung führt.
 Literaturverzeichnisse beziehen sich auf das vorhergehende Kapitel, haben aber ein schwieriges Format.
 Insbesondere \ac{url}s müssen vom Modell in Tokens zerlegt werden, die nicht den Inhalt der \ac{url}s widerspiegeln.
 Überschriften haben im Vergleich zum Text nur einen minimalen Anteil an der Gesamtzahl der Tokens, wodurch das in ihnen enthaltene Wissen verloren geht.
@@ -208,7 +205,7 @@ Das Abkürzungsverzeichnis und das Glossar bleiben im Text enthalten, da sie fü
 Einige Fragen können Akronyme oder Fachbegriffe verwenden, die vom Modell verstanden werden müssen.
 
 \subsection{Formatierung von Text}
-Die Formatierung des Textes im Word-Dokument kann nicht berücksichtigt werden.
+Die Formatierung des Textes im Epub-Dokument kann nicht berücksichtigt werden.
 Daher muss hier ein Ersatz in Form einer Markdown-Formatierung gefunden werden.
 Überschriften werden durch \enquote{\texttt{\#}}, Aufzählungen durch \enquote{\texttt{-}} und \enquote{\texttt{1.}} dargestellt.
 Tabellen werden durch eine Aufzählung dargestellt, wobei die erste Zeile die Überschriften enthält und die zweite Zeile die Trennung zwischen Überschriften und Inhalt darstellt.
@@ -222,7 +219,7 @@ Die Übungsabschnitte sowie das Glossar und das Abkürzungsverzeichnis können a
 um das Modell und andere Modelle besser bewerten zu können.
 
 \section{Unüberwachtes Weitertrainieren}
-Um das LLaMA-Modell zu trainieren, wird ein Programm benötigt, das den Datensatz in Tokens umwandelt und diese dann in Batches an das Modell übergibt.
+Um das Llama-Modell zu trainieren, wird ein Programm benötigt, das den Datensatz in Tokens umwandelt und diese dann in Batches an das Modell übergibt.
 Basierend auf diesen Batches wird das Modell verwendet, um die Gewichte mittels Backpropagation anzupassen.
 Dieser Prozess stellt somit eine Epoche dar.
 Bei kleineren Datensätzen und Fine-Tuning werden oft mehrere Epochen gewählt, während größere Datensätze (mehrere hundert Gigabyte) nur eine Epoche oder nicht einmal eine Epoche benötigen.
@@ -231,7 +228,7 @@ Diese Grenze wird oft als \enquote{Overfitting} bezeichnet und stellt ein Modell
 Dadurch verliert das Modell die Fähigkeit, auf unbekannte Daten zu verallgemeinern, was in diesem Anwendungsfall dazu führt, dass keine Fragen mehr beantwortet werden können.\\
 
 Um Overfitting zu vermeiden, wird der Datensatz in einen Trainings- und einen Validierungsdatensatz aufgeteilt.
-Dabei wird eine Aufteilung von \SI{90}{\percent} Training und \SI{10}{\percent} Validierung verwendet.
+Dabei wird eine Aufteilung von \SI{95}{\percent} Training und \SI{5}{\percent} Validierung verwendet.
 Das Modell wird nur auf dem Trainingsdatensatz trainiert, aber in regelmäßigen Abständen mit dem Validierungsdatensatz überprüft.
 Die Ergebnisse des Validierungsdatensatzes haben keinen Einfluss auf die Anpassung der Gewichte, sondern dienen nur zur Überprüfung der Generalisierungsfähigkeit des Modells.
 Sowohl für den Trainings- als auch für den Validierungsdatensatz wird ein Absinken der Fehlerfunktion erwartet.
@@ -260,10 +257,10 @@ Diese Parameter sind in der \cref{tab:training:parameter} aufgelistet und folgen
         Gewichtsreduktion     & \SI{0,1}{}    \\
         Gradientenlimitierung & \SI{1,0}{}    \\
         Aufwärmphase          & \SI{0}{}      \\
-        Epochen               & \SI{2}{}      \\
+        Epochen               & \SI{3}{}      \\
         \bottomrule
     \end{tabular}
-    \caption{Parameter für das Training des LLaMA 7B-Modells}\label{tab:training:parameter}
+    \caption{Parameter für das Training des Llama 2 7B-Modells}\label{tab:training:parameter}
 \end{table}
 
 Die Lernrate (engl. \enquote{Learning Rate}) ist ein Parameter, der das Ausmaß der Anpassung der Gewichte bestimmt (siehe \cref{def:lernrate}).
@@ -272,7 +269,7 @@ Diese Anpassung folgt dem Kosinus-Lernratenschema, so dass die endgültige Lernr
 Die Lernraten hängen von der Modellgröße ab.
 Im Allgemeinen benötigen größere Modelle eine niedrigere Lernrate.
 Der Optimierer AdamW berücksichtigt den zeitlichen Abfall der Gewichte und wurde in \citet{adamw} vorgestellt.
-Er ist die häufigste Wahl in aktuellen Modellen und wurde auch für das Training der LLaMA-Modelle verwendet.\\
+Er ist die häufigste Wahl in aktuellen Modellen und wurde auch für das Training der Llama-Modelle verwendet.\\
 
 Gewichtsabnahme (engl. \enquote{Weight Decay}) ist ein Parameter, der die Gewichte während des Trainings reduziert.
 Er stellt eine Regularisierung dar, die Overfitting verhindern soll.
@@ -281,7 +278,7 @@ Er stellt eine Regularisierung dar, die Overfitting verhindern soll.
 Die Gradientenbegrenzung (engl. \enquote{Gradient Clipping}) ist ein Parameter, der die Größe der Gradienten begrenzt.
 Dies ist notwendig, da bei großen Modellen die Gradienten während der Backpropagation mit zunehmender Tiefe immer größer werden.
 Ohne eine Begrenzung würden die Gradienten hier exponentiell wachsen.
-Eine Gradientenbegrenzung beschränkt die Gradienten auf \SI{1,0}{}\\
+Eine Gradientenbegrenzung beschränkt die Gradienten auf \SI{1,0}{}.\\
 
 Die Aufwärmphase beschreibt die Anzahl der Schritte, die das Modell benötigt, um die Lernrate von $0$ linear auf den Anfangswert zu erhöhen.
 Dies ist notwendig, da sich die Modelle zu Beginn des Trainings zu schnell an nicht universelle Muster anpassen.
@@ -300,7 +297,7 @@ Diese Skriptsprache wird vom Rechenzentrum der Universität Leipzig verwendet, u
 
 Die Supercomputer Clara und Paula sind Rechennetze, die auf \ac{gpu} beschleunigte Berechnungen spezialisiert sind.
 Paula besteht aus 12 Knoten mit je 8 Nvidia Tesla A30 \ac{gpu}s.
-Clara ist zweigeteilt und besteht aus 8 Nodes mit je 4 Nvidia Tesla V100 \ac{gpu}s und 22 Nodes mit je 8 Nvidia GeForce RTX 2080 TI \ac{gpu}s.
+Clara ist zweigeteilt und besteht aus 8 Knoten mit je 4 Nvidia Tesla V100 \ac{gpu}s und 22 Knoten mit je 8 Nvidia GeForce RTX 2080 TI \ac{gpu}s.
 Die Knoten sind über ein Infiniband-Netzwerk verbunden, das eine hohe Bandbreite und geringe Latenz bietet.\\
 
 Supercomputer sind gemeinsam genutzte Ressourcen, die von mehreren Nutzern gebucht werden können.
@@ -330,7 +327,7 @@ Allerdings ist die Anzahl der durchgeführten Klausuren zum Zeitpunkt der Erstel
 Dies führt zu einer geringeren Qualität der Bewertung,
 hat aber keinen Einfluss auf die Qualität des Modells.\\
 
-Die LLaMA-Modelle sind ohne weiteres Fine-Tuning verfügbar und wurden daher nicht an die Aufgabe der Beantwortung von Fragen angepasst.
+Die Llama-Modelle sind ohne weiteres Fine-Tuning verfügbar und wurden daher nicht an die Aufgabe der Beantwortung von Fragen angepasst.
 Dies hat zur Folge, dass die Modelle bei einer Frage wie \enquote{Welche Farbe hat der Himmel?} nicht die Antwort liefern, sondern den Text im gleichen Stil mit weiteren Fragen fortsetzen.
 Um eine Antwort auf eine Frage zu erhalten, muss die Frage in eine unvollständige Aussage umformuliert werden.
 Im gegebenen Beispiel wird aus \enquote{Welche Farbe hat der Himmel?} die Aussage \enquote{Der Himmel hat die Farbe}, die dann vom Modell mit \enquote{blau.} beantwortet wird.
@@ -347,7 +344,7 @@ Diese Fragen müssen ebenfalls umformuliert werden, um unabhängig von anderen F
 \section{Modellevaluation}\label{sec:approach:comparison}
 Der Vergleich der Modelle erfolgt im Rahmen einer manuellen Bewertung.
 Dazu werden die in \cref{sec:approach:questions} definierten Fragen verwendet.
-Diese Fragen werden von dem LLaMA Modell 7B sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
+Diese Fragen werden von dem Llama 2 7B Modell sowohl vor als auch nach dem Continual Pretraining und von GPT-4 beantwortet.
 Die Antworten werden manuell ausgewertet und mit den Antworten aus dem Buch \citet{bb} verglichen.
 Die Lösungen werden ebenfalls in drei Kategorien eingeteilt:
 \begin{enumerate}
@@ -366,7 +363,7 @@ Die Definition folgt den unter \citet{chatgpt_qas} beschriebenen Formeln:
         F1     & = 2\frac{prec \cdot recall}{prec + recall}
     \end{align}
 \end{ceqn}
-Dabei ist $S_q$ die Menge der für die Fragen $q$ generierten Antworten, $G_q$ die Menge der richtigen Antworten aus dem Buch \citet{bb} und $C_q$ die Menge der richtigen Antworten, die sowohl in $S_q$ als auch in $G_q$ enthalten sind.
+Dabei ist $S_q$ die Menge der für die Frage $q$ generierten Antworten, $G_q$ die Menge der richtigen Antworten aus dem Buch \citet{bb} und $C_q$ die Menge der richtigen Antworten, die sowohl in $S_q$ als auch in $G_q$ enthalten sind.
 $prec$ ist die Präzision, $recall$ der Recall und $F1$ der F1-Wert pro Frage.
 \begin{definition}
     \textbf{Präzision} ist der Anteil der richtigen Antworten an allen Antworten des Modells.
@@ -423,9 +420,7 @@ Eine Antwort wird als robust bezeichnet, wenn sie auch bei fehlerhaften Eingaben
 \noindent\textbf{Erklärbarkeit:}\newline
 Die Erklärbarkeit beschreibt die Fähigkeit des Modells, die erzeugten Antworten zu erklären.
 Dazu werden die Modellantworten manuell daraufhin überprüft, ob sie eine Erklärung enthalten.
-Ist dies nicht der Fall, wird eine zusätzliche Eingabe erzeugt, der nach einer Erklärung fragt.
-Eine Antwort gilt als erklärbar, wenn sie eine Erklärung enthält.
-Die Ergebnisse werden in \enquote{ohne zusätzliche Eingabe} und \enquote{mit zusätzlicher Eingabe} unterschieden.\\
+Eine Antwort gilt als erklärbar, wenn sie eine Erklärung enthält.\\
 
 \noindent\textbf{Fragenverständnis:}\newline
 Das Fragenverständnis beschreibt die Fähigkeit des Modells, die Frage zu verstehen.

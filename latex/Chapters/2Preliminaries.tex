@@ -106,6 +106,7 @@ Anschließend wird die Ähnlichkeit zwischen dem Abfragevektor und dem Schlüsse
 um die Aufmerksamkeitsgewichte zu erhalten.
 Die Aufmerksamkeitsgewichte geben an, wie wichtig jeder Wertvektor für die Berechnung eines gewichteten
 Durchschnitts ist. Die gewichteten Wertvektoren werden schließlich summiert, um den Ausgabevektor zu erhalten.
+
 Die Self-Attention Mechanismen ermöglichen es den Modellen, komplexe Abhängigkeiten zwischen den Elementen einer Eingabesequenz zu erfassen.\\
 
 \begin{definition}\label{def:multi-head-attention}
@@ -143,7 +144,7 @@ Diese Werte können in unterschiedlichen Formaten gespeichert werden.
 Gängige Formate sind hier \enquote{Float16} und \enquote{Float32}.
 Float steht hier für Floating Value und stellt eine Fließkommazahl dar.
 Die Zahl hinter Float gibt die Anzahl der Bits an, die zur Darstellung der Zahl verwendet werden.
-Eine höhere Anzahl von Bits bedeutet eine höhere Genauigkeit, aber auch einen höheren Speicherbedarf.
+Eine höhere Anzahl von Bits bedeutet eine höhere Genauigkeit und Wertebereich, aber auch einen höheren Speicherbedarf.
 
 \begin{definition}\label{def:continual-pretraining}
     \textbf{Continual Pretraining} beschreibt den Prozess des kontinuierlichen, selbstüberwachten Trainings eines vortrainierten Modells.
@@ -376,7 +377,8 @@ Wählt man die Lernrate zu niedrig, so dauert das Training des neuronalen Netzes
 Bei Transformern und tiefen neuronalen Netzen ist die Lernrate nicht konstant, sondern wird während des Trainingsprozesses regelmäßig angepasst.
 Sehr große Modelle haben oft mehrere Milliarden Parameter und benötigen daher eine sehr kleine Lernrate, um nicht zu oszillieren.
 Zu Beginn eines Trainings passt sich das Modell mit einer höheren Lernrate zu stark an kleine Änderungen an und findet ein lokales Minimum, das weit über dem globalen Minimum liegt.
-Daher wird eine Aufwärmphase verwendet, um die Lernrate langsam zu erhöhen und das Modell an die Daten anzupassen.
+Daher wird eine Aufwärmphase verwendet, um die Lernrate langsam zu erhöhen und das Modell an die Daten anzupassen.\\
+
 Nach der Aufwärmphase wird die Lernrate langsam reduziert, so dass zu Beginn große Anpassungen der Parameter möglich sind und gegen Ende des Trainings nur noch eine Feinanpassung des gefundenen Minimums möglich ist.\\
 
 \paragraph{Stochastischer Gradientenabstieg}\mbox{}\\

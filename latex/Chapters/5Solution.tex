@@ -51,12 +51,12 @@ Llama 2 wurde im Juli 2023 von Meta AI veröffentlicht und stellt eine generelle
 Neben der nun auf 4096 Tokens erweiterten Kontextlänge (die ursprüngliche Kontextlänge von Llama 1 lag bei 2048 Tokens) stellt Meta AI Llama 2 auch in einer Chat-Version zur Verfügung.
 Die Chat-Version wurde zusätzlich mit Hilfe von Reinforcement Learning aus menschlichem Feedback trainiert und ermöglicht so eine einfachere Nutzung der vortrainierten Modelle im Kontext eines Chatbots.
 Diese Chat-Modelle wurden jedoch nicht zum Training verwendet, da davon ausgegangen wird, dass dieses zusätzliche Training durch das hier durchgeführte Continual Pretraining überschrieben wird.
-Außerdem ermöglicht Huggingface nun die Nutzung der Llama 2 Modelle ohne Download und Konvertierung, so dass die ersten beiden Schritte entfallen.
+Außerdem ermöglicht Huggingface nun die Nutzung der Llama 2 Modelle ohne Download und Konvertierung, so dass diese Schritte entfallen.
 Die Llama 2 Modelle wurden unter anderem im Artikel von \citet{llama2} vorgestellt.\\
 
 Der Parameter \texttt{cache\_dir} beschreibt den Speicherort des heruntergeladenen Modells.
 Dies ermöglicht ein wiederholtes Trainieren des Modells ohne erneuten Download.
-Die heruntergeladenen Modelle werden durch das Training nicht überschrieben und stellen somit den Grundzustand des Modells dar (im Folgenden auch als Llama2-$0$e für \enquote{$0$ Epochen trainiert} bezeichnet).\\
+Die heruntergeladenen Modelle werden durch das Training nicht überschrieben und stellen somit den Grundzustand des Modells dar (im Folgenden auch als Llama$2$-$0$e für \enquote{$0$ Epochen trainiert} bezeichnet).\\
 
 \texttt{use\_fast\_tokenizer} konfiguriert die Verwendung einer schnelleren Version des Tokenizers zur Konvertierung der Datensätze.
 Diese Option ist optional und wurde hier nicht verwendet.\\
@@ -95,7 +95,7 @@ Da im vorliegenden Fall genügend Arbeitsspeicher zur Verfügung stand, wurde au
     \end{tabular}
     \caption{Parameter zur Auswahl und Konfiguration der Trainingsdaten}\label{tab:data-config}
 \end{table}
-Für das Training des Modells Llama 2 wurde das Buch \enquote{Health Information Systems} von \citet{bb} im epub-Format in das Markdown-Format konvertiert.
+Für das Training des Modells Llama 2 wurde das Buch \citetitle{bb} von \citet{bb} im epub-Format in das Markdown-Format konvertiert.
 Die notwendigen Änderungen am Text sind in \cref{sec:datenkuration} beschrieben.
 Um diese Markdown-Datei in eine für das Modell verständliche Form umzuwandeln, wird die Bibliothek datasets \citep{datasets} von Huggingface verwendet.
 Sie ermöglicht das Laden der Textdatei, die Umwandlung in Tokens und die Aufteilung in Blöcke.
@@ -209,7 +209,7 @@ Eine sehr hohe Lernrate kann dazu führen, dass das Modell nicht konvergiert, w�
 Die Lernrate wurde aus dem Artikel über Llama-Modelle von \citet{llama} übernommen.\\
 
 In dem Artikel zu den Llama-Modellen von \citet{llama} wird ebenfalls ein Gewichtsabnahme-Wert von $0,1$ verwendet, der auch bei diesem Training mithilfe des Parameters \texttt{weight\_decay} eingestellt wurde.
-Die Gewichtsverminderung führt zu einer kontinuierlichen Verringerung der Gewichte des Modells. Dadurch soll verhindert werden, dass es sich zu stark an einzelne Trainingsdaten anpasst.\\
+Die Gewichtsabnahme führt zu einer kontinuierlichen Verringerung der Gewichte des Modells. Dadurch soll verhindert werden, dass es sich zu stark an einzelne Trainingsdaten anpasst.\\
 
 Die Parameter \texttt{adam\_beta1}, \texttt{adam\_beta2} und \texttt{adam\_epsilon} beschreiben die Parameter des verwendeten AdamW-Optimierers, der im Parameter \texttt{optim} eingestellt ist.
 Diese Werte entsprechen ebenfalls den Werten, die im Artikel zu den Llama-Modellen von \citet{llama} angegeben sind.
@@ -465,18 +465,18 @@ Mit Hilfe dieser Bibliothek können Textdateien während des Trainings geladen, 
 Über eine Schnittstelle zu den Bibliotheken Transformers und DeepSpeed ermöglicht \enquote{datasets} auch die geordnete Zuordnung von Blöcken zu verschiedenen \ac{gpu}s.
 
 Die \enquote{DeepSpeed}-Bibliothek wird verwendet, um das Training und die Ausführung auf mehreren \ac{gpu}s zu beschleunigen.
-Sie ermöglicht die Nutzung der \ac{zero}-Optimierung, die es erlaubt, Teile des Trainings und des Modells auf mehrere GPUs, die CPU und lokale NVMe SSDs auszulagern.
-Der Prozess dieser Optimierung und die Vorstellung dieser Bibliothek wird in \citet{deepspeed} genauer beschrieben.
+Sie ermöglicht die Nutzung der \ac{zero}-Optimierung, die es erlaubt, Teile des Trainings und des Modells auf mehrere GPUs, der CPU und lokale NVMe SSDs auszulagern.
+Der Prozess dieser Optimierung und die Vorstellung dieser Bibliothek wird in \citet{deepspeed} genauer beschrieben.\\
 
 Die Bibliothek \enquote{evaluate} wird zur Berechnung der Modellgenauigkeit verwendet.
 Sie stammt von Huggingface\footnote{\url{https://github.com/huggingface/evaluate} abgerufen am 19.8.2023}.\\
 
 Die Bibliothek \enquote{PyTorch} bildet die Grundlage für die Berechnung der neuronalen Netze.
-Sie ermöglicht neben der eigentlichen Berechnung aller Trainingsphasen auch die Verwendung von \ac{gpu}s\citep{pytorch}.\\
+Sie ermöglicht neben der eigentlichen Berechnung aller Trainingsphasen auch die Verwendung von \ac{gpu}s \citep{pytorch}.\\
 
 Die Bibliothek \enquote{sentencepiece} wird für die Tokenisierung der Texte genutzt.
 Sie wird im Skript nicht explizit verwendet, ist hier aber als zusätzliche Voraussetzung für die Verwendung des Tokenizers des Llama-Modells aufgeführt.
-Diese Bibliothek wurde auch im Artikel von \citet{llama} verwendet und wurde von Google veröffentlicht\citep{sentencepiece}.\\
+Diese Bibliothek wurde auch im Artikel von \citet{llama} verwendet und wurde von Google veröffentlicht \citep{sentencepiece}.\\
 
 Die Bibliothek \enquote{Transformers} wird für die Verwaltung der Modelle und die Berechnung der neuronalen Netze verwendet.
 Sie ermöglicht die Verwendung vortrainierter Modelle und bietet einen abstrakten Trainer, der die verschiedenen Phasen des Trainings steuert.
@@ -581,7 +581,7 @@ Diese Verbindung schlug in allen Einstellungen fehl.
 Eine Lösung für dieses Problem konnte nicht gefunden werden.
 Aus diesem Grund wurde das Training auf einen Knoten und damit 4 \ac{gpu}s beschränkt.\\
 
-Größere Modelle wie das 33B oder das 65B Modell können mit dem aktuellen Setup nicht trainiert werden.
+Größere Modelle wie das 70B Modell können mit dem aktuellen Setup nicht trainiert werden.
 Aus diesem Grund und um Ressourcen zu sparen, wurde das Training mit dem Modell Llama 2 7B begonnen.
 Bei der Ausführung auf Nvidia V100 Grafikkarten traten in unregelmäßigen Abständen Überlauffehler auf.
 Wie in \cref{sec:deepspeed-config} beschrieben, werden die berechneten Fehlerwerte der Fehlerrückkopplungsfunktion während der Berechnung skaliert, um eine höhere Genauigkeit zu erreichen und einen Unterlauf zu vermeiden.
