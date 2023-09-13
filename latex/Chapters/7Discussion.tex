@@ -16,7 +16,7 @@ Zudem wurde die Unterteilung des Fortschritts nur in 1, 3, 5 und 10 Epochen vorg
 Auch die geringe Datenmenge für das Training reduziert die mögliche Leistung in allen Kriterien.
 Kleine Datenmengen führen zu Überanpassung und stellen Informationen in zu wenig unterschiedlichen Ausprägungen dar, was die Generalisierbarkeit des Modells verringert.\\
 
-Zur Evaluierung des Modells erfolgte anhand von \num{95} Fragen.
+Die Evaluierung des Modells erfolgte anhand von \num{95} Fragen.
 Auch dieser Fragenkatalog ist kleiner als erwartet und enthält meist ähnliche Wissensfragen in nur einer Formulierung.
 Insbesondere die Fragen aus der schriftlichen Prüfung des Moduls \enquote{Informationssysteme im Gesundheitswesen} umfassen insgesamt nur 9 Fragen und unterliegen damit sehr starken Schwankungen.\\
 
@@ -29,7 +29,7 @@ Abhilfe schafft hier das bereits erwähnte Finetuning, bei dem einem Modell absc
 
 \section{Probleme bei Kernfragen}
 Das Thema Informationssysteme im Gesundheitswesen und damit auch der hier verwendete Evaluationsdatensatz enthalten grundlegende Kerninformationen,
-die in ihrem Verständnis wichtiger sind als anderes Wissen. Dazu gehören z.B. die Definition von Daten, Information und Wissen, die Definition eines Informationssystems, so dass Menschen Teil des Systems sind, oder die Unterscheidung zwischen Anwendungssystemen und Softwareprodukten (ein Anwendungssystem ist die Installation und Nutzung eines Softwareprodukts durch Akteure, deren Rollen und Aufgaben).
+die in ihrem Verständnis wichtiger sind als anderes Wissen. Dazu gehören z.B. die Definition von Daten, Information und Wissen, die Definition eines Informationssystems, so dass Menschen Teil des Systems sind, oder die Unterscheidung zwischen Anwendungssystemen und Softwareprodukten (ein Anwendungssystem ist die Installation und Nutzung eines Softwareprodukts durch Akteure, deren Rollen und Aufgaben).\\
 
 Diese Kerninformationen werden in der Literatur zu diesem Thema unterschiedlich definiert und sollten von den Modellen mit dem Wissen aus dem Buch von \citet{bb} beantwortet werden.
 Auch widersprechen einige Definitionen aus dem Buch der Definition aus dem allgemeinen Sprachgebrauch. Auch hier ist eine Beantwortung mit dem Wissen aus dem Buch erforderlich.\\
@@ -44,6 +44,6 @@ Hier wäre eine genauere Evaluierung mit nur Kernfragen notwendig, um die Leistu
 Zur Berechnung des Kriteriums Korrektheit wurden jeder Frage drei Werte zugeordnet: die Anzahl der korrekten Antworten des Modells, die Anzahl der Antworten des Modells im Allgemeinen und die Anzahl der erwarteten Antworten für diese Frage.
 Anhand dieser Werte wurden die F1- und MakroF1-Werte der Modelle berechnet.\\
 
-Da der Evaluationsdatensatz jedoch ausschließlich aus Prüfungsfragen besteht, wäre hier auch eine Auswertung der Fragen nach den Original-Prüfungspunkten möglich.
+Da der Evaluationsdatensatz jedoch größtenteils aus Prüfungsfragen besteht, wäre hier auch eine Auswertung der Fragen nach den Original-Prüfungspunkten möglich.
 Dadurch würden schwierigere Fragen bzw. Fragen mit mehr Antworten stärker gewichtet und hätten somit einen größeren Einfluss auf die Leistung der Modelle.
 Diese Art der Auswertung könnte die Modellleistung in den Kontext der menschlichen Leistung stellen und die Aussagen über die Modellleistung nachvollziehbarer machen.

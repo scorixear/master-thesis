@@ -40,7 +40,7 @@
     palatino=true,    % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
     style=classicthesis % classicthesis, arsclassica
 }{classicthesis}
-\setlength{\overfullrule}{20pt} 
+%\setlength{\overfullrule}{20pt} 
 
 % ****************************************************************************************************
 % 2. Personal data and user ad-hoc commands (insert your own data here)
@@ -303,10 +303,18 @@
 \usepackage{todonotes}
 \usepackage{cleveref} % for cref
 \usepackage{ntheorem} % for definitions in chapter 2
-\usepackage{verbatimbox} % for code blocks as figures
+\usepackage{listings} % for code blocks as figures
+\lstset{
+    basicstyle=\ttfamily,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
+    breaklines=true,
+    breakatwhitespace=true
+}
+\usepackage{MnSymbol}
 \usepackage{float} % for H placement
 \usepackage{longtable} % multi page tables
 \usepackage{pdflscape} % landscape pages
+\usepackage{adjustbox} % for centering figures
 
 \newtheorem{definition}{Definition}
 

@@ -3,12 +3,12 @@
 %*****************************************
 \newcommand{\gpt}{\texttt{gpt$4$}}
 \newcommand{\lo}{\texttt{llama$2$\_$0$e}}
-\newcommand{\liv}{\texttt{llama$2$\_$1$e\_v$100$}}
-\newcommand{\lia}{\texttt{llama$2$\_$1$e\_a$30$}}
-\newcommand{\lev}{\texttt{llama$2$\_$3$e\_v$100$}}
-\newcommand{\lea}{\texttt{llama$2$\_$3$e\_a$30$}}
-\newcommand{\lsa}{\texttt{llama$2$\_$5$e\_a$30$}}
-\newcommand{\lioa}{\texttt{llama$2$\_$10$e\_a$30$}}
+\newcommand{\liv}{\texttt{llama$2$\_\allowbreak{}$1$e\_v$100$}}
+\newcommand{\lia}{\texttt{llama$2$\_\allowbreak{}$1$e\_a$30$}}
+\newcommand{\lev}{\texttt{llama$2$\_\allowbreak{}$3$e\_v$100$}}
+\newcommand{\lea}{\texttt{llama$2$\_\allowbreak{}$3$e\_a$30$}}
+\newcommand{\lsa}{\texttt{llama$2$\_\allowbreak{}$5$e\_a$30$}}
+\newcommand{\lioa}{\texttt{llama$2$\_\allowbreak{}$10$e\_a$30$}}
 
 \newcommand{\pic}[4][1]{
     \begin{figure}
@@ -66,7 +66,7 @@ Im Gegensatz dazu zeigt das \lia-Modell eine vergleichbare, wenn auch etwas schl
 Mit dem \lev-Modell konnte eine signifikante Leistungssteigerung im Vergleich zu einer Epoche erzielt werden, die Gesamtleistung ist jedoch dauerhaft schlechter als beim untrainierten Modell.
 Das \lea-Modell hingegen übertraf erstmals die Leistung des untrainierten Modells und beantwortete \SI{43}{\percent} der Fragen mit mindestens einer richtigen Antwort.\\
 
-Modelle mit höherer Epoche wurden ausschließlich auf A30-Grafikkarten trainiert und zeigten keine weitere Leistungssteigerung, beantworteten aber kontinuierlich weniger Fragen.
+Modelle mit höherer Epoche wurden ausschließlich auf A30-Grafik-\allowbreak{karten} trainiert und zeigten keine weitere Leistungssteigerung, beantworteten aber kontinuierlich weniger Fragen.
 Hier zeigt sich eine Präferenz für keine Antwort gegenüber einer falschen Antwort.\\
 
 \subsection{Stärken und Schwächen der Modelle}\label{subsec:results:correctness:strengths}
@@ -75,7 +75,7 @@ Neben der Gesamtleistung der Modelle wurde auch eine Unterteilung nach Fragetype
 
 \begin{table}
     \centering
-    \begin{tabular}{lll}
+    \begin{tabular}{lcl}
         \toprule
         \textbf{Fragetyp} & \textbf{Anzahl der Fragen} & \textbf{Bezeichnung} \\
         \midrule
@@ -89,10 +89,10 @@ Neben der Gesamtleistung der Modelle wurde auch eine Unterteilung nach Fragetype
 
 
 Die verschiedenen Fragetypen sind in \cref{tab:eval-question-types} aufgelistet.
-In den folgenden Grafiken werden die entsprechenden Bezeichnungen zur Beschriftung der Achsen verwendet.
+In den folgenden Grafiken werden die entsprechenden Bezeichnungen zur Beschriftung der Achsen verwendet.\\
 \begin{table}
     \centering
-    \begin{tabularx}{\textwidth}{Xll}
+    \begin{tabularx}{\textwidth}{Xcl}
         \toprule
         \textbf{Fragequelle}                                                                                                                               & \textbf{Anzahl der Fragen} & \textbf{Bezeichnung}       \\
         \midrule
@@ -119,7 +119,7 @@ Vergleichsweise wenige Antworten wurden bei den beiden schriftlichen Prüfungen 
 
 
 Das untrainierte Llama-Modell zeigte mit \SI{39}{\percent} richtigen Antworten eine deutliche Stärke bei Multi-Fakten-Fragen und konnte \SI{27}{\percent} der mündlichen Klausurfragen beantworten.
-Die schlechtesten Kategorien ergaben sich bei den Ein-Fakten-Fragen mit \SI{20}{\percent} und den Fragen aus dem Buch mit \SI{24}{\percent} richtigen Antworten.\\
+Die schlechtesten Kategorien ergaben sich bei den Ein-Fakt-Fragen mit \SI{20}{\percent} und den Fragen aus dem Buch mit \SI{24}{\percent} richtigen Antworten.\\
 
 
 Während das \liv-Modell mit nur 2 richtig beantworteten Fragen grundsätzlich schlecht abschnitt,
@@ -146,7 +146,7 @@ Während der Trainingsphase wurden die Modelle mit Hilfe eines Validierungsdaten
 Diese zusätzliche Evaluierung berechnete den Fehlerwert des Modells auf einem gegebenen Datensatz.
 \cref{fig:results:loss} zeigt die Fehlerwerte der Trainingsdaten und \cref{fig:results:validation_loss} die Fehlerwerte der Validierungsdaten für jedes Modell.
 Fehlerwerte beschreiben nicht konkret die Leistung eines Modells, sondern sind ein Indikator für die Verbesserung der Leistung und den Beginn der Überanpassung.
-Ein abnehmender Fehlerwert des Trainingsdatensatzes bedeutet, dass das Modell den Trainingsdatensatz besser nachahmen kann, während ein abnehmender Fehlerwert des Validierungsdatensatzes zeigt, dass das Modell diese Nachahmung generalisierend auf ungesehenen Text anwenden kann.
+Ein abnehmender Fehlerwert des Trainingsdatensatzes bedeutet, dass das Modell den Trainingsdatensatz besser nachahmen kann, während ein abnehmender Fehlerwert des Validierungsdatensatzes zeigt, dass das Modell diese Nachahmung generalisierend auf ungesehenen Text anwenden kann.\\
 
 Wenn der Fehlerwert des Validierungsdatensatzes zu steigen beginnt, deutet dies auf eine Überanpassung hin.
 Das Modell verliert dann die Fähigkeit, ungesehenen Text zu imitieren und beginnt stattdessen, den Trainingsdatensatz auswendig zu lernen.
@@ -177,7 +177,7 @@ So beantwortet das GPT4-Modell im Durchschnitt eine Frage zu \SI{70}{\percent} r
 
 Eine genauere Aufschlüsselung der MakroF1-Werte nach Fragetypen ist in \cref{fig:results:makrof1_total_type_heat} zu sehen.
 Hier sieht man die Leistungssteigerung in allen Fragetypen ab 3 Epochen.
-Nicht intuitiv werden Transferfragen von den Modellen besser beantwortet als Einzelfragen, obwohl diese für den Menschen deutlich einfacher sind.
+Nicht intuitiv werden Transferfragen von den Modellen besser beantwortet als Einzelfragen, obwohl letztere für den Menschen deutlich einfacher sind.
 Der Grund dafür könnte in der günstigen Grundstruktur der Modelle liegen.
 Durch die inhärente Architektur mit Hilfe einer Aufmerksamkeitsmaske sind Transformermodelle darauf spezialisiert, Texte und Token miteinander zu korrelieren und könnten daher verschiedene Textstellen aus dem Buch und Fakten besser miteinander verknüpfen.
 Diese Beobachtung kann jedoch nicht auf das GPT4-Modell übertragen werden.
@@ -207,7 +207,7 @@ Seine Leistung kann durch ein Continual Pretraining ab Epoche 3 verdoppelt werde
 Eine Epoche, d.h.\ das einmalige Lesen des Buches, scheint nicht auszureichen, um eine bessere Leistung zu erzielen.
 Dies liegt auch an der Größe des Trainingsdatensatzes.
 Da dieser relativ klein ist, kann das Modell seine Gewichte nicht schnell genug anpassen, um die darin enthaltene Information zu reproduzieren.
-Eine höhere Lernrate würde eine schnellere Anpassung des Modells an den gesehenen Text verbessern, aber die Gefahr erhöhen
+Eine höhere Lernrate würde eine schnellere Anpassung des Modells an den gesehenen Text verbessern, aber die Gefahr erhöhen,
 dass sich das Modell zu sehr an Formulierungen und Formatierungen anpasst und dadurch unbrauchbar wird.\\
 
 Ab Epoche 5 verliert das Modell an Leistung, obwohl die ermittelten MakroF1-Werte konstant bleiben.
@@ -231,7 +231,7 @@ Allerdings ist diese Tendenz auf eine Überanpassung an den Trainingsdatensatz z
         Frage              & Definieren Sie den Begriff \enquote{Krankenhausinformationssystem}.                                                                                                                                                                                                    \\
         Übersetzt          & Define the term ``hospital information system''.                                                                                                                                                                                                                       \\
         Erwartete Antwort  & A Hospital Information system is the socio-technical subsystem of hospitals. It comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. \\
-        Generierte Antwort & \#\#\# 2.2.2.2.2.2.1.1.1.1.1.1.2.1.1.2.1.2.1.2.1.2.1.2.1. $[\dots]$                                                                                                                                                                                                    \\
+        Generierte Antwort & \#\#\# 2.2.2.2.2.2.1.1.1.1.1.1.2.1.1.2.1.2.1.2.1.2.1.2. $[\dots]$                                                                                                                                                                                                    \\
         \bottomrule                                                                                                                                                                                                                                                                                 \\
     \end{tabularx}
     \caption{Beispiel für Formatierungsfehler in der Ausgabe des Llama 2 7B Modells trainiert auf 1 Epoche}\label{fig:formatting-errors}
@@ -299,7 +299,7 @@ Dies entspricht einer Leistungsminimierung von \SI{16}{\percent}. Trainierte Mod
 Diese großen Unterschiede deuten auf einen oberflächlichen Wissenserwerb mit Fokus auf korrekt geschriebene Fachbegriffe hin.
 Bei wenigen Trainingsdaten können die Modelle das darin enthaltene Wissen nur grob erlernen.
 Hier kann die Leistung verbessert werden, indem der Trainingsdatensatz erweitert wird, um mehr Arten der Wissensformulierung zu enthalten.
-Dies würde die Generalisierung der Modelle und damit die Leistung in diesem Kriterium verbessern.
+Dies würde die Generalisierung der Modelle und damit die Leistung in diesem Kriterium verbessern.\\
 
 Das untrainierte Llama-Modell erzielt etwas bessere Ergebnisse mit eingebauten Rechtschreibfehlern.
 Diese Verbesserung wird aufgrund der geringen Veränderung als zufällig angesehen und bedeutet nicht, dass das Modell bessere Ergebnisse liefert, wenn Fehler enthalten sind.
@@ -313,7 +313,7 @@ Dadurch kann das Modell zwar zunächst mehr Wissen abbilden, verliert aber die F
 
 \begin{table}
     \centering
-    \resizebox{1.2\textwidth}{!}{
+    \begin{adjustbox}{width=1.2\textwidth,center}
         \begin{tabular}{lllll}
             \toprule
             \textbf{Modell} & \textbf{MakroF1}                   & \textbf{Erklärbarkeit}                      & \textbf{Fragenverständnis}                  & \textbf{Robustheit (Leistungsverlust)}       \\
@@ -327,7 +327,8 @@ Dadurch kann das Modell zwar zunächst mehr Wissen abbilden, verliert aber die F
             \lea{}          & \num{0.3}                          & \textbf{\SI[detect-weight]{85.4}{\percent}} & \textbf{\SI[detect-weight]{72.6}{\percent}} & \SI{46.7}{\percent}                          \\
             \lsa{}          & \textbf{\num[detect-weight]{0.33}} & \SI{82.5}{\percent}                         & \SI{60}{\percent}                          & \SI{60.6}{\percent}                          \\
             \lioa{}         & \num{0.32}                         & \SI{81}{\percent}                           & \SI{55.8}{\percent}                         & \textbf{\SI[detect-weight]{43.8}{\percent}}  \\
-        \end{tabular}}
+        \end{tabular}
+    \end{adjustbox}
         \caption[Zusammenfassung der Evaluierungsergebnisse]{Zusammenfassung der Evaluierungsergebnisse. Fettgedruckte Werte stellen die beste Leistung im Kriterium dar. Die Zeilen sind unterteilt in nur evaluierte Modelle und trainierte und evaluierte Modelle. }\label{tab:results:summary}
     \end{table}
     

@@ -7,7 +7,7 @@ Eine Auswahl der erfolgsversprechensten Ansätze wird in diesem Kapitel vorgeste
 \section{Modellvergrößerung}
 Die intuitivste Lösung ist die Vergrößerung der verwendeten Modelle.
 Von dem verwendeten Llama 2 Modell gibt es auch Modelle mit 13 Milliarden und 70 Milliarden Parametern.
-Bereits im Artikel \citet{llama} über Llama 1 Modelle erreicht nur das größte Modell eine vergleichbare Leistung wie ChatGPT, es ist also davon auszugehen, dass auch hier größere Modelle eine bessere Leistung erzielen können.
+Bereits im Artikel \citet{llama} über Llama 1 Modelle erreicht nur das größte Modell eine vergleichbare Leistung wie ChatGPT. Es ist also davon auszugehen, dass auch hier größere Modelle eine bessere Leistung erzielen können.
 \citet{scaling_laws} haben gezeigt, dass die Leistung eines Modells neben der Größe des Datensatzes und der Länge des Trainings auch von der Größe des Modells abhängt.
 Dies unterstützt die hier vorgestellte These.\\
 
@@ -48,7 +48,7 @@ Dieser Trainingsschritt ist jedoch sehr aufwendig und kann nicht vollständig au
 
 Llama 2 verfügt über Versionen, die dieses Human Reinforcement Learning bereits durchlaufen haben.
 In dieser Arbeit wird davon ausgegangen, dass dieses zusätzlich erlernte Wissen verloren geht, sobald ein Continual Pretraining durchgeführt wird.
-Diese Annahme basiert auf der Tatsache, dass alle existierenden Modelle das Human Reinforcement Learning als letzten Trainingsschritt durchlaufen haben.
+Diese Annahme basiert auf der Tatsache, dass populäre Modelle das Human Reinforcement Learning als letzten Trainingsschritt durchlaufen haben.
 Eine Widerlegung dieser Hypothese könnte potenziell auch die Leistung der Modelle verbessern.
 
 \section{Datensatzvergrößerung}
@@ -68,7 +68,7 @@ Das Llama 2 Modell wurde ohne speziellen Fokus auf eine Domäne, insbesondere di
 Allgemein trainierte Modelle können einen breiteren Anwendungsbereich abdecken, enthalten aber auch weniger Verständnis einzelner Domänen als domänenspezifische Modelle.
 Die Verwendung von Modellen, die stärker auf die Domäne der Medizininformatik oder auf wissenschaftliche Inhalte fokussiert sind, könnte die Basisleistung des Modells und damit auch die Endleistung der hier trainierten Modelle verbessern.\\
 
-Leider gibt es zum Zeitpunkt dieser Arbeit keine domänenspezifischen Modelle in der Größe von Llama 2, da entweder die Größe der Modelle oder die Größe des Datensatzes geringer ist.
+Leider existieren zum Zeitpunkt dieser Arbeit keine domänenspezifischen Modelle in der Größe von Llama 2, da entweder die Größe der Modelle oder die Größe des Datensatzes geringer ist.
 Domänenspezifische Modelle können auch Informationen enthalten, die im Widerspruch zum verwendeten Trainingsdatensatz stehen, aber besser gelernt wurden, weil mehr Informationen im ursprünglichen Datensatz vorhanden waren.
 Das bewusste Verlernen dieses falschen Wissens ist nicht trivial und kann die Leistung des Modells negativ beeinflussen.
 Eine Möglichkeit der Modellanpassung wurde von \citet{knowledge_neurons} vorgestellt, um bestimmte Wissensneuronen aus einem Modell zu entfernen.
@@ -78,7 +78,7 @@ Wie bereits in \cref{ch:relatedWork} erwähnt, ist neben den klassischen Trainin
 \citet{adapterhub} stellt eine Plattform zur Verfügung, die es erlaubt, kleinere Neuronale Netze zwischen die Modellschichten einzufügen und diese zu trainieren.
 Dies minimiert die benötigten Ressourcen, verkürzt die Trainingszeit und verhindert das Verlernen von Wissen.
 Adapter müssen speziell für Modelltypen entwickelt werden und sind zum Zeitpunkt dieser Arbeit nicht für Llama-Modelle verfügbar.
-Eine eigene Implementierung für die Llama Modelle könnte die endgültige Performance der Modelle verbessern.
+Eine eigene Implementierung für die Llama Modelle könnte die endgültige Performance der Modelle verbessern.\\
 
 Neben dem Einfügen von Adaptern ist auch die Verwendung von \ac{lora}, eingeführt in \citet{lora}, möglich.
 \ac{lora} erlaubt das Einfügen von trainierbaren Matrizen in jede Schicht und hat ähnliche Vorteile wie Adapter.
@@ -95,7 +95,7 @@ Dieser Ansatz könnte zu einer besseren Korrektheit der Fragen führen, allerdin
 Man könnte auch ganz auf das Training von Decoder-basierten Modellen verzichten, bei denen das Modell die Frage nur mit Hilfe eines gegebenen Kontextes beantworten soll.
 Dieser Ansatz verspricht sehr gute Ergebnisse, da Modelle wie GPT4 bereits sehr gute Leistungen bei der Extraktion von Informationen aus Kontexten zeigen.\\
 
-\citet{context-extract} hat dieses Verhalten an großen Sprachmodellen untersucht und gezeigt, dass Modelle in der Lage sind, Informationen aus Anfang und Ende eines Kontextes weitgehend korrekt zu extrahieren.
+\citet{context-extract} haben dieses Verhalten an großen Sprachmodellen untersucht und gezeigt, dass Modelle in der Lage sind, Informationen aus Anfang und Ende eines Kontextes weitgehend korrekt zu extrahieren.
 Um nur den Kontext zur Beantwortung von Fragen zu verwenden, müssen Modelle mit einer großen Kontextlänge gewählt und das verwendete Buch optional gekürzt werden. \citet{extending-context} beschreibt eine Möglichkeit, die verfügbare Kontextlänge mit Hilfe von positionsabhängiger Interpolation zu erweitern.\\
 Eine Kombination aus einem Encoder-basierten Modell zur Bestimmung der Textposition und einem Decoder-basierten Modell zur Generierung einer Antwort mit Hilfe der extrahierten Textposition könnte ebenfalls Abhilfe schaffen. Dieser Ansatz wurde von \citet{retrieval-1} untersucht und erzielte \ac{sota} Ergebnisse in drei \ac{qa} Evaluationsdatensätzen. Ähnliche Ergebnisse wurden von \citet{retrieval-2} in ihrem Artikel erreicht.\\
 
