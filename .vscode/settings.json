@@ -143,5 +143,6 @@
     "VRAM",
     "Weitertrainieren",
     "weitertrainiert"
-  ]
+  ],
+  "svg.preview.background": "white"
 }

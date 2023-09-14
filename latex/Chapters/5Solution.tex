@@ -453,8 +453,7 @@ Der Parameter \texttt{sub\_group\_size} beschreibt die maximale Anzahl von Param
         Transformers        & 4.31.0           \\
         \bottomrule
     \end{tabular}
-    \caption{Verwendete Bibliotheken zum Training}
-    \label{tab:training-libraries}
+    \caption{Verwendete Bibliotheken zum Training}\label{tab:training-libraries}
 \end{table}
 Die für das Training verwendeten Bibliotheken sind in \cref{tab:training-libraries} aufgelistet.
 Einige der hier aufgeführten Pakete benötigen weitere Abhängigkeiten, die über die verwendete Paketverwaltung \ac{pip}\footnote{\url{https://github.com/pypa/pip} abgerufen am 19.8.2023} installiert werden.\\
@@ -698,7 +697,7 @@ Dieses ist unter anderem auf den eingebauten Parameter \enquote{temperature} bei
 Die Temperatur beschreibt die Varianz der Ausgabewerte.
 Je höher die Temperatur, desto größer ist die Varianz der Ausgabevektoren.
 Eine höhere Varianz führt zu einer größeren Vielfalt des generierten Textes und zu weniger sich wiederholenden Textpassagen.
-Dieser Temperaturwert wurde für die Generierung auf $0,9$ gesetzt.
+Dieser Temperaturwert wurde für die Generierung auf $0,9$ gesetzt.test
 Das beschriebene nicht-deterministische Verhalten konnte bei der Textgenerierung mit den Llama-Modellen nicht beobachtet werden.
 Mehrfache identische Eingaben führten bei allen Modellen zu identischen Ausgaben.
 Da sich somit ein konstanter Wert von $1,0$ für den Determinismus ergibt, wurde dieser hier nicht weiter ausgewertet.

@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="bMsaWp_U04bSCfyDXs2s" name="SimpleNN">
-        <mxGraphModel dx="2963" dy="2980" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="700" pageHeight="700" background="none" math="1" shadow="0">
+        <mxGraphModel dx="557" dy="1607" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="700" pageHeight="700" background="#ffffff" math="1" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -63,7 +63,7 @@
                 <mxCell id="7" value="$$H^2_1$$" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=100;strokeWidth=6;" parent="1" vertex="1">
                     <mxGeometry x="1580" y="265" width="250" height="246.88" as="geometry"/>
                 </mxCell>
-                <mxCell id="35" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=4;fontSize=100;endArrow=none;endFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="8" target="9">
+                <mxCell id="35" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=4;fontSize=100;endArrow=none;endFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="8" target="9" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" value="$$H^2_2$$" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=100;strokeWidth=6;" parent="1" vertex="1">

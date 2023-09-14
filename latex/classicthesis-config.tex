@@ -166,7 +166,8 @@
 %\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
 \lstset{language=[LaTeX]Tex,%C++,
     morekeywords={PassOptionsToPackage,selectlanguage},
-    keywordstyle=\color{RoyalBlue},%\bfseries,
+    %keywordstyle=\color{RoyalBlue},%\bfseries, screen version
+    keywordstyle=\color{gray}, % print version
     basicstyle=\small\ttfamily,
     %identifierstyle=\color{NavyBlue},
     commentstyle=\color{Green}\ttfamily,
@@ -176,12 +177,15 @@
     stepnumber=5,
     numbersep=8pt,
     showstringspaces=false,
+    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
     breaklines=true,
+    breakatwhitespace=true
     %frameround=ftff,
     %frame=single,
     belowcaptionskip=.75\baselineskip
     %frame=L
 }
+
 % ****************************************************************************************************
 
 
@@ -201,9 +205,9 @@
 % ********************************************************************
 \hypersetup{%
     %draft, % hyperref's draft mode, for printing see below
-    colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
+    %colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,% screen version
     % uncomment the following line if you want to have black links (e.g., for printing)
-    %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
+    colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
     breaklinks=true, pageanchor=true,%
     pdfpagemode=UseNone, %
     % pdfpagemode=UseOutlines,%
@@ -303,13 +307,6 @@
 \usepackage{todonotes}
 \usepackage{cleveref} % for cref
 \usepackage{ntheorem} % for definitions in chapter 2
-\usepackage{listings} % for code blocks as figures
-\lstset{
-    basicstyle=\ttfamily,
-    prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
-    breaklines=true,
-    breakatwhitespace=true
-}
 \usepackage{MnSymbol}
 \usepackage{float} % for H placement
 \usepackage{longtable} % multi page tables
