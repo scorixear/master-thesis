@@ -21,20 +21,20 @@ daher war ein Training größerer Modelle nicht möglich.\\
 Größere Modelle neigen schneller dazu, einen Zustand der Überanpassung zu erreichen, weshalb das Training mit einer deutlich geringeren Lernrate durchgeführt wird, was die Trainingszeit weiter erhöht.\\
 
 \subsection{Training durch Quantisierung}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{results/bit_scaling_laws.png}
+    \caption[Korrektheit von OPT Modellen nach Modellbits]{Korrektheit von OPT Modellen aufgeteilt nach unterschiedlicher Bitanzahl pro Parameter aus \citet{4bit}. Modelle mit gleicher Parameteranzahl liegen ungefähr auf gleicher X-Ebene, jedoch nicht auf gleicher Y-Ebene.}%
+    \label{fig:bit_scaling}
+\end{figure}
 Um große Modelle zu trainieren und zu nutzen, ist der Einsatz der \ac{zero}-Optimierung ein erster Schritt, der in \citet{deepspeed} vorgestellt wird.
 Mit Hilfe der \ac{zero}-Stufe 3 Optimierung können Optimierungs- und Parameterzustände auf \ac{cpu}s und Festplatten ausgelagert werden, während die Berechnungen weiterhin auf \ac{gpu}s durchgeführt werden.
 Zusätzlich kann durch eine Quantisierung der Modelle in kleinere Datentypen die Anzahl der benötigten \ac{gpu}-\ac{ram}s deutlich reduziert werden.
-\citet{4bit} untersuchte den Einfluss der Quantisierung auf die Performance der Modelle und zeigte, dass eine Quantisierung auf 4 Bit die Leistung der Modelle nur geringfügig beeinflusst.\\
-\todo{Bin mir nicht sicher ob man das wirklich so sagen kann. In dem Paper sind bei allen Grafiken die total model bits auf der x Achse.
-    Das finde ich irreführend, weil man ja in der Praxis oft z.B. LLama 7b 16 bit mit LLama 7b 8 bit vergleicht.
-    Das lässt sich aber aus den Plots schlecht ablesen weil bei 16 bit ja die models bits doppelt so viele sind.
-    dazu ist die x achse noch logarithmisch.
-    wäre vielleicht gut hier ein bild davon zu bringen aber wo auf der x achse nicht die bits sind sondern die parameter.
-    daraus ließe sich so eine aussage besser begründen.
-    aber wenn das zu viel aufwand ist muss das auch nicht sein.
-    was gut wäre: bit zahl runter aber gleichzeitig parameterzahl hoch.
-    aber das ist wohl zu aufwändig, würde dann einfach ein existierendes bild aus dem paper hier mit quellenangabe reinnehmen, so grob kann man es ja trotzdem sehen, vor allem die hauptaussage, dass bei gegebener Größe in bits des Modells 4 bit Parameter am besten abgeschnitten haben .
-}
+\citet{4bit} untersuchte den Einfluss der Quantisierung auf die Performance der Modelle und zeigte, dass eine Quantisierung auf 4 Bit die Leistung der Modelle nur geringfügig beeinflusst.
+\cref{fig:bit_scaling} zeigt die Korrektheit von OPT-Modellen mit unterschiedlichen Datentypen (3, 4, 8 und 16 Bit).
+Modelle mit gleicher Parameteranzahl liegen nicht auf dem gleichen Y-Ebene, da die X-Achse in Modellbits angegeben ist.
+Modelle mit der gleichen Anzahl von Parametern, aber einer geringeren Anzahl von Bits pro Parameter sind daher weiter links in der Grafik angeordnet.
+Dennoch zeigen diese Abbildung von \citet{4bit} und ähnliche Abbildungen für andere Modelltypen eine fast identische Leistung bis einschließlich 4 Bit.\\
 
 Zusätzlich ist es möglich, Modelle während der Inferenz in einen 8-Bit-Modus zu konvertieren, um Ressourcen zu sparen.
 \citet{8bit-inference} haben gezeigt, dass bei der Verwendung von 8-Bit-Matrix-Multiplikationen keine signifikanten Leistungseinbußen zu erwarten sind.
