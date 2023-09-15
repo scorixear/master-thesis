@@ -1,5 +1,6 @@
-latex/thesis.pdf
-latex/output
+thesis/thesis.pdf
+thesis/output
+./*.pdf
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
