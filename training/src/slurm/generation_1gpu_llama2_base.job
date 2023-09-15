@@ -23,6 +23,6 @@ srun pip install sentencepiece
 
 MODEL_DIR=meta-llama/Llama-2-7b-hf
 OUTPUT_PATH=./output/generated_base.csv
-TOKEN=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
+TOKEN=<BLANKED>
 
 srun python 04_predict_llama2_base.py --model-dir $MODEL_DIR --output-path $OUTPUT_PATH --token $TOKEN

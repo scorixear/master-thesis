@@ -19,7 +19,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
 model_name = "meta-llama/Llama-2-7b-hf"
-token = "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"
+token = "<BLANKED>"
 
 # initialize bitsanbytes configuration
 bnb_config = BitsAndBytesConfig(
