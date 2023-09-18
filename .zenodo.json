@@ -1,0 +1,13 @@
+{
+    "title": "Question Answering auf dem Lehrbuch \"Health Information Systems\" mit Hilfe von unüberwachtem Training eines Pretrained Transformers",
+    "upload_type": "dataset",
+    "description": "Masterthesis, verwendete Datensätze, Skripte und Ergebnisse des praktischen Teils",
+    "creators": [
+        {
+            "name": "Paul Keller",
+            "affiliation": "Leipzig University, Institute for Medical Informatics, Statistics and Epidemiology, Leipzig, Germany"
+        }
+    ],
+    "keywords": ["llm", "question answering", "health information systems", "fine tuning"],
+    "license": "cc-zero"
+}
