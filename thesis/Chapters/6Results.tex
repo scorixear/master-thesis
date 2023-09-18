@@ -10,16 +10,16 @@
 \newcommand{\lsa}{\texttt{llama$2$\_\allowbreak{}$5$e\_a$30$}}
 \newcommand{\lioa}{\texttt{llama$2$\_\allowbreak{}$10$e\_a$30$}}
 
-\newcommand{\pic}[4][1]{
+\newcommand{\pic}[5][1]{
     \begin{figure}
         \makebox[\textwidth][c]{\includegraphics[width=#1\textwidth]{#2}}
-        \caption{#3}\label{#4}
+        \caption[#3]{#4}\label{#5}
     \end{figure}
 }
-\newcommand{\pich}[4][1]{
+\newcommand{\pich}[5][1]{
     \begin{figure}[H]
         \makebox[\textwidth][c]{\includegraphics[width=#1\textwidth]{#2}}
-        \caption{#3}\label{#4}
+        \caption[#3]{#4}\label{#5}
     \end{figure}
 }
 
@@ -50,7 +50,7 @@ Die zu vergleichenden Modelle sind in \cref{tab:eval-models} aufgeführt.
 
 \section{Analyse Korrektheit}\label{sec:results:correctness}
 \subsection{Vergleich totaler Zahlen}
-\pich{results/answers_total.png}{Vergleich evaluierter Modelle und ihren totalen Leistungen bei der Beantwortung von Fragen.}{fig:results:answers_total}
+\pich{results/answers_total.png}{Vergleich evaluierter Modelle}{Vergleich evaluierter Modelle und ihren totalen Leistungen bei der Beantwortung von Fragen.}{fig:results:answers_total}
 
 \cref{fig:results:answers_total} zeigt die Verteilung der richtigen, falschen und unbeantworteten Fragen der evaluierten Modelle.
 Allen Modellen wurden dieselben $95$ Fragen mit identischem Kontext vorgelegt.
@@ -84,7 +84,7 @@ Neben der Gesamtleistung der Modelle wurde auch eine Unterteilung nach Fragetype
         Transfer          & 23                         & \enquote{transfer}   \\
         \bottomrule
     \end{tabular}
-    \caption{Fragetypen die im Evaluierungsdatensatz enthalten sind.}\label{tab:eval-question-types}
+    \caption[Fragetypen des Evaluierungsdatensatzes]{Fragetypen die im Evaluierungsdatensatz enthalten sind.}\label{tab:eval-question-types}
 \end{table}
 
 
@@ -105,7 +105,7 @@ In den folgenden Grafiken werden die entsprechenden Bezeichnungen zur Beschriftu
         Schriftliche Klausurfragen aus der Nachholklausur des Moduls \enquote{Informationssysteme in medizinischer Versorgung und Forschung} vom Jahr 2022 & 31                         & \enquote{IS\_2022\_09\_27} \\
         \bottomrule
     \end{tabularx}
-    \caption{Fragequellen die im Evaluierungsdatensatz enthalten sind.}\label{tab:eval-question-sources}
+    \caption[Fragequellen des Evaluierungsdatensatzes]{Fragequellen die im Evaluierungsdatensatz enthalten sind.}\label{tab:eval-question-sources}
 \end{table}
 
 
@@ -136,8 +136,8 @@ Die anderen Fragequellen werden von den Modellen mit zunehmender Epoche immer sc
 Diese Verschiebung deutet auf eine Überanpassung hin, da die Fragen aus dem Buch auch in den Trainingsdaten enthalten sind.\\
 
 \subsection{Verbesserungen durch Training}
-\pic{results/loss.png}{Vergleich evaluierter Modelle und ihrer Fehlerwerte des Trainingsdatensatzes.}{fig:results:loss}
-\pic{results/validation_loss.png}{Vergleich evaluierter Modelle und ihrer Fehlerwerte des Validierungsdatensatzes.}{fig:results:validation_loss}
+\pic{results/loss.png}{Fehlerwerte des Trainingsdatensatezs}{Vergleich evaluierter Modelle und ihrer Fehlerwerte des Trainingsdatensatzes.}{fig:results:loss}
+\pic{results/validation_loss.png}{Fehlerwerte des Validierungsdatensatzes}{Vergleich evaluierter Modelle und ihrer Fehlerwerte des Validierungsdatensatzes.}{fig:results:validation_loss}
 Während der Trainingsphase wurden die Modelle mit Hilfe eines Validierungsdatensatzes evaluiert.
 Diese zusätzliche Evaluierung berechnete den Fehlerwert des Modells auf einem gegebenen Datensatz.
 \cref{fig:results:loss} zeigt die Fehlerwerte der Trainingsdaten und \cref{fig:results:validation_loss} die Fehlerwerte der Validierungsdaten für jedes Modell.
@@ -156,7 +156,7 @@ Treten unbekannte Formulierungen wie z.B. Rechtschreibfehler auf, kann das Model
 Diese Problematik nimmt mit steigender Epoche zu, weshalb Modelle ab Epoche 5 in ihrer Leistungsfähigkeit nachlassen.\\
 
 \subsection{Vergleich MakroF1}
-\pic{results/makro_total.png}{Vergleich evaluierter Modelle und Makro F1 Werten bei der Beantwortung von Fragen.}{fig:results:makro_total}
+\pic{results/makro_total.png}{Vergleich der MakroF1 Werte}{Vergleich evaluierter Modelle und Makro F1 Werten bei der Beantwortung von Fragen.}{fig:results:makro_total}
 
 \cref{fig:results:makro_total} zeigt die MakroF1-Werte der evaluierten Modelle.
 Auch hier sind die Tendenzen aus \cref{subsec:results:correctness:strengths} erkennbar.
@@ -169,7 +169,7 @@ Modelle, die Fragen richtig beantwortet haben, aber auch falsche oder unvollstä
 Ein Modell mit einem MakroF1-Wert von \num{0} beantwortet keine Frage richtig, während ein Modell mit einem Wert von \num{1} alle Fragen richtig und vollständig beantwortet.
 So beantwortet das GPT4-Modell im Durchschnitt eine Frage zu \SI{70}{\percent} richtig, während das \lea-Modell im Durchschnitt eine Frage zu \SI{30}{\percent} richtig beantwortet.\\
 
-\pic[0.7]{results/makrof1_total_type_heat.png}{Heatmap der MakroF1-Werte der evaluierten Modelle nach Fragetypen.}{fig:results:makrof1_total_type_heat}
+\pic[0.7]{results/makrof1_total_type_heat.png}{Heatmap der MakroF1-Werte nach Fragetypen}{Heatmap der MakroF1-Werte der evaluierten Modelle nach Fragetypen.}{fig:results:makrof1_total_type_heat}
 
 Eine genauere Aufschlüsselung der MakroF1-Werte nach Fragetypen ist in \cref{fig:results:makrof1_total_type_heat} zu sehen.
 Hier sieht man die Leistungssteigerung in allen Fragetypen ab 3 Epochen.
@@ -180,7 +180,7 @@ Diese Beobachtung kann jedoch nicht auf das GPT4-Modell übertragen werden.
 Da der technische Hintergrund des GPT4-Modells nicht bekannt ist, kann diese Beobachtung nicht weiter begründet werden.
 Das GPT4-Modell wurde nach normalem Training durch umfangreiches Finetuning mit menschlichem Feedback an die Beantwortung von Fragen angepasst, wodurch die Leistung bei der Beantwortung von einfachen Einzelfragen hier durchaus gesteigert werden könnte.\\
 
-\pic{results/makrof1_total_source_heat.png}{Heatmap der MakroF1-Werte der evaluierten Modelle aufgeteilt nach Fragequellen.}{fig:results:makrof1_total_source_heat}
+\pic{results/makrof1_total_source_heat.png}{Heatmap der MakroF1-Werte nach Fragequellen}{Heatmap der MakroF1-Werte der evaluierten Modelle aufgeteilt nach Fragequellen.}{fig:results:makrof1_total_source_heat}
 
 \cref{fig:results:makrof1_total_source_heat} zeigt die MakroF1-Werte der Modelle unterteilt nach Fragequellen.
 Die Entwicklung der Modelle von einem untrainierten über einen trainierten zu einem übertrainierten Zustand ist hier gut zu erkennen.
@@ -221,7 +221,7 @@ Weiter trainierte Modelle zeigen eine Präferenz für keine Antwort gegenüber e
 was für die Anwendung des Modells durchaus vorteilhaft sein kann.
 Allerdings ist diese Tendenz auf eine Überanpassung an den Trainingsdatensatz zurückzuführen.\\
 
-\begin{figure}
+\begin{table}
     \begin{tabularx}{\textwidth}{lX}
         \toprule
         Frage              & Definieren Sie den Begriff \enquote{Krankenhausinformationssystem}.                                                                                                                                                                                                    \\
@@ -230,8 +230,8 @@ Allerdings ist diese Tendenz auf eine Überanpassung an den Trainingsdatensatz z
         Generierte Antwort & \#\#\# 2.2.2.2.2.2.1.1.1.1.1.1.2.1.1.2.1.2.1.2.1.2.1.2. $[\dots]$                                                                                                                                                                                                    \\
         \bottomrule                                                                                                                                                                                                                                                                                 \\
     \end{tabularx}
-    \caption{Beispiel für Formatierungsfehler in der Ausgabe des Llama 2 7B Modells trainiert auf 1 Epoche}\label{fig:formatting-errors}
-\end{figure}
+    \caption[Beispiel für Formatierungsfehler]{Beispiel für Formatierungsfehler in der Ausgabe des Llama 2 7B Modells trainiert auf 1 Epoche}\label{fig:formatting-errors}
+\end{table}
 
 Modelle, die mit V100-Grafikkarten trainiert wurden, zeigen eine sehr starke Verschlechterung der Leistung.
 Dies ist auf das notwendige Training im FP16 Datenformat gegenüber dem ursprünglich verwendeten BF16 Datenformat zurückzuführen.
@@ -240,7 +240,7 @@ Diese Beobachtung wird auch durch die Ergebnisse dieser Arbeit bestätigt.\\
 
 
 \section{Analyse Erklärbarkeit}\label{sec:results:explainability}
-\pic{results/explained.png}{Vergleich der evaluierten Modelle und der Anzahl der Antworten mit Erklärungen.}{fig:results:explained}
+\pic{results/explained.png}{Vergleich der Modelle nach Erklärbarkeit}{Vergleich der evaluierten Modelle und der Anzahl der Antworten mit Erklärungen.}{fig:results:explained}
 Die hier evaluierten Modelle weisen eine hohe Fähigkeit auf, Erklärungen zu den generierten Antworten zu liefern.
 Insbesondere GPT4 ist in der Lage, zu \SI{97}{\percent} richtig beantworteten Fragen eine Erklärung zu liefern.
 \cref{fig:results:explained} zeigt hier die Gesamtzahl der Antworten, die Erklärungen enthalten.
@@ -248,8 +248,8 @@ Dabei wurden nur Fragen berücksichtigt, die das jeweilige Modell zuvor mit mind
 Das untrainierte Modell sowie die trainierten Modelle einer Epoche können hier nur für die Hälfte der Fragen eine Erklärung liefern.
 Ab Epoche 3 steigt diese Leistung ebenso deutlich auf \SI{85}{\percent}.\\
 
-\pich[0.7]{results/explainability_total_type.png}{Heatmap der Erklärbarkeit der evaluierten Modelle nach Fragetypen.}{fig:results:explainability_total_type}
-\pic{results/explainability_total_source.png}{Heatmap der Erklärbarkeit der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:explainability_total_source}
+\pich[0.7]{results/explainability_total_type.png}{Heatmap der Erklärbarkeit nach Fragetypen}{Heatmap der Erklärbarkeit der evaluierten Modelle nach Fragetypen.}{fig:results:explainability_total_type}
+\pic{results/explainability_total_source.png}{Heatmap der Erklärbarkeit nach Fragequellen}{Heatmap der Erklärbarkeit der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:explainability_total_source}
 
 \cref{fig:results:explainability_total_type} und \cref{fig:results:explainability_total_source} zeigen die Unterteilung dieser Leistung nach Fragetypen und Fragequellen.
 Hier ist zunächst kein klarer Trend der Verbesserung in diesen Unterteilungen zu erkennen.
@@ -260,7 +260,7 @@ Hervorzuheben ist die grundsätzlich gute Leistung von GPT4, die durch das einge
 Mit dieser Trainingsmethode könnte auch das Llama-Modell belohnt werden, wenn es Erklärungen für seine Antworten gibt.\\
 
 \section{Analyse Fragenverständnis}\label{sec:results:questionunderstanding}
-\pic{results/understood.png}{Vergleich der evaluierten Modelle und der Anzahl der verstandenen Fragen.}{fig:results:understood}
+\pic{results/understood.png}{Vergleich der Modelle nach Fragenverständnis}{Vergleich der evaluierten Modelle und der Anzahl der verstandenen Fragen.}{fig:results:understood}
 Das Kriterium Fragenverständnis ist nicht äquivalent zur Anzahl der beantworteten Fragen des Kriteriums Korrektheit.
 Eine Frage gilt nicht als verstanden, wenn sie beantwortet wurde, da falsche Antworten zwar falsche Fakten enthalten können, die Frage aber nicht vollständig beantwortet wurde und daher als nicht verstanden gezählt wird.
 Ebenso kann eine unbeantwortete Frage als verstanden gezählt werden.
@@ -274,8 +274,8 @@ Insbesondere Modelle mit höherer Epoche verlieren die Fähigkeit, Fragen zu ver
 Diese Beobachtung bestätigt somit auch die steigende Anzahl unbeantworteter Fragen aus dem Kriterium Korrektheit, da immer mehr Fragen nicht verstanden werden.
 Grund hierfür ist die zunehmende Überanpassung der Modelle, die es den Modellen erschwert, andere Formulierungen gleichen Wissens zu verstehen.\\
 
-\pic[0.7]{results/question_understanding_total_type.png}{Heatmap des Fragenverständnisses der evaluierten Modelle nach Fragetypen.}{fig:results:question_understanding_total_type}
-\pic{results/question_understanding_total_source.png}{Heatmap des Fragenverständnisses der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:question_understanding_total_source}
+\pic[0.7]{results/question_understanding_total_type.png}{Heatmap des Fragenverständnis nach Fragetypen}{Heatmap des Fragenverständnisses der evaluierten Modelle nach Fragetypen.}{fig:results:question_understanding_total_type}
+\pic{results/question_understanding_total_source.png}{Heatmap des Fragenverständnis nach Fragequellen}{Heatmap des Fragenverständnisses der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:question_understanding_total_source}
 
 \cref{fig:results:question_understanding_total_type} und \cref{fig:results:question_understanding_total_source} zeigen die Unterteilung dieser Statistik nach Fragetyp und Fragequelle.
 Auch hier ist ein deutlicher Leistungsabfall ab Epoche 5 zu erkennen, insbesondere beim Fragetyp \enquote{transfer}. Das \lea-Modell zeigt hier die beste Leistung aller Llama-Modelle, obwohl es in der Kategorie \enquote{multi} schlechter als das untrainierte Modell abschneidet.
@@ -283,7 +283,7 @@ Die Unterteilung in Fragequellen bestätigt diese Beobachtungen, wobei die Quell
 Die Fragen dieser Quelle scheinen grundsätzlich andere Formulierungen als im Buch zu verwenden und müssen daher vermehrt mit generalisiertem Wissen beantwortet werden.
 
 \section{Analyse Robustheit}\label{sec:results:robustness}
-\pic{results/makro_comparison.png}{Vergleich der evaluierten Modelle und ihrer MakroF1-Werte nach Einführung von Rechtschreibfehlern.}{fig:results:makro_comparison}
+\pic{results/makro_comparison.png}{Vergleich der Robustheit von Modellen}{Vergleich der evaluierten Modelle und ihrer MakroF1-Werte nach Einführung von Rechtschreibfehlern.}{fig:results:makro_comparison}
 \cref{fig:results:makro_comparison} zeigt die MakroF1-Werte der Modelle nach Einführung von Rechtschreibfehlern.
 Dazu wurden alle richtig beantworteten Fragen der Modelle mit zusätzlichen Rechtschreibfehlern versehen und erneut ausgewertet.
 Rechtschreibfehler in Fachausdrücken erschweren die Wiedergabe von Sachverhalten, da die Tokenisierung die Wörter anders unterteilt.

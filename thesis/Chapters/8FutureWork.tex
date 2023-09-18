@@ -24,7 +24,7 @@ Größere Modelle neigen schneller dazu, einen Zustand der Überanpassung zu err
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{results/bit_scaling_laws.png}
-    \caption[Korrektheit von OPT Modellen nach Modellbits]{Korrektheit von OPT Modellen aufgeteilt nach unterschiedlicher Bitanzahl pro Parameter aus \citet{4bit}. Modelle mit gleicher Parameteranzahl liegen ungefähr auf gleicher X-Ebene, jedoch nicht auf gleicher Y-Ebene.}%
+    \caption[Korrektheit von OPT Modellen nach Modellbits]{Korrektheit von OPT Modellen aufgeteilt nach unterschiedlicher Bitanzahl pro Parameter aus \citet{4bit}. Modelle mit gleicher Parameteranzahl liegen ungefähr auf gleicher X-Achse, jedoch nicht auf gleicher Y-Achse.}%
     \label{fig:bit_scaling}
 \end{figure}
 Um große Modelle zu trainieren und zu nutzen, ist der Einsatz der \ac{zero}-Optimierung ein erster Schritt, der in \citet{deepspeed} vorgestellt wird.
@@ -32,7 +32,7 @@ Mit Hilfe der \ac{zero}-Stufe 3 Optimierung können Optimierungs- und Parameterz
 Zusätzlich kann durch eine Quantisierung der Modelle in kleinere Datentypen die Anzahl der benötigten \ac{gpu}-\ac{ram}s deutlich reduziert werden.
 \citet{4bit} untersuchte den Einfluss der Quantisierung auf die Performance der Modelle und zeigte, dass eine Quantisierung auf 4 Bit die Leistung der Modelle nur geringfügig beeinflusst.
 \cref{fig:bit_scaling} zeigt die Korrektheit von OPT-Modellen mit unterschiedlichen Datentypen (3, 4, 8 und 16 Bit).
-Modelle mit gleicher Parameteranzahl liegen nicht auf dem gleichen Y-Ebene, da die X-Achse in Modellbits angegeben ist.
+Modelle mit gleicher Parameteranzahl liegen nicht auf dem gleichen Y-Achse, da die X-Achse in Modellbits angegeben ist.
 Modelle mit der gleichen Anzahl von Parametern, aber einer geringeren Anzahl von Bits pro Parameter sind daher weiter links in der Grafik angeordnet.
 Dennoch zeigen diese Abbildung von \citet{4bit} und ähnliche Abbildungen für andere Modelltypen eine fast identische Leistung bis einschließlich 4 Bit.\\
 
@@ -122,5 +122,5 @@ Ein hoher Aufwand bedeutet grundlegende strukturelle Änderungen im genutzten Pr
         Textextraktion aus Kontext        & niedrig                                       & mittel    \\
         Adapter-basiertes Training        & mittel                                        & mittel    \\
     \end{tabular}}
-    \caption{Übersicht über mögliche Ansätze zur Verbesserung der Leistung der Modelle}\label{tab:future-work}
+    \caption[Verbesserungsansätze der Modelle]{Übersicht über mögliche Ansätze zur Verbesserung der Leistung der Modelle}\label{tab:future-work}
 \end{table}

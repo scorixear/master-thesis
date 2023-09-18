@@ -41,7 +41,7 @@ Im Folgenden werden diese Einstellungen näher erläutert.
         torch\_dtype         & auto                       \\
         low\_cpu\_mem\_usage & false                      \\
     \end{tabular}
-    \caption{Parameter zur Auswahl und Konfiguration des Modells}\label{tab:model-config}
+    \caption[Parameter zur Konfiguration des Modells]{Parameter zur Auswahl und Konfiguration des Modells}\label{tab:model-config}
 \end{table}
 Die zur Auswahl und Konfiguration des Modells verwendeten Parameter sind in \cref{tab:model-config} aufgelistet.\\
 
@@ -93,7 +93,7 @@ Da im vorliegenden Fall genügend Arbeitsspeicher zur Verfügung stand, wurde au
         keep\_linebreaks              & true          \\
         \bottomrule
     \end{tabular}
-    \caption{Parameter zur Auswahl und Konfiguration der Trainingsdaten}\label{tab:data-config}
+    \caption[Parameter zur Konfiguration der Trainingsdaten]{Parameter zur Auswahl und Konfiguration der Trainingsdaten}\label{tab:data-config}
 \end{table}
 Für das Training des Modells Llama 2 wurde das Buch \citetitle{bb} von \citet{bb} im epub-Format in das Markdown-Format konvertiert.
 Die notwendigen Änderungen am Text sind in \cref{sec:datenkuration} beschrieben.
@@ -350,7 +350,7 @@ Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Ko
         device                                & cpu           \\
         pin\_memory                           & true          \\
     \end{tabular}
-    \caption{DeepSpeed \ac{zero} Stufe 3 Konfiguration}\label{tab:deepspeed-config-stage3}
+    \caption[DeepSpeed ZeRO 3 Konfiguration]{DeepSpeed \ac{zero} Stufe 3 Konfiguration}\label{tab:deepspeed-config-stage3}
 \end{table}
 
 Die DeepSpeed-Konfiguration ist in \cref{tab:deepspeed-config} beschrieben.
@@ -498,7 +498,7 @@ Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit
         Clara            & 23              & 8 Nvidia GeForce RTX 2080 Ti & \SI{11}{\giga\byte} \\
         \bottomrule
     \end{tabular}
-    \caption{ \ac{gpu} Werte des des Rechenzentrums der Universität Leipzig}\label{tab:gpu-cluster}
+    \caption[GPU Werte des Rechenzentrums]{ \ac{gpu} Werte des des Rechenzentrums der Universität Leipzig}\label{tab:gpu-cluster}
 \end{table}
 \begin{table}
     \centering
@@ -510,7 +510,7 @@ Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit
         Clara            & 1 AMD(R) EPYC(R) 7551P & \SI{512}{\giga\byte} \\
         \bottomrule
     \end{tabular}
-    \caption{ \ac{cpu} Werte des Rechenzentrums der Universität Leipzig}\label{tab:cpu-cluster}
+    \caption[CPU Werte des Rechenzentrums]{ \ac{cpu} Werte des Rechenzentrums der Universität Leipzig}\label{tab:cpu-cluster}
 \end{table}
 Die technischen Daten der beiden Cluster sind in \cref{tab:gpu-cluster} und \cref{tab:cpu-cluster} aufgelistet.
 Das \enquote{Clara}-Cluster ist hierbei zweigeteilt, da einige Knoten mit Nvidia Tesla V100 Grafikkarten und andere mit Nvidia GeForce RTX 2080 Ti Grafikkarten ausgestattet sind.
