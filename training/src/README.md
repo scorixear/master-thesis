@@ -1,6 +1,6 @@
 # Description
 
-Contains scripts for training and evaluation of the `LLaMA2` model as well as its results.
+Contains scripts for training and evaluation of the `Llama 2` model as well as its results.
 
 # Table of Contents
 - [Description](#description)
@@ -25,7 +25,6 @@ Contains scripts for training and evaluation of the `LLaMA2` model as well as it
 
 # Folder Structure
 
-- `.env`: conda environment folder containing all libraries needed to train the model
 - `data`: questions used for evaluation. Json Structure further below. Contains also questions with spelling mistakes
 - `ds_configs`: DeepSpeed Configuration Files for each stage with and without cpu offloading
   - `ds_config.md`: contains annotations for the DeepSpeed configuration files
@@ -43,32 +42,31 @@ Contains scripts for training and evaluation of the `LLaMA2` model as well as it
 - `input`: Training Dataset, contains cleaned up "Health Information Systems" book in Markdown format
 - `output`: Contains Generated Answers by each model for questions with and without spelling mistakes. Json structure further below.
 - `slurm`: Contains slurm job files used to run training and evaluation scripts
-- `trained`: Contains trained models (currently only 3 epochs, not included in git due to size)
 
 # Training Scripts
 - `01_download_llama.sh`: Script provided by Meta for downloading the LLaMA weights
 - `02_prepare_weights.py`: Script provided by Huggingface for converting the LLaMA weights to a format that can be used by the Huggingface library
 - `03_train_llama.py`: Script for training the LLaMA model
-- `03_train_llama2.py`: Script for training the LLaMA2 model
-- `03_train_lora.py`: Script for training the LLaMA2 model with LoRA Adapter
-- `03_trainig_args.json`: Example training arguments for the LLaMA2 model training script
-- `04_predict_llama2_4bit.py`: Script for generating answer of continual pretrained LLaMA2 models, but adjusted to use bitsandbytes to load in model as 4bit version. Uses less memory.
+- `03_train_llama2.py`: Script for training the Llama 2 model
+- `03_train_lora.py`: Script for training the Llama 2 model with LoRA Adapter
+- `03_trainig_args.json`: Example training arguments for the Llama 2 model training script
+- `04_predict_llama2_4bit.py`: Script for generating answer of continual pretrained Llama 2 models, but adjusted to use bitsandbytes to load in model as 4bit version. Uses less memory. Llama 2 will be loaded in 8-bit despite the configured 4-bit.
 - `04_predict_llama2_base.py`: Script for generating answers with the not continual pretrained (out of the box) LLaMA2 model
 - `04_predict_llama2_lora.py`: Script for generating answers with the Model trained with a LoRA Adapter. Currently not working.
-- `04_predict_llama2.py`: Script for generating answers of continual pretrained LLaMA2 models
+- `04_predict_llama2.py`: Script for generating answers of continual pretrained Llama 2 models
 - `05_evaluation_generation.py`: Script for rating/evaluating the generated answers by a model. Requires specific JSON structure (see below) from `04_predict_llama2.py`
-- `05.2_evalutation_generation.py`: Script for extended evaluation of the generated answers by a model. Requires specific JSON structure (see below) from `05_evaluation_generation.py`
-- `06_evaluation_correctness.py`: Script for calculating the correctness of the generated answers by a model. Requires specific JSON structure (see below) from `05.2_evalutation_generation.py`
-- `06_evaluation_explainability_01.py`: Script for calculating the explainability of the generated answers by a model. Requires specific JSON structure (see below) from `05.2_evalutation_generation.py`
-- `06_evaluation_explainability_02.py`: Script for generating bar plots from the results of `06_evaluation_explainability_01.py`
-- `06_evalation_loss.py`: Script for generating loss plots from the training of the models
-- `06_evaluation_question_understanding_01.py`: Script for calculating the question understanding of the generated answers by a model. Requires specific JSON structure (see below) from `05.2_evalutation_generation.py`
+- `05.2_evaluation_generation.py`: Script for extended evaluation of the generated answers by a model. Requires specific JSON structure (see below) from `05_evaluation_generation.py`
+- `06_evaluation_correctness.py`: Script for calculating the correctness of the generated answers by a model. Requires specific JSON structure (see below) from `05.2_evaluation_generation.py`
+- `06_evaluation_explainability_01.py`: Script for calculating the explainability of the generated answers by a model. Requires specific JSON structure (see below) from `05.2_evaluation_generation.py`
+- `06_evaluation_explainability_02.py`: Script for generating plots from the results of `06_evaluation_explainability_01.py`
+- `06_evaluation_loss.py`: Script for generating loss plots from the training of the models
+- `06_evaluation_question_understanding_01.py`: Script for rating the question understanding of the generated answers by a model. Requires specific JSON structure (see below) from `05.2_evaluation_generation.py`
 - `06_evaluation_question_understanding_02.py`: Script for generating bar plots from the results of `06_evaluation_question_understanding_01.py`
 - `06_evaluation_ranking.py`: Script for generating Ranking plots from the results of `06_evaluation_correctness.py`
 - `06_evaluation_robustness_01.py`: Script for generating evaluation datasets with spelling mistakes. Requires output from `05.2_evaluation_generation.py` and the misspelled questions from `data`
-- `06_evaluation_robustness.py`: Script for calculating the robustness of the generated answers by a model. Requires specific JSON structure (see below) from `05.2_evalutation_generation.py` and results from `06_evaluation_correctness.py`
+- `06_evaluation_robustness.py`: Script for calculating the robustness of the generated answers by a model. Requires specific JSON structure (see below) from `05.2_evaluation_generation.py` and results from `06_evaluation_correctness.py`
 - `07_question_to_latex.py`: Script for converting a question source generated by `04_predict_llama2.py` to a latex table
-- `Finetune_Llama_Lora.ipynb`: Jupyter Notebook from `useftn.com` to finetune the LLaMA2 model with LoRA Adapter
+- `Finetune_Llama_Lora.ipynb`: Jupyter Notebook from `useftn.com` to finetune the Llama 2 model with LoRA Adapter
 - `question.py`: Question Class used in `06_evaluation_`-files to read in json data.
 - `requirements.txt`: Python libraries needed to run the training scripts (`04`)
 
@@ -106,7 +104,7 @@ Additionally each question needs to have a `type` attributed that is either `sin
 
 ## For Evaluating generated Answers
 Required for script `05_evaluation_generation.py`.
-Generated by `04_predict_llama2.py`, `04_predict_llama2_paula.py` or `04_predict_llama2_base.py`.
+Generated by `04_predict_llama2.py`, `04_predict_llama2_4bit.py` or `04_predict_llama2_base.py`.
 Examples can be found in `/output` named `generated_*.json`
 
 ```json
