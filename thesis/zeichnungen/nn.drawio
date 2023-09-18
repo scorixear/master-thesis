@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="bMsaWp_U04bSCfyDXs2s" name="SimpleNN">
-        <mxGraphModel dx="557" dy="1607" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="700" pageHeight="700" background="#ffffff" math="1" shadow="0">
+        <mxGraphModel dx="3320" dy="2507" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="700" pageHeight="700" background="#ffffff" math="1" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -15,7 +15,7 @@
                 <mxCell id="2" value="$$E_1$$" style="ellipse;whiteSpace=wrap;html=1;fontSize=100;strokeWidth=6;aspect=fixed;" parent="1" vertex="1">
                     <mxGeometry x="80" width="250" height="246.88" as="geometry"/>
                 </mxCell>
-                <mxCell id="14" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 70px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;$$W^1_2$$&lt;/span&gt;" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fontSize=70;strokeWidth=4;" parent="1" source="3" target="5" edge="1">
+                <mxCell id="14" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-family: Helvetica; font-size: 70px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;$$W^1_3$$&lt;/span&gt;" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;fontSize=70;strokeWidth=4;" parent="1" source="3" target="5" edge="1">
                     <mxGeometry x="-0.5" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
@@ -23,7 +23,7 @@
                 <mxCell id="15" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=default;endArrow=none;endFill=0;fontSize=100;strokeWidth=4;" parent="1" source="3" target="6" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="$$E_2$$" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=100;strokeWidth=6;" parent="1" vertex="1">
+                <mxCell id="3" value="$$E_3$$" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=100;strokeWidth=6;" parent="1" vertex="1">
                     <mxGeometry x="80" y="1150" width="250" height="246.88" as="geometry"/>
                 </mxCell>
                 <mxCell id="16" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeColor=default;endArrow=none;endFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=100;strokeWidth=4;" parent="1" source="4" target="6" edge="1">
@@ -31,12 +31,12 @@
                         <mxPoint x="230" y="430" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="17" value="&lt;span style=&quot;font-size: 70px;&quot;&gt;$$W^1_3$$&lt;/span&gt;" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=default;endArrow=none;endFill=0;fontSize=70;strokeWidth=4;labelBackgroundColor=default;" parent="1" source="4" target="5" edge="1">
+                <mxCell id="17" value="&lt;span style=&quot;font-size: 70px;&quot;&gt;$$W^1_2$$&lt;/span&gt;" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=default;endArrow=none;endFill=0;fontSize=70;strokeWidth=4;labelBackgroundColor=default;" parent="1" source="4" target="5" edge="1">
                     <mxGeometry x="-0.5091" y="-2" relative="1" as="geometry">
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="4" value="$$E_3$$" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=100;strokeWidth=6;" parent="1" vertex="1">
+                <mxCell id="4" value="$$E_2$$" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=100;strokeWidth=6;" parent="1" vertex="1">
                     <mxGeometry x="80" y="570" width="250" height="246.88" as="geometry"/>
                 </mxCell>
                 <mxCell id="18" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=default;endArrow=none;endFill=0;fontSize=100;strokeWidth=4;" parent="1" source="5" target="8" edge="1">
