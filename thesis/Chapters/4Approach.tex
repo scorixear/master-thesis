@@ -35,24 +35,24 @@ Da ein Finetuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht mögl
     \centering
     \setlength{\tabcolsep}{5pt}
     \resizebox{\textwidth}{!}{
-        \begin{tabular}{lllS[table-text-alignment=center, table-number-alignment=right]S[table-text-alignment=center, table-number-alignment=right]rS[table-text-alignment=center, table-number-alignment=right]}
+        \begin{tabular}{lllrrrr}
             \toprule
-            Modell   & Verfügbarkeit & ZeroShot & {Größe}     & {Training}              & Inferenz              & {Inferenz (4Bit)}       \\
+            Modell   & Verfügbarkeit & ZeroShot & Größe     & Training              & Inferenz              & Inferenz (4Bit)       \\
             \midrule
-            GPT-2    & frei          & schlecht & 1,5 & 24\si{\giga\byte}   & \SI{6}{\giga\byte}    & \SI{750}{\mega\byte}  \\
-            GPT-3    & nur Inferenz  & gut      & 175 & 1,4\si{\tera\byte}  & \SI{350}{\giga\byte}  & \SI{43,8}{\giga\byte} \\
-            GPT-4    & nur Inferenz  & sehr gut & {?} & {?} & \multicolumn{1}{c}{?} & {?} \\
-            GPT-J    & frei          & gut      & 6,7 & 104\si{\giga\byte}  & \SI{26}{\giga\byte}   & \SI{3,4}{\giga\byte}  \\
-            GPT-NeoX & frei          & gut      & 20  & 160\si{\giga\byte}  & \SI{40}{\giga\byte}   & \SI{10}{\giga\byte}   \\
+            GPT-2    & frei          & schlecht & \num{1,5} & \SI{24}{\giga\byte}   & \SI{6}{\giga\byte}    & \SI{750}{\mega\byte}  \\
+            GPT-3    & nur Inferenz  & gut      & \num{175} & \SI{1,4}{\tera\byte}  & \SI{350}{\giga\byte}  & \SI{43,8}{\giga\byte} \\
+            GPT-4    & nur Inferenz  & sehr gut & ?         & \multicolumn{1}{c}{?} & \multicolumn{1}{c}{?} & \multicolumn{1}{c}{?} \\
+            GPT-J    & frei          & gut      & \num{6,7} & \SI{104}{\giga\byte}  & \SI{26}{\giga\byte}   & \SI{3,4}{\giga\byte}  \\
+            GPT-NeoX & frei          & gut      & \num{20}  & \SI{160}{\giga\byte}  & \SI{40}{\giga\byte}   & \SI{10}{\giga\byte}   \\
 
-            LLaMA    & limitiert     & gut      & 7   & 56\si{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
-                     & limitiert     & gut      & 13  & 104\si{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
-                     & limitiert     & sehr gut & 33  & 264\si{\giga\byte}  & \SI{66}{\giga\byte}   & \SI{16,5}{\giga\byte} \\
-                     & limitiert     & sehr gut & 65  & 520\si{\giga\byte}  & \SI{130}{\giga\byte}  & \SI{32,5}{\giga\byte} \\
+            LLaMA    & limitiert     & gut      & \num{7}   & \SI{56}{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
+                     & limitiert     & gut      & \num{13}  & \SI{104}{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
+                     & limitiert     & sehr gut & \num{33}  & \SI{264}{\giga\byte}  & \SI{66}{\giga\byte}   & \SI{16,5}{\giga\byte} \\
+                     & limitiert     & sehr gut & \num{65}  & \SI{520}{\giga\byte}  & \SI{130}{\giga\byte}  & \SI{32,5}{\giga\byte} \\
 
-            Llama 2  & limitiert     & gut      & 7   & 56\si{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
-                     & limitiert     & gut      & 13  & 104\si{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
-                     & limitiert     & sehr gut      & 70  & 560\si{\giga\byte}  & \SI{140}{\giga\byte}  & \SI{35}{\giga\byte}   \\
+            Llama 2  & limitiert     & gut      & \num{7}   & \SI{56}{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
+                     & limitiert     & gut      & \num{13}  & \SI{104}{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
+                     & limitiert     & sehr gut      & \num{70}  & \SI{560}{\giga\byte}  & \SI{140}{\giga\byte}  & \SI{35}{\giga\byte}   \\
             \bottomrule
         \end{tabular}}
     \caption[Übersicht über zur Auswahl stehenden Modelle]{Übersicht über die zur Auswahl stehenden Modelle. Größe ist in Milliarden Parameter angegeben.}\label{tab:approach:models}
