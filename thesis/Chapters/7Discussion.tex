@@ -1,7 +1,7 @@
 %*****************************************
 \chapter{Diskussion}\label{ch:discussion}
 %*****************************************
-Die Ergebnisse dieser Arbeit zeigen, dass ein Continual Pretraining die Leistung eines Modells bei der Beantwortung von Fragen verbessern kann.
+Die Ergebnisse dieser Arbeit zeigen, dass ein Continual Pretraining die Leistung eines Modells bei der Beantwortung von Fragen verbessern kann. Ebenso wirkt das Modell demnach unterstützend bei der Wissensbeschaffung aus \citet{bb}.
 Dennoch erreichte das hier trainierte Modell eine maximale Leistung von \num{0.3} MakroF1, was nicht mit derzeit verfügbaren Modellen wie GPT4 vergleichbar ist.
 Um diese Leistung zu erreichen, werden in \cref{ch:futurework} einige Ansätze vorgestellt, die in zukünftigen Arbeiten untersucht werden können.
 
@@ -31,7 +31,7 @@ Abhilfe schafft hier das bereits erwähnte Finetuning, bei dem einem Modell absc
 Das Thema Informationssysteme im Gesundheitswesen und damit auch der hier verwendete Evaluationsdatensatz enthalten grundlegende Kerninformationen,
 die in ihrem Verständnis wichtiger sind als anderes Wissen. Dazu gehören z.B. die Definition von Daten, Information und Wissen, die Definition eines Informationssystems, so dass Menschen Teil des Systems sind, oder die Unterscheidung zwischen Anwendungssystemen und Softwareprodukten (ein Anwendungssystem ist die Installation und Nutzung eines Softwareprodukts durch Akteure, deren Rollen und Aufgaben).\\
 
-Diese grundlegenden Wissenfragen werden in der Literatur zu diesem Thema unterschiedlich definiert und sollte von den Modellen mit dem Wissen aus dem Buch von \citet{bb} beantwortet werden.
+Diese grundlegenden Wissensfragen werden in der Literatur zu diesem Thema unterschiedlich definiert und sollte von den Modellen mit dem Wissen aus dem Buch von \citet{bb} beantwortet werden.
 Auch widersprechen einige Definitionen aus dem Buch der Definition aus dem allgemeinen Sprachgebrauch. Auch hier ist eine Beantwortung mit dem Wissen aus dem Buch erforderlich.\\
 
 Die hier trainierten Modelle wurden jedoch auf Literatur vortrainiert, die durchaus widersprüchliches Wissen zum Buch enthält.
@@ -47,3 +47,18 @@ Anhand dieser Werte wurden die F1- und MakroF1-Werte der Modelle berechnet.\\
 Da der Evaluationsdatensatz jedoch größtenteils aus Prüfungsfragen besteht, wäre hier auch eine Auswertung der Fragen nach den Original-Prüfungspunkten möglich.
 Dadurch würden schwierigere Fragen bzw. Fragen mit mehr Antworten stärker gewichtet und hätten somit einen größeren Einfluss auf die Leistung der Modelle.
 Diese Art der Auswertung könnte die Modellleistung in den Kontext der menschlichen Leistung stellen und die Aussagen über die Modellleistung nachvollziehbarer machen.
+
+\section{Lösung des Problems}
+Das in \cref{sec:problemstellung} formulierte Problem kann mit den hier vorgestellten Modellen nur teilweise gelöst werden.
+Die Verwendung des Modells erleichtert die Wissensextraktion aus dem Buch, gibt aber in weiten Teilen den Inhalt des Buches nicht oder nur unvollständig wieder.
+Mit zunehmender Epoche der Modelle steigt die Qualität der Wissensextraktion durch Zitieren des Buches, jedoch sinkt die Anwendbarkeit auf andere Formulierungen und die Verallgemeinerung des gleichen Wissens, insbesondere bei der Verwendung in einem anderen Kontext.
+Die Fragmentierung der Definitionen wird durch das Modell zusammengeführt, was sich insbesondere an den Ergebnissen der Auswertung bei den Fragen zum Buch zeigt.
+Hier gelang es den Modellen, die im Buch enthaltenen Wissensfragen mit zunehmender Epoche den entsprechenden Antworten zuzuordnen.\\
+
+Das Ziel Z1 wurde mit den hier vorgestellten Modellen teilweise erreicht.
+Die trainierten Modelle sind in der Lage, Fragen zu Informationssystemen im Gesundheitswesen mit einem MakroF1-Wert von \num{0.3} korrekt zu beantworten, steigern damit die Ausgangsergebnisse des untrainierten Modells, fallen aber in ihrer Leistung hinter das \ac{sota} Modell GPT4 zurück.\\
+
+Ziel Z2 wird wie Ziel Z1 teilweise erreicht.
+Das Modell Llama 2 7B, trainiert mit Nvidia Tesla A30 Grafikkarten über 3 Epochen, erreicht bei den Klausurfragen des Moduls \enquote{Architektur von Informationssystemen im Gesundheitswesen} einen MakroF1-Wert von \num{0.45} und beantwortet \num{12} von \num{22} Fragen mit mindestens einer richtigen Antwort.
+Diese Ergebnisse liegen weit über dem untrainierten Modell mit einem MakroF1-Wert von \num{0.12} und \num{6} von \num{22} richtig beantworteten Fragen, werden aber immer noch vom GPT4-Modell mit einem MakroF1-Wert von \num{0.64} und \num{17} von \num{22} richtig beantworteten Fragen geschlagen.
+Die hier vorgestellten Ergebnisse zeigen, dass die Leistung bei der Lösung dieser Beispielklausur durch Continual Pretraining deutlich gesteigert werden kann, jedoch durch die Größe des Modells und den verwendeten Datensatz begrenzt ist.\\
