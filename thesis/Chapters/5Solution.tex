@@ -714,6 +714,24 @@ Die Zählung der richtigen Antworten erfolgte somit weitestgehend objektiv.
 \subsection{Kriterium: Erklärbarkeit}
 Eine Antwort eines Modells auf eine Frage gilt als erklärt, wenn sie inhaltlich mit der Frage zusammenhängt und eine Erklärung oder nähere Beschreibung enthält.
 Alle Ausgaben der Modelle wurden erneut manuell auf das Vorhandensein einer Erklärung im Rahmen dieses Kriteriums bewertet.
+Ein Beispiel für eine Antwort mit und ohne Erklärung ist in \cref{tab:explanation} dargestellt.
+\begin{table}
+    \begin{tabularx}{\textwidth}{p{2.8cm}p{3cm}X}
+        \toprule
+        \textbf{Erklärung} & \textbf{Frage} & \textbf{Generierte Antwort} \\
+        \midrule
+        enthalten & Is openEHR a standard? & OpenEHR (Sect. 3.7.2.2) is an open standard specification which focuses on the representation of clinical concepts in detailed clinical models.\newline
+        It has been maintained by the openEHR Foundation since the early 20s and supports the creation of clinical models in the form of a centralized database. $[\dots]$ \\
+        nicht enthalten & What types of integrity exist in the context of health information systems? & - data integrity,\newline
+         - semantic integration,\newline 
+         - user interface integration,\newline 
+         - context integration,\newline
+         - feature integration,\newline 
+         - process integration.$[\dots]$ \\
+        \bottomrule
+    \end{tabularx}
+    \caption[Beispiele der Erklärbarkeit]{Ein Beispiel für Antworten mit Erklärung und ohne Erklärung}\label{tab:explanation}
+\end{table}
 
 \subsection{Kriterium: Fragenverständnis}
 Das Kriterium Fragenverständnis bezieht sich auf die Fähigkeit eines Modells, die gestellten Fragen zu verstehen.

@@ -3,7 +3,7 @@
 %*****************************************
 In diesem Kapitel werden aktuelle Artikel und Forschungsergebnisse zu den Themen Sprachmodelle, Continual Pretraining und Problemen bei der Nutzung von Sprachmodellen vorgestellt.
 
-\section{Continual Pretraining und die Nutzung von Sprachmodellen}
+\section[Continual Pretraining]{Continual Pretraining und die Nutzung von Sprachmodellen}
 Ein Transformer-Modell als Wissensbasis wird in \citet{chatgpt_qas} mit verschiedenen \ac{sota}-Modellen verglichen.
 Sie zeigen eine deutliche Verbesserung der Robustheit gegenüber Eingabefehlern, der Erklärbarkeit von Antworten und des Fragenverständnisses bei komplexeren Fragen mit mehreren Fakten durch ChatGPT,
 zeigen aber Probleme bei der Aktualität von Wissen, dem Wissen über spezifische Domänen und vor allem bei der korrekten Beantwortung von Fragen.
@@ -12,7 +12,7 @@ Das Training von \ac{gpt}-Modellen ist ein aufwendiger Prozess und kann nicht be
 Darüber hinaus wurde ChatGPT ohne zusätzliches Continual Pretraining eingesetzt.
 Eine Anpassung an die Domänen und eine Verbesserung der Korrektheit der Antworten stehen daher noch aus.\\
 
-\citet{gpt1} zeigen die Verbesserung der Leistung von Transformer-Modellen durch generatives Pretraining und eine weitere Verbesserung durch überwachtes Fine-Tuning.
+\citet{gpt1} zeigen die Verbesserung der Leistung von Transformer-Modellen durch generatives Pretraining und eine weitere Verbesserung durch überwachtes Finetuning.
 Auch hier ist ein klarer Trend erkennbar.
 Die Ergebnisse der Modelle verbessern sich mit zunehmender Größe des Datensatzes, mit zunehmender Länge des Trainingsprozesses und mit zunehmender Größe der Modelle.\\
 
@@ -29,11 +29,11 @@ Continual Pretraining auf aufgabenspezifischen Daten verbessert wiederum die Lei
 während die Trainingszeit um den Faktor 60 kürzer ist im Vergleich zu Continual Pretraining auf Domänen.
 Eine Kombination beider Arten liefert die besten Ergebnisse.\\
 
-Aber nicht nur das Continual Pretraining verbessert die Ausgabe der Modelle, sondern auch das überwachte Fine-Tuning.
-\citet{finetuning} beschreiben in ihrem Artikel die Effektivität von Reinforcement Learning als Fine-Tuning-Methode zur Lösung von Aufgaben der Weiterführung und Zusammenfassung von Texten.
-Fine-Tuning benötigt jedoch gekennzeichnete Daten (engl. \enquote{labeled data}, Daten mit bekannten korrekten Ausgaben),
+Aber nicht nur das Continual Pretraining verbessert die Ausgabe der Modelle, sondern auch das überwachte Finetuning.
+\citet{finetuning} beschreiben in ihrem Artikel die Effektivität von Reinforcement Learning als Finetuning-Methode zur Lösung von Aufgaben der Weiterführung und Zusammenfassung von Texten.
+Finetuning benötigt jedoch gekennzeichnete Daten (engl. \enquote{labeled data}, Daten mit bekannten korrekten Ausgaben),
 die in der Regel aufwendig zu erstellen sind und nicht immer in der benötigten Menge zur Verfügung stehen.
-In dieser Arbeit wird aufgrund der mangelnden Verfügbarkeit von gekennzeichneten Daten auf ein Fine-Tuning verzichtet.\\
+In dieser Arbeit wird aufgrund der mangelnden Verfügbarkeit von gekennzeichneten Daten auf ein Finetuning verzichtet.\\
 
 \section{Aktuelle Modelle und deren Nutzbarkeit}
 
@@ -45,9 +45,9 @@ die Größe des Datensatzes oder die Länge des Trainings, eine grundlegende Not
 Bereits hier konnten sie ohne jegliche Änderung der Architektur im ZeroShot Rahmen je nach Aufgabenstellung erfolgreiche, \ac{sota}-kompetitive Ergebnisse erzielen.\\
 
 OpenAI gelang mit \ac{gpt}-3 ein Durchbruch in der Popularität und beschrieben ihren Ansatz in \citet{gpt3}.
-In ihrem Artikel demonstrierten sie die Leistungssteigerung durch größere Modelle und zeigten, dass diese Leistung auch ohne Fine-Tuning erreicht werden kann.
+In ihrem Artikel demonstrierten sie die Leistungssteigerung durch größere Modelle und zeigten, dass diese Leistung auch ohne Finetuning erreicht werden kann.
 Sie verglichen auch das Antwortverhalten in Abhängigkeit von FewShot- und ZeroShot-Eingaben, wobei erstere bessere Ergebnisse lieferten.
-Diese Ergebnisse unterstützen die Hypothese, dass das in dieser Arbeit verwendete Modell auch ohne Fine-Tuning eine gute Leistung erzielen kann.\\
+Diese Ergebnisse unterstützen die Hypothese, dass das in dieser Arbeit verwendete Modell auch ohne Finetuning eine gute Leistung erzielen kann.\\
 
 Weiter im Jahr 2023 veröffentlichte OpenAI \ac{gpt}-4 und stellten es in \citet{gpt4} vor.
 Neben deutlich besseren Ergebnissen durch ein noch größeres Modell mit mehr Parametern gelang es nun auch, Bilddaten als Eingabe zu verarbeiten.

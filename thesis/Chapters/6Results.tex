@@ -92,7 +92,7 @@ Die verschiedenen Fragetypen sind in \cref{tab:eval-question-types} aufgelistet.
 In den folgenden Grafiken werden die entsprechenden Bezeichnungen zur Beschriftung der Achsen verwendet.\\
 \begin{table}
     \centering
-    \begin{tabularx}{\textwidth}{Xcl}
+    \begin{tabularx}{\textwidth}{p{4.5cm}cl}
         \toprule
         \textbf{Fragequelle}                                                                                                                               & \textbf{Anzahl der Fragen} & \textbf{Bezeichnung}       \\
         \midrule
@@ -274,8 +274,8 @@ Insbesondere Modelle mit höherer Epoche verlieren die Fähigkeit, Fragen zu ver
 Diese Beobachtung bestätigt somit auch die steigende Anzahl unbeantworteter Fragen aus dem Kriterium Korrektheit, da immer mehr Fragen nicht verstanden werden.
 Grund hierfür ist die zunehmende Überanpassung der Modelle, die es den Modellen erschwert, andere Formulierungen gleichen Wissens zu verstehen.\\
 
-\pic[0.7]{results/question_understanding_total_type.png}{Heatmap des Fragenverständnis nach Fragetypen}{Heatmap des Fragenverständnisses der evaluierten Modelle nach Fragetypen.}{fig:results:question_understanding_total_type}
-\pic{results/question_understanding_total_source.png}{Heatmap des Fragenverständnis nach Fragequellen}{Heatmap des Fragenverständnisses der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:question_understanding_total_source}
+\pic[0.7]{results/question_understanding_total_type.png}{Heatmap des Fragenverständnis nach Typ}{Heatmap des Fragenverständnisses der evaluierten Modelle nach Fragetypen.}{fig:results:question_understanding_total_type}
+\pic{results/question_understanding_total_source.png}{Heatmap des Fragenverständnis nach Quelle}{Heatmap des Fragenverständnisses der evaluierten Modelle unterteilt nach Fragequellen.}{fig:results:question_understanding_total_source}
 
 \cref{fig:results:question_understanding_total_type} und \cref{fig:results:question_understanding_total_source} zeigen die Unterteilung dieser Statistik nach Fragetyp und Fragequelle.
 Auch hier ist ein deutlicher Leistungsabfall ab Epoche 5 zu erkennen, insbesondere beim Fragetyp \enquote{transfer}. Das \lea-Modell zeigt hier die beste Leistung aller Llama-Modelle, obwohl es in der Kategorie \enquote{multi} schlechter als das untrainierte Modell abschneidet.

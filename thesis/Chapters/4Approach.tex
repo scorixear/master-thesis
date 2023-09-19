@@ -28,31 +28,31 @@ Das Modell soll eine gute ZeroShot-Performance haben und nicht nur eine gute Few
 Diese Arbeit untersucht die Fähigkeit eines Modells, Wissen aus domänenspezifischer Literatur (hier aus \citet{bb}) zu reproduzieren.
 Indem frühere Fragen und Antworten als Kontext verwendet werden, werden die Ergebnisse synthetisch durch zusätzliches Wissen im Kontext verbessert.
 Einige Fragen könnten nicht durch das Modell mit Hilfe des gelernten Wissens beantwortet werden, sondern durch das Wissen im Kontext.
-Das Modell soll auch ohne Fine-Tuning eine gute Leistung erbringen.
-Da ein Fine-Tuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht möglich ist, soll ein Modell gewählt werden, das auch ohne dieses Fine-Tuning eine gute Performance erreicht.\\
+Das Modell soll auch ohne Finetuning eine gute Leistung erbringen.
+Da ein Finetuning in dieser Arbeit aufgrund der fehlenden Datenmenge nicht möglich ist, soll ein Modell gewählt werden, das auch ohne dieses Finetuning eine gute Performance erreicht.\\
 
 \begin{table}
     \centering
     \setlength{\tabcolsep}{5pt}
     \resizebox{\textwidth}{!}{
-        \begin{tabular}{llllrrr}
+        \begin{tabular}{lllS[table-text-alignment=center, table-number-alignment=right]S[table-text-alignment=center, table-number-alignment=right]rS[table-text-alignment=center, table-number-alignment=right]}
             \toprule
-            Modell   & Verfügbarkeit & ZeroShot & Größe     & Training              & Inferenz              & Inferenz (4Bit)       \\
+            Modell   & Verfügbarkeit & ZeroShot & {Größe}     & {Training}              & Inferenz              & {Inferenz (4Bit)}       \\
             \midrule
-            GPT-2    & frei          & schlecht & \num{1,5} & \SI{24}{\giga\byte}   & \SI{6}{\giga\byte}    & \SI{750}{\mega\byte}  \\
-            GPT-3    & nur Inferenz  & gut      & \num{175} & \SI{1,4}{\tera\byte}  & \SI{350}{\giga\byte}  & \SI{43,8}{\giga\byte} \\
-            GPT-4    & nur Inferenz  & sehr gut & ?         & \multicolumn{1}{c}{?} & \multicolumn{1}{c}{?} & \multicolumn{1}{c}{?} \\
-            GPT-J    & frei          & gut      & \num{6,7} & \SI{104}{\giga\byte}  & \SI{26}{\giga\byte}   & \SI{3,4}{\giga\byte}  \\
-            GPT-NeoX & frei          & gut      & \num{20}  & \SI{160}{\giga\byte}  & \SI{40}{\giga\byte}   & \SI{10}{\giga\byte}   \\
+            GPT-2    & frei          & schlecht & 1,5 & 24\si{\giga\byte}   & \SI{6}{\giga\byte}    & \SI{750}{\mega\byte}  \\
+            GPT-3    & nur Inferenz  & gut      & 175 & 1,4\si{\tera\byte}  & \SI{350}{\giga\byte}  & \SI{43,8}{\giga\byte} \\
+            GPT-4    & nur Inferenz  & sehr gut & {?} & {?} & \multicolumn{1}{c}{?} & {?} \\
+            GPT-J    & frei          & gut      & 6,7 & 104\si{\giga\byte}  & \SI{26}{\giga\byte}   & \SI{3,4}{\giga\byte}  \\
+            GPT-NeoX & frei          & gut      & 20  & 160\si{\giga\byte}  & \SI{40}{\giga\byte}   & \SI{10}{\giga\byte}   \\
 
-            LLaMA    & limitiert     & gut      & \num{7}   & \SI{56}{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
-                     & limitiert     & gut      & \num{13}  & \SI{104}{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
-                     & limitiert     & sehr gut & \num{33}  & \SI{264}{\giga\byte}  & \SI{66}{\giga\byte}   & \SI{16,5}{\giga\byte} \\
-                     & limitiert     & sehr gut & \num{65}  & \SI{520}{\giga\byte}  & \SI{130}{\giga\byte}  & \SI{32,5}{\giga\byte} \\
+            LLaMA    & limitiert     & gut      & 7   & 56\si{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
+                     & limitiert     & gut      & 13  & 104\si{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
+                     & limitiert     & sehr gut & 33  & 264\si{\giga\byte}  & \SI{66}{\giga\byte}   & \SI{16,5}{\giga\byte} \\
+                     & limitiert     & sehr gut & 65  & 520\si{\giga\byte}  & \SI{130}{\giga\byte}  & \SI{32,5}{\giga\byte} \\
 
-            Llama 2  & limitiert     & gut      & \num{7}   & \SI{56}{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
-                     & limitiert     & gut      & \num{13}  & \SI{104}{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
-                     & limitiert     & sehr gut      & \num{70}  & \SI{560}{\giga\byte}  & \SI{140}{\giga\byte}  & \SI{35}{\giga\byte}   \\
+            Llama 2  & limitiert     & gut      & 7   & 56\si{\giga\byte}   & \SI{14}{\giga\byte}   & \SI{3,5}{\giga\byte}  \\
+                     & limitiert     & gut      & 13  & 104\si{\giga\byte}  & \SI{23}{\giga\byte}   & \SI{5,8}{\giga\byte}  \\
+                     & limitiert     & sehr gut      & 70  & 560\si{\giga\byte}  & \SI{140}{\giga\byte}  & \SI{35}{\giga\byte}   \\
             \bottomrule
         \end{tabular}}
     \caption[Übersicht über zur Auswahl stehenden Modelle]{Übersicht über die zur Auswahl stehenden Modelle. Größe ist in Milliarden Parameter angegeben.}\label{tab:approach:models}
@@ -222,7 +222,7 @@ um das Modell und andere Modelle besser bewerten zu können.
 Um das Llama-Modell zu trainieren, wird ein Programm benötigt, das den Datensatz in Tokens umwandelt und diese dann in Batches an das Modell übergibt.
 Basierend auf diesen Batches wird das Modell verwendet, um die Gewichte mittels Backpropagation anzupassen.
 Dieser Prozess stellt somit eine Epoche dar.
-Bei kleineren Datensätzen und Fine-Tuning werden oft mehrere Epochen gewählt, während größere Datensätze (mehrere hundert Gigabyte) nur eine Epoche oder nicht einmal eine Epoche benötigen.
+Bei kleineren Datensätzen und Finetuning werden oft mehrere Epochen gewählt, während größere Datensätze (mehrere hundert Gigabyte) nur eine Epoche oder nicht einmal eine Epoche benötigen.
 Mit zunehmender Epoche passt sich das Modell immer mehr an die Literatur an, bis eine Grenze überschritten wird.
 Diese Grenze wird oft als \enquote{Overfitting} bezeichnet und stellt ein Modell dar, das sich zu sehr an einen Datensatz angepasst hat.
 Dadurch verliert das Modell die Fähigkeit, auf unbekannte Daten zu verallgemeinern, was in diesem Anwendungsfall dazu führt, dass keine Fragen mehr beantwortet werden können.\\
@@ -324,10 +324,27 @@ Die Fragen sind in drei Kategorien unterteilt:
 \end{enumerate}
 
 Allerdings ist die Anzahl der durchgeführten Klausuren zum Zeitpunkt der Erstellung dieser Arbeit geringer als erwartet, da der Studiengang erst seit 2021 existiert.
-Dies führt zu einer geringeren Qualität der Bewertung,
-hat aber keinen Einfluss auf die Qualität des Modells.\\
+Dies führt zu einer geringeren Qualität der Bewertung, hat aber keinen Einfluss auf die Qualität des Modells.
+Beispiele für die drei Kategorien sind in \cref{tab:question-category} zu finden.\\
 
-Die Llama-Modelle sind ohne weiteres Fine-Tuning verfügbar und wurden daher nicht an die Aufgabe der Beantwortung von Fragen angepasst.
+\begin{table}
+    \begin{tabularx}{\textwidth}{p{2.5cm}p{3cm}X}
+        \toprule
+        \textbf{Kategorie} & \textbf{Frage} & \textbf{Antwort} \\
+        \midrule
+        Einzelfrage & Define the term \enquote{tHIS} &  tHIS stands for transinstitutional health information system, an information system of a health care network which consists of multiple health care settings (contexts). It comprises all data, information, and knowledge processing as well as the associated human or technical actors in their respective data, information, and knowledge processing roles. \\
+        Multi-Fakten Frage & Compare HL7 V2 and HL7 FHIR. Explain at least three differences & Both used to exchange health information between application systems\newline
+        Syntax HL7 v2: proprietay, ASCII-text\newline
+        Syntax HL7 FHIR: XML / JSON  = easier to implement\newline
+        Structure HL7 v2: fixed, hierarchical, fixed amount of segments and codes\newline
+        Structure HL7 FHIR: flexible, modular, resource/element based \\
+        Transferfrage & When is a model good in the context of health information systems? & A good models should be able to help understand and predict the behavior of the system or process. It should also be able to help design and evaluate health information systems. A reference architecture can be used to support the design of a proper HIS architecture that meets the various stakeholder concerns of HISs. This architecture should be able to show the HIS from a different angle, suitable for various stakeholders. \\
+        \bottomrule
+    \end{tabularx}
+    \caption[Beispielfragen der drei Kategorien]{Beispielfragen der drei Fragekategorien}\label{tab:question-category}
+\end{table}
+
+Die Llama-Modelle sind ohne weiteres Finetuning verfügbar und wurden daher nicht an die Aufgabe der Beantwortung von Fragen angepasst.
 Dies hat zur Folge, dass die Modelle bei einer Frage wie \enquote{Welche Farbe hat der Himmel?} nicht die Antwort liefern, sondern den Text im gleichen Stil mit weiteren Fragen fortsetzen.
 Um eine Antwort auf eine Frage zu erhalten, muss die Frage in eine unvollständige Aussage umformuliert werden.
 Im gegebenen Beispiel wird aus \enquote{Welche Farbe hat der Himmel?} die Aussage \enquote{Der Himmel hat die Farbe}, die dann vom Modell mit \enquote{blau.} beantwortet wird.

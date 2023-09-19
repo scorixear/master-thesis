@@ -54,7 +54,7 @@
 \newcommand{\mybirthcountry}{Deutschland}
 \newcommand{\myProf}{Prof. Dr. Alfred Winter\xspace}
 \newcommand{\myOtherProf}{Prof. Name2\xspace}
-\newcommand{\mySupervisor}{Konrad Höffner\xspace}
+\newcommand{\mySupervisor}{Dr. Konrad Höffner\xspace}
 
 %\newcommand{\myFaculty}{Institut für Mathematik und Informatik\xspace}
 %\newcommand{\mySubject}{Informatik}
@@ -137,7 +137,10 @@
 \PassOptionsToPackage{activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=12,shrink=12,final}{microtype}%final-even in draft mode
 \usepackage[]{microtype}
 \usepackage{siunitx} % numbers with units
-\sisetup{per-mode=symbol,per-symbol = /}
+\sisetup{per-mode=symbol,
+per-symbol = /,
+table-format=3.1, 
+table-alignment-mode=format }
 \sisetup{output-exponent-marker=\ensuremath{\mathrm{e}}}
 % ****************************************************************************************************
 %\usepackage{pgfplots} % External TikZ/PGF support (thanks to Andreas Nautsch)
