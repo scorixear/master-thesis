@@ -20,7 +20,7 @@ Textgenerierung, Spracherkennung und Textklassifikation.
     indem sie die Wahrscheinlichkeit von Wörtern oder Zeichen in einer Sequenz vorhersagen.
 \end{definition}
 
-Autoregressive Modelle basieren auf der Annahme, dass jedes Element in der Sequenz von den vorhergehenden Elementen abhängt.
+Autoregressive Modelle basieren auf der Annahme, dass jedes Element in einer Sequenz von den vorhergehenden Elementen abhängt.
 In einem autoregressiven Sprachmodell wird die generative Wahrscheinlichkeit des nächsten Elements in der Sequenz geschätzt.
 Die Ausgabe im Kontext von Decoder-basierten Modellen ist daher eine Wahrscheinlichkeitsverteilung über das mögliche nächste Element.
 Das wahrscheinlichste Element wird dann der Sequenz hinzugefügt, und der Prozess wird wiederholt, bis die Sequenz vollständig ist.
@@ -34,7 +34,7 @@ Das wahrscheinlichste Element wird dann der Sequenz hinzugefügt, und der Prozes
 Im Gegensatz zu früheren Sprachmodellen, die auf rekurrenten oder faltenden neuronalen Netzen basieren, verwendet der Transformer einen Aufmerksamkeitsmechanismus, um die Beziehungen zwischen Wörtern in einem Satz zu modellieren.
 Transformer-Modelle bestehen aus einer Stapelung von Encoder- und Decoder-Schichten, wobei der Encoder dazu dient, Kontextinformationen aus der Eingabe zu extrahieren,
 während der Decoder die Ausgabe des Encoders verwendet, um die gewünschte Aufgabe zu lösen.
-Die Architektur eines Transformators ist in \cref{bild:transformer} dargestellt.\\
+Die Architektur eines Transformers ist in \cref{bild:transformer} dargestellt.\\
 
 \begin{figure}[ht]
     \centering
@@ -76,7 +76,7 @@ Die Methode wurde 2014 eingeführt und ist seitdem ein fester Bestandteil von \a
 
 \subsubsection{Modellarten von Transformer-Modellen}
 
-Basierend auf der eingeführten Transformer-Architektur wurden verschiedene Modelltypen entwickelt, die nur Teile der Architektur nutzen und sich in ihrer Funktionsweise unterscheiden.
+Basierend auf der eingeführten Transformer-Architektur wurden verschiedene Modellarten entwickelt, die nur Teile der Architektur nutzen und sich in ihrer Funktionsweise unterscheiden.
 
 \begin{definition}\label{def:encoder-basierte-modelle}
     \textbf{Encoder-basierte Modelle} sind Sprachmodelle, die hauptsächlich auf der Encoder-Architektur basieren.
@@ -212,7 +212,7 @@ Die Repräsentation von Token in einem Vektorraum muss erlernt werden und ermög
 Token, die semantische Ähnlichkeiten oder Beziehungen zueinander aufweisen, geometrisch nahe beieinander zu platzieren.
 Dadurch ist nicht nur das Token selbst, sondern auch die Beziehung zu anderen Tokens bekannt. Mit zunehmender Größe des Vokabulars müssen auch die Dimensionen der Input Embeddings vergrößert werden, da es sonst zu ungewollten Kollisionen zwischen Tokens kommen kann.
 
-\begin{definition}[Positional Encodings]\label{def:positional-encodings}
+\begin{definition}\label{def:positional-encodings}
     \textbf{Positional Encodings} stellen sogenannte relative und absolute Positionen der Token in der Eingabe dar.
 \end{definition}
 Relative und absolute Positionen von Token innerhalb einer Eingabe werden in einem Vektorraum dargestellt und ermöglichen es dem Modell, die Positionen der Token zu berücksichtigen.
@@ -311,7 +311,7 @@ Bei Transformern ist die Ausgabe $A_N$ ein Vektor über das gesamte Vokabular de
 
 \subsection{Training}\label{subsec:grundlagen:training}
 Bevor ein neuronales Netz korrekte Ergebnisse liefern kann, muss es trainiert werden.
-Training bedeutet die iterative Anpassung der Trainingsparameter, um eine möglichst gute Ausgabe zu erhalten.
+Training bedeutet die iterative Anpassung der lernbaren Parameter, um eine möglichst gute Ausgabe zu erhalten.
 Eine gute Ausgabe wird durch eine Fehlerfunktion beschrieben.
 Diese Fehlerfunktion gibt einen einzelnen Wert zurück, der den Eingaben in das neuronale Netz entspricht und umgekehrt proportional zur guten Ausgabe ist.
 Geometrisch stellt eine Fehlerfunktion eine mehrdimensionale Fläche dar, wobei jeder lernbare Parameter auf einer Achse liegt und das Minimum dieser Fläche ein Optimum darstellt.

@@ -93,7 +93,7 @@ Es existiert zwar eine \ac{api}, diese dient jedoch nur zur Inferenz des Modells
 Damit scheidet das Modell bereits aus.
 Ein weiteres Problem ist die Größe des Modells.
 Bei ca. 175 Milliarden Parametern ist eine Nutzung des Modells erst mit 8 A100 \ac{gpu}s möglich (eine Nvidia A100 \ac{gpu} besitzt \SI{80}{\giga\byte} VRAM).
-Das Training benötigt zusätzlich etwa den 4-fache Speicher.
+Das Training benötigt zusätzlich etwa den 4-fachen Speicher.
 Dieser Speicher kann zwar vom Rechenzentrum der Universität Leipzig zur Verfügung gestellt werden, verhindert aber den Einsatz des Modells in einer längerfristigen Umgebung.\\
 
 GPT-4 ist das mächtigste Modell von OpenAI und wurde in \citet{gpt4} vorgestellt.
@@ -157,7 +157,7 @@ Dieser Antrag wurde im Rahmen dieser Arbeit gestellt und genehmigt.\\
 Eine Alternative zu den LLaMA-Modellen ist OpenLLaMA, veröffentlicht unter \citet{openllama}.
 Die hier verfügbaren Modelle mit 3 Milliarden, 7 Milliarden und 13 Milliarden Parametern entsprechen in ihrer Leistungsfähigkeit den LLaMA-Modellen, sind aber unter der Open-Source-Lizenz Apache 2.0 verfügbar. Da hier jedoch keine Publikation über den Prozess der Erstellung dieser Modelle vorhanden ist, wird von der Verwendung dieser Modelle vorerst abgesehen.\\
 
-Zuletzt veröffentliche MetaAI die Llama 2 Modelle, welche auf der Architektur und Trainingsart von den LLaMA Modellen basieren, jedoch in allen Bereichen eine bessere Leistung durch mehr Training und größere Datensätze erzielen. Die Llama 2 Modelle sind unter \citet{llama2} veröffentlicht und stehen ebenso unter eine Lizenz die nur zu Forschungszwecken freigegeben wird.
+Zuletzt veröffentliche MetaAI die Llama 2 Modelle, welche auf der Architektur und Trainingsart von den LLaMA Modellen basieren, jedoch in allen Bereichen eine bessere Leistung durch mehr Training und größere Datensätze erzielen. Die Llama 2 Modelle sind unter \citet{llama2} veröffentlicht und stehen ebenso unter eine Lizenz, die nur zu Forschungszwecken freigegeben wird.
 Llama 2 ist in den Größen 7 Milliarden, 13 Milliarden und 70 Milliarden Parametern verfügbar.\\
 
 In dieser Arbeit wird zunächst das Modell Llama 2 7B ausgewählt, da es eine sehr gute Leistung mit minimalen Ressourcenanforderungen bietet und bessere Leistungen als die Vorgänger Version der LLaMA Modelle erzielt.
@@ -238,9 +238,9 @@ Die Ergebnisse zeigen in den meisten Fällen, dass die Fehlerfunktion des Traini
 Solange der Unterschied zwischen den beiden Fehlerfunktion nicht zu groß ist, konnte das Modell erfolgreich trainiert werden.\\
 
 Für die Umsetzung dieser Trainingsschritte wird die Programmiersprache Python verwendet, da sie eine Vielzahl von Bibliotheken für die Textverarbeitung und den Einsatz von neuronalen Netzen bietet.
-Die Bibliothek Transformers von HuggingFace\footnote{\url{https://huggingface.co/docs/transformers/index} (abgerufen am 28.6.2023)} bietet eine Vielzahl von Modellen und Trainingsmethoden und basiert auf der populären Bibliothek PyTorch\footnote{\url{https://pytorch.org/} (abgerufen am 28.6.2023)}.
+Die Bibliothek Transformers von HuggingFace \citep{transformers} bietet eine Vielzahl von Modellen und Trainingsmethoden und basiert auf der populären Bibliothek PyTorch \citep{pytorch}.
 PyTorch bietet mit Hilfe von CUDA die Möglichkeit, Trainingsschritte auf einer Nvidia \ac{gpu} durchzuführen, was die in \cref{subsec:grundlagen:training} beschriebenen Schritte um ein Vielfaches beschleunigt.
-Mit Hilfe von DeepSpeed\footnote{\url{https://www.deepspeed.ai/} (abgerufen am 28.6.2023)} kann dieses Training auch auf mehrere \ac{gpu}s verteilt werden.
+Mit Hilfe von DeepSpeed \citep{deepspeed} kann dieses Training auch auf mehrere \ac{gpu}s verteilt werden.
 Dies ist notwendig, da das verwendete Modell mit 7 Milliarden Parametern zu groß ist, um in den Arbeitsspeicher einer einzelnen \ac{gpu} zu passen.\\
 
 Vor Beginn des Trainings müssen einige Konfigurationsparameter festgelegt werden.
@@ -252,12 +252,12 @@ Diese Parameter sind in der \cref{tab:training:parameter} aufgelistet und folgen
         \textbf{Parameter}    & \textbf{Wert} \\
         \midrule
         Lernrate              & $3e^{-4}$     \\
-        AdamW $\beta_1$       & \SI{0,9}{}    \\
-        AdamW $\beta_2$       & \SI{0,95}{}   \\
-        Gewichtsreduktion     & \SI{0,1}{}    \\
-        Gradientenlimitierung & \SI{1,0}{}    \\
-        Aufwärmphase          & \SI{0}{}      \\
-        Epochen               & \SI{3}{}      \\
+        AdamW $\beta_1$       & \num{0,9}   \\
+        AdamW $\beta_2$       & \num{0,95}   \\
+        Gewichtsreduktion     & \num{0,1}   \\
+        Gradientenlimitierung & \num{1,0}   \\
+        Aufwärmphase          & \num{0}   \\
+        Epochen               & \num{3}   \\
         \bottomrule
     \end{tabular}
     \caption[Parameter des Trainings]{Parameter für das Training des Llama 2 7B-Modells}\label{tab:training:parameter}

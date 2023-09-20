@@ -19,7 +19,7 @@ Anschließend kann ein von den Autoren vorbereitetes Skript oder die \ac{api} vo
 Das Skript benötigt eine explizite \ac{url}, die nach einer vorgegebenen Zeit von einer Woche nach Freigabe der Modelle ungültig wird. Aus diesem Grund ist diese \ac{url} nicht im Skript enthalten.
 
 \section{Training des Modells}
-Um das Llama-Modell zu trainieren, wird die Transformers Bibliothek von Huggingface verwendet\footnote{\url{https://huggingface.co/docs/transformers/index} abgerufen am 16.8.2023}.
+Um das Llama-Modell zu trainieren, wird die Transformers Bibliothek von Huggingface verwendet \citep{transformers}.
 Das in Python geschriebene Trainingsskript basiert auf dem Beispielskript zum Training von kausalen Sprachmodellen
 aus dem Huggingface GitHub Repository\footnote{\url{https://github.com/huggingface/transformers/blob/v4.31.0/examples/pytorch/language-modeling/run_clm.py} abgerufen am 16.8.2023}
 und wurde teilweise an die Anforderungen des hier durchgeführten Trainings angepasst.
@@ -51,18 +51,19 @@ Llama 2 wurde im Juli 2023 von Meta AI veröffentlicht und stellt eine generelle
 Neben der nun auf 4096 Tokens erweiterten Kontextlänge (die ursprüngliche Kontextlänge von Llama 1 lag bei 2048 Tokens) stellt Meta AI Llama 2 auch in einer Chat-Version zur Verfügung.
 Die Chat-Version wurde zusätzlich mit Hilfe von Reinforcement Learning aus menschlichem Feedback trainiert und ermöglicht so eine einfachere Nutzung der vortrainierten Modelle im Kontext eines Chatbots.
 Diese Chat-Modelle wurden jedoch nicht zum Training verwendet, da davon ausgegangen wird, dass dieses zusätzliche Training durch das hier durchgeführte Continual Pretraining überschrieben wird.
-Außerdem ermöglicht Huggingface nun die Nutzung der Llama 2 Modelle ohne Download und Konvertierung, so dass diese Schritte entfallen.
 Die Llama 2 Modelle wurden unter anderem im Artikel von \citet{llama2} vorgestellt.\\
 
 Der Parameter \texttt{cache\_dir} beschreibt den Speicherort des heruntergeladenen Modells.
 Dies ermöglicht ein wiederholtes Trainieren des Modells ohne erneuten Download.
-Die heruntergeladenen Modelle werden durch das Training nicht überschrieben und stellen somit den Grundzustand des Modells dar (im Folgenden auch als Llama$2$-$0$e für \enquote{$0$ Epochen trainiert} bezeichnet).\\
+Die heruntergeladenen Modelle werden durch das Training nicht überschrieben und stellen somit den Grundzustand des Modells dar.\\
 
+\newpage
 \texttt{use\_fast\_tokenizer} konfiguriert die Verwendung einer schnelleren Version des Tokenizers zur Konvertierung der Datensätze.
 Diese Option ist optional und wurde hier nicht verwendet.\\
 
 \texttt{model\_revision} beschreibt die zu verwendende Version des Modells.
 Hier wurde die aktuellste Version verwendet, die durch den Wert \enquote{main} repräsentiert wird.\\
+
 \texttt{use\_auth\_token} und \texttt{hugging\_token} beschreiben die Verwendung eines Authentifizierungs-Tokens, um Modelle von Huggingface herunterzuladen.
 Diese Authentifizierung ist notwendig, da auch die Llama 2 Modelle unter der gleichen Lizenz wie Llama 1 stehen und nur auf Anfrage zur Verfügung gestellt werden.
 Um die Modelle mit beschränktem Zugang herunterzuladen, wurde ein Huggingface-Account erstellt, die Anfrage an Meta AI zur Nutzung der Llama 2 Modelle gestellt und bestätigt und ein Authentifizierungstoken generiert.\\
@@ -208,6 +209,7 @@ Dieser Parameter bestimmt, in welchem Ausmaß die Gewichte des Modells angepasst
 Eine sehr hohe Lernrate kann dazu führen, dass das Modell nicht konvergiert, während eine sehr niedrige Lernrate zu langen Trainingszeiten führt.
 Die Lernrate wurde aus dem Artikel über Llama-Modelle von \citet{llama} übernommen.\\
 
+\enlargethispage{0.5\baselineskip}
 In dem Artikel zu den Llama-Modellen von \citet{llama} wird ebenfalls ein Gewichtsabnahme-Wert von $0,1$ verwendet, der auch bei diesem Training mithilfe des Parameters \texttt{weight\_decay} eingestellt wurde.
 Die Gewichtsabnahme führt zu einer kontinuierlichen Verringerung der Gewichte des Modells. Dadurch soll verhindert werden, dass es sich zu stark an einzelne Trainingsdaten anpasst.\\
 
@@ -369,7 +371,8 @@ Die Skalierung der Fehlerwerte ist notwendig, da aufgrund der geringeren Genauig
 Aus diesem Grund werden die Fehlerwerte bei der Berechnung um mehrere Potenzen skaliert.
 Diese Skalierung kann auch zu einem Überlauf über den Wertebereich des Float16 Datentyps führen.
 DeepSpeed verwendet hier eine automatische, dynamische Skalierung der Fehlerwerte, ohne einen Überlauf zu verursachen.
-Eine genauere Erklärung der Skalierung von Fehlerwerten findet sich im Artikel von \citet{lossscale}.
+Eine genauere Erklärung der Skalierung von Fehlerwerten findet sich im Artikel von \citet{lossscale}.\\
+
 Der Parameter \texttt{loss\_scale} beschreibt die konstante Skalierung der Fehlerwerte.
 Ist er auf $0$ gesetzt, wird eine dynamische Skalierung verwendet.
 Der Parameter \texttt{loss\_scale\_window} beschreibt das Werteintervall, in dem die dynamische Skalierung erfolgt.
@@ -462,6 +465,7 @@ Zur Verwaltung der Datensätze wird die Bibliothek \enquote{datasets} verwendet 
 Mit Hilfe dieser Bibliothek können Textdateien während des Trainings geladen, in Tokens umgewandelt und in Blöcke gruppiert werden.
 Über eine Schnittstelle zu den Bibliotheken Transformers und DeepSpeed ermöglicht \enquote{datasets} auch die geordnete Zuordnung von Blöcken zu verschiedenen \ac{gpu}s.\\
 
+\enlargethispage{0.5\baselineskip}
 Die Bibliothek \enquote{DeepSpeed} wird zur Beschleunigung des Trainings und der Ausführung auf mehreren Grafikkarten verwendet.
 Sie ermöglicht die Nutzung der \ac{zero}-Optimierung, die es erlaubt, Teile des Trainings und des Modells auf mehrere GPUs, der CPU und lokalen NVMe SSDs auszulagern.
 Der Prozess dieser Optimierung und die Einführung dieser Bibliothek werden in \citet{deepspeed} genauer beschrieben.\\
@@ -534,7 +538,7 @@ Bei der Ausführung des Trainings auf Nvidia v100 GPUs traten in unregelmäßige
 Diese konnten durch eine Reduzierung der Blockgröße auf 256 Tokens minimiert werden. Eine Epoche bestand somit aus 134 Schritten und dauerte 24:34 Minuten.\\
 
 Insgesamt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
-\cref{tab:trained-models} zeigt die in dieser Arbeit trainierten Modelle.
+\cref{tab:trained-models} zeigt die in dieser Arbeit trainierten Modelle.\\
 \begin{table}
     \centering
     \begin{tabular}{lll}
@@ -551,7 +555,7 @@ Insgesamt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
     \end{tabular}
     \caption[Trainierte Llama 2 7B Modelle]{Trainierte Llama 2 7B Modelle. Das Training wurde von dem vortrainierten Llama 2 7B Huggingface Modell begonnen.}\label{tab:trained-models}
 \end{table}
-
+\newpage
 Zusätzlich evaluiert wurden die Modelle:
 \begin{itemize}
     \item GPT4 Modell: \enquote{gpt4}
@@ -617,7 +621,7 @@ Die Verwendung des untrainierten Llama-Modells sowie der trainierten Modelle mit
 Dieses Skript wurde größtenteils für die Nutzung der mit A30-Grafikkarten trainierten Modelle verwendet, musste jedoch modifiziert werden, da die Generierung ausschließlich auf einer \ac{gpu} erfolgt, die A30-Grafikkarten jedoch mit \SI{24}{\giga\byte} \ac{ram} das Modell nicht vollständig unterstützen konnten.
 Aus diesem Grund wurde das Modell im 8-Bit-Modus geladen. Dieser spezielle Modus reduziert alle Gewichte des Modells auf 8-Bit-Floatwerte, was zu einer geringeren Genauigkeit, aber auch zu einem geringeren Speicherbedarf führt. Eigentlich sollte das 7B Modell mit \SI{14}{\giga\byte} Speicherbedarf ohne Datentyptransformierung mit einer A30-Grafikkarte genutzt werden können, jedoch wurde in diesem Aufbau das Speicherlimit der Grafikkarte erreicht. Ein Grund dafür ist nicht bekannt.\\
 
-\subsection{Erstellung des Evaluierungsdatensatz}\label{subsec:eval-dataset}
+\subsection{Erstellung des Evaluierungsdatensatzes}\label{subsec:eval-dataset}
 Vor der Generierung der Antworten mussten die in den jeweiligen Klausuren gestellten Fragen aus \cref{sec:approach:questions} transformiert werden.
 Dazu wurden diese Fragen um notwendigen Kontext ergänzt, wenn dieser in der Frage angesprochen wurde oder auf den Ergebnissen vorhergehender Fragen aufbaute.
 Zusätzlich wurden alle Fragen in die englische Sprache übersetzt, da das Llama-Modell fast ausschließlich auf englischen Texten trainiert wurde und das verwendete Buch \citet{bb} ebenfalls in englischer Sprache verfasst ist.
