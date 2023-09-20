@@ -1,5 +1,7 @@
 # Question Answering auf dem Lehrbuch "Health Information Systems" mit Hilfe eines Pretrained Transformers
 
+[![DOI](https://zenodo.org/badge/610795720.svg)](https://zenodo.org/badge/latestdoi/610795720)
+
 # Folder Structure:
 - papers: contains papers referenced in the thesis and their summarization
 - pre_work: contains side projects that preceded the thesis main work
