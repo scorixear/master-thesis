@@ -133,7 +133,7 @@ def main():
         heatmap.get_avgvalue_heatmap_total_by_model("avg"),
         "Fragequelle",
         "Fragetyp",
-        "Durschnittlich Verstandene Fragen",
+        "Durchschnittlich Verstandene Fragen",
         os.path.join(args.output, "question_understanding_total_model.png"),
     )
     for model in models:
@@ -141,14 +141,14 @@ def main():
             heatmap.get_heatmap_by_model(model, "avg"),
             "Fragequelle",
             "Fragetyp",
-            f"Durschnittlich Verstandene Fragen ({model})",
+            f"Durchschnittlich Verstandene Fragen ({model})",
             os.path.join(args.output, f"question_understanding_{model}.png"),
         )
     show_heatmap(
         heatmap.get_avgvalue_heatmap_total_by_type("avg"),
         "Fragetyp",
         "Modell",
-        "Durschnittlich Verstandene Fragen",
+        "Durchschnittlich Verstandene Fragen",
         os.path.join(args.output, "question_understanding_total_type.png"),
     )
     for q_type in QuestionType:
@@ -163,14 +163,14 @@ def main():
             heatmap.get_heatmap_by_type(str(q_type), "avg"),
             "Fragequelle",
             "Modell",
-            f"Durschnittlich Verstandene Fragen ({q_type.value})",
+            f"Durchschnittlich Verstandene Fragen ({q_type.value})",
             os.path.join(args.output, f"question_understanding_{q_type}.png"),
         )
     show_heatmap(
         heatmap.get_avgvalue_heatmap_total_by_source("avg"),
         "Fragequelle",
         "Modell",
-        "Durschnittlich Verstandene Fragen",
+        "Durchschnittlich Verstandene Fragen",
         os.path.join(args.output, "question_understanding_total_source.png"),
     )
     for source in QuestionSource:
@@ -185,7 +185,7 @@ def main():
             heatmap.get_heatmap_by_source(str(source), "avg"),
             "Fragetyp",
             "Modell",
-            f"Durschnittlich Verstandene Fragen ({source.value})",
+            f"Durchschnittlich Verstandene Fragen ({source.value})",
             os.path.join(args.output, f"question_understanding_{source}.png"),
         )
 

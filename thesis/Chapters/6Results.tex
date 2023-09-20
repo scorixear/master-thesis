@@ -22,7 +22,7 @@
         \caption[#3]{#4}\label{#5}
     \end{figure}
 }
-\marginpar[]{Ausführliche Ergebnisse und die verwendeten Datensätze sind unter \url{https://doi.org/10.5281/zenodo.8363502} verfügbar.}
+\marginpar[]{Ausführliche Ergebnisse und die verwendeten Datensätze sind unter \url{https://doi.org/10.5281/zenodo.8363501} verfügbar.}
 In dieser Arbeit wurde die Konzeption und Implementierung eines kontinuierlichen Pre-Trainings von Llama-Modellen beschrieben.
 Diese Modelle wurden anschließend nach den in \cref{sec:approach:comparison} genannten Kriterien Korrektheit, Erklärbarkeit, Fragenverständnis und Robustheit verglichen.
 Die Durchführung dieses Vergleichs ist in \cref{sec:evaluation} beschrieben.
@@ -310,7 +310,7 @@ Dadurch kann das Modell zwar zunächst mehr Wissen abbilden, verliert aber die F
 
 \begin{table}
     \centering
-    \begin{adjustbox}{width=1.2\textwidth,center}
+    \begin{adjustbox}{width=\textwidth,center}
         \begin{tabular}{lllll}
             \toprule
             \textbf{Modell} & \textbf{MakroF1}                   & \textbf{Erklärbarkeit}                      & \textbf{Fragenverständnis}                  & \textbf{Robustheit (Leistungsverlust)}       \\
@@ -324,6 +324,7 @@ Dadurch kann das Modell zwar zunächst mehr Wissen abbilden, verliert aber die F
             \lea{}          & \num{0.3}                          & \textbf{\SI[detect-weight]{85.4}{\percent}} & \textbf{\SI[detect-weight]{72.6}{\percent}} & \SI{46.7}{\percent}                          \\
             \lsa{}          & \textbf{\num[detect-weight]{0.33}} & \SI{82.5}{\percent}                         & \SI{60}{\percent}                          & \SI{60.6}{\percent}                          \\
             \lioa{}         & \num{0.32}                         & \SI{81}{\percent}                           & \SI{55.8}{\percent}                         & \textbf{\SI[detect-weight]{43.8}{\percent}}  \\
+            \bottomrule
         \end{tabular}
     \end{adjustbox}
         \caption[Zusammenfassung der Evaluierungsergebnisse]{Zusammenfassung der Evaluierungsergebnisse. Fettgedruckte Werte stellen die beste Leistung im Kriterium dar. Die Zeilen sind unterteilt in nur evaluierte Modelle und trainierte und evaluierte Modelle. }\label{tab:results:summary}
