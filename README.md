@@ -4,6 +4,7 @@
 
 # Folder Structure:
 - papers: contains papers referenced in the thesis and their summarization
+- pdf: contains the thesis pdf
 - pre_work: contains side projects that preceded the thesis main work
   - byte_pair_encoding: a crude implementation of the byte pair encoding algorithm
   - gpt2_pretrained: training scripts for gpt2 pretraining
