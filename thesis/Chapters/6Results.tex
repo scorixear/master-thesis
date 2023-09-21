@@ -23,7 +23,7 @@
     \end{figure}
 }
 \marginpar[]{Ausführliche Ergebnisse und die verwendeten Datensätze sind unter \url{https://doi.org/10.5281/zenodo.8363501} verfügbar.}
-In dieser Arbeit wurde die Konzeption und Implementierung eines kontinuierlichen Pre-Trainings von Llama-Modellen beschrieben.
+In dieser Arbeit wurde die Konzeption und Implementierung eines Continual Pretrainings von Llama-Modellen beschrieben.
 Diese Modelle wurden anschließend nach den in \cref{sec:approach:comparison} genannten Kriterien Korrektheit, Erklärbarkeit, Fragenverständnis und Robustheit verglichen.
 Die Durchführung dieses Vergleichs ist in \cref{sec:evaluation} beschrieben.
 In diesem Kapitel werden die Ergebnisse dargestellt und analysiert, wobei auch hier eine Unterteilung nach den Kriterien erfolgt.
@@ -162,7 +162,7 @@ Diese Problematik nimmt mit steigender Epoche zu, weshalb Modelle ab Epoche 5 in
 \cref{fig:results:makro_total} zeigt die MakroF1-Werte der evaluierten Modelle.
 Auch hier sind die Tendenzen aus \cref{subsec:results:correctness:strengths} erkennbar.
 GPT4 erreicht einen MakroF1-Wert von \num{0.7} und ist damit deutlich besser als die Llama-Modelle.
-Während die auf 1 Epoche trainierten Modelle noch unter der Leistung der untrainierten Llama-Modelle liegen, verdoppeln sich die MakroF1-Werte der Modelle ab 3 Epochen.
+Während die auf 1 Epoche trainierten Modelle noch unter der Leistung des untrainierten Llama-Modells liegen, verdoppeln sich die MakroF1-Werte der Modelle ab 3 Epochen.
 Danach bleiben die MakroF1-Werte der Modelle mit 5 und 10 Epochen konstant.\\
 
 Der MakroF1-Wert hat einen Wertebereich von \numrange{0}{1} und repräsentiert die tatsächliche Leistung des Modells besser.
@@ -327,7 +327,7 @@ Dadurch kann das Modell zwar zunächst mehr Wissen abbilden, verliert aber die F
             \bottomrule
         \end{tabular}
     \end{adjustbox}
-        \caption[Zusammenfassung der Evaluierungsergebnisse]{Zusammenfassung der Evaluierungsergebnisse. Fettgedruckte Werte stellen die beste Leistung im Kriterium dar. Die Zeilen sind unterteilt in nur evaluierte Modelle und trainierte und evaluierte Modelle. }\label{tab:results:summary}
+        \caption[Zusammenfassung der Evaluierungsergebnisse]{Zusammenfassung der Evaluierungsergebnisse. Fettgedruckte Werte stellen die beste Leistung im Kriterium dar. Die Zeilen sind unterteilt in nur evaluierte Modelle und trainiert und evaluierte Modelle. }\label{tab:results:summary}
     \end{table}
     
     \cref{tab:results:summary} zeigt eine Zusammenfassung der Evaluationsergebnisse.

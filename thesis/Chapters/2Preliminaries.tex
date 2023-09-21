@@ -100,13 +100,13 @@ Bei der Textgenerierung kann der Decoder aus einer gegebenen Ausgangssequenz for
 \begin{definition}\label{def:self-attention-mechanismus}
     Der \textbf{Self-Attention-Mechanismus} ist ein zentrales Konzept in der Transformer-Architektur und beschreibt die Gewichtung der Eingabesequenz auf Basis eines aktuellen Tokens.
 \end{definition}
+\enlargethispage{0.5\baselineskip}
 Hier wird ein Eingabevektor in drei separate Vektoren transformiert:
 Den Abfragevektor (engl. Query), den Schlüsselvektor (engl. Key) und den Wertvektor (engl. Value).
 Anschließend wird die Ähnlichkeit zwischen dem Abfragevektor und dem Schlüsselvektor berechnet,
 um die Aufmerksamkeitsgewichte zu erhalten.
 Die Aufmerksamkeitsgewichte geben an, wie wichtig jeder Wertvektor für die Berechnung eines gewichteten
 Durchschnitts ist. Die gewichteten Wertvektoren werden schließlich summiert, um den Ausgabevektor zu erhalten.
-
 Die Self-Attention Mechanismen ermöglichen es den Modellen, komplexe Abhängigkeiten zwischen den Elementen einer Eingabesequenz zu erfassen.\\
 
 \begin{definition}\label{def:multi-head-attention}

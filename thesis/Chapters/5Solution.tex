@@ -40,6 +40,7 @@ Im Folgenden werden diese Einstellungen näher erläutert.
         hugging\_token       & \textit{Huggingface Token} \\
         torch\_dtype         & auto                       \\
         low\_cpu\_mem\_usage & false                      \\
+        \bottomrule
     \end{tabular}
     \caption[Parameter zur Konfiguration des Modells]{Parameter zur Auswahl und Konfiguration des Modells}\label{tab:model-config}
 \end{table}
@@ -328,6 +329,7 @@ Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Ko
             steps\_per\_print                   & $500$         \\
             wall\_clock\_breakdown              & false         \\
             train\_micro\_batch\_size\_per\_gpu & auto          \\
+            \bottomrule
         \end{tabular}}
     \caption[DeepSpeed Konfiguration]{DeepSpeed Konfiguration mit Benutzung der \ac{zero} Stufe 2 Optimierung. Für diese Stufe wurde der Parameter \texttt{enabled} unter der Rubrik \texttt{bf16} auf \enquote{false} gesetzt. Für die Nutzung der \ac{zero} Stufe 3 Optimierung ist dieser Wert auf \enquote{true} gesetzt.}\label{tab:deepspeed-config}
 \end{table}
@@ -351,6 +353,7 @@ Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Ko
         \multicolumn{2}{c}{offload\_param}                    \\
         device                                & cpu           \\
         pin\_memory                           & true          \\
+        \bottomrule
     \end{tabular}
     \caption[DeepSpeed ZeRO 3 Konfiguration]{DeepSpeed \ac{zero} Stufe 3 Konfiguration}\label{tab:deepspeed-config-stage3}
 \end{table}
@@ -465,7 +468,6 @@ Zur Verwaltung der Datensätze wird die Bibliothek \enquote{datasets} verwendet 
 Mit Hilfe dieser Bibliothek können Textdateien während des Trainings geladen, in Tokens umgewandelt und in Blöcke gruppiert werden.
 Über eine Schnittstelle zu den Bibliotheken Transformers und DeepSpeed ermöglicht \enquote{datasets} auch die geordnete Zuordnung von Blöcken zu verschiedenen \ac{gpu}s.\\
 
-\enlargethispage{0.5\baselineskip}
 Die Bibliothek \enquote{DeepSpeed} wird zur Beschleunigung des Trainings und der Ausführung auf mehreren Grafikkarten verwendet.
 Sie ermöglicht die Nutzung der \ac{zero}-Optimierung, die es erlaubt, Teile des Trainings und des Modells auf mehrere GPUs, der CPU und lokalen NVMe SSDs auszulagern.
 Der Prozess dieser Optimierung und die Einführung dieser Bibliothek werden in \citet{deepspeed} genauer beschrieben.\\
@@ -490,7 +492,7 @@ Das Trainieren der Modelle ist wesentlich rechenintensiver als deren Anwendung.
 Aus diesem Grund kann ein normaler Computer dafür nicht verwendet werden.
 Stattdessen wurde ein GPU Computing Cluster des Rechenzentrums der Universität Leipzig verwendet.\\
 
-Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit den Namen \enquote{Paula} und \enquote{Clara} zur Verfügung.
+
 \begin{table}
     \centering
     \begin{tabular}{llll}
@@ -516,6 +518,7 @@ Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit
     \end{tabular}
     \caption[CPU Werte des Rechenzentrums]{ \ac{cpu} Werte des Rechenzentrums der Universität Leipzig}\label{tab:cpu-cluster}
 \end{table}
+Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit den Namen \enquote{Paula} und \enquote{Clara} zur Verfügung.
 Die technischen Daten der beiden Cluster sind in \cref{tab:gpu-cluster} und \cref{tab:cpu-cluster} aufgelistet.
 Das \enquote{Clara}-Cluster ist hierbei zweigeteilt, da einige Knoten mit Nvidia Tesla V100 Grafikkarten und andere mit Nvidia GeForce RTX 2080 Ti Grafikkarten ausgestattet sind.
 Alle Knoten innerhalb eines Clusters sind über ein \SI{100}{\giga\bit\per\second} Infiniband-Netzwerk miteinander verbunden.
@@ -555,7 +558,7 @@ Insgesamt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
     \end{tabular}
     \caption[Trainierte Llama 2 7B Modelle]{Trainierte Llama 2 7B Modelle. Das Training wurde von dem vortrainierten Llama 2 7B Huggingface Modell begonnen.}\label{tab:trained-models}
 \end{table}
-\newpage
+
 Zusätzlich evaluiert wurden die Modelle:
 \begin{itemize}
     \item GPT4 Modell: \enquote{gpt4}
@@ -636,7 +639,7 @@ Jeder Frage wurden 6 Eigenschaften zugeordnet.
 \end{itemize}
 
 Mit Hilfe dieser Struktur wurden die Fragen in eine weitere explizite Frageform umgewandelt.
-Wie bereits unter \cref{sec:approach:questions} beschrieben, wird das Llama-Modell nicht mittels Reinforcement Training auf die Beantwortung von Fragen trainiert.
+Wie bereits unter \cref{sec:approach:questions} beschrieben, wird das Llama-Modell nicht mittels Reinforcement Learning auf die Beantwortung von Fragen trainiert.
 Aus diesem Grund wurden Anweisung, Frage und Kontext in einem Textblock zusammengefasst.
 Die Struktur ist in \cref{fig:llama-input} dargestellt.
 Der verwendete Evaluationsdatensatz befindet sich im Anhang.\\
@@ -660,7 +663,7 @@ Dieser zweite Datensatz wird in gleicher Weise im folgenden Schritt unter \cref{
 Die Bewertung der generierten Antworten erfolgte manuell.
 Die von den Modellen generierten Ausgaben wurden wie in \cref{subsec:eval-dataset} strukturiert. Drei zusätzliche Eigenschaften wurden hinzugefügt.
 \begin{itemize}
-    \item \textbf{generated}: Stellt die generierte Antwort des Modells dar.
+    \item \textbf{generated}: Stellt die generierte Antwort des Modells dar
     \item \textbf{type}: Gibt den Typ der Frage an
     \item \textbf{true\_input}: Enthält die tatsächlich verwendete Eingabe
 \end{itemize}
@@ -687,7 +690,7 @@ Zwei Dateien, die die generierten Antworten auf die Fragen enthalten (für jeden
 Die Bewertungen wurden mit 3 zusätzlichen Eigenschaften versehen:
 
 \begin{itemize}
-    \item \textbf{answered}: Zeigt an, ob die Frage richtig, falsch oder gar nicht beantwortet wurde.
+    \item \textbf{answered}: Zeigt an, ob die Frage richtig, falsch oder gar nicht beantwortet wurde
     \item \textbf{points}: Gibt die Anzahl der richtigen Antworten in der generierten Antwort an
     \item \textbf{total\_answers}: Zeigt die Anzahl der gegebenen Antworten in der generierten Antwort an
 \end{itemize}
@@ -701,7 +704,7 @@ Dieses ist unter anderem auf den eingebauten Parameter \enquote{temperature} bei
 Die Temperatur beschreibt die Varianz der Ausgabewerte.
 Je höher die Temperatur, desto größer ist die Varianz der Ausgabevektoren.
 Eine höhere Varianz führt zu einer größeren Vielfalt des generierten Textes und zu weniger sich wiederholenden Textpassagen.
-Dieser Temperaturwert wurde für die Generierung auf $0,9$ gesetzt.test
+Dieser Temperaturwert wurde für die Generierung auf $0,9$ gesetzt.
 Das beschriebene nicht-deterministische Verhalten konnte bei der Textgenerierung mit den Llama-Modellen nicht beobachtet werden.
 Mehrfache identische Eingaben führten bei allen Modellen zu identischen Ausgaben.
 Da sich somit ein konstanter Wert von $1,0$ für den Determinismus ergibt, wurde dieser hier nicht weiter ausgewertet.
