@@ -3,4 +3,4 @@
 	url = git@github.com:IMISE/imise-classicthesis.git
 [submodule "non-public"]
 	path = non-public
-	url = git@github.com:scorixear/masther-thesis-database.git
+	url = git@github.com:scorixear/master-thesis-database.git
