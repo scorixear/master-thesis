@@ -4,7 +4,6 @@
 
 # Folder Structure:
 - papers: contains papers referenced in the thesis and their summarization
-- pdf: contains the thesis pdf
 - pre_work: contains side projects that preceded the thesis main work
   - byte_pair_encoding: a crude implementation of the byte pair encoding algorithm
   - gpt2_pretrained: training scripts for gpt2 pretraining
@@ -12,4 +11,5 @@
   - vscode_newline_extensions: vscode extensions that splits long lines along punctuation
 - presentations: presentation pdfs for all 3 presentations
 - thesis: the thesis is pdf and latex format
+- thesis-pdf: contains the thesis pdf
 - training: training and evaluation scripts used during this thesis (further detailed in `/training/README.md`)
