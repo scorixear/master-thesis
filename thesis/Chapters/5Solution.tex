@@ -344,7 +344,7 @@ Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Ko
         stage                                 & $3$           \\
         contiguous\_gradients                 & true          \\
         stage3\_max\_live\_parameter          & \num{1e9}     \\
-        stage3\_max\_resuse\_distance         & \num{1e9}     \\
+        stage3\_max\_reuse\_distance         & \num{1e9}     \\
         stage3\_prefetch\_bucket\_size        & \num{1e7}     \\
         stage3\_param\_persistence\_threshold & \num{1e5}     \\
         reduce\_bucket\_size                  & \num{1e7}     \\
@@ -359,13 +359,13 @@ Wichtig bei der Verwendung von DeepSpeed mit Transformers ist eine identische Ko
 \end{table}
 
 Die DeepSpeed-Konfiguration ist in \cref{tab:deepspeed-config} beschrieben.
-Die hier verwendeten Parameter beschreiben ein Training mit \ac{zero} Stufe 2 Optimierung und zusätzlichem CPU Offloading.
+Die hier verwendeten Parameter beschreiben ein Training mit \ac{zero} Stufe 2 Optimierung und zusätzlichem \ac{cpu} Offloading.
 Die \ac{zero} Stufe 2 Optimierung beschreibt einen Algorithmus zur Reduzierung des Speicherbedarfs während des Trainings.
 Dieser Algorithmus wird in \citet{deepspeed} genauer beschrieben.
 Zusätzlich zu dieser Optimierung werden Teile der Berechnungen auf die \ac{cpu} ausgelagert, um den Speicherbedarf pro \ac{gpu} weiter zu reduzieren.
 Diese Konfiguration wurde beim Training der Modelle mit Nvidia Tesla V100 Grafikkarten verwendet.
 \cref{tab:deepspeed-config-stage3} beschreibt zusätzlich eine Konfiguration des \texttt{zero\_optimization} Abschnitts bei Verwendung der \ac{zero} Stufe 3 Optimierung.
-Hier werden zusätzlich Parameter der Modelle auf die CPU ausgelagert.
+Hier werden zusätzlich Parameter der Modelle auf die \ac{cpu} ausgelagert.
 Diese Konfiguration wurde beim Training der Modelle mit Nvidia Tesla A30 Grafikkarten verwendet.\\\
 
 Der Abschnitt \texttt{fp16} beschreibt den Umgang mit Float16-Werten während des Trainings.
@@ -405,9 +405,9 @@ Mit Hilfe des Parameters \texttt{overlap\_comm} wird versucht, die Gradienten w�
 \texttt{reduce\_scatter} beschreibt die Verwendung einer speziellen Reduktionsmethode \enquote{Reduce Scatter} zur Mittelung von Gradienten.
 In Kombination mit den Parametern \texttt{reduce\_bucket\_size} und \texttt{allgather\_bucket\_size} wird die maximale Anzahl der in einem Schritt zu reduzierenden Gradienten festgelegt.
 Diese Option reduziert den Speicherbedarf während des Trainings erheblich.
-Mit Hilfe der Option \texttt{offload\_optimizer} wird der Zustand und die Berechnung des Optimierers auf die CPU ausgelagert.
+Mit Hilfe der Option \texttt{offload\_optimizer} wird der Zustand und die Berechnung des Optimierers auf die \ac{cpu} ausgelagert.
 Optional kann dies für sehr große Modelle auch auf eine NVMe SSD erfolgen.
-Mit Hilfe der Einstellung \texttt{pin\_memory} wird der für die Berechnung benötigte Speicher auf der CPU reserviert.
+Mit Hilfe der Einstellung \texttt{pin\_memory} wird der für die Berechnung benötigte Speicher auf der \ac{cpu} reserviert.
 Dies führt zu einer besseren Performance, aber auch zu zusätzlichem Speicherbedarf.\\
 
 Wie bereits bei den Trainingsargumenten durch den Parameter \texttt{max\_grad\_norm} beschrieben, wird die maximale Größe des Gradienten durch den Parameter \texttt{gradient\_clipping} festgelegt.
@@ -418,7 +418,7 @@ Die Parameter \texttt{steps\_per\_print} und \texttt{wall\_clock\_breakdown} bes
 Zusätzlich zur Ausgabe der Transformers-Bibliothek werden alle 500 Iterationen weitere Informationen der DeepSpeed-Bibliothek ausgegeben.
 Mit Hilfe des Parameters \texttt{wall\_clock\_breakdown} wird zusätzlich die Messung der verstrichenen Zeit für jede Phase einer Iteration ausgegeben.\\
 
-Der Parameter \texttt{train\_micro\_batch\_size\_per\_gpu} beschreibt die Anzahl der Batches pro GPU.
+Der Parameter \texttt{train\_micro\_batch\_size\_per\_gpu} beschreibt die Anzahl der Batches pro \ac{gpu}.
 Dieser Wert wird aus den Trainingsargumenten übernommen.\\
 
 Für die Ausführung des Trainings mit der \ac{zero} Stufe 3 Optimierung auf Nvidia Tesla A30 Grafikkarten wurde der Abschnitt \texttt{zero\_\allowbreak{}optimization} in \cref{tab:deepspeed-config} durch die in \cref{tab:deepspeed-config-stage3} gezeigten Parameter ersetzt.
@@ -469,7 +469,7 @@ Mit Hilfe dieser Bibliothek können Textdateien während des Trainings geladen, 
 Über eine Schnittstelle zu den Bibliotheken Transformers und DeepSpeed ermöglicht \enquote{datasets} auch die geordnete Zuordnung von Blöcken zu verschiedenen \ac{gpu}s.\\
 
 Die Bibliothek \enquote{DeepSpeed} wird zur Beschleunigung des Trainings und der Ausführung auf mehreren Grafikkarten verwendet.
-Sie ermöglicht die Nutzung der \ac{zero}-Optimierung, die es erlaubt, Teile des Trainings und des Modells auf mehrere GPUs, der CPU und lokalen NVMe SSDs auszulagern.
+Sie ermöglicht die Nutzung der \ac{zero}-Optimierung, die es erlaubt, Teile des Trainings und des Modells auf mehrere \ac{gpu}s, der \ac{cpu} und lokalen NVMe SSDs auszulagern.
 Der Prozess dieser Optimierung und die Einführung dieser Bibliothek werden in \citet{deepspeed} genauer beschrieben.\\
 
 Die Bibliothek \enquote{evaluate} wird zur Berechnung der Modellgenauigkeit verwendet.
@@ -490,7 +490,7 @@ Die Bibliothek wurde in \citet{transformers} vorgestellt.\\
 \subsection{Training auf einem GPU Computing Cluster}\label{sec:training-cluster}
 Das Trainieren der Modelle ist wesentlich rechenintensiver als deren Anwendung.
 Aus diesem Grund kann ein normaler Computer dafür nicht verwendet werden.
-Stattdessen wurde ein GPU Computing Cluster des Rechenzentrums der Universität Leipzig verwendet.\\
+Stattdessen wurde ein \ac{gpu} Computing Cluster des Rechenzentrums der Universität Leipzig verwendet.\\
 
 
 \begin{table}
@@ -504,7 +504,7 @@ Stattdessen wurde ein GPU Computing Cluster des Rechenzentrums der Universität 
         Clara            & 23              & 8 Nvidia GeForce RTX 2080 Ti & \SI{11}{\giga\byte} \\
         \bottomrule
     \end{tabular}
-    \caption[GPU Werte des Rechenzentrums]{ \ac{gpu} Werte des des Rechenzentrums der Universität Leipzig}\label{tab:gpu-cluster}
+    \caption[GPU Werte des Rechenzentrums]{ \ac{gpu} Werte des Rechenzentrums der Universität Leipzig}\label{tab:gpu-cluster}
 \end{table}
 \begin{table}
     \centering
@@ -518,7 +518,7 @@ Stattdessen wurde ein GPU Computing Cluster des Rechenzentrums der Universität 
     \end{tabular}
     \caption[CPU Werte des Rechenzentrums]{ \ac{cpu} Werte des Rechenzentrums der Universität Leipzig}\label{tab:cpu-cluster}
 \end{table}
-Das Rechenzentrum der Universität Leipzig stellt zwei GPU Computing Cluster mit den Namen \enquote{Paula} und \enquote{Clara} zur Verfügung.
+Das Rechenzentrum der Universität Leipzig stellt zwei \ac{gpu} Computing Cluster mit den Namen \enquote{Paula} und \enquote{Clara} zur Verfügung.
 Die technischen Daten der beiden Cluster sind in \cref{tab:gpu-cluster} und \cref{tab:cpu-cluster} aufgelistet.
 Das \enquote{Clara}-Cluster ist hierbei zweigeteilt, da einige Knoten mit Nvidia Tesla V100 Grafikkarten und andere mit Nvidia GeForce RTX 2080 Ti Grafikkarten ausgestattet sind.
 Alle Knoten innerhalb eines Clusters sind über ein \SI{100}{\giga\bit\per\second} Infiniband-Netzwerk miteinander verbunden.
@@ -530,14 +530,14 @@ Mit Hilfe von Slurm-Bash-Dateien konnte das Training der Modelle auf dem Cluster
 
 Während des Trainings wurde durchschnittlich alle 12 Sekunden eine Iteration des Modells berechnet.
 Eine Iteration entspricht einer vollständigen Berechnung der Ausgaben über einen Batch und einer vollständigen Anpassung aller Gewichte (engl. \enquote{Forwards-} und \enquote{Backwardspass}).
-Eingeschlossen sind auch alle Kommunikationen, die zwischen den GPUs durchgeführt werden, um ihren aktuellen Zustand untereinander abzustimmen.
+Eingeschlossen sind auch alle Kommunikationen, die zwischen den \ac{gpu}s durchgeführt werden, um ihren aktuellen Zustand untereinander abzustimmen.
 Diese Geschwindigkeit ist unabhängig von der Blockgröße.
 Allerdings hängt die Länge des Trainings von der Anzahl der Iterationen ab, daher von der Anzahl der Blöcke und somit von der Blockgröße.
 Der kurierte Datensatz, der das Buch \citet{bb} repräsentiert, umfasst ca. 34.500 Tokens.
 Dementsprechend wird eine Epoche bei einer Standardblockgröße von 1024 Tokens in 34 Schritten beziehungsweise 6:14 Minuten berechnet.
 Eine größere Blockgröße war aufgrund von Speicherfehlern nicht möglich.\\
 
-Bei der Ausführung des Trainings auf Nvidia v100 GPUs traten in unregelmäßigen Abständen Fehler auf, die in \cref{sec:problem-training} genauer beschrieben sind.
+Bei der Ausführung des Trainings auf Nvidia v100 \ac{gpu}s traten in unregelmäßigen Abständen Fehler auf, die in \cref{sec:problem-training} genauer beschrieben sind.
 Diese konnten durch eine Reduzierung der Blockgröße auf 256 Tokens minimiert werden. Eine Epoche bestand somit aus 134 Schritten und dauerte 24:34 Minuten.\\
 
 Insgesamt wurden 6 Modelle trainiert und 8 Modelle evaluiert.
@@ -614,7 +614,7 @@ Durch Anpassung der Blockgröße in \cref{subsec:config-training} auf kleinere W
 
 Während des Trainings traten immer wieder Speicherfehler auf, die anzeigten, dass der gesamte Speicher der Grafikkarte belegt war, jedoch mehr benötigt wurde.
 Diese Fehler waren unabhängig vom Grafikkartentyp und der Konfiguration des Trainings.
-Erst die Minimierung der Batchgröße auf 1 pro \ac{gpu}, die Aktivierung des CPU-Offloads und die Nutzung von \SI{256}{\giga\byte} CPU \ac{ram} ermöglichte ein erfolgreiches Training des Modells Llama 2 7B.
+Erst die Minimierung der Batchgröße auf 1 pro \ac{gpu}, die Aktivierung des \ac{cpu}-Offloads und die Nutzung von \SI{256}{\giga\byte} \ac{cpu} \ac{ram} ermöglichte ein erfolgreiches Training des Modells Llama 2 7B.
 Dieser Speicherbedarf ist unerwartet hoch und kann nicht durch die Größe des Modells erklärt werden.
 
 \section{Generierung von Antworten}\label{sec:generierung}
